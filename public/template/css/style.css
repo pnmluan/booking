@@ -226,8 +226,9 @@ header .navbar-toggle .icon-bar { background-color: #fff }
 
 /*****  2 MEDIA QUERIES *****/
 /****************************/
-@media screen and (max-width: 480px) {
-
+@media screen and (max-width: 991px) {
+  .main-form { padding-right: 15px; }
+  .main-adv { padding-left: 15px; }
 }
 
 
