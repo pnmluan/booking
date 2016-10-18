@@ -6,7 +6,7 @@ tpj(document).ready(function() {
     var api = tpj('.fullwidthbanner').revolution({
         delay: 8000,
         startwidth: 600,
-        startheight: 384,
+        startheight: 373,
         onHoverStop: "off",
         thumbWidth: 100,
         thumbHeight: 50,
