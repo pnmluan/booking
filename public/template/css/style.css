@@ -95,7 +95,7 @@ header .info-bar .contact li p { font-size: 13px; font-weight: bold; }
 header .info-bar .contact li a { font-size: 15px; font-weight: bold; color: red; }
 
 header .navbar { background: #0685AA; margin-bottom: 0; min-height: 40px; border-width: 0; -webkit-box-shadow: 0 1px 1px 0 rgba(0, 0, 0, .4); -moz-box-shadow: 0 1px 1px 0 rgba(0, 0, 0, .4); box-shadow: 0 1px 1px 0 rgba(0, 0, 0, .4) }
-header .navbar #logo { position: absolute; top: -55px; z-index: 9999 }
+header .navbar #logo { position: absolute; top: -55px; z-index: 9999; display: none; }
 header .navbar #logo-big { display: block; border: 1px solid red }
 header .navbar #logo-small { display: none; margin-left: 15px; margin-top: 1px }
 header .navbar #logo-tiny { display: none; margin-left: 15px; margin-top: 60px }
@@ -185,7 +185,7 @@ header .navbar-toggle .icon-bar { background-color: #fff }
 .icon-payment i { background: #0685AA; }
 .icon-book { background-color: #fff; border: 2px solid #e2aa11; }
 .icon-payment { background-color: #fff; border: 2px solid #0685AA;}
-.text-desc { float: left; }
+.text-desc { overflow: hidden; }
 .text-big { font-size: 14px; margin-bottom: 5px; margin-top: 2px; text-transform: uppercase; font-weight: bold; }
 .text-small { color: #6a6a6a; line-height: 20px; }
 .text-small a { color: #ff0000; font-weight: bold; margin-right: 20px; }
