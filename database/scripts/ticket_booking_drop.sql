@@ -1,5 +1,5 @@
 -- Created by Vertabelo (http://vertabelo.com)
--- Last modification date: 2016-10-18 17:01:17.315
+-- Last modification date: 2016-10-20 03:38:16.373
 
 -- foreign keys
 ALTER TABLE booking
@@ -14,39 +14,39 @@ ALTER TABLE contact
 ALTER TABLE fare
     DROP FOREIGN KEY fare_passengers;
 
-ALTER TABLE flight
+ALTER TABLE booking_detail
     DROP FOREIGN KEY flight_booking;
 
-ALTER TABLE flight
+ALTER TABLE booking_detail
     DROP FOREIGN KEY flight_location_arrive;
 
-ALTER TABLE flight
+ALTER TABLE booking_detail
     DROP FOREIGN KEY flight_location_depart;
 
-ALTER TABLE passengers
+ALTER TABLE passenger
     DROP FOREIGN KEY passengers_booking;
 
 ALTER TABLE ticket_type
     DROP FOREIGN KEY ticket_type_airlines;
 
 -- tables
-DROP TABLE airlines;
-
 DROP TABLE baggage_type;
 
 DROP TABLE banner;
 
 DROP TABLE booking;
 
+DROP TABLE booking_detail;
+
 DROP TABLE contact;
 
 DROP TABLE fare;
 
-DROP TABLE flight;
-
 DROP TABLE location;
 
-DROP TABLE passengers;
+DROP TABLE passenger;
+
+DROP TABLE provider;
 
 DROP TABLE ticket_type;
 
