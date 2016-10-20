@@ -1,0 +1,64 @@
+/*-----------------------------------------------------------------------------
+
+REVOLUTION RESPONSIVE BASIC STYLES OF HTML DOCUMENT
+
+Screen Stylesheet
+
+version:   	1.0
+date:      	26/06/12
+author:		themepunch
+email:     	support@themepunch.com
+website:   	http://www.themepunch.com
+-----------------------------------------------------------------------------*/
+
+
+
+
+  /*********************************************************************************************
+		-	SET THE SCREEN SIZES FOR THE BANNER IF YOU WISH TO MAKE THE BANNER RESOPONSIVE 	-
+  **********************************************************************************************/
+
+  /*	-	THE BANNER CONTAINER (Padding, Shadow, Border etc. )	-	*/
+
+
+
+
+.fullscreen-container {
+	width:100% !important;
+	position:relative;
+	padding:0;
+	height:100%!important;
+}
+@media (min-width: 992px) {
+	.fullscreen-container {
+		width:100% !important;
+		position:relative;
+		padding:0;
+		height:65%!important;
+	}
+}
+
+
+
+ /***************** THIS IS ONLY FOR DEMO , CAN BE DELETED **************/
+
+.bottomtexts-example,
+#topheader-to-offset 	{ position:relative;width:100%;min-height:120px; padding:30px 20px;box-sizing:border-box;-moz-box-sizing:border-box; text-align: center}
+
+.bottomtexts-example	{	background-color:#421b3b; padding:40px 20px}
+.bottomtexts-example h1,
+#topheader-to-offset h1	{ font-size:25px;line-height:35px; color:#fff; font-family:Arial; font-weight:300;margin-bottom:30px;text-align:center;}
+
+.bottomtexts-example p,
+#topheader-to-offset p	{ font-size:13px; line-height:18px; color:#fff; font-family:Arial; font-weight:300;}
+
+
+.service-panel { padding-top: 40px; padding-bottom: 60px; }
+
+/***** PARTNER *****/
+.partner { border-top: 1px solid #c9c9c9; padding: 70px 0px 40px 0px; }
+.swiper-container .swiper-slide img { filter: grayscale(1); -webkit-filter: grayscale(1); }
+.swiper-container .swiper-slide img:hover { filter: grayscale(0); -webkit-filter: grayscale(0); }
+.swiper-container { width: 100%; height: 75px; color: #fff; text-align: center; overflow: hidden; }
+.swiper-container .swiper-slide { height: 100%; width: auto; padding: 0 30px; }
+

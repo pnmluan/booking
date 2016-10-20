@@ -2,469 +2,631 @@
 <html>
 
 <head>
-  <title>Home</title>
-  <meta charset="UTF-8">
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="plugins/bootstrap-3.3.7/css/bootstrap.min.css">
-  <link rel="stylesheet" href="fonts/icons/font-awesome-4.6.3/css/font-awesome.min.css">
-  <link rel="stylesheet" href="css/animate.min.css">
-  <link rel="stylesheet" href="css/socialize-bookmarks.min.css">
+  <title>Đặt Vé Siêu Rẻ</title>
+  <!-- Bootstrap -->
+  <link href="dist/css/bootstrap.css" rel="stylesheet" media="screen">
   <link rel="stylesheet" href="plugins/swiper/swiper.min.css">
-  <link rel="stylesheet" href="plugins/revolution/settings.css">
-  <link rel="stylesheet" href="plugins/bootstrap-datepicker/css/bootstrap-datetimepicker.min.css">
-  <link rel="stylesheet" href="css/reset.css">
-  <link rel="stylesheet" href="css/style.css">
+  <link href="assets/css/custom.css" rel="stylesheet" media="screen">
+  <!-- Carousel -->
+  <link href="examples/carousel/carousel.css" rel="stylesheet">
+  <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+  <!--[if lt IE 9]>
+      <script src="assets/js/html5shiv.js"></script>
+      <script src="assets/js/respond.min.js"></script>
+    <![endif]-->
+  <!-- Fonts -->
+  <link href='http://fonts.googleapis.com/css?family=Lato:400,100,100italic,300,300italic,400italic,700,700italic,900,900italic' rel='stylesheet' type='text/css'>
+  <link href='http://fonts.googleapis.com/css?family=Open+Sans:700,400,300,300italic' rel='stylesheet' type='text/css'>
+  <!-- Font-Awesome -->
+  <link rel="stylesheet" type="text/css" href="assets/css/font-awesome.css" media="screen" />
+  <!--[if lt IE 7]><link rel="stylesheet" type="text/css" href="assets/css/font-awesome-ie7.css" media="screen" /><![endif]-->
+  <!-- REVOLUTION BANNER CSS SETTINGS -->
+  <link rel="stylesheet" type="text/css" href="css/fullscreen.css" media="screen" />
+  <link rel="stylesheet" type="text/css" href="rs-plugin/css/settings.css" media="screen" />
+  <!-- Picker UI-->
+  <link rel="stylesheet" href="assets/css/jquery-ui.css" />
+  <!-- jQuery -->
+  <script src="assets/js/jquery.v2.0.3.js"></script>
 </head>
 
-<body>
-  <header role="banner">
-    <div id="bignavbar">
-      <div id="menubar">
-        <div class="container-fluid info-bar">
-          <div class="container">
-            <div class="social-panel">
-              <ul class="social-bookmarks clearfix">
-                <li class="phone-s lg-0 md-0 sm-0">
-                  <a href="tel:0986125225" target="_blank" id="phone"></a>
-                </li>
-                <li class="facebook-s">
-                  <a href="#" target="_blank" id="facebook"></a>
-                </li>
-                <li class="youtube-s">
-                  <a href="#" target="_blank" id="youtube"></a>
-                </li>
-                <li class="twitter-s">
-                  <a href="#" target="_blank" id="twitter"></a>
-                </li>
-              </ul>
-              <ul class="login-panel clearfix">
-                <li><a href="#">Đăng nhập</a></li>
-                <li>|</li>
-                <li><a href="#">Đăng ký</a></li>
-              </ul>
-            </div>
-            <ul class="contact">
-              <li class="xs-0">
-                <p>Hotline đặt vé</p>
-                <a href="tel:+05113888408">(0511) 38 88 408</a>
-                <!-- <a href="tel:0986125225">0986.125.225</a> -->
-              </li>
+<body id="top">
+  <!-- Top wrapper -->
+  <div class="navbar-wrapper2 navbar-fixed-top">
+    <div class="container">
+      <div class="navbar mtnav">
+        <div class="container offset-3">
+          <!-- Navigation-->
+          <div class="navbar-header">
+            <button data-target=".navbar-collapse" data-toggle="collapse" class="navbar-toggle" type="button">
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+            <a href="index.html" class="navbar-brand"><img src="images/logo.png" alt="Travel Agency Logo" class="logo" /></a>
+          </div>
+          <div class="navbar-collapse collapse">
+            <ul class="nav navbar-nav navbar-left">
+              <li><a href="#">Tranh chủ</a></li>
+              <li><a href="#">Đặt vé</a></li>
+              <li><a href="#">Giới thiệu</a></li>
+              <li><a href="#">Hướng dẫn</a></li>
+              <li><a href="#">Liên hệ</a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+              <li><a href="#"><span class="glyphicon glyphicon-user"></span> Đăng ký</a></li>
+              <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Đăng nhập</a></li>
             </ul>
           </div>
-        </div>
-        <div class="navbar navbar-static-top" role="navigation">
-          <div class="container">
-            <div class="navbar-header">
-              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-              </button>
-              <div id="logo">
-                <a href="http://bangkokfoodtours.com">
-                  <img src="#" alt="LOGO" id="logo-big" height="135" width="165">
-                </a>
-                <a href="http://bangkokfoodtours.com">
-                  <img src="#" alt="" id="logo-small" height="100" width="122">
-                </a>
-                <a href="http://bangkokfoodtours.com">
-                  <img src="#" alt="" id="logo-tiny" height="62" width="76">
-                </a>
-              </div>
-            </div>
-            <div class="navbar-collapse collapse">
-              <div class="menu-header-menu-container">
-                <ul id="menu-header-menu" class="nav navbar-nav navbar-right">
-                  <li class="menu-item active"><a href="#">Trang chủ</a></li>
-                  <li class="menu-item"><a href="#">Đặt vé</a></li>
-                  <li class="menu-item"><a href="#">Hướng dẫn</a></li>
-                  <li class="menu-item"><a href="#">Giới thiệu</a></li>
-                  <li class="menu-item"><a href="#">Liên hệ</a></li>
-                </ul>
-              </div>
-            </div>
-          </div>
+          <!-- /Navigation-->
         </div>
       </div>
-      <!--End menu bar-->
     </div>
-    <!--End Big nav bar-->
-  </header>
-  <!-- End Header -->
-  <main id="main" class="main clearfix">
-    <div class="home">
-      <!-- product-tab -->
-      <div class="ticketbook">
-        <div class="container">
-          <div class="product-tab pr">
-            <ul class="clearfix">
-              <li class="plane">
-                <a href="#" class="bus active"><i class="fa fa-plane"></i>Vé máy bay</a>
-              </li>
-              <li class="train">
-                <a href="#" class="train"><i class="fa fa-train"></i>Vé tàu hỏa</a>
-              </li>
-              <li class="car">
-                <a href="#" class="car"><i class="fa fa-bus"></i>Vé xe khách</a>
-              </li>
+  </div>
+  <!-- /Top wrapper -->
+  <!--
+  #################################
+    - THEMEPUNCH BANNER -
+  #################################
+  -->
+  <main class="main-home">
+    <div id="dajy" class="fullscreen-container mtslide sliderbg">
+      <div class="fullscreenbanner">
+        <ul>
+          <!-- papercut fade turnoff flyin slideright slideleft slideup slidedown-->
+          <!-- FADE -->
+          <li data-transition="fade" data-slotamount="1" data-masterspeed="300">
+            <img src="images/slider/paris.jpg" alt="" />
+            <div class="tp-caption scrolleffect sft" data-x="center" data-y="120" data-speed="1000" data-start="800" data-easing="easeOutExpo">
+              <div class="sboxpurple textcenter">
+                <span class="lato size28 slim caps white">Hà Nội</span>
+                <br/>
+                <br/>
+                <br/>
+                <span class="lato size65 caps white">Tp.Hồ Chí Minh</span>
+                <br/>
+                <br/>
+                <span class="lato size20 normal caps white">Chỉ từ</span>
+                <br/>
+                <br/>
+                <span class="lato size48 slim uppercase yellow">1.000.000 VNĐ</span>
+                <br/>
+              </div>
+            </div>
+          </li>
+          <!-- FADE -->
+          <li data-transition="fade" data-slotamount="1" data-masterspeed="300">
+            <img src="images/slider/rome.jpg" alt="" />
+            <div class="tp-caption scrolleffect sft" data-x="center" data-y="120" data-speed="1000" data-start="800" data-easing="easeOutExpo">
+              <div class="sboxpurple textcenter">
+                <span class="lato size28 slim caps white">Hà Nội</span>
+                <br/>
+                <br/>
+                <br/>
+                <span class="lato size65 caps white">Đà Nẵng</span>
+                <br/>
+                <br/>
+                <span class="lato size20 normal caps white">Chỉ từ</span>
+                <br/>
+                <br/>
+                <span class="lato size48 slim uppercase yellow">500.000 VNĐ</span>
+                <br/>
+              </div>
+            </div>
+          </li>
+          <!-- FADE -->
+          <li data-transition="fade" data-slotamount="1" data-masterspeed="300">
+            <img src="images/slider/santorini.jpg" alt="" />
+            <div class="tp-caption scrolleffect sft" data-x="center" data-y="120" data-speed="1000" data-start="800" data-easing="easeOutExpo">
+              <div class="sboxpurple textcenter">
+                <span class="lato size28 slim caps white">Đà Nẵng</span>
+                <br/>
+                <br/>
+                <br/>
+                <span class="lato size65 caps white">Tp.Hồ Chí Minh</span>
+                <br/>
+                <br/>
+                <span class="lato size20 normal caps white">Chỉ từ</span>
+                <br/>
+                <br/>
+                <span class="lato size48 slim uppercase yellow">500.000 VNĐ</span>
+                <br/>
+              </div>
+            </div>
+          </li>
+        </ul>
+        <div class="tp-bannertimer none"></div>
+      </div>
+    </div>
+    <div class="container z-index100">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="bs-example bs-example-tabs">
+            <ul class="nav nav-tabs" id="myTab">
+              <li onclick="mySelectUpdate()" class="active"><a data-toggle="tab" href="#air2"><span class="flight"></span><span class="hidetext">&nbsp;Vé Máy Bay</span>&nbsp;</a></li>
+              <li onclick="mySelectUpdate()" class=""><a data-toggle="tab" href="#car2"><span class="car"></span><span class="hidetext">&nbsp;Vé Xe Khách</span>&nbsp;</a></li>
             </ul>
-          </div>
-          <div class="row">
-            <div class="main-form col-md-6">
-              <form class="plane-form" action="">
-                <h2 class="form-title">Đặt vé máy bay</h2>
-                <div class="plane-form-inner">
-                  <div class="plane-option">
-                    <label class="radio-inline">
-                      <input type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1"> Khứ hồi
-                    </label>
-                    <label class="radio-inline">
-                      <input type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2"> Một chiều
-                    </label>
-                    <label class="radio-inline">
-                      <input type="radio" name="inlineRadioOptions" id="inlineRadio3" value="option3"> Nhiều chặng
-                    </label>
-                  </div>
-                  <div class="plane-input clearfix">
-                    <div class="field">
-                      <span class="field-label">Điểm đi</span>
-                      <div class="field-input">
-                        <select name="" class="form-control">
-                          <option value=""></option>
-                        </select>
-                      </div>
-                    </div>
-                    <div class="field">
-                      <span class="field-label">Điểm đến</span>
-                      <div class="field-input">
-                        <select name="" class="form-control">
-                          <option value=""></option>
-                        </select>
-                      </div>
-                    </div>
-                    <div class="field field-date-go">
-                      <span class="field-label">Ngày đi</span>
-                      <div class="field-input">
-                        <div class='input-group date' id='date-go'>
-                          <input type='text' class="form-control" />
-                          <span class="input-group-addon">
-                            <span class="glyphicon glyphicon-calendar"></span>
-                          </span>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="field field-date-comeback">
-                      <span class="field-label">Ngày về</span>
-                      <div class="field-input">
-                        <div class='input-group date' id='date-comeback'>
-                          <input type='text' class="form-control" />
-                          <span class="input-group-addon">
-                            <span class="glyphicon glyphicon-calendar"></span>
-                          </span>
-                        </div>
-                      </div>
+            <div class="tab-content2" id="myTabContent">
+              <div id="air2" class="tab-pane fade active in">
+                <div class="col-md-4">
+                  <div class="w50percent">
+                    <div class="wh90percent textleft">
+                      <span class="opensans size13"><b>Điểm đi</b></span>
+                      <input type="text" class="form-control" placeholder="">
                     </div>
                   </div>
-                  <div class="plane-age clearfix">
-                    <div>
-                      <div>
-                        <span class="field-label">Người lớn</span>
-                        <i>( >12 tuổi )</i>
-                      </div>
-                      <select name="" class="form-control">
-                        <option value="">1</option>
-                        <option value="">2</option>
-                        <option value="">3</option>
-                        <option value="">4</option>
-                        <option value="">5</option>
-                        <option value="">6</option>
-                        <option value="">7</option>
-                        <option value="">8</option>
-                        <option value="">9</option>
-                      </select>
+                  <div class="w50percentlast">
+                    <div class="wh90percent textleft right">
+                      <span class="opensans size13"><b>Điểm đến</b></span>
+                      <input type="text" class="form-control" placeholder="">
                     </div>
-                    <div>
-                      <div>
-                        <span class="field-label">Trẻ em</span>
-                        <i> ( 2 - 12 tuổi ) </i>
-                      </div>
-                      <select name="" class="form-control">
-                        <option value="">1</option>
-                        <option value="">2</option>
-                        <option value="">3</option>
-                        <option value="">4</option>
-                        <option value="">5</option>
-                        <option value="">6</option>
-                        <option value="">7</option>
-                        <option value="">8</option>
-                        <option value="">9</option>
-                      </select>
-                    </div>
-                    <div class="last">
-                      <div>
-                        <span class="field-label">Em bé</span>
-                        <i> ( < 2 tuổi ) </i>
-                      </div>
-                      <select name="" class="form-control">
-                        <option value="">1</option>
-                        <option value="">2</option>
-                        <option value="">3</option>
-                        <option value="">4</option>
-                        <option value="">5</option>
-                        <option value="">6</option>
-                        <option value="">7</option>
-                        <option value="">8</option>
-                        <option value="">9</option>
-                      </select>
-                    </div>
-                  </div>
-                  <div class="plane-submit text-right">
-                    <button type="button" class="btn">Tìm chuyến bay</button>
                   </div>
                 </div>
+                <div class="col-md-4">
+                  <div class="w50percent">
+                    <div class="wh90percent textleft">
+                      <span class="opensans size13"><b>Ngày đi</b></span>
+                      <input type="text" class="form-control mySelectCalendar" id="datepicker3" placeholder="mm/dd/yyyy" />
+                    </div>
+                  </div>
+                  <div class="w50percentlast">
+                    <div class="wh90percent textleft right">
+                      <span class="opensans size13"><b>Ngày về</b></span>
+                      <input type="text" class="form-control mySelectCalendar" id="datepicker4" placeholder="mm/dd/yyyy" />
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="room1">
+                    <div class="w50percent">
+                      <div class="wh90percent textleft">
+                        <span class="opensans size13"><b>Người lớn</b></span>
+                        <select class="form-control mySelectBoxClass">
+                          <option>1</option>
+                          <option selected>2</option>
+                          <option>3</option>
+                          <option>4</option>
+                          <option>5</option>
+                        </select>
+                      </div>
+                    </div>
+                    <div class="w50percentlast">
+                      <div class="wh90percent textleft right">
+                        <span class="opensans size13"><b>Trẻ em</b></span>
+                        <select class="form-control mySelectBoxClass">
+                          <option>0</option>
+                          <option selected>1</option>
+                          <option>2</option>
+                          <option>3</option>
+                          <option>4</option>
+                          <option>5</option>
+                        </select>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!--End of 1st tab -->
+              <div id="car2" class="tab-pane fade">
+                <div class="col-md-4">
+                  <div class="w50percent">
+                    <div class="wh90percent textleft">
+                      <span class="opensans size13"><b>Picking up</b></span>
+                      <input type="text" class="form-control" placeholder="Airport, address">
+                    </div>
+                  </div>
+                  <div class="w50percentlast">
+                    <div class="wh90percent textleft right">
+                      <span class="opensans size13"><b>Dropping off</b></span>
+                      <input type="text" class="form-control" placeholder="Airport, address">
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="w50percent">
+                    <div class="wh90percent textleft">
+                      <span class="opensans size13"><b>Pick up date</b></span>
+                      <input type="text" class="form-control mySelectCalendar" id="datepicker5" placeholder="mm/dd/yyyy" />
+                    </div>
+                  </div>
+                  <div class="w50percentlast">
+                    <div class="wh90percent textleft right">
+                      <span class="opensans size13"><b>Hour</b></span>
+                      <select class="form-control mySelectBoxClass">
+                        <option>12:00 AM</option>
+                        <option>12:30 AM</option>
+                        <option>01:00 AM</option>
+                        <option>01:30 AM</option>
+                        <option>02:00 AM</option>
+                        <option>02:30 AM</option>
+                        <option>03:00 AM</option>
+                        <option>03:30 AM</option>
+                        <option>04:00 AM</option>
+                        <option>04:30 AM</option>
+                        <option>05:00 AM</option>
+                        <option>05:30 AM</option>
+                        <option>06:00 AM</option>
+                        <option>06:30 AM</option>
+                        <option>07:00 AM</option>
+                        <option>07:30 AM</option>
+                        <option>08:00 AM</option>
+                        <option>08:30 AM</option>
+                        <option>09:00 AM</option>
+                        <option>09:30 AM</option>
+                        <option>10:00 AM</option>
+                        <option selected>10:30 AM</option>
+                        <option>11:00 AM</option>
+                        <option>11:30 AM</option>
+                        <option>12:00 PM</option>
+                        <option>12:30 PM</option>
+                        <option>01:00 PM</option>
+                        <option>01:30 PM</option>
+                        <option>02:00 PM</option>
+                        <option>02:30 PM</option>
+                        <option>03:00 PM</option>
+                        <option>03:30 PM</option>
+                        <option>04:00 PM</option>
+                        <option>04:30 PM</option>
+                        <option>05:00 PM</option>
+                        <option>05:30 PM</option>
+                        <option>06:00 PM</option>
+                        <option>06:30 PM</option>
+                        <option>07:00 PM</option>
+                        <option>07:30 PM</option>
+                        <option>08:00 PM</option>
+                        <option>08:30 PM</option>
+                        <option>09:00 PM</option>
+                        <option>09:30 PM</option>
+                        <option>10:00 PM</option>
+                        <option>10:30 PM</option>
+                        <option>11:00 PM</option>
+                        <option>11:30 PM</option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="w50percent">
+                    <div class="wh90percent textleft">
+                      <span class="opensans size13"><b>Drop off date</b></span>
+                      <input type="text" class="form-control mySelectCalendar" id="datepicker6" placeholder="mm/dd/yyyy" />
+                    </div>
+                  </div>
+                  <div class="w50percentlast">
+                    <div class="wh90percent textleft right">
+                      <span class="opensans size13"><b>Hour</b></span>
+                      <select class="form-control mySelectBoxClass">
+                        <option>12:00 AM</option>
+                        <option>12:30 AM</option>
+                        <option>01:00 AM</option>
+                        <option>01:30 AM</option>
+                        <option>02:00 AM</option>
+                        <option>02:30 AM</option>
+                        <option>03:00 AM</option>
+                        <option>03:30 AM</option>
+                        <option>04:00 AM</option>
+                        <option>04:30 AM</option>
+                        <option>05:00 AM</option>
+                        <option>05:30 AM</option>
+                        <option>06:00 AM</option>
+                        <option>06:30 AM</option>
+                        <option>07:00 AM</option>
+                        <option>07:30 AM</option>
+                        <option>08:00 AM</option>
+                        <option>08:30 AM</option>
+                        <option>09:00 AM</option>
+                        <option>09:30 AM</option>
+                        <option>10:00 AM</option>
+                        <option selected>10:30 AM</option>
+                        <option>11:00 AM</option>
+                        <option>11:30 AM</option>
+                        <option>12:00 PM</option>
+                        <option>12:30 PM</option>
+                        <option>01:00 PM</option>
+                        <option>01:30 PM</option>
+                        <option>02:00 PM</option>
+                        <option>02:30 PM</option>
+                        <option>03:00 PM</option>
+                        <option>03:30 PM</option>
+                        <option>04:00 PM</option>
+                        <option>04:30 PM</option>
+                        <option>05:00 PM</option>
+                        <option>05:30 PM</option>
+                        <option>06:00 PM</option>
+                        <option>06:30 PM</option>
+                        <option>07:00 PM</option>
+                        <option>07:30 PM</option>
+                        <option>08:00 PM</option>
+                        <option>08:30 PM</option>
+                        <option>09:00 PM</option>
+                        <option>09:30 PM</option>
+                        <option>10:00 PM</option>
+                        <option>10:30 PM</option>
+                        <option>11:00 PM</option>
+                        <option>11:30 PM</option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!--End of 3rd tab -->
+            </div>
+            <div class="searchbg2">
+              <div class="left ca01"><a href="#">Advanced +</a></div>
+              <form action="list4.html">
+                <button type="submit" class="btn-search right mr30">Search</button>
               </form>
             </div>
-            <div class="main-adv col-md-6">
-              <div class="plane-adv">
-                <div id="slider" class="revolution-slider">
-                  <div class="fullwidthbanner-container">
-                    <div class="fullwidthbanner">
-                      <ul>
-                        <li data-transition="3dcurtain-vertical" data-slotamount="10" data-delay="6000">
-                          <img data-url="#" alt="" class="banner-link" src="img/banner_2.png">
-                        </li>
-                        <li data-transition="3dcurtain-vertical" data-slotamount="10" data-delay="6000">
-                          <img data-url="#" alt="ILA Beyond English" class="banner-link" src="img/banner_1.png">
-                        </li>
-                        <li data-transition="3dcurtain-vertical" data-slotamount="10" data-delay="6000">
-                          <img data-url="#" alt="ILA Beyond English" class="banner-link" src="img/banner_2.png">
-                        </li>
-                      </ul>
-                    </div>
-                  </div>
-                </div>
-              </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+  <!--
+    ##############################
+     - ACTIVATE THE BANNER HERE -
+    ##############################
+    -->
+  <script type="text/javascript">
+  var tpj = jQuery;
+  tpj.noConflict();
+
+  tpj(document).ready(function() {
+
+    if (tpj.fn.cssOriginal != undefined)
+      tpj.fn.css = tpj.fn.cssOriginal;
+
+    tpj('.fullscreenbanner').revolution({
+      delay: 9000,
+      startwidth: 1170,
+      startheight: 600,
+
+      onHoverStop: "on", // Stop Banner Timet at Hover on Slide on/off
+
+      thumbWidth: 100, // Thumb With and Height and Amount (only if navigation Tyope set to thumb !)
+      thumbHeight: 50,
+      thumbAmount: 3,
+
+      hideThumbs: 0,
+      navigationType: "bullet", // bullet, thumb, none
+      navigationArrows: "solo", // nexttobullets, solo (old name verticalcentered), none
+
+      navigationStyle: false, // round,square,navbar,round-old,square-old,navbar-old, or any from the list in the docu (choose between 50+ different item), custom
+
+
+      navigationHAlign: "left", // Vertical Align top,center,bottom
+      navigationVAlign: "bottom", // Horizontal Align left,center,right
+      navigationHOffset: 30,
+      navigationVOffset: 30,
+
+      soloArrowLeftHalign: "left",
+      soloArrowLeftValign: "center",
+      soloArrowLeftHOffset: 20,
+      soloArrowLeftVOffset: 0,
+
+      soloArrowRightHalign: "right",
+      soloArrowRightValign: "center",
+      soloArrowRightHOffset: 20,
+      soloArrowRightVOffset: 0,
+
+      touchenabled: "on", // Enable Swipe Function : on/off
+
+
+      stopAtSlide: -1, // Stop Timer if Slide "x" has been Reached. If stopAfterLoops set to 0, then it stops already in the first Loop at slide X which defined. -1 means do not stop at any slide. stopAfterLoops has no sinn in this case.
+      stopAfterLoops: -1, // Stop Timer if All slides has been played "x" times. IT will stop at THe slide which is defined via stopAtSlide:x, if set to -1 slide never stop automatic
+
+      hideCaptionAtLimit: 0, // It Defines if a caption should be shown under a Screen Resolution ( Basod on The Width of Browser)
+      hideAllCaptionAtLilmit: 0, // Hide all The Captions if Width of Browser is less then this value
+      hideSliderAtLimit: 0, // Hide the whole slider, and stop also functions if Width of Browser is less than this value
+
+
+      fullWidth: "on", // Same time only Enable FullScreen of FullWidth !!
+      fullScreen: "off", // Same time only Enable FullScreen of FullWidth !!
+
+
+      shadow: 0 //0 = no Shadow, 1,2,3 = 3 Different Art of Shadows -  (No Shadow in Fullwidth Version !)
+
+    });
+
+
+  });
+  </script>
+  <!-- WRAP -->
+  <div class="wrap">
+    <!-- <div class="lastminute lcfix">
+      <div class="container lmc">
+        <img src="images/rating-4.png" alt="" />
+        <br/> LAST MINUTE: <b>Barcelona</b> - 2 nights - Flight+4* Hotel, Dep 27h Aug from $209/person
+        <br/>
+        <form action="details.html">
+          <button class="btn iosbtn" type="submit">Read more</button>
+        </form>
+      </div>
+    </div> -->
+    <div class="container service-panel">
+      <div class="row">
+        <div class="col-md-4">
+          <div class="boxshadow center">
+            <a href="list4.html"><img src="images/plane.jpg" alt="" class="fwimg" /></a>
+            <div class="bscontainer">
+              <h4 class="lato bold caps">VÉ MÁY BAY</h4>
+              <hr>
+              <p class="textleft grey">Đặt mua vé máy bay online với Vietnam Airlines, Vietjet Air, Jetstar và 600 hãng hàng không toàn cầu. (Đây là mô tả demo. Hãy nhập dữ liệu thật vào đây - về Vé Máy Bay)</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="boxshadow center">
+            <a href="list4.html"><img src="images/train.jpg" alt="" class="fwimg" /> </a>
+            <div class="bscontainer">
+              <h4 class="lato bold caps">VÉ TÀU HỎA</h4>
+              <hr>
+              <p class="textleft grey">Đặt mua vé máy bay online với Vietnam Airlines, Vietjet Air, Jetstar và 600 hãng hàng không toàn cầu. (Đây là mô tả demo. Hãy nhập dữ liệu thật vào đây - về Vé Máy Bay)</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="boxshadow center">
+            <a href="list4.html"><img src="images/bus.jpg" alt="" class="fwimg" /></a>
+            <div class="bscontainer">
+              <h4 class="lato bold caps">VÉ XE KHÁCH</h4>
+              <hr>
+              <p class="textleft grey">Đặt mua vé máy bay online với Vietnam Airlines, Vietjet Air, Jetstar và 600 hãng hàng không toàn cầu. (Đây là mô tả demo. Hãy nhập dữ liệu thật vào đây - về Vé Máy Bay)</p>
             </div>
           </div>
         </div>
       </div>
-      <div class="container">
-        <!-- main-form -->
-        <div class="love-me">
-          <div class="section-title">Dịch vụ của <span>chúng tôi</span></div>
-          <div class="border-title"></div>
-          <div class="row love-me-inner clearfix">
-            <div class="item text-center col-md-4">
-              <div class="icon-item">
-                <img src="img/plane.jpg" alt="">
-              </div>
-              <h3>VÉ MÁY BAY</h3>
-              <div class="border-title"></div>
-              <p>Đặt mua vé máy bay online với Vietnam Airlines, Vietjet Air, Jetstar và 600 hãng hàng không toàn cầu. (Đây là mô tả demo. Hãy nhập dữ liệu thật vào đây - về Vé Máy Bay)</p>
-            </div>
-            <div class="item text-center col-md-4">
-              <div class="icon-item">
-                <img src="img/train.jpg" alt="">
-              </div>
-              <h3>VÉ TÀU HỎA</h3>
-              <div class="border-title"></div>
-              <p>Đội ngũ nhân viên của Đặt Vé Siêu Rẻ luôn sẵn sàng hỗ trợ bạn mọi lúc mọi nơi. (Đây là mô tả demo. Hãy nhập dữ liệu thật vào đây - về Vé Tàu)</p>
-            </div>
-            <div class="item text-center col-md-4">
-              <div class="icon-item">
-                <img src="img/bus.jpg" alt="">
-              </div>
-              <h3>VÉ XE KHÁCH</h3>
-              <div class="border-title"></div>
-              <p>Với lợi thế là Đại lý vé máy bay Cấp 1 của các hãng không, chúng tôi luôn cung cấp giá vé tốt nhất. (Đây là mô tả demo. Hãy nhập dữ liệu thật vào đây - về Vé Xe Khách)</p>
-            </div>
-          </div>
-        </div>
-        <!--  -->
-        <div class="banner-adv">
-          Banner quảng cáo ( 1140 x 150 )
-        </div>
-        <!-- banner -->
-        <div class="row service-method">
-          <div class="col-md-6 ticket-book">
-            <div class="section-title">các hình thức <span>đặt vé</span>
-            </div>
-            <div class="border-title"></div>
-            <div class="row form-group">
-              <div class="col-md-12">
-                <div class="icon-book"><i class="fa fa-globe"></i></div>
-                <div class="text-desc">
-                  <div class="text-big">Đặt vé trực tiếp trên website.</div>
-                  <div class="text-small">Sẽ được nhân viên xác nhận sau vài phút</div>
-                </div>
-              </div>
-            </div>
-            <div class="row form-group">
-              <div class="col-md-12">
-                <div class="icon-book"><i class="fa fa-comments"></i></div>
-                <div class="text-desc">
-                  <div class="text-big">Qua chat với hỗ trợ viên</div>
-                  <div class="text-small">
-                    <a href="#" title="" style="color: #0095EB;">Bắt đầu trò chuyện ngay</a>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="row form-group">
-              <div class="col-md-12">
-                <div class="icon-book"><i class="fa fa-phone"></i></div>
-                <div class="text-desc">
-                  <div class="text-big">Đặt vé qua điện thoại</div>
-                  <div class="text-small">
-                    <a href="tel:0873050500">(0511) 38 88 408</a>
-                    <!-- <a href="tel:0902985355">0986.125.225</a> -->
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="row form-group">
-              <div class="col-md-12">
-                <div class="icon-book"><i class="fa fa-building-o"></i></div>
-                <div class="text-desc">
-                  <div class="text-big">Tại văn phòng Công ty TNHH MTV Thương mại và Du lịch Ba Lô</div>
-                  <div class="text-small">06 Tân Lập 1, phường Thạch Thang, quận Hải Châu, Đà Nẵng</div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-6 payment-method">
-            <div class="section-title">các hình thức <span>thanh toán</span>
-            </div>
-            <div class="border-title"></div>
-            <div class="row form-group">
-              <div class="col-md-12">
-                <div class="icon-payment"><i class="fa fa-money"></i></div>
-                <div class="text-desc">
-                  <div class="text-big">Thanh toán trực tiếp tại văn phòng</div>
-                  <div class="text-small"> Quý khách vui lòng qua văn phòng Đặt Vé Siêu Rẻ để thanh toán và nhận vé.</div>
-                </div>
-              </div>
-            </div>
-            <div class="row form-group">
-              <div class="col-md-12">
-                <div class="icon-payment"><i class="fa fa-cc-visa"></i></div>
-                <div class="text-desc">
-                  <div class="text-big">Thanh toán qua máy cà thẻ (POS)</div>
-                  <div class="text-small">Thanh toán bằng hình thức cà thẻ (POS) tại văn phòng datvesieure.com (có tính phí).</div>
-                </div>
-              </div>
-            </div>
-            <div class="row form-group">
-              <div class="col-md-12">
-                <div class="icon-payment"><i class="fa fa-home"></i></div>
-                <div class="text-desc">
-                  <div class="text-big">Thanh toán tại nhà</div>
-                  <div class="text-small">Sẽ giao vé &amp; thu tiền tại nhà theo địa chỉ Quý khách cung cấp.</div>
-                </div>
-              </div>
-            </div>
-            <div class="row form-group">
-              <div class="col-md-12">
-                <div class="icon-payment"><i class="fa fa-bank"></i></div>
-                <div class="text-desc">
-                  <div class="text-big">Thanh toán qua chuyển khoản ngân hàng</div>
-                  <div class="text-small">Chuyển khoản trực tiếp tại ngân hàng, thẻ ATM, hoặc qua Internet banking.</div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <!-- service-method -->
+    </div>
+    <!-- service-method -->
+    <div class="container">
         <div class="partner">
           <div class="swiper-container">
             <div class="swiper-wrapper">
               <div class="swiper-slide item">
                 <a href="#" target="_blank">
-                  <img src="img/partners/boditech.png" alt="" /><span class="imba"></span>
+                  <img src="images/partners/boditech.png" alt="" /><span class="imba"></span>
                 </a>
               </div>
               <div class="swiper-slide item">
                 <a href="#" target="_blank">
-                  <img src="img/partners/namyangi.png" alt="" /><span class="imba"></span>
+                  <img src="images/partners/namyangi.png" alt="" /><span class="imba"></span>
                 </a>
               </div>
               <div class="swiper-slide item">
                 <a href="#" target="_blank">
-                  <img src="img/partners/geumsan.png" alt="" /><span class="imba"></span>
+                  <img src="images/partners/geumsan.png" alt="" /><span class="imba"></span>
                 </a>
               </div>
               <div class="swiper-slide item">
                 <a href="#" target="_blank">
-                  <img src="img/partners/hicook.png" alt="" /><span class="imba"></span>
+                  <img src="images/partners/hicook.png" alt="" /><span class="imba"></span>
                 </a>
               </div>
               <div class="swiper-slide item">
                 <a href="#" target="_blank">
-                  <img src="img/partners/customer_2.png" alt="" /><span class="imba"></span>
+                  <img src="images/partners/customer_2.png" alt="" /><span class="imba"></span>
                 </a>
               </div>
               <div class="swiper-slide item">
                 <a href="#" target="_blank">
-                  <img src="img/partners/boditech.png" alt="" /><span class="imba"></span>
+                  <img src="images/partners/boditech.png" alt="" /><span class="imba"></span>
                 </a>
               </div>
               <div class="swiper-slide item">
                 <a href="#" target="_blank">
-                  <img src="img/partners/namyangi.png" alt="" /><span class="imba"></span>
+                  <img src="images/partners/namyangi.png" alt="" /><span class="imba"></span>
                 </a>
               </div>
               <div class="swiper-slide item">
                 <a href="#" target="_blank">
-                  <img src="img/partners/geumsan.png" alt="" /><span class="imba"></span>
+                  <img src="images/partners/geumsan.png" alt="" /><span class="imba"></span>
                 </a>
               </div>
             </div>
           </div>
         </div>
+
+    </div>
+    <!-- FOOTER -->
+    <div class="footerbg lcfix">
+      <div class="container">
+        <div class="col-md-3">
+        <img src="images/logosmal.png" alt="" />
+        <br/>
+        <br/>
+          <span class="ftitle">Let's socialize</span>
+          <div class="scont">
+            <a href="#" class="social1b"><img src="images/icon-facebook.png" alt="" /></a>
+            <a href="#" class="social2b"><img src="images/icon-twitter.png" alt="" /></a>
+            <a href="#" class="social3b"><img src="images/icon-gplus.png" alt="" /></a>
+            <a href="#" class="social4b"><img src="images/icon-youtube.png" alt="" /></a>
+            <br/>
+            <br/> &copy; 2016 | <a href="#">VisionTeam</a>
+            <br/> All Rights Reserved
+            <br/>
+            <br/>
+          </div>
+        </div>
+        <!-- End of column 1-->
+        <div class="col-md-3">
+          <span class="ftitle">Travel Specialists</span>
+          <br/>
+          <br/>
+          <ul class="footerlist">
+            <li><a href="#">Golf Vacations</a></li>
+            <li><a href="#">Ski & Snowboarding</a></li>
+            <li><a href="#">Disney Parks Vacations</a></li>
+            <li><a href="#">Disneyland Vacations</a></li>
+            <li><a href="#">Disney World Vacations</a></li>
+            <li><a href="#">Vacations As Advertised</a></li>
+          </ul>
+        </div>
+        <!-- End of column 2-->
+        <div class="col-md-3">
+          <span class="ftitle">Travel Specialists</span>
+          <br/>
+          <br/>
+          <ul class="footerlist">
+            <li><a href="#">Weddings</a></li>
+            <li><a href="#">Accessible Travel</a></li>
+            <li><a href="#">Disney Parks</a></li>
+            <li><a href="#">Cruises</a></li>
+            <li><a href="#">Round the World</a></li>
+            <li><a href="#">First Class Flights</a></li>
+          </ul>
+        </div>
+        <!-- End of column 3-->
+        <div class="col-md-3 grey">
+          <span class="ftitle">Văn phòng chính</span>
+          <br/>
+          <br/>
+          <p><strong>Công ty TNHH MTV Thương mại và Du lịch Ba Lô</strong>
+            <br/>06 Tân Lập 1, phường Thạch Thang, quận Hải Châu, Đà Nẵng</p>
+          <br/>
+          <span class="ftitle">Hotline đặt vé</span>
+          <br/>
+          <span class="pnr">(0511) 38 88 408</span>
+        </div>
+        <!-- End of column 4-->
       </div>
     </div>
-    <!-- home -->
-  </main>
-  <!-- main -->
-  <footer id="footer" class="footer">
-    <div class="container">
-      <div class="top-footer clearfix">
-        <div class="footer-panel first-panel">
-          <h3 class="footer-title">Về Chúng Tôi</h3>
-          <p>Là đại lý chính thức của các Hãng hàng không trong nước và quốc tế, với hệ thống đặt vé máy bay trực tuyến tại địa chỉ website datvesieure.vn.</p>
-          <p>ĐẶT VÉ SIÊU RẺ đáp ứng nhanh chóng các nhu cầu tìm kiếm hành trình bay, so sánh giá vé máy bay của các hãng, hệ, cập nhật thông tin theo giá vé, theo hãng bay, giờ bay, Đặt vé và thanh toán trực tuyến qua website một cách nhanh gọn, tiết kiệm thời gian và chi phí.</p>
-        </div>
-        <div class="footer-panel second-panel">
-          <h3 class="footer-title">Văn phòng chính</h3>
-          <p><strong>Công ty TNHH MTV Thương mại và Du lịch Ba Lô</strong><br/>06 Tân Lập 1, phường Thạch Thang, quận Hải Châu, Đà Nẵng</p>
-          <p><a title="phone">(0511) 38 88 408</a></p>
-          <!-- <p><a title="phone">(08) 123 25 225</a></p> -->
-          <!-- <p><a href="mailto:thaolc1701@gmail.com" title="email">thaolc1701@gmail.com</a></p> -->
-        </div>
-        <div class="footer-panel thirst-panel">
-          <h3 class="footer-title">Fanpage</h3>
-          <img src="img/fan-page.jpg" alt="">
-        </div>
-      </div>
-      <div class="bottom-footer clearfix">
-        <p class="copy-right">Copyright © 2016 Company Name - All rights reserved</p>
-        <p class="design-by">
-          <a href="">Chính sách bảo mật</a> | <a href="">Design by VisionTeam</a>
-        </p>
+    <div class="footerbg2">
+      <div class="container center grey">
+        <a href="#">Trang chủ</a> |
+        <a href="#">Đặt vé</a> |
+        <a href="#">Giới thiệu</a> |
+        <a href="#">Hướng dẫn</a> |
+        <a href="#">Liên hệ</a>
+        <a href="#top" class="gotop scroll"><img src="images/spacer.png" alt="" /></a>
       </div>
     </div>
-  </footer>
-  <!-- footer -->
-  <script src="plugins/jquery/jquery-3.1.1.min.js"></script>
-  <script src="plugins/bootstrap-3.3.7/js/bootstrap.min.js"></script>
+  </div>
+  <!-- /WRAP -->
+  <!-- Javascript -->
+  <!-- This page JS -->
+  <script src="assets/js/js-index3.js"></script>
+  <!-- Custom functions -->
+  <script src="assets/js/functions.js"></script>
+  <!-- Picker UI-->
+  <script src="assets/js/jquery-ui.js"></script>
+  <!-- Easing -->
+  <script src="assets/js/jquery.easing.js"></script>
+  <!-- jQuery KenBurn Slider  -->
+  <script type="text/javascript" src="rs-plugin/js/jquery.themepunch.revolution.min.js"></script>
+  <!-- Nicescroll  -->
+  <script src="assets/js/jquery.nicescroll.min.js"></script>
+  <!-- CarouFredSel -->
+  <script src="assets/js/jquery.carouFredSel-6.2.1-packed.js"></script>
+  <script src="assets/js/helper-plugins/jquery.touchSwipe.min.js"></script>
+  <script type="text/javascript" src="assets/js/helper-plugins/jquery.mousewheel.min.js"></script>
+  <script type="text/javascript" src="assets/js/helper-plugins/jquery.transit.min.js"></script>
+  <script type="text/javascript" src="assets/js/helper-plugins/jquery.ba-throttle-debounce.min.js"></script>
+  <!-- Custom Select -->
+  <script type='text/javascript' src='assets/js/jquery.customSelect.js'></script>
+  <!-- Include all compiled plugins (below), or include individual files as needed -->
+  <script src="dist/js/bootstrap.min.js"></script>
   <script src="plugins/swiper/swiper.min.js"></script>
-  <script src="plugins/revolution/jquery.themepunch.revolution.min.js"></script>
-  <script src="plugins/revolution/slidermain.js"></script>
-  <script src="plugins/moment/moment.js"></script>
-  <script src="plugins/bootstrap-datepicker/js/bootstrap-datetimepicker.min.js"></script>
-  <script src="plugins/nicescroll/jquery.nicescroll.js"></script>
-  <script src="js/script.js"></script>
   <script>
   var swiper = new Swiper('.swiper-container', {
     slidesPerView: 'auto',
