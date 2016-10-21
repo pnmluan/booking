@@ -1,0 +1,114 @@
+.cstyle03 { margin-top: 700px; }
+.footer { text-align: left; background: #70C5CE; }
+.footerbg { background: #70C5CE; }
+.footerbg2 a { color: #999; }
+.footerbg2 a:hover { color: #0099cc; }
+.pnr { font-weight: 400; }
+
+.page-loading { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: 99999; background: #fff; }
+.page-loading img { display: block; position: absolute; top: 50%; left: 50%; margin-top: -60px; margin-left: -60px; }
+
+
+
+.section-title { font-size: 20px; color: #0685AA; text-transform: uppercase; font-weight: 700; margin-top: 20px; padding-bottom: 10px;}
+.border-title { height: 7px; margin-bottom: 20px; width: 82px; background: url(../images/border-title.png) repeat; }
+
+
+/***** BANNER ADV *****/
+.banner-adv { background: #ccc; height: 150px; text-align: center; line-height: 150px; text-transform: uppercase; color: #fff; font-weight: bold; font-size: 25px; margin: 35px 0px 30px 0px; }
+
+
+/***** SERVICE METHOD *****/
+.icon-book, .icon-payment { color: #fff; font-size: 40px; width: 48px; height: 48px; float: left; margin-right: 15px; }
+.icon-book i, .icon-payment i {  display: block; width: 100%; height:100%; }
+.icon-book i, .icon-payment i { color: #AFAFAF; }
+.text-desc { overflow: hidden; }
+.text-big { font-size: 14px; margin-bottom: 5px; margin-top: 2px; text-transform: uppercase; font-weight: bold; }
+.text-small { color: #6a6a6a; line-height: 20px; }
+.text-small a { color: #ff0000; font-weight: bold; margin-right: 20px; }
+
+
+/***** PARTNER *****/
+.partner {  }
+.swiper-container .swiper-slide img { filter: grayscale(1); -webkit-filter: grayscale(1); }
+.swiper-container .swiper-slide img:hover { filter: grayscale(0); -webkit-filter: grayscale(0); }
+.swiper-container { width: 100%; height: 75px; color: #fff; text-align: center; overflow: hidden; margin-top: 30px; margin-bottom: 40px; }
+.swiper-container .swiper-slide { height: 100%; width: auto; padding: 0 30px; }
+
+
+@-webkit-keyframes moveskyline {
+  from {
+    background-position: 0 0;
+  }
+  to {
+    background-position: -1980px 0;
+  }
+}
+
+
+@-moz-keyframes moveskyline {
+  from {
+    background-position: 0 0;
+  }
+  to {
+    background-position: -1980px 0;
+  }
+}
+
+@keyframes moveskyline {
+  from {
+    background-position: 0 0;
+  }
+  to {
+    background-position: -1980px 0;
+  }
+}
+
+.skyline {
+  position: relative!important;
+  bottom: 0;
+  height: 218px;
+  width: 100%;
+  z-index: 1
+}
+
+.skyline-city {
+  background: url("../images/footer.png") bottom!important;
+  -webkit-animation-name: moveskyline;
+  -webkit-animation-duration: 40s;
+  -webkit-animation-iteration-count: infinite;
+  -webkit-animation-timing-function: linear;
+  -moz-animation-name: moveskyline;
+  -moz-animation-duration: 40s;
+  -moz-animation-iteration-count: infinite;
+  -moz-animation-timing-function: linear;
+  animation-name: moveskyline;
+  animation-duration: 40s;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
+  width: 100%;
+  z-index: 1;
+  position: absolute;
+  height: 250px
+}
+
+.bus-img {
+  background: url("../images/bus-vxr.png")!important;
+  position: absolute;
+  bottom: -20px!important;
+  left: 35%;
+  z-index: 2;
+  width: 257px!important;
+  height: 77px!important
+}
+
+.plane-img {
+  position: absolute;
+  left: 50%;
+  z-index: 2;
+  top: 70px;
+}
+
+.bus-img img {
+  width: 256px
+}

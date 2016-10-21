@@ -21,8 +21,8 @@ website:   	http://www.themepunch.com
   /*	-	THE BANNER CONTAINER (Padding, Shadow, Border etc. )	-	*/
 
 
-
-
+  
+  
 .fullscreen-container {
 	width:100% !important;
 	position:relative;
@@ -34,7 +34,7 @@ website:   	http://www.themepunch.com
 		width:100% !important;
 		position:relative;
 		padding:0;
-		height:65%!important;
+		height:80%!important;
 	}
 }
 
@@ -51,14 +51,4 @@ website:   	http://www.themepunch.com
 
 .bottomtexts-example p,
 #topheader-to-offset p	{ font-size:13px; line-height:18px; color:#fff; font-family:Arial; font-weight:300;}
-
-
-.service-panel { padding-top: 40px; padding-bottom: 60px; }
-
-/***** PARTNER *****/
-.partner { border-top: 1px solid #c9c9c9; padding: 70px 0px 40px 0px; }
-.swiper-container .swiper-slide img { filter: grayscale(1); -webkit-filter: grayscale(1); }
-.swiper-container .swiper-slide img:hover { filter: grayscale(0); -webkit-filter: grayscale(0); }
-.swiper-container { width: 100%; height: 75px; color: #fff; text-align: center; overflow: hidden; }
-.swiper-container .swiper-slide { height: 100%; width: auto; padding: 0 30px; }
 
