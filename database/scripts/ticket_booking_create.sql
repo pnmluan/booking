@@ -38,12 +38,12 @@ CREATE TABLE booking_detail (
     booking_id int NOT NULL,
     code varchar(20) NOT NULL,
     depart int NOT NULL,
-    departure timestamp NOT NULL,
+    departure date DEFAULT NULL,
     arrive int NOT NULL,
-    arrival timestamp NOT NULL,
+    arrival date DEFAULT NULL,
     one_way boolean NOT NULL,
-    depart_duration int NOT NULL,
-    return_duration int NOT NULL,
+    depart_duration time DEFAULT NULL,
+    return_duration time DEFAULT NULL,
     location_id int NOT NULL,
     CONSTRAINT booking_detail_pk PRIMARY KEY (id)
 );
@@ -55,6 +55,7 @@ CREATE TABLE contact (
     title int NOT NULL,
     first_name varchar(50) NOT NULL,
     last_name varchar(50) NOT NULL,
+	birthday date DEFAULT NULL,
     phone varchar(11) NOT NULL,
     email varchar(50) NOT NULL,
     CONSTRAINT contact_pk PRIMARY KEY (id)
@@ -86,6 +87,7 @@ CREATE TABLE passenger (
     title int NOT NULL,
     first_name varchar(50) NOT NULL,
     last_name varchar(50) NOT NULL,
+	birthday date DEFAULT NULL,
     phone varchar(11) NOT NULL,
     email varchar(50) NOT NULL,
     CONSTRAINT passenger_pk PRIMARY KEY (id)
