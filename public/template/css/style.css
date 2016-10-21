@@ -2,7 +2,8 @@
 html, body { overflow-x: hidden; }
 body{ font-family: "Open Sans"; }
 
-a.gotop { position: fixed; right: 15px; bottom: 15px; }
+a.gotop {
+  display: none; }
 
 .tab-content2 {
     background: #F8F3E7;
@@ -46,7 +47,7 @@ header a { text-transform: uppercase; font-family: 'diavlo'; }
 .pnr { font-weight: 400; }
 
 .page-loading { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: 99999; background: #fff; }
-.page-loading img { display: block; position: absolute; top: 50%; left: 50%; margin-top: -60px; margin-left: -60px; }
+.page-loading img { display: block; position: absolute; top: 50%; left: 50%; margin-top: -40px; margin-left: -40px; width: 80px; }
 
 
 
@@ -152,3 +153,9 @@ header a { text-transform: uppercase; font-family: 'diavlo'; }
 .bus-img img {
   width: 256px
 }
+
+/*.navbar > .container .navbar-brand {*/
+  /*margin-left: -15px;*/
+  /*margin-top: -19px;*/
+/*}*/
+.logo{margin-top: -20px;}
