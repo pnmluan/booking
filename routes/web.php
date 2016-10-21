@@ -17,15 +17,15 @@ $app->get('/', function () use ($app) {
 
 $app->group(['prefix' => 'api/v1', 'middleware' => 'BasicAuth', 'namespace' => 'App\Http\Controllers'], function($app)
 {
-    $app->get('category','CategoryController@index');
+    $app->get('banner','BannerController@index');
   
-    $app->get('category/{id}','CategoryController@getcategory');
+    $app->get('banner/{id}','BannerController@getbanner');
       
-    $app->post('category','CategoryController@createcategory');
+    $app->post('banner','BannerController@createbanner');
       
-    $app->put('category/{id}','CategoryController@updatecategory');
+    $app->put('banner/{id}','BannerController@updatebanner');
       
-    $app->delete('category/{id}','CategoryController@deletecategory');
+    $app->delete('banner/{id}','BannerController@deletebanner');
 });
 
 // Crawler API
