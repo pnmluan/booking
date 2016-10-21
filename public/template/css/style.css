@@ -1,3 +1,43 @@
+@font-face {font-family: 'diavlo'; src: url('../fonts/Diavlo_MEDIUM.otf');}
+html, body { overflow-x: hidden; }
+body{ font-family: "Open Sans"; }
+
+a.gotop { position: fixed; right: 15px; bottom: 15px; }
+
+.tab-content2 {
+    background: #F8F3E7;
+    padding: 30px 15px 30px 15px;
+    height: 223px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    background-image: url("../images/pattern_vang.svg");
+    background-repeat: repeat;
+    background-size: 250px;
+    background-color: #F8F3E7;
+}
+
+.searchbg2 {
+    height: 62px;
+    width: 100%;
+    position: absolute;
+    top: 200px;
+    display: block;
+    background: #F4EBCC;
+    background-image: url("../images/pattern_vang.svg");
+    background-repeat: repeat;
+}
+
+header a { text-transform: uppercase; font-family: 'diavlo'; }
+.navbar-wrapper2 { background: #BDE4E8;
+  background: #91D2D9; /* For browsers that do not support gradients */
+    background: -webkit-linear-gradient(#91D2D9, #fff); /* For Safari 5.1 to 6.0 */
+    background: -o-linear-gradient(#91D2D9, #fff); /* For Opera 11.1 to 12.0 */
+    background: -moz-linear-gradient(#91D2D9, #fff); /* For Firefox 3.6 to 15 */
+    background: linear-gradient(#91D2D9, #fff); /* Standard syntax */
+}
+.service-method { padding: 30px 0px;  }
+.main-service { background: #F2F2F2; padding: 50px 0px 50px 0px; }
+.title { font-family: 'diavlo'; }
+
 .cstyle03 { margin-top: 700px; }
 .footer { text-align: left; background: #70C5CE; }
 .footerbg { background: #70C5CE; }
@@ -10,8 +50,8 @@
 
 
 
-.section-title { font-size: 20px; color: #0685AA; text-transform: uppercase; font-weight: 700; margin-top: 20px; padding-bottom: 10px;}
-.border-title { height: 7px; margin-bottom: 20px; width: 82px; background: url(../images/border-title.png) repeat; }
+.section-title { font-size: 20px; color: #0685AA; text-transform: uppercase; font-family: 'diavlo';  margin-top: 20px; padding-bottom: 10px;}
+.border-title { height: 7px; margin-bottom: 20px; width: 75px; background: url(../images/border-title.png) repeat; }
 
 
 /***** BANNER ADV *****/
@@ -19,11 +59,11 @@
 
 
 /***** SERVICE METHOD *****/
-.icon-book, .icon-payment { color: #fff; font-size: 40px; width: 48px; height: 48px; float: left; margin-right: 15px; }
-.icon-book i, .icon-payment i {  display: block; width: 100%; height:100%; }
-.icon-book i, .icon-payment i { color: #AFAFAF; }
+.icon-book, .icon-payment { color: #fff; font-size: 40px; width: 48px; height: 48px; float: left; margin-right: 5px; }
+.icon-book i, .icon-payment i {  display: block; width: 100%; height:100%; color: #AFAFAF;  }
+.icon-book img, .icon-payment img { display: block; }
 .text-desc { overflow: hidden; }
-.text-big { font-size: 14px; margin-bottom: 5px; margin-top: 2px; text-transform: uppercase; font-weight: bold; }
+.text-big { font-size: 14px; margin-bottom: 3px; margin-top: 2px; text-transform: uppercase; font-weight: bold; }
 .text-small { color: #6a6a6a; line-height: 20px; }
 .text-small a { color: #ff0000; font-weight: bold; margin-right: 20px; }
 
