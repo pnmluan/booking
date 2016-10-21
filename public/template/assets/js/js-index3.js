@@ -193,7 +193,7 @@ jQuery(window).scroll(function(){
 	  else{
 	   jQuery('.navbar-wrapper2').css({'min-height' : 110-(jQueryscrollTop/2) +'px'});
 	  }
-  // jQuery('#dajy').css({'top': ((- jQueryscrollTop / 5)+ jQueryheaderheight)  + 'px' });
+  jQuery('#dajy').css({'top': ((- jQueryscrollTop / 5)+ jQueryheaderheight)  + 'px' });
   //jQuery(".sboxpurple").css({'opacity' : 1-(jQueryscrollTop/300)});
   jQuery(".scrolleffect").css({'top': ((- jQueryscrollTop / 5)+ jQueryheaderheight) + 30  + 'px' });
   jQuery(".tp-leftarrow").css({'left' : 20-(jQueryscrollTop/2) +'px'});
@@ -246,7 +246,7 @@ jQuery(window).scroll(function(){
 			}, 300);
 
 			setTimeout(function (){
-				jQuery('.gotop').stop().animate({top:'0px'}, 200);
+				jQuery('.gotop').stop().animate({top:'10px'}, 200);
 			}, 400);
 
 		}
