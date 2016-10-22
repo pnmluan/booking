@@ -5,6 +5,8 @@ body{ font-family: "Open Sans"; }
 a.gotop {
   display: none; }
 
+.form-control{ border: 1px solid rgba(242, 229, 184, 1);}
+
 .tab-content2 {
     background: #F8F3E7;
     padding: 30px 15px 30px 15px;
@@ -22,18 +24,18 @@ a.gotop {
     position: absolute;
     top: 200px;
     display: block;
-    background: #F4EBCC;
-    background-image: url("../images/pattern_vang.svg");
-    background-repeat: repeat;
+  background-color: rgba(242, 229, 184, 0.5);
 }
 
 header a { text-transform: uppercase; font-family: 'diavlo'; }
 .navbar-wrapper2 { background: #BDE4E8;
-  background: #91D2D9; /* For browsers that do not support gradients */
-    background: -webkit-linear-gradient(#91D2D9, #fff); /* For Safari 5.1 to 6.0 */
-    background: -o-linear-gradient(#91D2D9, #fff); /* For Opera 11.1 to 12.0 */
-    background: -moz-linear-gradient(#91D2D9, #fff); /* For Firefox 3.6 to 15 */
-    background: linear-gradient(#91D2D9, #fff); /* Standard syntax */
+  background: #fff; /* For browsers that do not support gradients */
+    /*background: -webkit-linear-gradient(#91D2D9, #fff); !* For Safari 5.1 to 6.0 *!*/
+    /*background: -o-linear-gradient(#91D2D9, #fff); !* For Opera 11.1 to 12.0 *!*/
+    /*background: -moz-linear-gradient(#91D2D9, #fff); !* For Firefox 3.6 to 15 *!*/
+    /*background: linear-gradient(#91D2D9, #fff); !* Standard syntax *!*/
+
+  box-shadow: 0px 1px 12px #ccc;
 }
 .service-method { padding: 30px 0px;  }
 .main-service { background: #F2F2F2; padding: 50px 0px 50px 0px; }
