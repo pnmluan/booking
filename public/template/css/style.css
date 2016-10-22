@@ -39,7 +39,7 @@ header a { text-transform: uppercase; font-family: 'diavlo'; }
 }
 .service-method { padding: 30px 0px;  }
 .main-service { background: #F2F2F2; padding: 50px 0px 50px 0px; }
-.title { font-family: 'diavlo'; }
+.title { font-family: 'diavlo'; color: #0685AA; }
 
 .cstyle03 { margin-top: 700px; }
 .footer { text-align: left; background: #70C5CE; }
