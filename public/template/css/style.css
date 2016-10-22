@@ -2,7 +2,10 @@
 html, body { overflow-x: hidden; }
 body{ font-family: "Open Sans"; }
 
-a.gotop { position: fixed; right: 15px; bottom: 15px; }
+a.gotop {
+  display: none; }
+
+.form-control{ border: 1px solid rgba(242, 229, 184, 1);}
 
 .tab-content2 {
     background: #F8F3E7;
@@ -21,22 +24,22 @@ a.gotop { position: fixed; right: 15px; bottom: 15px; }
     position: absolute;
     top: 200px;
     display: block;
-    background: #F4EBCC;
-    background-image: url("../images/pattern_vang.svg");
-    background-repeat: repeat;
+  background-color: rgba(242, 229, 184, 0.5);
 }
 
 header a { text-transform: uppercase; font-family: 'diavlo'; }
 .navbar-wrapper2 { background: #BDE4E8;
-  background: #91D2D9; /* For browsers that do not support gradients */
-    background: -webkit-linear-gradient(#91D2D9, #fff); /* For Safari 5.1 to 6.0 */
-    background: -o-linear-gradient(#91D2D9, #fff); /* For Opera 11.1 to 12.0 */
-    background: -moz-linear-gradient(#91D2D9, #fff); /* For Firefox 3.6 to 15 */
-    background: linear-gradient(#91D2D9, #fff); /* Standard syntax */
+  background: #fff; /* For browsers that do not support gradients */
+    /*background: -webkit-linear-gradient(#91D2D9, #fff); !* For Safari 5.1 to 6.0 *!*/
+    /*background: -o-linear-gradient(#91D2D9, #fff); !* For Opera 11.1 to 12.0 *!*/
+    /*background: -moz-linear-gradient(#91D2D9, #fff); !* For Firefox 3.6 to 15 *!*/
+    /*background: linear-gradient(#91D2D9, #fff); !* Standard syntax *!*/
+
+  box-shadow: 0px 1px 12px #ccc;
 }
 .service-method { padding: 30px 0px;  }
 .main-service { background: #F2F2F2; padding: 50px 0px 50px 0px; }
-.title { font-family: 'diavlo'; }
+.title { font-family: 'diavlo'; color: #0685AA; }
 
 .cstyle03 { margin-top: 700px; }
 .footer { text-align: left; background: #70C5CE; }
@@ -46,7 +49,7 @@ header a { text-transform: uppercase; font-family: 'diavlo'; }
 .pnr { font-weight: 400; }
 
 .page-loading { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: 99999; background: #fff; }
-.page-loading img { display: block; position: absolute; top: 50%; left: 50%; margin-top: -60px; margin-left: -60px; }
+.page-loading img { display: block; position: absolute; top: 50%; left: 50%; margin-top: -40px; margin-left: -40px; width: 80px; }
 
 
 
@@ -152,3 +155,9 @@ header a { text-transform: uppercase; font-family: 'diavlo'; }
 .bus-img img {
   width: 256px
 }
+
+/*.navbar > .container .navbar-brand {*/
+  /*margin-left: -15px;*/
+  /*margin-top: -19px;*/
+/*}*/
+.logo{margin-top: -20px;}
