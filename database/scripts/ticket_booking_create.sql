@@ -1,11 +1,13 @@
 -- Created by Vertabelo (http://vertabelo.com)
--- Last modification date: 2016-10-20 03:38:16.373
+-- Last modification date: 2016-10-23 12:16:30.854
 
 -- tables
 -- Table: baggage_type
 CREATE TABLE baggage_type (
     id int NOT NULL AUTO_INCREMENT,
+    provider_id int NOT NULL,
     name varchar(150) NOT NULL,
+    fare float NOT NULL,
     CONSTRAINT baggage_type_pk PRIMARY KEY (id)
 );
 
@@ -15,6 +17,7 @@ CREATE TABLE banner (
     tittle varchar(200) NOT NULL,
     img varchar(200) NOT NULL,
     url varchar(1000) NOT NULL,
+    description varchar(1000) NOT NULL,
     active boolean NOT NULL,
     CONSTRAINT banner_pk PRIMARY KEY (id)
 );
@@ -26,7 +29,6 @@ CREATE TABLE booking (
     adult int NOT NULL,
     children int NOT NULL,
     infant int NOT NULL,
-    baggage_type_id int NOT NULL,
     ticket_type_id int NOT NULL,
     remark varchar(1000) NOT NULL,
     CONSTRAINT booking_pk PRIMARY KEY (id)
@@ -38,14 +40,45 @@ CREATE TABLE booking_detail (
     booking_id int NOT NULL,
     code varchar(20) NOT NULL,
     depart int NOT NULL,
-    departure date DEFAULT NULL,
+    departure date NULL,
     arrive int NOT NULL,
-    arrival date DEFAULT NULL,
+    arrival date NULL,
     one_way boolean NOT NULL,
-    depart_duration time DEFAULT NULL,
-    return_duration time DEFAULT NULL,
-    location_id int NOT NULL,
+    depart_duration int NULL,
+    return_duration int NULL,
     CONSTRAINT booking_detail_pk PRIMARY KEY (id)
+);
+
+-- Table: bus_route
+CREATE TABLE bus_route (
+    id int NOT NULL AUTO_INCREMENT,
+    code varchar(20) NOT NULL,
+    depart int NOT NULL,
+    departure date NULL,
+    arrive int NOT NULL,
+    arrival date NULL,
+    bus_type_id int NOT NULL,
+    depart_duration int NULL,
+    return_duration int NULL,
+    fare float NOT NULL,
+    CONSTRAINT bus_route_pk PRIMARY KEY (id)
+);
+
+-- Table: bus_type
+CREATE TABLE bus_type (
+    id int NOT NULL AUTO_INCREMENT,
+    name varchar(100) NOT NULL,
+    CONSTRAINT bus_type_pk PRIMARY KEY (id)
+);
+
+-- Table: comment
+CREATE TABLE comment (
+    id int NOT NULL AUTO_INCREMENT,
+    full_name int NOT NULL,
+    comment varchar(1000) NOT NULL,
+    created_at date NOT NULL,
+    active boolean NOT NULL,
+    CONSTRAINT comment_pk PRIMARY KEY (id)
 );
 
 -- Table: contact
@@ -55,7 +88,6 @@ CREATE TABLE contact (
     title int NOT NULL,
     first_name varchar(50) NOT NULL,
     last_name varchar(50) NOT NULL,
-	birthday date DEFAULT NULL,
     phone varchar(11) NOT NULL,
     email varchar(50) NOT NULL,
     CONSTRAINT contact_pk PRIMARY KEY (id)
@@ -66,9 +98,10 @@ CREATE TABLE fare (
     id int NOT NULL AUTO_INCREMENT,
     passenger_id int NOT NULL,
     one_way boolean NOT NULL,
-    fare int NOT NULL,
-    charge int NOT NULL,
-    tax int NOT NULL,
+    fare float NOT NULL,
+    charge float NOT NULL,
+    tax float NOT NULL,
+    baggage_type_id int NOT NULL,
     CONSTRAINT fare_pk PRIMARY KEY (id)
 );
 
@@ -87,7 +120,7 @@ CREATE TABLE passenger (
     title int NOT NULL,
     first_name varchar(50) NOT NULL,
     last_name varchar(50) NOT NULL,
-	birthday date DEFAULT NULL,
+    birthdate date NOT NULL,
     phone varchar(11) NOT NULL,
     email varchar(50) NOT NULL,
     CONSTRAINT passenger_pk PRIMARY KEY (id)
@@ -109,17 +142,25 @@ CREATE TABLE ticket_type (
 );
 
 -- foreign keys
--- Reference: booking_baggage_type (table: booking)
-ALTER TABLE booking ADD CONSTRAINT booking_baggage_type FOREIGN KEY booking_baggage_type (baggage_type_id)
-    REFERENCES baggage_type (id);
+-- Reference: baggage_type_provider (table: baggage_type)
+ALTER TABLE baggage_type ADD CONSTRAINT baggage_type_provider FOREIGN KEY baggage_type_provider (provider_id)
+    REFERENCES provider (id);
 
 -- Reference: booking_ticket_type (table: booking)
 ALTER TABLE booking ADD CONSTRAINT booking_ticket_type FOREIGN KEY booking_ticket_type (ticket_type_id)
     REFERENCES ticket_type (id);
 
+-- Reference: bus_info_bus_type (table: bus_route)
+ALTER TABLE bus_route ADD CONSTRAINT bus_info_bus_type FOREIGN KEY bus_info_bus_type (bus_type_id)
+    REFERENCES bus_type (id);
+
 -- Reference: contact_booking (table: contact)
 ALTER TABLE contact ADD CONSTRAINT contact_booking FOREIGN KEY contact_booking (booking_id)
     REFERENCES booking (id);
+
+-- Reference: fare_baggage_type (table: fare)
+ALTER TABLE fare ADD CONSTRAINT fare_baggage_type FOREIGN KEY fare_baggage_type (baggage_type_id)
+    REFERENCES baggage_type (id);
 
 -- Reference: fare_passengers (table: fare)
 ALTER TABLE fare ADD CONSTRAINT fare_passengers FOREIGN KEY fare_passengers (passenger_id)
