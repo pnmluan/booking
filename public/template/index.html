@@ -1,584 +1,1125 @@
 <!DOCTYPE html>
-<html>
-
+<html> <!--<![endif]-->
 <head>
-  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Đặt Vé Siêu Rẻ</title>
-  <!-- Bootstrap -->
-  <link href="dist/css/bootstrap.css" rel="stylesheet" media="screen">
-  <link rel="stylesheet" href="plugins/swiper/swiper.min.css">
-  <link href="assets/css/custom.css" rel="stylesheet" media="screen">
-  <!-- Carousel -->
-  <link href="examples/carousel/carousel.css" rel="stylesheet">
-  <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
-  <!--[if lt IE 9]>
-      <script src="assets/js/html5shiv.js"></script>
-      <script src="assets/js/respond.min.js"></script>
-    <![endif]-->
-  <!-- Fonts -->
+  <meta charset="UTF-8">
+  <title>Đặt vé giá rẻ</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!--meta responsive-->
   <link href='http://fonts.googleapis.com/css?family=Open+Sans:700,400,300,300italic' rel='stylesheet' type='text/css'>
-  <!-- Font-Awesome -->
+  <link rel='stylesheet' href='plugins/rs-plugin/settings.css' type='text/css' media='all'/>
+  <style id='rs-plugin-settings-inline-css' type='text/css'>
+    .tp-caption a {
+      color: #ff7302;
+      text-shadow: none;
+      -webkit-transition: all 0.2s ease-out;
+      -moz-transition: all 0.2s ease-out;
+      -o-transition: all 0.2s ease-out;
+      -ms-transition: all 0.2s ease-out
+    }
+    .tp-caption a:hover {
+      color: #ffa902
+    }
+  </style>
+  <link rel='stylesheet' href='http://www.nicdarkthemes.com/themes/love-travel/wp/demo-travel/wp-content/themes/lovetravel/style.css?ver=4.2.2'/>
+  <link rel='stylesheet' href='css/nicdark_responsive.css'/>
+  <link rel='stylesheet' href='css/elusive-icons.css'/>
+  <link rel='stylesheet' href='plugins/js-composer/js_composer.css'/>
+
+  <script type='text/javascript' src='plugins/jquery/jquery.js'></script>
+  <script type='text/javascript' src='plugins/rs-plugin/jquery.themepunch.tools.min.js'></script>
+  <script type='text/javascript' src='plugins/rs-plugin/jquery.themepunch.revolution.min.js'></script>
+
+  <link rel="stylesheet" href="plugins/bootstrap-3.3.7/css/bootstrap.min.css">
   <link rel="stylesheet" href="fonts/icons/font-awesome-4.6.3/css/font-awesome.min.css">
-  <!--[if lt IE 7]><link rel="stylesheet" type="text/css" href="assets/css/font-awesome-ie7.css" media="screen" /><![endif]-->
-  <!-- REVOLUTION BANNER CSS SETTINGS -->
-  <link rel="stylesheet" type="text/css" href="css/fullscreen.css" media="screen" />
-  <link rel="stylesheet" type="text/css" href="rs-plugin/css/settings.css" media="screen" />
-  <!-- Picker UI-->
-  <link rel="stylesheet" href="assets/css/jquery-ui.css" />
-  <!-- Style -->
-  <link rel="stylesheet" href="css/style.css" />
-  <!-- jQuery -->
-  <script src="assets/js/jquery.v2.0.3.js"></script>
+  <link rel="stylesheet" href="plugins/swiper/swiper.min.css">
+  <link rel="stylesheet" href="css/reset.css">
+  <link rel="stylesheet" href="css/style.css">
+
+  <meta name="generator" content="Powered by Visual Composer - drag and drop page builder for WordPress."/>
+  <!--[if IE 8]>
+  <link rel="stylesheet" type="text/css"
+        href="http://www.nicdarkthemes.com/themes/love-travel/wp/demo-travel/wp-content/plugins/js_composer/assets/css/vc-ie8.css"
+        media="screen"><![endif]-->
+  <style type="text/css" data-type="vc_shortcodes-custom-css">.vc_custom_1431681573399 {
+    margin-top: -90px !important;
+  }
+
+  .vc_custom_1431683232904 {
+    margin-top: 10px !important;
+  }
+
+  .vc_custom_1430753414602 {
+    margin-bottom: 60px !important;
+  }
+
+  .vc_custom_1429020663398 {
+    margin: 0px !important;
+    border-width: 0px !important;
+    padding: 0px !important;
+  }
+
+  .vc_custom_1431937582413 {
+    margin-top: -204px !important;
+  }
+
+  .vc_custom_1430745958006 {
+    margin: 0px !important;
+    border-width: 0px !important;
+    padding: 0px !important;
+  }
+
+  .vc_custom_1430753455786 {
+    margin-top: 100px !important;
+    margin-bottom: 100px !important;
+  }
+
+  .vc_custom_1431947118714 {
+    padding-right: 0px !important;
+    padding-left: 0px !important;
+  }</style>
+
 </head>
-
 <body>
-  <div class="page-loading">
-    <img src="images/loading.gif" alt="">
-  </div>
-  <!-- page-loading -->
-  <header id="header" class="header">
-    <div class="navbar-wrapper2 navbar-fixed-top">
-      <div class="container">
-        <div class="navbar mtnav">
-          <div class="container offset-3">
-            <!-- Navigation-->
-            <div class="navbar-header">
-              <button data-target=".navbar-collapse" data-toggle="collapse" class="navbar-toggle" type="button">
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-              </button>
-              <a href="index.html" class="navbar-brand"><img src="images/logo.png" alt="Travel Agency Logo" class="logo" /></a>
+
+<!--start preloader-->
+<div class="nicdark_preloader"><i class="icon-globe green"></i></div>
+<!--end preloader-->
+
+<div style="" class="nicdark_site">
+
+  <div class="nicdark_site_fullwidth_boxed nicdark_site_fullwidth nicdark_clearfix">
+    <div class="nicdark_overlay"></div>
+
+    <div class="nicdark_section nicdark_navigation nicdark_upper_level2">
+
+      <!--decide fullwidth or boxed header-->
+      <div class='nicdark_menu_fullwidth_boxed nicdark_menu_fullwidth'>
+
+        <!--start top header-->
+        <!--start before navigation-->
+        <div class="nicdark_section nicdark_bg_greydark nicdark_displaynone_responsive">
+          <div class="nicdark_container nicdark_clearfix">
+
+            <div class="grid grid_6">
+              <div class="nicdark_focus">
+                <h6 class="white">
+                  <i class="icon-mail"></i> <a class="white title" href="#">info@travel.com</a>
+                  <span class="greydark2 nicdark_marginright10 nicdark_marginleft10">|</span>
+                  <i class="icon-phone"></i> <a class="white title" href="#">+44 5227653</a>
+                </h6></div>
             </div>
-            <div class="navbar-collapse collapse">
-              <ul class="nav navbar-nav navbar-right">
-                <li><a href="#">Trang chủ</a></li>
-                <li><a href="#">Đặt vé</a></li>
-                <li><a href="#">Giới thiệu</a></li>
-                <li><a href="#">Hướng dẫn</a></li>
-                <li><a href="#">Liên hệ</a></li>
-              </ul>
+            <div class="grid grid_6 right">
+              <div class="nicdark_focus right">
+                <h6 class="white">
+                  <i class="icon-key"></i> <a class="white title" href="#">REGISTER</a>
+                  <span class="greydark2 nicdark_marginright10 nicdark_marginleft10">|</span>
+                  <i class="icon-lock"></i> <a class="white title" href="#">LOG IN</a>
+                </h6>
+              </div>
             </div>
-            <!-- /Navigation-->
+
           </div>
         </div>
+        <!--end before navigation-->
+        <!--end top header-->
+
+        <!--decide gradient or not-->
+        <div class="nicdark_space3 nicdark_bg_gradient"></div>
+
+        <!--start header-->
+        <div class="nicdark_bg_white nicdark_section nicdark_border_grey nicdark_sizing">
+
+          <!--start container-->
+          <div class="nicdark_container nicdark_clearfix">
+
+            <div class="grid grid_12 percentage">
+
+              <div class="nicdark_space20"></div>
+
+              <!--logo-->
+              <div class="nicdark_logo nicdark_marginleft10">
+                <a href="#"><img alt="" src="img/logo.png"></a>
+              </div>
+              <!--end logo-->
+
+              <div class="menu-main-menu-container">
+                <ul id="menu-main-menu" class="menu">
+                  <li class="greydark menu-item menu-item-type-post_type menu-item-object-page current-menu-item page_item page-item-32 current_page_item current-menu-ancestor current-menu-parent current_page_parent current_page_ancestor">
+                    <a href="#">HOME</a>
+                  </li>
+                  <li class="greydark menu-item menu-item-type-custom menu-item-object-custom">
+                    <a
+                      href="#">TOUR PACKAGES</a>
+                  </li>
+                  <li class="greydark menu-item menu-item-type-post_type menu-item-object-page">
+                    <a href="#">PAGES</a>
+                  </li>
+                  <li class="greydark menu-item menu-item-type-post_type menu-item-object-page">
+                    <a href="#">SHOP</a>
+                  </li>
+                  <li class="greydark menu-item menu-item-type-post_type menu-item-object-page">
+                    <a href="#">NEWS</a>
+                  </li>
+                  <li class="greydark nicdark_megamenu nicdark_displaynone_ipadland menu-item menu-item-type-post_type menu-item-object-page ">
+                    <a href="#">COMPONENTS</a>
+                  </li>
+                  <li class="menu-item menu-item-type-post_type menu-item-object-page ">
+                    <a href="#">CONTACTS</a></li>
+                </ul>
+              </div>
+
+              <div class="nicdark_space20"></div>
+
+            </div>
+
+          </div>
+          <!--end container-->
+
+        </div>
+        <!--end header-->
       </div>
     </div>
-  </header>
-  <!-- /header -->
-  <div id="dajy" class="fullscreen-container mtslide sliderbg fixed">
-    <div class="fullscreenbanner">
-      <ul>
-        <!-- papercut fade turnoff flyin slideright slideleft slideup slidedown-->
-        <!-- FADE -->
-        <li data-transition="fade" data-slotamount="1" data-masterspeed="300">
-          <img src="images/slider/paris.jpg" alt="" />
-          <div class="tp-caption scrolleffect sft" data-x="center" data-y="120" data-speed="1000" data-start="800" data-easing="easeOutExpo">
-            <div class="sboxpurple textcenter">
-              <span class="size28 slim caps white">Hà Nội</span>
-              <br/>
-              <br/>
-              <br/>
-              <span class="size65 caps white">Tp.Hồ Chí Minh</span>
-              <br/>
-              <br/>
-              <span class="size20 normal caps white">Chỉ từ</span>
-              <br/>
-              <br/>
-              <span class="size48 slim uppercase yellow">1.000.000 VNĐ</span>
-              <br/>
-            </div>
-          </div>
-        </li>
-        <!-- FADE -->
-        <li data-transition="fade" data-slotamount="1" data-masterspeed="300">
-          <img src="images/slider/rome.jpg" alt="" />
-          <div class="tp-caption scrolleffect sft" data-x="center" data-y="120" data-speed="1000" data-start="800" data-easing="easeOutExpo">
-            <div class="sboxpurple textcenter">
-              <span class="size28 slim caps white">Hà Nội</span>
-              <br/>
-              <br/>
-              <br/>
-              <span class="size65 caps white">Đà Nẵng</span>
-              <br/>
-              <br/>
-              <span class="size20 normal caps white">Chỉ từ</span>
-              <br/>
-              <br/>
-              <span class="size48 slim uppercase yellow">500.000 VNĐ</span>
-              <br/>
-            </div>
-          </div>
-        </li>
-        <!-- FADE -->
-        <li data-transition="fade" data-slotamount="1" data-masterspeed="300">
-          <img src="images/slider/santorini.jpg" alt="" />
-          <div class="tp-caption scrolleffect sft" data-x="center" data-y="120" data-speed="1000" data-start="800" data-easing="easeOutExpo">
-            <div class="sboxpurple textcenter">
-              <span class="size28 slim caps white">Đà Nẵng</span>
-              <br/>
-              <br/>
-              <br/>
-              <span class="size65 caps white">Tp.Hồ Chí Minh</span>
-              <br/>
-              <br/>
-              <span class="size20 normal caps white">Chỉ từ</span>
-              <br/>
-              <br/>
-              <span class="size48 slim uppercase yellow">500.000 VNĐ</span>
-              <br/>
-            </div>
-          </div>
-        </li>
-      </ul>
-      <div class="tp-bannertimer none"></div>
-    </div>
-  </div>
-  <!-- main-slider -->
-  <script type="text/javascript">
-  var tpj = jQuery;
-  tpj.noConflict();
 
-  tpj(document).ready(function() {
+    <!--start header parallax image-->
+    <div class="nicdark_space160"></div>
+    <!--end header parallax image-->
 
-    if (tpj.fn.cssOriginal != undefined)
-      tpj.fn.css = tpj.fn.cssOriginal;
+    <!--FULL WIDTH PAGE-->
 
-    tpj('.fullscreenbanner').revolution({
-      delay: 9000,
-      startwidth: 1170,
-      startheight: 550,
-      onHoverStop: "on", // Stop Banner Timet at Hover on Slide on/off
-      thumbWidth: 100, // Thumb With and Height and Amount (only if navigation Tyope set to thumb !)
-      thumbHeight: 50,
-      thumbAmount: 3,
-      hideThumbs: 0,
-      navigationType: "bullet", // bullet, thumb, none
-      navigationArrows: "solo", // nexttobullets, solo (old name verticalcentered), none
-      navigationStyle: false, // round,square,navbar,round-old,square-old,navbar-old, or any from the list in the docu (choose between 50+ different item), custom
-      navigationHAlign: "left", // Vertical Align top,center,bottom
-      navigationVAlign: "bottom", // Horizontal Align left,center,right
-      navigationHOffset: 30,
-      navigationVOffset: 30,
-      soloArrowLeftHalign: "left",
-      soloArrowLeftValign: "center",
-      soloArrowLeftHOffset: 20,
-      soloArrowLeftVOffset: 0,
-      soloArrowRightHalign: "right",
-      soloArrowRightValign: "center",
-      soloArrowRightHOffset: 20,
-      soloArrowRightVOffset: 0,
-      touchenabled: "on", // Enable Swipe Function : on/off
-      stopAtSlide: -1, // Stop Timer if Slide "x" has been Reached. If stopAfterLoops set to 0, then it stops already in the first Loop at slide X which defined. -1 means do not stop at any slide. stopAfterLoops has no sinn in this case.
-      stopAfterLoops: -1, // Stop Timer if All slides has been played "x" times. IT will stop at THe slide which is defined via stopAtSlide:x, if set to -1 slide never stop automatic
-      hideCaptionAtLimit: 0, // It Defines if a caption should be shown under a Screen Resolution ( Basod on The Width of Browser)
-      hideAllCaptionAtLilmit: 0, // Hide all The Captions if Width of Browser is less then this value
-      hideSliderAtLimit: 0, // Hide the whole slider, and stop also functions if Width of Browser is less than this value
-      fullWidth: "on", // Same time only Enable FullScreen of FullWidth !!
-      fullScreen: "off", // Same time only Enable FullScreen of FullWidth !!
-      shadow: 0 //0 = no Shadow, 1,2,3 = 3 Different Art of Shadows -  (No Shadow in Fullwidth Version !)
-    });
-  });
-  </script>
-  <div class="wrap cstyle03">
-    <div class="container mt-159 z-index100">
-      <div class="row">
-        <div class="col-md-12">
-          <div class="bs-example bs-example-tabs cstyle04">
-            <ul class="nav nav-tabs" id="myTab">
-              <li onclick="mySelectUpdate()" class="active"><a data-toggle="tab" href="#air2"><span class="flight"></span><span class="hidetext">&nbsp;Vé Máy Bay</span>&nbsp;</a></li>
-              <li onclick="mySelectUpdate()" class=""><a data-toggle="tab" href="#car2"><span class="car"></span><span class="hidetext">&nbsp;Vé Xe Khách</span>&nbsp;</a></li>
-            </ul>
-            <div class="tab-content2" id="myTabContent">
-              <div id="air2" class="tab-pane fade active in">
-                <div class="col-md-3">
-                  <span class="opensans size13"><b>Điểm đi</b></span>
-                  <input type="text" class="form-control" placeholder="">
+    <!--#post-->
+    <div style="float:left; width:100%;" id="post-32" class="post-32 page type-page status-publish hentry">
+
+      <!--start content-->
+      <section class="nicdark_section vc_row wpb_row vc_row-fluid vc_custom_1431681573399">
+        <div class="vc_col-sm-12 wpb_column vc_column_container  vc_custom_1429020663398">
+          <div class="wpb_wrapper">
+            <div
+              class="vc_empty_space  nicdark_displaynone_desktop nicdark_displayblock_iphonepotr nicdark_displayblock_iphoneland"
+              style="height: 60px"><span
+              class="vc_empty_space_inner"></span></div>
+
+            <div class="wpb_revslider_element wpb_content_element">
+              <div id="rev_slider_4_1_wrapper" class="rev_slider_wrapper fullwidthbanner-container"
+                   style="margin:0px auto;background-color:#E9E9E9;padding:0px;margin-top:0px;margin-bottom:0px;max-height:650px;">
+                <!-- START REVOLUTION SLIDER 4.6.93 fullwidth mode -->
+                <div id="rev_slider_4_1" class="rev_slider fullwidthabanner"
+                     style="display:none;max-height:650px;height:650px;">
+                  <ul>  <!-- SLIDE  -->
+                    <li data-transition="fade" data-slotamount="7" data-masterspeed="300"
+                        data-thumb="http://www.nicdarkthemes.com/themes/love-travel/wp/demo-travel/wp-content/uploads/2015/05/love-travel-2-1920-320x200.jpg"
+                        data-saveperformance="off" data-title="Slide">
+                      <!-- MAIN IMAGE -->
+                      <img
+                        src="img/slider/paris.jpg"
+                        alt="love-travel-2-1920" data-bgposition="center top" data-kenburns="on" data-duration="9000"
+                        data-ease="Linear.easeNone" data-bgfit="100" data-bgfitend="110"
+                        data-bgpositionend="center top">
+                      <!-- LAYERS -->
+
+                      <!-- LAYER NR. 1 -->
+                      <div class="tp-caption nicdarkwithlight50 sfl tp-resizeme rs-parallaxlevel-3"
+                           data-x="center" data-hoffset="-20"
+                           data-y="center" data-voffset="-150"
+                           data-speed="2000"
+                           data-start="3000"
+                           data-easing="Power3.easeInOut"
+                           data-splitin="none"
+                           data-splitout="none"
+                           data-elementdelay="0.1"
+                           data-endelementdelay="0.1"
+                           data-endspeed="300"
+
+                           style="z-index: 5; max-width: auto; max-height: auto; white-space: nowrap;">PARIS
+                      </div>
+
+                      <!-- LAYER NR. 2 -->
+                      <div class="tp-caption nicdarkwithregular75 sfl tp-resizeme rs-parallaxlevel-4"
+                           data-x="center" data-hoffset="20"
+                           data-y="center" data-voffset="-60"
+                           data-speed="2000"
+                           data-start="4100"
+                           data-easing="Power3.easeInOut"
+                           data-splitin="none"
+                           data-splitout="none"
+                           data-elementdelay="0.1"
+                           data-endelementdelay="0.1"
+                           data-endspeed="300"
+
+                           style="z-index: 6; max-width: auto; max-height: auto; white-space: nowrap;">TOUR
+                      </div>
+
+                      <!-- LAYER NR. 3 -->
+                      <div class="tp-caption nicdarkwithlight75 sfl tp-resizeme rs-parallaxlevel-4"
+                           data-x="center" data-hoffset="250"
+                           data-y="center" data-voffset="-60"
+                           data-speed="2000"
+                           data-start="4200"
+                           data-easing="Power3.easeInOut"
+                           data-splitin="none"
+                           data-splitout="none"
+                           data-elementdelay="0.1"
+                           data-endelementdelay="0.1"
+                           data-endspeed="300"
+
+                           style="z-index: 7; max-width: auto; max-height: auto; white-space: nowrap;">EIFFEL
+                      </div>
+
+                      <!-- LAYER NR. 4 -->
+                      <div class="tp-caption nicdarkwithlight40 sft tp-resizeme rs-parallaxlevel-2"
+                           data-x="982"
+                           data-y="259"
+                           data-speed="2000"
+                           data-start="5000"
+                           data-easing="Power3.easeInOut"
+                           data-splitin="none"
+                           data-splitout="none"
+                           data-elementdelay="0.1"
+                           data-endelementdelay="0.1"
+                           data-endspeed="300"
+
+                           style="z-index: 8; max-width: auto; max-height: auto; white-space: nowrap;">TOUR
+                      </div>
+
+                      <!-- LAYER NR. 5 -->
+                      <div class="tp-caption nicdarkwithlight20 sft tp-resizeme rs-parallaxlevel-1"
+                           data-x="983"
+                           data-y="237"
+                           data-speed="2000"
+                           data-start="5200"
+                           data-easing="Power3.easeInOut"
+                           data-splitin="none"
+                           data-splitout="none"
+                           data-elementdelay="0.1"
+                           data-endelementdelay="0.1"
+                           data-endspeed="300"
+
+                           style="z-index: 9; max-width: auto; max-height: auto; white-space: nowrap;">CITY
+                      </div>
+
+                      <!-- LAYER NR. 6 -->
+                      <div class="tp-caption nicdarkwithregular15btn sfl tp-resizeme rs-parallaxlevel-0"
+                           data-x="center" data-hoffset="150"
+                           data-y="center" data-voffset="30"
+                           data-speed="2000"
+                           data-start="6000"
+                           data-easing="Power3.easeInOut"
+                           data-splitin="none"
+                           data-splitout="none"
+                           data-elementdelay="0.1"
+                           data-endelementdelay="0.1"
+                           data-endspeed="300"
+
+                           style="z-index: 10; max-width: auto; max-height: auto; white-space: nowrap;">SALE
+                      </div>
+
+                      <!-- LAYER NR. 7 -->
+                      <div class="tp-caption nicdarkwithregular60 sfr tp-resizeme rs-parallaxlevel-3"
+                           data-x="790"
+                           data-y="333"
+                           data-speed="2000"
+                           data-start="6100"
+                           data-easing="Power3.easeInOut"
+                           data-splitin="none"
+                           data-splitout="none"
+                           data-elementdelay="0.1"
+                           data-endelementdelay="0.1"
+                           data-endspeed="300"
+
+                           style="z-index: 11; max-width: auto; max-height: auto; white-space: nowrap;">1.500
+                      </div>
+
+                      <!-- LAYER NR. 8 -->
+                      <div class="tp-caption nicdarkwithregular25 sfb tp-resizeme rs-parallaxlevel-2"
+                           data-x="954"
+                           data-y="365"
+                           data-speed="2000"
+                           data-start="6200"
+                           data-easing="Power3.easeInOut"
+                           data-splitin="none"
+                           data-splitout="none"
+                           data-elementdelay="0.1"
+                           data-endelementdelay="0.1"
+                           data-endspeed="300"
+
+                           style="z-index: 12; max-width: auto; max-height: auto; white-space: nowrap;">$
+                      </div>
+                    </li>
+                    <!-- SLIDE  -->
+                    <li data-transition="fade" data-slotamount="7" data-masterspeed="300"
+                        data-thumb="http://www.nicdarkthemes.com/themes/love-travel/wp/demo-travel/wp-content/uploads/2015/05/love-travel-12-1920-320x200.jpg"
+                        data-saveperformance="off" data-title="Slide">
+                      <!-- MAIN IMAGE -->
+                      <img
+                        src="img/slider/rome.jpg"
+                        alt="love-travel-12-1920" data-bgposition="center top" data-kenburns="on" data-duration="9000"
+                        data-ease="Linear.easeNone" data-bgfit="100" data-bgfitend="110"
+                        data-bgpositionend="center center">
+                      <!-- LAYERS -->
+                    </li>
+                    <!-- SLIDE  -->
+                    <li data-transition="fade" data-slotamount="7" data-masterspeed="300"
+                        data-thumb="http://www.nicdarkthemes.com/themes/love-travel/wp/demo-travel/wp-content/uploads/2015/05/love-travel-26-1920-320x200.jpg"
+                        data-saveperformance="off" data-title="Slide">
+                      <!-- MAIN IMAGE -->
+                      <img
+                        src="img/slider/santorini.jpg"
+                        alt="love-travel-26-1920" data-bgposition="center top" data-kenburns="on" data-duration="9000"
+                        data-ease="Linear.easeNone" data-bgfit="100" data-bgfitend="110"
+                        data-bgpositionend="center right">
+                      <!-- LAYERS -->
+                    </li>
+                  </ul>
+                  <div class="tp-bannertimer tp-bottom" style="visibility: hidden !important;"></div>
                 </div>
-                <div class="col-md-3">
-                  <span class="opensans size13"><b>Điểm đến</b></span>
-                  <input type="text" class="form-control" placeholder="">
-                </div>
-                <div class="col-md-3">
-                  <span class="opensans size13"><b>Ngày đi</b></span>
-                  <input type="text" class="form-control mySelectCalendar" id="datepicker3" placeholder="mm/dd/yyyy" />
-                </div>
-                <div class="col-md-3">
-                  <span class="opensans size13"><b>Ngày về</b></span>
-                  <input type="text" class="form-control mySelectCalendar" id="datepicker4" placeholder="mm/dd/yyyy" />
-                </div>
-                <div class="col-md-3">
-                  <span class="opensans size13"><b>Người lớn</b>&nbsp;(> 12 tuổi)</span>
-                  <select class="form-control mySelectBoxClass">
-                    <option>1</option>
-                    <option selected>2</option>
-                    <option>3</option>
-                    <option>4</option>
-                    <option>5</option>
-                  </select>
-                </div>
-                <div class="col-md-3">
-                  <span class="opensans size13"><b>Trẻ em</b>&nbsp;(2 - 12 tuổi)</span>
-                  <select class="form-control mySelectBoxClass">
-                    <option>0</option>
-                    <option selected>1</option>
-                    <option>2</option>
-                    <option>3</option>
-                    <option>4</option>
-                    <option>5</option>
-                  </select>
-                </div>
-                <div class="col-md-3">
-                  <span class="opensans size13"><b>Em bé</b>&nbsp;(< 2 tuổi)</span>
-                  <select class="form-control mySelectBoxClass">
-                    <option>0</option>
-                    <option selected>1</option>
-                    <option>2</option>
-                    <option>3</option>
-                    <option>4</option>
-                    <option>5</option>
-                  </select>
-                </div>
-              </div>
-              <!--End of 1st tab -->
-              <div id="car2" class="tab-pane fade">
-                <div class="col-md-3">
-                  <span class="opensans size13"><b>Điểm khởi hành</b></span>
-                  <input type="text" class="form-control" placeholder="Điểm khởi hành">
-                </div>
-                <div class="col-md-3">
-                  <span class="opensans size13"><b>Điểm đến</b></span>
-                  <input type="text" class="form-control" placeholder="Điểm đến">
-                </div>
-                <div class="col-md-3">
-                  <span class="opensans size13"><b>Ngày khởi hành</b></span>
-                  <input type="text" class="form-control mySelectCalendar" id="datepicker5" placeholder="mm/dd/yyyy" />
-                </div>
-                <div class="col-md-3">
-                  <span class="opensans size13"><b>Số lượng vé</b></span>
-                  <input type="text" class="form-control" placeholder="Số lượng vé">
-                </div>
-              </div>
-              <!--End of 3rd tab -->
-            </div>
-            <div class="searchbg2">
-              <!-- <div class="left ca01"><a href="#">Advanced +</a></div> -->
-              <form action="list4.html">
-                <button type="submit" class="btn-search right mr30">Tìm chuyến bay</button>
-              </form>
-            </div>
+
+
+                <style scoped>.tp-caption.nicdarkwithlight50, .nicdarkwithlight50 {
+                  font-size: 50px;
+                  line-height: 50px;
+                  font-weight: 100;
+                  font-family: "Open Sans";
+                  color: rgb(255, 255, 255);
+                  text-decoration: none;
+                  text-shadow: none;
+                  background-color: transparent;
+                  border-width: 0px;
+                  border-color: rgb(0, 0, 0);
+                  border-style: none
+                }
+
+                .tp-caption.nicdarkwithregular75, .nicdarkwithregular75 {
+                  font-size: 75px;
+                  line-height: 75px;
+                  font-weight: 500;
+                  font-family: "Open Sans";
+                  color: rgb(255, 255, 255);
+                  text-decoration: none;
+                  text-shadow: none;
+                  background-color: transparent;
+                  border-width: 0px;
+                  border-color: rgb(0, 0, 0);
+                  border-style: none
+                }
+
+                .tp-caption.nicdarkwithlight75, .nicdarkwithlight75 {
+                  font-size: 75px;
+                  line-height: 75px;
+                  font-weight: 100;
+                  font-family: "Open Sans";
+                  color: rgb(255, 255, 255);
+                  text-decoration: none;
+                  text-shadow: none;
+                  background-color: transparent;
+                  border-width: 0px;
+                  border-color: rgb(0, 0, 0);
+                  border-style: none
+                }
+
+                .tp-caption.nicdarkwithlight20, .nicdarkwithlight20 {
+                  font-size: 20px;
+                  line-height: 20px;
+                  font-weight: 100;
+                  font-family: "Open Sans";
+                  color: rgb(255, 255, 255);
+                  text-decoration: none;
+                  text-shadow: none;
+                  background-color: transparent;
+                  border-width: 0px;
+                  border-color: rgb(0, 0, 0);
+                  border-style: none
+                }
+
+                .tp-caption.nicdarkwithlight40, .nicdarkwithlight40 {
+                  font-size: 40px;
+                  line-height: 40px;
+                  font-weight: 100;
+                  font-family: "Open Sans";
+                  color: rgb(255, 255, 255);
+                  text-decoration: none;
+                  text-shadow: none;
+                  background-color: transparent;
+                  border-width: 0px;
+                  border-color: rgb(0, 0, 0);
+                  border-style: none
+                }
+
+                .tp-caption.nicdarkwithregular60, .nicdarkwithregular60 {
+                  font-size: 60px;
+                  line-height: 60px;
+                  font-weight: 500;
+                  font-family: "Open Sans";
+                  color: rgb(255, 255, 255);
+                  text-decoration: none;
+                  text-shadow: none;
+                  background-color: transparent;
+                  border-width: 0px;
+                  border-color: rgb(0, 0, 0);
+                  border-style: none
+                }
+
+                .tp-caption.nicdarkwithregular15btn, .nicdarkwithregular15btn {
+                  font-size: 15px;
+                  line-height: 15px;
+                  font-weight: 500;
+                  font-family: "Open Sans";
+                  color: rgb(255, 255, 255);
+                  text-decoration: none;
+                  padding: 5px 10px;
+                  text-shadow: none;
+                  background-color: rgb(243, 164, 107);
+                  border-width: 0px;
+                  border-color: rgb(0, 0, 0);
+                  border-style: none
+                }
+
+                .tp-caption.nicdarkwithregular25, .nicdarkwithregular25 {
+                  font-size: 25px;
+                  line-height: 25px;
+                  font-weight: 500;
+                  font-family: "Open Sans";
+                  color: rgb(255, 255, 255);
+                  text-decoration: none;
+                  text-shadow: none;
+                  background-color: transparent;
+                  border-width: 0px;
+                  border-color: rgb(0, 0, 0);
+                  border-style: none
+                }</style>
+
+                <script type="text/javascript">
+
+                  /******************************************
+                   -  PREPARE PLACEHOLDER FOR SLIDER  -
+                   ******************************************/
+
+
+                  var setREVStartSize = function () {
+                    var tpopt = new Object();
+                    tpopt.startwidth = 1200;
+                    tpopt.startheight = 650;
+                    tpopt.container = jQuery('#rev_slider_4_1');
+                    tpopt.fullScreen = "off";
+                    tpopt.forceFullWidth = "off";
+
+                    tpopt.container.closest(".rev_slider_wrapper").css({height: tpopt.container.height()});
+                    tpopt.width = parseInt(tpopt.container.width(), 0);
+                    tpopt.height = parseInt(tpopt.container.height(), 0);
+                    tpopt.bw = tpopt.width / tpopt.startwidth;
+                    tpopt.bh = tpopt.height / tpopt.startheight;
+                    if (tpopt.bh > tpopt.bw)tpopt.bh = tpopt.bw;
+                    if (tpopt.bh < tpopt.bw)tpopt.bw = tpopt.bh;
+                    if (tpopt.bw < tpopt.bh)tpopt.bh = tpopt.bw;
+                    if (tpopt.bh > 1) {
+                      tpopt.bw = 1;
+                      tpopt.bh = 1
+                    }
+                    if (tpopt.bw > 1) {
+                      tpopt.bw = 1;
+                      tpopt.bh = 1
+                    }
+                    tpopt.height = Math.round(tpopt.startheight * (tpopt.width / tpopt.startwidth));
+                    if (tpopt.height > tpopt.startheight && tpopt.autoHeight != "on")tpopt.height = tpopt.startheight;
+                    if (tpopt.fullScreen == "on") {
+                      tpopt.height = tpopt.bw * tpopt.startheight;
+                      var cow = tpopt.container.parent().width();
+                      var coh = jQuery(window).height();
+                      if (tpopt.fullScreenOffsetContainer != undefined) {
+                        try {
+                          var offcontainers = tpopt.fullScreenOffsetContainer.split(",");
+                          jQuery.each(offcontainers, function (e, t) {
+                            coh = coh - jQuery(t).outerHeight(true);
+                            if (coh < tpopt.minFullScreenHeight)coh = tpopt.minFullScreenHeight
+                          })
+                        } catch (e) {
+                        }
+                      }
+                      tpopt.container.parent().height(coh);
+                      tpopt.container.height(coh);
+                      tpopt.container.closest(".rev_slider_wrapper").height(coh);
+                      tpopt.container.closest(".forcefullwidth_wrapper_tp_banner").find(".tp-fullwidth-forcer").height(coh);
+                      tpopt.container.css({height: "100%"});
+                      tpopt.height = coh;
+                    } else {
+                      tpopt.container.height(tpopt.height);
+                      tpopt.container.closest(".rev_slider_wrapper").height(tpopt.height);
+                      tpopt.container.closest(".forcefullwidth_wrapper_tp_banner").find(".tp-fullwidth-forcer").height(tpopt.height);
+                    }
+                  };
+
+                  /* CALL PLACEHOLDER */
+                  setREVStartSize();
+
+
+                  var tpj = jQuery;
+                  tpj.noConflict();
+                  var revapi4;
+
+                  tpj(document).ready(function () {
+
+                    if (tpj('#rev_slider_4_1').revolution == undefined) {
+                      revslider_showDoubleJqueryError('#rev_slider_4_1');
+                    } else {
+                      revapi4 = tpj('#rev_slider_4_1').show().revolution(
+                        {
+                          dottedOverlay: "none",
+                          delay: 9000,
+                          startwidth: 1200,
+                          startheight: 650,
+                          hideThumbs: 0,
+
+                          thumbWidth: 100,
+                          thumbHeight: 50,
+                          thumbAmount: 3,
+
+
+                          simplifyAll: "off",
+
+                          navigationType: "none",
+                          navigationArrows: "solo",
+                          navigationStyle: "preview1",
+
+                          touchenabled: "on",
+                          onHoverStop: "on",
+                          nextSlideOnWindowFocus: "off",
+
+                          swipe_threshold: 75,
+                          swipe_min_touches: 1,
+                          drag_block_vertical: false,
+
+                          parallax: "mouse",
+                          parallaxBgFreeze: "off",
+                          parallaxLevels: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+
+
+                          keyboardNavigation: "off",
+
+                          navigationHAlign: "center",
+                          navigationVAlign: "bottom",
+                          navigationHOffset: 0,
+                          navigationVOffset: 20,
+
+                          soloArrowLeftHalign: "left",
+                          soloArrowLeftValign: "center",
+                          soloArrowLeftHOffset: 20,
+                          soloArrowLeftVOffset: 0,
+
+                          soloArrowRightHalign: "right",
+                          soloArrowRightValign: "center",
+                          soloArrowRightHOffset: 20,
+                          soloArrowRightVOffset: 0,
+
+                          shadow: 0,
+                          fullWidth: "on",
+                          fullScreen: "off",
+
+                          spinner: "spinner2",
+
+                          stopLoop: "off",
+                          stopAfterLoops: -1,
+                          stopAtSlide: -1,
+
+                          shuffle: "off",
+
+                          autoHeight: "off",
+                          forceFullWidth: "off",
+
+
+                          hideTimerBar: "on",
+                          hideThumbsOnMobile: "off",
+                          hideNavDelayOnMobile: 1500,
+                          hideBulletsOnMobile: "off",
+                          hideArrowsOnMobile: "off",
+                          hideThumbsUnderResolution: 0,
+
+                          hideSliderAtLimit: 0,
+                          hideCaptionAtLimit: 0,
+                          hideAllCaptionAtLilmit: 0,
+                          startWithSlide: 0
+                        });
+
+
+                    }
+                  });
+                  /*ready*/
+
+                </script>
+
+
+                <style type="text/css">
+                  #rev_slider_4_1_wrapper .tp-loader.spinner2 {
+                    background-color: #1bbc9b !important;
+                  }
+                </style>
+              </div><!-- END REVOLUTION SLIDER --></div>
+
           </div>
         </div>
-      </div>
-    </div>
-    <!-- main-search -->
-    <div class="lastminute2 lcfix">
-      <div class="container lmc">
-        <h2 class="title">ĐẶT VÉ SIÊU RẺ</h2>
-        <p>Datvesieure.com là hệ thống bán vé máy bay, vé xe lớn nhất và uy tín nhất tại Việt Nam</p>
-      </div>
-    </div>
-    <!-- main-intro -->
-    <div class="main-service">
-      <div class="container">
-        <div class="row">
-          <div class="col-md-4">
-            <div class="boxshadow center">
-              <a href="list4.html"><img src="images/price.jpg" alt="" class="fwimg" /> </a>
-              <div class="bscontainer">
-                <h4 class="caps title">Đội ngũ nhân viên</h4>
-                <hr>
-                <p class="textleft">Đội ngũ nhân viên phục vụ nhiệt tình, chu đáo và chuyên nghiệp. Hỗ trợ khách hàng đặt vé xe khách, vé máy bay.</p>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-4">
-            <div class="boxshadow center">
-              <a href="list4.html"><img src="images/plane.jpg" alt="" class="fwimg" /></a>
-              <div class="bscontainer">
-                <h4 class="caps title">VÉ MÁY BAY</h4>
-                <hr>
-                <p class="textleft">Đặt mua vé máy bay online với các hãng hàng không nội địa Vietnam Airlines, Vietjet Air, Jetstar và 600 hãng hàng không.</p>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-4">
-            <div class="boxshadow center">
-              <a href="list4.html"><img src="images/bus.jpg" alt="" class="fwimg" /></a>
-              <div class="bscontainer">
-                <h4 class="caps title">VÉ XE KHÁCH</h4>
-                <hr>
-                <p class="textleft">Đặt mua vé xe khách online với Hoàng Long, Mai Linh, Phương Trang và hơn 2000 các nhà xe khác nhau trên cả nước. </p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <!-- main-service -->
-    <!-- <div class="container">
-      <div class="banner-adv">
-        Banner quảng cáo ( 1140 x 150 )
-      </div>
-    </div> -->
-    <!-- banner -->
-    <div class="service-method">
-      <div class="container">
-        <div class="row">
-          <div class="col-md-6 ticket-book">
-            <div class="section-title">các hình thức đặt vé</div>
-            <div class="border-title"></div>
-            <div class="row form-group">
-              <div class="col-md-12">
-                <div class="icon-book"><img src="images/web.png" alt="" style="width: 45px;"></div>
-                <div class="text-desc">
-                  <div class="text-big">Đặt vé trực tiếp trên website.</div>
-                  <div class="text-small">Sẽ được nhân viên xác nhận sau vài phút</div>
-                </div>
-              </div>
-            </div>
-            <!-- <div class="row form-group">
-              <div class="col-md-12">
-                <div class="icon-book"><i class="fa fa-comments"></i></div>
-                <div class="text-desc">
-                  <div class="text-big">Qua chat với hỗ trợ viên</div>
-                  <div class="text-small">
-                    <a href="#" title="" style="color: #0095EB;">Bắt đầu trò chuyện ngay</a>
+      </section>
+      <section class="nicdark_section vc_row wpb_row vc_row-fluid">
+        <div class="nicdark_container nicdark_vc nicdark_clearfix">
+          <div class="vc_col-sm-12 nicdark_upper_level1 wpb_column vc_column_container  vc_custom_1431937582413">
+            <div class="wpb_wrapper">
+              <div
+                class="vc_empty_space  nicdark_displaynone_desktop nicdark_displayblock_iphonepotr nicdark_displayblock_iphoneland"
+                style="height: 162px"><span
+                class="vc_empty_space_inner"></span></div>
+
+
+              <div class="wpb_tabs wpb_content_element  nicdark_tab_dark" data-interval="0">
+                <div class="wpb_wrapper wpb_tour_tabs_wrapper ui-tabs vc_clearfix">
+                  <ul class="wpb_tabs_nav ui-tabs-nav vc_clearfix">
+                    <li class=" nicdark_width100_iphonepotr nicdark_width100_iphoneland "><a
+                      class="title white nicdark_bg_blue " href="#tab-41648c1f-c14f-8"><i class=" icon-search-2"></i>
+                      QUICK SEARCH</a></li>
+                    <li class=" nicdark_width100_iphonepotr nicdark_width100_iphoneland "><a
+                      class="title white nicdark_bg_green " href="#tab-1430811957345-1-7"><i class="icon-params"></i>
+                      ADVANCED</a></li>
+                  </ul>
+
+
+                  <div id="tab-41648c1f-c14f-8"
+                       class="wpb_tab  nicdark_bg_grey nicdark_border_grey ui-tabs-panel wpb_ui-tabs-hide vc_clearfix">
+
+                    <form id="advsearch_1" class="nicdark_advanced_search"
+                          action="http://www.nicdarkthemes.com/themes/love-travel/wp/demo-travel/packages/"
+                          method="GET">
+                      <h2 class="form-title">Đặt vé máy bay</h2>
+                      <div class="plane-form-inner">
+                        <div class="plane-option">
+                          <label class="radio-inline">
+                            <input type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1"> Khứ hồi
+                          </label>
+                          <label class="radio-inline">
+                            <input type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2"> Một chiều
+                          </label>
+                          <label class="radio-inline">
+                            <input type="radio" name="inlineRadioOptions" id="inlineRadio3" value="option3"> Nhiều chặng
+                          </label>
+                        </div>
+                        <div class="plane-input clearfix">
+                          <div class="field">
+                            <span class="field-label">Điểm đi</span>
+                            <div class="field-input">
+                              <select name="" class="form-control">
+                                <option value=""></option>
+                              </select>
+                            </div>
+                          </div>
+                          <div class="field">
+                            <span class="field-label">Điểm đến</span>
+                            <div class="field-input">
+                              <select name="" class="form-control">
+                                <option value=""></option>
+                              </select>
+                            </div>
+                          </div>
+                          <div class="field">
+                            <span class="field-label">Ngày đi</span>
+                            <div class="field-input">
+                              <input type="datetime" name="" value="" placeholder="" class="form-control">
+                            </div>
+                          </div>
+                          <div class="field">
+                            <span class="field-label">Ngày về</span>
+                            <div class="field-input">
+                              <input type="datetime" name="" value="" placeholder="" class="form-control">
+                            </div>
+                          </div>
+                        </div>
+                        <div class="plane-age clearfix">
+                          <div>
+                            <div>
+                              <span class="field-label">Người lớn</span>
+                              <i>( >12 tuổi )</i>
+                            </div>
+
+                            <select name="" class="form-control">
+                              <option value="">1</option>
+                              <option value="">2</option>
+                              <option value="">3</option>
+                              <option value="">4</option>
+                              <option value="">5</option>
+                              <option value="">6</option>
+                              <option value="">7</option>
+                              <option value="">8</option>
+                              <option value="">9</option>
+                            </select>
+
+                          </div>
+                          <div>
+                            <div>
+                              <span class="field-label">Trẻ em</span>
+                              <i> ( 2 - 12 tuổi ) </i>
+                            </div>
+
+                            <select name="" class="form-control">
+                              <option value="">1</option>
+                              <option value="">2</option>
+                              <option value="">3</option>
+                              <option value="">4</option>
+                              <option value="">5</option>
+                              <option value="">6</option>
+                              <option value="">7</option>
+                              <option value="">8</option>
+                              <option value="">9</option>
+                            </select>
+
+                          </div>
+                          <div class="last">
+                            <div>
+                              <span class="field-label">Em bé</span>
+                              <i> ( < 2 tuổi ) </i>
+                            </div>
+
+                            <select name="" class="form-control">
+                              <option value="">1</option>
+                              <option value="">2</option>
+                              <option value="">3</option>
+                              <option value="">4</option>
+                              <option value="">5</option>
+                              <option value="">6</option>
+                              <option value="">7</option>
+                              <option value="">8</option>
+                              <option value="">9</option>
+                            </select>
+
+                          </div>
+                        </div>
+                        <div class="plane-submit text-right">
+                          <button type="button" class="btn">Tìm chuyến bay</button>
+                        </div>
+                      </div>
+
+                    </form>
+                  </div>
+                  <div id="tab-1430811957345-1-7"
+                       class="wpb_tab  nicdark_bg_grey nicdark_border_grey ui-tabs-panel wpb_ui-tabs-hide vc_clearfix">
+                    <form id="nicdark_adv_search_all" class="nicdark_advanced_search"
+                          action="#"
+                          method="GET">
+                      <h2 class="form-title">Đặt vé xe khách</h2>
+                      <div class="bus-form-inner">
+                        <div class="bus-input clearfix">
+                          <div class="field">
+                            <span class="field-label">Điểm đi</span>
+                            <div class="field-input">
+                              <select name="" class="form-control">
+                                <option value=""></option>
+                              </select>
+                            </div>
+                          </div>
+                          <div class="field">
+                            <span class="field-label">Điểm đến</span>
+                            <div class="field-input">
+                              <select name="" class="form-control">
+                                <option value=""></option>
+                              </select>
+                            </div>
+                          </div>
+                          <div class="field">
+                            <span class="field-label">Ngày đi</span>
+                            <div class="field-input">
+                              <input type="datetime" name="" value="" placeholder="" class="form-control">
+                            </div>
+                          </div>
+                          <div class="field">
+                            <span class="field-label">Số lượng vé</span>
+                            <div class="field-input">
+                              <input type="datetime" name="" value="" placeholder="" class="form-control">
+                            </div>
+                          </div>
+                        </div>
+                        <div class="bus-submit text-right">
+                          <button type="button" class="btn">Tìm vé xe</button>
+                        </div>
+                      </div>
+                    </form>
                   </div>
                 </div>
               </div>
-            </div> -->
-            <div class="row form-group">
-              <div class="col-md-12">
-                <div class="icon-book"><img src="images/phone.png" alt=""></div>
-                <div class="text-desc">
-                  <div class="text-big">Đặt vé qua điện thoại</div>
-                  <div class="text-small">
-                    <a href="tel:0873050500">(0511) 38 88 408</a>
-                    <!-- <a href="tel:0902985355">0986.125.225</a> -->
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="row form-group">
-              <div class="col-md-12">
-                <div class="icon-book"><img src="images/index.jpg" alt="" style="width: 45px;"></div>
-                <div class="text-desc">
-                  <div class="text-big">Tại văn phòng Công ty TNHH MTV Thương mại và Du lịch Ba Lô</div>
-                  <div class="text-small">06 Tân Lập 1, phường Thạch Thang, quận Hải Châu, Đà Nẵng</div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-6 payment-method">
-            <div class="section-title">các hình thức thanh toán</div>
-            <div class="border-title"></div>
-            <div class="row form-group">
-              <div class="col-md-12">
-                <div class="icon-payment"><img src="images/money.jpg" alt="" style="width: 45px;"></div>
-                <div class="text-desc">
-                  <div class="text-big">Thanh toán trực tiếp tại văn phòng</div>
-                  <div class="text-small"> Quý khách vui lòng qua văn phòng Đặt Vé Siêu Rẻ để thanh toán và nhận vé.</div>
-                </div>
-              </div>
-            </div>
-            <!-- <div class="row form-group">
-              <div class="col-md-12">
-                <div class="icon-payment" style="font-size: 34px;"><i class="fa fa-cc-visa"></i></div>
-                <div class="text-desc">
-                  <div class="text-big">Thanh toán qua máy cà thẻ (POS)</div>
-                  <div class="text-small">Thanh toán bằng hình thức cà thẻ (POS) tại văn phòng datvesieure.com (có tính phí).</div>
-                </div>
-              </div>
-            </div> -->
-            <div class="row form-group">
-              <div class="col-md-12">
-                <div class="icon-payment"><img src="images/house.png" alt=""></div>
-                <div class="text-desc">
-                  <div class="text-big">Thanh toán tại nhà</div>
-                  <div class="text-small">Sẽ giao vé &amp; thu tiền tại nhà theo địa chỉ Quý khách cung cấp.</div>
-                </div>
-              </div>
-            </div>
-            <div class="row form-group">
-              <div class="col-md-12">
-                <div class="icon-payment"><img src="images/bank.png" alt=""></div>
-                <div class="text-desc">
-                  <div class="text-big">Thanh toán qua chuyển khoản ngân hàng</div>
-                  <div class="text-small">Chuyển khoản trực tiếp tại ngân hàng, thẻ ATM, hoặc qua Internet banking.</div>
-                </div>
-              </div>
             </div>
           </div>
         </div>
-      </div>
-    </div>
-    <!-- service-method -->
-    <div class="container">
-      <div class="partner">
-        <div class="section-title">Đối tác</div>
-        <div class="border-title"></div>
-        <div class="swiper-container">
-          <div class="swiper-wrapper">
-            <div class="swiper-slide item">
-              <a href="#" target="_blank">
-                <img src="images/partners/boditech.png" alt="" /><span class="imba"></span>
-              </a>
-            </div>
-            <div class="swiper-slide item">
-              <a href="#" target="_blank">
-                <img src="images/partners/namyangi.png" alt="" /><span class="imba"></span>
-              </a>
-            </div>
-            <div class="swiper-slide item">
-              <a href="#" target="_blank">
-                <img src="images/partners/geumsan.png" alt="" /><span class="imba"></span>
-              </a>
-            </div>
-            <div class="swiper-slide item">
-              <a href="#" target="_blank">
-                <img src="images/partners/hicook.png" alt="" /><span class="imba"></span>
-              </a>
-            </div>
-            <div class="swiper-slide item">
-              <a href="#" target="_blank">
-                <img src="images/partners/customer_2.png" alt="" /><span class="imba"></span>
-              </a>
-            </div>
-            <div class="swiper-slide item">
-              <a href="#" target="_blank">
-                <img src="images/partners/boditech.png" alt="" /><span class="imba"></span>
-              </a>
-            </div>
-            <div class="swiper-slide item">
-              <a href="#" target="_blank">
-                <img src="images/partners/namyangi.png" alt="" /><span class="imba"></span>
-              </a>
-            </div>
-            <div class="swiper-slide item">
-              <a href="#" target="_blank">
-                <img src="images/partners/geumsan.png" alt="" /><span class="imba"></span>
-              </a>
-            </div>
-          </div>
+      </section>
+      <div class="main-intro">
+        <div class="container">
+
+          <h2 class="intro-title title">ĐẶT VÉ SIÊU RẺ</h2>
+          <p>Datvesieure.com là hệ thống bán vé máy bay, vé xe lớn nhất và uy tín nhất tại Việt Nam</p>
         </div>
       </div>
-    </div>
-    <!-- partner -->
-    <div class="skyline hidden-xs hidden-sm">
-      <!-- <script src="js/prefixfree.min.js"></script> -->
-      <div class="skyline-city"></div>
-      <div class="bus-img">
-        <img style="opacity: 0.3;filter: alpha(opacity=30);" src="images/banh-xe.gif">
-      </div>
-      <div class="plane-img">
-        <img src="images/plane.png" alt="" style="width: 250px;">
-      </div>
-    </div>
-    <footer id="footer" class="footer">
-      <div class="footerbg">
+      <!-- main-intro -->
+      <div class="main-promotions">
         <div class="container">
           <div class="row">
-            <div class="col-md-3">
-              <img src="images/logo.png" alt="" style="width: 200px;"/>
-              <br/>
-              <br/>
-              <span class="ftitle">Kết nối với chúng tôi</span>
-              <div class="scont">
-                <a href="#" class="social1b"><img src="images/icon-facebook.png" alt="" /></a>
-                <a href="#" class="social2b"><img src="images/icon-twitter.png" alt="" /></a>
-                <a href="#" class="social3b"><img src="images/icon-google.png" alt="" /></a>
-                <a href="#" class="social4b"><img src="images/icon-youtube.png" alt="" /></a>
-                <br/>
-                <br/> &copy; 2016 | <a href="#">VisionTeam</a>
-                <br/> All Rights Reserved
-                <br/>
-                <br/>
+            <div class="col-md-6">
+              <div class="promotions">
+                <div class="section-title">Thông tin khuyến mãi</div>
+                <div class="border-title"></div>
               </div>
             </div>
-            <!-- End of column 1-->
-            <div class="col-md-3">
-              <span class="ftitle">Footer Title</span>
-              <br/>
-              <br/>
-              <ul class="footerlist">
-                <li><a href="#">Footer title list</a></li>
-                <li><a href="#">Footer title list</a></li>
-                <li><a href="#">Footer title list</a></li>
-                <li><a href="#">Footer title list</a></li>
-                <li><a href="#">Footer title list</a></li>
-                <li><a href="#">Footer title list</a></li>
-              </ul>
+            <div class="col-md-6">
+              <div class="comment">
+                <div class="section-title">Khách hàng nói về chúng tôi</div>
+                <div class="border-title"></div>
+              </div>
             </div>
-            <!-- End of column 2-->
-            <div class="col-md-3">
-              <span class="ftitle">Footer Title</span>
-              <br/>
-              <br/>
-              <ul class="footerlist">
-                <li><a href="#">Footer title list</a></li>
-                <li><a href="#">Footer title list</a></li>
-                <li><a href="#">Footer title list</a></li>
-                <li><a href="#">Footer title list</a></li>
-                <li><a href="#">Footer title list</a></li>
-                <li><a href="#">Footer title list</a></li>
-              </ul>
+          </div>
+
+        </div>
+      </div>
+      <div class="service-method">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-6 ticket-book">
+              <div class="section-title">các hình thức đặt vé</div>
+              <div class="border-title"></div>
+              <div class="row form-group">
+                <div class="col-md-12">
+                  <div class="icon-bookticket"><img src="img/web.png" alt="" style="width: 45px;"></div>
+                  <div class="text-desc">
+                    <div class="text-big">Đặt vé trực tiếp trên website.</div>
+                    <div class="text-small">Sẽ được nhân viên xác nhận sau vài phút</div>
+                  </div>
+                </div>
+              </div>
+              <!-- <div class="row form-group">
+                <div class="col-md-12">
+                  <div class="icon-book"><i class="fa fa-comments"></i></div>
+                  <div class="text-desc">
+                    <div class="text-big">Qua chat với hỗ trợ viên</div>
+                    <div class="text-small">
+                      <a href="#" title="" style="color: #0095EB;">Bắt đầu trò chuyện ngay</a>
+                    </div>
+                  </div>
+                </div>
+              </div> -->
+              <div class="row form-group">
+                <div class="col-md-12">
+                  <div class="icon-bookticket"><img src="img/phone.png" alt=""></div>
+                  <div class="text-desc">
+                    <div class="text-big">Đặt vé qua điện thoại</div>
+                    <div class="text-small">
+                      <a href="tel:0873050500">(0511) 38 88 408</a>
+                      <!-- <a href="tel:0902985355">0986.125.225</a> -->
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="row form-group">
+                <div class="col-md-12">
+                  <div class="icon-bookticket"><img src="img/index.jpg" alt="" style="width: 45px;"></div>
+                  <div class="text-desc">
+                    <div class="text-big">Tại văn phòng Công ty TNHH MTV Thương mại và Du lịch Ba Lô</div>
+                    <div class="text-small">06 Tân Lập 1, phường Thạch Thang, quận Hải Châu, Đà Nẵng</div>
+                  </div>
+                </div>
+              </div>
             </div>
-            <!-- End of column 3-->
-            <div class="col-md-3">
-              <span class="ftitle">Văn phòng chính</span>
-              <br/>
-              <br/>
-              <p><strong>Công ty TNHH MTV Thương mại và Du lịch Ba Lô</strong>
-                <br/>06 Tân Lập 1, phường Thạch Thang, quận Hải Châu, Đà Nẵng</p>
-              <br/>
-              <span class="ftitle">Hotline đặt vé</span>
-              <br/>
-              <strong class="pnr">(0511) 38 88 408</strong>
+            <div class="col-md-6 payment-method">
+              <div class="section-title">các hình thức thanh toán</div>
+              <div class="border-title"></div>
+              <div class="row form-group">
+                <div class="col-md-12">
+                  <div class="icon-payment"><img src="img/money.jpg" alt="" style="width: 45px;"></div>
+                  <div class="text-desc">
+                    <div class="text-big">Thanh toán trực tiếp tại văn phòng</div>
+                    <div class="text-small"> Quý khách vui lòng qua văn phòng Đặt Vé Siêu Rẻ để thanh toán và nhận vé.</div>
+                  </div>
+                </div>
+              </div>
+              <!-- <div class="row form-group">
+                <div class="col-md-12">
+                  <div class="icon-payment" style="font-size: 34px;"><i class="fa fa-cc-visa"></i></div>
+                  <div class="text-desc">
+                    <div class="text-big">Thanh toán qua máy cà thẻ (POS)</div>
+                    <div class="text-small">Thanh toán bằng hình thức cà thẻ (POS) tại văn phòng datvesieure.com (có tính phí).</div>
+                  </div>
+                </div>
+              </div> -->
+              <div class="row form-group">
+                <div class="col-md-12">
+                  <div class="icon-payment"><img src="img/house.png" alt=""></div>
+                  <div class="text-desc">
+                    <div class="text-big">Thanh toán tại nhà</div>
+                    <div class="text-small">Sẽ giao vé &amp; thu tiền tại nhà theo địa chỉ Quý khách cung cấp.</div>
+                  </div>
+                </div>
+              </div>
+              <div class="row form-group">
+                <div class="col-md-12">
+                  <div class="icon-payment"><img src="img/bank.png" alt=""></div>
+                  <div class="text-desc">
+                    <div class="text-big">Thanh toán qua chuyển khoản ngân hàng</div>
+                    <div class="text-small">Chuyển khoản trực tiếp tại ngân hàng, thẻ ATM, hoặc qua Internet banking.</div>
+                  </div>
+                </div>
+              </div>
             </div>
-            <!-- End of column 4-->
           </div>
         </div>
       </div>
-      <div class="footerbg2">
-        <div class="container center">
-          <a href="#">Trang chủ</a> |
-          <a href="#">Đặt vé</a> |
-          <a href="#">Giới thiệu</a> |
-          <a href="#">Hướng dẫn</a> |
-          <a href="#">Liên hệ</a>
-          <a href="#top" class="gotop scroll"><img src="images/spacer.png" alt="" /></a>
+      <!-- service-method -->
+      <div class="container">
+        <div class="partner">
+          <div class="section-title">Đối tác của chúng tôi</div>
+          <div class="border-title"></div>
+          <div class="swiper-container">
+            <div class="swiper-wrapper">
+              <div class="swiper-slide item">
+                <a href="#" target="_blank">
+                  <img src="img/partners/boditech.png" alt="" /><span class="imba"></span>
+                </a>
+              </div>
+              <div class="swiper-slide item">
+                <a href="#" target="_blank">
+                  <img src="img/partners/namyangi.png" alt="" /><span class="imba"></span>
+                </a>
+              </div>
+              <div class="swiper-slide item">
+                <a href="#" target="_blank">
+                  <img src="img/partners/geumsan.png" alt="" /><span class="imba"></span>
+                </a>
+              </div>
+              <div class="swiper-slide item">
+                <a href="#" target="_blank">
+                  <img src="img/partners/hicook.png" alt="" /><span class="imba"></span>
+                </a>
+              </div>
+              <div class="swiper-slide item">
+                <a href="#" target="_blank">
+                  <img src="img/partners/customer_2.png" alt="" /><span class="imba"></span>
+                </a>
+              </div>
+              <div class="swiper-slide item">
+                <a href="#" target="_blank">
+                  <img src="img/partners/boditech.png" alt="" /><span class="imba"></span>
+                </a>
+              </div>
+              <div class="swiper-slide item">
+                <a href="#" target="_blank">
+                  <img src="img/partners/namyangi.png" alt="" /><span class="imba"></span>
+                </a>
+              </div>
+              <div class="swiper-slide item">
+                <a href="#" target="_blank">
+                  <img src="img/partners/geumsan.png" alt="" /><span class="imba"></span>
+                </a>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
-    </footer>
-    <!-- footer -->
+      <!-- partner -->
+      <div class="skyline hidden-xs hidden-sm">
+        <!-- <script src="js/prefixfree.min.js"></script> -->
+        <div class="skyline-city"></div>
+        <div class="bus-img">
+          <img style="opacity: 0.3;filter: alpha(opacity=30);" src="img/banh-xe.gif">
+        </div>
+        <div class="plane-img">
+          <img src="img/plane.png" alt="" style="width: 250px;">
+        </div>
+      </div>
+      <footer id="footer" class="footer">
+        <div class="footerbg">
+          <div class="container">
+            <div class="row">
+              <div class="col-md-3">
+                <img src="img/logo.png" alt="" style="width: 200px;"/>
+                <br/>
+                <br/>
+                <span class="ftitle">Kết nối với chúng tôi</span>
+                <div class="scont">
+                  <a href="#" class="social1b"><img src="img/icon-facebook.png" alt="" /></a>
+                  <a href="#" class="social2b"><img src="img/icon-twitter.png" alt="" /></a>
+                  <a href="#" class="social3b"><img src="img/icon-google.png" alt="" /></a>
+                  <a href="#" class="social4b"><img src="img/icon-youtube.png" alt="" /></a>
+                  <br/>
+                  <br/> &copy; 2016 | <a href="#">VisionTeam</a>
+                  <br/> All Rights Reserved
+                  <br/>
+                  <br/>
+                </div>
+              </div>
+              <!-- End of column 1-->
+              <div class="col-md-3">
+                <span class="ftitle">Về chúng tôi</span>
+                <br/>
+                <br/>
+                <ul class="footerlist">
+                  <li><a href="#">Giới thiệu về balotravel.vn</a></li>
+                  <li><a href="#">Giới thiệu về datvesieure.com</a></li>
+                </ul>
+              </div>
+              <!-- End of column 2-->
+              <div class="col-md-3">
+                <span class="ftitle">Các điều khoản</span>
+                <br/>
+                <br/>
+                <ul class="footerlist">
+                  <li><a href="#">Các điều khoản và điều kiện</a></li>
+                  <li><a href="#">Lịch sử hoạt động</a></li>
+                  <li><a href="#">Chính sách bảo mật</a></li>
+                </ul>
+              </div>
+              <!-- End of column 3-->
+              <div class="col-md-3">
+                <span class="ftitle">Văn phòng chính</span>
+                <br/>
+                <br/>
+                <p><strong>Công ty TNHH MTV Thương mại và Du lịch Ba Lô</strong>
+                  <br/>06 Tân Lập 1, phường Thạch Thang, quận Hải Châu, Đà Nẵng</p>
+                <br/>
+                <span class="ftitle">Hotline đặt vé</span>
+                <br/>
+                <strong class="pnr">(0511) 38 88 408</strong>
+              </div>
+              <!-- End of column 4-->
+            </div>
+          </div>
+        </div>
+        <div class="footerbg2">
+          <div class="container text-center">
+            <a href="#">Trang chủ</a> |
+            <a href="#">Đặt vé</a> |
+            <a href="#">Giới thiệu</a> |
+            <a href="#">Hướng dẫn</a> |
+            <a href="#">Liên hệ</a>
+            <a href="#top" class="gotop scroll"><img src="img/spacer.png" alt="" /></a>
+          </div>
+        </div>
+      </footer>
+    </div>
+    <!--#post-->
   </div>
-  <!-- This page JS -->
-  <script src="assets/js/js-index3.js"></script>
-  <!-- Custom functions -->
-  <script src="assets/js/functions.js"></script>
-  <!-- Picker UI-->
-  <script src="assets/js/jquery-ui.js"></script>
-  <!-- Easing -->
-  <script src="assets/js/jquery.easing.js"></script>
-  <!-- jQuery KenBurn Slider  -->
-  <script type="text/javascript" src="rs-plugin/js/jquery.themepunch.revolution.min.js"></script>
-  <!-- Nicescroll  -->
-  <script src="assets/js/jquery.nicescroll.min.js"></script>
-  <!-- CarouFredSel -->
-  <script src="assets/js/jquery.carouFredSel-6.2.1-packed.js"></script>
-  <script src="assets/js/helper-plugins/jquery.touchSwipe.min.js"></script>
-  <script type="text/javascript" src="assets/js/helper-plugins/jquery.mousewheel.min.js"></script>
-  <script type="text/javascript" src="assets/js/helper-plugins/jquery.transit.min.js"></script>
-  <script type="text/javascript" src="assets/js/helper-plugins/jquery.ba-throttle-debounce.min.js"></script>
-  <!-- Custom Select -->
-  <script type='text/javascript' src='assets/js/jquery.customSelect.js'></script>
-  <!-- Include all compiled plugins (below), or include individual files as needed -->
-  <script src="dist/js/bootstrap.min.js"></script>
-  <script src="plugins/swiper/swiper.min.js"></script>
-  <script src="assets/js/script.js"></script>
-  <script>
+  <!--end nicdark_site_fullwidth-->
+
+</div>
+<!--end nicdark_site-->
+
+
+<!--start preloader-->
+<script type="text/javascript">
+  jQuery(window).load(function () {
+    jQuery(".nicdark_preloader").delay(1000).fadeOut("slow");
+  })
+</script>
+<!--end preloader-->
+
+<script type='text/javascript' src='plugins/jquery-ui/jquery-ui.js'></script>
+<script type='text/javascript' src='plugins/menu/superfish.min.js'></script>
+<script type='text/javascript' src='plugins/menu/tinynav.min.js'></script>
+<script type='text/javascript' src='plugins/nicescrool/jquery.nicescroll.min.js'></script>
+<script type='text/javascript' src='js/settings.js'></script>
+<script type='text/javascript' src='plugins/js-composer/js_composer_front.js'></script>
+<script type='text/javascript' src='plugins/jquery-ui/core.min.js'></script>
+<script type='text/javascript' src='plugins/jquery-ui/tabs.min.js'></script>
+<script type='text/javascript' src='plugins/jquery-ui/jquery-ui-tabs-rotate.js'></script>
+
+<script src="plugins/bootstrap-3.3.7/js/bootstrap.min.js"></script>
+<script src="plugins/swiper/swiper.min.js"></script>
+<script src="js/script.js"></script>
+<script>
   var swiper = new Swiper('.swiper-container', {
     slidesPerView: 'auto',
     paginationClickable: true,
@@ -586,7 +1127,6 @@
     autoplay: true,
     speed: 5000
   });
-  </script>
+</script>
 </body>
-
 </html>
