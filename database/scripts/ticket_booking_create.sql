@@ -18,7 +18,7 @@ CREATE TABLE banner (
     img varchar(200) NOT NULL,
     url varchar(1000) NOT NULL,
     description varchar(1000) NOT NULL,
-    active boolean NOT NULL,
+    status varchar(45) NOT NULL,
     CONSTRAINT banner_pk PRIMARY KEY (id)
 );
 
@@ -68,9 +68,9 @@ CREATE TABLE bus_route (
 CREATE TABLE comment (
     id int NOT NULL AUTO_INCREMENT,
     full_name int NOT NULL,
-    comment varchar(1000) NOT NULL,
+    content varchar(1000) NOT NULL,
     created_at date NOT NULL,
-    active boolean NOT NULL,
+	status varchar(45) NOT NULL,
     CONSTRAINT comment_pk PRIMARY KEY (id)
 );
 
