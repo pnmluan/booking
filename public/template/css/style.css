@@ -516,8 +516,12 @@ textarea:-moz-placeholder { color: #a9a9a9; }
 .promotion {}
 
 .list-news > div { padding-top: 15px; padding-bottom: 15px; border-top: solid 1px #eaeaea; }
-.list-news > div .avatar-news { float: left; margin-right: 20px; width: 65px; height: 65px; display: block; }
-.list-news > div .avatar-news img { -webkit-transition: all 1s ease-out; -moz-transition: all 1s ease-out; -o-transition: all 1s ease-out; transition: all 1s ease-out; max-width: 100px; max-height: 100px; width: 100%; }
+.list-news > div .avatar-news { display: block; float: left; margin-right: 15px; border: solid 1px #ddd !important; }
+.list-news > div .avatar-news img { -webkit-transition: all 1s ease-out; -moz-transition: all 1s ease-out; -o-transition: all 1s ease-out; transition: all 1s ease-out;
+  display: block;
+  width: 65px !important;
+  height: auto;
+}
 .list-news > div .avatar-news img:hover { opacity: 0.9; border-radius: 50%; border: solid 1px #ffcc4e; }
 .list-news > div .content-news .create-date-news { margin-bottom: 5px; color: #999; }
 .list-news > div .content-news .detail-news { line-height: 22px; color: #333; }
