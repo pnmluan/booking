@@ -15,11 +15,13 @@
       -o-transition: all 0.2s ease-out;
       -ms-transition: all 0.2s ease-out
     }
+
     .tp-caption a:hover {
       color: #ffa902
     }
   </style>
-  <link rel='stylesheet' href='http://www.nicdarkthemes.com/themes/love-travel/wp/demo-travel/wp-content/themes/lovetravel/style.css?ver=4.2.2'/>
+  <link rel='stylesheet'
+        href='http://www.nicdarkthemes.com/themes/love-travel/wp/demo-travel/wp-content/themes/lovetravel/style.css?ver=4.2.2'/>
   <link rel='stylesheet' href='css/nicdark_responsive.css'/>
   <link rel='stylesheet' href='css/elusive-icons.css'/>
   <link rel='stylesheet' href='plugins/js-composer/js_composer.css'/>
@@ -143,7 +145,8 @@
 
               <div class="menu-main-menu-container">
                 <ul id="menu-main-menu" class="menu">
-                  <li class="greydark menu-item menu-item-type-post_type menu-item-object-page current-menu-item page_item page-item-32 current_page_item current-menu-ancestor current-menu-parent current_page_parent current_page_ancestor">
+                  <li
+                    class="greydark menu-item menu-item-type-post_type menu-item-object-page current-menu-item page_item page-item-32 current_page_item current-menu-ancestor current-menu-parent current_page_parent current_page_ancestor">
                     <a href="#">HOME</a>
                   </li>
                   <li class="greydark menu-item menu-item-type-custom menu-item-object-custom">
@@ -159,7 +162,8 @@
                   <li class="greydark menu-item menu-item-type-post_type menu-item-object-page">
                     <a href="#">NEWS</a>
                   </li>
-                  <li class="greydark nicdark_megamenu nicdark_displaynone_ipadland menu-item menu-item-type-post_type menu-item-object-page ">
+                  <li
+                    class="greydark nicdark_megamenu nicdark_displaynone_ipadland menu-item menu-item-type-post_type menu-item-object-page ">
                     <a href="#">COMPONENTS</a>
                   </li>
                   <li class="menu-item menu-item-type-post_type menu-item-object-page ">
@@ -664,172 +668,194 @@
                 class="vc_empty_space_inner"></span></div>
 
 
-              <div class="wpb_tabs wpb_content_element  nicdark_tab_dark" data-interval="0">
+              <div class="wpb_tabs wpb_content_element nicdark_tab_dark" data-interval="0">
                 <div class="wpb_wrapper wpb_tour_tabs_wrapper ui-tabs vc_clearfix">
                   <ul class="wpb_tabs_nav ui-tabs-nav vc_clearfix">
                     <li class=" nicdark_width100_iphonepotr nicdark_width100_iphoneland "><a
-                      class="title white nicdark_bg_blue " href="#tab-41648c1f-c14f-8"><i class=" icon-search-2"></i>
-                      QUICK SEARCH</a></li>
+                      class="title white" href="#tab-plane"><i class=" icon-search-2"></i>
+                      VÉ MÁY BAY</a></li>
                     <li class=" nicdark_width100_iphonepotr nicdark_width100_iphoneland "><a
-                      class="title white nicdark_bg_green " href="#tab-1430811957345-1-7"><i class="icon-params"></i>
-                      ADVANCED</a></li>
+                      class="title white" href="#tab-bus"><i class="icon-params"></i>
+                      VÉ XE KHÁCH</a></li>
                   </ul>
-
-
-                  <div id="tab-41648c1f-c14f-8"
-                       class="wpb_tab  nicdark_bg_grey nicdark_border_grey ui-tabs-panel wpb_ui-tabs-hide vc_clearfix">
-
-                    <form id="advsearch_1" class="nicdark_advanced_search"
-                          action="http://www.nicdarkthemes.com/themes/love-travel/wp/demo-travel/packages/"
-                          method="GET">
-                      <h2 class="form-title">Đặt vé máy bay</h2>
+                  <div id="tab-plane" class="wpb_tab ui-tabs-panel wpb_ui-tabs-hide vc_clearfix">
+                    <form class="plane-form" action="" method="">
+                      <div class="col-md-12">
+                        <h2 class="form-title">Đặt vé máy bay</h2>
+                      </div>
                       <div class="plane-form-inner">
-                        <div class="plane-option">
-                          <label class="radio-inline">
-                            <input type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1"> Khứ hồi
-                          </label>
-                          <label class="radio-inline">
-                            <input type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2"> Một chiều
-                          </label>
-                          <label class="radio-inline">
-                            <input type="radio" name="inlineRadioOptions" id="inlineRadio3" value="option3"> Nhiều chặng
-                          </label>
-                        </div>
-                        <div class="plane-input clearfix">
-                          <div class="field">
-                            <span class="field-label">Điểm đi</span>
-                            <div class="field-input">
-                              <select name="" class="form-control">
-                                <option value=""></option>
-                              </select>
-                            </div>
-                          </div>
-                          <div class="field">
-                            <span class="field-label">Điểm đến</span>
-                            <div class="field-input">
-                              <select name="" class="form-control">
-                                <option value=""></option>
-                              </select>
-                            </div>
-                          </div>
-                          <div class="field">
-                            <span class="field-label">Ngày đi</span>
-                            <div class="field-input">
-                              <input type="datetime" name="" value="" placeholder="" class="form-control">
-                            </div>
-                          </div>
-                          <div class="field">
-                            <span class="field-label">Ngày về</span>
-                            <div class="field-input">
-                              <input type="datetime" name="" value="" placeholder="" class="form-control">
-                            </div>
+                        <div class="col-md-12">
+                          <div class="plane-option">
+                            <label class="radio-inline">
+                              <input type="radio" name="plane-option" id="one-way" value="option1"> Khứ hồi
+                            </label>
+                            <label class="radio-inline">
+                              <input type="radio" name="plane-option" id="round-trip" value="option2"> Một chiều
+                            </label>
+                            <label class="radio-inline">
+                              <input type="radio" name="plane-option" id="multiple" value="option3"> Nhiều chặng
+                            </label>
                           </div>
                         </div>
-                        <div class="plane-age clearfix">
-                          <div>
-                            <div>
-                              <span class="field-label">Người lớn</span>
-                              <i>( >12 tuổi )</i>
+                        <div class="one">
+                          <div class="plane-input clearfix">
+                            <div class="col-md-3">
+                              <div class="field">
+                                <span class="field-label">Điểm đi</span>
+                                <div class="field-input">
+                                  <select name="" class="form-control">
+                                    <option value=""></option>
+                                  </select>
+                                </div>
+                              </div>
                             </div>
-
-                            <select name="" class="form-control">
-                              <option value="">1</option>
-                              <option value="">2</option>
-                              <option value="">3</option>
-                              <option value="">4</option>
-                              <option value="">5</option>
-                              <option value="">6</option>
-                              <option value="">7</option>
-                              <option value="">8</option>
-                              <option value="">9</option>
-                            </select>
-
+                            <div class="col-md-3">
+                              <div class="field">
+                                <span class="field-label">Điểm đến</span>
+                                <div class="field-input">
+                                  <select name="" class="form-control">
+                                    <option value=""></option>
+                                  </select>
+                                </div>
+                              </div>
+                            </div>
+                            <div class="col-md-3">
+                              <div class="field">
+                                <span class="field-label">Ngày đi</span>
+                                <div class="field-input">
+                                  <input type="datetime" name="" value="" placeholder="" class="form-control">
+                                </div>
+                              </div>
+                            </div>
+                            <div class="col-md-3">
+                              <div class="field">
+                                <span class="field-label">Ngày về</span>
+                                <div class="field-input">
+                                  <input type="datetime" name="" value="" placeholder="" class="form-control">
+                                </div>
+                              </div>
+                            </div>
                           </div>
-                          <div>
-                            <div>
-                              <span class="field-label">Trẻ em</span>
-                              <i> ( 2 - 12 tuổi ) </i>
+                          <div class="plane-age clearfix">
+                            <div class="col-md-3">
+                              <div>
+                                <div>
+                                  <span class="field-label">Người lớn</span>
+                                  <i>( >12 tuổi )</i>
+                                </div>
+                                <select name="" class="form-control">
+                                  <option value="">1</option>
+                                  <option value="">2</option>
+                                  <option value="">3</option>
+                                  <option value="">4</option>
+                                  <option value="">5</option>
+                                  <option value="">6</option>
+                                  <option value="">7</option>
+                                  <option value="">8</option>
+                                  <option value="">9</option>
+                                </select>
+                              </div>
                             </div>
-
-                            <select name="" class="form-control">
-                              <option value="">1</option>
-                              <option value="">2</option>
-                              <option value="">3</option>
-                              <option value="">4</option>
-                              <option value="">5</option>
-                              <option value="">6</option>
-                              <option value="">7</option>
-                              <option value="">8</option>
-                              <option value="">9</option>
-                            </select>
-
-                          </div>
-                          <div class="last">
-                            <div>
-                              <span class="field-label">Em bé</span>
-                              <i> ( < 2 tuổi ) </i>
+                            <div class="col-md-3">
+                              <div>
+                                <div>
+                                  <span class="field-label">Trẻ em</span>
+                                  <i> ( 2 - 12 tuổi ) </i>
+                                </div>
+                                <select name="" class="form-control">
+                                  <option value="">1</option>
+                                  <option value="">2</option>
+                                  <option value="">3</option>
+                                  <option value="">4</option>
+                                  <option value="">5</option>
+                                  <option value="">6</option>
+                                  <option value="">7</option>
+                                  <option value="">8</option>
+                                  <option value="">9</option>
+                                </select>
+                              </div>
                             </div>
-
-                            <select name="" class="form-control">
-                              <option value="">1</option>
-                              <option value="">2</option>
-                              <option value="">3</option>
-                              <option value="">4</option>
-                              <option value="">5</option>
-                              <option value="">6</option>
-                              <option value="">7</option>
-                              <option value="">8</option>
-                              <option value="">9</option>
-                            </select>
-
+                            <div class="col-md-3">
+                              <div>
+                                <div>
+                                  <span class="field-label">Em bé</span>
+                                  <i> ( < 2 tuổi ) </i>
+                                </div>
+                                <select name="" class="form-control">
+                                  <option value="">1</option>
+                                  <option value="">2</option>
+                                  <option value="">3</option>
+                                  <option value="">4</option>
+                                  <option value="">5</option>
+                                  <option value="">6</option>
+                                  <option value="">7</option>
+                                  <option value="">8</option>
+                                  <option value="">9</option>
+                                </select>
+                              </div>
+                            </div>
                           </div>
                         </div>
-                        <div class="plane-submit text-right">
-                          <button type="button" class="btn">Tìm chuyến bay</button>
+                        <div class="multiple">
+
+                        </div>
+                        <div class="col-md-12">
+                          <div class="plane-submit text-right">
+                            <button type="button" class="btn">Tìm chuyến bay</button>
+                          </div>
                         </div>
                       </div>
 
                     </form>
                   </div>
-                  <div id="tab-1430811957345-1-7"
-                       class="wpb_tab  nicdark_bg_grey nicdark_border_grey ui-tabs-panel wpb_ui-tabs-hide vc_clearfix">
-                    <form id="nicdark_adv_search_all" class="nicdark_advanced_search"
-                          action="#"
-                          method="GET">
-                      <h2 class="form-title">Đặt vé xe khách</h2>
+                  <div id="tab-bus" class="wpb_tab ui-tabs-panel wpb_ui-tabs-hide vc_clearfix">
+                    <form class="bus-form" action="#" method="">
+                      <div class="col-md-12">
+                        <h2 class="form-title">Đặt vé xe khách</h2>
+                      </div>
                       <div class="bus-form-inner">
                         <div class="bus-input clearfix">
-                          <div class="field">
-                            <span class="field-label">Điểm đi</span>
-                            <div class="field-input">
-                              <select name="" class="form-control">
-                                <option value=""></option>
-                              </select>
+                          <div class="col-md-3">
+                            <div class="field">
+                              <span class="field-label">Điểm đi</span>
+                              <div class="field-input">
+                                <select name="" class="form-control">
+                                  <option value=""></option>
+                                </select>
+                              </div>
                             </div>
                           </div>
-                          <div class="field">
-                            <span class="field-label">Điểm đến</span>
-                            <div class="field-input">
-                              <select name="" class="form-control">
-                                <option value=""></option>
-                              </select>
+                          <div class="col-md-3">
+                            <div class="field">
+                              <span class="field-label">Điểm đến</span>
+                              <div class="field-input">
+                                <select name="" class="form-control">
+                                  <option value=""></option>
+                                </select>
+                              </div>
                             </div>
                           </div>
-                          <div class="field">
-                            <span class="field-label">Ngày đi</span>
-                            <div class="field-input">
-                              <input type="datetime" name="" value="" placeholder="" class="form-control">
+                          <div class="col-md-3">
+                            <div class="field">
+                              <span class="field-label">Ngày đi</span>
+                              <div class="field-input">
+                                <input type="datetime" name="" value="" placeholder="" class="form-control">
+                              </div>
                             </div>
                           </div>
-                          <div class="field">
-                            <span class="field-label">Số lượng vé</span>
-                            <div class="field-input">
-                              <input type="datetime" name="" value="" placeholder="" class="form-control">
+                          <div class="col-md-3">
+                            <div class="field">
+                              <span class="field-label">Số lượng vé</span>
+                              <div class="field-input">
+                                <input type="datetime" name="" value="" placeholder="" class="form-control">
+                              </div>
                             </div>
                           </div>
                         </div>
-                        <div class="bus-submit text-right">
-                          <button type="button" class="btn">Tìm vé xe</button>
+                        <div class="col-md-12">
+                          <div class="bus-submit text-right">
+                            <button type="button" class="btn">Tìm vé xe</button>
+                          </div>
                         </div>
                       </div>
                     </form>
@@ -840,34 +866,124 @@
           </div>
         </div>
       </section>
-      <div class="main-intro">
+      <section class="main-intro nicdark_section vc_row wpb_row vc_row-fluid">
         <div class="container">
-
           <h2 class="intro-title title">ĐẶT VÉ SIÊU RẺ</h2>
           <p>Datvesieure.com là hệ thống bán vé máy bay, vé xe lớn nhất và uy tín nhất tại Việt Nam</p>
         </div>
-      </div>
+      </section>
       <!-- main-intro -->
-      <div class="main-promotions">
+      <section class="main-promotions nicdark_section vc_row wpb_row vc_row-fluid">
         <div class="container">
           <div class="row">
             <div class="col-md-6">
               <div class="promotions">
                 <div class="section-title">Thông tin khuyến mãi</div>
                 <div class="border-title"></div>
+                <div class="list-news">
+                  <div class="clearfix">
+                    <a class="avatar-news" href="#"><img
+                      src="img/avatar-news-1.png"></a>
+                    <div class="content-news">
+                      <div class="create-date-news">
+                        <span><i class="fa fa-calendar"></i></span>
+                                    <span>
+                                        14, Mar, 2016
+                                    </span>
+                      </div>
+                      <div class="detail-news">
+                        <a href="#">Chúng tôi rất tự hào trở thành đơn vị quảng cáo duy nhất tại Việt Nam cho hãng Truyền Thông Viên Thao</a>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="clearfix">
+                    <a class="avatar-news" href="#"><img
+                      src="img/avatar-news-2.png"></a>
+                    <div class="content-news">
+                      <div class="create-date-news">
+                        <span><i class="fa fa-calendar"></i></span>
+                                    <span>
+                                        14, Mar, 2016
+                                    </span>
+                      </div>
+                      <div class="detail-news">
+                        <a href="#">Chúng tôi rất tự hào trở thành đơn vị quảng cáo duy nhất tại Việt Nam cho hãng Truyền Thông Viên Thao</a>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="clearfix">
+                    <a class="avatar-news" href="#"><img
+                      src="img/avatar-news-3.png"></a>
+                    <div class="content-news">
+                      <div class="create-date-news">
+                        <span><i class="fa fa-calendar"></i></span>
+                                    <span>
+                                        4, Mar, 2016
+                                    </span>
+                      </div>
+                      <div class="detail-news">
+                        <a href="#">m&ocirc; tả ngắn</a>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="clearfix">
+                    <a class="avatar-news" href="#"><img
+                      src="img/avatar-news-2.png"></a>
+                    <div class="content-news">
+                      <div class="create-date-news">
+                        <span><i class="fa fa-calendar"></i></span>
+                                    <span>
+                                        14, Mar, 2016
+                                    </span>
+                      </div>
+                      <div class="detail-news">
+                        <a href="#">Chúng tôi rất tự hào trở thành đơn vị quảng cáo duy nhất tại Việt Nam cho hãng Truyền Thông Viên Thao</a>
+                      </div>
+                    </div>
+                  </div>
+                  <a href="#">View more >></a>
+                </div>
               </div>
             </div>
             <div class="col-md-6">
               <div class="comment">
                 <div class="section-title">Khách hàng nói về chúng tôi</div>
                 <div class="border-title"></div>
+                <div>
+                  <p>
+                    Dịch vụ đặt mua vé xe trực tuyến tại VeXeRe.com thật tuyệt vời, tôi thấy thậm chí đặt chỗ mua vé máy bay còn không được chọn chỗ ngồi như vậy. Bây giờ tôi không còn phải đi lại xếp hàng mua vé tại bến xe nữa, chỉ cần cầm mã vé qua SMS và email là đã có thể lên xe rồi. Cảm ơn VeXeRe.com.
+                  </p>
+                  <div class="text-center">
+                    <img src="img/avatar-news-1.png" alt="" style="width: 80px;">
+                    <h3>Phan Ngọc Minh Luân</h3>
+                    <span>Php Developer</span>
+                  </div>
+                </div>
+                <div class="section-title">Cảm nhận của bạn</div>
+                <div class="border-title"></div>
+                <form class="form-contact">
+                  <div class="row">
+                    <div class="col-md-6">
+                      <input placeholder="Họ Tên*" id="name" class="form-control">
+                    </div>
+                    <div class="col-md-6">
+                      <input placeholder="Email*" id="email" class="form-control">
+                    </div>
+                    <div class="col-md-12">
+                      <textarea placeholder="Nội Dung*" rows="3" id="comment" class="form-control"></textarea>
+                    </div>
+                    <div class="col-md-12">
+                      <button id="submit-send" class="send-msg" type="button" class="btn">Gửi</button>
+                    </div>
+                  </div>
+                </form>
               </div>
             </div>
           </div>
 
         </div>
-      </div>
-      <div class="service-method">
+      </section>
+      <section class="service-method nicdark_section vc_row wpb_row vc_row-fluid">
         <div class="container">
           <div class="row">
             <div class="col-md-6 ticket-book">
@@ -923,7 +1039,8 @@
                   <div class="icon-payment"><img src="img/money.jpg" alt="" style="width: 45px;"></div>
                   <div class="text-desc">
                     <div class="text-big">Thanh toán trực tiếp tại văn phòng</div>
-                    <div class="text-small"> Quý khách vui lòng qua văn phòng Đặt Vé Siêu Rẻ để thanh toán và nhận vé.</div>
+                    <div class="text-small"> Quý khách vui lòng qua văn phòng Đặt Vé Siêu Rẻ để thanh toán và nhận vé.
+                    </div>
                   </div>
                 </div>
               </div>
@@ -950,16 +1067,17 @@
                   <div class="icon-payment"><img src="img/bank.png" alt=""></div>
                   <div class="text-desc">
                     <div class="text-big">Thanh toán qua chuyển khoản ngân hàng</div>
-                    <div class="text-small">Chuyển khoản trực tiếp tại ngân hàng, thẻ ATM, hoặc qua Internet banking.</div>
+                    <div class="text-small">Chuyển khoản trực tiếp tại ngân hàng, thẻ ATM, hoặc qua Internet banking.
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
+      </section>
       <!-- service-method -->
-      <div class="container">
+      <section class="container">
         <div class="partner">
           <div class="section-title">Đối tác của chúng tôi</div>
           <div class="border-title"></div>
@@ -967,48 +1085,48 @@
             <div class="swiper-wrapper">
               <div class="swiper-slide item">
                 <a href="#" target="_blank">
-                  <img src="img/partners/boditech.png" alt="" /><span class="imba"></span>
+                  <img src="img/partners/boditech.png" alt=""/><span class="imba"></span>
                 </a>
               </div>
               <div class="swiper-slide item">
                 <a href="#" target="_blank">
-                  <img src="img/partners/namyangi.png" alt="" /><span class="imba"></span>
+                  <img src="img/partners/namyangi.png" alt=""/><span class="imba"></span>
                 </a>
               </div>
               <div class="swiper-slide item">
                 <a href="#" target="_blank">
-                  <img src="img/partners/geumsan.png" alt="" /><span class="imba"></span>
+                  <img src="img/partners/geumsan.png" alt=""/><span class="imba"></span>
                 </a>
               </div>
               <div class="swiper-slide item">
                 <a href="#" target="_blank">
-                  <img src="img/partners/hicook.png" alt="" /><span class="imba"></span>
+                  <img src="img/partners/hicook.png" alt=""/><span class="imba"></span>
                 </a>
               </div>
               <div class="swiper-slide item">
                 <a href="#" target="_blank">
-                  <img src="img/partners/customer_2.png" alt="" /><span class="imba"></span>
+                  <img src="img/partners/customer_2.png" alt=""/><span class="imba"></span>
                 </a>
               </div>
               <div class="swiper-slide item">
                 <a href="#" target="_blank">
-                  <img src="img/partners/boditech.png" alt="" /><span class="imba"></span>
+                  <img src="img/partners/boditech.png" alt=""/><span class="imba"></span>
                 </a>
               </div>
               <div class="swiper-slide item">
                 <a href="#" target="_blank">
-                  <img src="img/partners/namyangi.png" alt="" /><span class="imba"></span>
+                  <img src="img/partners/namyangi.png" alt=""/><span class="imba"></span>
                 </a>
               </div>
               <div class="swiper-slide item">
                 <a href="#" target="_blank">
-                  <img src="img/partners/geumsan.png" alt="" /><span class="imba"></span>
+                  <img src="img/partners/geumsan.png" alt=""/><span class="imba"></span>
                 </a>
               </div>
             </div>
           </div>
         </div>
-      </div>
+      </section>
       <!-- partner -->
       <div class="skyline hidden-xs hidden-sm">
         <!-- <script src="js/prefixfree.min.js"></script> -->
@@ -1030,10 +1148,10 @@
                 <br/>
                 <span class="ftitle">Kết nối với chúng tôi</span>
                 <div class="scont">
-                  <a href="#" class="social1b"><img src="img/icon-facebook.png" alt="" /></a>
-                  <a href="#" class="social2b"><img src="img/icon-twitter.png" alt="" /></a>
-                  <a href="#" class="social3b"><img src="img/icon-google.png" alt="" /></a>
-                  <a href="#" class="social4b"><img src="img/icon-youtube.png" alt="" /></a>
+                  <a href="#" class="social1b"><img src="img/icon-facebook.png" alt=""/></a>
+                  <a href="#" class="social2b"><img src="img/icon-twitter.png" alt=""/></a>
+                  <a href="#" class="social3b"><img src="img/icon-google.png" alt=""/></a>
+                  <a href="#" class="social4b"><img src="img/icon-youtube.png" alt=""/></a>
                   <br/>
                   <br/> &copy; 2016 | <a href="#">VisionTeam</a>
                   <br/> All Rights Reserved
@@ -1085,7 +1203,7 @@
             <a href="#">Giới thiệu</a> |
             <a href="#">Hướng dẫn</a> |
             <a href="#">Liên hệ</a>
-            <a href="#top" class="gotop scroll"><img src="img/spacer.png" alt="" /></a>
+            <a href="#top" class="gotop scroll"><img src="img/spacer.png" alt=""/></a>
           </div>
         </div>
       </footer>

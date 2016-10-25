@@ -474,6 +474,9 @@ span.signature
 /*start custom css*/
 /*end custom css*/
 
+
+/***** INDEX *****/
+/*****************/
 /* A Linux- and Windows-friendly sans-serif font stack: http://prospects.mhurrell.co.uk/post/updating-the-helvetica-font-stack */
 body {
     font: 14px "Open Sans", arial, sans-serif;
@@ -529,13 +532,87 @@ textarea:-moz-placeholder {
 }
 @font-face {font-family: 'diavlo'; src: url('../fonts/Diavlo_MEDIUM.otf');}
 
+/***** MAIN PROMOTIONS *****/
+/***************************/
+.form-title {}
+.plane-form {}
+.plane-form-inner {}
+.plane-form-option {}
+.one {}
+.one .plane-input {  }
+.one .plane-input .field { }
+.one .plane-age {}
+.one .plane-age .field {  }
+
+.multiple {}
+
+.bus-form {}
+
+
+/***** MAIN INTRO *****/
+/**********************/
+.main-intro { text-align: center; padding: 50px 0px; }
+.main-intro .intro-title { font-size: 30px; margin-bottom: 10px; }
+.main-intro p { font-size: 18px; }
+
+/***** MAIN PROMOTIONS *****/
+/***************************/
+.main-promotions { padding: 50px 0px; }
+.promotion {}
+
+.list-news > div {
+    padding-top: 15px;
+    padding-bottom: 15px;
+    border-top: solid 1px #eaeaea;
+}
+
+.list-news > div .avatar-news {
+    float: left;
+    margin-right: 20px;
+    width: 80px;
+    height: 80px;
+    display: block;
+}
+
+.list-news > div .avatar-news img {
+    -webkit-transition: all 1s ease-out;
+    -moz-transition: all 1s ease-out;
+    -o-transition: all 1s ease-out;
+    transition: all 1s ease-out;
+    max-width: 100px;
+    max-height: 100px;
+    width: 100%;
+}
+
+.list-news > div .avatar-news img:hover {
+    opacity: 0.9;
+    border-radius: 50%;
+    border: solid 1px #ffcc4e;
+}
+
+.list-news > div .content-news .create-date-news {
+    margin-bottom: 5px;
+}
+
+.list-news > div .content-news .detail-news {
+    line-height: 22px;
+    color: #333;
+}
+
+.list-news > div .content-news .detail-news a { color: #333; }
+.list-news > div .content-news .detail-news a:hover { color: #2A8DAC; }
+
+
+.comment {}
+
+
 .title { font-family: 'diavlo'; color: #649931; }
 .section-title { font-size: 20px; color: #649931; text-transform: uppercase; font-family: 'diavlo';  margin-top: 20px; padding-bottom: 10px;}
 .border-title { height: 7px; margin-bottom: 20px; width: 75px; background: url(../img/border-title.png) repeat; }
 .service-method { padding: 30px 0px;  }
 
 /***** SERVICE METHOD *****/
-.icon-bookticket, .icon-payment { color: #fff; font-size: 40px; width: 48px; height: 48px; float: left; margin-right: 5px; }
+.icon-bookticket, .icon-payment { color: #fff; font-size: 40px; width: 50px; height: 50px; float: left; margin-right: 5px; }
 .icon-bookticket i, .icon-payment i {  display: block; width: 100%; height:100%; color: #AFAFAF;  }
 .icon-bookticket img, .icon-payment img { display: block; }
 .text-desc { overflow: hidden; }
