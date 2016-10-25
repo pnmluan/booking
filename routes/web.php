@@ -17,6 +17,11 @@ $app->get('/', function () use ($app) {
 
 $app->group(['prefix' => 'api/v1', 'middleware' => 'BasicAuth', 'namespace' => 'App\Http\Controllers'], function($app)
 {
+	/*
+	|--------------------------------------------------------------------------
+	| Banner
+	|--------------------------------------------------------------------------
+	*/
     $app->get('banner','BannerController@index');
   
     $app->get('banner/{id}','BannerController@getbanner');
@@ -26,6 +31,13 @@ $app->group(['prefix' => 'api/v1', 'middleware' => 'BasicAuth', 'namespace' => '
     $app->put('banner/{id}','BannerController@updatebanner');
       
     $app->delete('banner/{id}','BannerController@deletebanner');
+
+    /*
+	|--------------------------------------------------------------------------
+	| Comment
+	|--------------------------------------------------------------------------
+	*/
+    $app->get('comment','CommentController@index');
 });
 
 // Crawler API
