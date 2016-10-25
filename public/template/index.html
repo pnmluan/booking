@@ -16,23 +16,27 @@
     -o-transition: all 0.2s ease-out;
     -ms-transition: all 0.2s ease-out
   }
-
   .tp-caption a:hover {
     color: #ffa902
   }
   </style>
-  <link rel='stylesheet' href='http://www.nicdarkthemes.com/themes/love-travel/wp/demo-travel/wp-content/themes/lovetravel/style.css?ver=4.2.2' />
+  <link rel='stylesheet' href='css/styles.css' />
   <link rel='stylesheet' href='css/nicdark_responsive.css' />
   <link rel='stylesheet' href='css/elusive-icons.css' />
   <link rel='stylesheet' href='plugins/js-composer/js_composer.css' />
   <link rel="stylesheet" href="plugins/bootstrap-3.3.7/css/bootstrap.min.css">
   <link rel="stylesheet" href="fonts/icons/font-awesome-4.6.3/css/font-awesome.min.css">
   <link rel="stylesheet" href="plugins/swiper/swiper.min.css">
+  <link rel="stylesheet" href="plugins/select2/css/select2.css">
+  <link rel="stylesheet" href="plugins/owl-carousel/owl.carousel.css">
+  <link rel="stylesheet" href="plugins/owl-carousel/owl.theme.css">
+  <link rel="stylesheet" href="plugins/owl-carousel/owl.transitions.css">
   <link rel="stylesheet" href="css/reset.css">
   <link rel="stylesheet" href="css/style.css">
-  <script type='text/javascript' src='plugins/jquery/jquery.js'></script>
-  <script type='text/javascript' src='plugins/rs-plugin/jquery.themepunch.tools.min.js'></script>
-  <script type='text/javascript' src='plugins/rs-plugin/jquery.themepunch.revolution.min.js'></script>
+
+  <script src='plugins/jquery/jquery.js'></script>
+  <script src='plugins/rs-plugin/jquery.themepunch.tools.min.js'></script>
+  <script src='plugins/rs-plugin/jquery.themepunch.revolution.min.js'></script>
   <!--[if IE 8]>
   <link rel="stylesheet" type="text/css" href="http://www.nicdarkthemes.com/themes/love-travel/wp/demo-travel/wp-content/plugins/js_composer/assets/css/vc-ie8.css" media="screen">
   <![endif]-->
@@ -56,7 +60,7 @@
   }
 
   .vc_custom_1431937582413 {
-    margin-top: -204px !important;
+    margin-top: -167px !important;
   }
 
   .vc_custom_1430745958006 {
@@ -87,29 +91,19 @@
         <!--decide fullwidth or boxed header-->
         <div class='nicdark_menu_fullwidth_boxed nicdark_menu_fullwidth'>
           <!--start top header-->
-          <!--start before navigation-->
-          <div class="nicdark_section nicdark_bg_greydark nicdark_displaynone_responsive">
+          <div class="nicdark_section nicdark_displaynone_responsive top-menu">
             <div class="nicdark_container nicdark_clearfix">
-              <div class="grid grid_6">
+              <div class="grid grid_12">
                 <div class="nicdark_focus">
-                  <h6 class="white">
-                  <i class="icon-mail"></i> <a class="white title" href="#">info@travel.com</a>
-                  <span class="greydark2 nicdark_marginright10 nicdark_marginleft10">|</span>
-                  <i class="icon-phone"></i> <a class="white title" href="#">+44 5227653</a>
-                </h6></div>
-              </div>
-              <div class="grid grid_6 right">
-                <div class="nicdark_focus right">
-                  <h6 class="white">
-                  <i class="icon-key"></i> <a class="white title" href="#">Đăng ký</a>
-                  <span class="greydark2 nicdark_marginright10 nicdark_marginleft10">|</span>
-                  <i class="icon-lock"></i> <a class="white title" href="#">Đăng nhập</a>
-                </h6>
+                  <h6 class="text-right">
+                    <i class="icon-mail"></i> <a class="title" href="#">balotravelco@gmail.com</a>
+                    <span class="greydark2 nicdark_marginright10 nicdark_marginleft10">|</span>
+                    <i class="icon-phone"></i> <a class="title" href="tel:05113888408">+(0511) 38 88 408</a>
+                  </h6>
                 </div>
               </div>
             </div>
           </div>
-          <!--end before navigation-->
           <!--end top header-->
           <!--decide gradient or not-->
           <div class="nicdark_space3 nicdark_bg_gradient"></div>
@@ -127,7 +121,7 @@
                 <div class="menu-main-menu-container">
                   <ul id="menu-main-menu" class="menu">
                     <li class="menu-item">
-                      <a href="#">Trang chủ</a>
+                      <a href="#" class="active">Trang chủ</a>
                     </li>
                     <li class="menu-item">
                       <a href="#">Đặt vé</a>
@@ -505,21 +499,18 @@
                 <div class="wpb_tabs wpb_content_element nicdark_tab_dark" data-interval="0">
                   <div class="wpb_wrapper wpb_tour_tabs_wrapper ui-tabs vc_clearfix">
                     <ul class="wpb_tabs_nav ui-tabs-nav vc_clearfix">
-                      <li class=" nicdark_width100_iphonepotr nicdark_width100_iphoneland ">
-                        <a class="title white" href="#tab-plane"><i class=" icon-search-2"></i> VÉ MÁY BAY</a>
+                      <li class="nicdark_width100_iphonepotr nicdark_width100_iphoneland">
+                        <a class="title white" href="#tab-plane"><i class="icon-plane"></i> VÉ MÁY BAY</a>
                       </li>
-                      <li class=" nicdark_width100_iphonepotr nicdark_width100_iphoneland ">
-                        <a class="title white" href="#tab-bus"><i class="icon-params"></i> VÉ XE KHÁCH</a>
+                      <li class="nicdark_width100_iphonepotr nicdark_width100_iphoneland">
+                        <a class="title white" href="#tab-bus"><i class="fa fa-bus"></i> VÉ XE KHÁCH</a>
                       </li>
                     </ul>
                     <div id="tab-plane" class="wpb_tab ui-tabs-panel wpb_ui-tabs-hide vc_clearfix">
                       <form class="plane-form" action="" method="">
-                        <div class="col-md-12">
-                          <h2 class="form-title">Đặt vé máy bay</h2>
-                        </div>
                         <div class="plane-form-inner">
                           <div class="col-md-12">
-                            <div class="plane-option">
+                            <div class="plane-option clearfix">
                               <label class="radio-inline">
                                 <input type="radio" name="plane-option" id="one-way" value="option1"> Khứ hồi
                               </label>
@@ -537,8 +528,10 @@
                                 <div class="field">
                                   <span class="field-label">Điểm đi</span>
                                   <div class="field-input">
-                                    <select name="" class="form-control">
+                                    <select class="select-from" data-placeholder="Điểm đi">
                                       <option value=""></option>
+                                      <option value="Hanoi">Hà Nội</option>
+                                      <option value="Saigon">Tp.Hồ Chí Minh</option>
                                     </select>
                                   </div>
                                 </div>
@@ -547,8 +540,10 @@
                                 <div class="field">
                                   <span class="field-label">Điểm đến</span>
                                   <div class="field-input">
-                                    <select name="" class="form-control">
+                                    <select class="select-to" data-placeholder="Điểm đến">
                                       <option value=""></option>
+                                      <option value="Hanoi">Hà Nội</option>
+                                      <option value="Saigon">Tp.Hồ Chí Minh</option>
                                     </select>
                                   </div>
                                 </div>
@@ -572,60 +567,56 @@
                             </div>
                             <div class="plane-age clearfix">
                               <div class="col-md-3">
-                                <div>
+                                <div class="field">
                                   <div>
                                     <span class="field-label">Người lớn</span>
                                     <i>( >12 tuổi )</i>
                                   </div>
-                                  <select name="" class="form-control">
-                                    <option value="">1</option>
-                                    <option value="">2</option>
-                                    <option value="">3</option>
-                                    <option value="">4</option>
-                                    <option value="">5</option>
-                                    <option value="">6</option>
-                                    <option value="">7</option>
-                                    <option value="">8</option>
-                                    <option value="">9</option>
-                                  </select>
+                                  <div>
+                                    <select class="select-adult" data-placeholder="">
+                                      <option value=""></option>
+                                      <option value="1">1</option>
+                                      <option value="2">2</option>
+                                      <option value="2">3</option>
+                                      <option value="3">4</option>
+                                      <option value="4">5</option>
+                                    </select>
+                                  </div>
                                 </div>
                               </div>
                               <div class="col-md-3">
-                                <div>
+                                <div class="field">
                                   <div>
                                     <span class="field-label">Trẻ em</span>
                                     <i> ( 2 - 12 tuổi ) </i>
                                   </div>
-                                  <select name="" class="form-control">
-                                    <option value="">1</option>
-                                    <option value="">2</option>
-                                    <option value="">3</option>
-                                    <option value="">4</option>
-                                    <option value="">5</option>
-                                    <option value="">6</option>
-                                    <option value="">7</option>
-                                    <option value="">8</option>
-                                    <option value="">9</option>
-                                  </select>
+                                  <div>
+                                    <select class="select-child-1" data-placeholder="">
+                                      <option value="1">1</option>
+                                      <option value="2">2</option>
+                                      <option value="2">3</option>
+                                      <option value="3">4</option>
+                                      <option value="4">5</option>
+                                    </select>
+                                  </div>
                                 </div>
                               </div>
                               <div class="col-md-3">
-                                <div>
+                                <div class="field">
                                   <div>
                                     <span class="field-label">Em bé</span>
                                     <i> ( < 2 tuổi ) </i>
                                   </div>
-                                  <select name="" class="form-control">
-                                    <option value="">1</option>
-                                    <option value="">2</option>
-                                    <option value="">3</option>
-                                    <option value="">4</option>
-                                    <option value="">5</option>
-                                    <option value="">6</option>
-                                    <option value="">7</option>
-                                    <option value="">8</option>
-                                    <option value="">9</option>
-                                  </select>
+                                  <div>
+                                    <select class="select-child-2" data-placeholder="">
+                                      <option value=""></option>
+                                      <option value="1">1</option>
+                                      <option value="2">2</option>
+                                      <option value="2">3</option>
+                                      <option value="3">4</option>
+                                      <option value="4">5</option>
+                                    </select>
+                                  </div>
                                 </div>
                               </div>
                             </div>
@@ -634,7 +625,7 @@
                           </div>
                           <div class="col-md-12">
                             <div class="plane-submit text-right">
-                              <button type="button" class="btn">Tìm chuyến bay</button>
+                              <button type="button" class="btn btn-plane btn-search"><i class=" icon-search-2"></i> Tìm chuyến bay</button>
                             </div>
                           </div>
                         </div>
@@ -642,18 +633,17 @@
                     </div>
                     <div id="tab-bus" class="wpb_tab ui-tabs-panel wpb_ui-tabs-hide vc_clearfix">
                       <form class="bus-form" action="#" method="">
-                        <div class="col-md-12">
-                          <h2 class="form-title">Đặt vé xe khách</h2>
-                        </div>
                         <div class="bus-form-inner">
                           <div class="bus-input clearfix">
                             <div class="col-md-3">
                               <div class="field">
                                 <span class="field-label">Điểm đi</span>
                                 <div class="field-input">
-                                  <select name="" class="form-control">
-                                    <option value=""></option>
-                                  </select>
+                                  <select class="select-from" data-placeholder="Điểm đến">
+                                      <option value=""></option>
+                                      <option value="Hanoi">Hà Nội</option>
+                                      <option value="Saigon">Tp.Hồ Chí Minh</option>
+                                    </select>
                                 </div>
                               </div>
                             </div>
@@ -661,9 +651,11 @@
                               <div class="field">
                                 <span class="field-label">Điểm đến</span>
                                 <div class="field-input">
-                                  <select name="" class="form-control">
-                                    <option value=""></option>
-                                  </select>
+                                  <select class="select-to" data-placeholder="Điểm đến">
+                                      <option value=""></option>
+                                      <option value="Hanoi">Hà Nội</option>
+                                      <option value="Saigon">Tp.Hồ Chí Minh</option>
+                                    </select>
                                 </div>
                               </div>
                             </div>
@@ -686,7 +678,7 @@
                           </div>
                           <div class="col-md-12">
                             <div class="bus-submit text-right">
-                              <button type="button" class="btn">Tìm vé xe</button>
+                              <button type="button" class="btn btn-bus btn-search"><i class=" icon-search-2"></i> Tìm vé xe</button>
                             </div>
                           </div>
                         </div>
@@ -746,23 +738,13 @@
                           <span>4, Mar, 2016</span>
                         </div>
                         <div class="detail-news">
-                          <a href="#">m&ocirc; tả ngắn</a>
+                          <a href="#">Mô tả ngắn</a>
                         </div>
                       </div>
                     </div>
-                    <div class="clearfix">
-                      <a class="avatar-news" href="#"><img src="img/avatar-news-2.png"></a>
-                      <div class="content-news">
-                        <div class="create-date-news">
-                          <span><i class="fa fa-calendar"></i></span>
-                          <span>14, Mar, 2016</span>
-                        </div>
-                        <div class="detail-news">
-                          <a href="#">Chúng tôi rất tự hào trở thành đơn vị quảng cáo duy nhất tại Việt Nam cho hãng Truyền Thông Viên Thao</a>
-                        </div>
-                      </div>
+                    <div class="view-more text-right">
+                      <a href="#">View more <i class="fa fa-angle-double-right"></i></a>
                     </div>
-                    <a href="#">View more >></a>
                   </div>
                 </div>
               </div>
@@ -770,14 +752,46 @@
                 <div class="comment">
                   <div class="section-title">Khách hàng nói về chúng tôi</div>
                   <div class="border-title"></div>
-                  <div>
-                    <p>
-                      Dịch vụ đặt mua vé xe trực tuyến tại VeXeRe.com thật tuyệt vời, tôi thấy thậm chí đặt chỗ mua vé máy bay còn không được chọn chỗ ngồi như vậy. Bây giờ tôi không còn phải đi lại xếp hàng mua vé tại bến xe nữa, chỉ cần cầm mã vé qua SMS và email là đã có thể lên xe rồi. Cảm ơn VeXeRe.com.
-                    </p>
-                    <div class="text-center">
-                      <img src="img/avatar-news-1.png" alt="" style="width: 80px;">
-                      <h3>Phan Ngọc Minh Luân</h3>
-                      <span>Php Developer</span>
+                  <div class="owl-carousel customer-comment">
+                    <div class="item">
+                      <p>
+                        "Dịch vụ đặt mua vé xe trực tuyến tại VeXeRe.com thật tuyệt vời, tôi thấy thậm chí đặt chỗ mua vé máy bay còn không được chọn chỗ ngồi như vậy. Bây giờ tôi không còn phải đi lại xếp hàng mua vé tại bến xe nữa, chỉ cần cầm mã vé qua SMS và email là đã có thể lên xe rồi. Cảm ơn VeXeRe.com."
+                      </p>
+                      <div class="text-right">
+                        <h3><strong>Chị Hà Anh</strong> - <i>Hải Phòng</i></h3>
+                      </div>
+                    </div>
+                    <div class="item">
+                      <p>
+                        "Dịch vụ đặt mua vé xe trực tuyến tại VeXeRe.com thật tuyệt vời, tôi thấy thậm chí đặt chỗ mua vé máy bay còn không được chọn chỗ ngồi như vậy. Bây giờ tôi không còn phải đi lại xếp hàng mua vé tại bến xe nữa, chỉ cần cầm mã vé qua SMS và email là đã có thể lên xe rồi. Cảm ơn VeXeRe.com."
+                      </p>
+                      <div class="text-right">
+                        <h3><strong>Chị Hà Anh</strong> - <i>Hải Phòng</i></h3>
+                      </div>
+                    </div>
+                    <div class="item">
+                      <p>
+                        "Dịch vụ đặt mua vé xe trực tuyến tại VeXeRe.com thật tuyệt vời, tôi thấy thậm chí đặt chỗ mua vé máy bay còn không được chọn chỗ ngồi như vậy. Bây giờ tôi không còn phải đi lại xếp hàng mua vé tại bến xe nữa, chỉ cần cầm mã vé qua SMS và email là đã có thể lên xe rồi. Cảm ơn VeXeRe.com."
+                      </p>
+                      <div class="text-right">
+                        <h3><strong>Chị Hà Anh</strong> - <i>Hải Phòng</i></h3>
+                      </div>
+                    </div>
+                    <div class="item">
+                      <p>
+                        "Dịch vụ đặt mua vé xe trực tuyến tại VeXeRe.com thật tuyệt vời, tôi thấy thậm chí đặt chỗ mua vé máy bay còn không được chọn chỗ ngồi như vậy. Bây giờ tôi không còn phải đi lại xếp hàng mua vé tại bến xe nữa, chỉ cần cầm mã vé qua SMS và email là đã có thể lên xe rồi. Cảm ơn VeXeRe.com."
+                      </p>
+                      <div class="text-right">
+                        <h3><strong>Chị Hà Anh</strong> - <i>Hải Phòng</i></h3>
+                      </div>
+                    </div>
+                    <div class="item">
+                      <p>
+                        "Dịch vụ đặt mua vé xe trực tuyến tại VeXeRe.com thật tuyệt vời, tôi thấy thậm chí đặt chỗ mua vé máy bay còn không được chọn chỗ ngồi như vậy. Bây giờ tôi không còn phải đi lại xếp hàng mua vé tại bến xe nữa, chỉ cần cầm mã vé qua SMS và email là đã có thể lên xe rồi. Cảm ơn VeXeRe.com."
+                      </p>
+                      <div class="text-right">
+                        <h3><strong>Chị Hà Anh</strong> - <i>Hải Phòng</i></h3>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -1022,27 +1036,20 @@
   })
   </script>
   <!--end preloader-->
-  <script type='text/javascript' src='plugins/jquery-ui/jquery-ui.js'></script>
-  <script type='text/javascript' src='plugins/menu/superfish.min.js'></script>
-  <script type='text/javascript' src='plugins/menu/tinynav.min.js'></script>
-  <script type='text/javascript' src='plugins/nicescrool/jquery.nicescroll.min.js'></script>
-  <script type='text/javascript' src='js/settings.js'></script>
-  <script type='text/javascript' src='plugins/js-composer/js_composer_front.js'></script>
-  <script type='text/javascript' src='plugins/jquery-ui/core.min.js'></script>
-  <script type='text/javascript' src='plugins/jquery-ui/tabs.min.js'></script>
-  <script type='text/javascript' src='plugins/jquery-ui/jquery-ui-tabs-rotate.js'></script>
+  <script src='plugins/jquery-ui/jquery-ui.js'></script>
+  <script src='plugins/menu/superfish.min.js'></script>
+  <script src='plugins/menu/tinynav.min.js'></script>
+  <script src='plugins/nicescrool/jquery.nicescroll.min.js'></script>
+  <script src='js/settings.js'></script>
+  <script src='plugins/js-composer/js_composer_front.js'></script>
+  <script src='plugins/jquery-ui/core.min.js'></script>
+  <script src='plugins/jquery-ui/tabs.min.js'></script>
+  <script src='plugins/jquery-ui/jquery-ui-tabs-rotate.js'></script>
   <script src="plugins/bootstrap-3.3.7/js/bootstrap.min.js"></script>
   <script src="plugins/swiper/swiper.min.js"></script>
+  <script src="plugins/select2/js/select2.min.js"></script>
+  <script src="plugins/owl-carousel/owl.carousel.js"></script>
   <script src="js/script.js"></script>
-  <script>
-  var swiper = new Swiper('.swiper-container', {
-    slidesPerView: 'auto',
-    paginationClickable: true,
-    spaceBetween: 30,
-    autoplay: true,
-    speed: 5000
-  });
-  </script>
 </body>
 
 </html>
