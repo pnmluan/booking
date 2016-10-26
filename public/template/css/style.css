@@ -1,6 +1,6 @@
 /*start header*/
 .slowup{ margin-top: -35px; }
-.nicdark_logo img{ width: 133px; margin-top: 3px; }
+.nicdark_logo img{ width: 210px; margin-top: 3px; }
 /*end header*/
 
 
@@ -481,6 +481,10 @@ textarea:-moz-placeholder { color: #a9a9a9; }
 @font-face {font-family: 'diavlo'; src: url('../fonts/Diavlo_MEDIUM.otf');}
 @font-face {font-family: 'diavlo-book'; src: url('../fonts/Diavlo_BOOK.otf');}
 
+.form-control { border-radius: 2px; box-shadow: none; }
+.input-group-addon { border-radius: 2px; }
+.form-group { margin-bottom: 0px; }
+
 /***** INDEX *****/
 /*****************/
 .wpb_content_element .wpb_tour_tabs_wrapper .wpb_tabs_nav a { background: #E6E1DA; color: #333; font-family: 'diavlo-book';}
@@ -511,7 +515,7 @@ textarea:-moz-placeholder { color: #a9a9a9; }
 
 .multiple {}
 
-.bus-form { color: #fff; }
+.bus-form { }
 .bus-form .field { margin-bottom: 10px; }
 
 
@@ -686,3 +690,82 @@ ul.footerlist {padding-left:20px; list-style-image:url('../img/li.png');}
 ul.footerlist li{line-height:24px; }
 ul.footerlist li a{color:#fff; }
 ul.footerlist li a:hover{color:#0099cc; text-decoration:none;}
+
+
+.tp-caption a {
+color: #ff7302;
+text-shadow: none;
+-webkit-transition: all 0.2s ease-out;
+-moz-transition: all 0.2s ease-out;
+-o-transition: all 0.2s ease-out;
+-ms-transition: all 0.2s ease-out
+}
+.tp-caption a:hover {
+color: #ffa902
+}
+
+.vc_custom_1431681573399 {
+margin-top: -90px !important;
+}
+
+.vc_custom_1431683232904 {
+margin-top: 10px !important;
+}
+
+.vc_custom_1430753414602 {
+margin-bottom: 60px !important;
+}
+
+.vc_custom_1429020663398 {
+margin: 0px !important;
+border-width: 0px !important;
+padding: 0px !important;
+}
+
+.vc_custom_1431937582413 {
+margin-top: -165px !important;
+}
+
+.vc_custom_1430745958006 {
+margin: 0px !important;
+border-width: 0px !important;
+padding: 0px !important;
+}
+
+.vc_custom_1430753455786 {
+margin-top: 100px !important;
+margin-bottom: 100px !important;
+}
+
+.vc_custom_1431947118714 {
+padding-right: 0px !important;
+padding-left: 0px !important;
+}
+
+
+/***** LIST PLANE *****/
+/**********************/
+.list-plane {}
+.list-plane-inner { display: table; width: 100%; }
+.main-list-plane { display: table-cell; padding-right: 15px; }
+
+.aside-search-plane { display: table-cell; width: 280px; min-width: 260px; }
+.filter-plane { background: #f9f9f9; border: 1px solid #ddd; border-radius: 3px; margin-bottom: 20px; }
+.filter-plane-inner { padding: 10px; }
+.filter-plane-inner h3 { }
+
+.search-plane { border-radius: 4px; padding: 10px; background-image: url("../img/pattern_vang.svg"); background-repeat: repeat; background-color: #F8F3E7; margin-bottom: 20px; }
+.search-plane h2 { font-family: 'diavlo'; font-size: 20px; padding-bottom: 15px; background: url(../img/plane-icon.png) no-repeat 0px 0px; padding-left: 50px; padding-top: 5px; color: #649931; }
+.search-plane-inner { background: #fff; border-radius: 5px; padding: 10px; }
+.search-plane-inner .field { margin-bottom: 10px; }
+
+.field-date-go { width: 49%; float: left; }
+.field-date-back { width: 49%; float: right; }
+
+.field-1,
+.field-2,
+.field-3 { width: 32%; float: left; margin-right: 2%; }
+.field-3 { margin-right: 0px; }
+
+.field-date-go .input-group-addon,
+.field-date-back .input-group-addon{ padding: 6px; }
