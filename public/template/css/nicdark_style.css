@@ -205,7 +205,7 @@ select.big { font-size: 17px; padding: 15px 10%; }
 /*tab*/
 .wpb_tabs_nav a.title{ padding: 10px 20px !important; box-sizing: border-box; }
 /*color dark*/
-.nicdark_tab_dark .wpb_tabs_nav .ui-state-active a.title{ color: #fff !important; }
+.nicdark_tab_dark .wpb_tabs_nav .ui-state-active a.title{ color: #333 !important; }
 /*color default*/
 .wpb_content_element.wpb_tabs .wpb_tour_tabs_wrapper .wpb_tab{ background-color: #f9f9f9 !important; }
 .wpb_tabs_nav .ui-state-active a.title{ background-color: #f9f9f9 !important; color: #b7b7b7 !important; }
