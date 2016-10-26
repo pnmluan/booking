@@ -134,9 +134,9 @@ pre p{ font-family: monospace; font-size: 13px; line-height: 22px; }
 
 
 /* 8 - START NICDARKFORMELEMENTS*/
-input[type="text"], input[type="email"], input[type="url"], input[type="tel"], input[type="number"], input[type="date"], textarea{ border: 0; outline: 0; border: 1px solid #f1f1f1; font-size: 17px; width: 100%; padding: 10px 20px; margin: 10px 0px; box-sizing: border-box; color: #a4a4a4; font-size: 15px; }
-input[type="text"], input[type="email"], input[type="url"], input[type="tel"], input[type="number"], input[type="date"], textarea{ background-color: #f9f9f9; }
-input[type="submit"]{ height:45px; cursor: pointer; outline: 0; border: 0; padding: 10px 20px; font-size: 17px; color: #ffffff; display: inline-block; text-align: center; margin: 10px 0px; }
+// input[type="text"], input[type="email"], input[type="url"], input[type="tel"], input[type="number"], input[type="date"], textarea{ border: 0; outline: 0; border: 1px solid #f1f1f1; font-size: 17px; width: 100%; padding: 10px 20px; margin: 10px 0px; box-sizing: border-box; color: #a4a4a4; font-size: 15px; }
+// input[type="text"], input[type="email"], input[type="url"], input[type="tel"], input[type="number"], input[type="date"], textarea{ background-color: #f9f9f9; }
+// input[type="submit"]{ height:45px; cursor: pointer; outline: 0; border: 0; padding: 10px 20px; font-size: 17px; color: #ffffff; display: inline-block; text-align: center; margin: 10px 0px; }
 .wpcf7-select{ border: 0; outline: 0; box-shadow: 0px 4px 0px 0px #e5e5e5; border-radius: 5px; background-color: #f9f9f9; font-size: 17px; width: 100%; margin: 10px 0px; box-sizing: border-box; color: #a4a4a4; font-size: 15px; }
 .wpcf7-select option{ padding: 10px 20px; border-bottom: 1px solid #e5e5e5;}
 
