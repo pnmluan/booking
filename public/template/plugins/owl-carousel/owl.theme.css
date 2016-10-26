@@ -42,8 +42,8 @@
 }
 .owl-theme .owl-controls .owl-page span{
 	display: block;
-	width: 10px;
-	height: 10px;
+	width: 8px;
+	height: 8px;
 	margin: 5px;
 	filter: Alpha(Opacity=50);/*IE7 fix*/
 	opacity: 0.5;
@@ -57,6 +57,7 @@
 .owl-theme .owl-controls.clickable .owl-page:hover span{
 	filter: Alpha(Opacity=100);/*IE7 fix*/
 	opacity: 1;
+	background: #649931;
 }
 
 /* If PaginationNumbers is true */
