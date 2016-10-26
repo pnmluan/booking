@@ -4,11 +4,23 @@ Metronic AngularJS App Main Script
 
 /* Metronic App */
 var MetronicApp = angular.module("MetronicApp", [
+    "base64",
     "ui.router", 
     "ui.bootstrap", 
     "oc.lazyLoad",  
     "ngSanitize"
 ]); 
+
+/* Configure API */
+MetronicApp.config(['$httpProvider', '$base64', function($httpProvider, $base64) {
+    var auth = $base64.encode("datvesieure:balobooking");
+    $httpProvider.defaults.headers.common['Authorization'] = 'Basic ' + auth;
+}]);
+// MetronicApp.config(function($httpProvider, $base64) {
+//     var auth = $base64.encode("datvesieure:balobooking");
+//     $httpProvider.defaults.headers.common['Authorization'] = 'Basic ' + auth;
+// });
+
 
 /* Configure ocLazyLoader(refer: https://github.com/ocombe/ocLazyLoad) */
 MetronicApp.config(['$ocLazyLoadProvider', function($ocLazyLoadProvider) {
@@ -41,6 +53,7 @@ MetronicApp.factory('settings', ['$rootScope', function($rootScope) {
         assetsPath: '../assets',
         globalPath: '../assets/global',
         layoutPath: '../assets/layouts/layout',
+        apiPath: '/booking/public/api/v1/'
     };
 
     $rootScope.settings = settings;
@@ -106,7 +119,7 @@ MetronicApp.config(['$stateProvider', '$urlRouterProvider', function($stateProvi
 
     $stateProvider
 
-        // Dashboard
+        // Banner
         .state('banner', {
             url: "/banner.html",
             templateUrl: "views/banner.html",            
@@ -120,6 +133,27 @@ MetronicApp.config(['$stateProvider', '$urlRouterProvider', function($stateProvi
                         files: [
                             '../assets/global/plugins/dropzone/dropzone.min.js',
                             'js/controllers/BannerController.js',
+                        ] 
+                    });
+                }]
+            }
+        })
+
+        // Banner
+        .state('comment', {
+            url: "/comment.html",
+            templateUrl: "views/comment.html",            
+            data: {pageTitle: 'Admin Comment Template'},
+            controller: "CommentController",
+            resolve: {
+                deps: ['$ocLazyLoad', function($ocLazyLoad) {
+                    return $ocLazyLoad.load({
+                        name: 'MetronicApp',
+                        insertBefore: '#ng_load_plugins_before', // load the above css files before a LINK element with this ID. Dynamic CSS files must be loaded between core and theme css files
+                        files: [
+                            '../assets/global/plugins/dropzone/dropzone.min.js',
+                            'js/controllers/CommentController.js',
+                            'js/services/comment.service.js'
                         ] 
                     });
                 }]

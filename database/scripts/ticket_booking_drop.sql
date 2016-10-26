@@ -1,5 +1,5 @@
 -- Created by Vertabelo (http://vertabelo.com)
--- Last modification date: 2016-10-23 12:16:30.854
+-- Last modification date: 2016-10-25 03:20:27.47
 
 -- foreign keys
 ALTER TABLE baggage_type
@@ -9,7 +9,7 @@ ALTER TABLE booking
     DROP FOREIGN KEY booking_ticket_type;
 
 ALTER TABLE bus_route
-    DROP FOREIGN KEY bus_info_bus_type;
+    DROP FOREIGN KEY bus_route_ticket_type;
 
 ALTER TABLE contact
     DROP FOREIGN KEY contact_booking;
@@ -45,8 +45,6 @@ DROP TABLE booking;
 DROP TABLE booking_detail;
 
 DROP TABLE bus_route;
-
-DROP TABLE bus_type;
 
 DROP TABLE comment;
 
