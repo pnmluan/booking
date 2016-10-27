@@ -668,8 +668,8 @@ textarea:-moz-placeholder { color: #a9a9a9; }
 .footer { background: #649931; color:#fff; font-size:14px; }
 .footerbg{  background: #649931; width:100%; padding:60px 0 40px 0; overflow:hidden;}
 .footerbg2{width:100%; background:#f2f2f2;padding:10px 0; overflow:hidden; color: #999;}
-.footerbg2 a { color:#666; font-size: 13px; }
-.footerbg2 a:hover{ color:#0099cc; text-decoration:none; }
+.footerbg2 a { color:#666 !important; font-size: 13px; }
+.footerbg2 a:hover{ color:#F69E1C !important; text-decoration:none; }
 
 .footer p { color: #fff; }
 .ftitle {
@@ -776,6 +776,7 @@ padding-left: 0px !important;
 .list-plane-table table { border-left: 1px solid #ddd; border-right: 1px solid #ddd; border-bottom: 1px solid #ddd; }
 .list-plane-table table tr th { background: #CECECE; padding-top: 10px; }
 .list-plane-table table tr td { vertical-align: middle; }
+.table-hover > tbody > tr:hover { background-color: #F8F3E7; }
 
 .list-plane-table .plane-id { background: url(../img/icon-plane.png) no-repeat 0px 0px; padding-left: 25px; font-weight: bold; }
 .list-plane-table .city { color: #666; }
@@ -786,13 +787,6 @@ padding-left: 0px !important;
 .submit-plane {height: 60px; padding: 10px 15px; }
 .submit-plane button { float: right; height: 40px; border-radius: 5px; padding: 0px 30px; border: 0px; outline: 0px; text-transform: uppercase; background: #E44803; color: #fff; font-family: 'diavlo'; }
 .submit-plane button:hover { background: #D65800; }
-
-
-
-
-
-
-
 
 .aside-search-plane { display: table-cell; width: 280px; min-width: 260px; font-size: 13px; }
 .filter-plane { background: #f9f9f9; border: 1px solid #ddd; border-radius: 3px; margin-bottom: 20px; }
@@ -832,3 +826,42 @@ padding-left: 0px !important;
 
 .field-date-go .input-group-addon,
 .field-date-back .input-group-addon{ padding: 6px; }
+
+/***** CUSTOMER *****/
+/********************/
+.customer {}
+.customer-inner { display: table; width: 100%; }
+.customer-info { display: table-cell; padding-right: 15px; font-size: 13px; }
+// .customer-info p { line-height: 20px; }
+.customer-title { font-size: 20px; color: #649931; border-bottom: 1px solid #ddd; padding-bottom: 5px; margin-bottom: 10px; font-weight: bold; }
+
+.price-condition .field,
+.luggage-info .field { margin-bottom: 5px; }
+.price-condition .field label,
+.luggage-info .field label { font-weight: bold; width: 200px; float: left; }
+.price-condition .field > div,
+.luggage-info .field > div { overflow: hidden; }
+.luggage-info .field label { font-weight: normal; }
+.customer-title-1 { font-weight: bold; margin-bottom: 5px; }
+.luggage-info p span { float: left; margin-right: 10px;}
+.luggage-info p select { border: 1px solid #ddd; float: left; display: inline-block; width: auto; height: 28px; padding: 0px 5px; }
+.customer-info .form-control { height: 28px; padding: 0px 5px; }
+
+
+
+
+
+
+.aside-price-detail{ display: table-cell; width: 280px; min-width: 260px; font-size: 13px; }
+.price-detail { padding: 15px 10px; background: #649931; color: #fff; border-radius: 3px; }
+.price-detail h2 { font-size: 18px; font-family: 'diavlo'; border-bottom: 1px solid rgba(255, 255, 255, 0.2); padding-bottom: 10px; color: #fbba00; }
+.price-detail h3 { font-size: 13px; font-family: 'diavlo'; margin-bottom: 5px; color: #fbba00; margin-top: 10px; font-size: 14px; }
+.price-detail > div { border-bottom: 1px solid rgba(255, 255, 255, 0.2); padding-bottom: 10px; padding-top: 10px; }
+.price-detail > div h3:first-child { margin-top: 0px; }
+.price-detail > div:first-child { padding-top: 0px; }
+.price-detail > div:last-child{ padding-bottom: 0px; border-bottom: 0px;}
+.price-detail table { width: 100%; }
+.price-detail table td { padding: 2px 0px; }
+.price-detail table td:last-child { text-align: right; }
+.price-detail .sale-off { font-size: 13px; font-family: 'diavlo'; color: #fbba00; }
+.price-detail table td strong { font-size: 14px; }
