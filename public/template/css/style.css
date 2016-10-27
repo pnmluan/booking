@@ -544,7 +544,7 @@ textarea:-moz-placeholder { color: #a9a9a9; }
 .list-news > div .content-news .detail-news a { color: #333; }
 .list-news > div .content-news .detail-news a:hover { color: #649931; }
 
-.btn-search { background: #F69E1C; font-family: 'diavlo'; text-transform: uppercase; }
+.btn-search { background: #E44803; font-family: 'diavlo'; text-transform: uppercase; }
 .btn-search:hover { background: #D65800; color: #fff; }
 
 @keyframes blinker {
@@ -565,7 +565,8 @@ textarea:-moz-placeholder { color: #a9a9a9; }
 .owl-carousel .item > div:first-child { margin-bottom: 30px; }
 .owl-carousel .item > div:last-child {  border-left: 2px solid #649931; }
 .owl-carousel .item img { width: 60px; display: block; margin-right: 15px; border-radius: 50%; float: left; border: 2px solid #fff; }
-.owl-carousel .item .text { overflow: hidden;   }
+.owl-carousel .item .text { overflow: hidden; }
+.owl-carousel .item .text i { position: relative; top: -4px; color: #999; font-size: 11px;}
 
 
 /***** SERVICE METHOD *****/
@@ -749,15 +750,77 @@ padding-left: 0px !important;
 .list-plane-inner { display: table; width: 100%; }
 .main-list-plane { display: table-cell; padding-right: 15px; }
 
-.aside-search-plane { display: table-cell; width: 280px; min-width: 260px; }
+.list-plane-title { }
+.list-plane-title h1 { font-size: 25px; text-transform: uppercase; font-weight: bold; color: #649931; margin-bottom: 5px; }
+.list-plane-title h1 span { color: #333; text-transform: lowercase; font-size: 18px; font-weight: bold; color: #E44803; }
+.list-plane-title h2 { margin-bottom: 10px; color: #E44803; font-size: 20px;  font-weight: bold; }
+.list-plane-title h2 span { color: #649931; font-style: italic; font-weight: bold; font-size: 16px; text-decoration: underline; }
+.list-plane-title h3 { color: red; font-size: 15px; font-style: italic;  margin-bottom: 20px; font-weight: bold; }
+
+.list-plane-date {}
+.list-plane-date ul { border: 1px solid #ddd; border-bottom: 0px; }
+.list-plane-date ul li { float: left; width: 14.28%; text-align: center; border-right: 1px solid #ddd; padding: 10px 0px; cursor: pointer; }
+.list-plane-date ul li:hover { color: #E44803; }
+.list-plane-date ul li:last-child { border-right: 0px; }
+.list-plane-date ul li.current {
+    color: #E44803;
+    background: #fff; /* For browsers that do not support gradients */
+    background: -webkit-linear-gradient(#fff, #ccc); /* For Safari 5.1 to 6.0 */
+    background: -o-linear-gradient(#fff, #ccc); /* For Opera 11.1 to 12.0 */
+    background: -moz-linear-gradient(#fff, #ccc); /* For Firefox 3.6 to 15 */
+    background: linear-gradient(#fff, #ccc); /* Standard syntax */
+}
+.list-plane-date ul li.off { cursor: not-allowed; color: #ccc; }
+.list-plane-date ul li.off:hover { color: #ccc; }
+
+.list-plane-table table { border-left: 1px solid #ddd; border-right: 1px solid #ddd; border-bottom: 1px solid #ddd; }
+.list-plane-table table tr th { background: #CECECE; padding-top: 10px; }
+.list-plane-table table tr td { vertical-align: middle; }
+
+.list-plane-table .plane-id { background: url(../img/icon-plane.png) no-repeat 0px 0px; padding-left: 25px; font-weight: bold; }
+.list-plane-table .city { color: #666; }
+.list-plane-table .time { font-weight: bold; color: #E44803; }
+.list-plane-table .plane-price { color: #E44803; font-size: 20px; font-weight: bold; }
+.list-plane-table .plane-price span { font-weight: bold; color: #666; font-size: 14px; }
+
+.submit-plane {height: 60px; padding: 10px 15px; }
+.submit-plane button { float: right; height: 40px; border-radius: 5px; padding: 0px 30px; border: 0px; outline: 0px; text-transform: uppercase; background: #E44803; color: #fff; font-family: 'diavlo'; }
+.submit-plane button:hover { background: #D65800; }
+
+
+
+
+
+
+
+
+.aside-search-plane { display: table-cell; width: 280px; min-width: 260px; font-size: 13px; }
 .filter-plane { background: #f9f9f9; border: 1px solid #ddd; border-radius: 3px; margin-bottom: 20px; }
-.filter-plane-inner { padding: 10px; }
-.filter-plane-inner h3 { }
+.filter-plane h2 { font-family: 'diavlo'; font-size: 20px; padding-bottom: 10px; padding-left: 50px; padding-top: 7px; color: #649931; position: relative;
+    background: #fff; /* For browsers that do not support gradients */
+    background: -webkit-linear-gradient(#fff, #ccc); /* For Safari 5.1 to 6.0 */
+    background: -o-linear-gradient(#fff, #ccc); /* For Opera 11.1 to 12.0 */
+    background: -moz-linear-gradient(#fff, #ccc); /* For Firefox 3.6 to 15 */
+    background: linear-gradient(#fff, #ccc); /* Standard syntax */
+}
+.filter-plane h2::before { content: ""; display: inline-block; width: 41px; height: 37px; background: url(../img/plane-icon.png) no-repeat 0px 0px; position: absolute; top: 2px; left: 5px; }
+.filter-plane-inner { padding: 10px 8px; }
+.filter-plane-inner h3 { font-size: 18px; font-family: 'diavlo'; color: #649931; margin-top: 10px; }
+.filter-plane-inner h3 i { font-size: 14px; }
+.filter-plane-inner .box { border: 1px solid #ddd; border-radius: 4px; padding: 0px 7px; background: #fff; margin-top: 10px; }
+.filter-plane-inner .box table { width: 100%; margin-top: 10px; }
+.filter-plane-inner .box table td:last-child { text-align: right; }
+.filter-plane-inner .box table tr:first-child td:first-child { font-weight: bold; }
+.filter-plane-inner .box table tr a { color: #649931; }
+.filter-plane-inner .box table tr a:hover { color: #F69E1C; }
 
 .search-plane { border-radius: 4px; padding: 10px; background-image: url("../img/pattern_vang.svg"); background-repeat: repeat; background-color: #F8F3E7; margin-bottom: 20px; }
 .search-plane h2 { font-family: 'diavlo'; font-size: 20px; padding-bottom: 15px; background: url(../img/plane-icon.png) no-repeat 0px 0px; padding-left: 50px; padding-top: 5px; color: #649931; }
 .search-plane-inner { background: #fff; border-radius: 5px; padding: 10px; }
 .search-plane-inner .field { margin-bottom: 10px; }
+.search-plane-inner .field:first-child { font-family: 'diavlo'; }
+.search-plane-inner .field:last-child button { color: #fff; }
+
 
 .field-date-go { width: 49%; float: left; }
 .field-date-back { width: 49%; float: right; }
