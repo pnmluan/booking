@@ -683,13 +683,13 @@ textarea:-moz-placeholder { color: #a9a9a9; }
     font-weight: 400;
 }
 
-.footer a{ font-size:14px; font-weight:normal;  -webkit-transition:.3s;-moz-transition:.3s;transition:.3s}
-.footer a:hover{ color:#72BF66; font-size:14px; font-weight:normal; text-decoration:none;}
+.footer a{ color: #F69E1C; font-size:14px; font-weight:normal;  -webkit-transition:.3s;-moz-transition:.3s;transition:.3s}
+.footer a:hover{ font-size:14px; font-weight:normal; text-decoration:none;}
 
 ul.footerlist {padding-left:20px; list-style-image:url('../img/li.png');}
 ul.footerlist li{line-height:24px; }
 ul.footerlist li a{color:#fff; }
-ul.footerlist li a:hover{color:#0099cc; text-decoration:none;}
+ul.footerlist li a:hover{color:#F69E1C; text-decoration:none;}
 
 
 .tp-caption a {
