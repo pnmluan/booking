@@ -8,17 +8,7 @@
   <link href='http://fonts.googleapis.com/css?family=Open+Sans:700,400,300,300italic' rel='stylesheet' type='text/css'>
   <link rel='stylesheet' href='plugins/rs-plugin/settings.css' type='text/css' media='all' />
   <style id='rs-plugin-settings-inline-css' type='text/css'>
-  .tp-caption a {
-    color: #ff7302;
-    text-shadow: none;
-    -webkit-transition: all 0.2s ease-out;
-    -moz-transition: all 0.2s ease-out;
-    -o-transition: all 0.2s ease-out;
-    -ms-transition: all 0.2s ease-out
-  }
-  .tp-caption a:hover {
-    color: #ffa902
-  }
+
   </style>
   <link rel='stylesheet' href='css/styles.css' />
   <link rel='stylesheet' href='css/nicdark_responsive.css' />
@@ -31,6 +21,7 @@
   <link rel="stylesheet" href="plugins/owl-carousel/owl.carousel.css">
   <link rel="stylesheet" href="plugins/owl-carousel/owl.theme.css">
   <link rel="stylesheet" href="plugins/owl-carousel/owl.transitions.css">
+  <link rel="stylesheet" href="plugins/datetimepicker/css/bootstrap-datetimepicker.min.css">
   <link rel="stylesheet" href="css/reset.css">
   <link rel="stylesheet" href="css/style.css">
 
@@ -40,45 +31,6 @@
   <!--[if IE 8]>
   <link rel="stylesheet" type="text/css" href="http://www.nicdarkthemes.com/themes/love-travel/wp/demo-travel/wp-content/plugins/js_composer/assets/css/vc-ie8.css" media="screen">
   <![endif]-->
-  <style type="text/css" data-type="vc_shortcodes-custom-css">
-  .vc_custom_1431681573399 {
-    margin-top: -90px !important;
-  }
-
-  .vc_custom_1431683232904 {
-    margin-top: 10px !important;
-  }
-
-  .vc_custom_1430753414602 {
-    margin-bottom: 60px !important;
-  }
-
-  .vc_custom_1429020663398 {
-    margin: 0px !important;
-    border-width: 0px !important;
-    padding: 0px !important;
-  }
-
-  .vc_custom_1431937582413 {
-    margin-top: -167px !important;
-  }
-
-  .vc_custom_1430745958006 {
-    margin: 0px !important;
-    border-width: 0px !important;
-    padding: 0px !important;
-  }
-
-  .vc_custom_1430753455786 {
-    margin-top: 100px !important;
-    margin-bottom: 100px !important;
-  }
-
-  .vc_custom_1431947118714 {
-    padding-right: 0px !important;
-    padding-left: 0px !important;
-  }
-  </style>
 </head>
 
 <body>
@@ -146,7 +98,7 @@
         </div>
       </div>
       <!--start header parallax image-->
-      <div class="nicdark_space160"></div>
+      <div class="nicdark_space130"></div>
       <!--end header parallax image-->
       <!--FULL WIDTH PAGE-->
       <!--#post-->
@@ -491,7 +443,7 @@
         <!-- slider -->
         <section class="nicdark_section vc_row wpb_row vc_row-fluid">
           <div class="nicdark_container nicdark_vc nicdark_clearfix">
-            <div class="vc_col-sm-12 nicdark_upper_level1 wpb_column vc_column_container  vc_custom_1431937582413">
+            <div class="vc_col-sm-12 nicdark_upper_level1 wpb_column vc_column_container vc_custom_1431937582413">
               <div class="wpb_wrapper">
                 <div class="vc_empty_space  nicdark_displaynone_desktop nicdark_displayblock_iphonepotr nicdark_displayblock_iphoneland" style="height: 162px">
                   <span class="vc_empty_space_inner"></span>
@@ -511,14 +463,14 @@
                         <div class="plane-form-inner">
                           <div class="col-md-12">
                             <div class="plane-option clearfix">
-                              <label class="radio-inline">
-                                <input type="radio" name="plane-option" id="one-way" value="option1"> Khứ hồi
+                              <label class="radio-inline radio-plane">
+                                <input class="plane-option" type="radio" name="plane-option" id="one-way" value="option1" checked> Một chiều
                               </label>
-                              <label class="radio-inline">
-                                <input type="radio" name="plane-option" id="round-trip" value="option2"> Một chiều
+                              <label class="radio-inline radio-plane">
+                                <input class="plane-option" type="radio" name="plane-option" id="round-trip" value="option2"> Khứ hồi
                               </label>
-                              <label class="radio-inline">
-                                <input type="radio" name="plane-option" id="multiple" value="option3"> Nhiều chặng
+                              <label class="radio-inline radio-plane">
+                                <input class="plane-option" type="radio" name="plane-option" id="multiple" value="option3"> Nhiều chặng
                               </label>
                             </div>
                           </div>
@@ -552,7 +504,14 @@
                                 <div class="field">
                                   <span class="field-label">Ngày đi</span>
                                   <div class="field-input">
-                                    <input type="datetime" name="" value="" placeholder="" class="form-control">
+                                    <div class="form-group">
+                                      <div class='input-group date' id='date-go'>
+                                        <input type='text' class="form-control" />
+                                        <span class="input-group-addon">
+                                          <span class="glyphicon glyphicon-calendar"></span>
+                                        </span>
+                                      </div>
+                                    </div>
                                   </div>
                                 </div>
                               </div>
@@ -560,7 +519,14 @@
                                 <div class="field">
                                   <span class="field-label">Ngày về</span>
                                   <div class="field-input">
-                                    <input type="datetime" name="" value="" placeholder="" class="form-control">
+                                    <div class="form-group">
+                                      <div class='input-group date' id='date-back'>
+                                        <input type='text' class="form-control" />
+                                        <span class="input-group-addon">
+                                          <span class="glyphicon glyphicon-calendar"></span>
+                                        </span>
+                                      </div>
+                                    </div>
                                   </div>
                                 </div>
                               </div>
@@ -663,7 +629,14 @@
                               <div class="field">
                                 <span class="field-label">Ngày đi</span>
                                 <div class="field-input">
-                                  <input type="datetime" name="" value="" placeholder="" class="form-control">
+                                  <div class="form-group">
+                                    <div class='input-group date' id='date-go'>
+                                      <input type='text' class="form-control" />
+                                      <span class="input-group-addon">
+                                        <span class="glyphicon glyphicon-calendar"></span>
+                                      </span>
+                                    </div>
+                                  </div>
                                 </div>
                               </div>
                             </div>
@@ -754,6 +727,22 @@
                         </div>
                       </div>
                     </div>
+                    <div class="clearfix">
+                      <a class="avatar-news" href="#"><img src="img/jetstar.gif"></a>
+                      <div class="content-news">
+                        <!-- <div class="create-date-news">
+                          <span><i class="fa fa-calendar"></i></span>
+                          <span>14, Mar, 2016</span>
+                        </div> -->
+                        <div class="detail-news">
+                          <a href="#">Chúng tôi rất tự hào trở thành đơn vị quảng cáo duy nhất tại Việt Nam cho hãng Truyền Thông Viên Thao</a> -
+                          <i>
+                            <span><i class="fa fa-calendar"></i></span>
+                            <span>14, Mar, 2016 </span>
+                          </i>
+                        </div>
+                      </div>
+                    </div>
                     <div class="view-more text-right">
                       <a href="#">View more <i class="fa fa-angle-double-right"></i></a>
                     </div>
@@ -769,11 +758,42 @@
                       <div>
                         <img src="img/avatar.jpg" alt="">
                         <div class="text">
-                          <p>
-                            "Dịch vụ đặt mua vé xe trực tuyến tại VeXeRe.com thật tuyệt vời, tôi thấy thậm chí đặt chỗ mua vé máy bay còn không được chọn chỗ ngồi như vậy. Bây giờ tôi không còn phải đi lại xếp hàng mua vé tại bến xe nữa, chỉ cần cầm mã vé qua SMS và email là đã có thể lên xe rồi. Cảm ơn VeXeRe.com."
+                          <p><i class="fa fa-quote-left" aria-hidden="true"></i>&nbsp;Dịch vụ đặt mua vé xe trực tuyến tại VeXeRe.com thật tuyệt vời, tôi thấy thậm chí đặt chỗ mua vé máy bay còn không được chọn chỗ ngồi như vậy. Bây giờ tôi không còn phải đi lại xếp hàng mua vé tại bến xe nữa.&nbsp;<i class="fa fa-quote-right" aria-hidden="true"></i>
                           </p>
                           <div class="text-right">
                             <h3><strong>Chị Hà Anh</strong> - <i>Hải Phòng</i></h3>
+                          </div>
+                        </div>
+                      </div>
+                      <div>
+                        <img src="img/bb.jpg" alt="">
+                        <div class="text">
+                          <p><i class="fa fa-quote-left" aria-hidden="true"></i>&nbsp;Dịch vụ đặt mua vé xe trực tuyến tại VeXeRe.com thật tuyệt vời, tôi thấy thậm chí đặt chỗ mua vé máy bay còn không được chọn chỗ ngồi như vậy. Bây giờ tôi không còn phải đi lại xếp hàng mua vé tại bến xe nữa.&nbsp;<i class="fa fa-quote-right" aria-hidden="true"></i>
+                          </p>
+                          <div class="text-right">
+                            <h3><strong>Chị Kim Liên</strong> - <i>Hà Nội</i></h3>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="item">
+                      <div>
+                        <img src="img/bb.jpg" alt="">
+                        <div class="text">
+                          <p><i class="fa fa-quote-left" aria-hidden="true"></i>&nbsp;Dịch vụ đặt mua vé xe trực tuyến tại VeXeRe.com thật tuyệt vời, tôi thấy thậm chí đặt chỗ mua vé máy bay còn không được chọn chỗ ngồi như vậy. Bây giờ tôi không còn phải đi lại xếp hàng mua vé tại bến xe nữa.&nbsp;<i class="fa fa-quote-right" aria-hidden="true"></i>
+                          </p>
+                          <div class="text-right">
+                            <h3><strong>Chị Hà Em</strong> - <i>Hải Phòng</i></h3>
+                          </div>
+                        </div>
+                      </div>
+                      <div>
+                        <img src="img/avatar.jpg" alt="">
+                        <div class="text">
+                          <p><i class="fa fa-quote-left" aria-hidden="true"></i>&nbsp;Dịch vụ đặt mua vé xe trực tuyến tại VeXeRe.com thật tuyệt vời, tôi thấy thậm chí đặt chỗ mua vé máy bay còn không được chọn chỗ ngồi như vậy. Bây giờ tôi không còn phải đi lại xếp hàng mua vé tại bến xe nữa.&nbsp;<i class="fa fa-quote-right" aria-hidden="true"></i>
+                          </p>
+                          <div class="text-right">
+                            <h3><strong>Chị Hà Anh Văn</strong> - <i>Hải Phòng</i></h3>
                           </div>
                         </div>
                       </div>
@@ -782,24 +802,20 @@
                       <div>
                         <img src="img/avatar.jpg" alt="">
                         <div class="text">
-                          <p>
-                            "Dịch vụ đặt mua vé xe trực tuyến tại VeXeRe.com thật tuyệt vời, tôi thấy thậm chí đặt chỗ mua vé máy bay còn không được chọn chỗ ngồi như vậy. Bây giờ tôi không còn phải đi lại xếp hàng mua vé tại bến xe nữa, chỉ cần cầm mã vé qua SMS và email là đã có thể lên xe rồi. Cảm ơn VeXeRe.com."
+                          <p><i class="fa fa-quote-left" aria-hidden="true"></i>&nbsp;Dịch vụ đặt mua vé xe trực tuyến tại VeXeRe.com thật tuyệt vời, tôi thấy thậm chí đặt chỗ mua vé máy bay còn không được chọn chỗ ngồi như vậy. Bây giờ tôi không còn phải đi lại xếp hàng mua vé tại bến xe nữa.&nbsp;<i class="fa fa-quote-right" aria-hidden="true"></i>
                           </p>
                           <div class="text-right">
-                            <h3><strong>Chị Hà Anh</strong> - <i>Hải Phòng</i></h3>
+                            <h3><strong>Chị Anh Anh Tú</strong> - <i>Tp.Hồ Chí Minh</i></h3>
                           </div>
                         </div>
                       </div>
-                    </div>
-                    <div class="item">
                       <div>
-                        <img src="img/avatar.jpg" alt="">
+                        <img src="img/bb.jpg" alt="">
                         <div class="text">
-                          <p>
-                            "Dịch vụ đặt mua vé xe trực tuyến tại VeXeRe.com thật tuyệt vời, tôi thấy thậm chí đặt chỗ mua vé máy bay còn không được chọn chỗ ngồi như vậy. Bây giờ tôi không còn phải đi lại xếp hàng mua vé tại bến xe nữa, chỉ cần cầm mã vé qua SMS và email là đã có thể lên xe rồi. Cảm ơn VeXeRe.com."
+                          <p><i class="fa fa-quote-left" aria-hidden="true"></i>&nbsp;Dịch vụ đặt mua vé xe trực tuyến tại VeXeRe.com thật tuyệt vời, tôi thấy thậm chí đặt chỗ mua vé máy bay còn không được chọn chỗ ngồi như vậy. Bây giờ tôi không còn phải đi lại xếp hàng mua vé tại bến xe nữa.&nbsp;<i class="fa fa-quote-right" aria-hidden="true"></i>
                           </p>
                           <div class="text-right">
-                            <h3><strong>Chị Hà Anh</strong> - <i>Hải Phòng</i></h3>
+                            <h3><strong>Anh Hà Văn Thành</strong> - <i>Hải Dương</i></h3>
                           </div>
                         </div>
                       </div>
@@ -1053,6 +1069,8 @@
   <script src="plugins/swiper/swiper.min.js"></script>
   <script src="plugins/select2/js/select2.min.js"></script>
   <script src="plugins/owl-carousel/owl.carousel.js"></script>
+  <script src="plugins/moment.js"></script>
+  <script src="plugins/datetimepicker/js/bootstrap-datetimepicker.min.js"></script>
   <script src="js/script.js"></script>
 </body>
 
