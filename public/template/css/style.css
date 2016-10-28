@@ -779,6 +779,7 @@ ul.footerlist li a:hover{color:#F69E1C; text-decoration:none;}
 .luggage-info .field label { font-weight: bold; width: 200px; float: left; }
 .price-condition .field > div,
 .luggage-info .field > div { overflow: hidden; }
+.luggage-info .field > div p { margin-bottom: 10px; }
 .luggage-info .field label { font-weight: normal; }
 .customer-title-1 { font-weight: bold; margin-bottom: 5px; }
 .luggage-info p span { float: left; margin-right: 10px;}
@@ -787,13 +788,18 @@ ul.footerlist li a:hover{color:#F69E1C; text-decoration:none;}
 
 .people-info { margin-bottom: 25px; }
 .people-info-inner {}
-.people-info-inner .item { float: left; }
-.people-info-inner .item:first-child { width: 90px; }
-.people-info-inner .item:nth-child(2) { width: 80px; }
-.people-info-inner .item:last-child { width: calc(100% - 170px); padding-left: 10px; }
-.people-info-inner .item:last-child input { max-width: 300px; }
-.people-info-inner .item label { margin-bottom: 3px; font-weight: bold; }
+.people-info-inner .item { width: 100%; height: 33px; }
+.people-info-inner .item label { margin-bottom: 3px; font-weight: bold; float: left; width: 90px; }
 .people-info-inner .item label span { color: red; }
+.people-info-inner .item p { float: left; }
+.people-info-inner .item p input { width: 300px; }
+
+.tbl-people-info td { padding: 5px 0px; }
+.tbl-people-info span { color: red; }
+.tbl-people-info th:first-child { width: 90px; }
+.tbl-people-info th:nth-child(2) { width: 80px; }
+.tbl-people-info th:last-child { width: 310px; padding-left: 10px; }
+.tbl-people-info td:last-child { width: 310px; padding-left: 10px; }
 
 .contact-info { margin-bottom: 20px;  }
 .contact-info-inner > p span { color: red; }
@@ -802,9 +808,9 @@ ul.footerlist li a:hover{color:#F69E1C; text-decoration:none;}
 .contact-info-field .field { margin-bottom: 7px; }
 .contact-info-field .field label { font-weight: bold; margin-bottom: 3px; }
 .contact-info-field .field:first-child {}
-.contact-info-field .field:first-child label { float: left; margin-right: 10px; padding-top: 3px; }
+// .contact-info-field .field:first-child label { float: left; margin-right: 10px; padding-top: 3px; }
 .contact-info-field .field:first-child > div { overflow: hidden; }
-.contact-info-field .field:first-child > div input { width: 300px; display: inline-block; }
+// .contact-info-field .field:first-child > div input { width: 324px; display: inline-block; }
 .contact-info-field .field.even { width: 49%; float: left; margin-right: 2%; }
 .contact-info-field .field.odd { width: 49%; float: right; }
 .contact-info-field .field.field-name > div:first-child { width: 80px; float: left; }
