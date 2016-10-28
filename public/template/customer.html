@@ -102,6 +102,14 @@
       <!--FULL WIDTH PAGE-->
       <!--#post-->
       <div style="float:left; width:100%;" id="post-32" class="post-32 page type-page status-publish hentry">
+        <section class="steps">
+          <ul class="progressbar">
+            <li class="active">Tìm chuyến bay</li>
+            <li class="active">Khách hàng</li>
+            <li>Thanh toán</li>
+            <li>Xác nhận</li>
+          </ul>
+        </section>
         <section class="customer">
           <div class="container clearfix">
             <div class="customer-inner">
@@ -109,8 +117,103 @@
                 <div class="customer-info-inner">
                   <div class="flight-info">
                     <h2 class="customer-title">Thông tin chuyến bay </h2>
-                    <div>
-
+                    <div class="flight-info-inner">
+                      <div class="main-info clearfix">
+                        <div class="field">
+                          <label>Chuyến bay :</label>
+                          <div>
+                            Khứ hồi
+                          </div>
+                        </div>
+                        <div class="field">
+                          <label>Số lượng hành khách :</label>
+                          <div>
+                            1 Người lớn
+                          </div>
+                        </div>
+                        <div class="field">
+                          <label>Ngày xuất phát: </label>
+                          <div>
+                            25/01/2017
+                          </div>
+                        </div>
+                        <div class="field">
+                          <label>Ngày về: </label>
+                          <div>
+                            27/01/2017
+                          </div>
+                        </div>
+                      </div>
+                      <div class="flight-go flight-go-back">
+                        <div class="flight-title clearfix">
+                          <div class="field">
+                            <label>Khởi hành từ :</label>
+                            <div>
+                              Ho Chi Minh City ,Viet nam
+                            </div>
+                          </div>
+                          <div class="field">
+                            <label>Thời gian :</label>
+                            <div>
+                              02h + 05m
+                            </div>
+                          </div>
+                        </div>
+                        <div class="content clearfix">
+                          <div class="content-img">
+                            <img src="img/smVJ.gif" alt="">
+                          </div>
+                          <div class="content-info clearfix">
+                            <div class="field">
+                              <p>Từ :<strong>Thành phố Hồ Chí Minh</strong> (SGN)</p>
+                              <p><strong>19:40</strong>, 25/01/2017</p>
+                            </div>
+                            <div class="field">
+                              <p>tới : <strong>Hà Nội</strong> (HAN)</p>
+                              <p><strong>21:45</strong>, 25/01/2017</p>
+                            </div>
+                            <div class="field">
+                              <p>Vietjet Air <strong>(VJ 160)</strong></p>
+                              <p>Loại vé :<strong> Tiết kiệm </strong></p>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="flight-back flight-go-back">
+                        <div class="flight-title clearfix">
+                          <div class="field">
+                            <label>Khởi hành từ: </label>
+                            <div>
+                               Ho Chi Minh City ,Viet nam
+                            </div>
+                          </div>
+                          <div class="field">
+                            <label>Thời gian :</label>
+                            <div>
+                              02h + 05m
+                            </div>
+                          </div>
+                        </div>
+                        <div class="content clearfix">
+                          <div class="content-img">
+                            <img src="img/smVN.gif" alt="">
+                          </div>
+                          <div class="content-info clearfix">
+                            <div class="field">
+                              <p>Từ :<strong>Thành phố Hồ Chí Minh</strong> (SGN)</p>
+                              <p><strong>19:40</strong>, 25/01/2017</p>
+                            </div>
+                            <div class="field">
+                              <p>tới : <strong>Hà Nội</strong> (HAN)</p>
+                              <p><strong>21:45</strong>, 25/01/2017</p>
+                            </div>
+                            <div class="field">
+                              <p>Vietjet Air <strong>(VJ 160)</strong></p>
+                              <p>Loại vé :<strong> Tiết kiệm </strong></p>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
                     </div>
                   </div>
                   <div class="price-condition">
@@ -408,7 +511,11 @@
                       </div>
                     </div>
                   </div>
-                  <button type="button">Tiếp tục</button>
+                  <div class="submit-customer clearfix">
+                    <p>Khi nhấn nút "Tiếp Tục", đồng nghĩa với việc quý khách đã đồng ý với các <a href="#" title="">điều kiện và điều khoản của Datvesieure.com</a> (được quy định <a href="#" title="">tại đây</a>) </p>
+                    <button type="button">Tiếp tục <i class="fa fa-angle-double-right" aria-hidden="true"></i></button>
+                  </div>
+
                 </div>
               </div>
               <!-- customer-info -->
@@ -454,21 +561,28 @@
                     </table>
                   </div>
                   <div>
-                  <table>
-                    <tbody>
-                      <tr>
-                        <td>Tổng</td>
-                        <td><strong>990.000 VNĐ</strong></td>
-                      </tr>
-                    </tbody>
-                  </table>
+                    <table>
+                      <tbody>
+                        <tr>
+                          <td>Tổng</td>
+                          <td><strong>990.000 VNĐ</strong></td>
+                        </tr>
+                      </tbody>
+                    </table>
                   </div>
                 </div>
-                <div>
-                  <button type="button">Quay về trang kết quả</button>
+                <div class="prev-page">
+                  <button type="button" class="btn"><i class="fa fa-angle-double-left" aria-hidden="true"></i> Quay về trang kết quả</button>
                 </div>
-                <div>
-
+                <div class="how-to">
+                  <h3>Tôi làm thế nào ?</h3>
+                  <ul>
+                    <li><a href="#" title=""><i class="fa fa-caret-right" aria-hidden="true"></i> Liên hệ</a></li>
+                    <li><a href="#" title=""><i class="fa fa-caret-right" aria-hidden="true"></i> Thanh toán</a></li>
+                    <li><a href="#" title=""><i class="fa fa-caret-right" aria-hidden="true"></i> Xem đơn hàng</a></li>
+                    <li><a href="#" title=""><i class="fa fa-caret-right" aria-hidden="true"></i> In vé điện tử</a></li>
+                    <li><a href="#" title=""><i class="fa fa-caret-right" aria-hidden="true"></i> Hướng dẫn đặt vé</a></li>
+                  </ul>
                 </div>
               </aside>
               <!-- price-detail -->
