@@ -39,19 +39,19 @@
               <div class="menu-main-menu-container">
                 <ul id="menu-main-menu" class="menu">
                   <li class="menu-item">
-                    <a href="#" class="active">Trang chủ</a>
+                    <a [routerLink]=" ['./'] " class="active">Trang chủ</a>
                   </li>
                   <li class="menu-item">
-                    <a href="#">Đặt vé</a>
+                    <a [routerLink]=" ['./home'] ">Đặt vé</a>
                   </li>
                   <li class="menu-item">
-                    <a href="#">Giới thiệu</a>
+                    <a [routerLink]=" ['./about'] ">Giới thiệu</a>
                   </li>
                   <li class="menu-item">
-                    <a href="#">Hướng dẫn</a>
+                    <a [routerLink]=" ['./detail'] ">Hướng dẫn</a>
                   </li>
                   <li class="menu-item">
-                    <a href="#">Liên hệ</a>
+                    <a [routerLink]=" ['./detail'] ">Liên hệ</a>
                   </li>
                 </ul>
               </div>
@@ -66,75 +66,9 @@
     <!--start header parallax image-->
     <div class="nicdark_space130"></div>
     
+    <main>
+      <router-outlet></router-outlet>
+    </main>
   </div>
 </div>
 
-<footer id="footer" class="footer">
-  <div class="footerbg">
-    <div class="container">
-      <div class="row">
-        <div class="col-md-3">
-          <img src="assets/img/logo.png" alt="" style="width: 200px;" />
-          <br/>
-          <br/>
-          <span class="ftitle">Kết nối với chúng tôi</span>
-          <div class="scont">
-            <a href="#" class="social1b"><img src="assets/img/icon-facebook.png" alt="" /></a>
-            <a href="#" class="social2b"><img src="assets/img/icon-twitter.png" alt="" /></a>
-            <a href="#" class="social3b"><img src="assets/img/icon-google.png" alt="" /></a>
-            <a href="#" class="social4b"><img src="assets/img/icon-youtube.png" alt="" /></a>
-            <br/>
-            <br/> &copy; 2016 | <a href="#">VisionTeam</a>
-            <br/> All Rights Reserved
-            <br/>
-            <br/>
-          </div>
-        </div>
-        <!-- End of column 1-->
-        <div class="col-md-3">
-          <span class="ftitle">Về chúng tôi</span>
-          <br/>
-          <br/>
-          <ul class="footerlist">
-            <li><a href="#">Giới thiệu về balotravel.vn</a></li>
-            <li><a href="#">Giới thiệu về datvesieure.com</a></li>
-          </ul>
-        </div>
-        <!-- End of column 2-->
-        <div class="col-md-3">
-          <span class="ftitle">Các điều khoản</span>
-          <br/>
-          <br/>
-          <ul class="footerlist">
-            <li><a href="#">Các điều khoản và điều kiện</a></li>
-            <li><a href="#">Lịch sử hoạt động</a></li>
-            <li><a href="#">Chính sách bảo mật</a></li>
-          </ul>
-        </div>
-        <!-- End of column 3-->
-        <div class="col-md-3">
-          <span class="ftitle">Văn phòng chính</span>
-          <br/>
-          <br/>
-          <p><strong>Công ty TNHH MTV Thương mại và Du lịch Ba Lô</strong>
-            <br/>06 Tân Lập 1, phường Thạch Thang, quận Hải Châu, Đà Nẵng</p>
-          <br/>
-          <span class="ftitle">Hotline đặt vé</span>
-          <br/>
-          <strong class="pnr">(0511) 38 88 408</strong>
-        </div>
-        <!-- End of column 4-->
-      </div>
-    </div>
-  </div>
-  <div class="footerbg2">
-    <div class="container text-center">
-      <a href="#">Trang chủ</a> |
-      <a href="#">Đặt vé</a> |
-      <a href="#">Giới thiệu</a> |
-      <a href="#">Hướng dẫn</a> |
-      <a href="#">Liên hệ</a>
-      <a href="#top" class="gotop scroll"><img src="assets/img/spacer.png" alt="" /></a>
-    </div>
-  </div>
-</footer>
