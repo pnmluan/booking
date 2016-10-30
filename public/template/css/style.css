@@ -808,18 +808,16 @@ ul.footerlist li a:hover{color:#F69E1C; text-decoration:none;}
 
 .people-info { margin-bottom: 25px; }
 .people-info-inner {}
-.people-info-inner .item { width: 100%; height: 33px; }
-.people-info-inner .item label { margin-bottom: 3px; font-weight: bold; float: left; width: 90px; }
-.people-info-inner .item label span { color: red; }
-.people-info-inner .item p { float: left; }
-.people-info-inner .item p input { width: 300px; }
-
 .tbl-people-info td { padding: 5px 0px; }
 .tbl-people-info span { color: red; }
-.tbl-people-info th:first-child { width: 90px; }
-.tbl-people-info th:nth-child(2) { width: 80px; }
-.tbl-people-info th:last-child { width: 310px; padding-left: 10px; }
-.tbl-people-info td:last-child { width: 310px; padding-left: 10px; }
+.tbl-people-info th:nth-child(1) { width: 90px; }
+.tbl-people-info th:nth-child(2) { width: 90px; }
+.tbl-people-info th:nth-child(3) { width: 310px; }
+.tbl-people-info th:nth-child(4) { width: 150px; }
+.tbl-people-info th, .tbl-people-info td{ padding: 5px 10px 5px 0px; }
+.tbl-people-info .input-group-addon { padding: 0px 9px; }
+.tbl-people-info .input-group-addon span { color: #666; }
+
 
 .contact-info { margin-bottom: 20px;  }
 .contact-info-inner > p span { color: red; }
@@ -897,3 +895,11 @@ ul.footerlist li a:hover{color:#F69E1C; text-decoration:none;}
 .how-to ul li:last-child { margin-bottom: 0px; }
 .how-to ul li a { color: #666; }
 .how-to ul li a:hover { color: #E77741; }
+
+/***** CUSTOMER *****/
+/********************/
+.payment {}
+.payment-inner { display: table; width: 100%; }
+.payment-info { display: table-cell; padding-right: 15px; font-size: 13px; }
+
+.aside-price-detail{ display: table-cell; width: 280px; min-width: 260px; font-size: 13px; }
