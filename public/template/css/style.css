@@ -503,7 +503,9 @@ textarea:-moz-placeholder { color: #a9a9a9; }
 .form-title {}
 .plane-form {  }
 .plane-form-inner {}
-.plane-option { margin-bottom: 10px; }
+.plane-option { margin-bottom: 10px; font-family: 'diavlo'; margin-bottom: 5px; }
+.plane-option .radio-inline { margin-bottom: 5px; }
+
 .one {}
 .field-label { margin-bottom: 5px; font-family: 'diavlo'; display: block; font-size: 13px; }
 .one .plane-input {  }
@@ -514,9 +516,27 @@ textarea:-moz-placeholder { color: #a9a9a9; }
 .plane-age .field { margin-bottom: 10px; }
 
 .multiple {}
+.multiple .plane-input {}
+.multiple .plane-input .field { padding: 5px 15px; }
+.multiple .plane-input .field label { float: left; width: 120px; padding-top: 6px; }
+.multiple .plane-input .field > div { float: left; width: calc(100% - 120px); }
+.multiple .plane-input .field > div > div { width: 32%; float: left; margin-right: 2%; }
+.multiple .plane-input .field > div > div:last-child { margin-right: 0px; }
+.multiple .plane-input .field > div > div:last-child .form-group { float: left; width: calc(100% - 30px); }
+.multiple .plane-input .field > div > div:last-child > a { display: block; font-size: 22px; float: right; margin-top: 1px; color: #999; }
+.multiple .plane-input .field > div > div:last-child > a:hover { color: red; }
+.multiple .plane-input .field.multi-field > div > div { width: 24%; float: left; margin-right: 1.33%; }
+.multiple .plane-input .field.multi-field > div > div:last-child { margin-right: 0px; }
+.multiple .plane-input .field.multi-field > div > div:last-child button { width: calc(100% - 30px); }
+
+.btn-add { color: #649931; font-size: 16px; }
+.btn-add i { font-size: 22px; }
+.btn-add:hover { color: red; }
 
 .bus-form { }
 .bus-form .field { margin-bottom: 10px; }
+
+.bus-form .btn-search { width: 258px; }
 
 
 /***** MAIN INTRO *****/
@@ -544,7 +564,7 @@ textarea:-moz-placeholder { color: #a9a9a9; }
 .list-news > div .content-news .detail-news a { color: #333; }
 .list-news > div .content-news .detail-news a:hover { color: #649931; }
 
-.btn-search { background: #E77741; font-family: 'diavlo'; text-transform: uppercase; color: #fff; }
+.btn-search { background: #E77741; font-family: 'diavlo'; text-transform: uppercase; color: #fff; width: 100%; }
 .btn-search:hover { background: #E77741; color: #fff; }
 
 @keyframes blinker {
@@ -808,9 +828,9 @@ ul.footerlist li a:hover{color:#F69E1C; text-decoration:none;}
 .contact-info-field .field { margin-bottom: 7px; }
 .contact-info-field .field label { font-weight: bold; margin-bottom: 3px; }
 .contact-info-field .field:first-child {}
-// .contact-info-field .field:first-child label { float: left; margin-right: 10px; padding-top: 3px; }
+/*.contact-info-field .field:first-child label { float: left; margin-right: 10px; padding-top: 3px; }*/
 .contact-info-field .field:first-child > div { overflow: hidden; }
-// .contact-info-field .field:first-child > div input { width: 324px; display: inline-block; }
+/*.contact-info-field .field:first-child > div input { width: 324px; display: inline-block; }*/
 .contact-info-field .field.even { width: 49%; float: left; margin-right: 2%; }
 .contact-info-field .field.odd { width: 49%; float: right; }
 .contact-info-field .field.field-name > div:first-child { width: 80px; float: left; }
