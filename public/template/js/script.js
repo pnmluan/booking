@@ -11,7 +11,7 @@ jQuery(window).on('load', function() {
 });
 
 var indexScript = {
-  loadBookOption: function(){
+  loadBookOption: function() {
     var radios = jQuery('input[name="plane-option"]');
     radios.filter('[value=option1]').prop('checked', true);
 
@@ -19,13 +19,13 @@ var indexScript = {
 
     jQuery('.multiple').hide();
   },
-  changeBookOption: function(){
-    jQuery('input[name="plane-option"]').on('change', function(){
-      if(jQuery(this).val() ==  'option1'){
+  changeBookOption: function() {
+    jQuery('input[name="plane-option"]').on('change', function() {
+      if (jQuery(this).val() == 'option1') {
         jQuery('.multiple').hide();
         jQuery('.one').fadeIn('300');
         jQuery('#date-back input').prop('disabled', true);
-      } else if (jQuery(this).val() ==  'option2'){
+      } else if (jQuery(this).val() == 'option2') {
         jQuery('.multiple').hide();
         jQuery('.one').fadeIn('300');
         jQuery('#date-back input').prop('disabled', false);
@@ -35,16 +35,12 @@ var indexScript = {
       }
     });
   }
-
 };
 
 var general = {
 
 };
 
-jQuery('window').load(function(){
-
-});
 
 jQuery(document).ready(function() {
   jQuery(".select-from, .select-to").select2({
@@ -57,11 +53,11 @@ jQuery(document).ready(function() {
   });
 
   jQuery('.owl-carousel').owlCarousel({
-    navigation : false,
-    slideSpeed : 300,
-    paginationSpeed : 400,
-    singleItem:true,
-    autoPlay : 5000
+    navigation: false,
+    slideSpeed: 300,
+    paginationSpeed: 400,
+    singleItem: true,
+    autoPlay: 5000
   });
 
   jQuery('#date-go, #date-back, .date').datetimepicker({

@@ -586,7 +586,7 @@ textarea:-moz-placeholder { color: #a9a9a9; }
 .owl-carousel .item > div:last-child {  border-left: 2px solid #649931; }
 .owl-carousel .item img { width: 60px; display: block; margin-right: 15px; border-radius: 50%; float: left; border: 2px solid #fff; }
 .owl-carousel .item .text { overflow: hidden; }
-.owl-carousel .item .text i { position: relative; top: -4px; color: #999; font-size: 11px;}
+.owl-carousel .item .text i.fa { position: relative; top: -4px; color: #999; font-size: 11px;}
 
 
 /***** SERVICE METHOD *****/
@@ -723,7 +723,7 @@ ul.footerlist li a:hover{color:#F69E1C; text-decoration:none;}
 .submit-plane button { float: right; height: 40px; border-radius: 5px; padding: 0px 30px; border: 0px; outline: 0px; text-transform: uppercase; background: #E44803; color: #fff; font-family: 'diavlo'; }
 .submit-plane button:hover { background: #D65800; }
 
-.aside-search-plane { display: table-cell; width: 280px; min-width: 260px; font-size: 13px; }
+.aside-search-plane { display: table-cell; width: 300px; min-width: 260px; font-size: 13px; }
 .filter-plane { background: #f9f9f9; border: 1px solid #ddd; border-radius: 3px; margin-bottom: 20px; }
 .filter-plane h2 { font-family: 'diavlo'; font-size: 20px; padding-bottom: 10px; padding-left: 50px; padding-top: 7px; color: #649931; position: relative;
     background: #fff; /* For browsers that do not support gradients */
@@ -896,10 +896,88 @@ ul.footerlist li a:hover{color:#F69E1C; text-decoration:none;}
 .how-to ul li a { color: #666; }
 .how-to ul li a:hover { color: #E77741; }
 
-/***** CUSTOMER *****/
-/********************/
+/***** PAYMENT *****/
+/*******************/
 .payment {}
 .payment-inner { display: table; width: 100%; }
 .payment-info { display: table-cell; padding-right: 15px; font-size: 13px; }
+.payment-info-inner > h1 { font-size: 20px; color: #649931; border-bottom: 1px solid #ddd; padding-bottom: 5px; margin-bottom: 10px; font-weight: bold; }
+.payment-info-inner > h2 { text-transform: uppercase; font-weight: bold; margin-bottom: 5px; }
+.payment-info-inner > p { font-size: 14px; font-style: italic; margin-bottom: 15px; }
+.warning { border: solid 1px #ffa500; padding: 10px 15px; margin: 10px 0px 20px 0px; background: #faebd7;}
+.warning b { font-size: 14px; font-weight: bold; color: #fe4500; }
+.tetp { font-size: 14px; color: #fe4500; font-weight: bold; font-style: italic; line-height: 25px; }
+.bold-font { font-size: 12px; line-height: 18px; color: #333; font-weight: bold; }
+.warning-2 {background: url(../img/warning.png) no-repeat 5px 10px antiquewhite; border: 1px solid orange; padding: 5px 10px 5px 30px; font-size: 13px; font-weight: bold; color: orangered; margin-bottom: 5px; margin: 10px 0px; }
 
-.aside-price-detail{ display: table-cell; width: 280px; min-width: 260px; font-size: 13px; }
+.panel-group .panel-heading  { background: url("../img/pattern_vang.svg") repeat 0px 0px; text-transform: uppercase;   }
+.panel.panel-default a { color: #333; font-family: 'diavlo'; }
+.panel.panel-default a:hover { color: #333; }
+.panel-title { font-family: 'diavlo'; line-height: 25px; color: #649931; }
+.panel-title span { color: red; }
+.panel-body { padding: 30px; }
+
+.table-bank th { background: #f2f2f2}
+.table-bank th:first-child { width: 100px; max-width: 100px; }
+.table-bank img { width: 80px; }
+.table-bank td { vertical-align: middle !important; }
+.table-bank td:nth-child(2) { text-transform: uppercase; }
+
+.tbl-receiver { margin: 0px auto; width: 320px; }
+.tbl-receiver td:first-child { font-weight: bold; }
+.tbl-receiver td { padding: 5px 5px 5px 0px;}
+.tbl-receiver td input { height: 28px; }
+
+.btn-choose { padding-top: 10px; }
+.btn-choose button { color: #fff; background: #E77741; text-transform: uppercase;  font-family: 'diavlo'; border-radius: 3px; border: 0px; outline: 0px; padding: 10px 20px 8px 20px; }
+.btn-choose button:hover { background: #DB5E25; }
+
+.aside-price-detail{ display: table-cell; width: 300px; min-width: 260px; font-size: 13px;  }
+.aside-price-detail .ticket-details { padding: 15px 10px; background: #649931; color: #fff; border-radius: 3px; box-shadow: 0 1px 3px rgba(0,0,0,.5); margin-bottom: 20px; }
+.aside-price-detail .ticket-details > h3 { font-size: 18px; font-family: 'diavlo'; border-bottom: 1px solid rgba(255, 255, 255, 0.2); padding-bottom: 10px; color: #fbba00;}
+.aside-price-detail .price-basic,
+.aside-price-detail .price-total { border-bottom: 1px solid rgba(255, 255, 255, 0.2); padding: 5px 0px; }
+.aside-price-detail .price-total { margin-bottom: 10px; }
+.aside-price-detail .ticket-details table { width: 100%; }
+.aside-price-detail .ticket-details table td { padding: 5px 0px; }
+.aside-price-detail .ticket-details table td:first-child { width: 120px; }
+.aside-price-detail .btn-flight-details { color: #fff; }
+.aside-price-detail .btn-flight-details:hover { color: #fbba00; }
+
+.aside-price-detail .contact-info { border-radius: 4px; padding: 10px; background-image: url("../img/pattern_vang.svg"); background-repeat: repeat; background-color: #F8F3E7; margin-bottom: 20px; }
+.aside-price-detail .contact-info > h3 { font-family: 'diavlo'; font-size: 20px; padding-bottom: 15px; padding-top: 5px; color: #649931; }
+.aside-price-detail .contact-info-inner { background: #fff; border-radius: 5px; padding: 10px; }
+.aside-price-detail .contact-info-inner .field { margin-bottom: 10px; }
+.aside-price-detail .contact-info-inner .form-control { padding: 6px; }
+.aside-price-detail .contact-info-inner .field label { margin-bottom: 5px; font-family: 'diavlo'; display: block; font-size: 13px; }
+.aside-price-detail .contact-info-inner .field:first-child {}
+.aside-price-detail .contact-info-inner .field:first-child > div {  }
+.aside-price-detail .contact-info-inner .field:first-child > div select { width: 70px; float: left; }
+.aside-price-detail .contact-info-inner .field:first-child > div input { width: calc(100% - 80px); float: right; }
+.aside-price-detail .contact-info-inner .field:last-child button { color: #fff; background: #E77741; text-transform: uppercase; font-family: 'diavlo'; border-radius: 3px; border: 0px; outline: 0px; width: 100%; padding: 8px 0px; }
+
+
+/***** CONFIRM *****/
+/*******************/
+.confirm-inner > h1 { font-size: 20px; color: #649931; padding-bottom: 5px; margin-bottom: 10px; font-weight: bold; }
+
+.TTdh { margin: 15px 0px; padding: 12px; color: #000; line-height: 18px; font-size: 13px; border: solid 1px #ffa500; background: #faebd7;}
+.order-id { font-weight: bold; font-size: 20px; color: #ff0000; }
+.orangeBold { color: #e84e0f; font-weight: bold; font-size: 110%; line-height: 18px; }
+
+.main-confirm { }
+
+.main-confirm .ticket-details { float: left; width: calc(100% - 315px); }
+.main-confirm .ticket-details { padding: 15px 10px; background: #F2F2F2; border-radius: 3px; margin-bottom: 20px; }
+.main-confirm .ticket-details > h3 { font-size: 18px; font-family: 'diavlo'; border-bottom: 1px solid rgba(255, 255, 255, 0.2); padding-bottom: 10px; color: #fbba00;}
+.main-confirm .price-basic,
+.main-confirm .price-total { border-bottom: 1px solid rgba(0, 0, 0, 1); padding: 5px 0px; }
+.main-confirm .price-total { margin-bottom: 10px; }
+.main-confirm .ticket-details table { width: 100%; }
+.main-confirm .ticket-details table td { padding: 5px 0px; }
+.main-confirm .ticket-details table td:first-child { width: 120px; }
+.main-confirm .btn-flight-details { color: #fff; }
+.main-confirm .btn-flight-details:hover { color: #fbba00; }
+
+
+.main-confirm .contact-info { width: 300px; float: right; }
