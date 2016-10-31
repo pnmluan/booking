@@ -67,10 +67,11 @@ CREATE TABLE bus_route (
 -- Table: comment
 CREATE TABLE comment (
     id int NOT NULL AUTO_INCREMENT,
-    full_name int NOT NULL,
+    full_name varchar(250) NOT NULL,
     content varchar(1000) NOT NULL,
-    created_at date NOT NULL,
-	status varchar(45) NOT NULL,
+    status varchar(45) NOT NULL,
+    created_at datetime,
+    updated_at datetime,
     CONSTRAINT comment_pk PRIMARY KEY (id)
 );
 
