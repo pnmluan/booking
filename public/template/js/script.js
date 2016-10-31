@@ -11,14 +11,40 @@ jQuery(window).on('load', function() {
 });
 
 var indexScript = {
-  changeBookOption: function(){
+  loadBookOption: function(){
+    var radios = jQuery('input[name="plane-option"]');
+    radios.filter('[value=option1]').prop('checked', true);
 
+    jQuery('#date-back input').prop('disabled', true);
+
+    jQuery('.multiple').hide();
+  },
+  changeBookOption: function(){
+    jQuery('input[name="plane-option"]').on('change', function(){
+      if(jQuery(this).val() ==  'option1'){
+        jQuery('.multiple').hide();
+        jQuery('.one').fadeIn('300');
+        jQuery('#date-back input').prop('disabled', true);
+      } else if (jQuery(this).val() ==  'option2'){
+        jQuery('.multiple').hide();
+        jQuery('.one').fadeIn('300');
+        jQuery('#date-back input').prop('disabled', false);
+      } else {
+        jQuery('.one').hide();
+        jQuery('.multiple').fadeIn('300');
+      }
+    });
   }
+
 };
 
 var general = {
 
 };
+
+jQuery('window').load(function(){
+
+});
 
 jQuery(document).ready(function() {
   jQuery(".select-from, .select-to").select2({
@@ -38,7 +64,11 @@ jQuery(document).ready(function() {
     autoPlay : 5000
   });
 
-  jQuery('#date-go, #date-back').datetimepicker();
+  jQuery('#date-go, #date-back, .date').datetimepicker({
+    format: 'DD/MM/YYYY',
+    allowInputToggle: true
+  });
 
-  //indexScript.changeBookOption();
+  indexScript.loadBookOption();
+  indexScript.changeBookOption();
 });
