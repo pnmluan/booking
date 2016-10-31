@@ -1,0 +1,26 @@
+<div class="row form-group">
+  <div class="col-sm-3"> Full Name: </div>
+  <div class="col-sm-3">
+    <input type="text" ng-model="new_comment.full_name"/>
+  </div>
+</div>
+
+<div class="row form-group">
+  <div class="col-sm-3"> Content: </div>
+  <div class="col-sm-3">
+    <input type="text" ng-model="new_comment.content"/>
+  </div>
+</div>
+
+<div class="row form-group">
+  <div class="col-sm-3"> Status: </div>
+  <div class="col-sm-3">
+    <input type="text" ng-model="new_comment.status"/>
+  </div>
+</div>
+
+<div class="row form-group">
+  <div class="col-sm-offset-6 col-sm-3">
+    <button class="btn btn-success" ng-click="createComment()"> Submit </button>
+  </div>
+</div>
