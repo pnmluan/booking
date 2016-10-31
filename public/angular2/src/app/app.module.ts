@@ -15,6 +15,8 @@ import { AppComponent } from './app.component';
 import { HomeComponent } from './home';
 import { AboutComponent } from './about';
 import { PageNotFoundComponent } from './page-not-found';
+import { HeaderComponent } from './shared';
+import { SearchResultComponent } from './search-result';
 
 
 @NgModule({
@@ -22,7 +24,9 @@ import { PageNotFoundComponent } from './page-not-found';
     AppComponent,
     HomeComponent,
     AboutComponent,
-    PageNotFoundComponent
+    PageNotFoundComponent,
+    HeaderComponent,
+    SearchResultComponent,
   ],
   imports: [
     BrowserModule,
