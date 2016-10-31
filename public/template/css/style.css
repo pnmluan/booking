@@ -965,3 +965,21 @@ ul.footerlist li a:hover{color:#F69E1C; text-decoration:none;}
 .order-id { font-weight: bold; font-size: 20px; color: #ff0000; }
 .orangeBold { color: #e84e0f; font-weight: bold; font-size: 110%; line-height: 18px; }
 
+.confirm-inner .flight-go-back .flight-title .field { width: calc(100% - 165px); }
+.confirm-inner .flight-go-back .flight-title .field:last-child { width: 165px; }
+
+.main-confirm {}
+
+.main-confirm .book-info { float: left; width: 50%; padding-right: 15px; }
+.main-confirm .book-info table { width: 100%; }
+.main-confirm .book-info table td:last-child { text-align: right; }
+
+.main-confirm .contact-info { float: right; width: 50%; padding-left: 15px; }
+.main-confirm .contact-info-inner .field { margin-bottom: 10px; }
+.main-confirm .contact-info-inner .form-control { padding: 6px; }
+.main-confirm .contact-info-inner .field label { margin-bottom: 5px; font-family: 'diavlo'; display: block; font-size: 13px; }
+.main-confirm .contact-info-inner .field:first-child {}
+.main-confirm .contact-info-inner .field:first-child > div {  }
+.main-confirm .contact-info-inner .field:first-child > div select { width: 80px; float: left; }
+.main-confirm .contact-info-inner .field:first-child > div input { width: calc(100% - 90px); float: right; }
+.main-confirm .contact-info-inner .field:last-child button { color: #fff; background: #E77741; text-transform: uppercase; font-family: 'diavlo'; border-radius: 3px; border: 0px; outline: 0px; width: 100%; padding: 8px 0px; }
