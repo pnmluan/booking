@@ -503,7 +503,9 @@ textarea:-moz-placeholder { color: #a9a9a9; }
 .form-title {}
 .plane-form {  }
 .plane-form-inner {}
-.plane-option { margin-bottom: 10px; }
+.plane-option { margin-bottom: 10px; font-family: 'diavlo'; margin-bottom: 5px; }
+.plane-option .radio-inline { margin-bottom: 5px; }
+
 .one {}
 .field-label { margin-bottom: 5px; font-family: 'diavlo'; display: block; font-size: 13px; }
 .one .plane-input {  }
@@ -514,9 +516,27 @@ textarea:-moz-placeholder { color: #a9a9a9; }
 .plane-age .field { margin-bottom: 10px; }
 
 .multiple {}
+.multiple .plane-input {}
+.multiple .plane-input .field { padding: 5px 15px; }
+.multiple .plane-input .field label { float: left; width: 120px; padding-top: 6px; }
+.multiple .plane-input .field > div { float: left; width: calc(100% - 120px); }
+.multiple .plane-input .field > div > div { width: 32%; float: left; margin-right: 2%; }
+.multiple .plane-input .field > div > div:last-child { margin-right: 0px; }
+.multiple .plane-input .field > div > div:last-child .form-group { float: left; width: calc(100% - 30px); }
+.multiple .plane-input .field > div > div:last-child > a { display: block; font-size: 22px; float: right; margin-top: 1px; color: #999; }
+.multiple .plane-input .field > div > div:last-child > a:hover { color: red; }
+.multiple .plane-input .field.multi-field > div > div { width: 24%; float: left; margin-right: 1.33%; }
+.multiple .plane-input .field.multi-field > div > div:last-child { margin-right: 0px; }
+.multiple .plane-input .field.multi-field > div > div:last-child button { width: calc(100% - 30px); }
+
+.btn-add { color: #649931; font-size: 16px; }
+.btn-add i { font-size: 22px; }
+.btn-add:hover { color: red; }
 
 .bus-form { }
 .bus-form .field { margin-bottom: 10px; }
+
+.bus-form .btn-search { width: 258px; }
 
 
 /***** MAIN INTRO *****/
@@ -544,7 +564,7 @@ textarea:-moz-placeholder { color: #a9a9a9; }
 .list-news > div .content-news .detail-news a { color: #333; }
 .list-news > div .content-news .detail-news a:hover { color: #649931; }
 
-.btn-search { background: #E77741; font-family: 'diavlo'; text-transform: uppercase; color: #fff; }
+.btn-search { background: #E77741; font-family: 'diavlo'; text-transform: uppercase; color: #fff; width: 100%; }
 .btn-search:hover { background: #E77741; color: #fff; }
 
 @keyframes blinker {
@@ -788,18 +808,16 @@ ul.footerlist li a:hover{color:#F69E1C; text-decoration:none;}
 
 .people-info { margin-bottom: 25px; }
 .people-info-inner {}
-.people-info-inner .item { width: 100%; height: 33px; }
-.people-info-inner .item label { margin-bottom: 3px; font-weight: bold; float: left; width: 90px; }
-.people-info-inner .item label span { color: red; }
-.people-info-inner .item p { float: left; }
-.people-info-inner .item p input { width: 300px; }
-
 .tbl-people-info td { padding: 5px 0px; }
 .tbl-people-info span { color: red; }
-.tbl-people-info th:first-child { width: 90px; }
-.tbl-people-info th:nth-child(2) { width: 80px; }
-.tbl-people-info th:last-child { width: 310px; padding-left: 10px; }
-.tbl-people-info td:last-child { width: 310px; padding-left: 10px; }
+.tbl-people-info th:nth-child(1) { width: 90px; }
+.tbl-people-info th:nth-child(2) { width: 90px; }
+.tbl-people-info th:nth-child(3) { width: 310px; }
+.tbl-people-info th:nth-child(4) { width: 150px; }
+.tbl-people-info th, .tbl-people-info td{ padding: 5px 10px 5px 0px; }
+.tbl-people-info .input-group-addon { padding: 0px 9px; }
+.tbl-people-info .input-group-addon span { color: #666; }
+
 
 .contact-info { margin-bottom: 20px;  }
 .contact-info-inner > p span { color: red; }
@@ -808,9 +826,9 @@ ul.footerlist li a:hover{color:#F69E1C; text-decoration:none;}
 .contact-info-field .field { margin-bottom: 7px; }
 .contact-info-field .field label { font-weight: bold; margin-bottom: 3px; }
 .contact-info-field .field:first-child {}
-// .contact-info-field .field:first-child label { float: left; margin-right: 10px; padding-top: 3px; }
+/*.contact-info-field .field:first-child label { float: left; margin-right: 10px; padding-top: 3px; }*/
 .contact-info-field .field:first-child > div { overflow: hidden; }
-// .contact-info-field .field:first-child > div input { width: 324px; display: inline-block; }
+/*.contact-info-field .field:first-child > div input { width: 324px; display: inline-block; }*/
 .contact-info-field .field.even { width: 49%; float: left; margin-right: 2%; }
 .contact-info-field .field.odd { width: 49%; float: right; }
 .contact-info-field .field.field-name > div:first-child { width: 80px; float: left; }
@@ -877,3 +895,11 @@ ul.footerlist li a:hover{color:#F69E1C; text-decoration:none;}
 .how-to ul li:last-child { margin-bottom: 0px; }
 .how-to ul li a { color: #666; }
 .how-to ul li a:hover { color: #E77741; }
+
+/***** CUSTOMER *****/
+/********************/
+.payment {}
+.payment-inner { display: table; width: 100%; }
+.payment-info { display: table-cell; padding-right: 15px; font-size: 13px; }
+
+.aside-price-detail{ display: table-cell; width: 280px; min-width: 260px; font-size: 13px; }
