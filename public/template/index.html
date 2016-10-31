@@ -22,12 +22,13 @@
   <link rel="stylesheet" href="plugins/owl-carousel/owl.theme.css">
   <link rel="stylesheet" href="plugins/owl-carousel/owl.transitions.css">
   <link rel="stylesheet" href="plugins/datetimepicker/css/bootstrap-datetimepicker.min.css">
+  <link rel="stylesheet" href="css/rs-style.css">
   <link rel="stylesheet" href="css/reset.css">
   <link rel="stylesheet" href="css/style.css">
-
-  <script src='plugins/jquery/jquery.js'></script>
+  <script src='plugins/jquery/jquery-1.11.3.min.js'></script>
   <script src='plugins/rs-plugin/jquery.themepunch.tools.min.js'></script>
   <script src='plugins/rs-plugin/jquery.themepunch.revolution.min.js'></script>
+  <script src='js/rs-script.js'></script>
   <!--[if IE 8]>
   <link rel="stylesheet" type="text/css" href="http://www.nicdarkthemes.com/themes/love-travel/wp/demo-travel/wp-content/plugins/js_composer/assets/css/vc-ie8.css" media="screen">
   <![endif]-->
@@ -158,282 +159,6 @@
                     </ul>
                     <div class="tp-bannertimer tp-bottom" style="visibility: hidden !important;"></div>
                   </div>
-                  <style scoped>
-                  .tp-caption.nicdarkwithlight50,
-                  .nicdarkwithlight50 {
-                    font-size: 50px;
-                    line-height: 50px;
-                    font-weight: 100;
-                    font-family: "Open Sans";
-                    color: rgb(255, 255, 255);
-                    text-decoration: none;
-                    text-shadow: none;
-                    background-color: transparent;
-                    border-width: 0px;
-                    border-color: rgb(0, 0, 0);
-                    border-style: none
-                  }
-
-                  .tp-caption.nicdarkwithregular75,
-                  .nicdarkwithregular75 {
-                    font-size: 75px;
-                    line-height: 75px;
-                    font-weight: 500;
-                    font-family: "Open Sans";
-                    color: rgb(255, 255, 255);
-                    text-decoration: none;
-                    text-shadow: none;
-                    background-color: transparent;
-                    border-width: 0px;
-                    border-color: rgb(0, 0, 0);
-                    border-style: none
-                  }
-
-                  .tp-caption.nicdarkwithlight75,
-                  .nicdarkwithlight75 {
-                    font-size: 75px;
-                    line-height: 75px;
-                    font-weight: 100;
-                    font-family: "Open Sans";
-                    color: rgb(255, 255, 255);
-                    text-decoration: none;
-                    text-shadow: none;
-                    background-color: transparent;
-                    border-width: 0px;
-                    border-color: rgb(0, 0, 0);
-                    border-style: none
-                  }
-
-                  .tp-caption.nicdarkwithlight20,
-                  .nicdarkwithlight20 {
-                    font-size: 20px;
-                    line-height: 20px;
-                    font-weight: 100;
-                    font-family: "Open Sans";
-                    color: rgb(255, 255, 255);
-                    text-decoration: none;
-                    text-shadow: none;
-                    background-color: transparent;
-                    border-width: 0px;
-                    border-color: rgb(0, 0, 0);
-                    border-style: none
-                  }
-
-                  .tp-caption.nicdarkwithlight40,
-                  .nicdarkwithlight40 {
-                    font-size: 40px;
-                    line-height: 40px;
-                    font-weight: 100;
-                    font-family: "Open Sans";
-                    color: rgb(255, 255, 255);
-                    text-decoration: none;
-                    text-shadow: none;
-                    background-color: transparent;
-                    border-width: 0px;
-                    border-color: rgb(0, 0, 0);
-                    border-style: none
-                  }
-
-                  .tp-caption.nicdarkwithregular60,
-                  .nicdarkwithregular60 {
-                    font-size: 60px;
-                    line-height: 60px;
-                    font-weight: 500;
-                    font-family: "Open Sans";
-                    color: rgb(255, 255, 255);
-                    text-decoration: none;
-                    text-shadow: none;
-                    background-color: transparent;
-                    border-width: 0px;
-                    border-color: rgb(0, 0, 0);
-                    border-style: none
-                  }
-
-                  .tp-caption.nicdarkwithregular15btn,
-                  .nicdarkwithregular15btn {
-                    font-size: 15px;
-                    line-height: 15px;
-                    font-weight: 500;
-                    font-family: "Open Sans";
-                    color: rgb(255, 255, 255);
-                    text-decoration: none;
-                    padding: 5px 10px;
-                    text-shadow: none;
-                    background-color: rgb(243, 164, 107);
-                    border-width: 0px;
-                    border-color: rgb(0, 0, 0);
-                    border-style: none
-                  }
-
-                  .tp-caption.nicdarkwithregular25,
-                  .nicdarkwithregular25 {
-                    font-size: 25px;
-                    line-height: 25px;
-                    font-weight: 500;
-                    font-family: "Open Sans";
-                    color: rgb(255, 255, 255);
-                    text-decoration: none;
-                    text-shadow: none;
-                    background-color: transparent;
-                    border-width: 0px;
-                    border-color: rgb(0, 0, 0);
-                    border-style: none
-                  }
-                  </style>
-                  <script type="text/javascript">
-                  /* PREPARE PLACEHOLDER FOR SLIDER */
-                  var setREVStartSize = function() {
-                    var tpopt = new Object();
-                    tpopt.startwidth = 1200;
-                    tpopt.startheight = 650;
-                    tpopt.container = jQuery('#rev_slider_4_1');
-                    tpopt.fullScreen = "off";
-                    tpopt.forceFullWidth = "off";
-
-                    tpopt.container.closest(".rev_slider_wrapper").css({
-                      height: tpopt.container.height()
-                    });
-                    tpopt.width = parseInt(tpopt.container.width(), 0);
-                    tpopt.height = parseInt(tpopt.container.height(), 0);
-                    tpopt.bw = tpopt.width / tpopt.startwidth;
-                    tpopt.bh = tpopt.height / tpopt.startheight;
-                    if (tpopt.bh > tpopt.bw) tpopt.bh = tpopt.bw;
-                    if (tpopt.bh < tpopt.bw) tpopt.bw = tpopt.bh;
-                    if (tpopt.bw < tpopt.bh) tpopt.bh = tpopt.bw;
-                    if (tpopt.bh > 1) {
-                      tpopt.bw = 1;
-                      tpopt.bh = 1
-                    }
-                    if (tpopt.bw > 1) {
-                      tpopt.bw = 1;
-                      tpopt.bh = 1
-                    }
-                    tpopt.height = Math.round(tpopt.startheight * (tpopt.width / tpopt.startwidth));
-                    if (tpopt.height > tpopt.startheight && tpopt.autoHeight != "on") tpopt.height = tpopt.startheight;
-                    if (tpopt.fullScreen == "on") {
-                      tpopt.height = tpopt.bw * tpopt.startheight;
-                      var cow = tpopt.container.parent().width();
-                      var coh = jQuery(window).height();
-                      if (tpopt.fullScreenOffsetContainer != undefined) {
-                        try {
-                          var offcontainers = tpopt.fullScreenOffsetContainer.split(",");
-                          jQuery.each(offcontainers, function(e, t) {
-                            coh = coh - jQuery(t).outerHeight(true);
-                            if (coh < tpopt.minFullScreenHeight) coh = tpopt.minFullScreenHeight
-                          })
-                        } catch (e) {}
-                      }
-                      tpopt.container.parent().height(coh);
-                      tpopt.container.height(coh);
-                      tpopt.container.closest(".rev_slider_wrapper").height(coh);
-                      tpopt.container.closest(".forcefullwidth_wrapper_tp_banner").find(".tp-fullwidth-forcer").height(coh);
-                      tpopt.container.css({
-                        height: "100%"
-                      });
-                      tpopt.height = coh;
-                    } else {
-                      tpopt.container.height(tpopt.height);
-                      tpopt.container.closest(".rev_slider_wrapper").height(tpopt.height);
-                      tpopt.container.closest(".forcefullwidth_wrapper_tp_banner").find(".tp-fullwidth-forcer").height(tpopt.height);
-                    }
-                  };
-
-                  /* CALL PLACEHOLDER */
-                  setREVStartSize();
-
-                  var tpj = jQuery;
-                  tpj.noConflict();
-                  var revapi4;
-
-                  tpj(document).ready(function() {
-
-                    if (tpj('#rev_slider_4_1').revolution == undefined) {
-                      revslider_showDoubleJqueryError('#rev_slider_4_1');
-                    } else {
-                      revapi4 = tpj('#rev_slider_4_1').show().revolution({
-                        dottedOverlay: "none",
-                        delay: 9000,
-                        startwidth: 1200,
-                        startheight: 650,
-                        hideThumbs: 0,
-
-                        thumbWidth: 100,
-                        thumbHeight: 50,
-                        thumbAmount: 3,
-
-
-                        simplifyAll: "off",
-
-                        navigationType: "none",
-                        navigationArrows: "solo",
-                        navigationStyle: "preview1",
-
-                        touchenabled: "on",
-                        onHoverStop: "on",
-                        nextSlideOnWindowFocus: "off",
-
-                        swipe_threshold: 75,
-                        swipe_min_touches: 1,
-                        drag_block_vertical: false,
-
-                        parallax: "mouse",
-                        parallaxBgFreeze: "off",
-                        parallaxLevels: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
-
-
-                        keyboardNavigation: "off",
-
-                        navigationHAlign: "center",
-                        navigationVAlign: "bottom",
-                        navigationHOffset: 0,
-                        navigationVOffset: 20,
-
-                        soloArrowLeftHalign: "left",
-                        soloArrowLeftValign: "center",
-                        soloArrowLeftHOffset: 20,
-                        soloArrowLeftVOffset: 0,
-
-                        soloArrowRightHalign: "right",
-                        soloArrowRightValign: "center",
-                        soloArrowRightHOffset: 20,
-                        soloArrowRightVOffset: 0,
-
-                        shadow: 0,
-                        fullWidth: "on",
-                        fullScreen: "off",
-
-                        spinner: "spinner2",
-
-                        stopLoop: "off",
-                        stopAfterLoops: -1,
-                        stopAtSlide: -1,
-
-                        shuffle: "off",
-
-                        autoHeight: "off",
-                        forceFullWidth: "off",
-
-                        hideTimerBar: "on",
-                        hideThumbsOnMobile: "off",
-                        hideNavDelayOnMobile: 1500,
-                        hideBulletsOnMobile: "off",
-                        hideArrowsOnMobile: "off",
-                        hideThumbsUnderResolution: 0,
-
-                        hideSliderAtLimit: 0,
-                        hideCaptionAtLimit: 0,
-                        hideAllCaptionAtLilmit: 0,
-                        startWithSlide: 0
-                      });
-                    }
-                  });
-                  /*ready*/
-                  </script>
-                  <style type="text/css">
-                  #rev_slider_4_1_wrapper .tp-loader.spinner2 {
-                    background-color: #1bbc9b !important;
-                  }
-                  </style>
                 </div>
                 <!-- END REVOLUTION SLIDER -->
               </div>
@@ -741,10 +466,10 @@
                                 <span class="field-label">Điểm đi</span>
                                 <div class="field-input">
                                   <select class="select-from" data-placeholder="Điểm đến">
-                                      <option value=""></option>
-                                      <option value="Hanoi">Hà Nội</option>
-                                      <option value="Saigon">Tp.Hồ Chí Minh</option>
-                                    </select>
+                                    <option value=""></option>
+                                    <option value="Hanoi">Hà Nội</option>
+                                    <option value="Saigon">Tp.Hồ Chí Minh</option>
+                                  </select>
                                 </div>
                               </div>
                             </div>
@@ -753,10 +478,10 @@
                                 <span class="field-label">Điểm đến</span>
                                 <div class="field-input">
                                   <select class="select-to" data-placeholder="Điểm đến">
-                                      <option value=""></option>
-                                      <option value="Hanoi">Hà Nội</option>
-                                      <option value="Saigon">Tp.Hồ Chí Minh</option>
-                                    </select>
+                                    <option value=""></option>
+                                    <option value="Hanoi">Hà Nội</option>
+                                    <option value="Saigon">Tp.Hồ Chí Minh</option>
+                                  </select>
                                 </div>
                               </div>
                             </div>
@@ -825,7 +550,7 @@
                           <a href="#">Chúng tôi rất tự hào trở thành đơn vị quảng cáo duy nhất tại Việt Nam cho hãng Truyền Thông Viên Thao</a> -
                           <i>
                             <span><i class="fa fa-calendar"></i></span>
-                            <span>14, Mar, 2016 </span>
+                          <span>14, Mar, 2016 </span>
                           </i>
                         </div>
                       </div>
@@ -841,7 +566,7 @@
                           <a href="#">Chúng tôi rất tự hào trở thành đơn vị quảng cáo duy nhất tại Việt Nam cho hãng Truyền Thông Viên Thao</a> -
                           <i>
                             <span><i class="fa fa-calendar"></i></span>
-                            <span>14, Mar, 2016 </span>
+                          <span>14, Mar, 2016 </span>
                           </i>
                         </div>
                       </div>
@@ -857,7 +582,7 @@
                           <a href="#">Mô tả ngắn</a> -
                           <i>
                             <span><i class="fa fa-calendar"></i></span>
-                            <span>14, Mar, 2016 </span>
+                          <span>14, Mar, 2016 </span>
                           </i>
                         </div>
                       </div>
@@ -873,7 +598,7 @@
                           <a href="#">Chúng tôi rất tự hào trở thành đơn vị quảng cáo duy nhất tại Việt Nam cho hãng Truyền Thông Viên Thao</a> -
                           <i>
                             <span><i class="fa fa-calendar"></i></span>
-                            <span>14, Mar, 2016 </span>
+                          <span>14, Mar, 2016 </span>
                           </i>
                         </div>
                       </div>
