@@ -4,11 +4,12 @@ Metronic AngularJS App Main Script
 
 /* Metronic App */
 var MetronicApp = angular.module("MetronicApp", [
-    "base64",
-    "ui.router", 
-    "ui.bootstrap", 
-    "oc.lazyLoad",  
-    "ngSanitize"
+    "base64",       // Basic Auth
+    "ui.router",    // Router
+    "ui.bootstrap", // Bootstrap
+    "oc.lazyLoad",  // Lazy Loading
+    "ngSanitize",
+    "ngDialog"      // Model Popup
 ]); 
 
 /* Configure API */
@@ -122,7 +123,7 @@ MetronicApp.config(['$stateProvider', '$urlRouterProvider', function($stateProvi
         // Banner
         .state('banner', {
             url: "/banner.html",
-            templateUrl: "views/banner.html",            
+            templateUrl: "views/banner/main.html",            
             data: {pageTitle: 'Admin Banner Template'},
             controller: "BannerController",
             resolve: {
@@ -142,7 +143,7 @@ MetronicApp.config(['$stateProvider', '$urlRouterProvider', function($stateProvi
         // Banner
         .state('comment', {
             url: "/comment.html",
-            templateUrl: "views/comment.html",            
+            templateUrl: "views/comment/main.html",            
             data: {pageTitle: 'Admin Comment Template'},
             controller: "CommentController",
             resolve: {
