@@ -814,13 +814,13 @@ ul.footerlist li a:hover{color:#F69E1C; text-decoration:none;}
 
 .people-info { margin-bottom: 25px; }
 .people-info-inner {}
-.tbl-people-info td { padding: 5px 0px; }
-.tbl-people-info span { color: red; }
-.tbl-people-info th:nth-child(1) { width: 90px; }
-.tbl-people-info th:nth-child(2) { width: 90px; }
-.tbl-people-info th:nth-child(3) { width: 310px; }
-.tbl-people-info th:nth-child(4) { width: 150px; }
-.tbl-people-info th, .tbl-people-info td{ padding: 5px 10px 5px 0px; }
+.tbl-people-info > tbody > tr > td { padding: 5px 0px; }
+.tbl-people-info > thead > tr > th > span { color: red; }
+.tbl-people-info > thead > tr > th:nth-child(1) { width: 90px; }
+.tbl-people-info > thead > tr > th:nth-child(2) { width: 90px; }
+.tbl-people-info > thead > tr > th:nth-child(3) { width: 310px; }
+.tbl-people-info > thead > tr > th:nth-child(4) { width: 150px; }
+.tbl-people-info > thead > tr > th, .tbl-people-info > tbody > tr > td{ padding: 5px 10px 5px 0px; }
 .tbl-people-info .input-group-addon { padding: 0px 9px; }
 .tbl-people-info .input-group-addon span { color: #666; }
 
@@ -839,8 +839,6 @@ ul.footerlist li a:hover{color:#F69E1C; text-decoration:none;}
 .contact-info-field .field.odd { width: 49%; float: right; }
 .contact-info-field .field.field-name > div:first-child { width: 80px; float: left; }
 .contact-info-field .field.field-name > div:last-child { width: calc(100% - 80px); float: left; padding-left: 10px;}
-.contact-info-field .field.field-phone > div { width: 49%; float: left; }
-.contact-info-field .field.field-phone > div:first-child { margin-right: 2%; }
 .contact-info-field .field.field-name span,
 .contact-info-field .field.field-phone span { color: red; }
 .contact-info-field .field.field-birthday { float: none; }
