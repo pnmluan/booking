@@ -23,13 +23,13 @@ $app->group(['prefix' => 'api/v1', 'middleware' => 'BasicAuth', 'namespace' => '
 	|--------------------------------------------------------------------------
 	*/
     $app->get('banner','BannerController@index');
-  
+
     $app->get('banner/{id}','BannerController@getbanner');
-      
+
     $app->post('banner','BannerController@createbanner');
-      
+
     $app->put('banner/{id}','BannerController@updatebanner');
-      
+
     $app->delete('banner/{id}','BannerController@deletebanner');
 
     /*
@@ -37,7 +37,15 @@ $app->group(['prefix' => 'api/v1', 'middleware' => 'BasicAuth', 'namespace' => '
 	| Comment
 	|--------------------------------------------------------------------------
 	*/
-    $app->get('comment','CommentController@index');
+    $app->get('comment/index','CommentController@index');
+
+    $app->get('comment/show/{id}','CommentController@show');
+
+    $app->post('comment/create','CommentController@create');
+
+    $app->put('comment/update/{id}','CommentController@update');
+
+    $app->delete('comment/delete/{id}','CommentController@delete');
 });
 
 // Crawler API
