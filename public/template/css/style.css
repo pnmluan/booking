@@ -565,7 +565,10 @@ textarea:-moz-placeholder { color: #a9a9a9; }
 .list-news > div .content-news .detail-news a:hover { color: #649931; }
 
 .btn-search { background: #E77741; font-family: 'diavlo'; text-transform: uppercase; color: #fff; width: 100%; }
-.btn-search:hover { background: #E77741; color: #fff; }
+.btn-search:hover { background: #E44803; color: #fff; }
+
+.btn-color { background: #E77741; color: #fff; }
+.btn-color:hover { background: #E44803; color: #fff; }
 
 @keyframes blinker {
     50% { opacity: 0; }
@@ -719,9 +722,12 @@ ul.footerlist li a:hover{color:#F69E1C; text-decoration:none;}
 .list-plane-table .plane-price { color: #E44803; font-size: 20px; font-weight: bold; }
 .list-plane-table .plane-price span { font-weight: bold; color: #666; font-size: 14px; }
 
-.submit-plane {height: 60px; padding: 10px 15px; }
-.submit-plane button { float: right; height: 40px; border-radius: 5px; padding: 0px 30px; border: 0px; outline: 0px; text-transform: uppercase; background: #E44803; color: #fff; font-family: 'diavlo'; }
-.submit-plane button:hover { background: #D65800; }
+.submit-plane { padding: 10px 15px; }
+.submit-plane button { float: right; height: 40px; border-radius: 5px; padding: 0px 30px; border: 0px; outline: 0px; text-transform: uppercase; font-family: 'diavlo'; }
+
+
+.scroll-down { position: fixed; bottom: 0px; z-index: 99999; background: url(../img/corner.png) no-repeat 0px 0px; margin: 0px auto; display: block;}
+.scroll-down .more-scroll { font-weight: bold; color: #333; margin-right: 10px; float: left; margin-left: 40px; margin-top: 12px; background: url(../img/arrowdownScroll.png) no-repeat left center; padding-left: 20px; }
 
 .aside-search-plane { display: table-cell; width: 300px; min-width: 260px; font-size: 13px; }
 .filter-plane { background: #f9f9f9; border: 1px solid #ddd; border-radius: 3px; margin-bottom: 20px; }
@@ -768,7 +774,7 @@ ul.footerlist li a:hover{color:#F69E1C; text-decoration:none;}
 .customer-inner { display: table; width: 100%; }
 .customer-info { display: table-cell; padding-right: 15px; font-size: 13px; }
 /*.customer-info p { line-height: 20px; }*/
-.customer-title { font-size: 20px; color: #649931; border-bottom: 1px solid #ddd; padding-bottom: 5px; margin-bottom: 10px; font-weight: bold; }
+.customer-title { font-size: 18px; color: #649931; border-top: 1px solid #ddd; border-bottom: 1px solid #ddd; padding: 10px; margin-bottom: 10px; font-weight: bold; background: #f2f2f2; }
 
 .flight-info {}
 .flight-info-inner {}
@@ -867,8 +873,8 @@ ul.footerlist li a:hover{color:#F69E1C; text-decoration:none;}
 .submit-customer p { width: calc(100% - 130px); float: left; }
 .submit-customer p a { font-weight: bold; color: #649931; }
 .submit-customer p a:hover { color: #FBBB00; }
-.submit-customer button { float: right; height: 40px; border-radius: 5px; padding: 0px 30px; border: 0px; outline: 0px; text-transform: uppercase; background: #E44803; color: #fff; font-family: 'diavlo'; }
-.submit-customer button:hover { background: #D65800; }
+.submit-customer button { float: right; height: 40px; border-radius: 5px; padding: 0px 30px; border: 0px; outline: 0px; text-transform: uppercase;background: #E77741; color: #fff; font-family: 'diavlo'; }
+.submit-customer button:hover { background: #E44803; }
 
 .aside-price-detail{ display: table-cell; width: 280px; min-width: 260px; font-size: 13px; }
 .price-detail { padding: 15px 10px; background: #649931; color: #fff; border-radius: 3px; box-shadow: 0 1px 3px rgba(0,0,0,.5); }
@@ -960,6 +966,9 @@ ul.footerlist li a:hover{color:#F69E1C; text-decoration:none;}
 /***** CONFIRM *****/
 /*******************/
 .confirm-inner > h1 { font-size: 20px; color: #649931; padding-bottom: 5px; margin-bottom: 10px; font-weight: bold; }
+.confirm-inner .customer-title { margin-top: 20px; }
+
+.confirm-inner .customer-title { background: #f2f2f2; padding: 10px; border-top: 1px solid #ddd; }
 
 .TTdh { margin: 15px 0px; padding: 12px; color: #000; line-height: 18px; font-size: 13px; border: solid 1px #ffa500; background: #faebd7;}
 .order-id { font-weight: bold; font-size: 20px; color: #ff0000; }
@@ -983,3 +992,14 @@ ul.footerlist li a:hover{color:#F69E1C; text-decoration:none;}
 .main-confirm .contact-info-inner .field:first-child > div select { width: 80px; float: left; }
 .main-confirm .contact-info-inner .field:first-child > div input { width: calc(100% - 90px); float: right; }
 .main-confirm .contact-info-inner .field:last-child button { color: #fff; background: #E77741; text-transform: uppercase; font-family: 'diavlo'; border-radius: 3px; border: 0px; outline: 0px; width: 100%; padding: 8px 0px; }
+
+
+.book-info .item { border-top: 1px solid #ddd; padding: 5px 0px; }
+.book-info .item.first { border-top: 0px; padding-top: 0px; }
+.book-info .item table td { padding: 2px 0px; }
+.small-title { font-weight: bold; color: #e84e0f; margin: 5px 0px; }
+
+.submit-confirm { padding: 15px 0px; border-top: 1px solid #ddd; margin-top: 15px; }
+.submit-confirm button{ height: 40px; border-radius: 5px; padding: 0px 30px; border: 0px; outline: 0px; text-transform: uppercase; background: #E77741; color: #fff; font-family: 'diavlo'; }
+.submit-confirm button:hover { background: #E44803;  }
+
