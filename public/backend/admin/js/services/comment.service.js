@@ -1,33 +1,23 @@
 angular.module('MetronicApp')
     .factory('CommentService', ['$http', '$rootScope', function($http, $rootScope) {
 
-    
-
     var urlBase = $rootScope.settings.apiPath + 'comment';
     var CommentService = {};
 
-    CommentService.getComment = function () {
-        return $http.get(urlBase);
+    CommentService.getComments = function () {
+        return $http.get(urlBase + '/index');
     };
 
-    CommentService.getCustomer = function (id) {
-        return $http.get(urlBase + '/' + id);
+    CommentService.createComment = function (cust) {
+        return $http.post(urlBase + '/create', cust);
     };
 
-    CommentService.insertCustomer = function (cust) {
-        return $http.post(urlBase, cust);
+    CommentService.updateComment = function (cust) {
+        return $http.put(urlBase + '/update/' + cust.id, cust)
     };
 
-    CommentService.updateCustomer = function (cust) {
-        return $http.put(urlBase + '/' + cust.ID, cust)
-    };
-
-    CommentService.deleteCustomer = function (id) {
-        return $http.delete(urlBase + '/' + id);
-    };
-
-    CommentService.getOrders = function (id) {
-        return $http.get(urlBase + '/' + id + '/orders');
+    CommentService.deleteComment = function (id) {
+        return $http.delete(urlBase + '/delete/' + id);
     };
 
     return CommentService;

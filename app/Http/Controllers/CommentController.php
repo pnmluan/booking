@@ -14,22 +14,12 @@ class CommentController extends Controller{
         return response()->json($comment);
     }
 
-    public function getComment($id) {
+    public function show($id) {
         $comment  = Comment::find($id);
         return response()->json($comment);
     }
 
-    public function createComment(Request $request){
-        $validator = Validator::make($request->all(), [
-            'full_name' => 'required',
-            'content' => 'required',
-            'status' => 'required'
-        ]);
-
-        if ($validator->fails()) {
-            return redirect()->back()->withErrors($validator)->withInput();
-        }
-
+    public function create(Request $request){
         $comment = new Comment();
         $comment->full_name = $request->input('full_name');
         $comment->content = $request->input('content');
@@ -39,24 +29,14 @@ class CommentController extends Controller{
         return response()->json($comment);
     }
 
-    public function deleteComment($id){
+    public function delete($id){
         $comment  = Comment::find($id);
         $comment->delete();
 
         return response()->json('deleted');
     }
 
-    public function updateComment(Request $request, $id){
-        $validator = Validator::make($request->all(), [
-            'full_name' => 'required',
-            'content' => 'required',
-            'status' => 'required'
-        ]);
-
-        if ($validator->fails()) {
-            return redirect()->back()->withErrors($validator)->withInput();
-        }
-
+    public function update(Request $request, $id){
         $comment = Comment::find($id);
         $comment->full_name = $request->input('full_name');
         $comment->content = $request->input('content');
