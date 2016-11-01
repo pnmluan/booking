@@ -2,12 +2,12 @@
   
 namespace App\Http\Controllers;
   
-use App\Banner;
+use App\Models\Banner;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
   
   
-class BannerController extends Controller{
+class BannerController extends ApiController{
   
 	public function index(){
         $Categories  = Banner::all();

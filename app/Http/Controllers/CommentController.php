@@ -2,48 +2,79 @@
 
 namespace App\Http\Controllers;
 
-use App\Comment;
+use App\Models\Comment;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
 
-class CommentController extends Controller{
+class CommentController extends ApiController{
 
     public function index(){
         $comment  = Comment::all();
-        return response()->json($comment);
+        return $this->respondWithSuccess(['data'=>$comment]);
     }
 
     public function show($id) {
+
         $comment  = Comment::find($id);
-        return response()->json($comment);
+
+        if (!$comment) {
+            return $this->respondNotFound();
+        }
+        return $this->respondWithSuccess(['data'=>$comment]);
     }
 
     public function create(Request $request){
         $comment = new Comment();
-        $comment->full_name = $request->input('full_name');
-        $comment->content = $request->input('content');
-        $comment->status = $request->input('status');
-        $comment->save();
+        $data = $request->all();
+        $comment->fill($data);
 
-        return response()->json($comment);
+        if (!$comment->isValid()) {
+            return $this->respondWithValidationError(['error' => $comment->getValidationErrors()]);
+        }
+        try {
+            $comment->save();
+        } catch (\Exception $ex) {
+            return $this->respondWithNotSaved();
+        }
+        return $this->respondWithCreated(['data'=>$comment]);
     }
 
     public function delete($id){
-        $comment  = Comment::find($id);
-        $comment->delete();
 
-        return response()->json('deleted');
+        $comment  = Comment::find($id);
+        if (!$comment) {
+            return $this->respondNotFound();
+        }
+        try {
+            if (!$comment->delete()) {
+                return $this->respondWithError();
+            }
+        } catch (\Exception $ex) {
+            return $this->respondWithError(['error' => $ex->getMessage()]);
+        }
+        return $this->respondWithSuccess(['record_id'=>$id]);
     }
 
     public function update(Request $request, $id){
+        
         $comment = Comment::find($id);
-        $comment->full_name = $request->input('full_name');
-        $comment->content = $request->input('content');
-        $comment->status = $request->input('status');
-        $comment->save();
+        if(!$comment) {
+            return $this->respondNotFound();
+        }
+        $data = $request->all();
+        $comment->fill($data);
 
-        return response()->json($comment);
+        if (!$comment->isValid()) {
+            return $this->respondWithValidationError(['error' => $comment->getValidationErrors()]);
+        }
+        try {
+            $comment->save();
+        } catch (\Exception $ex) {
+            return $this->respondWithNotSaved();
+        }
+
+        return $this->respondWithSaved(['data'=>$comment]);
     }
 }
 ?>
