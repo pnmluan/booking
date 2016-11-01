@@ -15,7 +15,7 @@ var indexScript = {
     var radios = jQuery('input[name="plane-option"]');
     radios.filter('[value=option1]').prop('checked', true);
 
-    jQuery('#date-back input').prop('disabled', true);
+    jQuery('.plane-form #date-back input').prop('disabled', true);
 
     jQuery('.multiple').hide();
   },
@@ -24,14 +24,61 @@ var indexScript = {
       if (jQuery(this).val() == 'option1') {
         jQuery('.multiple').hide();
         jQuery('.one').fadeIn('300');
-        jQuery('#date-back input').prop('disabled', true);
+        jQuery('.plane-form #date-back input').prop('disabled', true);
       } else if (jQuery(this).val() == 'option2') {
         jQuery('.multiple').hide();
         jQuery('.one').fadeIn('300');
-        jQuery('#date-back input').prop('disabled', false);
+        jQuery('.plane-form #date-back input').prop('disabled', false);
       } else {
         jQuery('.one').hide();
         jQuery('.multiple').fadeIn('300');
+      }
+    });
+  }
+};
+
+var selectFlights = {
+  scrollSubmit: function() {
+    var m = jQuery('.submit-plane').offset().top;
+    var n = jQuery(window).height();
+    var w = jQuery('.main-list-plane-inner').width();
+
+    if (n < m) {
+      jQuery('.submit-plane').addClass('scroll-down');
+      jQuery('.submit-plane').css('width', w);
+      jQuery('.more-scroll').text('Kéo xuống để xem thêm kết quả');
+    }
+
+    jQuery(window).scroll(function() {
+      var o = jQuery(window).scrollTop();
+      if (o + n >= m) {
+        jQuery('.submit-plane').removeClass('scroll-down');
+        jQuery('.more-scroll').text('');
+      } else {
+        jQuery('.submit-plane').addClass('scroll-down');
+        jQuery('.more-scroll').text('Kéo xuống để xem thêm kết quả');
+      }
+    });
+
+    jQuery(window).resize(function() {
+      w = jQuery('.main-list-plane-inner').width();
+      jQuery('.submit-plane').css('width', w);
+    });
+  },
+  loadBookOption: function() {
+    var radios = jQuery('input[name="flight-option"]');
+    radios.filter('[value=option1]').prop('checked', true);
+
+    jQuery('.search-plane #date-back input').prop('disabled', true);
+  },
+  changeBookOption: function() {
+    jQuery('input[name="flight-option"]').on('change', function() {
+      if (jQuery(this).val() == 'option1') {
+        jQuery('.one').fadeIn('300');
+        jQuery('.search-plane #date-back input').prop('disabled', true);
+      } else {
+        jQuery('.one').fadeIn('300');
+        jQuery('.search-plane #date-back input').prop('disabled', false);
       }
     });
   }
@@ -67,4 +114,8 @@ jQuery(document).ready(function() {
 
   indexScript.loadBookOption();
   indexScript.changeBookOption();
+
+  selectFlights.scrollSubmit();
+  selectFlights.loadBookOption();
+  selectFlights.changeBookOption();
 });
