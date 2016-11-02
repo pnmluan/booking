@@ -1004,7 +1004,7 @@ ul.footerlist li a:hover{color:#F69E1C; text-decoration:none;}
 .submit-confirm button:hover { background: #E44803; }
 
 /***** LIST BUS *****/
-/**********************/
+/********************/
 .list-bus  {}
 .list-bus-inner { display: table; width: 100%; }
 .main-list-bus { display: table-cell; padding-right: 15px; }
@@ -1059,6 +1059,11 @@ ul.footerlist li a:hover{color:#F69E1C; text-decoration:none;}
 .filter-bus-inner .box table tr a { color: #649931; }
 .filter-bus-inner .box table tr a:hover { color: #F69E1C; }
 
+.sel-bus-title { margin-top: 10px; font-size: 15px; }
+.btn-choose-all { color: #649931; margin-bottom: 10px; display: block; }
+.btn-choose-all:hover { color: #F69E1C; }
+
+
 .search-bus { border-radius: 4px; padding: 10px; background-image: url("../img/pattern_vang.svg"); background-repeat: repeat; background-color: #F8F3E7; margin-bottom: 20px; }
 .search-bus h2 { font-family: 'diavlo'; font-size: 20px; padding-bottom: 15px; background: url(../img/bus-icon.png) no-repeat 0px 0px; padding-left: 50px; padding-top: 5px; color: #649931; }
 .search-bus-inner { background: #fff; border-radius: 5px; padding: 10px; }
@@ -1077,4 +1082,29 @@ ul.footerlist li a:hover{color:#F69E1C; text-decoration:none;}
 
 .field-date-go .input-group-addon,
 .field-date-back .input-group-addon{ padding: 6px; }
+
+/***** BUS GUEST DETAILS *****/
+/*****************************/
+.bus-guest-details-inner {}
+.bus-guest-details-inner .contact-info { width: 49%; float: left; margin-bottom: 0px; }
+.bus-guest-details-inner .contact-info-inner .field { margin-bottom: 10px; }
+.bus-guest-details-inner .contact-info-inner .form-control { padding: 6px; }
+.bus-guest-details-inner .contact-info-inner .field label { margin-bottom: 5px; font-family: 'diavlo'; display: block; font-size: 13px; }
+.bus-guest-details-inner .contact-info-inner .field:first-child {}
+.bus-guest-details-inner .contact-info-inner .field:first-child > div {  }
+.bus-guest-details-inner .contact-info-inner .field:first-child > div select { width: 80px; float: left; }
+.bus-guest-details-inner .contact-info-inner .field:first-child > div input { width: calc(100% - 90px); float: right; }
+.bus-guest-details-inner .contact-info-inner .field:last-child button { color: #fff; background: #E77741; text-transform: uppercase; font-family: 'diavlo'; border-radius: 3px; border: 0px; outline: 0px; width: 100%; padding: 8px 0px; }
+
+
+.bus-guest-details-inner .bus-note { width: 49%; float: right; }
+.bus-guest-details-inner .bus-note .warning { margin-top: 25px; }
+
+/***** BUS CONFIRM *****/
+/***********************/
+.bus-book-info-inner {}
+.bus-book-info-inner .field { margin-bottom: 10px; }
+.bus-book-info-inner .field label { width: 120px; float: left; }
+.bus-book-info-inner .field > div { overflow: hidden; }
+.bus-book-info-inner .field:last-child { border-top: 1px solid #ddd; padding-top: 5px; }
 
