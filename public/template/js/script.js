@@ -38,6 +38,23 @@ var indexScript = {
 };
 
 var selectFlights = {
+  loadBookOption: function() {
+    var radios = jQuery('input[name="flight-option"]');
+    radios.filter('[value=option1]').prop('checked', true);
+
+    jQuery('.search-plane #date-back input').prop('disabled', true);
+  },
+  changeBookOption: function() {
+    jQuery('input[name="flight-option"]').on('change', function() {
+      if (jQuery(this).val() == 'option1') {
+        jQuery('.one').fadeIn('300');
+        jQuery('.search-plane #date-back input').prop('disabled', true);
+      } else {
+        jQuery('.one').fadeIn('300');
+        jQuery('.search-plane #date-back input').prop('disabled', false);
+      }
+    });
+  },
   scrollSubmit: function() {
     var m = jQuery('.submit-plane').offset().top;
     var n = jQuery(window).height();
@@ -64,21 +81,20 @@ var selectFlights = {
       w = jQuery('.main-list-plane-inner').width();
       jQuery('.submit-plane').css('width', w);
     });
-  },
-  loadBookOption: function() {
-    var radios = jQuery('input[name="flight-option"]');
-    radios.filter('[value=option1]').prop('checked', true);
+  }
+};
 
-    jQuery('.search-plane #date-back input').prop('disabled', true);
+var guestDetails = {
+  init: function(){
+    var checkbox = jQuery('input[name="order-report"]');
+    checkbox.prop('checked', false);
   },
-  changeBookOption: function() {
-    jQuery('input[name="flight-option"]').on('change', function() {
-      if (jQuery(this).val() == 'option1') {
-        jQuery('.one').fadeIn('300');
-        jQuery('.search-plane #date-back input').prop('disabled', true);
+  toggleBill: function(){
+    jQuery('input[name="order-report"]').on('change', function(){
+      if(!jQuery(this).is(':checked')){
+        jQuery('.bill').hide();
       } else {
-        jQuery('.one').fadeIn('300');
-        jQuery('.search-plane #date-back input').prop('disabled', false);
+        jQuery('.bill').slideDown(300);
       }
     });
   }
@@ -115,7 +131,10 @@ jQuery(document).ready(function() {
   indexScript.loadBookOption();
   indexScript.changeBookOption();
 
-  selectFlights.scrollSubmit();
-  selectFlights.loadBookOption();
-  selectFlights.changeBookOption();
+  // selectFlights.scrollSubmit();
+  // selectFlights.loadBookOption();
+  // selectFlights.changeBookOption();
+
+  guestDetails.init();
+  guestDetails.toggleBill();
 });
