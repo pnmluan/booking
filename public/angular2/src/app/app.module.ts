@@ -3,6 +3,8 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { RouterModule } from '@angular/router';
+import { Configuration } from './shared/app.configuration';
+
 
 /*
  * Platform and Environment providers/directives/pipes
@@ -12,11 +14,11 @@ import { ROUTES } from './app.routes';
 
 // App is our top level component
 import { AppComponent } from './app.component';
-import { HomeComponent } from './home';
-import { AboutComponent } from './about';
-import { PageNotFoundComponent } from './page-not-found';
-import { HeaderComponent } from './shared';
-import { SearchResultComponent } from './search-result';
+import { HomeComponent } from './components/home';
+import { AboutComponent } from './components/about';
+import { PageNotFoundComponent } from './components/page-not-found';
+import { HeaderComponent } from './components/header';
+import { SearchResultComponent } from './components/search-result';
 
 
 @NgModule({
@@ -34,7 +36,9 @@ import { SearchResultComponent } from './search-result';
     RouterModule.forRoot(ROUTES, { useHash: true }),
     HttpModule
   ],
-  providers: [],
+  providers: [
+    Configuration
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
