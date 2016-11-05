@@ -9,13 +9,26 @@ var MetronicApp = angular.module("MetronicApp", [
     "ui.bootstrap", // Bootstrap
     "oc.lazyLoad",  // Lazy Loading
     "ngSanitize",
-    "ngDialog"      // Model Popup
+    "ngDialog",     // Model Popup
+    "toastr",       // Toastr
+    "datatables",   // Datatable
 ]); 
 
 /* Configure API */
-MetronicApp.config(['$httpProvider', '$base64', function($httpProvider, $base64) {
+MetronicApp.config(['$httpProvider', '$base64', 'toastrConfig', function($httpProvider, $base64, toastrConfig) {
     var auth = $base64.encode("datvesieure:balobooking");
     $httpProvider.defaults.headers.common['Authorization'] = 'Basic ' + auth;
+
+    angular.extend(toastrConfig, {
+        autoDismiss: false,
+        containerId: 'toast-container',
+        maxOpened: 0,    
+        newestOnTop: true,
+        positionClass: 'toast-bottom-right',
+        preventDuplicates: false,
+        preventOpenDuplicates: false,
+        target: 'body'
+      });
 }]);
 // MetronicApp.config(function($httpProvider, $base64) {
 //     var auth = $base64.encode("datvesieure:balobooking");

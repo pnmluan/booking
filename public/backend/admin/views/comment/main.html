@@ -44,7 +44,7 @@
 
                         </div>
                     </div>
-                    <table class="table table-striped table-bordered table-hover table-checkable order-column" id="sample_1">
+                    <!-- <table class="table table-striped table-bordered table-hover table-checkable order-column" id="sample_1">
                         <thead>
                             <tr>
                                 <th class="text-center" width="200px"> Full Name </th>
@@ -56,27 +56,30 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr class="odd gradeX" ng-repeat="comment in data.comments track by $index">
-                                <td class="text-center" ng-bind="comment.full_name"></td>
-                                <td class="text-center" ng-bind="comment.content"></td>
+                            <tr class="odd gradeX" ng-repeat="item in listItem track by $index">
+                                <td class="text-center" ng-bind="item.full_name"></td>
+                                <td class="text-center" ng-bind="item.content"></td>
                                 <td class="text-center">
-                                    <span ng-class="classNameStatus(comment.status)" ng-bind="comment.status"></span>
+                                    <span ng-class="classNameStatus(item.status)" ng-bind="item.status"></span>
                                 </td>
-                                <td class="text-center" ng-bind="comment.created_at"></td>
-                                <td class="text-center" ng-bind="comment.updated_at"></td>
+                                <td class="text-center" ng-bind="item.created_at"></td>
+                                <td class="text-center" ng-bind="item.updated_at"></td>
                                 <td class="text-center actions-table">
-                                    <span aria-hidden="true" class="icon-pencil" ng-click="clickToUpdate(comment)"></span>
-                                    <span aria-hidden="true" class="icon-trash" ng-click="clickToDelete(comment.id)"></span>
+                                    <span aria-hidden="true" class="icon-pencil" ng-click="clickToUpdate(item)"></span>
+                                    <span aria-hidden="true" class="icon-trash" ng-click="clickToDelete(item.id)"></span>
                                 </td>
                             </tr>
                         </tbody>
-                    </table>
+                    </table> -->
+
+                    <table datatable="" dt-options="dtOptions" dt-columns="dtColumns" 
+                    class="table table-striped table-bordered table-hover table-checkable order-column"></table>
                 </div>
             </div>
             <!-- END EXAMPLE TABLE PORTLET-->
         </div>
 
     </div>
-    <!-- END TABLE COMMENT -->
+    <!-- END TABLE item -->
 </div>
 <!-- END MAIN CONTENT -->

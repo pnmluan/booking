@@ -9,9 +9,45 @@ use Illuminate\Http\Request;
 
 class CommentController extends ApiController{
 
-    public function index(){
-        $comment  = Comment::all();
-        return $this->respondWithSuccess(['data'=>$comment]);
+    public function index(Request $request){
+
+        // DB table to use
+        $table = 'comment';
+         
+        // Table's primary key
+        $primaryKey = 'id';
+         
+        // Array of database columns which should be read and sent back to DataTables.
+        // The `db` parameter represents the column name in the database, while the `dt`
+        // parameter represents the DataTables column identifier. In this case simple
+        // indexes
+        $columns = array(
+            array( 'db' => 'full_name', 'dt' => 'full_name' ),
+            array( 'db' => 'content',  'dt' => 'content' ),
+            array( 'db' => 'status',   'dt' => 'status' ),
+        );
+         
+        // SQL server connection information
+        
+         
+         
+        /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+         * If you just want to use the basic configuration for DataTables with PHP
+         * server-side, there is no need to edit below this line.
+         */
+
+         
+        echo json_encode(
+            self::simple( $_GET, $table, $primaryKey, $columns )
+        );
+die;
+        // $arrData = [
+        //     'draw' => 1,
+        //     'recordsFiltered' => 10,
+        //     'recordsTotal' => count($comment),
+        //     'data' => $comment
+        // ];
+        // return $this->respondWithSuccess($arrData);
     }
 
     public function show($id) {
@@ -30,11 +66,12 @@ class CommentController extends ApiController{
         $comment->fill($data);
 
         if (!$comment->isValid()) {
-            return $this->respondWithValidationError(['error' => $comment->getValidationErrors()]);
+            return $this->respondWithError(['error' => $comment->getValidationErrors()]);
         }
         try {
             $comment->save();
         } catch (\Exception $ex) {
+            var_dump($ex);die;
             return $this->respondWithNotSaved();
         }
         return $this->respondWithCreated(['data'=>$comment]);
@@ -66,7 +103,7 @@ class CommentController extends ApiController{
         $comment->fill($data);
 
         if (!$comment->isValid()) {
-            return $this->respondWithValidationError(['error' => $comment->getValidationErrors()]);
+            return $this->respondWithError(['error' => $comment->getValidationErrors()]);
         }
         try {
             $comment->save();
