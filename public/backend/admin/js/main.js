@@ -153,7 +153,7 @@ MetronicApp.config(['$stateProvider', '$urlRouterProvider', function($stateProvi
             }
         })
 
-        // Banner
+        // Comment
         .state('comment', {
             url: "/comment.html",
             templateUrl: "views/comment/main.html",            
@@ -168,6 +168,27 @@ MetronicApp.config(['$stateProvider', '$urlRouterProvider', function($stateProvi
                             '../assets/global/plugins/dropzone/dropzone.min.js',
                             'js/controllers/CommentController.js',
                             'js/services/comment.service.js'
+                        ] 
+                    });
+                }]
+            }
+        })
+
+        // Location
+        .state('location', {
+            url: "/location.html",
+            templateUrl: "views/location/main.html",            
+            data: {pageTitle: 'Admin Location Template'},
+            controller: "LocationController",
+            resolve: {
+                deps: ['$ocLazyLoad', function($ocLazyLoad) {
+                    return $ocLazyLoad.load({
+                        name: 'MetronicApp',
+                        insertBefore: '#ng_load_plugins_before', // load the above css files before a LINK element with this ID. Dynamic CSS files must be loaded between core and theme css files
+                        files: [
+                            '../assets/global/plugins/dropzone/dropzone.min.js',
+                            'js/controllers/LocationController.js',
+                            'js/services/location.service.js'
                         ] 
                     });
                 }]

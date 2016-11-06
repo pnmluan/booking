@@ -8,7 +8,7 @@ class Comment extends BaseModel
     protected $table = 'comment';
     protected $fillable = ['full_name', 'content', 'status', 'created_at', 'updated_at'];
 
-     public function getModelValidations()
+    public function getModelValidations()
 	{
 		return [
 			'full_name' => 'required|string|' //. $this->getUniqueValidatorForField('full_name')

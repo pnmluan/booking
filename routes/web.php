@@ -46,6 +46,21 @@ $app->group(['prefix' => 'api/v1', 'middleware' => 'BasicAuth', 'namespace' => '
     $app->put('comment/update/{id}','CommentController@update');
 
     $app->delete('comment/delete/{id}','CommentController@delete');
+
+    /*
+    |--------------------------------------------------------------------------
+    | Location
+    |--------------------------------------------------------------------------
+    */
+    $app->get('location/index','LocationController@index');
+
+    $app->get('location/show/{id}','LocationController@show');
+
+    $app->post('location/create','LocationController@create');
+
+    $app->put('location/update/{id}','CommentController@update');
+
+    $app->delete('location/delete/{id}','LocationController@delete');
 });
 
 // Crawler API

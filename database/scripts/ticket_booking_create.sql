@@ -8,6 +8,8 @@ CREATE TABLE baggage_type (
     provider_id int NOT NULL,
     name varchar(150) NOT NULL,
     fare float NOT NULL,
+	created_at datetime,
+    updated_at datetime,
     CONSTRAINT baggage_type_pk PRIMARY KEY (id)
 );
 
@@ -19,6 +21,8 @@ CREATE TABLE banner (
     url varchar(1000) NOT NULL,
     description varchar(1000) NOT NULL,
     status varchar(45) NOT NULL,
+	created_at datetime,
+    updated_at datetime,
     CONSTRAINT banner_pk PRIMARY KEY (id)
 );
 
@@ -31,6 +35,8 @@ CREATE TABLE booking (
     infant int NOT NULL,
     ticket_type_id int NOT NULL,
     remark varchar(1000) NOT NULL,
+	created_at datetime,
+    updated_at datetime,
     CONSTRAINT booking_pk PRIMARY KEY (id)
 );
 
@@ -46,6 +52,8 @@ CREATE TABLE booking_detail (
     one_way boolean NOT NULL,
     depart_duration int NULL,
     return_duration int NULL,
+	created_at datetime,
+    updated_at datetime,
     CONSTRAINT booking_detail_pk PRIMARY KEY (id)
 );
 
@@ -61,6 +69,8 @@ CREATE TABLE bus_route (
     return_duration int NULL,
     fare float NOT NULL,
     ticket_type_id int NOT NULL,
+	created_at datetime,
+    updated_at datetime,
     CONSTRAINT bus_route_pk PRIMARY KEY (id)
 );
 
@@ -84,6 +94,8 @@ CREATE TABLE contact (
     last_name varchar(50) NOT NULL,
     phone varchar(11) NOT NULL,
     email varchar(50) NOT NULL,
+	created_at datetime,
+    updated_at datetime,
     CONSTRAINT contact_pk PRIMARY KEY (id)
 );
 
@@ -96,6 +108,8 @@ CREATE TABLE fare (
     charge float NOT NULL,
     tax float NOT NULL,
     baggage_type_id int NOT NULL,
+	created_at datetime,
+    updated_at datetime,
     CONSTRAINT fare_pk PRIMARY KEY (id)
 );
 
@@ -104,6 +118,8 @@ CREATE TABLE location (
     id int NOT NULL AUTO_INCREMENT,
     code char(3) NOT NULL,
     name varchar(50) NOT NULL,
+	created_at datetime,
+    updated_at datetime,
     CONSTRAINT location_pk PRIMARY KEY (id)
 );
 
@@ -117,6 +133,8 @@ CREATE TABLE passenger (
     birthdate date NOT NULL,
     phone varchar(11) NOT NULL,
     email varchar(50) NOT NULL,
+	created_at datetime,
+    updated_at datetime,
     CONSTRAINT passenger_pk PRIMARY KEY (id)
 );
 
@@ -124,6 +142,8 @@ CREATE TABLE passenger (
 CREATE TABLE provider (
     id int NOT NULL AUTO_INCREMENT,
     name varchar(20) NOT NULL,
+	created_at datetime,
+    updated_at datetime,
     CONSTRAINT provider_pk PRIMARY KEY (id)
 );
 
@@ -132,6 +152,8 @@ CREATE TABLE ticket_type (
     id int NOT NULL AUTO_INCREMENT,
     provider int NOT NULL,
     type int NOT NULL,
+	created_at datetime,
+    updated_at datetime,
     CONSTRAINT ticket_type_pk PRIMARY KEY (id)
 );
 
