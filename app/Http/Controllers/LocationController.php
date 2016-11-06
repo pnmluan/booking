@@ -2,25 +2,30 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Comment;
+use App\Models\Location;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
 
-class CommentController extends ApiController{
+class LocationController extends ApiController{
 
     public function index(Request $request){
+        // $location  = Location::all();
+        // return $this->respondWithSuccess(['data'=>$location]);
+        // return response()->json($location);
 
         // DB table to use
-        $table = 'comment';
+        $table = 'location';
          
         // Table's primary key
         $primaryKey = 'id';
 
         $columns = array(
-            array( 'db' => 'full_name', 'dt' => 'full_name' ),
-            array( 'db' => 'content',  'dt' => 'content' ),
-            array( 'db' => 'status',   'dt' => 'status' ),
+            array( 'db' => 'id', 'dt' => 'id' ),
+            array( 'db' => 'name',  'dt' => 'name' ),
+            array( 'db' => 'code', 'dt' => 'code' ),
+            
+            // array( 'db' => 'action',  'dt' => 'action' ),
         );
          
         echo json_encode(
@@ -31,39 +36,39 @@ class CommentController extends ApiController{
 
     public function show($id) {
 
-        $comment  = Comment::find($id);
+        $location  = Location::find($id);
 
-        if (!$comment) {
+        if (!$location) {
             return $this->respondNotFound();
         }
-        return $this->respondWithSuccess(['data'=>$comment]);
+        return $this->respondWithSuccess(['data'=>$location]);
     }
 
     public function create(Request $request){
-        $comment = new Comment();
+        $location = new Location();
         $data = $request->all();
-        $comment->fill($data);
+        $location->fill($data);
 
-        if (!$comment->isValid()) {
-            return $this->respondWithError(['error' => $comment->getValidationErrors()]);
+        if (!$location->isValid()) {
+            return $this->respondWithError(['error' => $location->getValidationErrors()]);
         }
         try {
-            $comment->save();
+            $location->save();
         } catch (\Exception $ex) {
             var_dump($ex);die;
             return $this->respondWithNotSaved();
         }
-        return $this->respondWithCreated(['data'=>$comment]);
+        return $this->respondWithCreated(['data'=>$location]);
     }
 
     public function delete($id){
 
-        $comment  = Comment::find($id);
-        if (!$comment) {
+        $location  = Location::find($id);
+        if (!$location) {
             return $this->respondNotFound();
         }
         try {
-            if (!$comment->delete()) {
+            if (!$location->delete()) {
                 return $this->respondWithError();
             }
         } catch (\Exception $ex) {
@@ -74,23 +79,23 @@ class CommentController extends ApiController{
 
     public function update(Request $request, $id){
         
-        $comment = Comment::find($id);
-        if(!$comment) {
+        $location = Location::find($id);
+        if(!$location) {
             return $this->respondNotFound();
         }
         $data = $request->all();
-        $comment->fill($data);
+        $location->fill($data);
 
-        if (!$comment->isValid()) {
-            return $this->respondWithError(['error' => $comment->getValidationErrors()]);
+        if (!$location->isValid()) {
+            return $this->respondWithError(['error' => $location->getValidationErrors()]);
         }
         try {
-            $comment->save();
+            $location->save();
         } catch (\Exception $ex) {
             return $this->respondWithNotSaved();
         }
 
-        return $this->respondWithSaved(['data'=>$comment]);
+        return $this->respondWithSaved(['data'=>$location]);
     }
 }
 ?>
