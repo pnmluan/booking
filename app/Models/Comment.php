@@ -14,5 +14,7 @@ class Comment extends BaseModel
 			'full_name' => 'required|string|' //. $this->getUniqueValidatorForField('full_name')
 		];
 	}
+
+	
 }
 ?>

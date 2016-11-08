@@ -15,7 +15,7 @@ $app->get('/', function () use ($app) {
     return $app->version();
 });
 
-$app->group(['prefix' => 'api/v1', 'middleware' => 'BasicAuth', 'namespace' => 'App\Http\Controllers'], function($app)
+$app->group(['prefix' => 'api/v1',  'namespace' => 'App\Http\Controllers'], function($app)
 {
 	/*
 	|--------------------------------------------------------------------------
@@ -58,7 +58,7 @@ $app->group(['prefix' => 'api/v1', 'middleware' => 'BasicAuth', 'namespace' => '
 
     $app->post('location/create','LocationController@create');
 
-    $app->put('location/update/{id}','CommentController@update');
+    $app->put('location/update/{id}','LocationController@update');
 
     $app->delete('location/delete/{id}','LocationController@delete');
 });

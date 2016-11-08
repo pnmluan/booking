@@ -1,4 +1,4 @@
-angular.module('MetronicApp').controller('LocationController', function($rootScope, $scope, $http,  $base64, $timeout, LocationService, ngDialog, toastr, DTOptionsBuilder, DTColumnBuilder) {
+angular.module('MetronicApp').controller('LocationController', function($rootScope, $scope, $http,  $base64, $timeout, $location, LocationService, ngDialog, toastr, DTOptionsBuilder, DTColumnBuilder) {
     $scope.$on('$viewContentLoaded', function() {
         // initialize core components
         App.initAjax();
@@ -37,7 +37,7 @@ angular.module('MetronicApp').controller('LocationController', function($rootSco
                     LocationService.createLocation($scope.mItem).then(function(res) {
 
                         if(res.data.status == 'success') {
-                            data.listItem.push(res.data.data);
+                            data.dtInstance.reloadData();
                             $scope.mItem = {};
                             toastr.success('Added an item', 'Success');
                         } else {
@@ -57,7 +57,8 @@ angular.module('MetronicApp').controller('LocationController', function($rootSco
                 data: function () {
                     var data = {
                         optionStatus: $scope.optionStatus,
-                        listItem: $scope.listItem
+                        listItem: $scope.listItem,
+                        dtInstance: $scope.dtInstance
                     }
                     return data;
                 }
@@ -78,12 +79,13 @@ angular.module('MetronicApp').controller('LocationController', function($rootSco
 
     // Click to Update
     $('#dataTable').on( 'click', '.clickToUpdate', function () {
+        console.log('test');
         $scope.clickToUpdate($(this).data('id'));
     });
     $scope.clickToUpdate = function(id) {
         
         var item = getItemByID(id);
-console.log(item)
+
         ngDialog.openConfirm({
             template: 'views/location/model_update_location.html',
             className: 'ngdialog-theme-default',
@@ -92,13 +94,13 @@ console.log(item)
                 $scope.mItem = item;
                 $scope.errorMsg = [];
 
-console.log($scope.mItem);
                 // Create Location
                 $scope.save = function() {
 
                     LocationService.updateLocation($scope.mItem).then(function(res) {
 
                         if(res.data.status == 'success') {
+                            data.dtInstance.reloadData();
                             ngDialog.close();
                             toastr.success('Updated an item', 'Success');
                         } else {
@@ -119,7 +121,8 @@ console.log($scope.mItem);
                 data: function () {
                     var data = {
                         optionStatus: $scope.optionStatus,
-                        listItem: $scope.listItem
+                        listItem: $scope.listItem,
+                        dtInstance: $scope.dtInstance
                     }
                     return data;
                 }
@@ -168,48 +171,53 @@ console.log($scope.mItem);
         ];
         
         $scope.listItem = [];
+        $scope.dtInstance = {};
         loadListItem();
 
-        // $scope.dtOptions = DTOptionsBuilder.newOptions()
-        //     .withOption('ajax', {
-        //      // Either you specify the AjaxDataProp here
-        //      // dataSrc: 'data',
-        //     // headers: {'Authorization': "datvesieure:balobooking"},
-        //     url: $rootScope.settings.apiPath + 'location/index',
-        //     type: 'GET',
         //     // beforeSend: function (xhr) {
         //     //     xhr.setRequestHeader('Authorization', "datvesieure:balobooking");
         //     // },
         //     beforeSend: function(xhr){
         //         xhr.setRequestHeader("Authorization",
         //         "Basic " + btoa($base64.encode('datvesieure' + ":" + 'balobooking')));
-        //     },
-        //  })
-        //     // Add your custom button in the DOM
-        //  // or here
-        //  .withDataProp('data')
-        //     .withOption('processing', true)
-        //     .withOption('serverSide', true)
-        //     .withPaginationType('full_numbers');
-        // $scope.dtColumns = [
-        //     DTColumnBuilder.newColumn('name').withTitle('Name'),
-        //     DTColumnBuilder.newColumn('code').withTitle('Code'),
-        //     DTColumnBuilder.newColumn(null).withTitle('Action').notSortable()
-        //     .renderWith(actionsHtml)
-        // ];
+
+
+
+        //init datatables
+        var params = $location.search();
+
+        $scope.dtOptions = DTOptionsBuilder.newOptions()
+            .withOption('ajax',{
+                beforeSend: function(xhr){
+                    xhr.setRequestHeader('Authorization',"Basic " + btoa($base64.encode('datvesieure' + ":" + 'balobooking')));
+                },
+                data: params,
+                url: $rootScope.settings.apiPath + 'location/index',
+                type: 'GET',
+        }).withDataProp('data')
+            .withOption('processing',true)
+            .withOption('serverSide',true)
+            .withOption('filter',false)
+            .withOption('lengthChange',false)
+            .withDisplayLength(20);
+
+        $scope.dtColumns = [
+            DTColumnBuilder.newColumn('id').notVisible(),
+            DTColumnBuilder.newColumn('name').withTitle('Name'),
+            DTColumnBuilder.newColumn('code').withTitle('Code'),
+            DTColumnBuilder.newColumn(null).withTitle('Action').withOption('createdCell',function(td,cellData,rowData,row,col){
+                
+               var string_html = '</button>&nbsp;' +'<button class="btn btn-warning clickToUpdate" data-id="' + rowData.id + '">' +
+                                '   <i class="fa fa-edit"></i>' +"Edit"+
+                                '</button>&nbsp;' +
+                                '<button class="btn btn-danger clickToDelete" data-id="' + rowData.id + '">' +
+                                '   <i class="fa fa-trash-o"></i>' +"Delete"+
+                                '</button>';
+                $(td).html(string_html);
+            }).withOption('width','20px'),
+        ];
         
     
-    }
-
-    function actionsHtml(data, type, full, meta) {
-        console.log(data);
-        return 
-            '</button>&nbsp;' +'<button class="btn btn-warning" ng-click="clickToUpdate(' + data + ')">' +
-            '   <i class="fa fa-edit"></i>' +"Edit"+
-            '</button>&nbsp;' +
-            '<button class="btn btn-danger" ng-click="clickToDelete(' + data.id + ')">' +
-            '   <i class="fa fa-trash-o"></i>' +"Delete"
-            '</button>';
     }
 
     function loadListItem() {
@@ -218,46 +226,14 @@ console.log($scope.mItem);
             if(res.statusText == 'OK') {
                 $scope.listItem = res.data.data;
 
-                var dataset = [];
+                $scope.dataset = [];
                 angular.forEach(res.data.data, function(row, key) {
                     var temp = [];
                     angular.forEach(row, function(v, k) {
                         temp.push(v);
                         
                     });
-                    dataset.push(temp);
-                });
-
-                $('#dataTable').DataTable( {
-                    data: dataset,
-                    "columnDefs": [
-                        { "visible": false,  "targets": [0] },
-                        { title: "Name" , "targets": [1] },
-                        { title: "Code" , "targets": [2] },
-                        // {
-                        //     "targets": 3,
-                        //     "data": null,
-                        //     "defaultContent": "<button>Click!</button>"
-                        // },
-                        {
-                            "render": function ( data, type, row, $index ) {
-
-                                return '</button>&nbsp;' +'<button class="btn btn-warning clickToUpdate" data-id="' + row[0] + '">' +
-                                '   <i class="fa fa-edit"></i>' +"Edit"+
-                                '</button>&nbsp;' +
-                                '<button class="btn btn-danger clickToDelete" data-id="' + row[0] + '">' +
-                                '   <i class="fa fa-trash-o"></i>' +"Delete"+
-                                '</button>';
-                            },
-                            "targets": 3
-                        },
-
-                    ]
-                    // columns: [
-                    //     { title: "ID" },
-                    //     { title: "Name" },
-                    //     { title: "Code" }
-                    // ]
+                    $scope.dataset.push(temp);
                 });
             }
             

@@ -10,27 +10,8 @@ use Illuminate\Http\Request;
 class LocationController extends ApiController{
 
     public function index(Request $request){
-        // $location  = Location::all();
-        // return $this->respondWithSuccess(['data'=>$location]);
-        // return response()->json($location);
-
-        // DB table to use
-        $table = 'location';
-         
-        // Table's primary key
-        $primaryKey = 'id';
-
-        $columns = array(
-            array( 'db' => 'id', 'dt' => 'id' ),
-            array( 'db' => 'name',  'dt' => 'name' ),
-            array( 'db' => 'code', 'dt' => 'code' ),
-            
-            // array( 'db' => 'action',  'dt' => 'action' ),
-        );
-         
-        echo json_encode(
-            self::simple( $_GET, $table, $primaryKey, $columns )
-        );
+        $data = Location::listItems($request->all());
+        return response()->json($data);
 
     }
 
@@ -78,7 +59,7 @@ class LocationController extends ApiController{
     }
 
     public function update(Request $request, $id){
-        
+
         $location = Location::find($id);
         if(!$location) {
             return $this->respondNotFound();

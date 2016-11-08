@@ -73,7 +73,7 @@ class CommentController extends ApiController{
     }
 
     public function update(Request $request, $id){
-        
+        var_dump($id);die;
         $comment = Comment::find($id);
         if(!$comment) {
             return $this->respondNotFound();
