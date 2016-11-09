@@ -14,7 +14,8 @@ class AirlineController extends \App\Http\Controllers\ApiController
     }
 
     public function test() {
-        echo date('Y/m', strtotime('2016-12-06'));
+        $str = 'Lượt đi 1 BL  790';
+        echo substr($str, strpos($str,'Lượt đi') + 13, 8);
         exit;
     }
 
@@ -154,6 +155,144 @@ class AirlineController extends \App\Http\Controllers\ApiController
 
                 $result['ret_flights'][] = $data;
             }
+        }
+
+        // $this->respondWithSuccess(['data'=> $result]);
+        echo json_encode($result);
+        exit;
+    }
+
+    public function jetstar(Request $request) {
+        libxml_use_internal_errors(true);
+        require_once(base_path('app/Libraries/Curl.php'));
+
+        // PREPARE PARAM
+        $round_trip = $request->input('round_trip');
+        $from = $request->input('from');
+        $to = $request->input('to');
+        $from_date = strtotime($request->input('from_date'));
+        $to_date = strtotime($request->input('to_date'));
+        $adult = $request->input('adult');
+        $children = $request->input('children');
+        $infant = $request->input('infant');
+
+        // $round_trip = 'RoundTrip'; //OneWay
+        // $from = 'SGN';
+        // $to = 'HAN';
+        // $from_date = strtotime('2016-12-01');
+        // $to_date = strtotime('2016-12-08');
+        // $adult = '2';
+        // $children = '1';
+        // $infant = '1';
+
+        // GET SESSION ID
+        $url = 'http://booknow.jetstar.com/Search.aspx?culture=vi-VN';
+
+        $curl = new \Curl();
+
+        $curl->get($url);
+
+        $curl->setHeader('Host', 'booknow.jetstar.com');
+        $curl->setHeader('Referer', 'http://booknow.jetstar.com/Search.aspx?culture=vi-VN');
+
+        $curl->setCookie('ASP.NET_SessionId', $curl->getCookie('ASP.NET_SessionId'));
+
+        // SEARCH FLIGHT
+        $curl->post('http://booknow.jetstar.com/Search.aspx?culture=vi-VN', array(
+            '__EVENTTARGET' => '',
+            '__EVENTARGUMENT' => '',
+            '__VIEWSTATE' => '/wEPDwUBMGQYAQUeX19Db250cm9sc1JlcXVpcmVQb3N0QmFja0tleV9fFgEFJ01lbWJlckxvZ2luU2VhcmNoVmlldyRtZW1iZXJfUmVtZW1iZXJtZSDCMtVG/1lYc7dy4fVekQjBMvD5',
+            'pageToken' => '',
+            'ControlGroupSearchView$AvailabilitySearchInputSearchView$RadioButtonMarketStructure' => $round_trip,
+            'ControlGroupSearchView$AvailabilitySearchInputSearchView$TextBoxMarketOrigin1' => $from,
+            'ControlGroupSearchView$AvailabilitySearchInputSearchView$TextBoxMarketDestination1' => $to,
+            'ControlGroupSearchView$AvailabilitySearchInputSearchView$TextboxDepartureDate1' => date('d/m/Y', $from_date),
+            'ControlGroupSearchView$AvailabilitySearchInputSearchView$TextboxDestinationDate1' => date('d/m/Y', $to_date),
+            'ControlGroupSearchView$AvailabilitySearchInputSearchView$DropDownListCurrency' => 'VND',
+            'ControlGroupSearchView$AvailabilitySearchInputSearchView$TextBoxMarketOrigin2' => $to,
+            'ControlGroupSearchView$AvailabilitySearchInputSearchView$TextBoxMarketDestination2' => $from,
+            'ControlGroupSearchView$AvailabilitySearchInputSearchView$TextboxDepartureDate2' => date('d/m/Y', $to_date),
+            'ControlGroupSearchView$AvailabilitySearchInputSearchView$TextboxDestinationDate2' => '',
+            'ControlGroupSearchView$AvailabilitySearchInputSearchView$DropDownListPassengerType_ADT' => $adult,
+            'ControlGroupSearchView$AvailabilitySearchInputSearchView$DropDownListPassengerType_CHD' => $children,
+            'ControlGroupSearchView$AvailabilitySearchInputSearchView$DropDownListPassengerType_INFANT' => $infant,
+            'ControlGroupSearchView$AvailabilitySearchInputSearchView$RadioButtonSearchBy' => 'SearchStandard',
+            'ControlGroupSearchView$AvailabilitySearchInputSearchView$numberTrips' => '2',
+            'ControlGroupSearchView$AvailabilitySearchInputSearchView$ButtonSubmit' => '',
+            'locale' => 'vi-VN',
+        ));
+
+
+        $curl->get('http://booknow.jetstar.com/Select.aspx');
+
+        $doc = new \DOMDocument();
+        $doc->loadHTML($curl->response);
+        $xpath = new \DOMXpath($doc);
+
+        $result = [];
+
+        // DEPARTURE FLIGHT
+        $fields = $xpath->query("(//table[@class='domestic'])[1]/tbody/tr/td");
+        $prices = $xpath->query("//*[@name='ControlGroupSelectView\$AvailabilityInputSelectView\$market1']");
+
+        for ($i = 0; $i < ($fields->length / 4) - 1; $i++) {
+            $data = [];
+
+            $data['start_date'] = date('d/m/Y', $from_date);
+
+            $str = $fields[$i * 4]->nodeValue;
+            $data['start_time'] = substr($str, 0, strpos($str, ':') + 3);
+            $data['start_from'] = substr($str, strpos($str, ':') + 3);
+            $data['start_code'] = $from;
+
+            $str = $fields[$i * 4 + 1]->nodeValue;
+            $data['end_time'] = substr($str, 0, strpos($str, ':') + 3);
+            $data['end_to'] = substr($str, strpos($str, ':') + 3);
+            $data['end_code'] = $to;
+
+            $str = $fields[$i * 4 + 2]->nodeValue;
+            $str = substr($str, strpos($str, 'Lượt đi') + 14, 8);
+            $str = implode('', explode('  ', $str));
+            $data['flight_code'] = $str;
+
+            $str = $fields[$i * 4 + 3]->nodeValue;
+            $data['price'] = $prices[$i]->getAttribute('data-discfees-adt') + $prices[$i]->getAttribute('data-price');
+
+            $result['dep_flights'][] = $data;
+        }
+
+        // RETURN FLIGHT
+        if (!empty($round_trip) && $round_trip == 'RoundTrip') {
+
+            $fields = $xpath->query("(//table[@class='domestic'])[2]/tbody/tr/td");
+            $prices = $xpath->query("//*[@name='ControlGroupSelectView\$AvailabilityInputSelectView\$market2']");
+
+            for ($i = 0; $i < ($fields->length / 4) - 1; $i++) {
+                $data = [];
+
+                $data['start_date'] = date('d/m/Y', $from_date);
+
+                $str = $fields[$i * 4]->nodeValue;
+                $data['start_time'] = substr($str, 0, strpos($str, ':') + 3);
+                $data['start_from'] = substr($str, strpos($str, ':') + 3);
+                $data['start_code'] = $from;
+
+                $str = $fields[$i * 4 + 1]->nodeValue;
+                $data['end_time'] = substr($str, 0, strpos($str, ':') + 3);
+                $data['end_to'] = substr($str, strpos($str, ':') + 3);
+                $data['end_code'] = $to;
+
+                $str = $fields[$i * 4 + 2]->nodeValue;
+                $str = substr($str, strpos($str, 'Lượt về') + 14, 8);
+                $str = implode('', explode('  ', $str));
+                $data['flight_code'] = $str;
+
+                $str = $fields[$i * 4 + 3]->nodeValue;
+                $data['price'] = $prices[$i]->getAttribute('data-discfees-adt') + $prices[$i]->getAttribute('data-price');
+
+                $result['ret_flights'][] = $data;
+            }
+
         }
 
         // $this->respondWithSuccess(['data'=> $result]);

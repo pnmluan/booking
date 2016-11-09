@@ -69,6 +69,9 @@ $app->group(['prefix' => 'api/v1', 'middleware' => 'BasicAuth', 'namespace' => '
     $app->get('airline','TicketCrawlers\AirlineController@index');
 
     $app->get('airline/test','TicketCrawlers\AirlineController@test');
+
     $app->post('airline/vietjet','TicketCrawlers\AirlineController@vietjet');
+
+    $app->post('airline/jetstar','TicketCrawlers\AirlineController@jetstar');
 
 });
