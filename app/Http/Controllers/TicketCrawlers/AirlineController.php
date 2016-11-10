@@ -23,9 +23,9 @@ class AirlineController extends \App\Http\Controllers\ApiController
         require_once(base_path('app/Libraries/Curl.php'));
 
         // PREPARE PARAM
-        $round_trip = $request->input('round_trip');
-        $from = $request->input('from');
-        $to = $request->input('to');
+        $round_trip = $request->input('round_trip'); // Option: on, off
+        $from = $request->input('from'); // Example: HAN
+        $to = $request->input('to');    // Example: SGN
         $from_date = strtotime($request->input('from_date'));
         $to_date = strtotime($request->input('to_date'));
         $adult = $request->input('adult');

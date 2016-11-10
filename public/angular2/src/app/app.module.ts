@@ -9,8 +9,8 @@ import { Configuration } from './shared/app.configuration';
 /*
  * Platform and Environment providers/directives/pipes
  */
-// import { ENV_PROVIDERS } from './environment';
 import { ROUTES } from './app.routes';
+import { APP_BASE_HREF } from '@angular/common';
 
 // App is our top level component
 import { AppComponent } from './app.component';
@@ -33,11 +33,12 @@ import { SearchResultComponent } from './components/search-result';
   imports: [
     BrowserModule,
     FormsModule,
-    RouterModule.forRoot(ROUTES, { useHash: true }),
+    RouterModule.forRoot(ROUTES),
     HttpModule
   ],
   providers: [
-    Configuration
+    Configuration,
+    { provide: APP_BASE_HREF, useValue: '/' },
   ],
   bootstrap: [AppComponent]
 })
