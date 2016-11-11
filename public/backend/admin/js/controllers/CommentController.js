@@ -1,4 +1,4 @@
-angular.module('MetronicApp').controller('CommentController', function($rootScope, $scope, $http, $base64, $timeout, CommentService, ngDialog, toastr, DTOptionsBuilder, DTColumnBuilder) {
+angular.module('MetronicApp').controller('CommentController', function($rootScope, $scope, $http, $base64, $timeout, $location, $q, CommentService, ngDialog, toastr, DTOptionsBuilder, DTColumnBuilder) {
     $scope.$on('$viewContentLoaded', function() {
         // initialize core components
         App.initAjax();
@@ -37,9 +37,10 @@ angular.module('MetronicApp').controller('CommentController', function($rootScop
                     CommentService.createComment($scope.mItem).then(function(res) {
 
                         if(res.data.status == 'success') {
-                            data.listItem.push(res.data.data);
+                            data.dtInstance.reloadData();
                             $scope.mItem = {};
                             toastr.success('Added an item', 'Success');
+                            $scope.errorMsg = [];
                         } else {
                             $scope.errorMsg = res.data.error;
                             
@@ -57,7 +58,8 @@ angular.module('MetronicApp').controller('CommentController', function($rootScop
                 data: function () {
                     var data = {
                         optionStatus: $scope.optionStatus,
-                        listItem: $scope.listItem
+                        listItem: $scope.listItem,
+                        dtInstance: $scope.dtInstance
                     }
                     return data;
                 }
@@ -65,20 +67,42 @@ angular.module('MetronicApp').controller('CommentController', function($rootScop
         });
     };
 
+    // Get item By ID
+    function getItemByID(id) {
+        var deferred = $q.defer();
+        var item = {};
+        CommentService.getComments().then(function(res) {
+
+            if(res.statusText == 'OK') {
+
+                angular.forEach(res.data.data, function(row, key) {
+                    if(row.id == id) {
+                        return deferred.resolve(row);
+                    }
+                });
+            }
+        });
+        
+        return deferred.promise;
+    }
+
     // Click to Update
-    $scope.clickToUpdate = function(comment) {
-        $scope.edit_comment = JSON.parse(JSON.stringify(comment));
+    $scope.clickToUpdate = function(item) {
         ngDialog.openConfirm({
             template: 'views/comment/model_update_comment.html',
             className: 'ngdialog-theme-default',
             scope: $scope,
             controller: ['$scope', '$filter', 'data', function($scope, $filter, data){
-                $scope.mItem = comment;
+                $scope.mItem = item;
                 $scope.errorMsg = [];
 
                 $scope.optionStatus = data.optionStatus;
-                $scope.optionStatus.selected = $filter('filter')(data.optionStatus, {id: comment.status});
-                console.log($scope.optionStatus.selected);
+                angular.forEach($scope.optionStatus, function(value, key){
+                    if(value.id == item.status) {
+                        $scope.optionStatus.selected = value;
+                        return;
+                    }
+                });
 
                 // Create Comment
                 $scope.save = function() {
@@ -86,6 +110,7 @@ angular.module('MetronicApp').controller('CommentController', function($rootScop
                     CommentService.updateComment($scope.mItem).then(function(res) {
 
                         if(res.data.status == 'success') {
+                            data.dtInstance.reloadData();
                             ngDialog.close();
                             toastr.success('Updated an item', 'Success');
                         } else {
@@ -106,14 +131,18 @@ angular.module('MetronicApp').controller('CommentController', function($rootScop
                 data: function () {
                     var data = {
                         optionStatus: $scope.optionStatus,
-                        listItem: $scope.listItem
+                        listItem: $scope.listItem,
+                        dtInstance: $scope.dtInstance
                     }
                     return data;
                 }
             }
         });
+
+        
     }
 
+    // Click to Delete
     $scope.clickToDelete = function(id) {
         swal({
           title: 'Are you sure?',
@@ -132,7 +161,7 @@ angular.module('MetronicApp').controller('CommentController', function($rootScop
             CommentService.deleteComment(id).then(function(res) {
                 if(res.data.status == 'success') {
                     toastr.success('Deleted an item', 'Success');
-                    loadListItem();
+                    $scope.dtInstance.reloadData();
                 }
             });
         }, function(dismiss) {});
@@ -151,40 +180,58 @@ angular.module('MetronicApp').controller('CommentController', function($rootScop
         ];
         
         $scope.listItem = [];
+        $scope.dtInstance = {};
         loadListItem();
 
+        var params = $location.search();
+
         $scope.dtOptions = DTOptionsBuilder.newOptions()
-            .withOption('ajax', {
-             // Either you specify the AjaxDataProp here
-             // dataSrc: 'data',
-            // headers: {'Authorization': "datvesieure:balobooking"},
-            url: $rootScope.settings.apiPath + 'comment/index',
-            type: 'GET',
-            // beforeSend: function (xhr) {
-            //     xhr.setRequestHeader('Authorization', "datvesieure:balobooking");
-            // },
-            beforeSend: function(xhr){
-                xhr.setRequestHeader("Authorization",
-                "Basic " + btoa('datvesieure' + ":" + 'balobooking'));
-            },
-         })
-         // or here
-         .withDataProp('data')
-            .withOption('processing', true)
-            .withOption('serverSide', true)
-            .withPaginationType('full_numbers');
+            .withOption('ajax',{
+                beforeSend: function(xhr){
+                    xhr.setRequestHeader('Authorization',"Basic " + btoa($base64.encode('datvesieure' + ":" + 'balobooking')));
+                },
+                data: params,
+                url: $rootScope.settings.apiPath + 'comment/index',
+                type: 'GET',
+        }).withDataProp('data')
+            .withOption('processing',true)
+            .withOption('serverSide',true)
+            .withOption('filter',false)
+            .withOption('lengthChange',false)
+            .withDisplayLength(20)
+            .withOption('rowCallback',function(row,data){
+                $('td > .clickToUpdate', row).bind('click', function(){
+                    $scope.clickToUpdate(data);
+                });
+
+                $('td > .clickToDelete', row).bind('click', function(){
+                    $scope.clickToDelete(data.id);
+                });
+            });
+
         $scope.dtColumns = [
+            DTColumnBuilder.newColumn('id').notVisible(),
             DTColumnBuilder.newColumn('full_name').withTitle('Fullname'),
             DTColumnBuilder.newColumn('content').withTitle('Content'),
             DTColumnBuilder.newColumn('status').withTitle('Status'),
+            DTColumnBuilder.newColumn(null).withTitle('Action').withOption('createdCell',function(td,cellData,rowData,row,col){
+                
+               var string_html = `</button>&nbsp;<button class="btn btn-warning clickToUpdate"><i class="fa fa-edit"></i>Edit</button>&nbsp;` +
+                                 `<button class="btn btn-danger clickToDelete"><i class="fa fa-trash-o"></i>Delete </button>`;
+                $(td).html(string_html);
+            }).withOption('width','auto'),
         ];
-        
-    
     }
 
     function loadListItem() {
         CommentService.getComments().then(function(res) {
-            $scope.listItem = res.data.data;
+
+            if(res.statusText == 'OK') {
+                $scope.listItem = res.data.data;
+                return $scope.listItem;
+            }
+            return;
+            
         });
     }
 });
