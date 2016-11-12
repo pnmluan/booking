@@ -40,6 +40,7 @@ angular.module('MetronicApp').controller('LocationController', function($rootSco
                             data.dtInstance.reloadData();
                             $scope.mItem = {};
                             toastr.success('Added an item', 'Success');
+                            $scope.errorMsg = [];
                         } else {
                             $scope.errorMsg = res.data.error;
                             
@@ -57,7 +58,6 @@ angular.module('MetronicApp').controller('LocationController', function($rootSco
                 data: function () {
                     var data = {
                         optionStatus: $scope.optionStatus,
-                        listItem: $scope.listItem,
                         dtInstance: $scope.dtInstance
                     }
                     return data;
@@ -66,6 +66,7 @@ angular.module('MetronicApp').controller('LocationController', function($rootSco
         });
     };
 
+    // Get item By ID
     function getItemByID(id) {
         var item = {};
         angular.forEach($scope.listItem, function(row, key) {
@@ -78,13 +79,7 @@ angular.module('MetronicApp').controller('LocationController', function($rootSco
     }
 
     // Click to Update
-    $('#dataTable').on( 'click', '.clickToUpdate', function () {
-        console.log('test');
-        $scope.clickToUpdate($(this).data('id'));
-    });
-    $scope.clickToUpdate = function(id) {
-        
-        var item = getItemByID(id);
+    $scope.clickToUpdate = function(item) {
 
         ngDialog.openConfirm({
             template: 'views/location/model_update_location.html',
@@ -121,7 +116,6 @@ angular.module('MetronicApp').controller('LocationController', function($rootSco
                 data: function () {
                     var data = {
                         optionStatus: $scope.optionStatus,
-                        listItem: $scope.listItem,
                         dtInstance: $scope.dtInstance
                     }
                     return data;
@@ -131,9 +125,6 @@ angular.module('MetronicApp').controller('LocationController', function($rootSco
     }
 
     // Click to Delete
-    $('#dataTable').on( 'click', '.clickToDelete', function () {
-        $scope.clickToDelete($(this).data('id'));
-    });
     $scope.clickToDelete = function(id) {
         swal({
           title: 'Are you sure?',
@@ -152,7 +143,7 @@ angular.module('MetronicApp').controller('LocationController', function($rootSco
             LocationService.deleteLocation(id).then(function(res) {
                 if(res.data.status == 'success') {
                     toastr.success('Deleted an item', 'Success');
-                    loadListItem();
+                    // loadListItem();
                 }
             });
         }, function(dismiss) {});
@@ -164,6 +155,7 @@ angular.module('MetronicApp').controller('LocationController', function($rootSco
     $rootScope.settings.layout.pageBodySolid = false;
     $rootScope.settings.layout.pageSidebarClosed = false;
 
+    // initiallize function
     function initialize() {
         $scope.optionStatus = [
             {id: 'active', name: 'Active'},
@@ -172,16 +164,6 @@ angular.module('MetronicApp').controller('LocationController', function($rootSco
         
         $scope.listItem = [];
         $scope.dtInstance = {};
-        loadListItem();
-
-        //     // beforeSend: function (xhr) {
-        //     //     xhr.setRequestHeader('Authorization', "datvesieure:balobooking");
-        //     // },
-        //     beforeSend: function(xhr){
-        //         xhr.setRequestHeader("Authorization",
-        //         "Basic " + btoa($base64.encode('datvesieure' + ":" + 'balobooking')));
-
-
 
         //init datatables
         var params = $location.search();
@@ -189,7 +171,8 @@ angular.module('MetronicApp').controller('LocationController', function($rootSco
         $scope.dtOptions = DTOptionsBuilder.newOptions()
             .withOption('ajax',{
                 beforeSend: function(xhr){
-                    xhr.setRequestHeader('Authorization',"Basic " + btoa($base64.encode('datvesieure' + ":" + 'balobooking')));
+                    xhr.setRequestHeader('Content-Type', 'application/json; charset=utf-8');
+                    xhr.setRequestHeader('Authorization',"Basic " + $base64.encode('datvesieure' + ":" + 'balobooking'));
                 },
                 data: params,
                 url: $rootScope.settings.apiPath + 'location/index',
@@ -199,7 +182,16 @@ angular.module('MetronicApp').controller('LocationController', function($rootSco
             .withOption('serverSide',true)
             .withOption('filter',false)
             .withOption('lengthChange',false)
-            .withDisplayLength(20);
+            .withDisplayLength(20)
+            .withOption('rowCallback',function(row,data){
+                $('td > .clickToUpdate', row).bind('click', function(){
+                    $scope.clickToUpdate(data);
+                });
+
+                $('td > .clickToDelete', row).bind('click', function(){
+                    $scope.clickToDelete(data.id);
+                });
+            });
 
         $scope.dtColumns = [
             DTColumnBuilder.newColumn('id').notVisible(),
@@ -207,14 +199,10 @@ angular.module('MetronicApp').controller('LocationController', function($rootSco
             DTColumnBuilder.newColumn('code').withTitle('Code'),
             DTColumnBuilder.newColumn(null).withTitle('Action').withOption('createdCell',function(td,cellData,rowData,row,col){
                 
-               var string_html = '</button>&nbsp;' +'<button class="btn btn-warning clickToUpdate" data-id="' + rowData.id + '">' +
-                                '   <i class="fa fa-edit"></i>' +"Edit"+
-                                '</button>&nbsp;' +
-                                '<button class="btn btn-danger clickToDelete" data-id="' + rowData.id + '">' +
-                                '   <i class="fa fa-trash-o"></i>' +"Delete"+
-                                '</button>';
+               var string_html = `</button>&nbsp;<button class="btn btn-warning clickToUpdate"><i class="fa fa-edit"></i>Edit</button>&nbsp;` +
+                                 `<button class="btn btn-danger clickToDelete"><i class="fa fa-trash-o"></i>Delete </button>`;
                 $(td).html(string_html);
-            }).withOption('width','20px'),
+            }).withOption('width','auto'),
         ];
         
     
@@ -225,16 +213,6 @@ angular.module('MetronicApp').controller('LocationController', function($rootSco
 
             if(res.statusText == 'OK') {
                 $scope.listItem = res.data.data;
-
-                $scope.dataset = [];
-                angular.forEach(res.data.data, function(row, key) {
-                    var temp = [];
-                    angular.forEach(row, function(v, k) {
-                        temp.push(v);
-                        
-                    });
-                    $scope.dataset.push(temp);
-                });
             }
             
         });

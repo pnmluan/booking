@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Input;
 use App\Models\Comment;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -11,21 +12,8 @@ class CommentController extends ApiController{
 
     public function index(Request $request){
 
-        // DB table to use
-        $table = 'comment';
-         
-        // Table's primary key
-        $primaryKey = 'id';
-
-        $columns = array(
-            array( 'db' => 'full_name', 'dt' => 'full_name' ),
-            array( 'db' => 'content',  'dt' => 'content' ),
-            array( 'db' => 'status',   'dt' => 'status' ),
-        );
-         
-        echo json_encode(
-            self::simple( $_GET, $table, $primaryKey, $columns )
-        );
+        $data = Comment::listItems($request->all());
+        return response()->json($data);
 
     }
 
@@ -39,9 +27,29 @@ class CommentController extends ApiController{
         return $this->respondWithSuccess(['data'=>$comment]);
     }
 
+    protected function uploadImage($image) {
+        if($image) {
+            $filename  = time() . '.' . $image->getClientOriginalExtension();
+
+            $destinationPath = 'backend/assets/apps/img/comment'; // upload path
+
+            $image->move($destinationPath, $filename); // uploading file to given path
+
+            return $filename;
+        }
+        return null;
+
+    }
+
     public function create(Request $request){
         $comment = new Comment();
-        $data = $request->all();
+        $data = $request['data'];
+
+        $img = $this->uploadImage($request->file('img'));
+        if($img) {
+            $data['img'] = $img;
+        }
+
         $comment->fill($data);
 
         if (!$comment->isValid()) {
@@ -50,7 +58,6 @@ class CommentController extends ApiController{
         try {
             $comment->save();
         } catch (\Exception $ex) {
-            var_dump($ex);die;
             return $this->respondWithNotSaved();
         }
         return $this->respondWithCreated(['data'=>$comment]);
@@ -73,12 +80,17 @@ class CommentController extends ApiController{
     }
 
     public function update(Request $request, $id){
-        var_dump($id);die;
+
         $comment = Comment::find($id);
         if(!$comment) {
             return $this->respondNotFound();
         }
-        $data = $request->all();
+        $data = $request['data'];
+        $img = $this->uploadImage($request->file('img'));
+        if($img) {
+            $data['img'] = $img;
+        }
+
         $comment->fill($data);
 
         if (!$comment->isValid()) {

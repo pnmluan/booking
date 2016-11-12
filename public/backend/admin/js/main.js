@@ -12,6 +12,7 @@ var MetronicApp = angular.module("MetronicApp", [
     "ngDialog",     // Model Popup
     "toastr",       // Toastr
     "datatables",   // Datatable
+    'ngFileUpload', // ng-file-upload
 ]); 
 
 /* Configure API */
@@ -67,7 +68,8 @@ MetronicApp.factory('settings', ['$rootScope', function($rootScope) {
         assetsPath: '../assets',
         globalPath: '../assets/global',
         layoutPath: '../assets/layouts/layout',
-        apiPath: '/booking/public/api/v1/'
+        apiPath: '/booking/public/api/v1/',
+        imgPath: '../assets/apps/img/',
     };
 
     $rootScope.settings = settings;

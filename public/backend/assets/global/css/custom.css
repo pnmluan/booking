@@ -1,2 +1,6 @@
 .actions-table span { padding: 0px 3px; cursor: pointer; }
 .actions-table span:hover { color: blue; }
+
+.medium-thumb-icon {
+	width: 60px;
+}
