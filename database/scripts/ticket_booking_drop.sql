@@ -1,5 +1,5 @@
 -- Created by Vertabelo (http://vertabelo.com)
--- Last modification date: 2016-10-25 03:20:27.47
+-- Last modification date: 2016-11-10 16:56:11.041
 
 -- foreign keys
 ALTER TABLE baggage_type
