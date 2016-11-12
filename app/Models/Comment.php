@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 class Comment extends BaseModel
 {
     protected $table = 'comment';
-    protected $fillable = ['full_name', 'content', 'status', 'created_at', 'updated_at'];
+    protected $fillable = ['full_name', 'content', 'img', 'status', 'created_at', 'updated_at'];
 
     public function getModelValidations()
 	{

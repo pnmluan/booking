@@ -1,4 +1,4 @@
-angular.module('MetronicApp').controller('CommentController', function($rootScope, $scope, $http, $base64, $timeout, $location, $q, CommentService, ngDialog, toastr, DTOptionsBuilder, DTColumnBuilder) {
+angular.module('MetronicApp').controller('CommentController', function($rootScope, $scope, $http, $base64, $timeout, $location, $q, CommentService, ngDialog, toastr, DTOptionsBuilder, DTColumnBuilder, Upload) {
     $scope.$on('$viewContentLoaded', function() {
         // initialize core components
         App.initAjax();
@@ -31,10 +31,13 @@ angular.module('MetronicApp').controller('CommentController', function($rootScop
                 $scope.optionStatus = data.optionStatus;
                 $scope.optionStatus.selected = data.optionStatus[0];
 
+
+
                 // Create Comment
                 $scope.save = function() {
+
                     $scope.mItem.status = $scope.optionStatus.selected.id;
-                    CommentService.createComment($scope.mItem).then(function(res) {
+                    CommentService.createComment($scope.img, $scope.mItem).then(function(res) {
 
                         if(res.data.status == 'success') {
                             data.dtInstance.reloadData();
@@ -58,7 +61,6 @@ angular.module('MetronicApp').controller('CommentController', function($rootScop
                 data: function () {
                     var data = {
                         optionStatus: $scope.optionStatus,
-                        listItem: $scope.listItem,
                         dtInstance: $scope.dtInstance
                     }
                     return data;
@@ -104,10 +106,13 @@ angular.module('MetronicApp').controller('CommentController', function($rootScop
                     }
                 });
 
+                //Load Image
+                $scope.img = $scope.settings.imgPath + 'comment/' + item.img; 
+
                 // Create Comment
                 $scope.save = function() {
                     $scope.mItem.status = $scope.optionStatus.selected.id;
-                    CommentService.updateComment($scope.mItem).then(function(res) {
+                    CommentService.updateComment($scope.img, $scope.mItem).then(function(res) {
 
                         if(res.data.status == 'success') {
                             data.dtInstance.reloadData();
@@ -131,7 +136,6 @@ angular.module('MetronicApp').controller('CommentController', function($rootScop
                 data: function () {
                     var data = {
                         optionStatus: $scope.optionStatus,
-                        listItem: $scope.listItem,
                         dtInstance: $scope.dtInstance
                     }
                     return data;
@@ -181,17 +185,18 @@ angular.module('MetronicApp').controller('CommentController', function($rootScop
         
         $scope.listItem = [];
         $scope.dtInstance = {};
-        loadListItem();
 
+        var table = 'comment'
         var params = $location.search();
+        var imgUrl = $rootScope.settings.imgPath + table + '/';
 
         $scope.dtOptions = DTOptionsBuilder.newOptions()
             .withOption('ajax',{
                 beforeSend: function(xhr){
-                    xhr.setRequestHeader('Authorization',"Basic " + btoa($base64.encode('datvesieure' + ":" + 'balobooking')));
+                    xhr.setRequestHeader('Authorization',"Basic " + $base64.encode('datvesieure' + ":" + 'balobooking'));
                 },
                 data: params,
-                url: $rootScope.settings.apiPath + 'comment/index',
+                url: $rootScope.settings.apiPath + table + '/index',
                 type: 'GET',
         }).withDataProp('data')
             .withOption('processing',true)
@@ -211,6 +216,10 @@ angular.module('MetronicApp').controller('CommentController', function($rootScop
 
         $scope.dtColumns = [
             DTColumnBuilder.newColumn('id').notVisible(),
+            DTColumnBuilder.newColumn('img').withTitle('Image').withOption('createdCell',function(td, cellData, rowData, row, col){
+               var string_html = `<img class="medium-thumb-icon" src="` + imgUrl + rowData.img   + `">`;
+                $(td).html(string_html);
+            }).withOption('width','60px'),
             DTColumnBuilder.newColumn('full_name').withTitle('Fullname'),
             DTColumnBuilder.newColumn('content').withTitle('Content'),
             DTColumnBuilder.newColumn('status').withTitle('Status'),

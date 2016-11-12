@@ -79,6 +79,7 @@ CREATE TABLE comment (
     id int NOT NULL AUTO_INCREMENT,
     full_name varchar(250) NOT NULL,
     content varchar(1000) NOT NULL,
+	img varchar(200) NOT NULL,
     status varchar(45) NOT NULL,
     created_at datetime,
     updated_at datetime,

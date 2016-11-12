@@ -15,7 +15,7 @@ $app->get('/', function () use ($app) {
     return $app->version();
 });
 
-$app->group(['prefix' => 'api/v1',  'namespace' => 'App\Http\Controllers'], function($app)
+$app->group(['prefix' => 'api/v1', 'middleware' => 'BasicAuth',  'namespace' => 'App\Http\Controllers'], function($app)
 {
 	/*
 	|--------------------------------------------------------------------------
@@ -43,7 +43,7 @@ $app->group(['prefix' => 'api/v1',  'namespace' => 'App\Http\Controllers'], func
 
     $app->post('comment/create','CommentController@create');
 
-    $app->put('comment/update/{id}','CommentController@update');
+    $app->post('comment/update/{id}','CommentController@update');
 
     $app->delete('comment/delete/{id}','CommentController@delete');
 

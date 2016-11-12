@@ -58,7 +58,6 @@ angular.module('MetronicApp').controller('LocationController', function($rootSco
                 data: function () {
                     var data = {
                         optionStatus: $scope.optionStatus,
-                        listItem: $scope.listItem,
                         dtInstance: $scope.dtInstance
                     }
                     return data;
@@ -117,7 +116,6 @@ angular.module('MetronicApp').controller('LocationController', function($rootSco
                 data: function () {
                     var data = {
                         optionStatus: $scope.optionStatus,
-                        listItem: $scope.listItem,
                         dtInstance: $scope.dtInstance
                     }
                     return data;
@@ -145,7 +143,7 @@ angular.module('MetronicApp').controller('LocationController', function($rootSco
             LocationService.deleteLocation(id).then(function(res) {
                 if(res.data.status == 'success') {
                     toastr.success('Deleted an item', 'Success');
-                    loadListItem();
+                    // loadListItem();
                 }
             });
         }, function(dismiss) {});
@@ -166,11 +164,6 @@ angular.module('MetronicApp').controller('LocationController', function($rootSco
         
         $scope.listItem = [];
         $scope.dtInstance = {};
-        loadListItem();
-
-        //     beforeSend: function(xhr){
-        //         xhr.setRequestHeader("Authorization",
-        //         "Basic " + btoa($base64.encode('datvesieure' + ":" + 'balobooking')));
 
         //init datatables
         var params = $location.search();
@@ -178,7 +171,8 @@ angular.module('MetronicApp').controller('LocationController', function($rootSco
         $scope.dtOptions = DTOptionsBuilder.newOptions()
             .withOption('ajax',{
                 beforeSend: function(xhr){
-                    xhr.setRequestHeader('Authorization',"Basic " + btoa($base64.encode('datvesieure' + ":" + 'balobooking')));
+                    xhr.setRequestHeader('Content-Type', 'application/json; charset=utf-8');
+                    xhr.setRequestHeader('Authorization',"Basic " + $base64.encode('datvesieure' + ":" + 'balobooking'));
                 },
                 data: params,
                 url: $rootScope.settings.apiPath + 'location/index',
