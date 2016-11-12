@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { RouterModule } from '@angular/router';
 import { Configuration } from './shared/app.configuration';
+import { HttpClient } from './shared/http-client';
 
 
 /*
@@ -19,6 +20,9 @@ import { AboutComponent } from './components/about';
 import { PageNotFoundComponent } from './components/page-not-found';
 import { HeaderComponent } from './components/header';
 import { SearchResultComponent } from './components/search-result';
+import { BannerComponent } from './components/home/banner';
+import { NewsComponent } from './components/home/news';
+import { CommentComponent } from './components/home/comment/comment.component';
 
 
 @NgModule({
@@ -29,16 +33,21 @@ import { SearchResultComponent } from './components/search-result';
     PageNotFoundComponent,
     HeaderComponent,
     SearchResultComponent,
+    BannerComponent,
+    NewsComponent,
+    CommentComponent,
   ],
   imports: [
     BrowserModule,
     FormsModule,
-    RouterModule.forRoot(ROUTES),
-    HttpModule
+    RouterModule.forRoot(ROUTES, {useHash: true}),
+    HttpModule,
+
   ],
   providers: [
     Configuration,
     { provide: APP_BASE_HREF, useValue: '/' },
+    HttpClient
   ],
   bootstrap: [AppComponent]
 })
