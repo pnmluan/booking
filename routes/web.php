@@ -24,13 +24,13 @@ $app->group(['prefix' => 'api/v1', 'middleware' => 'BasicAuth',  'namespace' => 
 	*/
     $app->get('banner','BannerController@index');
 
-    $app->get('banner/{id}','BannerController@getbanner');
+    $app->get('banner/{id}','BannerController@show');
 
-    $app->post('banner','BannerController@createbanner');
+    $app->post('banner','BannerController@create');
 
-    $app->put('banner/{id}','BannerController@updatebanner');
+    $app->put('banner/{id}','BannerController@update');
 
-    $app->delete('banner/{id}','BannerController@deletebanner');
+    $app->delete('banner/{id}','BannerController@delete');
 
     /*
 	|--------------------------------------------------------------------------
