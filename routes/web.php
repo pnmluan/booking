@@ -76,6 +76,21 @@ $app->group(['prefix' => 'api/v1', 'middleware' => 'BasicAuth',  'namespace' => 
     $app->put('provider/update/{id}','ProviderController@update');
 
     $app->delete('provider/delete/{id}','ProviderController@delete');
+
+    /*
+    |--------------------------------------------------------------------------
+    | TicketType
+    |--------------------------------------------------------------------------
+    */
+    $app->get('ticketType','TicketTypeController@index');
+
+    $app->get('ticketType/show/{id}','TicketTypeController@show');
+
+    $app->post('ticketType/create','TicketTypeController@create');
+
+    $app->put('ticketType/update/{id}','TicketTypeController@update');
+
+    $app->delete('ticketType/delete/{id}','TicketTypeController@delete');
 });
 
 // Crawler API

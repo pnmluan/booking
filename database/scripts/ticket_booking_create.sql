@@ -1,5 +1,5 @@
 -- Created by Vertabelo (http://vertabelo.com)
--- Last modification date: 2016-11-12 04:39:52.542
+-- Last modification date: 2016-11-13 03:44:13.552
 
 -- tables
 -- Table: baggage_type
@@ -80,7 +80,6 @@ CREATE TABLE comment (
     id int NOT NULL AUTO_INCREMENT,
     full_name varchar(250) NOT NULL,
     content varchar(1000) NOT NULL,
-	img varchar(200) NOT NULL,
     status varchar(45) NOT NULL,
     created_at datetime NULL,
     updated_at datetime NULL,
@@ -153,7 +152,7 @@ CREATE TABLE provider (
 CREATE TABLE ticket_type (
     id int NOT NULL AUTO_INCREMENT,
     provider int NOT NULL,
-    type int NOT NULL,
+    name varchar(100) NOT NULL,
     created_at datetime NULL,
     updated_at datetime NULL,
     CONSTRAINT ticket_type_pk PRIMARY KEY (id)
