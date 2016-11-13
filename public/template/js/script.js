@@ -56,7 +56,10 @@ var selectFlights = {
     });
   },
   scrollSubmit: function() {
-    var m = jQuery('.submit-plane').offset().top;
+	 var m;
+	 if(jQuery('.submit-plane').length > 0){
+		 m = jQuery('.submit-plane').offset().top;
+	 }
     var n = jQuery(window).height();
     var w = jQuery('.main-list-plane-inner').width();
 
@@ -131,9 +134,9 @@ jQuery(document).ready(function() {
   indexScript.loadBookOption();
   indexScript.changeBookOption();
 
-  // selectFlights.scrollSubmit();
-  // selectFlights.loadBookOption();
-  // selectFlights.changeBookOption();
+  selectFlights.scrollSubmit();
+  selectFlights.loadBookOption();
+  selectFlights.changeBookOption();
 
   guestDetails.init();
   guestDetails.toggleBill();
