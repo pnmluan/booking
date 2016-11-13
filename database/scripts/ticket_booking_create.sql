@@ -151,7 +151,7 @@ CREATE TABLE provider (
 -- Table: ticket_type
 CREATE TABLE ticket_type (
     id int NOT NULL AUTO_INCREMENT,
-    provider int NOT NULL,
+    provider_id int NOT NULL,
     name varchar(100) NOT NULL,
     created_at datetime NULL,
     updated_at datetime NULL,

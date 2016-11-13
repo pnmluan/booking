@@ -82,15 +82,30 @@ $app->group(['prefix' => 'api/v1', 'middleware' => 'BasicAuth',  'namespace' => 
     | TicketType
     |--------------------------------------------------------------------------
     */
-    $app->get('ticketType','TicketTypeController@index');
+    $app->get('ticket_type','TicketTypeController@index');
 
-    $app->get('ticketType/show/{id}','TicketTypeController@show');
+    $app->get('ticket_type/show/{id}','TicketTypeController@show');
 
-    $app->post('ticketType/create','TicketTypeController@create');
+    $app->post('ticket_type/create','TicketTypeController@create');
 
-    $app->put('ticketType/update/{id}','TicketTypeController@update');
+    $app->put('ticket_type/update/{id}','TicketTypeController@update');
 
-    $app->delete('ticketType/delete/{id}','TicketTypeController@delete');
+    $app->delete('ticket_type/delete/{id}','TicketTypeController@delete');
+
+    /*
+    |--------------------------------------------------------------------------
+    | BaggageType
+    |--------------------------------------------------------------------------
+    */
+    $app->get('baggage_type','BaggageTypeController@index');
+
+    $app->get('baggage_type/show/{id}','BaggageTypeController@show');
+
+    $app->post('baggage_type/create','BaggageTypeController@create');
+
+    $app->put('baggage_type/update/{id}','BaggageTypeController@update');
+
+    $app->delete('baggage_type/delete/{id}','BaggageTypeController@delete');
 });
 
 // Crawler API

@@ -14,30 +14,30 @@ use App\Models\Provider;
 class ProviderController extends ApiController
 {
     public function index(){
-        $Categories  = Provider::all();
+        $providers  = Provider::all();
 
-        return response()->json($Categories);
+        return response()->json($providers);
 
     }
 
     public function show($id){
 
-        $Provider  = Provider::find($id);
+        $provider  = Provider::find($id);
 
-        return response()->json($Provider);
+        return response()->json($provider);
     }
 
     public function create(Request $request){
 
-        $Provider = Provider::create($request->all());
+        $provider = Provider::create($request->all());
 
-        return response()->json($Provider);
+        return response()->json($provider);
 
     }
 
     public function delete($id){
-        $Provider  = Provider::find($id);
-        $Provider->delete();
+        $provider  = Provider::find($id);
+        $provider->delete();
 
         return response()->json('deleted');
     }
