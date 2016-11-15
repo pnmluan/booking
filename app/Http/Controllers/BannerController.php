@@ -9,43 +9,99 @@ use Illuminate\Http\Request;
   
 class BannerController extends ApiController{
   
-	public function index(){
-        $Categories  = Banner::all();
-  
-        return response()->json($Categories);
-  
+	public function index(Request $request){
+
+        $data = Banner::listItems($request->all());
+        return response()->json($data);
+
     }
-  
-    public function getBanner($id){
-  
-        $Banner  = Banner::find($id);
-  
-        return response()->json($Banner);
+
+    public function show($id) {
+
+        $banner  = Banner::find($id);
+
+        if (!$banner) {
+            return $this->respondNotFound();
+        }
+        return $this->respondWithSuccess(['data'=>$banner]);
     }
-  
-    public function createBanner(Request $request){
-  
-        $Banner = Banner::create($request->all());
-  
-        return response()->json($Banner);
-  
+
+    protected function uploadImage($image) {
+        if($image) {
+            $filename  = time() . '.' . $image->getClientOriginalExtension();
+
+            $destinationPath = 'backend/assets/apps/img/banner'; // upload path
+
+            $image->move($destinationPath, $filename); // uploading file to given path
+
+            return $filename;
+        }
+        return null;
+
     }
-  
-    public function deleteBanner($id){
-        $Banner  = Banner::find($id);
-        $Banner->delete();
- 
-        return response()->json('deleted');
+
+    public function create(Request $request){
+        $banner = new Banner();
+        $data = $request['data'];
+
+        $img = $this->uploadImage($request->file('img'));
+        if($img) {
+            $data['img'] = $img;
+        }
+
+        $banner->fill($data);
+
+        if (!$banner->isValid()) {
+            return $this->respondWithError(['error' => $banner->getValidationErrors()]);
+        }
+        try {
+            $banner->save();
+        } catch (\Exception $ex) {
+            return $this->respondWithNotSaved();
+        }
+        return $this->respondWithCreated(['data'=>$banner]);
     }
-  
-    public function updateBanner(Request $request,$id){
-        $Banner  = Banner::find($id);
-        $Banner->title = $request->input('name');
-        $Banner->author = $request->input('description');
-        $Banner->isbn = $request->input('status');
-        $Banner->save();
-  
-        return response()->json($Banner);
+
+    public function delete($id){
+
+        $banner  = Banner::find($id);
+        if (!$banner) {
+            return $this->respondNotFound();
+        }
+        try {
+            if (!$banner->delete()) {
+                return $this->respondWithError();
+            }
+        } catch (\Exception $ex) {
+            return $this->respondWithError(['error' => $ex->getMessage()]);
+        }
+        return $this->respondWithSuccess(['record_id'=>$id]);
+    }
+
+    public function update(Request $request, $id){
+
+        $banner = Banner::find($id);
+        if(!$banner) {
+            return $this->respondNotFound();
+        }
+        $data = $request['data'];
+        $img = $this->uploadImage($request->file('img'));
+        if($img) {
+            $data['img'] = $img;
+        }
+
+        $banner->fill($data);
+
+        if (!$banner->isValid()) {
+            return $this->respondWithError(['error' => $banner->getValidationErrors()]);
+        }
+        try {
+            $banner->save();
+        } catch (\Exception $ex) {
+            return $this->respondWithNotSaved();
+        }
+
+        return $this->respondWithSaved(['data'=>$banner]);
     }
  
 }
