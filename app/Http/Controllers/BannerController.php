@@ -1,7 +1,7 @@
 <?php
   
 namespace App\Http\Controllers;
-  
+
 use App\Models\Banner;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -11,19 +11,19 @@ class BannerController extends ApiController{
   
 	public function index(){
         $Categories  = Banner::all();
-  
+
         return response()->json($Categories);
   
     }
   
-    public function getBanner($id){
+    public function show($id){
   
         $Banner  = Banner::find($id);
   
         return response()->json($Banner);
     }
   
-    public function createBanner(Request $request){
+    public function create(Request $request){
   
         $Banner = Banner::create($request->all());
   
@@ -31,14 +31,14 @@ class BannerController extends ApiController{
   
     }
   
-    public function deleteBanner($id){
+    public function delete($id){
         $Banner  = Banner::find($id);
         $Banner->delete();
  
         return response()->json('deleted');
     }
   
-    public function updateBanner(Request $request,$id){
+    public function update(Request $request,$id){
         $Banner  = Banner::find($id);
         $Banner->title = $request->input('name');
         $Banner->author = $request->input('description');

@@ -1,5 +1,5 @@
 -- Created by Vertabelo (http://vertabelo.com)
--- Last modification date: 2016-10-25 03:20:27.47
+-- Last modification date: 2016-11-13 03:44:13.552
 
 -- tables
 -- Table: baggage_type
@@ -8,8 +8,8 @@ CREATE TABLE baggage_type (
     provider_id int NOT NULL,
     name varchar(150) NOT NULL,
     fare float NOT NULL,
-	created_at datetime,
-    updated_at datetime,
+    created_at datetime NULL,
+    updated_at datetime NULL,
     CONSTRAINT baggage_type_pk PRIMARY KEY (id)
 );
 
@@ -21,22 +21,23 @@ CREATE TABLE banner (
     url varchar(1000) NOT NULL,
     description varchar(1000) NOT NULL,
     status varchar(45) NOT NULL,
-	created_at datetime,
-    updated_at datetime,
+    created_at datetime NULL,
+    updated_at datetime NULL,
     CONSTRAINT banner_pk PRIMARY KEY (id)
 );
 
 -- Table: booking
 CREATE TABLE booking (
     id int NOT NULL AUTO_INCREMENT,
+    code char(10) NOT NULL,
     one_way boolean NOT NULL,
     adult int NOT NULL,
     children int NOT NULL,
     infant int NOT NULL,
     ticket_type_id int NOT NULL,
     remark varchar(1000) NOT NULL,
-	created_at datetime,
-    updated_at datetime,
+    created_at datetime NULL,
+    updated_at datetime NULL,
     CONSTRAINT booking_pk PRIMARY KEY (id)
 );
 
@@ -52,8 +53,8 @@ CREATE TABLE booking_detail (
     one_way boolean NOT NULL,
     depart_duration int NULL,
     return_duration int NULL,
-	created_at datetime,
-    updated_at datetime,
+    created_at datetime NULL,
+    updated_at datetime NULL,
     CONSTRAINT booking_detail_pk PRIMARY KEY (id)
 );
 
@@ -69,8 +70,8 @@ CREATE TABLE bus_route (
     return_duration int NULL,
     fare float NOT NULL,
     ticket_type_id int NOT NULL,
-	created_at datetime,
-    updated_at datetime,
+    created_at datetime NULL,
+    updated_at datetime NULL,
     CONSTRAINT bus_route_pk PRIMARY KEY (id)
 );
 
@@ -79,10 +80,9 @@ CREATE TABLE comment (
     id int NOT NULL AUTO_INCREMENT,
     full_name varchar(250) NOT NULL,
     content varchar(1000) NOT NULL,
-	img varchar(200) NOT NULL,
     status varchar(45) NOT NULL,
-    created_at datetime,
-    updated_at datetime,
+    created_at datetime NULL,
+    updated_at datetime NULL,
     CONSTRAINT comment_pk PRIMARY KEY (id)
 );
 
@@ -95,8 +95,8 @@ CREATE TABLE contact (
     last_name varchar(50) NOT NULL,
     phone varchar(11) NOT NULL,
     email varchar(50) NOT NULL,
-	created_at datetime,
-    updated_at datetime,
+    created_at datetime NULL,
+    updated_at datetime NULL,
     CONSTRAINT contact_pk PRIMARY KEY (id)
 );
 
@@ -109,8 +109,8 @@ CREATE TABLE fare (
     charge float NOT NULL,
     tax float NOT NULL,
     baggage_type_id int NOT NULL,
-	created_at datetime,
-    updated_at datetime,
+    created_at datetime NOT NULL,
+    updated_at datetime NOT NULL,
     CONSTRAINT fare_pk PRIMARY KEY (id)
 );
 
@@ -119,10 +119,10 @@ CREATE TABLE location (
     id int NOT NULL AUTO_INCREMENT,
     code char(3) NOT NULL,
     name varchar(50) NOT NULL,
-	created_at datetime,
-    updated_at datetime,
+    created_at datetime NULL,
+    updated_at datetime NULL,
     CONSTRAINT location_pk PRIMARY KEY (id)
-);
+) COMMENT 'The location is the place where the passenger depart or arrive ';
 
 -- Table: passenger
 CREATE TABLE passenger (
@@ -134,8 +134,8 @@ CREATE TABLE passenger (
     birthdate date NOT NULL,
     phone varchar(11) NOT NULL,
     email varchar(50) NOT NULL,
-	created_at datetime,
-    updated_at datetime,
+    created_at datetime NULL,
+    updated_at datetime NULL,
     CONSTRAINT passenger_pk PRIMARY KEY (id)
 );
 
@@ -143,18 +143,18 @@ CREATE TABLE passenger (
 CREATE TABLE provider (
     id int NOT NULL AUTO_INCREMENT,
     name varchar(20) NOT NULL,
-	created_at datetime,
-    updated_at datetime,
+    created_at datetime NULL,
+    updated_at datetime NULL,
     CONSTRAINT provider_pk PRIMARY KEY (id)
 );
 
 -- Table: ticket_type
 CREATE TABLE ticket_type (
     id int NOT NULL AUTO_INCREMENT,
-    provider int NOT NULL,
-    type int NOT NULL,
-	created_at datetime,
-    updated_at datetime,
+    provider_id int NOT NULL,
+    name varchar(100) NOT NULL,
+    created_at datetime NULL,
+    updated_at datetime NULL,
     CONSTRAINT ticket_type_pk PRIMARY KEY (id)
 );
 
