@@ -2,29 +2,30 @@
 	<div class="section-title">Khách hàng nói về chúng tôi</div>
 	<div class="border-title"></div>
 	<div class="owl-carousel customer-comment">
-		<div class="item">
+		<div class="item" *ngFor="let item of comments">
+
 			<div>
-				<img src="assets/img/avatar.jpg" alt="">
+				<img [src]="item[0].img" alt="">
 				<div class="text">
-					<p><i class="fa fa-quote-left" aria-hidden="true"></i>&nbsp;Dịch vụ đặt mua vé xe trực tuyến tại VeXeRe.com thật tuyệt vời, tôi thấy thậm chí đặt chỗ mua vé máy bay còn không được chọn chỗ ngồi như vậy. Bây giờ tôi không còn phải đi lại xếp hàng mua vé tại bến xe nữa.&nbsp;<i class="fa fa-quote-right" aria-hidden="true"></i>
+					<p><i class="fa fa-quote-left" aria-hidden="true"></i>&nbsp;{{ item[0].content }}&nbsp;<i class="fa fa-quote-right" aria-hidden="true"></i>
 					</p>
 					<div class="text-right">
-						<h3><strong>Chị Hà Anh</strong> - <i>Hải Phòng</i></h3>
+						<h3><strong>{{ item[0].full_name }}</strong> - <i>Hải Phòng</i></h3>
 					</div>
 				</div>
 			</div>
-			<div>
-				<img src="assets/img/bb.jpg" alt="">
+			<div *ngIf="item[1]">
+				<img [src]="item[1].img" alt="">
 				<div class="text">
-					<p><i class="fa fa-quote-left" aria-hidden="true"></i>&nbsp;Dịch vụ đặt mua vé xe trực tuyến tại VeXeRe.com thật tuyệt vời, tôi thấy thậm chí đặt chỗ mua vé máy bay còn không được chọn chỗ ngồi như vậy. Bây giờ tôi không còn phải đi lại xếp hàng mua vé tại bến xe nữa.&nbsp;<i class="fa fa-quote-right" aria-hidden="true"></i>
+					<p><i class="fa fa-quote-left" aria-hidden="true"></i>&nbsp;{{ item[1].content }}&nbsp;<i class="fa fa-quote-right" aria-hidden="true"></i>
 					</p>
 					<div class="text-right">
-						<h3><strong>Chị Kim Liên</strong> - <i>Hà Nội</i></h3>
+						<h3><strong>{{ item[1].full_name }}</strong> - <i>Hà Nội</i></h3>
 					</div>
 				</div>
 			</div>
 		</div>
-		<div class="item">
+		<!-- <div class="item">
 			<div>
 				<img src="assets/img/bb.jpg" alt="">
 				<div class="text">
@@ -67,6 +68,6 @@
 					</div>
 				</div>
 			</div>
-		</div>
+		</div> -->
 	</div>
 </div>

@@ -1,24 +1,26 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit } from '@angular/core';
 
 import { BannerComponent } from './banner';
 import { NewsComponent } from './news';
 import { CommentComponent } from './comment';
 import { Location } from '../../models/Location';
+
 import { Configuration } from '../../shared/app.configuration';
 import { LocationDataService } from '../../shared/location.dataservice';
 import { BannerDataService } from '../../shared/banner.dataservice';
-import { CommentDataService } from '../../shared/comment.dataservice';
+declare let jQuery: any;
+
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css'],
-  providers: [BannerComponent, NewsComponent, BannerComponent, LocationDataService, BannerDataService, CommentDataService]
+  providers: [BannerComponent, NewsComponent, BannerComponent, LocationDataService, BannerDataService]
 })
-export class HomeComponent implements OnInit {
+export class HomeComponent implements OnInit, AfterViewInit {
 
 	constructor(private _locationDataService: LocationDataService, private _configuration: Configuration,
-		private _bannerDataService: BannerDataService, private _commentDataService: CommentDataService) { }
+		private _bannerDataService: BannerDataService) { }
 
 	public locations: Location[] = [];
 	// public LocationUrl = this._configuration.server + 'images/Location/';
@@ -36,7 +38,24 @@ export class HomeComponent implements OnInit {
 				
 			}
 			console.log(this.locations);
+			
 		})
 	}
+
+	ngAfterViewInit() {
+		setTimeout(function() {
+			jQuery('.owl-carousel').owlCarousel({
+				navigation: false,
+				slideSpeed: 300,
+				paginationSpeed: 400,
+				singleItem: true,
+				autoPlay: 5000
+			});
+
+			
+			console.log('abc');
+		}, 1000);
+	}
+	
 
 }
