@@ -3,6 +3,10 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { RouterModule } from '@angular/router';
+
+// Third party
+import { SelectModule } from 'angular2-select';
+
 import { Configuration } from './shared/app.configuration';
 import { HttpClient } from './shared/http-client';
 
@@ -42,6 +46,7 @@ import { CommentComponent } from './components/home/comment/comment.component';
     FormsModule,
     RouterModule.forRoot(ROUTES, {useHash: true}),
     HttpModule,
+    SelectModule
 
   ],
   providers: [

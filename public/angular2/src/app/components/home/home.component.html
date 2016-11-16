@@ -41,11 +41,10 @@
                           <div class="field">
                             <span class="field-label">Điểm đi</span>
                             <div class="field-input">
-                              <select class="select-from" data-placeholder="Điểm đi">
-                                <option value=""></option>
-                                <option value="Hanoi">Hà Nội</option>
-                                <option value="Saigon">Tp.Hồ Chí Minh</option>
-                              </select>
+
+                              <ng-select placeholder="Điểm đi"
+                                  [options]="locations">
+                              </ng-select>
                             </div>
                           </div>
                         </div>
@@ -53,11 +52,10 @@
                           <div class="field">
                             <span class="field-label">Điểm đến</span>
                             <div class="field-input">
-                              <select class="select-to" data-placeholder="Điểm đến">
-                                <option value=""></option>
-                                <option value="Hanoi">Hà Nội</option>
-                                <option value="Saigon">Tp.Hồ Chí Minh</option>
-                              </select>
+
+                              <ng-select placeholder="Điểm đến"
+                                  [options]="locations">
+                              </ng-select>
                             </div>
                           </div>
                         </div>

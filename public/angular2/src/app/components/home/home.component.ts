@@ -1,4 +1,5 @@
 import { Component, OnInit, AfterViewInit } from '@angular/core';
+import { SelectModule } from 'angular2-select';
 
 import { BannerComponent } from './banner';
 import { NewsComponent } from './news';
@@ -19,27 +20,35 @@ declare let jQuery: any;
 })
 export class HomeComponent implements OnInit, AfterViewInit {
 
+	locations = [];
 	constructor(private _locationDataService: LocationDataService, private _configuration: Configuration,
-		private _bannerDataService: BannerDataService) { }
+		private _bannerDataService: BannerDataService) { 
 
-	public locations: Location[] = [];
-	// public LocationUrl = this._configuration.server + 'images/Location/';
-
-
-	ngOnInit() {
 		this._locationDataService.getAll().subscribe(res => {
 
-			if (res.status == 'success') {
-
+			if (res.data) {
+				var locations = [];
 				for (var key in res.data) {
-					// res.data[key]['file'] = this.LocationUrl + res.data[key]['file'];
-					this.locations.push(res.data[key]);
+
+					var temp = {
+						value: res.data[key].code,
+						label: res.data[key].name
+					};
+					locations.push(temp);
+
 				}
-				
+				this.locations = locations;
 			}
-			console.log(this.locations);
+
 			
-		})
+
+		});
+	}
+
+	
+
+	ngOnInit() {
+		
 	}
 
 	ngAfterViewInit() {

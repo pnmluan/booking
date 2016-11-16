@@ -26,11 +26,17 @@ export class CommentComponent implements OnInit {
 				for (var i = 0; i < res.data.length; i = i +2) {
 					var temp = [];
 					if (res.data[i]) {
-						res.data[i]['img'] = this.commentPath + res.data[i]['img'];
+						if (res.data[i]['img']) {
+							res.data[i]['img'] = this.commentPath + res.data[i]['img'];
+						}
+						
 						temp.push(res.data[i]);
 					}
 					if (res.data[i+1]) {
-						res.data[i + 1]['img'] = this.commentPath + res.data[i + 1]['img'];
+						if (res.data[i + 1]['img']) {
+							res.data[i + 1]['img'] = this.commentPath + res.data[i + 1]['img'];
+						}
+						
 						temp.push(res.data[i+1]);
 					} else {
 						temp.push(new Comment());
