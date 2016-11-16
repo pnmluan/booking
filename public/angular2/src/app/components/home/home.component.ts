@@ -1,4 +1,11 @@
 import { Component, OnInit, AfterViewInit } from '@angular/core';
+import {
+	FormGroup,
+	FormControl,
+	Validators,
+	FormBuilder,
+	FormArray
+} from "@angular/forms";
 import { SelectModule } from 'angular2-select';
 
 import { BannerComponent } from './banner';
@@ -19,10 +26,27 @@ declare let jQuery: any;
   providers: [BannerComponent, NewsComponent, BannerComponent, LocationDataService, BannerDataService]
 })
 export class HomeComponent implements OnInit, AfterViewInit {
-
+	people = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 	locations = [];
-	constructor(private _locationDataService: LocationDataService, private _configuration: Configuration,
+	myForm: FormGroup;
+
+
+	constructor(private formBuilder: FormBuilder, private _locationDataService: LocationDataService, private _configuration: Configuration,
 		private _bannerDataService: BannerDataService) { 
+
+		this.myForm = formBuilder.group({
+			'from': ['', Validators.required],
+			'to': ['', Validators.required],
+			// 'from_date': ['', Validators.required],
+			// 'to_date': ['', Validators.required],
+			'adult': ['1', Validators.required],
+			'children': ['0'],
+			'infant': ['0']
+		});
+
+		this.myForm.statusChanges.subscribe(
+			(data: any) => console.log(data)
+		);
 
 		this._locationDataService.getAll().subscribe(res => {
 
@@ -39,8 +63,6 @@ export class HomeComponent implements OnInit, AfterViewInit {
 				}
 				this.locations = locations;
 			}
-
-			
 
 		});
 	}
@@ -60,11 +82,11 @@ export class HomeComponent implements OnInit, AfterViewInit {
 				singleItem: true,
 				autoPlay: 5000
 			});
-
-			
-			console.log('abc');
-		}, 1000);
+		}, 500);
 	}
 	
+	onSubmit() {
+		console.log(this.myForm);
+	}
 
 }

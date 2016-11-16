@@ -15,12 +15,12 @@
                 <li class="nicdark_width100_iphonepotr nicdark_width100_iphoneland">
                   <a class="title white" href="#tab-plane"><i class="icon-plane"></i> VÉ MÁY BAY</a>
                 </li>
-                <li class="nicdark_width100_iphonepotr nicdark_width100_iphoneland">
+                <!-- <li class="nicdark_width100_iphonepotr nicdark_width100_iphoneland">
                   <a class="title white" href="#tab-bus"><i class="fa fa-bus"></i> VÉ XE KHÁCH</a>
-                </li>
+                </li> -->
               </ul>
               <div id="tab-plane" class="wpb_tab ui-tabs-panel wpb_ui-tabs-hide vc_clearfix">
-                <form class="plane-form" action="" method="">
+                <form class="plane-form" [formGroup]="myForm" (ngSubmit)="onSubmit()">
                   <div class="plane-form-inner">
                     <div class="col-md-12">
                       <div class="plane-option clearfix">
@@ -30,9 +30,9 @@
                         <label class="radio-inline radio-plane">
                           <input class="plane-option" type="radio" name="plane-option" id="round-trip" value="option2"> Khứ hồi
                         </label>
-                        <label class="radio-inline radio-plane">
+                        <!-- <label class="radio-inline radio-plane">
                           <input class="plane-option" type="radio" name="plane-option" id="multiple" value="option3"> Nhiều chặng
-                        </label>
+                        </label> -->
                       </div>
                     </div>
                     <div class="one">
@@ -43,6 +43,7 @@
                             <div class="field-input">
 
                               <ng-select placeholder="Điểm đi"
+                                  formControlName="from"
                                   [options]="locations">
                               </ng-select>
                             </div>
@@ -54,6 +55,7 @@
                             <div class="field-input">
 
                               <ng-select placeholder="Điểm đến"
+                                  formControlName="to"
                                   [options]="locations">
                               </ng-select>
                             </div>
@@ -98,13 +100,8 @@
                               <i>( >12 tuổi )</i>
                             </div>
                             <div>
-                              <select class="select-adult" data-placeholder="">
-                                <option value=""></option>
-                                <option value="1">1</option>
-                                <option value="2">2</option>
-                                <option value="2">3</option>
-                                <option value="3">4</option>
-                                <option value="4">5</option>
+                              <select class="select-adult" data-placeholder="" formControlName="adult">
+                                <option *ngFor="let person of people" value="{{ person }}">{{ person }}</option>
                               </select>
                             </div>
                           </div>
@@ -116,12 +113,9 @@
                               <i> ( 2 - 12 tuổi ) </i>
                             </div>
                             <div>
-                              <select class="select-child-1" data-placeholder="">
-                                <option value="1">1</option>
-                                <option value="2">2</option>
-                                <option value="2">3</option>
-                                <option value="3">4</option>
-                                <option value="4">5</option>
+                              <select class="select-child-1" data-placeholder="" formControlName="children">
+                                <option value="0">0</option>
+                                <option *ngFor="let person of people" value="{{ person }}">{{ person }}</option>
                               </select>
                             </div>
                           </div>
@@ -133,13 +127,9 @@
                               <i> ( < 2 tuổi ) </i>
                             </div>
                             <div>
-                              <select class="select-child-2" data-placeholder="">
-                                <option value=""></option>
-                                <option value="1">1</option>
-                                <option value="2">2</option>
-                                <option value="2">3</option>
-                                <option value="3">4</option>
-                                <option value="4">5</option>
+                              <select class="select-child-2" data-placeholder="" formControlName="infant">
+                                <option value="0">0</option>
+                                <option *ngFor="let person of people" value="{{ person }}">{{ person }}</option>
                               </select>
                             </div>
                           </div>
@@ -147,12 +137,12 @@
                         <div class="col-md-3">
                           <span class="field-label">&nbsp;</span>
                           <div class="plane-submit">
-                            <button type="button" class="btn btn-plane btn-search"><i class=" icon-search-2"></i> Tìm chuyến bay</button>
+                            <button type="submit" class="btn btn-plane btn-search" [disabled]="!myForm.valid"><i class=" icon-search-2"></i> Tìm chuyến bay</button>
                           </div>
                         </div>
                       </div>
                     </div>
-                    <div class="multiple">
+                    <!-- <div class="multiple">
                       <div class="plane-input clearfix">
                         <div class="field clearfix">
                           <label>Hành trình 1</label>
@@ -287,11 +277,11 @@
                           </div>
                         </div>
                       </div>
-                    </div>
+                    </div> -->
                   </div>
                 </form>
               </div>
-              <div id="tab-bus" class="wpb_tab ui-tabs-panel wpb_ui-tabs-hide vc_clearfix">
+              <!-- <div id="tab-bus" class="wpb_tab ui-tabs-panel wpb_ui-tabs-hide vc_clearfix">
                 <form class="bus-form" action="#" method="">
                   <div class="bus-form-inner">
                     <div class="bus-input clearfix">
@@ -350,7 +340,7 @@
                     </div>
                   </div>
                 </form>
-              </div>
+              </div> -->
             </div>
           </div>
         </div>
