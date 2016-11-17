@@ -19,7 +19,6 @@ export class CommentDataService {
 	}
 
 	public getAll() {
-		console.log(this.actionUrl + 'index');
 		return this._http.get(this.actionUrl + 'index')
 			.map(res => res.json())
 			.catch(this.handleError);

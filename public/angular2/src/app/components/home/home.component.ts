@@ -1,4 +1,5 @@
 import { Component, OnInit, AfterViewInit } from '@angular/core';
+import { Router } from '@angular/router';
 import {
 	FormGroup,
 	FormControl,
@@ -6,8 +7,9 @@ import {
 	FormBuilder,
 	FormArray
 } from "@angular/forms";
-
+import { LocalStorageService } from 'angular-2-local-storage';
 import { SelectModule } from 'angular2-select';
+import { UUID } from 'angular2-uuid';
 
 import { BannerComponent } from './banner';
 import { NewsComponent } from './news';
@@ -46,14 +48,16 @@ export class HomeComponent implements OnInit, AfterViewInit {
 
 
 
-	constructor(private formBuilder: FormBuilder, private _locationDataService: LocationDataService, private _configuration: Configuration,
-		private _bannerDataService: BannerDataService) { 
+	constructor(private formBuilder: FormBuilder, private locationDataService: LocationDataService, private _configuration: Configuration,
+		private _bannerDataService: BannerDataService, private sessionStorage: LocalStorageService,
+		private router: Router) { 
 
 		this.myForm = formBuilder.group({
+			'round_trip': 'off',
 			'from': ['', Validators.required],
 			'to': ['', Validators.required],
 			'from_date': ['', Validators.required],
-			// 'to_date': ['', Validators.required],
+			// 'plan_option': ['', Validators.required],
 			'adult': ['1', Validators.required],
 			'children': ['0'],
 			'infant': ['0']
@@ -63,7 +67,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
 			(data: any) => console.log(data)
 		);
 
-		this._locationDataService.getAll().subscribe(res => {
+		this.locationDataService.getAll().subscribe(res => {
 
 			if (res.data) {
 				var locations = [];
@@ -101,7 +105,15 @@ export class HomeComponent implements OnInit, AfterViewInit {
 	}
 	
 	onSubmit() {
-		console.log(this.myForm);
+		let uuid = UUID.UUID();
+		this.sessionStorage.remove('session_flight');
+		this.sessionStorage.remove('session_token');
+		this.sessionStorage.set('session_token', uuid);
+
+		var objectStore = this.myForm.value;
+		objectStore.from_date = '2016-11-20';
+		this.sessionStorage.set('session_flight', JSON.stringify(objectStore));
+		this.router.navigate(['search-result']);
 	}
 
 	onDateChanged(event: any) {
