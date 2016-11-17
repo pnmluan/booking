@@ -121,6 +121,21 @@ $app->group(['prefix' => 'api/v1', 'middleware' => 'BasicAuth',  'namespace' => 
     $app->put('booking/update/{id}','BookingController@update');
 
     $app->delete('booking/delete/{id}','BookingController@delete');
+
+    /*
+    |--------------------------------------------------------------------------
+    | BookingDetail
+    |--------------------------------------------------------------------------
+    */
+    $app->get('booking_detail','BookingDetailController@index');
+
+    $app->get('booking_detail/show/{id}','BookingDetailController@show');
+
+    $app->post('booking_detail/create','BookingDetailController@create');
+
+    $app->put('booking_detail/update/{id}','BookingDetailController@update');
+
+    $app->delete('booking_detail/delete/{id}','BookingDetailController@delete');
 });
 
 // Crawler API
