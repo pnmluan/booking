@@ -15,8 +15,7 @@ import { HttpClient } from './shared/http-client';
 /*
  * Platform and Environment providers/directives/pipes
  */
-import { ROUTES } from './app.routes';
-import { APP_BASE_HREF } from '@angular/common';
+import { routing } from './app.routing';
 
 // App is our top level component
 import { AppComponent } from './app.component';
@@ -45,7 +44,7 @@ import { CommentComponent } from './components/home/comment/comment.component';
   imports: [
     BrowserModule,
     FormsModule,
-    RouterModule.forRoot(ROUTES, {useHash: true}),
+    routing,
     HttpModule,
     ReactiveFormsModule,
     SelectModule
@@ -53,7 +52,6 @@ import { CommentComponent } from './components/home/comment/comment.component';
   ],
   providers: [
     Configuration,
-    { provide: APP_BASE_HREF, useValue: '/' },
     HttpClient
   ],
   bootstrap: [AppComponent]

@@ -6,6 +6,7 @@ import {
 	FormBuilder,
 	FormArray
 } from "@angular/forms";
+
 import { SelectModule } from 'angular2-select';
 
 import { BannerComponent } from './banner';
@@ -30,6 +31,20 @@ export class HomeComponent implements OnInit, AfterViewInit {
 	locations = [];
 	myForm: FormGroup;
 
+	myDatePickerOptions = {
+		todayBtnTxt: 'Today',
+		dateFormat: 'yyyy-mm-dd',
+		firstDayOfWeek: 'mo',
+		sunHighlight: true,
+		height: '34px',
+		width: '260px',
+		inline: false,
+		disableUntil: { year: 2016, month: 8, day: 10 },
+		selectionTxtFontSize: '16px'
+	};
+
+
+
 
 	constructor(private formBuilder: FormBuilder, private _locationDataService: LocationDataService, private _configuration: Configuration,
 		private _bannerDataService: BannerDataService) { 
@@ -37,7 +52,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
 		this.myForm = formBuilder.group({
 			'from': ['', Validators.required],
 			'to': ['', Validators.required],
-			// 'from_date': ['', Validators.required],
+			'from_date': ['', Validators.required],
 			// 'to_date': ['', Validators.required],
 			'adult': ['1', Validators.required],
 			'children': ['0'],
@@ -87,6 +102,10 @@ export class HomeComponent implements OnInit, AfterViewInit {
 	
 	onSubmit() {
 		console.log(this.myForm);
+	}
+
+	onDateChanged(event: any) {
+		console.log('onDateChanged(): ', event.date, ' - formatted: ', event.formatted, ' - epoc timestamp: ', event.epoc);
 	}
 
 }
