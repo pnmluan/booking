@@ -106,6 +106,21 @@ $app->group(['prefix' => 'api/v1', 'middleware' => 'BasicAuth',  'namespace' => 
     $app->put('baggage_type/update/{id}','BaggageTypeController@update');
 
     $app->delete('baggage_type/delete/{id}','BaggageTypeController@delete');
+
+    /*
+    |--------------------------------------------------------------------------
+    | Booking
+    |--------------------------------------------------------------------------
+    */
+    $app->get('booking','BookingController@index');
+
+    $app->get('booking/show/{id}','BookingController@show');
+
+    $app->post('booking/create','BookingController@create');
+
+    $app->put('booking/update/{id}','BookingController@update');
+
+    $app->delete('booking/delete/{id}','BookingController@delete');
 });
 
 // Crawler API
