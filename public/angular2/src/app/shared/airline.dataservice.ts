@@ -21,7 +21,6 @@ export class AirlineDataService {
 	}
 
 	public vietjet(data) {
-		console.log(data);
 		return this._http.post(this.actionUrl + 'vietjet', data)
 			.map(res => res.json())
 			.catch(this.handleError);

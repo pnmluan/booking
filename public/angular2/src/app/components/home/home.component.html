@@ -25,10 +25,10 @@
                     <div class="col-md-12">
                       <div class="plane-option clearfix">
                         <label class="radio-inline radio-plane">
-                          <input class="plane-option" type="radio" formControlName="round_trip" name="round_trip" id="one-way" value="off" checked> Một chiều
+                          <input class="plane-option" type="radio" (click)="round_trip = 'off'" formControlName="round_trip" name="round_trip" id="one-way" value="off" checked> Một chiều
                         </label>
                         <label class="radio-inline radio-plane">
-                          <input class="plane-option" type="radio" formControlName="round_trip" name="round_trip" id="round-trip" value="roundTrip" value="on"> Khứ hồi
+                          <input class="plane-option" type="radio" (click)="round_trip = 'on'" formControlName="round_trip" name="round_trip" id="round-trip" value="roundTrip" value="on"> Khứ hồi
                         </label>
                         <!-- <label class="radio-inline radio-plane">
                           <input class="plane-option" type="radio" name="plane-option" id="multiple" value="option3"> Nhiều chặng
@@ -67,7 +67,7 @@
                             <div class="field-input">
                               <div class="form-group">
                                 <div class='input-group date' id='date-go'>
-                                  <input type='text' class="form-control"  #datePicker [ngModel]="from_date" (blur)="from_date = datePicker.value" formControlName="from_date" /> 
+                                  <input type='text' class="form-control"  #datePickerFrom [ngModel]="from_date" (blur)="from_date = datePickerFrom.value" formControlName="from_date" /> 
                                   
                                   <span class="input-group-addon">
                                     <span class="glyphicon glyphicon-calendar"></span>
@@ -84,7 +84,8 @@
                             <div class="field-input">
                               <div class="form-group">
                                 <div class='input-group date' id='date-back'>
-                                  <input type='text' class="form-control" disabled/>
+                                  <input type='text' class="form-control" #datePickerTo [ngModel]="to_date" 
+                                  (blur)="to_date = datePickerTo.value" formControlName="to_date" [disabled]="round_trip == 'off'"/>
                                   <span class="input-group-addon">
                                     <span class="glyphicon glyphicon-calendar"></span>
                                   </span>

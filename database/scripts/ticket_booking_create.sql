@@ -45,11 +45,10 @@ CREATE TABLE booking (
 CREATE TABLE booking_detail (
     id int NOT NULL AUTO_INCREMENT,
     booking_id int NOT NULL,
-    code varchar(20) NOT NULL,
     depart int NOT NULL,
-    departure date NULL,
+    departure datetime NULL,
     arrive int NOT NULL,
-    arrival date NULL,
+    arrival datetime NULL,
     one_way boolean NOT NULL,
     depart_duration int NULL,
     return_duration int NULL,

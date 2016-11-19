@@ -7,7 +7,7 @@ import { PageNotFoundComponent } from './components/page-not-found';
 const APP_ROUTES: Routes = [
 	{ path: '', redirectTo: 'home', pathMatch: 'full' },
 	{ path: 'home', component: HomeComponent },
-	{ path: 'search-result', component: SearchResultComponent },
+	{ path: 'search-result/:session_token', component: SearchResultComponent },
 	{ path: 'about', component: AboutComponent },
 	// {
 	//   path: 'detail', loadChildren: () => System.import('./+detail').then((comp: any) => {

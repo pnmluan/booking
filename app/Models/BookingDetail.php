@@ -1,13 +1,20 @@
-<?php 
+<?php
+/**
+ * Created by PhpStorm.
+ * User: hsb
+ * Date: 17-Nov-16
+ * Time: 11:14 PM
+ */
+
 namespace App\Models;
-  
-use App\Models\BaseModel;
+
 use Illuminate\Database\Eloquent\Model;
-  
-class Booking extends BaseModel
+
+
+class BookingDetail extends BaseModel
 {
-    protected $table = 'booking'; 
-    protected $fillable = ['code','one_way', 'adult', 'children', 'infant', 'ticket_type_id', 'remark'];
+    protected $table = 'booking_detail';
+    protected $fillable = ['booking_id', 'depart', 'departure', 'arrive', 'arrival', 'one_way', 'depart_duration', 'return_duration'];
 
     public function getModelValidations()
     {
@@ -18,10 +25,10 @@ class Booking extends BaseModel
 
     public static function listItems(array $param = null){
 
-        $aColumns = ['code','one_way', 'adult', 'children', 'infant', 'ticket_type_id', 'remark'];
+        $aColumns = ['booking_id', 'code', 'depart', 'departure', 'arrive', 'arrival', 'one_way', 'depart_duration', 'return_duration'];
 
-        $query = \DB::table('booking')
-            ->select(\DB::raw('SQL_CALC_FOUND_ROWS id'),\DB::raw('id AS DT_RowId'),'booking.*');
+        $query = \DB::table('booking_detail')
+            ->select(\DB::raw('SQL_CALC_FOUND_ROWS id'),\DB::raw('id AS DT_RowId'),'booking_detail.*');
 
         // Filter search condition
         foreach ($aColumns as $key => $value) {
@@ -97,4 +104,3 @@ class Booking extends BaseModel
         ];
     }
 }
-?>
