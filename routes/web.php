@@ -122,6 +122,21 @@ $app->group(['prefix' => 'api/v1', 'middleware' => 'BasicAuth',  'namespace' => 
     $app->put('passenger/update/{id}','PassengerController@update');
 
     $app->delete('passenger/delete/{id}','PassengerController@delete');
+
+    /*
+    |--------------------------------------------------------------------------
+    | Fare
+    |--------------------------------------------------------------------------
+    */
+    $app->get('fare','FareController@index');
+
+    $app->get('fare/show/{id}','FareController@show');
+
+    $app->post('fare/create','FareController@create');
+
+    $app->put('fare/update/{id}','FareController@update');
+
+    $app->delete('fare/delete/{id}','FareController@delete');
 });
 
 // Crawler API
