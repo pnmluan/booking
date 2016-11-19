@@ -1,31 +1,35 @@
 angular.module('MetronicApp')
-    .factory('BannerService', ['$http', '$rootScope', function($http, $rootScope) {
+    .factory('BannerService', ['$http', '$rootScope', 'Upload', function($http, $rootScope, Upload) {
 
     var urlBase = $rootScope.settings.apiPath + 'banner';
     var BannerService = {};
 
-    BannerService.getBanner = function () {
-        return $http.get(urlBase);
+    BannerService.getBanners = function () {
+        return $http.get(urlBase + '/index');
     };
 
-    BannerService.getCustomer = function (id) {
-        return $http.get(urlBase + '/' + id);
+    BannerService.createBanner = function (img,  cust) {
+        return Upload.upload({
+            url: urlBase + '/create',
+            data: {
+                data: cust,
+                img: img
+            },
+        });
     };
 
-    BannerService.insertCustomer = function (cust) {
-        return $http.post(urlBase, cust);
+    BannerService.updateBanner = function (img, cust) {
+        return Upload.upload({
+            url: urlBase + '/update/' + cust.id,
+            data: {
+                data: cust,
+                img: img
+            },
+        });
     };
 
-    BannerService.updateCustomer = function (cust) {
-        return $http.put(urlBase + '/' + cust.ID, cust)
-    };
-
-    BannerService.deleteCustomer = function (id) {
-        return $http.delete(urlBase + '/' + id);
-    };
-
-    BannerService.getOrders = function (id) {
-        return $http.get(urlBase + '/' + id + '/orders');
+    BannerService.deleteBanner = function (id) {
+        return $http.delete(urlBase + '/delete/' + id);
     };
 
     return BannerService;

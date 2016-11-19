@@ -31,7 +31,9 @@ angular.module('MetronicApp').controller('CommentController', function($rootScop
                 $scope.optionStatus = data.optionStatus;
                 $scope.optionStatus.selected = data.optionStatus[0];
 
-
+$scope.$watch('img', function() {
+    console.log($scope.img);
+})
 
                 // Create Comment
                 $scope.save = function() {

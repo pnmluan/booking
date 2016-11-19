@@ -149,6 +149,7 @@ MetronicApp.config(['$stateProvider', '$urlRouterProvider', function($stateProvi
                         files: [
                             '../assets/global/plugins/dropzone/dropzone.min.js',
                             'js/controllers/BannerController.js',
+                            'js/services/banner.service.js'
                         ] 
                     });
                 }]
