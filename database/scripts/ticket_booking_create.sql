@@ -90,7 +90,7 @@ CREATE TABLE comment (
 CREATE TABLE contact (
     id int NOT NULL AUTO_INCREMENT,
     booking_id int NOT NULL,
-    title int NOT NULL,
+    title varchar(3) NOT NULL,
     first_name varchar(50) NOT NULL,
     last_name varchar(50) NOT NULL,
     phone varchar(11) NOT NULL,
