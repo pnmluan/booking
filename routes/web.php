@@ -106,6 +106,22 @@ $app->group(['prefix' => 'api/v1', 'middleware' => 'BasicAuth',  'namespace' => 
     $app->put('contact/update/{id}','ContactController@update');
 
     $app->delete('contact/delete/{id}','ContactController@delete');
+
+
+    /*
+    |--------------------------------------------------------------------------
+    | Passenger
+    |--------------------------------------------------------------------------
+    */
+    $app->get('passenger','PassengerController@index');
+
+    $app->get('passenger/show/{id}','PassengerController@show');
+
+    $app->post('passenger/create','PassengerController@create');
+
+    $app->put('passenger/update/{id}','PassengerController@update');
+
+    $app->delete('passenger/delete/{id}','PassengerController@delete');
 });
 
 // Crawler API

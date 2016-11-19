@@ -128,10 +128,10 @@ CREATE TABLE location (
 CREATE TABLE passenger (
     id int NOT NULL AUTO_INCREMENT,
     booking_id int NOT NULL,
-    title int NOT NULL,
+    title varchar(3) NOT NULL,
     first_name varchar(50) NOT NULL,
     last_name varchar(50) NOT NULL,
-    birthdate date NOT NULL,
+    date_of_birth date NULL,
     phone varchar(11) NOT NULL,
     email varchar(50) NOT NULL,
     created_at datetime NULL,
