@@ -33,7 +33,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
 	people = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 	locations = [];
 	round_trip = 'off';
-	myForm: FormGroup;
+	filterBookForm: FormGroup;
 
 	myDatePickerOptions = {
 		todayBtnTxt: 'Today',
@@ -54,7 +54,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
 		private _bannerDataService: BannerDataService, private sessionStorage: LocalStorageService,
 		private router: Router) { 
 
-		this.myForm = this.formBuilder.group({
+		this.filterBookForm = this.formBuilder.group({
 			'round_trip': 'off',
 			'from': ['', Validators.required],
 			'to': ['', Validators.required],
@@ -64,11 +64,10 @@ export class HomeComponent implements OnInit, AfterViewInit {
 			'children': ['0'],
 			'infant': ['0']
 		});
-		console.log(this.myForm);
 
-		this.myForm.statusChanges.subscribe(
-			(data: any) => console.log(data)
-		);
+		// this.filterBookForm.statusChanges.subscribe(
+		// 	(data: any) => console.log(data)
+		// );
 
 		this.locationDataService.getAll().subscribe(res => {
 
@@ -113,7 +112,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
 		this.sessionStorage.remove('session_token');
 		this.sessionStorage.set('session_token', uuid);
 
-		var objectStore = this.myForm.value;
+		var objectStore = this.filterBookForm.value;
 		var dateFormat = 'YYYY-MM-DD';
 		var viFormatDate = 'DD/MM/YYYY';
 		objectStore.from_date = moment(objectStore.from_date, viFormatDate).format(dateFormat);
@@ -124,6 +123,14 @@ export class HomeComponent implements OnInit, AfterViewInit {
 
 		this.sessionStorage.set('session_flight', JSON.stringify(objectStore));
 		this.router.navigate(['search-result/' + uuid]);
+	}
+
+	selectPlaneOption(round_trip) {
+		if(round_trip == 'off') {
+			jQuery('#date-back input').prop('disabled', true);
+		} else {
+			jQuery('#date-back input').prop('disabled', false);
+		}
 	}
 
 	// Get Name From Code
