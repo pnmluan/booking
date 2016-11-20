@@ -1,7 +1,7 @@
 /*ipad land*/
 @media only screen and (min-width: 960px) and (max-width: 1199px) {
 	.nicdark_container{width:960px;}
-	.grid_1 {width:60px;}.grid_2 {width:140px;}.grid_3 {width:220px;}.grid_4 {width:300px;}.grid_5 {width:380px;}.grid_6 {width:460px;}.grid_7 {width:540px;}.grid_8 {width:620px;}.grid_9 {width:700px;}.grid_10 {width:780px;}.grid_11 {width:860px;}.grid_12 {width:940px;}	
+	.grid_1 {width:60px;}.grid_2 {width:140px;}.grid_3 {width:220px;}.grid_4 {width:300px;}.grid_5 {width:380px;}.grid_6 {width:460px;}.grid_7 {width:540px;}.grid_8 {width:620px;}.grid_9 {width:700px;}.grid_10 {width:780px;}.grid_11 {width:860px;}.grid_12 {width:940px;}
 
 	/*some class*/
 	.nicdark_disable_marginleft_ipadland, .nicdark_disable_marginleft_responsive{ margin-left: 0px !important; }
@@ -64,7 +64,7 @@
 }
 /*iphone land*/
 @media only screen and (min-width: 480px) and (max-width: 767px) {
-	body{ -webkit-text-size-adjust:none; }		
+	body{ -webkit-text-size-adjust:none; }
 	.nicdark_container {width:460px;}
 	.grid_1,.grid_2,.grid_3,.grid_4,.grid_5,.grid_6,.grid_7,.grid_8,.grid_9,.grid_10,.grid_11,.grid_12{ width: 440px; }
 	.grid.percentage{ width: 100%; }
@@ -99,12 +99,12 @@
 /*iphone potr*/
 @media only screen and (min-width: 320px) and (max-width: 479px){
 	body{ -webkit-text-size-adjust:none; }
-	.nicdark_container{ width:300px;}
-	.grid_1,.grid_2,.grid_3,.grid_4,.grid_5,.grid_6,.grid_7,.grid_8,.grid_9,.grid_10,.grid_11,.grid_12{ width: 280px; }	
+	.nicdark_container{ width: 100%; max-width: 480px; padding: 0px 10px; }
+	.grid_1,.grid_2,.grid_3,.grid_4,.grid_5,.grid_6,.grid_7,.grid_8,.grid_9,.grid_10,.grid_11,.grid_12{ width: 280px; }
 	.grid.percentage{ width: 100%; }
 	.nicdark_width_percentage10,.nicdark_width_percentage20,.nicdark_width_percentage25,.nicdark_width_percentage30,.nicdark_width_percentage40,.nicdark_width_percentage50,.nicdark_width_percentage60,.nicdark_width_percentage70,.nicdark_width_percentage80,.nicdark_width_percentage90,.nicdark_width_percentage100 { width: 100% !important; }
 
-	
+
 	/*some class*/
 	.nicdark_disable_marginleft_iphonepotr, .nicdark_disable_marginleft_responsive { margin-left: 0px !important; }
 	.nicdark_marginleft20_iphonepotr { margin-left: 20px !important; }

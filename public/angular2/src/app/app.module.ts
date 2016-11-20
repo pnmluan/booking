@@ -35,6 +35,7 @@ import { SearchResultComponent } from './components/search-result';
 import { BannerComponent } from './components/home/banner';
 import { NewsComponent } from './components/home/news';
 import { CommentComponent } from './components/home/comment/comment.component';
+import { CustomerComponent } from './components/customer';
 
 
 @NgModule({
@@ -48,6 +49,7 @@ import { CommentComponent } from './components/home/comment/comment.component';
     BannerComponent,
     NewsComponent,
     CommentComponent,
+    CustomerComponent,
   ],
   imports: [
     BrowserModule,

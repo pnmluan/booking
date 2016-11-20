@@ -13,13 +13,13 @@
             <div class="wpb_wrapper wpb_tour_tabs_wrapper ui-tabs vc_clearfix">
               <ul class="wpb_tabs_nav ui-tabs-nav vc_clearfix">
                 <li class="nicdark_width100_iphonepotr nicdark_width100_iphoneland">
-                  <a class="title white" href="#tab-plane"><i class="icon-plane"></i> VÉ MÁY BAY</a>
+                  <a class="title white" ><i class="icon-plane"></i> VÉ MÁY BAY</a>
                 </li>
                 <!-- <li class="nicdark_width100_iphonepotr nicdark_width100_iphoneland">
                   <a class="title white" href="#tab-bus"><i class="fa fa-bus"></i> VÉ XE KHÁCH</a>
                 </li> -->
               </ul>
-              <div id="tab-plane" class="wpb_tab ui-tabs-panel wpb_ui-tabs-hide vc_clearfix">
+              <div  class="wpb_tab ui-tabs-panel wpb_ui-tabs-hide vc_clearfix">
                 <form class="plane-form" [formGroup]="filterBookForm" (ngSubmit)="onSubmit()">
                   <div class="plane-form-inner">
                     <div class="col-md-12">
@@ -88,7 +88,7 @@
 
                                   <input type='text' class="form-control" #datePickerTo [ngModel]="to_date" 
                                   (blur)="to_date = datePickerTo.value" formControlName="to_date" />
-                                  
+
                                   <span class="input-group-addon">
                                     <span class="glyphicon glyphicon-calendar"></span>
                                   </span>

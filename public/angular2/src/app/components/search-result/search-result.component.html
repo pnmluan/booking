@@ -57,7 +57,7 @@
                       </td>
                       <td class="plane-price">{{ f.eco }} <span>VNĐ</span></td>
                       <td>
-                        <input type="radio" name="" value="" placeholder="">
+                        <button type="button" class="btn-select-flight">Chọn <i class="fa fa-angle-right" aria-hidden="true"></i></button>
                       </td>
                     </tr>
 
@@ -65,87 +65,7 @@
                 </table>
               </div>
             </div>
-            <!-- <div class="main-list-plane-table" *ngIf="round_trip">
-              <div class="list-plane-title">
-                <h1>{{ route.from_to }} <span>đi</span> Hà Nội</h1>
-                <h2><span>Bay ngày:</span> {{ route.to_fly_date }}</h2>
-                <h3>(* Giá vé chưa bao gồm thuế và phí)</h3>
-              </div>
-              <div class="list-plane-date">
-                <ul class="clearfix">
-                  <li class="off">
-                    <span>Thứ 2</span><br/>
-                    <strong>10/10/2016</strong>
-                  </li>
-                  <li>
-                    <span>Thứ 3</span><br/>
-                    <strong>11/10/2016</strong>
-                  </li>
-                  <li>
-                    <span>Thứ 4</span><br/>
-                    <strong>12/10/2016</strong>
-                  </li>
-                  <li class="current">
-                    <span>Thứ 5</span><br/>
-                    <strong>13/10/2016</strong>
-                  </li>
-                  <li>
-                    <span>Thứ 6</span><br/>
-                    <strong>14/10/2016</strong>
-                  </li>
-                  <li>
-                    <span>Thứ 7</span><br/>
-                    <strong>15/10/2016</strong>
-                  </li>
-                  <li>
-                    <span>Chủ nhật</span><br/>
-                    <strong>16/10/2016</strong>
-                  </li>
-                </ul>
-              </div>
-              <div class="list-plane-table">
-                <table class="table table-striped table-hover">
-                  <thead>
-                    <tr>
-                      <th>Hàng không</th>
-                      <th>Chuyến bay</th>
-                      <th>Giờ đi</th>
-                      <th>Giờ đến</th>
-                      <th>Giá</th>
-                      <th></th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    
-                    
 
-                    <tr *ngFor="let flight of flights">
-                      <td><img src="assets/img/smVJ.gif" alt=""></td>
-                      <td>
-                        <p class="plane-id">{{ flight.flight_code }}</p>
-                      </td>
-                      <td>
-                        <span class="city">{{ route.from_name }}</span>
-                        <p class="time">{{ flight.start_time }}</p>
-                      </td>
-                      <td>
-                        <span class="city">{{ route.to_name }}</span>
-                        <p class="time">{{ flight.end_time }}</p>
-                      </td>
-                      <td class="plane-price">{{ flight.eco }} <span>VNĐ</span></td>
-                      <td>
-                        <input type="radio" name="" value="" placeholder="">
-                      </td>
-                    </tr>
-
-                  </tbody>
-                </table>
-              </div>
-            </div> -->
-            <div class="submit-plane">
-              <span class="more-scroll"></span>
-              <button type="button">Tiếp tục <i class="fa fa-angle-double-right" aria-hidden="true"></i></button>
-            </div>
           </div>
         </div>
         <!-- main-list-plane -->
@@ -188,7 +108,7 @@
                   <tbody>
                     <tr>
                       <td>Hãng hàng không</td>
-                      <td><a href="#" title="">Hiển thị tất cả</a></td>
+                      <td colspan="2"><a href="#" title="">Hiển thị tất cả</a></td>
                     </tr>
                     <tr>
                       <td>
@@ -199,6 +119,7 @@
                         </div>
                       </td>
                       <td><img src="assets/img/smVN.gif" alt=""></td>
+                      <td>799.000</td>
                     </tr>
                     <tr>
                       <td>
@@ -209,6 +130,7 @@
                         </div>
                       </td>
                       <td><img src="assets/img/smBL.gif" alt=""></td>
+                      <td>999.000</td>
                     </tr>
                     <tr>
                       <td>
@@ -219,10 +141,12 @@
                         </div>
                       </td>
                       <td><img src="assets/img/smVJ.gif" alt=""></td>
+                      <td>1.299.000</td>
                     </tr>
                   </tbody>
                 </table>
               </div>
+            
             </div>
           </div>
           <!-- filter-plane -->

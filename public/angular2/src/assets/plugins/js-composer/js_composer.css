@@ -10475,7 +10475,7 @@ a.wpb_button_a:hover {
   cursor: default;
 }
 .wpb_content_element .wpb_tour_tabs_wrapper .wpb_ui-tabs-hide {
-  display: none;
+  /*display: none;*/
 }
 /** Tabs/Tour/Accordion Common **/
 .wpb_content_element {
