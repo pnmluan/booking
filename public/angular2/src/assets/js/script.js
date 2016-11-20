@@ -8,6 +8,7 @@ var swiper = new Swiper('.swiper-container', {
 
 jQuery(window).on('load', function() {
   jQuery(".nicdark_preloader").delay(1000).fadeOut("slow");
+  jQuery('#date-back input').prop('disabled', true);
 });
 
 // var indexScript = {
@@ -15,7 +16,7 @@ jQuery(window).on('load', function() {
 //     var radios = jQuery('input[name="plane-option"]');
 //     radios.filter('[value=option1]').prop('checked', true);
 
-//     jQuery('#date-back input').prop('disabled', true);
+//     
 
 //     jQuery('.multiple').hide();
 //   },
