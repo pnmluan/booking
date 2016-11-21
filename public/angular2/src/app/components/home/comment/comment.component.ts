@@ -23,6 +23,7 @@ export class CommentComponent implements OnInit {
 
 			if (res.data) {
 
+				var comments = [];
 				for (var i = 0; i < res.data.length; i = i +2) {
 					var temp = [];
 					if (res.data[i]) {
@@ -41,10 +42,12 @@ export class CommentComponent implements OnInit {
 					} else {
 						temp.push(new Comment());
 					}
-					this.comments.push(temp);
+					comments.push(temp);
 				}
+				this.comments = comments;
 
 			}
+			console.log(this.comments);
 
 		})
   	}
