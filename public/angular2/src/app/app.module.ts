@@ -8,6 +8,7 @@ import { RouterModule } from '@angular/router';
 // Third party
 import { SelectModule } from 'angular2-select';
 import { LocalStorageService, LOCAL_STORAGE_SERVICE_CONFIG } from 'angular-2-local-storage';
+import { MomentModule } from 'angular2-moment';
  
 // Create config options (see ILocalStorageServiceConfigOptions) for deets:
 let localStorageServiceConfig = {
@@ -34,6 +35,7 @@ import { SearchResultComponent } from './components/search-result';
 import { BannerComponent } from './components/home/banner';
 import { NewsComponent } from './components/home/news';
 import { CommentComponent } from './components/home/comment/comment.component';
+import { CustomerComponent } from './components/customer';
 
 
 @NgModule({
@@ -47,6 +49,7 @@ import { CommentComponent } from './components/home/comment/comment.component';
     BannerComponent,
     NewsComponent,
     CommentComponent,
+    CustomerComponent,
   ],
   imports: [
     BrowserModule,
@@ -54,7 +57,8 @@ import { CommentComponent } from './components/home/comment/comment.component';
     routing,
     HttpModule,
     ReactiveFormsModule,
-    SelectModule
+    SelectModule,
+    MomentModule
 
   ],
   providers: [

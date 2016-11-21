@@ -11,7 +11,7 @@ namespace App\Http\Controllers;
 
 use App\Models\TicketType;
 
-class TicketTypeController
+class TicketTypeController extends ApiController
 {
     public function index(){
         $Categories  = TicketType::all();
