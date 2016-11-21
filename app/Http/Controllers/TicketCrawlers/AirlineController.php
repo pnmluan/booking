@@ -131,32 +131,45 @@ class AirlineController extends \App\Http\Controllers\ApiController
 
             $price = $xpath->query("(//*[@id='travOpsMain']/table//tr[7]/td/table//tr[contains(substring(@id, 1, 16), 'gridTravelOptDep')])[" . ($i + 1) . "]/td[2]/table//tr/td[1]/*[@id='fare']");
             $fee = $xpath->query("(//*[@id='travOpsMain']/table//tr[7]/td/table//tr[contains(substring(@id, 1, 16), 'gridTravelOptDep')])[" . ($i + 1) . "]/td[2]/table//tr/td[1]/*[@id='charges']");
+
             if ($price->length > 0) {
-                $data['promo'] = substr(trim($price[0]->getAttribute('value')), 0, -4);
-            } else {
-                $data['promo'] = 'Hết vé';
+                $data['price'] = substr(trim($price[0]->getAttribute('value')), 0, -4);
+                $data['fee'] = substr(trim($fee[0]->getAttribute('value')), 0, -4);
+                $result['dep_flights'][] = $data;
             }
 
+
+            $data = [];
+            $data['start_date'] = $start_date;
+            $data['start_time'] = $start_time;
+            $data['end_time'] = $end_time;
+            $data['flight_code'] = $flight_code;
 
             $price = $xpath->query("(//*[@id='travOpsMain']/table//tr[7]/td/table//tr[contains(substring(@id, 1, 16), 'gridTravelOptDep')])[" . ($i + 1) . "]/td[2]/table//tr/td[2]/*[@id='fare']");
             $fee = $xpath->query("(//*[@id='travOpsMain']/table//tr[7]/td/table//tr[contains(substring(@id, 1, 16), 'gridTravelOptDep')])[" . ($i + 1) . "]/td[2]/table//tr/td[2]/*[@id='charges']");
+
             if ($price->length > 0) {
-                $data['eco'] = substr(trim($price[0]->getAttribute('value')), 0, -4);
-            } else {
-                $data['eco'] = 'Hết vé';
+                $data['price'] = substr(trim($price[0]->getAttribute('value')), 0, -4);
+                $data['fee'] = substr(trim($fee[0]->getAttribute('value')), 0, -4);
+                $result['dep_flights'][] = $data;
             }
 
+
+            $data = [];
+            $data['start_date'] = $start_date;
+            $data['start_time'] = $start_time;
+            $data['end_time'] = $end_time;
+            $data['flight_code'] = $flight_code;
 
             $price = $xpath->query("(//*[@id='travOpsMain']/table//tr[7]/td/table//tr[contains(substring(@id, 1, 16), 'gridTravelOptDep')])[" . ($i + 1) . "]/td[2]/table//tr/td[3]/*[@id='fare']");
             $fee = $xpath->query("(//*[@id='travOpsMain']/table//tr[7]/td/table//tr[contains(substring(@id, 1, 16), 'gridTravelOptDep')])[" . ($i + 1) . "]/td[2]/table//tr/td[3]/*[@id='charges']");
+
             if ($price->length > 0) {
-                $data['skyboss'] = substr(trim($price[0]->getAttribute('value')), 0, -4);
-            } else {
-                $data['skyboss'] = 'Hết vé';
+                $data['price'] = substr(trim($price[0]->getAttribute('value')), 0, -4);
+                $data['fee'] = substr(trim($fee[0]->getAttribute('value')), 0, -4);
+                $result['dep_flights'][] = $data;
             }
 
-
-            $result['dep_flights'][] = $data;
         }
 
         // RETURN FLIGHT
@@ -190,31 +203,44 @@ class AirlineController extends \App\Http\Controllers\ApiController
 
                 $price = $xpath->query("(//*[@id='travOpsMain']/table//tr[7]/td/table//tr[contains(substring(@id, 1, 16), 'gridTravelOptRet')])[" . ($i + 1) . "]/td[2]/table//tr/td[1]/*[@id='fare']");
                 $fee = $xpath->query("(//*[@id='travOpsMain']/table//tr[7]/td/table//tr[contains(substring(@id, 1, 16), 'gridTravelOptRet')])[" . ($i + 1) . "]/td[2]/table//tr/td[1]/*[@id='charges']");
+
                 if ($price->length > 0) {
-                    $data['promo'] = substr(trim($price[0]->getAttribute('value')), 0, -4);
-                } else {
-                    $data['promo'] = 'Hết vé';
+                    $data['price'] = substr(trim($price[0]->getAttribute('value')), 0, -4);
+                    $data['fee'] = substr(trim($fee[0]->getAttribute('value')), 0, -4);
+                    $result['ret_flights'][] = $data;
                 }
 
+
+                $data = [];
+                $data['start_date'] = $start_date;
+                $data['start_time'] = $start_time;
+                $data['end_time'] = $end_time;
+                $data['flight_code'] = $flight_code;
 
                 $price = $xpath->query("(//*[@id='travOpsMain']/table//tr[7]/td/table//tr[contains(substring(@id, 1, 16), 'gridTravelOptRet')])[" . ($i + 1) . "]/td[2]/table//tr/td[2]/*[@id='fare']");
                 $fee = $xpath->query("(//*[@id='travOpsMain']/table//tr[7]/td/table//tr[contains(substring(@id, 1, 16), 'gridTravelOptRet')])[" . ($i + 1) . "]/td[2]/table//tr/td[2]/*[@id='charges']");
+
                 if ($price->length > 0) {
-                    $data['eco'] = substr(trim($price[0]->getAttribute('value')), 0, -4);
-                } else {
-                    $data['eco'] = 'Hết vé';
+                    $data['price'] = substr(trim($price[0]->getAttribute('value')), 0, -4);
+                    $data['fee'] = substr(trim($fee[0]->getAttribute('value')), 0, -4);
+                    $result['ret_flights'][] = $data;
                 }
 
+
+                $data = [];
+                $data['start_date'] = $start_date;
+                $data['start_time'] = $start_time;
+                $data['end_time'] = $end_time;
+                $data['flight_code'] = $flight_code;
 
                 $price = $xpath->query("(//*[@id='travOpsMain']/table//tr[7]/td/table//tr[contains(substring(@id, 1, 16), 'gridTravelOptRet')])[" . ($i + 1) . "]/td[2]/table//tr/td[3]/*[@id='fare']");
                 $fee = $xpath->query("(//*[@id='travOpsMain']/table//tr[7]/td/table//tr[contains(substring(@id, 1, 16), 'gridTravelOptRet')])[" . ($i + 1) . "]/td[2]/table//tr/td[3]/*[@id='charges']");
-                if ($price->length > 0) {
-                    $data['skyboss'] = substr(trim($price[0]->getAttribute('value')), 0, -4);
-                } else {
-                    $data['skyboss'] = 'Hết vé';
-                }
 
-                $result['ret_flights'][] = $data;
+                if ($price->length > 0) {
+                    $data['price'] = substr(trim($price[0]->getAttribute('value')), 0, -4);
+                    $data['fee'] = substr(trim($fee[0]->getAttribute('value')), 0, -4);
+                    $result['ret_flights'][] = $data;
+                }
             }
         }
 
