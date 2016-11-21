@@ -387,7 +387,8 @@ ul.footerlist li a:hover{color:#F69E1C; text-decoration:none;}
 .filter-plane-inner h3 i { font-size: 14px; }
 .filter-plane-inner .box { border: 1px solid #ddd; border-radius: 4px; padding: 0px 7px; background: #fff; margin-top: 10px; }
 .filter-plane-inner .box table { width: 100%; margin-top: 10px; }
-.filter-plane-inner .box table td:last-child { text-align: right; }
+.filter-plane-inner .box table td { vertical-align: middle; }
+.filter-plane-inner .box table td:last-child { text-align: right; color: #E44803; font-weight: bold; }
 .filter-plane-inner .box table tr:first-child td:first-child { font-weight: bold; }
 .filter-plane-inner .box table tr a { color: #649931; }
 .filter-plane-inner .box table tr a:hover { color: #F69E1C; }
@@ -410,6 +411,23 @@ ul.footerlist li a:hover{color:#F69E1C; text-decoration:none;}
 
 .field-date-go .input-group-addon,
 .field-date-back .input-group-addon{ padding: 6px; }
+
+.small-modal { }
+.small-modal .modal-dialog { max-width: 360px; width: 100%; margin: 35vh auto; }
+.small-modal .modal-body { text-align: center; }
+.h20px { height: 20px; }
+.btn-style { height: 34px; }
+.btn-find-again { background: #649931; color: #fff; border: 1px solid #649931; }
+.btn-find-again:hover { color: #fff; background: #55911A; border: 1px solid #55911A; }
+.btn-go-home { background: #ddd; border: 1px solid #ddd; }
+.btn-go-home:hover { background: #ccc; border: 1px solid #ccc; }
+
+.btn-select-flight { color: #fff; background: #E77741; border: 0px; outline: 0px; font-family: 'diavlo'; text-transform: uppercase; padding: 3px 15px; border-radius: 3px; }
+.btn-select-flight:hover { background: #E44803; }
+.list-plane-table table td:last-child { text-align: center; }
+
+
+
 
 @media screen and (min-width: 992px) {
     .list-plane-inner { display: table; width: 100%; }

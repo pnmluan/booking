@@ -20,6 +20,7 @@ import { Configuration } from '../../shared/app.configuration';
 import { LocationDataService } from '../../shared/location.dataservice';
 import { BannerDataService } from '../../shared/banner.dataservice';
 declare let jQuery: any;
+declare let moment: any;
 
 
 @Component({
@@ -31,7 +32,8 @@ declare let jQuery: any;
 export class HomeComponent implements OnInit, AfterViewInit {
 	people = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 	locations = [];
-	myForm: FormGroup;
+	round_trip = 'off';
+	filterBookForm: FormGroup;
 
 	myDatePickerOptions = {
 		todayBtnTxt: 'Today',
@@ -52,20 +54,20 @@ export class HomeComponent implements OnInit, AfterViewInit {
 		private _bannerDataService: BannerDataService, private sessionStorage: LocalStorageService,
 		private router: Router) { 
 
-		this.myForm = formBuilder.group({
+		this.filterBookForm = this.formBuilder.group({
 			'round_trip': 'off',
 			'from': ['', Validators.required],
 			'to': ['', Validators.required],
 			'from_date': ['', Validators.required],
-			// 'plan_option': ['', Validators.required],
+			'to_date': '',
 			'adult': ['1', Validators.required],
 			'children': ['0'],
 			'infant': ['0']
 		});
 
-		this.myForm.statusChanges.subscribe(
-			(data: any) => console.log(data)
-		);
+		// this.filterBookForm.statusChanges.subscribe(
+		// 	(data: any) => console.log(data)
+		// );
 
 		this.locationDataService.getAll().subscribe(res => {
 
@@ -110,11 +112,37 @@ export class HomeComponent implements OnInit, AfterViewInit {
 		this.sessionStorage.remove('session_token');
 		this.sessionStorage.set('session_token', uuid);
 
-		var objectStore = this.myForm.value;
-		objectStore.from_date = '2016-11-20';
+		var objectStore = this.filterBookForm.value;
+		var dateFormat = 'YYYY-MM-DD';
+		var viFormatDate = 'DD/MM/YYYY';
+		objectStore.from_date = moment(objectStore.from_date, viFormatDate).format(dateFormat);
+		objectStore.to_date = moment(objectStore.to_date, viFormatDate).format(dateFormat);
+
+		objectStore.from_name = this.getNameFromCode(objectStore.from);
+		objectStore.to_name = this.getNameFromCode(objectStore.to);
+
 		this.sessionStorage.set('session_flight', JSON.stringify(objectStore));
-		this.router.navigate(['search-result']);
+		this.router.navigate(['search-result/' + uuid]);
 	}
+
+	selectPlaneOption(round_trip) {
+		if(round_trip == 'off') {
+			jQuery('#date-back input').prop('disabled', true);
+		} else {
+			jQuery('#date-back input').prop('disabled', false);
+		}
+	}
+
+	// Get Name From Code
+	protected getNameFromCode(code: string) {
+		let label = '';
+		for (var key in this.locations) {
+			if (this.locations[key].value == code)
+				return this.locations[key].label;
+		}
+		return label;
+	}
+
 
 	onDateChanged(event: any) {
 		console.log('onDateChanged(): ', event.date, ' - formatted: ', event.formatted, ' - epoc timestamp: ', event.epoc);

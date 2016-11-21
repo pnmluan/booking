@@ -13,22 +13,22 @@
             <div class="wpb_wrapper wpb_tour_tabs_wrapper ui-tabs vc_clearfix">
               <ul class="wpb_tabs_nav ui-tabs-nav vc_clearfix">
                 <li class="nicdark_width100_iphonepotr nicdark_width100_iphoneland">
-                  <a class="title white" href="#tab-plane"><i class="icon-plane"></i> VÉ MÁY BAY</a>
+                  <a class="title white" ><i class="icon-plane"></i> VÉ MÁY BAY</a>
                 </li>
                 <!-- <li class="nicdark_width100_iphonepotr nicdark_width100_iphoneland">
                   <a class="title white" href="#tab-bus"><i class="fa fa-bus"></i> VÉ XE KHÁCH</a>
                 </li> -->
               </ul>
-              <div id="tab-plane" class="wpb_tab ui-tabs-panel wpb_ui-tabs-hide vc_clearfix">
-                <form class="plane-form" [formGroup]="myForm" (ngSubmit)="onSubmit()">
+              <div  class="wpb_tab ui-tabs-panel wpb_ui-tabs-hide vc_clearfix">
+                <form class="plane-form" [formGroup]="filterBookForm" (ngSubmit)="onSubmit()">
                   <div class="plane-form-inner">
                     <div class="col-md-12">
                       <div class="plane-option clearfix">
                         <label class="radio-inline radio-plane">
-                          <input class="plane-option" type="radio" formControlName="round_trip" name="round_trip" id="one-way" value="off" checked> Một chiều
+                          <input class="plane-option" type="radio" (click)="selectPlaneOption('off')" formControlName="round_trip" name="round_trip" id="one-way" value="off" checked> Một chiều
                         </label>
                         <label class="radio-inline radio-plane">
-                          <input class="plane-option" type="radio" formControlName="round_trip" name="round_trip" id="round-trip" value="roundTrip" value="on"> Khứ hồi
+                          <input class="plane-option" type="radio" (click)="selectPlaneOption('on')" formControlName="round_trip" name="round_trip" id="round-trip" value="on"> Khứ hồi
                         </label>
                         <!-- <label class="radio-inline radio-plane">
                           <input class="plane-option" type="radio" name="plane-option" id="multiple" value="option3"> Nhiều chặng
@@ -67,7 +67,8 @@
                             <div class="field-input">
                               <div class="form-group">
                                 <div class='input-group date' id='date-go'>
-                                  <input type='text' class="form-control"  #datePicker [ngModel]="from_date" (blur)="from_date = datePicker.value" formControlName="from_date" /> 
+
+                                  <input type='text' class="form-control"  #datePickerFrom [ngModel]="from_date" (blur)="from_date = datePickerFrom.value" formControlName="from_date" /> 
                                   
                                   <span class="input-group-addon">
                                     <span class="glyphicon glyphicon-calendar"></span>
@@ -84,7 +85,10 @@
                             <div class="field-input">
                               <div class="form-group">
                                 <div class='input-group date' id='date-back'>
-                                  <input type='text' class="form-control" disabled/>
+
+                                  <input type='text' class="form-control" #datePickerTo [ngModel]="to_date" 
+                                  (blur)="to_date = datePickerTo.value" formControlName="to_date" />
+
                                   <span class="input-group-addon">
                                     <span class="glyphicon glyphicon-calendar"></span>
                                   </span>
@@ -139,7 +143,7 @@
                         <div class="col-md-3">
                           <span class="field-label">&nbsp;</span>
                           <div class="plane-submit">
-                            <button type="submit" class="btn btn-plane btn-search" [disabled]="!myForm.valid"><i class=" icon-search-2"></i> Tìm chuyến bay</button>
+                            <button type="submit" class="btn btn-plane btn-search" [disabled]="!filterBookForm.valid"><i class=" icon-search-2"></i> Tìm chuyến bay</button>
                           </div>
                         </div>
                       </div>
