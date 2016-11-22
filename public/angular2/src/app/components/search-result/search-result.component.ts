@@ -63,41 +63,41 @@ export class SearchResultComponent implements OnInit, AfterViewInit {
 		}
 		
 
-		// this.airlineDataService.vietjet(params).subscribe(res => {
-
-		// 	if (res.dep_flights) {
-
-		// 		from_flights['flights'] = res.dep_flights
-
-		// 		this.listRoutes.push(from_flights);
-				
-
-		// 	}
-
-		// 	if(res.ret_flights) {
-		// 		to_flights['flights'] = res.ret_flights;
-		// 		this.listRoutes.push(to_flights);
-		// 	}
-
-		// });
-			console.log(params);
-		this.airlineDataService.jetstar(params).subscribe(res => {
+		this.airlineDataService.vietjet(params).subscribe(res => {
 
 			if (res.dep_flights) {
 
 				from_flights['flights'] = res.dep_flights
 
 				this.listRoutes.push(from_flights);
-
+				
 
 			}
 
-			if (res.ret_flights) {
+			if(res.ret_flights) {
 				to_flights['flights'] = res.ret_flights;
 				this.listRoutes.push(to_flights);
 			}
-
+			console.log(this.listRoutes);
 		});
+
+		// this.airlineDataService.jetstar(params).subscribe(res => {
+
+		// 	if (res.dep_flights) {
+
+		// 		from_flights['flights'] = res.dep_flights
+
+		// 		this.listRoutes.push(from_flights);
+
+
+		// 	}
+
+		// 	if (res.ret_flights) {
+		// 		to_flights['flights'] = res.ret_flights;
+		// 		this.listRoutes.push(to_flights);
+		// 	}
+
+		// });
 		
 
 		// Get locations
@@ -148,7 +148,7 @@ export class SearchResultComponent implements OnInit, AfterViewInit {
 				return 0;
 			})
 		}
-		console.log(this.listRoutes);
+
 	}
 
 	// Sort Time From min to max
