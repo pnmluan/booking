@@ -102,12 +102,19 @@
       <!--FULL WIDTH PAGE-->
       <!--#post-->
       <div style="float:left; width:100%;" id="post-32" class="post-32 page type-page status-publish hentry">
+        <section class="loading text-center">
+          <h4>Vui lòng đợi, hệ thống đang tìm kiếm chuyến bay và mức giá tốt nhất ...</h4>
+          <div>
+            <h3>Hà Nội, Việt Nam (HAN) <i class="fa fa-long-arrow-right" aria-hidden="true"></i> Tp.Hò Chí Minh, Việt Nam</h3>
+            <p>Ngày đi: Thứ Tư 23 Tháng mười một 2016 <i class="fa fa-long-arrow-right" aria-hidden="true"></i> Ngày về: Thứ Tư 25 Tháng mười một 2016</p>
+          </div>
+          <img src="img/pleasewait.gif" alt="">
+        </section>
         <section class="steps">
           <ul class="progressbar">
             <li class="active">Tìm chuyến bay</li>
             <li>Khách hàng</li>
-            <li>Xác nhận</li>
-            <li>Thanh toán</li>
+            <li>Xác nhận & Thanh toán</li>
           </ul>
         </section>
         <section class="list-plane">
@@ -1613,6 +1620,8 @@
 
   <script>
     jQuery(function () {
+      jQuery('.loading').delay(5000).fadeOut('fast');
+
       jQuery('#modalNotify').modal('show');
 
       jQuery('.btn-select-flight').click(function(){
