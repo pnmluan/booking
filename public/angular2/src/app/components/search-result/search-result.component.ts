@@ -63,25 +63,40 @@ export class SearchResultComponent implements OnInit, AfterViewInit {
 		}
 		
 
-		this.airlineDataService.vietjet(params).subscribe(res => {
+		// this.airlineDataService.vietjet(params).subscribe(res => {
+
+		// 	if (res.dep_flights) {
+
+		// 		from_flights['flights'] = res.dep_flights
+
+		// 		this.listRoutes.push(from_flights);
+				
+
+		// 	}
+
+		// 	if(res.ret_flights) {
+		// 		to_flights['flights'] = res.ret_flights;
+		// 		this.listRoutes.push(to_flights);
+		// 	}
+
+		// });
+			console.log(params);
+		this.airlineDataService.jetstar(params).subscribe(res => {
 
 			if (res.dep_flights) {
-				// var moment_from_date = moment(this.session_flight['from_date']).format('DD/MM/YYYY');
-				// var flightsFromDate = res.dep_flights.filter(
-				// 	flight => flight.start_date == moment_from_date);
 
 				from_flights['flights'] = res.dep_flights
 
 				this.listRoutes.push(from_flights);
-				
+
 
 			}
 
-			if(res.ret_flights) {
+			if (res.ret_flights) {
 				to_flights['flights'] = res.ret_flights;
 				this.listRoutes.push(to_flights);
 			}
-			console.log(this.listRoutes);
+
 		});
 		
 

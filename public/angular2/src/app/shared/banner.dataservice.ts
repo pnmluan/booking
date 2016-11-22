@@ -1,6 +1,5 @@
 import { Injectable, EventEmitter, Output } from '@angular/core';
-import { Response, RequestOptions, RequestOptionsArgs } from '@angular/http';
-import { HttpClient } from './http-client';
+import { Http, Headers, Response } from '@angular/http';
 import { Observable } from 'rxjs/Rx';
 import { Configuration } from '../shared/app.configuration';
 
@@ -13,19 +12,26 @@ export class BannerDataService {
 	// @Output() foodAdded: EventEmitter<any> = new EventEmitter();
 	// @Output() foodDeleted: EventEmitter<any> = new EventEmitter();
 
-	constructor(private _http: HttpClient, private _configuration: Configuration) {
+	constructor(private _Http: Http, private _configuration: Configuration) {
 		this.actionUrl = _configuration.apiUrl + 'banner/';
 	}
 
+	createAuthorizationHeader(headers: Headers) {
+		headers.append('Content-Type', 'application/json;charset=UTF-8');
+		headers.append('Authorization', 'Basic ' + this._configuration.authentic);
+	}
+
 	public getAll() {
-		return this._http.get(this.actionUrl + 'index')
+		let headers = new Headers();
+		this.createAuthorizationHeader(headers);
+		return this._Http.get(this.actionUrl + 'index', { headers: headers })
 			.map(res => res.json())
 			.catch(this.handleError);
 
 	}
 
 	// public GetSingle = (id: number): Observable<Comment> => {
-	// 	return this._http.get(this.actionUrl + id)
+	// 	return this._Http.get(this.actionUrl + id)
 	// 		.map((response: Response) => <Comment>response.json())
 	// 		.catch(this.handleError);
 	// }
@@ -40,7 +46,7 @@ export class BannerDataService {
 
 		// let options = this.prepareOptions(null);
 
-	// 	return this._http.post(this.actionUrl, toAdd, options)
+	// 	return this._Http.post(this.actionUrl, toAdd, options)
 	// 		.map((response: Response) => <Comment>response.json())
 	// 		.do(() => this.foodAdded.emit(null))
 	// 		.catch(this.handleError);
@@ -49,13 +55,13 @@ export class BannerDataService {
 	// public Update = (id: number, foodToUpdate: Comment): Observable<Comment> => {
 	// 	let options = this.prepareOptions(null);
 
-	// 	return this._http.put(this.actionUrl + id, JSON.stringify(foodToUpdate), options)
+	// 	return this._Http.put(this.actionUrl + id, JSON.stringify(foodToUpdate), options)
 	// 		.map((response: Response) => <Comment>response.json())
 	// 		.catch(this.handleError);
 	// }
 
 	// public DeleteFood = (id: number): Observable<Response> => {
-	// 	return this._http.delete(this.actionUrl + id)
+	// 	return this._Http.delete(this.actionUrl + id)
 	// 		.do(() => this.foodDeleted.emit(null))
 	// 		.catch(this.handleError);
 	// }

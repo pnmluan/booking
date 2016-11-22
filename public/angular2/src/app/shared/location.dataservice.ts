@@ -1,5 +1,5 @@
 import { Injectable, EventEmitter, Output } from '@angular/core';
-import { Response, RequestOptions, RequestOptionsArgs } from '@angular/http';
+import { Http, Headers, Response } from '@angular/http';
 import { HttpClient } from './http-client';
 import { Observable } from 'rxjs/Rx';
 import { Location } from '../models/location';
@@ -11,13 +11,19 @@ export class LocationDataService {
 	private actionUrl: string;
 
 
-	constructor(private _http: HttpClient, private _configuration: Configuration) {
+	constructor(private _Http: Http, private _configuration: Configuration) {
 		this.actionUrl = _configuration.apiUrl + 'location/';
 	}
 
+	createAuthorizationHeader(headers: Headers) {
+		headers.append('Content-Type', 'application/json;charset=UTF-8');
+		headers.append('Authorization', 'Basic ' + this._configuration.authentic);
+	}
 
 	public getAll() {
-		return this._http.get(this.actionUrl + 'index')
+		let headers = new Headers();
+		this.createAuthorizationHeader(headers);
+		return this._Http.get(this.actionUrl + 'index', {headers: headers})
 			.map(res => res.json())
 			.catch(this.handleError);
 	}
