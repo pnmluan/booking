@@ -2,60 +2,61 @@
 /**
  * Created by PhpStorm.
  * User: hsb
- * Date: 13-Nov-16
- * Time: 9:07 AM
+ * Date: 19-Nov-16
+ * Time: 8:18 AM
  */
 
 namespace App\Http\Controllers;
 
-
-use App\Models\Provider;
+use App\Models\Contact;
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-class ProviderController extends ApiController
+
+class ContactController extends ApiController
 {
     public function index(Request $request){
 
-        $data = Provider::listItems($request->all());
+        $data = Contact::listItems($request->all());
         return response()->json($data);
 
     }
 
     public function show($id) {
 
-        $provider  = Provider::find($id);
+        $contact  = Contact::find($id);
 
-        if (!$provider) {
+        if (!$contact) {
             return $this->respondNotFound();
         }
-        return $this->respondWithSuccess(['data'=>$provider]);
+        return $this->respondWithSuccess(['data'=>$contact]);
     }
 
     public function create(Request $request){
-        $provider = new Provider();
+        $contact = new Contact();
         $data = $request['data'];
 
-        $provider->fill($data);
+        $contact->fill($data);
 
-        if (!$provider->isValid()) {
-            return $this->respondWithError(['error' => $provider->getValidationErrors()]);
+        if (!$contact->isValid()) {
+            return $this->respondWithError(['error' => $contact->getValidationErrors()]);
         }
         try {
-            $provider->save();
+            $contact->save();
         } catch (\Exception $ex) {
             return $this->respondWithNotSaved();
         }
-        return $this->respondWithCreated(['data'=>$provider]);
+        return $this->respondWithCreated(['data'=>$contact]);
     }
 
     public function delete($id){
 
-        $provider  = Provider::find($id);
-        if (!$provider) {
+        $contact  = Contact::find($id);
+        if (!$contact) {
             return $this->respondNotFound();
         }
         try {
-            if (!$provider->delete()) {
+            if (!$contact->delete()) {
                 return $this->respondWithError();
             }
         } catch (\Exception $ex) {
@@ -66,23 +67,23 @@ class ProviderController extends ApiController
 
     public function update(Request $request, $id){
 
-        $provider = Provider::find($id);
-        if(!$provider) {
+        $contact = Contact::find($id);
+        if(!$contact) {
             return $this->respondNotFound();
         }
         $data = $request['data'];
 
-        $provider->fill($data);
+        $contact->fill($data);
 
-        if (!$provider->isValid()) {
-            return $this->respondWithError(['error' => $provider->getValidationErrors()]);
+        if (!$contact->isValid()) {
+            return $this->respondWithError(['error' => $contact->getValidationErrors()]);
         }
         try {
-            $provider->save();
+            $contact->save();
         } catch (\Exception $ex) {
             return $this->respondWithNotSaved();
         }
 
-        return $this->respondWithSaved(['data'=>$provider]);
+        return $this->respondWithSaved(['data'=>$contact]);
     }
 }

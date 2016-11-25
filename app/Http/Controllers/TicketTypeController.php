@@ -10,44 +10,79 @@ namespace App\Http\Controllers;
 
 
 use App\Models\TicketType;
+use Illuminate\Http\Request;
 
 class TicketTypeController extends ApiController
 {
-    public function index(){
-        $Categories  = TicketType::all();
+    public function index(Request $request){
 
-        return response()->json($Categories);
+        $data = TicketType::listItems($request->all());
+        return response()->json($data);
 
     }
 
-    public function show($id){
+    public function show($id) {
 
         $ticketType  = TicketType::find($id);
 
-        return response()->json($ticketType);
+        if (!$ticketType) {
+            return $this->respondNotFound();
+        }
+        return $this->respondWithSuccess(['data'=>$ticketType]);
     }
 
     public function create(Request $request){
+        $ticketType = new TicketType();
+        $data = $request['data'];
 
-        $ticketType = TicketType::create($request->all());
+        $ticketType->fill($data);
 
-        return response()->json($ticketType);
-
+        if (!$ticketType->isValid()) {
+            return $this->respondWithError(['error' => $ticketType->getValidationErrors()]);
+        }
+        try {
+            $ticketType->save();
+        } catch (\Exception $ex) {
+            return $this->respondWithNotSaved();
+        }
+        return $this->respondWithCreated(['data'=>$ticketType]);
     }
 
     public function delete($id){
-        $ticketType  = TicketType::find($id);
-        $ticketType->delete();
 
-        return response()->json('deleted');
+        $ticketType  = TicketType::find($id);
+        if (!$ticketType) {
+            return $this->respondNotFound();
+        }
+        try {
+            if (!$ticketType->delete()) {
+                return $this->respondWithError();
+            }
+        } catch (\Exception $ex) {
+            return $this->respondWithError(['error' => $ex->getMessage()]);
+        }
+        return $this->respondWithSuccess(['record_id'=>$id]);
     }
 
-    public function update(Request $request,$id){
-        $ticketType  = TicketType::find($id);
-        $ticketType->name = $request->input('name');
-        $ticketType->provider = $request->input('provider');
-        $ticketType->save();
+    public function update(Request $request, $id){
 
-        return response()->json($ticketType);
+        $ticketType = TicketType::find($id);
+        if(!$ticketType) {
+            return $this->respondNotFound();
+        }
+        $data = $request['data'];
+
+        $ticketType->fill($data);
+
+        if (!$ticketType->isValid()) {
+            return $this->respondWithError(['error' => $ticketType->getValidationErrors()]);
+        }
+        try {
+            $ticketType->save();
+        } catch (\Exception $ex) {
+            return $this->respondWithNotSaved();
+        }
+
+        return $this->respondWithSaved(['data'=>$ticketType]);
     }
 }

@@ -61,12 +61,12 @@ $app->group(['prefix' => 'api/v1', 'middleware' => 'BasicAuth',  'namespace' => 
     $app->put('location/update/{id}','LocationController@update');
 
     $app->delete('location/delete/{id}','LocationController@delete');
-
+    
     /*
-    |--------------------------------------------------------------------------
-    | Provider
-    |--------------------------------------------------------------------------
-    */
+   |--------------------------------------------------------------------------
+   | Provider
+   |--------------------------------------------------------------------------
+   */
     $app->get('provider','ProviderController@index');
 
     $app->get('provider/show/{id}','ProviderController@show');
@@ -136,6 +136,82 @@ $app->group(['prefix' => 'api/v1', 'middleware' => 'BasicAuth',  'namespace' => 
     $app->put('booking_detail/update/{id}','BookingDetailController@update');
 
     $app->delete('booking_detail/delete/{id}','BookingDetailController@delete');
+
+    /*
+    |--------------------------------------------------------------------------
+    | Booking
+    |--------------------------------------------------------------------------
+    */
+    $app->get('booking','BookingController@index');
+
+    $app->get('booking/show/{id}','BookingController@show');
+
+    $app->post('booking/create','BookingController@create');
+
+    $app->put('booking/update/{id}','BookingController@update');
+
+    $app->delete('booking/delete/{id}','BookingController@delete');
+
+    /*
+    |--------------------------------------------------------------------------
+    | BookingDetail
+    |--------------------------------------------------------------------------
+    */
+    $app->get('booking_detail','BookingDetailController@index');
+
+    $app->get('booking_detail/show/{id}','BookingDetailController@show');
+
+    $app->post('booking_detail/create','BookingDetailController@create');
+
+    $app->put('booking_detail/update/{id}','BookingDetailController@update');
+
+    $app->delete('booking_detail/delete/{id}','BookingDetailController@delete');
+
+    /*
+    |--------------------------------------------------------------------------
+    | Contact
+    |--------------------------------------------------------------------------
+    */
+    $app->get('contact','ContactController@index');
+
+    $app->get('contact/show/{id}','ContactController@show');
+
+    $app->post('contact/create','ContactController@create');
+
+    $app->put('contact/update/{id}','ContactController@update');
+
+    $app->delete('contact/delete/{id}','ContactController@delete');
+
+
+    /*
+    |--------------------------------------------------------------------------
+    | Passenger
+    |--------------------------------------------------------------------------
+    */
+    $app->get('passenger','PassengerController@index');
+
+    $app->get('passenger/show/{id}','PassengerController@show');
+
+    $app->post('passenger/create','PassengerController@create');
+
+    $app->put('passenger/update/{id}','PassengerController@update');
+
+    $app->delete('passenger/delete/{id}','PassengerController@delete');
+
+    /*
+    |--------------------------------------------------------------------------
+    | Fare
+    |--------------------------------------------------------------------------
+    */
+    $app->get('fare','FareController@index');
+
+    $app->get('fare/show/{id}','FareController@show');
+
+    $app->post('fare/create','FareController@create');
+
+    $app->put('fare/update/{id}','FareController@update');
+
+    $app->delete('fare/delete/{id}','FareController@delete');
 });
 
 // Crawler API

@@ -2,60 +2,60 @@
 /**
  * Created by PhpStorm.
  * User: hsb
- * Date: 13-Nov-16
- * Time: 9:07 AM
+ * Date: 19-Nov-16
+ * Time: 8:37 AM
  */
 
 namespace App\Http\Controllers;
 
-
-use App\Models\Provider;
+use App\Models\Fare;
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-class ProviderController extends ApiController
+class FareController extends ApiController
 {
     public function index(Request $request){
 
-        $data = Provider::listItems($request->all());
+        $data = Fare::listItems($request->all());
         return response()->json($data);
 
     }
 
     public function show($id) {
 
-        $provider  = Provider::find($id);
+        $fare  = Fare::find($id);
 
-        if (!$provider) {
+        if (!$fare) {
             return $this->respondNotFound();
         }
-        return $this->respondWithSuccess(['data'=>$provider]);
+        return $this->respondWithSuccess(['data'=>$fare]);
     }
 
     public function create(Request $request){
-        $provider = new Provider();
+        $fare = new Fare();
         $data = $request['data'];
 
-        $provider->fill($data);
+        $fare->fill($data);
 
-        if (!$provider->isValid()) {
-            return $this->respondWithError(['error' => $provider->getValidationErrors()]);
+        if (!$fare->isValid()) {
+            return $this->respondWithError(['error' => $fare->getValidationErrors()]);
         }
         try {
-            $provider->save();
+            $fare->save();
         } catch (\Exception $ex) {
             return $this->respondWithNotSaved();
         }
-        return $this->respondWithCreated(['data'=>$provider]);
+        return $this->respondWithCreated(['data'=>$fare]);
     }
 
     public function delete($id){
 
-        $provider  = Provider::find($id);
-        if (!$provider) {
+        $fare  = Fare::find($id);
+        if (!$fare) {
             return $this->respondNotFound();
         }
         try {
-            if (!$provider->delete()) {
+            if (!$fare->delete()) {
                 return $this->respondWithError();
             }
         } catch (\Exception $ex) {
@@ -66,23 +66,23 @@ class ProviderController extends ApiController
 
     public function update(Request $request, $id){
 
-        $provider = Provider::find($id);
-        if(!$provider) {
+        $fare = Fare::find($id);
+        if(!$fare) {
             return $this->respondNotFound();
         }
         $data = $request['data'];
 
-        $provider->fill($data);
+        $fare->fill($data);
 
-        if (!$provider->isValid()) {
-            return $this->respondWithError(['error' => $provider->getValidationErrors()]);
+        if (!$fare->isValid()) {
+            return $this->respondWithError(['error' => $fare->getValidationErrors()]);
         }
         try {
-            $provider->save();
+            $fare->save();
         } catch (\Exception $ex) {
             return $this->respondWithNotSaved();
         }
 
-        return $this->respondWithSaved(['data'=>$provider]);
+        return $this->respondWithSaved(['data'=>$fare]);
     }
 }
