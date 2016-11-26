@@ -21,6 +21,7 @@ class AirlineController extends \App\Http\Controllers\ApiController
 
     public function vietjet(Request $request) {
         libxml_use_internal_errors(true);
+        set_time_limit(0);
         require_once(base_path('app/Libraries/Curl.php'));
 
         // PREPARE PARAM
@@ -135,6 +136,8 @@ class AirlineController extends \App\Http\Controllers\ApiController
             if ($price->length > 0) {
                 $data['price'] = substr(trim($price[0]->getAttribute('value')), 0, -4);
                 $data['fee'] = substr(trim($fee[0]->getAttribute('value')), 0, -4);
+                $data['fee_service'] = 0;
+                $data['type'] = 'promo';
                 $result['dep_flights'][] = $data;
             }
 
@@ -151,6 +154,8 @@ class AirlineController extends \App\Http\Controllers\ApiController
             if ($price->length > 0) {
                 $data['price'] = substr(trim($price[0]->getAttribute('value')), 0, -4);
                 $data['fee'] = substr(trim($fee[0]->getAttribute('value')), 0, -4);
+                $data['fee_service'] = 0;
+                $data['type'] = 'eco';
                 $result['dep_flights'][] = $data;
             }
 
@@ -167,6 +172,8 @@ class AirlineController extends \App\Http\Controllers\ApiController
             if ($price->length > 0) {
                 $data['price'] = substr(trim($price[0]->getAttribute('value')), 0, -4);
                 $data['fee'] = substr(trim($fee[0]->getAttribute('value')), 0, -4);
+                $data['fee_service'] = 0;
+                $data['type'] = 'skyboss';
                 $result['dep_flights'][] = $data;
             }
 
@@ -207,6 +214,8 @@ class AirlineController extends \App\Http\Controllers\ApiController
                 if ($price->length > 0) {
                     $data['price'] = substr(trim($price[0]->getAttribute('value')), 0, -4);
                     $data['fee'] = substr(trim($fee[0]->getAttribute('value')), 0, -4);
+                    $data['fee_service'] = 0;
+                    $data['type'] = 'promo';
                     $result['ret_flights'][] = $data;
                 }
 
@@ -223,6 +232,8 @@ class AirlineController extends \App\Http\Controllers\ApiController
                 if ($price->length > 0) {
                     $data['price'] = substr(trim($price[0]->getAttribute('value')), 0, -4);
                     $data['fee'] = substr(trim($fee[0]->getAttribute('value')), 0, -4);
+                    $data['fee_service'] = 0;
+                    $data['type'] = 'eco';
                     $result['ret_flights'][] = $data;
                 }
 
@@ -239,6 +250,8 @@ class AirlineController extends \App\Http\Controllers\ApiController
                 if ($price->length > 0) {
                     $data['price'] = substr(trim($price[0]->getAttribute('value')), 0, -4);
                     $data['fee'] = substr(trim($fee[0]->getAttribute('value')), 0, -4);
+                    $data['fee_service'] = 0;
+                    $data['type'] = 'skyboss';
                     $result['ret_flights'][] = $data;
                 }
             }
@@ -251,6 +264,7 @@ class AirlineController extends \App\Http\Controllers\ApiController
 
     public function jetstar(Request $request) {
         libxml_use_internal_errors(true);
+        set_time_limit(0);
         require_once(base_path('app/Libraries/Curl.php'));
 
         // PREPARE PARAM
@@ -259,7 +273,7 @@ class AirlineController extends \App\Http\Controllers\ApiController
         if ($round_trip == 'on')
             $round_trip = 'RoundTrip';
         else if ($round_trip == 'off')
-            $round_trip == 'OneWay';
+            $round_trip = 'OneWay';
 
         $from = $request->input('from');
         $to = $request->input('to');
@@ -319,31 +333,65 @@ class AirlineController extends \App\Http\Controllers\ApiController
         $k = 0;
         $fields = $xpath->query("(//table[@class='domestic'])[1]/tbody/tr/td");
         $prices = $xpath->query("//*[@name='ControlGroupSelectView\$AvailabilityInputSelectView\$market1']");
+        $prices1 = $xpath->query("//*[@name='ControlGroupSelectView\$AvailabilityInputSelectView\$CheckBoxMkt1P']");
+        $prices2 = $xpath->query("//*[@name='ControlGroupSelectView\$AvailabilityInputSelectView\$CheckBoxMkt1Y']");
 
         for ($i = 0; $i < ($fields->length - 2) / 4; $i++) {
             if ($xpath->query("(//table[@class='domestic'])[1]/tbody/tr[" . ($i + 1) . "]/td[4]/div[1]")->length > 0) {
-                $data = [];
-
-                $data['start_date'] = date('d/m/Y', $from_date);
 
                 $str = $fields[$i * 4]->nodeValue;
-                $data['start_time'] = substr($str, 0, strpos($str, ':') + 3);
-                // $data['start_from'] = substr($str, strpos($str, ':') + 3);
-                // $data['start_code'] = $from;
+                $start_time = substr($str, 0, strpos($str, ':') + 3);
 
                 $str = $fields[$i * 4 + 1]->nodeValue;
-                $data['end_time'] = substr($str, 0, strpos($str, ':') + 3);
-                // $data['end_to'] = substr($str, strpos($str, ':') + 3);
-                // $data['end_code'] = $to;
+                $end_time = substr($str, 0, strpos($str, ':') + 3);
 
                 $str = $fields[$i * 4 + 2]->nodeValue;
                 $str = substr($str, strpos($str, 'Lượt đi') + 14, 8);
                 $str = implode('', explode('  ', $str));
-                $data['flight_code'] = trim($str);
+                $flight_code = trim($str);
 
-                $data['price'] = number_format($prices[$k]->getAttribute('data-price'));
-                $data['fee'] = number_format($prices[$k]->getAttribute('data-discfees-adt'));
+                $price = number_format($prices[$k]->getAttribute('data-price'));
+                $price1 = number_format($prices1[$k]->getAttribute('data-price'));
+                $price2 = number_format($prices2[$k]->getAttribute('data-price'));
+                $fee = number_format($prices[$k]->getAttribute('data-discfees-adt'));
                 $k++;
+
+                // Vé tiết kiệm
+                $data = [];
+                $data['start_date'] = date('d/m/Y', $from_date);
+                $data['start_time'] = $start_time;
+                $data['end_time'] = $end_time;
+                $data['flight_code'] = $flight_code;
+                $data['price'] = $price;
+                $data['fee'] = $fee;
+                $data['fee_service'] = 0;
+                $data['type'] = 'Vé tiết kiệm';
+
+                $result['dep_flights'][] = $data;
+
+                // Vé linh hoạt
+                $data = [];
+                $data['start_date'] = date('d/m/Y', $from_date);
+                $data['start_time'] = $start_time;
+                $data['end_time'] = $end_time;
+                $data['flight_code'] = $flight_code;
+                $data['price'] = $price;
+                $data['fee'] = $fee;
+                $data['fee_service'] = $price1;
+                $data['type'] = 'Vé linh hoạt';
+
+                $result['dep_flights'][] = $data;
+
+                // Vé tối ưu
+                $data = [];
+                $data['start_date'] = date('d/m/Y', $from_date);
+                $data['start_time'] = $start_time;
+                $data['end_time'] = $end_time;
+                $data['flight_code'] = $flight_code;
+                $data['price'] = $price;
+                $data['fee'] = $fee;
+                $data['fee_service'] = $price2;
+                $data['type'] = 'Vé tối ưu';
 
                 $result['dep_flights'][] = $data;
             }
@@ -354,39 +402,310 @@ class AirlineController extends \App\Http\Controllers\ApiController
 
             $fields = $xpath->query("(//table[@class='domestic'])[2]/tbody/tr/td");
             $prices = $xpath->query("//*[@name='ControlGroupSelectView\$AvailabilityInputSelectView\$market2']");
+            $prices1 = $xpath->query("//*[@name='ControlGroupSelectView\$AvailabilityInputSelectView\$CheckBoxMkt2P']");
+            $prices2 = $xpath->query("//*[@name='ControlGroupSelectView\$AvailabilityInputSelectView\$CheckBoxMkt2Y']");
 
             $k = 0;
 
             for ($i = 0; $i < ($fields->length - 2) / 4; $i++) {
                 if ($xpath->query("(//table[@class='domestic'])[2]/tbody/tr[" . ($i + 1) . "]/td[4]/div[1]")->length > 0) {
 
-                    $data = [];
-
-                    $data['start_date'] = date('d/m/Y', $to_date);
-
                     $str = $fields[$i * 4]->nodeValue;
-                    $data['start_time'] =  substr($str, 0, strpos($str, ':') + 3);
-                    // $data['start_from'] = substr($str, strpos($str, ':') + 3);
-                    // $data['start_code'] = $from;
+                    $start_time = substr($str, 0, strpos($str, ':') + 3);
 
                     $str = $fields[$i * 4 + 1]->nodeValue;
-                    $data['end_time'] = substr($str, 0, strpos($str, ':') + 3);
-                    // $data['end_to'] = substr($str, strpos($str, ':') + 3);
-                    // $data['end_code'] = $to;
+                    $end_time = substr($str, 0, strpos($str, ':') + 3);
 
                     $str = $fields[$i * 4 + 2]->nodeValue;
                     $str = substr($str, strpos($str, 'Lượt về') + 14, 8);
                     $str = implode('', explode('  ', $str));
-                    $data['flight_code'] = trim($str);
+                    $flight_code = trim($str);
 
-                    $data['price'] = number_format($prices[$k]->getAttribute('data-price'));
-                    $data['fee'] = number_format($prices[$k]->getAttribute('data-discfees-adt'));
+                    $price = number_format($prices[$k]->getAttribute('data-price'));
+                    $price1 = number_format($prices1[$k]->getAttribute('data-price'));
+                    $price2 = number_format($prices2[$k]->getAttribute('data-price'));
+                    $fee = number_format($prices[$k]->getAttribute('data-discfees-adt'));
                     $k++;
+
+                    // Vé tiết kiệm
+                    $data = [];
+                    $data['start_date'] = date('d/m/Y', $to_date);
+                    $data['start_time'] = $start_time;
+                    $data['end_time'] = $end_time;
+                    $data['flight_code'] = $flight_code;
+                    $data['price'] = $price;
+                    $data['fee'] = $fee;
+                    $data['fee_service'] = 0;
+                    $data['type'] = 'Vé tiết kiệm';
+
+                    $result['ret_flights'][] = $data;
+
+                    // Vé linh hoạt
+                    $data = [];
+                    $data['start_date'] = date('d/m/Y', $to_date);
+                    $data['start_time'] = $start_time;
+                    $data['end_time'] = $end_time;
+                    $data['flight_code'] = $flight_code;
+                    $data['price'] = $price;
+                    $data['fee'] = $fee;
+                    $data['fee_service'] = $price1;
+                    $data['type'] = 'Vé linh hoạt';
+
+                    $result['ret_flights'][] = $data;
+
+                    // Vé tối ưu
+                    $data = [];
+                    $data['start_date'] = date('d/m/Y', $to_date);
+                    $data['start_time'] = $start_time;
+                    $data['end_time'] = $end_time;
+                    $data['flight_code'] = $flight_code;
+                    $data['price'] = $price;
+                    $data['fee'] = $fee;
+                    $data['fee_service'] = $price2;
+                    $data['type'] = 'Vé tối ưu';
 
                     $result['ret_flights'][] = $data;
                 }
             }
         }
+
+        // $this->respondWithSuccess(['data'=> $result]);
+        echo json_encode($result);
+        exit;
+    }
+
+
+    public function vna(Request $request) {
+        libxml_use_internal_errors(true);
+        set_time_limit(0);
+        require_once(base_path('app/Libraries/Curl.php'));
+
+        // PREPARE PARAM
+        $round_trip = $request->input('round_trip');
+
+        if ($round_trip == 'on')
+            $round_trip = 'RT';
+        else if ($round_trip == 'off')
+            $round_trip = 'OW';
+
+        $from = $request->input('from');
+        $to = $request->input('to');
+        $from_date = strtotime($request->input('from_date'));
+        $to_date = strtotime($request->input('to_date'));
+        $adult = $request->input('adult');
+        $children = $request->input('children');
+        $infant = $request->input('infant');
+
+        // SEARCH FLIGHT
+        $curl = new \Curl();
+
+        $curl->get('https://wl-prod.sabresonicweb.com/SSW2010/VNVN/webqtrip.html?' .
+            'searchType=NORMAL' .
+            "&lang=vi_VN" .
+            "&journeySpan=" . $round_trip .
+            "&origin=" . $from .
+            "&destination=" . $to .
+            "&numAdults=" . $adult .
+            "&numChildren=" . $children .
+            "&numInfants=" . $infant .
+            "&promoCode=" .
+            "&alternativeLandingPage=true" .
+            "&departureDate=" . date('Y-m-d', $from_date) .
+            "&returnDate=" . date('Y-m-d', $to_date)
+        );
+
+        $curl->setCookie('JSESSIONID', $curl->getCookie('JSESSIONID'));
+        $curl->setCookie('WLPCOOKIE', $curl->getCookie('WLPCOOKIE'));
+        $curl->setCookie('SSWGID', $curl->getCookie('SSWGID'));
+
+
+        $curl->get('https://wl-prod.sabresonicweb.com/SSW2010/VNVN/webqtrip.html?execution=e1s1');
+
+        $doc = new \DOMDocument();
+        $doc->loadHTML($curl->response);
+        $xpath = new \DOMXpath($doc);
+
+        $result = [];
+
+
+        // DEPARTURE FLIGHT
+        $flight_codes = $xpath->query("//*[@id='outbounds']//*[@class='flight-number']");
+        $start_times = $xpath->query("//*[@id='outbounds']//th[3]//*[@class='translate time wasTranslated']");
+        $end_times = $xpath->query("//*[@id='outbounds']//th[4]//*[@class='translate time wasTranslated']");
+
+        for ($i = 0; $i < $flight_codes->length; $i++) {
+            $flight_code = $flight_codes[$i]->nodeValue;
+            $start_time = $start_times[$i]->nodeValue;
+            $end_time = $end_times[$i]->nodeValue;
+            $start_date = date('d/m/Y', $from_date);
+
+            // Thương gia Linh hoạt
+            $price = $xpath->query("(//*[@id='outbounds']//td[1]//div[@class='outer'])[" . ($i + 1) ."]//*[@class='prices-amount']");
+
+            if ($price->length > 0) {
+                $data = [];
+                $data['flight_code'] = $flight_code;
+                $data['start_date'] = $start_date;
+                $data['start_time'] = $start_time;
+                $data['end_time'] = $end_time;
+                $data['price'] = $price[0]->nodeValue;
+                $data['type'] = 'Thương gia Linh hoạt';
+
+                $result['dep_flights'][] = $data;
+            }
+
+            // Thương gia Tiêu chuẩn
+            $price = $xpath->query("(//*[@id='outbounds']//td[2]//div[@class='outer'])[" . ($i + 1) ."]//*[@class='prices-amount']");
+
+            if ($price->length > 0) {
+                $data = [];
+                $data['flight_code'] = $flight_code;
+                $data['start_date'] = $start_date;
+                $data['start_time'] = $start_time;
+                $data['end_time'] = $end_time;
+                $data['price'] = $price[0]->nodeValue;
+                $data['type'] = 'Thương gia Tiêu chuẩn';
+
+                $result['dep_flights'][] = $data;
+            }
+
+            // Phổ thông linh hoạt
+            $price = $xpath->query("(//*[@id='outbounds']//td[3]//div[@class='outer'])[" . ($i + 1) ."]//*[@class='prices-amount']");
+
+            if ($price->length > 0) {
+                $data = [];
+                $data['flight_code'] = $flight_code;
+                $data['start_date'] = $start_date;
+                $data['start_time'] = $start_time;
+                $data['end_time'] = $end_time;
+                $data['price'] = $price[0]->nodeValue;
+                $data['type'] = 'Phổ thông linh hoạt';
+
+                $result['dep_flights'][] = $data;
+            }
+
+            // Phổ thông Tiêu chuẩn
+            $price = $xpath->query("(//*[@id='outbounds']//td[4]//div[@class='outer'])[" . ($i + 1) ."]//*[@class='prices-amount']");
+
+            if ($price->length > 0) {
+                $data = [];
+                $data['flight_code'] = $flight_code;
+                $data['start_date'] = $start_date;
+                $data['start_time'] = $start_time;
+                $data['end_time'] = $end_time;
+                $data['price'] = $price[0]->nodeValue;
+                $data['type'] = 'Phổ thông Tiêu chuẩn';
+
+                $result['dep_flights'][] = $data;
+            }
+
+            // Phổ thông Phổ thông Tiết kiệm
+            $price = $xpath->query("(//*[@id='outbounds']//td[5]//div[@class='outer'])[" . ($i + 1) ."]//*[@class='prices-amount']");
+
+            if ($price->length > 0) {
+                $data = [];
+                $data['flight_code'] = $flight_code;
+                $data['start_date'] = $start_date;
+                $data['start_time'] = $start_time;
+                $data['end_time'] = $end_time;
+                $data['price'] = $price[0]->nodeValue;
+                $data['type'] = 'Phổ thông Phổ thông Tiết kiệm';
+
+                $result['dep_flights'][] = $data;
+            }
+        }
+
+
+        // RETURN FLIGHT
+        if (!empty($round_trip) && $round_trip == 'RT') {
+            $flight_codes = $xpath->query("//*[@id='inbounds']//*[@class='flight-number']");
+            $start_times = $xpath->query("//*[@id='inbounds']//th[3]//*[@class='translate time wasTranslated']");
+            $end_times = $xpath->query("//*[@id='inbounds']//th[4]//*[@class='translate time wasTranslated']");
+
+            for ($i = 0; $i < $flight_codes->length; $i++) {
+                $flight_code = $flight_codes[$i]->nodeValue;
+                $start_time = $start_times[$i]->nodeValue;
+                $end_time = $end_times[$i]->nodeValue;
+                $start_date = date('d/m/Y', $to_date);
+
+                // Thương gia Linh hoạt
+                $price = $xpath->query("(//*[@id='inbounds']//td[1]//div[@class='outer'])[" . ($i + 1) ."]//*[@class='prices-amount']");
+
+                if ($price->length > 0) {
+                    $data = [];
+                    $data['flight_code'] = $flight_code;
+                    $data['start_date'] = $start_date;
+                    $data['start_time'] = $start_time;
+                    $data['end_time'] = $end_time;
+                    $data['price'] = $price[0]->nodeValue;
+                    $data['type'] = 'Thương gia Linh hoạt';
+
+                    $result['ret_flights'][] = $data;
+                }
+
+                // Thương gia Tiêu chuẩn
+                $price = $xpath->query("(//*[@id='inbounds']//td[2]//div[@class='outer'])[" . ($i + 1) ."]//*[@class='prices-amount']");
+
+                if ($price->length > 0) {
+                    $data = [];
+                    $data['flight_code'] = $flight_code;
+                    $data['start_date'] = $start_date;
+                    $data['start_time'] = $start_time;
+                    $data['end_time'] = $end_time;
+                    $data['price'] = $price[0]->nodeValue;
+                    $data['type'] = 'Thương gia Tiêu chuẩn';
+
+                    $result['ret_flights'][] = $data;
+                }
+
+                // Phổ thông linh hoạt
+                $price = $xpath->query("(//*[@id='inbounds']//td[3]//div[@class='outer'])[" . ($i + 1) ."]//*[@class='prices-amount']");
+
+                if ($price->length > 0) {
+                    $data = [];
+                    $data['flight_code'] = $flight_code;
+                    $data['start_date'] = $start_date;
+                    $data['start_time'] = $start_time;
+                    $data['end_time'] = $end_time;
+                    $data['price'] = $price[0]->nodeValue;
+                    $data['type'] = 'Phổ thông linh hoạt';
+
+                    $result['ret_flights'][] = $data;
+                }
+
+                // Phổ thông Tiêu chuẩn
+                $price = $xpath->query("(//*[@id='inbounds']//td[4]//div[@class='outer'])[" . ($i + 1) ."]//*[@class='prices-amount']");
+
+                if ($price->length > 0) {
+                    $data = [];
+                    $data['flight_code'] = $flight_code;
+                    $data['start_date'] = $start_date;
+                    $data['start_time'] = $start_time;
+                    $data['end_time'] = $end_time;
+                    $data['price'] = $price[0]->nodeValue;
+                    $data['type'] = 'Phổ thông Tiêu chuẩn';
+
+                    $result['ret_flights'][] = $data;
+                }
+
+                // Phổ thông Phổ thông Tiết kiệm
+                $price = $xpath->query("(//*[@id='inbounds']//td[5]//div[@class='outer'])[" . ($i + 1) ."]//*[@class='prices-amount']");
+
+                if ($price->length > 0) {
+                    $data = [];
+                    $data['flight_code'] = $flight_code;
+                    $data['start_date'] = $start_date;
+                    $data['start_time'] = $start_time;
+                    $data['end_time'] = $end_time;
+                    $data['price'] = $price[0]->nodeValue;
+                    $data['type'] = 'Phổ thông Phổ thông Tiết kiệm';
+
+                    $result['ret_flights'][] = $data;
+                }
+            }
+        }
+
+
 
         // $this->respondWithSuccess(['data'=> $result]);
         echo json_encode($result);
