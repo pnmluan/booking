@@ -1,6 +1,5 @@
 import { Injectable, EventEmitter, Output } from '@angular/core';
-import { Response, RequestOptions, RequestOptionsArgs } from '@angular/http';
-import { HttpClient } from './http-client';
+import { Http, Headers, Response } from '@angular/http';
 import { Observable } from 'rxjs/Rx';
 import { Configuration } from '../shared/app.configuration';
 
@@ -10,24 +9,35 @@ export class AirlineDataService {
 	private actionUrl: string;
 
 
-	constructor(private _http: HttpClient, private _configuration: Configuration) {
+	constructor(private http: Http, private _configuration: Configuration) {
 		this.actionUrl = _configuration.apiUrl + 'airline/';
 	}
 
 	public getAll() {
-		return this._http.get(this.actionUrl + 'index')
+		return this.http.get(this.actionUrl + 'index')
 			.map(res => res.json())
 			.catch(this.handleError);
 	}
 
+	createAuthorizationHeader(headers: Headers) {
+		// headers.append('Content-Type', 'application/json;charset=UTF-8');
+		headers.append('Authorization', 'Basic ' + this._configuration.authentic);
+	}
+
+
+
 	public vietjet(data) {
-		return this._http.post(this.actionUrl + 'vietjet', data)
+		let headers = new Headers();
+		this.createAuthorizationHeader(headers);
+		return this.http.post(this.actionUrl + 'vietjet', data, { headers: headers })
 			.map(res => res.json())
 			.catch(this.handleError);
 	}
 
 	public jetstar(data) {
-		return this._http.post(this.actionUrl + 'jetstar', data)
+		let headers = new Headers();
+		this.createAuthorizationHeader(headers);
+		return this.http.post(this.actionUrl + 'jetstar', data, { headers: headers })
 			.map(res => res.json())
 			.catch(this.handleError);
 	}

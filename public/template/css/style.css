@@ -317,9 +317,9 @@ ul.footerlist li a:hover{color:#F69E1C; text-decoration:none;}
 /****************/
 .steps {max-width: 992px; width: 100%; margin: 10px auto;text-align: center;position: relative; }
 .progressbar { margin-bottom: 30px; overflow: hidden; counter-reset: step; }
-.progressbar li { list-style-type: none; color: #333; text-transform: uppercase; font-size: 11px; width: 25%; float: left; position: relative; font-family: 'diavlo'; }
-.progressbar li:before { content: counter(step); counter-increment: step; width: 20px; line-height: 20px; display: block; font-size: 10px; color: #333; background: #ccc; border-radius: 3px; margin: 0 auto 5px auto; position: relative; z-index: 1; }
-.progressbar li:after { content: ''; width: 100%; height: 2px; background: #ccc; position: absolute; left: -50%; top: 9px; z-index: 0; }
+.progressbar li { list-style-type: none; color: #333; text-transform: uppercase; font-size: 13px; width: 33.33%; float: left; position: relative; font-family: 'diavlo'; }
+.progressbar li:before { content: counter(step); counter-increment: step; width: 40px; line-height: 40px; display: block; font-size: 10px; color: #333; background: #ccc; -webkit-border-radius: 50%; border-radius: 50%; margin: 0 auto 5px auto; position: relative; z-index: 1; font-size: 13px; }
+.progressbar li:after { content: ''; width: 100%; height: 2px; background: #ccc; position: absolute; left: -50%; top: 20px; z-index: 0; }
 .progressbar li:first-child:after { content: none; }
 .progressbar li.active:before,
 .progressbar li.active:after { background: #669A33; color: white; }
@@ -329,6 +329,15 @@ ul.footerlist li a:hover{color:#F69E1C; text-decoration:none;}
 .list-plane  {}
 // .list-plane-inner { display: table; width: 100%; }
 // .main-list-plane { display: table-cell; padding-right: 15px; }
+
+/***** LOADING ******/
+.loading { padding: 50px 0px; }
+.loading h4 { color: red; margin-bottom: 10px;}
+.loading h3 { font-weight: bold; margin-bottom: 10px; }
+.loading p { margin-bottom: 5px; }
+.loading div { margin: 5px 0px; }
+.loading img { margin-top: 20px; }
+
 
 .list-plane-title { }
 .list-plane-title h1 { font-size: 25px; text-transform: uppercase; font-weight: bold; color: #649931; margin-bottom: 5px; }
