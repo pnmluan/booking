@@ -42,6 +42,14 @@ export class AirlineDataService {
 			.catch(this.handleError);
 	}
 
+	public vna(data) {
+		let headers = new Headers();
+		this.createAuthorizationHeader(headers);
+		return this.http.post(this.actionUrl + 'vna', data, { headers: headers })
+			.map(res => res.json())
+			.catch(this.handleError);
+	}
+
 	private handleError(error: Response) {
 		console.log(error);
 		return Observable.throw(error.json().error || 'Server error');
