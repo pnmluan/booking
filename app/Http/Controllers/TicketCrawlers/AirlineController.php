@@ -511,13 +511,12 @@ class AirlineController extends \App\Http\Controllers\ApiController
             "&promoCode=" .
             "&alternativeLandingPage=true" .
             "&departureDate=" . date('Y-m-d', $from_date) .
-            "&returnDate=" . date('Y-m-d', $to_date)
+            (($round_trip == 'RT') ? "&returnDate=" . date('Y-m-d', $to_date) : '')
         );
 
         $curl->setCookie('JSESSIONID', $curl->getCookie('JSESSIONID'));
         $curl->setCookie('WLPCOOKIE', $curl->getCookie('WLPCOOKIE'));
         $curl->setCookie('SSWGID', $curl->getCookie('SSWGID'));
-
 
         $curl->get('https://wl-prod.sabresonicweb.com/SSW2010/VNVN/webqtrip.html?execution=e1s1');
 
