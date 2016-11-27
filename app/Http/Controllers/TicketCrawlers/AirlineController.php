@@ -528,9 +528,10 @@ class AirlineController extends \App\Http\Controllers\ApiController
 
 
         // DEPARTURE FLIGHT
-        $flight_codes = $xpath->query("//*[@id='outbounds']//*[@class='flight-number']");
-        $start_times = $xpath->query("//*[@id='outbounds']//th[3]//*[@class='translate time wasTranslated']");
-        $end_times = $xpath->query("//*[@id='outbounds']//th[4]//*[@class='translate time wasTranslated']");
+        $id = ($round_trip == 'RT') ? 'outbounds' : 'both';
+        $flight_codes = $xpath->query("//*[@id='" . $id . "']//*[@class='flight-number']");
+        $start_times = $xpath->query("//*[@id='" . $id . "']//th[3]//*[@class='translate time wasTranslated']");
+        $end_times = $xpath->query("//*[@id='" . $id . "']//th[4]//*[@class='translate time wasTranslated']");
 
         for ($i = 0; $i < $flight_codes->length; $i++) {
             $flight_code = $flight_codes[$i]->nodeValue;
@@ -539,7 +540,7 @@ class AirlineController extends \App\Http\Controllers\ApiController
             $start_date = date('d/m/Y', $from_date);
 
             // Thương gia Linh hoạt
-            $price = $xpath->query("(//*[@id='outbounds']//td[1]//div[@class='outer'])[" . ($i + 1) ."]//*[@class='prices-amount']");
+            $price = $xpath->query("(//*[@id='" . $id . "']//td[1]//div[@class='outer'])[" . ($i + 1) ."]//*[@class='prices-amount']");
 
             if ($price->length > 0) {
                 $data = [];
@@ -554,7 +555,7 @@ class AirlineController extends \App\Http\Controllers\ApiController
             }
 
             // Thương gia Tiêu chuẩn
-            $price = $xpath->query("(//*[@id='outbounds']//td[2]//div[@class='outer'])[" . ($i + 1) ."]//*[@class='prices-amount']");
+            $price = $xpath->query("(//*[@id='" . $id . "']//td[2]//div[@class='outer'])[" . ($i + 1) ."]//*[@class='prices-amount']");
 
             if ($price->length > 0) {
                 $data = [];
@@ -569,7 +570,7 @@ class AirlineController extends \App\Http\Controllers\ApiController
             }
 
             // Phổ thông linh hoạt
-            $price = $xpath->query("(//*[@id='outbounds']//td[3]//div[@class='outer'])[" . ($i + 1) ."]//*[@class='prices-amount']");
+            $price = $xpath->query("(//*[@id='" . $id . "']//td[3]//div[@class='outer'])[" . ($i + 1) ."]//*[@class='prices-amount']");
 
             if ($price->length > 0) {
                 $data = [];
@@ -584,7 +585,7 @@ class AirlineController extends \App\Http\Controllers\ApiController
             }
 
             // Phổ thông Tiêu chuẩn
-            $price = $xpath->query("(//*[@id='outbounds']//td[4]//div[@class='outer'])[" . ($i + 1) ."]//*[@class='prices-amount']");
+            $price = $xpath->query("(//*[@id='" . $id . "']//td[4]//div[@class='outer'])[" . ($i + 1) ."]//*[@class='prices-amount']");
 
             if ($price->length > 0) {
                 $data = [];
@@ -599,7 +600,7 @@ class AirlineController extends \App\Http\Controllers\ApiController
             }
 
             // Phổ thông Phổ thông Tiết kiệm
-            $price = $xpath->query("(//*[@id='outbounds']//td[5]//div[@class='outer'])[" . ($i + 1) ."]//*[@class='prices-amount']");
+            $price = $xpath->query("(//*[@id='" . $id . "']//td[5]//div[@class='outer'])[" . ($i + 1) ."]//*[@class='prices-amount']");
 
             if ($price->length > 0) {
                 $data = [];
