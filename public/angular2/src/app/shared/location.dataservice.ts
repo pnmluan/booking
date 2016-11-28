@@ -1,6 +1,5 @@
 import { Injectable, EventEmitter, Output } from '@angular/core';
 import { Http, Headers, Response } from '@angular/http';
-import { HttpClient } from './http-client';
 import { Observable } from 'rxjs/Rx';
 import { Location } from '../models/location';
 import { Configuration } from '../shared/app.configuration';
