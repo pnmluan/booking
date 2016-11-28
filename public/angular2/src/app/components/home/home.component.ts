@@ -103,6 +103,11 @@ export class HomeComponent implements OnInit, AfterViewInit {
 				singleItem: true,
 				autoPlay: 5000
 			});
+
+			jQuery(".select-adult, .select-child-1, .select-child-2").select2({
+			    width: '100%',
+			    minimumResultsForSearch: -1
+			});
 		}, 500);
 	}
 	
@@ -116,10 +121,15 @@ export class HomeComponent implements OnInit, AfterViewInit {
 		var dateFormat = 'YYYY-MM-DD';
 		var viFormatDate = 'DD/MM/YYYY';
 		objectStore.from_date = moment(objectStore.from_date, viFormatDate).format(dateFormat);
-		objectStore.to_date = moment(objectStore.to_date, viFormatDate).format(dateFormat);
-
 		objectStore.from_name = this.getNameFromCode(objectStore.from);
-		objectStore.to_name = this.getNameFromCode(objectStore.to);
+		
+		if (objectStore.to_date == undefined) {
+			objectStore.to_date = '';
+			objectStore.to_name = '';
+		} else {
+			objectStore.to_date = moment(objectStore.to_date, viFormatDate).format(dateFormat);
+			objectStore.to_name = this.getNameFromCode(objectStore.to);
+		}
 
 		this.sessionStorage.set('session_flight', JSON.stringify(objectStore));
 		this.router.navigate(['search-result/' + uuid]);

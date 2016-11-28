@@ -113,18 +113,18 @@ jQuery(document).ready(function() {
     width: '100%'
   });
 
-  jQuery(".select-adult, .select-child-1, .select-child-2").select2({
-    width: '100%',
-    minimumResultsForSearch: -1
-  });
+  // jQuery(".select-adult, .select-child-1, .select-child-2").select2({
+  //   width: '100%',
+  //   minimumResultsForSearch: -1
+  // });
 
-  jQuery('.owl-carousel').owlCarousel({
-    navigation: false,
-    slideSpeed: 300,
-    paginationSpeed: 400,
-    singleItem: true,
-    autoPlay: 5000
-  });
+  // jQuery('.owl-carousel').owlCarousel({
+  //   navigation: false,
+  //   slideSpeed: 300,
+  //   paginationSpeed: 400,
+  //   singleItem: true,
+  //   autoPlay: 5000
+  // });
 
   jQuery('#date-go, #date-back, .date').datetimepicker({
     format: 'DD/MM/YYYY',
