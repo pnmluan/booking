@@ -23,39 +23,39 @@ class BaggageTypeController extends ApiController
 
     public function show($id) {
 
-        $contact  = BaggageType::find($id);
+        $baggageType  = BaggageType::find($id);
 
-        if (!$contact) {
+        if (!$baggageType) {
             return $this->respondNotFound();
         }
-        return $this->respondWithSuccess(['data'=>$contact]);
+        return $this->respondWithSuccess(['data'=>$baggageType]);
     }
 
     public function create(Request $request){
-        $contact = new BaggageType();
+        $baggageType = new BaggageType();
         $data = $request['data'];
 
-        $contact->fill($data);
+        $baggageType->fill($data);
 
-        if (!$contact->isValid()) {
-            return $this->respondWithError(['error' => $contact->getValidationErrors()]);
+        if (!$baggageType->isValid()) {
+            return $this->respondWithError(['error' => $baggageType->getValidationErrors()]);
         }
         try {
-            $contact->save();
+            $baggageType->save();
         } catch (\Exception $ex) {
             return $this->respondWithNotSaved();
         }
-        return $this->respondWithCreated(['data'=>$contact]);
+        return $this->respondWithCreated(['data'=>$baggageType]);
     }
 
     public function delete($id){
 
-        $contact  = BaggageType::find($id);
-        if (!$contact) {
+        $baggageType  = BaggageType::find($id);
+        if (!$baggageType) {
             return $this->respondNotFound();
         }
         try {
-            if (!$contact->delete()) {
+            if (!$baggageType->delete()) {
                 return $this->respondWithError();
             }
         } catch (\Exception $ex) {
@@ -66,23 +66,23 @@ class BaggageTypeController extends ApiController
 
     public function update(Request $request, $id){
 
-        $contact = BaggageType::find($id);
-        if(!$contact) {
+        $baggageType = BaggageType::find($id);
+        if(!$baggageType) {
             return $this->respondNotFound();
         }
         $data = $request['data'];
 
-        $contact->fill($data);
+        $baggageType->fill($data);
 
-        if (!$contact->isValid()) {
-            return $this->respondWithError(['error' => $contact->getValidationErrors()]);
+        if (!$baggageType->isValid()) {
+            return $this->respondWithError(['error' => $baggageType->getValidationErrors()]);
         }
         try {
-            $contact->save();
+            $baggageType->save();
         } catch (\Exception $ex) {
             return $this->respondWithNotSaved();
         }
 
-        return $this->respondWithSaved(['data'=>$contact]);
+        return $this->respondWithSaved(['data'=>$baggageType]);
     }
 }

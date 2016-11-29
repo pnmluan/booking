@@ -17,6 +17,13 @@ $app->get('/', function () use ($app) {
 
 $app->group(['prefix' => 'api/v1', 'middleware' => 'BasicAuth',  'namespace' => 'App\Http\Controllers'], function($app)
 {
+    /*
+	|--------------------------------------------------------------------------
+	| Banner
+	|--------------------------------------------------------------------------
+	*/
+    $app->post('mail/send','MailController@send');
+
 	/*
 	|--------------------------------------------------------------------------
 	| Banner
