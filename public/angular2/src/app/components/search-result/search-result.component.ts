@@ -31,6 +31,9 @@ export class SearchResultComponent implements OnInit, AfterViewInit {
 	round_trip = false;
 	search:any;
 	session_token: string;
+	vietjet = [];
+	jetstar = [];
+	vna = [];
 
 	constructor(private _AirlineDataService: AirlineDataService, private _LocationDataService: LocationDataService,
 		private sessionStorage: LocalStorageService, private _ActivatedRoute: ActivatedRoute, private _Router: Router) { 
@@ -107,12 +110,13 @@ export class SearchResultComponent implements OnInit, AfterViewInit {
 		});
 		const vna$ = this._AirlineDataService.vna(this.session_flight).cache();
 
-		const combined$ = Observable.concat(vietjet$, jetstar$, vna$);
+		const combined$ = Observable.forkJoin(vietjet$, jetstar$, vna$);
 
-		combined$.subscribe(
-			vietjet => console.log(vietjet),
-
-		);
+		combined$.subscribe(res => {
+			this.vietjet = res[0];
+			this.jetstar = res[1];
+			this.vna = res[2];
+		});
 		
 
 		// Get locations
