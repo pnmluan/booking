@@ -54,7 +54,7 @@
                   <tbody>
 
                     <tr *ngFor="let f of route.flights">
-                      <td><img src="assets/img/smVJ.gif" alt=""></td>
+                      <td><img [src]="f.image" alt=""></td>
                       <td>
                         <p class="plane-id">{{ f.flight_code }}</p>
                       </td>
@@ -129,7 +129,7 @@
                           </label>
                         </div>
                       </td>
-                      <td><img src="assets/img/smVN.gif" alt=""></td>
+                      <td><img src="assets/img/vna.gif" alt=""></td>
                       <td>799.000</td>
                     </tr>
                     <tr>
@@ -140,7 +140,7 @@
                           </label>
                         </div>
                       </td>
-                      <td><img src="assets/img/smBL.gif" alt=""></td>
+                      <td><img src="assets/img/jetstar.gif" alt=""></td>
                       <td>999.000</td>
                     </tr>
                     <tr>
@@ -151,7 +151,7 @@
                           </label>
                         </div>
                       </td>
-                      <td><img src="assets/img/smVJ.gif" alt=""></td>
+                      <td><img src="assets/img/vietjet.gif" alt=""></td>
                       <td>1.299.000</td>
                     </tr>
                   </tbody>

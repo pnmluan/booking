@@ -70,52 +70,65 @@ export class SearchResultComponent implements OnInit, AfterViewInit {
 		}
 		
 		const vietjet$ = this._AirlineDataService.vietjet(this.session_flight).cache();
-		vietjet$.subscribe(res => {
+		// vietjet$.subscribe(res => {
 
-			if (res.dep_flights) {
+		// 	if (res.dep_flights) {
 
-				from_flights['flights'] = res.dep_flights
+		// 		from_flights['flights'] = res.dep_flights
 
-				this.listRoutes.push(from_flights);
+		// 		this.listRoutes.push(from_flights);
 				
 
-			}
+		// 	}
 
-			if(res.ret_flights) {
-				to_flights['flights'] = res.ret_flights;
-				this.listRoutes.push(to_flights);
-			}
-			console.log(this.listRoutes);
-		});
+		// 	if(res.ret_flights) {
+		// 		to_flights['flights'] = res.ret_flights;
+		// 		this.listRoutes.push(to_flights);
+		// 	}
+		// 	console.log(this.listRoutes);
+		// });
 
 		const jetstar$ = this._AirlineDataService.jetstar(this.session_flight).cache();
 
-		jetstar$.subscribe(res => {
+		// jetstar$.subscribe(res => {
 
-			if (res.dep_flights) {
+		// 	if (res.dep_flights) {
 
-				from_flights['flights'] = res.dep_flights
+		// 		from_flights['flights'] = res.dep_flights
 
-				this.listRoutes.push(from_flights);
+		// 		this.listRoutes.push(from_flights);
 
 
-			}
+		// 	}
 
-			if (res.ret_flights) {
-				to_flights['flights'] = res.ret_flights;
-				this.listRoutes.push(to_flights);
-			}
-			console.log(this.listRoutes);
+		// 	if (res.ret_flights) {
+		// 		to_flights['flights'] = res.ret_flights;
+		// 		this.listRoutes.push(to_flights);
+		// 	}
+		// 	console.log(this.listRoutes);
 
-		});
+		// });
 		const vna$ = this._AirlineDataService.vna(this.session_flight).cache();
 
 		const combined$ = Observable.forkJoin(vietjet$, jetstar$, vna$);
 
 		combined$.subscribe(res => {
-			this.vietjet = res[0];
-			this.jetstar = res[1];
-			this.vna = res[2];
+			let dep_flights = [];
+			let ret_flights = [];
+			
+			dep_flights = this.pushDepFlights('vietjet', res[0], dep_flights);
+			ret_flights = this.pushRetFlights('vietjet', res[0], ret_flights);
+
+			dep_flights = this.pushDepFlights('jetstar', res[1], dep_flights);
+			ret_flights = this.pushRetFlights('jetstar', res[1], ret_flights);
+
+			dep_flights = this.pushDepFlights('vna', res[2], dep_flights);
+			ret_flights = this.pushRetFlights('vna', res[2], ret_flights);
+
+			console.log(dep_flights);
+			from_flights['flights'] = dep_flights;
+			this.listRoutes.push(from_flights);
+
 		});
 		
 
@@ -179,6 +192,28 @@ export class SearchResultComponent implements OnInit, AfterViewInit {
 
 		}, 5000);
 		
+	}
+
+	pushDepFlights(type, result, flights) {
+		if (result.dep_flights) {
+			let image = 'assets/img/' + type + '.gif';
+			for (let k in result.dep_flights) {
+				result.dep_flights[k].image = image;
+				flights.push(result.dep_flights[k]);
+			}
+		}
+		return flights;
+	}
+
+	pushRetFlights(type, result, flights) {
+		if (result.ret_flights) {
+			let image = 'assets/img/' + type + '.gif';
+			for (let k in result.ret_flights) {
+				result.dep_flights[k].image = image;
+				flights.push(result.ret_flights[k]);
+			}
+		}
+		return flights;
 	}
 
 	// Set Date
