@@ -199,6 +199,7 @@ export class SearchResultComponent implements OnInit, AfterViewInit {
 			let image = 'assets/img/' + type + '.gif';
 			for (let k in result.dep_flights) {
 				result.dep_flights[k].image = image;
+				result.dep_flights[k].price = result.dep_flights[k].price.replace(/,/g, '');
 				flights.push(result.dep_flights[k]);
 			}
 		}
@@ -250,6 +251,11 @@ export class SearchResultComponent implements OnInit, AfterViewInit {
 
 		this.sessionStorage.set('session_flight', JSON.stringify(objectStore));
 		this._Router.navigate(['search-result/' + uuid]);
+	}
+
+	// Select Flights
+	onSelectFlight() {
+
 	}
 
 
