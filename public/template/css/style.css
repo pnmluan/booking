@@ -225,6 +225,7 @@ textarea:-moz-placeholder { color: #a9a9a9; }
 .section-title { font-size: 20px; color: #649931; text-transform: uppercase; font-family: 'diavlo';  margin-top: 20px; padding-bottom: 10px;}
 .border-title { height: 7px; margin-bottom: 20px; width: 75px; background: url(../img/border-title.png) repeat; }
 .service-method { padding: 30px 0px; }
+.service-method .form-group .col-md-12 { margin-bottom: 10px; }
 
 .owl-carousel .item > div { border-left: 2px solid #E77741; padding-left: 15px; }
 .owl-carousel .item > div:first-child { margin-bottom: 30px; }
@@ -981,4 +982,21 @@ only screen and (max-width: 767px) {
     margin: 2px 0;
     padding: 20px;
     width: 20em;
+}
+
+.white { color: #fff;  }
+.size20 { font-size: 20px; }
+.size28 { font-size: 28px; }
+.size70 { font-size: 70px; }
+.size40 { font-size: 40px; }
+.lato { font-family: 'diavlo-book'; }
+.yellow { color: #ffff00; }
+.slim { font-weight: 300; }
+.caps { text-transform: uppercase; }
+
+@media screen and (max-width: 767px){
+    .size20 { font-size: 15px; }
+    .size28 { font-size: 18px; }
+    .size70 { font-size: 20px; }
+    .size40 { font-size: 18px; }
 }
