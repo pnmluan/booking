@@ -34,7 +34,7 @@ class PassengerController extends ApiController
 
     public function create(Request $request){
         $passenger = new Passenger();
-        $data = $request['data'];
+        $data = $request->all();
 
         $passenger->fill($data);
 
@@ -71,7 +71,7 @@ class PassengerController extends ApiController
         if(!$passenger) {
             return $this->respondNotFound();
         }
-        $data = $request['data'];
+        $data = $request->all();
 
         $passenger->fill($data);
 

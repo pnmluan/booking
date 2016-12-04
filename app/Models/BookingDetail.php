@@ -14,7 +14,7 @@ use Illuminate\Database\Eloquent\Model;
 class BookingDetail extends BaseModel
 {
     protected $table = 'booking_detail';
-    protected $fillable = ['booking_id', 'depart', 'departure', 'arrive', 'arrival', 'one_way', 'depart_duration', 'return_duration'];
+    protected $fillable = ['booking_id', 'from', 'start_time', 'start_date', 'from', 'end_time', 'end_date', 'round_trip', 'duration'];
 
     public function getModelValidations()
     {
@@ -25,7 +25,7 @@ class BookingDetail extends BaseModel
 
     public static function listItems(array $param = null){
 
-        $aColumns = ['booking_id', 'code', 'depart', 'departure', 'arrive', 'arrival', 'one_way', 'depart_duration', 'return_duration'];
+        $aColumns = ['booking_id', 'code', 'from', 'start_time', 'start_date', 'from', 'end_time', 'end_date', 'round_trip', 'duration'];
 
         $query = \DB::table('booking_detail')
             ->select(\DB::raw('SQL_CALC_FOUND_ROWS id'),\DB::raw('id AS DT_RowId'),'booking_detail.*');

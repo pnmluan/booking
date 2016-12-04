@@ -8,8 +8,8 @@
 
 namespace App\Http\Controllers;
 
-
 use App\Models\Booking;
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
 class BookingController extends ApiController
@@ -33,8 +33,7 @@ class BookingController extends ApiController
 
     public function create(Request $request){
         $booking = new Booking();
-        $data = $request['data'];
-
+        $data = $request->all();
         $booking->fill($data);
 
         if (!$booking->isValid()) {
@@ -70,7 +69,7 @@ class BookingController extends ApiController
         if(!$booking) {
             return $this->respondNotFound();
         }
-        $data = $request['data'];
+        $data = $request->all();
 
         $booking->fill($data);
 

@@ -5,27 +5,33 @@ import { Comment } from '../models/comment';
 import { Configuration } from '../shared/app.configuration';
 
 @Injectable()
-export class CommentDataService {
+export class ContactDataService {
 
 	private actionUrl: string;
 
-
-	// @Output() foodAdded: EventEmitter<any> = new EventEmitter();
-	// @Output() foodDeleted: EventEmitter<any> = new EventEmitter();
-
-	constructor(private _Http: Http, private _configuration: Configuration) {
-		this.actionUrl = _configuration.apiUrl + 'comment/';
+	constructor(private _Http: Http, private _Configuration: Configuration) {
+		this.actionUrl = _Configuration.apiUrl + 'contact/';
 	}
 
 	createAuthorizationHeader(headers: Headers) {
 		headers.append('Content-Type', 'application/x-www-form-urlencoded;charset=UTF-8');
-		headers.append('Authorization', 'Basic ' + this._configuration.authentic);
+		headers.append('Authorization', 'Basic ' + this._Configuration.authentic);
 	}
 
 	public getAll() {
 		let headers = new Headers();
 		this.createAuthorizationHeader(headers);
 		return this._Http.get(this.actionUrl + 'index', {headers: headers})
+			.map(res => res.json())
+			.catch(this.handleError);
+	}
+
+	public create(params) {
+		let headers = new Headers();
+		this.createAuthorizationHeader(headers);
+		return this._Http.post(this.actionUrl + 'create', params.toString(), {
+			headers: headers
+		})
 			.map(res => res.json())
 			.catch(this.handleError);
 	}

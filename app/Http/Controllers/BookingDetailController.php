@@ -33,7 +33,7 @@ class BookingDetailController extends ApiController
 
     public function create(Request $request){
         $bookingDetail = new BookingDetail();
-        $data = $request['data'];
+        $data = $request->all();
 
         $bookingDetail->fill($data);
 
@@ -70,7 +70,7 @@ class BookingDetailController extends ApiController
         if(!$bookingDetail) {
             return $this->respondNotFound();
         }
-        $data = $request['data'];
+        $data = $request->all();
 
         $bookingDetail->fill($data);
 

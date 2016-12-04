@@ -26,16 +26,27 @@ CREATE TABLE banner (
     CONSTRAINT banner_pk PRIMARY KEY (id)
 );
 
+-- Table: news
+CREATE TABLE news (
+    id int NOT NULL AUTO_INCREMENT,
+    title varchar(200) NOT NULL,
+    img varchar(200) NOT NULL,
+    url varchar(1000) NOT NULL,
+    description varchar(1000) NOT NULL,
+    status varchar(45) NOT NULL,
+    created_at datetime NULL,
+    updated_at datetime NULL,
+    CONSTRAINT banner_pk PRIMARY KEY (id)
+);
+
 -- Table: booking
 CREATE TABLE booking (
     id int NOT NULL AUTO_INCREMENT,
     code char(10) NOT NULL,
-    one_way boolean NOT NULL,
+    round_trip  varchar(10)  NOT NULL, -- options: on, of, mul
     adult int NOT NULL,
     children int NOT NULL,
     infant int NOT NULL,
-    ticket_type_id int NOT NULL,
-    remark varchar(1000) NOT NULL,
     created_at datetime NULL,
     updated_at datetime NULL,
     CONSTRAINT booking_pk PRIMARY KEY (id)
@@ -45,13 +56,15 @@ CREATE TABLE booking (
 CREATE TABLE booking_detail (
     id int NOT NULL AUTO_INCREMENT,
     booking_id int NOT NULL,
-    depart int NOT NULL,
-    departure datetime NULL,
-    arrive int NOT NULL,
-    arrival datetime NULL,
-    one_way boolean NOT NULL,
-    depart_duration int NULL,
-    return_duration int NULL,
+    `from` varchar(10) NOT NULL,
+	start_date varchar(20) NOT NULL,
+	start_time varchar(20) NOT NULL,
+    `to` varchar(10) NOT NULL,
+    end_date varchar(20) NOT NULL,
+	end_time varchar(20) NOT NULL,
+    round_trip  varchar(10)  NOT NULL,
+	ticket_type int NOT NULL,
+    duration varchar(10) NOT NULL,
     created_at datetime NULL,
     updated_at datetime NULL,
     CONSTRAINT booking_detail_pk PRIMARY KEY (id)
@@ -90,11 +103,13 @@ CREATE TABLE comment (
 CREATE TABLE contact (
     id int NOT NULL AUTO_INCREMENT,
     booking_id int NOT NULL,
-    title varchar(3) NOT NULL,
+    title varchar20) NOT NULL,
     first_name varchar(50) NOT NULL,
     last_name varchar(50) NOT NULL,
+	fullname varchar(100) NOT NULL,
     phone varchar(11) NOT NULL,
     email varchar(50) NOT NULL,
+	requirement varchar(100) NOT NULL,
     created_at datetime NULL,
     updated_at datetime NULL,
     CONSTRAINT contact_pk PRIMARY KEY (id)
@@ -104,7 +119,7 @@ CREATE TABLE contact (
 CREATE TABLE fare (
     id int NOT NULL AUTO_INCREMENT,
     passenger_id int NOT NULL,
-    one_way boolean NOT NULL,
+    round_trip  varchar(10)  NOT NULL,
     fare float NOT NULL,
     charge float NOT NULL,
     tax float NOT NULL,
@@ -128,12 +143,18 @@ CREATE TABLE location (
 CREATE TABLE passenger (
     id int NOT NULL AUTO_INCREMENT,
     booking_id int NOT NULL,
-    title varchar(3) NOT NULL,
+	customer_type int NOT NULL, -- 'adult', 'children', 'infant' 
+    title varchar(20) NOT NULL,
     first_name varchar(50) NOT NULL,
     last_name varchar(50) NOT NULL,
+	fullname varchar(100) NOT NULL,
     date_of_birth date NULL,
     phone varchar(11) NOT NULL,
     email varchar(50) NOT NULL,
+	fare float NOT NULL,
+    charge float NOT NULL,
+    tax float NOT NULL,
+    baggage_type_id int NOT NULL,
     created_at datetime NULL,
     updated_at datetime NULL,
     CONSTRAINT passenger_pk PRIMARY KEY (id)

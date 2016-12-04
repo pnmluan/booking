@@ -3,10 +3,10 @@ namespace App\Models;
   
 use Illuminate\Database\Eloquent\Model;
   
-class Passenger extends Model
+class Passenger extends BaseModel
 {
     protected $table = 'passenger';
-    protected $fillable = ['booking_id', 'title', 'first_name', 'last_name', 'date_of_birth', 'phone', 'email'];
+    protected $fillable = ['booking_detail_id', 'title', 'fullname', 'date_of_birth', 'customer_type', 'phone', 'email', 'fare', 'charge', 'tax', 'baggage_type_id'];
 
 
     public function getModelValidations()
@@ -18,7 +18,7 @@ class Passenger extends Model
 
     public static function listItems(array $param = null){
 
-        $aColumns = ['booking_id', 'title', 'first_name', 'last_name', 'date_of_birth', 'phone', 'email'];
+        $aColumns = ['booking_detail_id', 'title', 'fullname', 'date_of_birth', 'customer_type', 'phone', 'email', 'fare', 'charge', 'tax', 'baggage_type_id'];
 
         $query = \DB::table('passenger')
             ->select(\DB::raw('SQL_CALC_FOUND_ROWS id'),\DB::raw('id AS DT_RowId'),'passenger.*');

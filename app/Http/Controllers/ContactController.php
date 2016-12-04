@@ -34,7 +34,7 @@ class ContactController extends ApiController
 
     public function create(Request $request){
         $contact = new Contact();
-        $data = $request['data'];
+        $data = $request->all();
 
         $contact->fill($data);
 
@@ -71,7 +71,7 @@ class ContactController extends ApiController
         if(!$contact) {
             return $this->respondNotFound();
         }
-        $data = $request['data'];
+        $data = $request->all();
 
         $contact->fill($data);
 
