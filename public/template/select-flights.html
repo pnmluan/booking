@@ -1625,7 +1625,10 @@
       jQuery('#modalNotify').modal('show');
 
       jQuery('.btn-select-flight').click(function(){
-        if(!jQuery(this).closest('.flights').hasClass('selected')){
+			jQuery(this).closest('.flights').find('tr').removeClass('ac');
+			jQuery(this).closest('tr').addClass('ac');
+			
+        /*if(!jQuery(this).closest('.flights').hasClass('selected')){
           jQuery(this).closest('.flights').addClass('selected');
           if(jQuery('.flights.selected').length < jQuery('.flights').length){
             jQuery('.flights').each(function(i){
@@ -1639,7 +1642,22 @@
           } else {
             alert('Redirect to confirm page');
           }
-        }
+        }*/
+
+          jQuery(this).closest('.flights').addClass('selected');
+          if(jQuery('.flights.selected').length < jQuery('.flights').length){
+            jQuery('.flights').each(function(i){
+              if(!jQuery('.flights').eq(i).hasClass('selected')){
+                jQuery('html, body').animate({
+                  scrollTop: jQuery('.flights').eq(i).offset().top
+                }, 500);
+                return false;
+              }
+            })
+          } else {
+            alert('Redirect to confirm page');
+          }
+        
       });
     })
   </script>

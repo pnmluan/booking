@@ -824,6 +824,10 @@ only screen and (max-width: 767px) {
 .list-bus-table table tr th { background: #CECECE; padding-top: 10px; }
 .list-bus-table table tr td { vertical-align: middle; }
 .table-hover > tbody > tr:hover { background-color: #F8F3E7; }
+.table-hover > tbody > tr.ac { background-color: #F5EBCD; }
+.table-hover > tbody > tr.ac .btn-select-flight { display: none; }
+
+/* background-color: #F8F3E7; */
 
 .list-bus-table .bus-name { font-size: 15px; }
 .list-bus-table .bus-price { color: #E44803; font-size: 20px; font-weight: bold; }
