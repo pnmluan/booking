@@ -33,7 +33,7 @@ class FareController extends ApiController
 
     public function create(Request $request){
         $fare = new Fare();
-        $data = $request['data'];
+        $data = $request->all();
 
         $fare->fill($data);
 
@@ -70,7 +70,7 @@ class FareController extends ApiController
         if(!$fare) {
             return $this->respondNotFound();
         }
-        $data = $request['data'];
+        $data = $request->all();
 
         $fare->fill($data);
 

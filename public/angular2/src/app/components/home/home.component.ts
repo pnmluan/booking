@@ -33,6 +33,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
 	people = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 	locations = [];
 	round_trip = 'off';
+	search = {};
 	filterBookForm: FormGroup;
 
 	myDatePickerOptions = {
@@ -103,6 +104,11 @@ export class HomeComponent implements OnInit, AfterViewInit {
 				singleItem: true,
 				autoPlay: 5000
 			});
+
+			jQuery(".select-adult, .select-child-1, .select-child-2").select2({
+			    width: '100%',
+			    minimumResultsForSearch: -1
+			});
 		}, 500);
 	}
 	
@@ -113,13 +119,21 @@ export class HomeComponent implements OnInit, AfterViewInit {
 		this.sessionStorage.set('session_token', uuid);
 
 		var objectStore = this.filterBookForm.value;
+		objectStore.adult = jQuery('.select-adult').val();
+		objectStore.children = jQuery('.select-child-1').val();
+		objectStore.infant = jQuery('.select-child-2').val();
 		var dateFormat = 'YYYY-MM-DD';
 		var viFormatDate = 'DD/MM/YYYY';
 		objectStore.from_date = moment(objectStore.from_date, viFormatDate).format(dateFormat);
-		objectStore.to_date = moment(objectStore.to_date, viFormatDate).format(dateFormat);
-
 		objectStore.from_name = this.getNameFromCode(objectStore.from);
-		objectStore.to_name = this.getNameFromCode(objectStore.to);
+		
+		if (objectStore.to_date == undefined) {
+			objectStore.to_date = '';
+			objectStore.to_name = '';
+		} else {
+			objectStore.to_date = moment(objectStore.to_date, viFormatDate).format(dateFormat);
+			objectStore.to_name = this.getNameFromCode(objectStore.to);
+		}
 
 		this.sessionStorage.set('session_flight', JSON.stringify(objectStore));
 		this.router.navigate(['search-result/' + uuid]);

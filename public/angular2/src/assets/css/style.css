@@ -110,7 +110,7 @@ a:hover { color: #69f; }
 /* Custom text-selection colors (remove any text shadows: http://twitter.com/miketaylr/status/12228805301) */
 ::-moz-selection { background: #fcd700; color: #fff; text-shadow: none; }
 ::selection { background: #fcd700; color: #fff; text-shadow: none; }
-/*	j.mp/webkit-tap-highlight-color */
+/*  j.mp/webkit-tap-highlight-color */
 a:link { -webkit-tap-highlight-color: #fcd700; outline: none; text-decoration: none; }
 ins { background-color: #fcd700; color: #000; text-decoration: none; }
 mark { background-color: #fcd700; color: #000; font-style: italic; font-weight: bold; }
@@ -225,6 +225,7 @@ textarea:-moz-placeholder { color: #a9a9a9; }
 .section-title { font-size: 20px; color: #649931; text-transform: uppercase; font-family: 'diavlo';  margin-top: 20px; padding-bottom: 10px;}
 .border-title { height: 7px; margin-bottom: 20px; width: 75px; background: url(../img/border-title.png) repeat; }
 .service-method { padding: 30px 0px; }
+.service-method .form-group .col-md-12 { margin-bottom: 10px; }
 
 .owl-carousel .item > div { border-left: 2px solid #E77741; padding-left: 15px; }
 .owl-carousel .item > div:first-child { margin-bottom: 30px; }
@@ -514,7 +515,7 @@ ul.footerlist li a:hover{color:#F69E1C; text-decoration:none;}
 .price-condition .field,
 .luggage-info .field { margin-bottom: 5px; }
 .price-condition .field label,
-.luggage-info .field label { font-weight: bold; width: 200px; float: left; }
+.luggage-info .field label { width: 150px; float: left; font-style: italic; }
 .price-condition .field > div,
 .luggage-info .field > div { overflow: hidden; }
 .luggage-info .field > div p { margin-bottom: 10px; }
@@ -528,10 +529,9 @@ ul.footerlist li a:hover{color:#F69E1C; text-decoration:none;}
 .people-info-inner {}
 .tbl-people-info > tbody > tr > td { padding: 5px 0px; }
 .tbl-people-info > thead > tr > th > span { color: red; }
-.tbl-people-info > thead > tr > th:nth-child(1) { width: 90px; }
-.tbl-people-info > thead > tr > th:nth-child(2) { width: 90px; }
-.tbl-people-info > thead > tr > th:nth-child(3) { width: 310px; }
-.tbl-people-info > thead > tr > th:nth-child(4) { width: 150px; }
+.tbl-people-info > thead > tr > th:nth-child(1) { width: 110px; }
+.tbl-people-info > thead > tr > th:nth-child(2) { width: 320px; }
+.tbl-people-info > thead > tr > th:nth-child(3) { width: 150px; }
 .tbl-people-info > thead > tr > th, .tbl-people-info > tbody > tr > td{ padding: 5px 10px 5px 0px; }
 .tbl-people-info .input-group-addon { padding: 0px 9px; }
 .tbl-people-info .input-group-addon span { color: #666; }
@@ -563,7 +563,7 @@ only screen and (max-width: 767px) {
         border: none;
         // border-bottom: 1px solid #ddd;
         position: relative;
-        padding-left: 120px !important;
+        padding-left: 80px !important;
         padding-right: 0px !important;
     }
 
@@ -584,10 +584,9 @@ only screen and (max-width: 767px) {
     /*
     Label the data
     */
-    .tbl-people-info td:nth-of-type(1):before { content: "Khách hàng :"; }
-    .tbl-people-info td:nth-of-type(2):before { content: "Quý danh :"; }
-    .tbl-people-info td:nth-of-type(3):before { content: "Họ và tên :"; }
-    .tbl-people-info td:nth-of-type(4):before { content: "Ngày sinh :"; }
+    .tbl-people-info td:nth-of-type(1):before { content: "Quý danh :"; }
+    .tbl-people-info td:nth-of-type(2):before { content: "Họ và tên :"; }
+    .tbl-people-info td:nth-of-type(3):before { content: "Ngày sinh :"; }
 }
 
 .contact-info { margin-bottom: 20px;  }
@@ -975,3 +974,29 @@ only screen and (max-width: 767px) {
 
 .btn-contact { border: 3px solid #649931; padding: 7px 30px 5px 30px; text-transform: uppercase; font-family: 'diavlo';  background: #649931; color: #fff; }
 .btn-contact:hover { background: #fff; color: #649931; }
+
+
+.people-title { font-weight: bold; font-size: 15px; color: #649931; margin-top: 5px; margin-bottom: 5px; }
+.luggage-title { font-weight: bold; margin-top: 10px; margin-bottom: 10px; }
+.bootstrap-datetimepicker-widget.dropdown-menu {
+    margin: 2px 0;
+    padding: 20px;
+    width: 20em;
+}
+
+.white { color: #fff;  }
+.size20 { font-size: 20px; }
+.size28 { font-size: 28px; }
+.size70 { font-size: 70px; }
+.size40 { font-size: 40px; }
+.lato { font-family: 'diavlo-book'; }
+.yellow { color: #ffff00; }
+.slim { font-weight: 300; }
+.caps { text-transform: uppercase; }
+
+@media screen and (max-width: 767px){
+    .size20 { font-size: 15px; }
+    .size28 { font-size: 18px; }
+    .size70 { font-size: 20px; }
+    .size40 { font-size: 18px; }
+}

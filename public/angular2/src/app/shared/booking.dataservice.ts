@@ -1,11 +1,11 @@
 import { Injectable, EventEmitter, Output } from '@angular/core';
 import { Http, Headers, Response } from '@angular/http';
 import { Observable } from 'rxjs/Rx';
-import { Comment } from '../models/comment';
+
 import { Configuration } from '../shared/app.configuration';
 
 @Injectable()
-export class CommentDataService {
+export class BookingDataService {
 
 	private actionUrl: string;
 
@@ -14,7 +14,7 @@ export class CommentDataService {
 	// @Output() foodDeleted: EventEmitter<any> = new EventEmitter();
 
 	constructor(private _Http: Http, private _configuration: Configuration) {
-		this.actionUrl = _configuration.apiUrl + 'comment/';
+		this.actionUrl = _configuration.apiUrl + 'booking/';
 	}
 
 	createAuthorizationHeader(headers: Headers) {
@@ -26,6 +26,16 @@ export class CommentDataService {
 		let headers = new Headers();
 		this.createAuthorizationHeader(headers);
 		return this._Http.get(this.actionUrl + 'index', {headers: headers})
+			.map(res => res.json())
+			.catch(this.handleError);
+	}
+
+	public create(params) {
+		let headers = new Headers();
+		this.createAuthorizationHeader(headers);
+		return this._Http.post(this.actionUrl + 'create', params.toString(), {
+			headers: headers
+		})
 			.map(res => res.json())
 			.catch(this.handleError);
 	}

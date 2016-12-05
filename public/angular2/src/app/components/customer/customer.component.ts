@@ -6,10 +6,17 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./customer.component.css']
 })
 export class CustomerComponent implements OnInit {
+	roundTripOptions = {};
+	constructor() { 
+		this.roundTripOptions = {
+			on: 'Khứ hồi',
+			off: 'Một chiều',
+			mul: 'Nhiều chặng'
+		}
 
-  constructor() { }
+	}
 
-  ngOnInit() {
-  }
+	ngOnInit() {
+  	}
 
 }

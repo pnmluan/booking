@@ -17,7 +17,7 @@ export class BannerDataService {
 	}
 
 	createAuthorizationHeader(headers: Headers) {
-		headers.append('Content-Type', 'application/json;charset=UTF-8');
+		headers.append('Content-Type', 'application/x-www-form-urlencoded;charset=UTF-8');
 		headers.append('Authorization', 'Basic ' + this._configuration.authentic);
 	}
 
