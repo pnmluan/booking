@@ -112,17 +112,13 @@ class AirlineController extends \App\Http\Controllers\ApiController
 
             $t = $left_fields[$i * 4 + 1]->nodeValue;
             $start_time = substr($t, 0, 5);
-            // $start_from = substr($t, 10);
-            // $start_code = substr($t, 7, 3);
 
             $t = $left_fields[$i * 4 + 2]->nodeValue;
             $end_time = substr($t, 0, 5);
-            // $end_to = substr($t, 10);
-            // $end_code = substr($t, 7, 3);
 
             $flight_code = substr($left_fields[$i * 4 + 3]->nodeValue, 0, 5);
 
-
+            $min = null;
             $data = [];
             $data['start_date'] = $start_date;
             $data['start_time'] = $start_time;
@@ -134,13 +130,12 @@ class AirlineController extends \App\Http\Controllers\ApiController
             $fee = $xpath->query("(//*[@id='travOpsMain']/table//tr[7]/td/table//tr[contains(substring(@id, 1, 16), 'gridTravelOptDep')])[" . ($i + 1) . "]/td[2]/table//tr/td[1]/*[@id='charges']");
 
             if ($price->length > 0) {
-                $data['price'] = substr(trim($price[0]->getAttribute('value')), 0, -4);
-                $data['fee'] = substr(trim($fee[0]->getAttribute('value')), 0, -4);
+                $data['price'] = str_replace(',', '', substr(trim($price[0]->getAttribute('value')), 0, -4));
+                $data['fee'] = str_replace(',', '', substr(trim($fee[0]->getAttribute('value')), 0, -4));
                 $data['fee_service'] = 0;
                 $data['type'] = 'promo';
-                $result['dep_flights'][] = $data;
+                $min = $data;
             }
-
 
             $data = [];
             $data['start_date'] = $start_date;
@@ -152,11 +147,19 @@ class AirlineController extends \App\Http\Controllers\ApiController
             $fee = $xpath->query("(//*[@id='travOpsMain']/table//tr[7]/td/table//tr[contains(substring(@id, 1, 16), 'gridTravelOptDep')])[" . ($i + 1) . "]/td[2]/table//tr/td[2]/*[@id='charges']");
 
             if ($price->length > 0) {
-                $data['price'] = substr(trim($price[0]->getAttribute('value')), 0, -4);
-                $data['fee'] = substr(trim($fee[0]->getAttribute('value')), 0, -4);
+                $data['price'] = str_replace(',', '', substr(trim($price[0]->getAttribute('value')), 0, -4));
+                $data['fee'] = str_replace(',', '', substr(trim($fee[0]->getAttribute('value')), 0, -4));
                 $data['fee_service'] = 0;
                 $data['type'] = 'eco';
-                $result['dep_flights'][] = $data;
+
+
+                if ($min) {
+                    if (intval($min['price']) > intval($data['price']))
+                        $min = $data;
+                } else {
+                    $min = $data;
+                }
+
             }
 
 
@@ -170,13 +173,20 @@ class AirlineController extends \App\Http\Controllers\ApiController
             $fee = $xpath->query("(//*[@id='travOpsMain']/table//tr[7]/td/table//tr[contains(substring(@id, 1, 16), 'gridTravelOptDep')])[" . ($i + 1) . "]/td[2]/table//tr/td[3]/*[@id='charges']");
 
             if ($price->length > 0) {
-                $data['price'] = substr(trim($price[0]->getAttribute('value')), 0, -4);
-                $data['fee'] = substr(trim($fee[0]->getAttribute('value')), 0, -4);
+                $data['price'] = str_replace(',', '', substr(trim($price[0]->getAttribute('value')), 0, -4));
+                $data['fee'] = str_replace(',', '', substr(trim($fee[0]->getAttribute('value')), 0, -4));
                 $data['fee_service'] = 0;
                 $data['type'] = 'skyboss';
-                $result['dep_flights'][] = $data;
+                if ($min) {
+                    if (intval($min['price']) > intval($data['price']))
+                        $min = $data;
+                } else {
+                    $min = $data;
+                }
             }
 
+            if ($min)
+                $result['dep_flights'][] = $min;
         }
 
         // RETURN FLIGHT
@@ -190,17 +200,14 @@ class AirlineController extends \App\Http\Controllers\ApiController
 
                 $t = $left_fields[$i * 4 + 1]->nodeValue;
                 $start_time = substr($t, 0, 5);
-                // $start_from = substr($t, 10);
-                // $start_code = substr($t, 7, 3);
 
                 $t = $left_fields[$i * 4 + 2]->nodeValue;
                 $end_time = substr($t, 0, 5);
-                // $end_to = substr($t, 10);
-                // $end_code = substr($t, 7, 3);
+
 
                 $flight_code = substr($left_fields[$i * 4 + 3]->nodeValue, 0, 5);
 
-
+                $min = null;
                 $data = [];
                 $data['start_date'] = $start_date;
                 $data['start_time'] = $start_time;
@@ -212,11 +219,11 @@ class AirlineController extends \App\Http\Controllers\ApiController
                 $fee = $xpath->query("(//*[@id='travOpsMain']/table//tr[7]/td/table//tr[contains(substring(@id, 1, 16), 'gridTravelOptRet')])[" . ($i + 1) . "]/td[2]/table//tr/td[1]/*[@id='charges']");
 
                 if ($price->length > 0) {
-                    $data['price'] = substr(trim($price[0]->getAttribute('value')), 0, -4);
-                    $data['fee'] = substr(trim($fee[0]->getAttribute('value')), 0, -4);
+                    $data['price'] = str_replace(',', '', substr(trim($price[0]->getAttribute('value')), 0, -4));
+                    $data['fee'] = str_replace(',', '', substr(trim($fee[0]->getAttribute('value')), 0, -4));
                     $data['fee_service'] = 0;
                     $data['type'] = 'promo';
-                    $result['ret_flights'][] = $data;
+                    $min = $data;
                 }
 
 
@@ -230,11 +237,16 @@ class AirlineController extends \App\Http\Controllers\ApiController
                 $fee = $xpath->query("(//*[@id='travOpsMain']/table//tr[7]/td/table//tr[contains(substring(@id, 1, 16), 'gridTravelOptRet')])[" . ($i + 1) . "]/td[2]/table//tr/td[2]/*[@id='charges']");
 
                 if ($price->length > 0) {
-                    $data['price'] = substr(trim($price[0]->getAttribute('value')), 0, -4);
-                    $data['fee'] = substr(trim($fee[0]->getAttribute('value')), 0, -4);
+                    $data['price'] = str_replace(',', '', substr(trim($price[0]->getAttribute('value')), 0, -4));
+                    $data['fee'] = str_replace(',', '', substr(trim($fee[0]->getAttribute('value')), 0, -4));
                     $data['fee_service'] = 0;
                     $data['type'] = 'eco';
-                    $result['ret_flights'][] = $data;
+                    if ($min) {
+                        if (intval($min['price']) > intval($data['price']))
+                            $min = $data;
+                    } else {
+                        $min = $data;
+                    }
                 }
 
 
@@ -248,16 +260,23 @@ class AirlineController extends \App\Http\Controllers\ApiController
                 $fee = $xpath->query("(//*[@id='travOpsMain']/table//tr[7]/td/table//tr[contains(substring(@id, 1, 16), 'gridTravelOptRet')])[" . ($i + 1) . "]/td[2]/table//tr/td[3]/*[@id='charges']");
 
                 if ($price->length > 0) {
-                    $data['price'] = substr(trim($price[0]->getAttribute('value')), 0, -4);
-                    $data['fee'] = substr(trim($fee[0]->getAttribute('value')), 0, -4);
+                    $data['price'] = str_replace(',', '', substr(trim($price[0]->getAttribute('value')), 0, -4));
+                    $data['fee'] = str_replace(',', '', substr(trim($fee[0]->getAttribute('value')), 0, -4));
                     $data['fee_service'] = 0;
                     $data['type'] = 'skyboss';
-                    $result['ret_flights'][] = $data;
+                    if ($min) {
+                        if (intval($min['price']) > intval($data['price']))
+                            $min = $data;
+                    } else {
+                        $min = $data;
+                    }
                 }
+
+                if ($min)
+                    $result['ret_flights'][] = $min;
             }
         }
 
-        // $this->respondWithSuccess(['data'=> $result]);
         echo json_encode($result);
         exit;
     }
@@ -284,6 +303,9 @@ class AirlineController extends \App\Http\Controllers\ApiController
         $infant = $request->input('infant');
 
         // GET SESSION ID
+        $again = 0;
+        begin:
+        $again++;
         $url = 'http://booknow.jetstar.com/Search.aspx?culture=vi-VN';
 
         $curl = new \Curl();
@@ -350,10 +372,10 @@ class AirlineController extends \App\Http\Controllers\ApiController
                 $str = implode('', explode('  ', $str));
                 $flight_code = trim($str);
 
-                $price = number_format($prices[$k]->getAttribute('data-price'));
-                $price1 = number_format($prices1[$k]->getAttribute('data-price'));
-                $price2 = number_format($prices2[$k]->getAttribute('data-price'));
-                $fee = number_format($prices[$k]->getAttribute('data-discfees-adt'));
+                $price = $prices[$k]->getAttribute('data-price');
+                $price1 = $prices1[$k]->getAttribute('data-price');
+                $price2 = $prices2[$k]->getAttribute('data-price');
+                $fee = $prices[$k]->getAttribute('data-discfees-adt');
                 $k++;
 
                 // Vé tiết kiệm
@@ -370,30 +392,30 @@ class AirlineController extends \App\Http\Controllers\ApiController
                 $result['dep_flights'][] = $data;
 
                 // Vé linh hoạt
-                $data = [];
-                $data['start_date'] = date('d/m/Y', $from_date);
-                $data['start_time'] = $start_time;
-                $data['end_time'] = $end_time;
-                $data['flight_code'] = $flight_code;
-                $data['price'] = $price;
-                $data['fee'] = $fee;
-                $data['fee_service'] = $price1;
-                $data['type'] = 'Vé linh hoạt';
+                // $data = [];
+                // $data['start_date'] = date('d/m/Y', $from_date);
+                // $data['start_time'] = $start_time;
+                // $data['end_time'] = $end_time;
+                // $data['flight_code'] = $flight_code;
+                // $data['price'] = $price;
+                // $data['fee'] = $fee;
+                // $data['fee_service'] = $price1;
+                // $data['type'] = 'Vé linh hoạt';
 
-                $result['dep_flights'][] = $data;
+                // $result['dep_flights'][] = $data;
 
                 // Vé tối ưu
-                $data = [];
-                $data['start_date'] = date('d/m/Y', $from_date);
-                $data['start_time'] = $start_time;
-                $data['end_time'] = $end_time;
-                $data['flight_code'] = $flight_code;
-                $data['price'] = $price;
-                $data['fee'] = $fee;
-                $data['fee_service'] = $price2;
-                $data['type'] = 'Vé tối ưu';
+                // $data = [];
+                // $data['start_date'] = date('d/m/Y', $from_date);
+                // $data['start_time'] = $start_time;
+                // $data['end_time'] = $end_time;
+                // $data['flight_code'] = $flight_code;
+                // $data['price'] = $price;
+                // $data['fee'] = $fee;
+                // $data['fee_service'] = $price2;
+                // $data['type'] = 'Vé tối ưu';
 
-                $result['dep_flights'][] = $data;
+                // $result['dep_flights'][] = $data;
             }
         }
 
@@ -421,10 +443,10 @@ class AirlineController extends \App\Http\Controllers\ApiController
                     $str = implode('', explode('  ', $str));
                     $flight_code = trim($str);
 
-                    $price = number_format($prices[$k]->getAttribute('data-price'));
-                    $price1 = number_format($prices1[$k]->getAttribute('data-price'));
-                    $price2 = number_format($prices2[$k]->getAttribute('data-price'));
-                    $fee = number_format($prices[$k]->getAttribute('data-discfees-adt'));
+                    $price = $prices[$k]->getAttribute('data-price');
+                    $price1 = $prices1[$k]->getAttribute('data-price');
+                    $price2 = $prices2[$k]->getAttribute('data-price');
+                    $fee = $prices[$k]->getAttribute('data-discfees-adt');
                     $k++;
 
                     // Vé tiết kiệm
@@ -441,35 +463,37 @@ class AirlineController extends \App\Http\Controllers\ApiController
                     $result['ret_flights'][] = $data;
 
                     // Vé linh hoạt
-                    $data = [];
-                    $data['start_date'] = date('d/m/Y', $to_date);
-                    $data['start_time'] = $start_time;
-                    $data['end_time'] = $end_time;
-                    $data['flight_code'] = $flight_code;
-                    $data['price'] = $price;
-                    $data['fee'] = $fee;
-                    $data['fee_service'] = $price1;
-                    $data['type'] = 'Vé linh hoạt';
+                    // $data = [];
+                    // $data['start_date'] = date('d/m/Y', $to_date);
+                    // $data['start_time'] = $start_time;
+                    // $data['end_time'] = $end_time;
+                    // $data['flight_code'] = $flight_code;
+                    // $data['price'] = $price;
+                    // $data['fee'] = $fee;
+                    // $data['fee_service'] = $price1;
+                    // $data['type'] = 'Vé linh hoạt';
 
-                    $result['ret_flights'][] = $data;
+                    // $result['ret_flights'][] = $data;
 
                     // Vé tối ưu
-                    $data = [];
-                    $data['start_date'] = date('d/m/Y', $to_date);
-                    $data['start_time'] = $start_time;
-                    $data['end_time'] = $end_time;
-                    $data['flight_code'] = $flight_code;
-                    $data['price'] = $price;
-                    $data['fee'] = $fee;
-                    $data['fee_service'] = $price2;
-                    $data['type'] = 'Vé tối ưu';
+                    // $data = [];
+                    // $data['start_date'] = date('d/m/Y', $to_date);
+                    // $data['start_time'] = $start_time;
+                    // $data['end_time'] = $end_time;
+                    // $data['flight_code'] = $flight_code;
+                    // $data['price'] = $price;
+                    // $data['fee'] = $fee;
+                    // $data['fee_service'] = $price2;
+                    // $data['type'] = 'Vé tối ưu';
 
-                    $result['ret_flights'][] = $data;
+                    // $result['ret_flights'][] = $data;
                 }
             }
         }
 
-        // $this->respondWithSuccess(['data'=> $result]);
+        if (empty($result) && $again < 3)
+            goto begin;
+
         echo json_encode($result);
         exit;
     }
@@ -539,6 +563,8 @@ class AirlineController extends \App\Http\Controllers\ApiController
             $end_time = $end_times[$i]->nodeValue;
             $start_date = date('d/m/Y', $from_date);
 
+            $min = null;
+
             // Thương gia Linh hoạt
             $price = $xpath->query("(//*[@id='" . $id . "']//td[1]//div[@class='outer'])[" . ($i + 1) ."]//*[@class='prices-amount']");
 
@@ -548,10 +574,10 @@ class AirlineController extends \App\Http\Controllers\ApiController
                 $data['start_date'] = $start_date;
                 $data['start_time'] = $start_time;
                 $data['end_time'] = $end_time;
-                $data['price'] = $price[0]->nodeValue;
+                $data['price'] = str_replace(',', '', $price[0]->nodeValue);
                 $data['type'] = 'Thương gia Linh hoạt';
 
-                $result['dep_flights'][] = $data;
+                $min = $data;
             }
 
             // Thương gia Tiêu chuẩn
@@ -563,10 +589,15 @@ class AirlineController extends \App\Http\Controllers\ApiController
                 $data['start_date'] = $start_date;
                 $data['start_time'] = $start_time;
                 $data['end_time'] = $end_time;
-                $data['price'] = $price[0]->nodeValue;
+                $data['price'] = str_replace(',', '', $price[0]->nodeValue);
                 $data['type'] = 'Thương gia Tiêu chuẩn';
 
-                $result['dep_flights'][] = $data;
+                if ($min) {
+                    if (intval($min['price']) > intval($data['price']))
+                        $min = $data;
+                } else {
+                    $min = $data;
+                }
             }
 
             // Phổ thông linh hoạt
@@ -578,10 +609,15 @@ class AirlineController extends \App\Http\Controllers\ApiController
                 $data['start_date'] = $start_date;
                 $data['start_time'] = $start_time;
                 $data['end_time'] = $end_time;
-                $data['price'] = $price[0]->nodeValue;
+                $data['price'] = str_replace(',', '', $price[0]->nodeValue);
                 $data['type'] = 'Phổ thông linh hoạt';
 
-                $result['dep_flights'][] = $data;
+                if ($min) {
+                    if (intval($min['price']) > intval($data['price']))
+                        $min = $data;
+                } else {
+                    $min = $data;
+                }
             }
 
             // Phổ thông Tiêu chuẩn
@@ -593,10 +629,15 @@ class AirlineController extends \App\Http\Controllers\ApiController
                 $data['start_date'] = $start_date;
                 $data['start_time'] = $start_time;
                 $data['end_time'] = $end_time;
-                $data['price'] = $price[0]->nodeValue;
+                $data['price'] = str_replace(',', '', $price[0]->nodeValue);
                 $data['type'] = 'Phổ thông Tiêu chuẩn';
 
-                $result['dep_flights'][] = $data;
+                if ($min) {
+                    if (intval($min['price']) > intval($data['price']))
+                        $min = $data;
+                } else {
+                    $min = $data;
+                }
             }
 
             // Phổ thông Phổ thông Tiết kiệm
@@ -608,11 +649,19 @@ class AirlineController extends \App\Http\Controllers\ApiController
                 $data['start_date'] = $start_date;
                 $data['start_time'] = $start_time;
                 $data['end_time'] = $end_time;
-                $data['price'] = $price[0]->nodeValue;
-                $data['type'] = 'Phổ thông Phổ thông Tiết kiệm';
+                $data['price'] = str_replace(',', '', $price[0]->nodeValue);
+                $data['type'] = 'Phổ thông Tiết kiệm';
 
-                $result['dep_flights'][] = $data;
+                if ($min) {
+                    if (intval($min['price']) > intval($data['price']))
+                        $min = $data;
+                } else {
+                    $min = $data;
+                }
             }
+
+            if ($min)
+                $result['dep_flights'][] = $min;
         }
 
 
@@ -628,6 +677,8 @@ class AirlineController extends \App\Http\Controllers\ApiController
                 $end_time = $end_times[$i]->nodeValue;
                 $start_date = date('d/m/Y', $to_date);
 
+                $min = null;
+
                 // Thương gia Linh hoạt
                 $price = $xpath->query("(//*[@id='inbounds']//td[1]//div[@class='outer'])[" . ($i + 1) ."]//*[@class='prices-amount']");
 
@@ -637,10 +688,10 @@ class AirlineController extends \App\Http\Controllers\ApiController
                     $data['start_date'] = $start_date;
                     $data['start_time'] = $start_time;
                     $data['end_time'] = $end_time;
-                    $data['price'] = $price[0]->nodeValue;
+                    $data['price'] = str_replace(',', '', $price[0]->nodeValue);
                     $data['type'] = 'Thương gia Linh hoạt';
 
-                    $result['ret_flights'][] = $data;
+                    $min = $data;
                 }
 
                 // Thương gia Tiêu chuẩn
@@ -652,10 +703,15 @@ class AirlineController extends \App\Http\Controllers\ApiController
                     $data['start_date'] = $start_date;
                     $data['start_time'] = $start_time;
                     $data['end_time'] = $end_time;
-                    $data['price'] = $price[0]->nodeValue;
+                    $data['price'] = str_replace(',', '', $price[0]->nodeValue);
                     $data['type'] = 'Thương gia Tiêu chuẩn';
 
-                    $result['ret_flights'][] = $data;
+                    if ($min) {
+                        if (intval($min['price']) > intval($data['price']))
+                            $min = $data;
+                    } else {
+                        $min = $data;
+                    }
                 }
 
                 // Phổ thông linh hoạt
@@ -667,10 +723,15 @@ class AirlineController extends \App\Http\Controllers\ApiController
                     $data['start_date'] = $start_date;
                     $data['start_time'] = $start_time;
                     $data['end_time'] = $end_time;
-                    $data['price'] = $price[0]->nodeValue;
+                    $data['price'] = str_replace(',', '', $price[0]->nodeValue);
                     $data['type'] = 'Phổ thông linh hoạt';
 
-                    $result['ret_flights'][] = $data;
+                    if ($min) {
+                        if (intval($min['price']) > intval($data['price']))
+                            $min = $data;
+                    } else {
+                        $min = $data;
+                    }
                 }
 
                 // Phổ thông Tiêu chuẩn
@@ -682,10 +743,15 @@ class AirlineController extends \App\Http\Controllers\ApiController
                     $data['start_date'] = $start_date;
                     $data['start_time'] = $start_time;
                     $data['end_time'] = $end_time;
-                    $data['price'] = $price[0]->nodeValue;
+                    $data['price'] = str_replace(',', '', $price[0]->nodeValue);
                     $data['type'] = 'Phổ thông Tiêu chuẩn';
 
-                    $result['ret_flights'][] = $data;
+                    if ($min) {
+                        if (intval($min['price']) > intval($data['price']))
+                            $min = $data;
+                    } else {
+                        $min = $data;
+                    }
                 }
 
                 // Phổ thông Phổ thông Tiết kiệm
@@ -697,17 +763,22 @@ class AirlineController extends \App\Http\Controllers\ApiController
                     $data['start_date'] = $start_date;
                     $data['start_time'] = $start_time;
                     $data['end_time'] = $end_time;
-                    $data['price'] = $price[0]->nodeValue;
-                    $data['type'] = 'Phổ thông Phổ thông Tiết kiệm';
+                    $data['price'] = str_replace(',', '', $price[0]->nodeValue);
+                    $data['type'] = 'Phổ thông Tiết kiệm';
 
-                    $result['ret_flights'][] = $data;
+                    if ($min) {
+                        if (intval($min['price']) > intval($data['price']))
+                            $min = $data;
+                    } else {
+                        $min = $data;
+                    }
                 }
+
+                if ($min)
+                    $result['ret_flights'][] = $min;
             }
         }
 
-
-
-        // $this->respondWithSuccess(['data'=> $result]);
         echo json_encode($result);
         exit;
     }
