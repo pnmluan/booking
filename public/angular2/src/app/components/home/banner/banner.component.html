@@ -8,7 +8,8 @@
           <div id="rev_slider_4_1" class="rev_slider fullwidthabanner" style="display:none;max-height:650px;height:650px;">
             <ul>
               <!-- SLIDE  -->
-              <li data-transition="fade" data-slotamount="7" data-masterspeed="300" data-thumb="http://www.nicdarkthemes.com/themes/love-travel/wp/demo-travel/wp-content/uploads/2015/05/love-travel-2-1920-320x200.jpg" data-saveperformance="off" data-title="Slide">
+              <li *ngFor="let b of bannerOptions"
+              data-transition="fade" data-slotamount="7" data-masterspeed="300" data-thumb="http://www.nicdarkthemes.com/themes/love-travel/wp/demo-travel/wp-content/uploads/2015/05/love-travel-2-1920-320x200.jpg" data-saveperformance="off" data-title="Slide">
                 <!-- MAIN IMAGE -->
                 <img src="assets/img/slider/paris.jpg" alt="love-travel-2-1920" data-bgposition="center top" data-kenburns="on" data-duration="9000" data-ease="Linear.easeNone" data-bgfit="100" data-bgfitend="110" data-bgpositionend="center top">
                 <div class="tp-caption scrolleffect sft"
@@ -22,45 +23,11 @@
                     <span class="lato size70 slim caps white">Tp.Hồ Chí Minh</span><br/><br/>
                     <span class="lato size20 normal caps white">Từ</span><br/><br/>
                     <span class="lato size40 slim uppercase yellow">990.000 vnđ</span><br/>
+                    {{b.description}}
                   </div>
                 </div>
               </li>
-              <!-- SLIDE  -->
-              <li data-transition="fade" data-slotamount="7" data-masterspeed="300" data-thumb="http://www.nicdarkthemes.com/themes/love-travel/wp/demo-travel/wp-content/uploads/2015/05/love-travel-12-1920-320x200.jpg" data-saveperformance="off" data-title="Slide">
-                <!-- MAIN IMAGE -->
-                <img src="assets/img/slider/rome.jpg" alt="love-travel-12-1920" data-bgposition="center top" data-kenburns="on" data-duration="9000" data-ease="Linear.easeNone" data-bgfit="100" data-bgfitend="110" data-bgpositionend="center center">
-                <div class="tp-caption scrolleffect sft"
-                     data-x="center"
-                     data-y="150"
-                     data-speed="1000"
-                     data-start="800"
-                     data-easing="easeOutExpo">
-                  <div class="sboxpurple text-center">
-                    <span class="lato size28 slim caps white">Đà Nẵng</span><br/><br/><br/>
-                    <span class="lato size70 slim caps white">Sài Gòn</span><br/><br/>
-                    <span class="lato size20 normal caps white">Từ</span><br/><br/>
-                    <span class="lato size40 slim uppercase yellow">500.000 vnđ</span><br/>
-                  </div>
-                </div>
-              </li>
-              <!-- SLIDE  -->
-              <li data-transition="fade" data-slotamount="7" data-masterspeed="300" data-thumb="http://www.nicdarkthemes.com/themes/love-travel/wp/demo-travel/wp-content/uploads/2015/05/love-travel-26-1920-320x200.jpg" data-saveperformance="off" data-title="Slide">
-                <!-- MAIN IMAGE -->
-                <img src="assets/img/slider/santorini.jpg" alt="love-travel-26-1920" data-bgposition="center top" data-kenburns="on" data-duration="9000" data-ease="Linear.easeNone" data-bgfit="100" data-bgfitend="110" data-bgpositionend="center right">
-                <div class="tp-caption scrolleffect sft"
-                     data-x="center"
-                     data-y="150"
-                     data-speed="1000"
-                     data-start="800"
-                     data-easing="easeOutExpo">
-                  <div class="sboxpurple text-center">
-                    <span class="lato size28 slim caps white">Tp.Hồ Chí Minh</span><br/><br/><br/>
-                    <span class="lato size70 slim caps white">Hà Nội</span><br/><br/>
-                    <span class="lato size20 normal caps white">Từ</span><br/><br/>
-                    <span class="lato size40 slim uppercase yellow">3.900.000 vnđ</span><br/>
-                  </div>
-                </div>
-              </li>
+              
             </ul>
             <div class="tp-bannertimer tp-bottom" style="visibility: hidden !important;"></div>
           </div>

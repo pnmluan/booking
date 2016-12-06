@@ -41,7 +41,9 @@ export class SearchResultComponent implements OnInit, AfterViewInit {
 	round_trip = false;
 	selectedFlights = {};
 	roundTripOptions = {};
-	selectedStep = 1;
+	selectedStep = 0;
+	sort: any;
+	lowestFilter = {};
 	steps = [];
 	search: any;
 	contact = {};
@@ -119,8 +121,13 @@ export class SearchResultComponent implements OnInit, AfterViewInit {
 		let from_flights = this.getRoute(this.session_flight, 'from');
 		from_flights['class'] = 'flight-go';
 		let to_flights = {};
+		let format_day = 'dddd, DD/MM/YYYY';
 		
 		this.search = this.clone(this.session_flight);
+		this.search['from_day'] = moment(this.search['from_date']).format(format_day);
+		if (this.search['to_date']) {
+			this.search['to_day'] = moment(this.search['to_date']).format(format_day);
+		}
 		// Check one-way or round-trip
 		if (this.session_flight['round_trip'] === 'on') {
 			this.round_trip = true;
@@ -129,18 +136,22 @@ export class SearchResultComponent implements OnInit, AfterViewInit {
 			// this.session_flight['to_fly_date'] = moment(this.session_flight['to_date']).format("dddd - DD/MM/YYYY");
 		}
 		
+		// Combine fork join 3 airlines
 		const vietjet$ = this._AirlineDataService.vietjet(this.session_flight).cache();
 
 		const jetstar$ = this._AirlineDataService.jetstar(this.session_flight).cache();
 
 		const vna$ = this._AirlineDataService.vna(this.session_flight).cache();
 
-		const combined$ = Observable.forkJoin(vietjet$, jetstar$, vna$);
-
-		combined$.subscribe(res => {
+		Observable.forkJoin(vietjet$, jetstar$, vna$).subscribe(res => {
 			let dep_flights = [];
 			let ret_flights = [];
 			
+			this.lowestFilter['vietjet'] = this.getLowestPrice(res[0].dep_flights);
+			this.lowestFilter['jetstar'] = this.getLowestPrice(res[1].dep_flights);
+			this.lowestFilter['vna'] = this.getLowestPrice(res[2].dep_flights);
+			console.log(this.lowestFilter);
+
 			dep_flights = this.pushDepFlights('vietjet', res[0], dep_flights);
 			dep_flights = this.pushDepFlights('jetstar', res[1], dep_flights);
 			dep_flights = this.pushDepFlights('vna', res[2], dep_flights);
@@ -157,8 +168,9 @@ export class SearchResultComponent implements OnInit, AfterViewInit {
 				this.listRoutes.push(to_flights);
 			}
 			
-
-			console.log(this.listRoutes);
+			this.selectedStep = 1;
+			this.sortTime();
+			this.sort = 'time';
 
 		});
 		
@@ -235,7 +247,6 @@ export class SearchResultComponent implements OnInit, AfterViewInit {
 			let image = 'assets/img/' + type + '.gif';
 			for (let k in result.dep_flights) {
 				result.dep_flights[k].image = image;
-				result.dep_flights[k].price = result.dep_flights[k].price.replace(/,/g, '');
 				result.dep_flights[k].direction = 'from';
 				flights.push(result.dep_flights[k]);
 			}
@@ -408,8 +419,8 @@ export class SearchResultComponent implements OnInit, AfterViewInit {
 		for (var key in this.listRoutes) {
 
 			this.listRoutes[key].flights.sort((leftSide, rightSide): any => {
-				var left_price = +leftSide.price.replace(',', '');
-				var right_price = +rightSide.price.replace(',', '');
+				var left_price = +leftSide.price;
+				var right_price = +rightSide.price;
 				
 				if (left_price < right_price) return -1;
 				if (left_price > right_price) return 1;
@@ -458,6 +469,22 @@ export class SearchResultComponent implements OnInit, AfterViewInit {
 		return temp;
 
   	}
+
+	// Get Lowest Price 
+	getLowestPrice(data) {
+		console.log(data);
+		let arr = [];
+		for (var key in data) {
+			arr.push(data[key].price);
+		}
+		console.log(arr);
+		return this.min(arr);
+
+	}
+
+	min(array) {
+		return Math.min.apply(Math, array);
+	};
 
   	// Get Route
   	protected getRoute(route, option) {
