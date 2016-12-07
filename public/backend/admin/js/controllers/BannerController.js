@@ -35,7 +35,7 @@ angular.module('MetronicApp').controller('BannerController', function($rootScope
                 $scope.save = function() {
 
                     $scope.mItem.status = $scope.optionStatus.selected.id;
-                    BannerService.createBanner($scope.img, $scope.mItem).then(function(res) {
+                    BannerService.create($scope.img, $scope.mItem).then(function(res) {
 
                         if(res.data.status == 'success') {
                             data.dtInstance.reloadData();
@@ -110,7 +110,7 @@ angular.module('MetronicApp').controller('BannerController', function($rootScope
                 // Create Banner
                 $scope.save = function() {
                     $scope.mItem.status = $scope.optionStatus.selected.id;
-                    BannerService.updateBanner($scope.img, $scope.mItem).then(function(res) {
+                    BannerService.update($scope.img, $scope.mItem).then(function(res) {
 
                         if(res.data.status == 'success') {
                             data.dtInstance.reloadData();
@@ -160,7 +160,7 @@ angular.module('MetronicApp').controller('BannerController', function($rootScope
           buttonsStyling: false
         }).then(function() {
 
-            BannerService.deleteBanner(id).then(function(res) {
+            BannerService.delete(id).then(function(res) {
                 if(res.data.status == 'success') {
                     toastr.success('Deleted an item', 'Success');
                     $scope.dtInstance.reloadData();

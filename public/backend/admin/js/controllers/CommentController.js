@@ -39,7 +39,7 @@ $scope.$watch('img', function() {
                 $scope.save = function() {
 
                     $scope.mItem.status = $scope.optionStatus.selected.id;
-                    CommentService.createComment($scope.img, $scope.mItem).then(function(res) {
+                    CommentService.create($scope.img, $scope.mItem).then(function(res) {
 
                         if(res.data.status == 'success') {
                             data.dtInstance.reloadData();
@@ -114,7 +114,7 @@ $scope.$watch('img', function() {
                 // Create Comment
                 $scope.save = function() {
                     $scope.mItem.status = $scope.optionStatus.selected.id;
-                    CommentService.updateComment($scope.img, $scope.mItem).then(function(res) {
+                    CommentService.update($scope.img, $scope.mItem).then(function(res) {
 
                         if(res.data.status == 'success') {
                             data.dtInstance.reloadData();
@@ -164,7 +164,7 @@ $scope.$watch('img', function() {
           buttonsStyling: false
         }).then(function() {
 
-            CommentService.deleteComment(id).then(function(res) {
+            CommentService.delete(id).then(function(res) {
                 if(res.data.status == 'success') {
                     toastr.success('Deleted an item', 'Success');
                     $scope.dtInstance.reloadData();

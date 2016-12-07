@@ -34,7 +34,7 @@ angular.module('MetronicApp').controller('LocationController', function($rootSco
                 // Create Location
                 $scope.save = function() {
                     $scope.mItem.status = $scope.optionStatus.selected.id;
-                    LocationService.createLocation($scope.mItem).then(function(res) {
+                    LocationService.create($scope.mItem).then(function(res) {
 
                         if(res.data.status == 'success') {
                             data.dtInstance.reloadData();
@@ -92,7 +92,7 @@ angular.module('MetronicApp').controller('LocationController', function($rootSco
                 // Create Location
                 $scope.save = function() {
 
-                    LocationService.updateLocation($scope.mItem).then(function(res) {
+                    LocationService.update($scope.mItem).then(function(res) {
 
                         if(res.data.status == 'success') {
                             data.dtInstance.reloadData();
@@ -140,7 +140,7 @@ angular.module('MetronicApp').controller('LocationController', function($rootSco
           buttonsStyling: false
         }).then(function() {
 
-            LocationService.deleteLocation(id).then(function(res) {
+            LocationService.delete(id).then(function(res) {
                 if(res.data.status == 'success') {
                     toastr.success('Deleted an item', 'Success');
                     // loadListItem();

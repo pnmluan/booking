@@ -177,6 +177,27 @@ MetronicApp.config(['$stateProvider', '$urlRouterProvider', function($stateProvi
             }
         })
 
+        // News
+        .state('news', {
+            url: "/news.html",
+            templateUrl: "views/news/main.html",            
+            data: {pageTitle: 'Admin News Template'},
+            controller: "NewsController",
+            resolve: {
+                deps: ['$ocLazyLoad', function($ocLazyLoad) {
+                    return $ocLazyLoad.load({
+                        name: 'MetronicApp',
+                        insertBefore: '#ng_load_plugins_before', // load the above css files before a LINK element with this ID. Dynamic CSS files must be loaded between core and theme css files
+                        files: [
+                            '../assets/global/plugins/dropzone/dropzone.min.js',
+                            'js/controllers/NewsController.js',
+                            'js/services/news.service.js'
+                        ] 
+                    });
+                }]
+            }
+        })
+
         // Location
         .state('location', {
             url: "/location.html",

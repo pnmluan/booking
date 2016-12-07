@@ -1,14 +1,14 @@
 angular.module('MetronicApp')
-    .factory('BannerService', ['$http', '$rootScope', 'Upload', function($http, $rootScope, Upload) {
+    .factory('NewsService', ['$http', '$rootScope', 'Upload', function($http, $rootScope, Upload) {
 
-    var urlBase = $rootScope.settings.apiPath + 'banner';
-    var BannerService = {};
+    var urlBase = $rootScope.settings.apiPath + 'news';
+    var NewsService = {};
 
-    BannerService.getAll = function () {
+    NewsService.getAll = function () {
         return $http.get(urlBase + '/index');
     };
 
-    BannerService.create = function (img,  cust) {
+    NewsService.create = function (img,  cust) {
         return Upload.upload({
             url: urlBase + '/create',
             data: {
@@ -18,7 +18,7 @@ angular.module('MetronicApp')
         });
     };
 
-    BannerService.update = function (img, cust) {
+    NewsService.update = function (img, cust) {
         return Upload.upload({
             url: urlBase + '/update/' + cust.id,
             data: {
@@ -28,9 +28,9 @@ angular.module('MetronicApp')
         });
     };
 
-    BannerService.delete = function (id) {
+    NewsService.delete = function (id) {
         return $http.delete(urlBase + '/delete/' + id);
     };
 
-    return BannerService;
+    return NewsService;
 }]);

@@ -4,11 +4,11 @@ angular.module('MetronicApp')
     var urlBase = $rootScope.settings.apiPath + 'comment';
     var CommentService = {};
 
-    CommentService.getComments = function () {
+    CommentService.getAll = function () {
         return $http.get(urlBase + '/index');
     };
 
-    CommentService.createComment = function (img,  cust) {
+    CommentService.create = function (img,  cust) {
         return Upload.upload({
             url: urlBase + '/create',
             data: {
@@ -18,7 +18,7 @@ angular.module('MetronicApp')
         });
     };
 
-    CommentService.updateComment = function (img, cust) {
+    CommentService.update = function (img, cust) {
         return Upload.upload({
             url: urlBase + '/update/' + cust.id,
             data: {
@@ -28,7 +28,7 @@ angular.module('MetronicApp')
         });
     };
 
-    CommentService.deleteComment = function (id) {
+    CommentService.delete = function (id) {
         return $http.delete(urlBase + '/delete/' + id);
     };
 
