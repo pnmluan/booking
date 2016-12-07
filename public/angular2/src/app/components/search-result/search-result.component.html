@@ -124,7 +124,8 @@
                       <td>
                         <div class="checkbox">
                           <label>
-                            <input type="checkbox" value=""> VietNam Airlines
+                            <input type="checkbox" value="" [(ngModel)]="airlineOptions.vna"
+                            (change)="updateCheckedOptions('vna', $event)"> VietNam Airlines
                           </label>
                         </div>
                       </td>
@@ -135,7 +136,8 @@
                       <td>
                         <div class="checkbox">
                           <label>
-                            <input type="checkbox" value=""> Jet Star
+                            <input type="checkbox" value="" [(ngModel)]="airlineOptions.jetstar"
+                            (change)="updateCheckedOptions('jetstar', $event)"> Jet Star
                           </label>
                         </div>
                       </td>
@@ -146,7 +148,8 @@
                       <td>
                         <div class="checkbox">
                           <label>
-                            <input type="checkbox" value=""> VietjetAir
+                            <input type="checkbox" value="" [(ngModel)]="airlineOptions.vietjet"
+                            (change)="updateCheckedOptions('vietjet', $event)"> VietjetAir
                           </label>
                         </div>
                       </td>
