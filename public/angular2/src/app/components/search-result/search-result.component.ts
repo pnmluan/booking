@@ -56,6 +56,7 @@ export class SearchResultComponent implements OnInit, AfterViewInit {
 	childrenOptions = [];
 	infantOptions = [];
 
+	curRouting?: string;
 
 	constructor(
 		private _AirlineDataService: AirlineDataService, 
@@ -75,6 +76,13 @@ export class SearchResultComponent implements OnInit, AfterViewInit {
 			(param: any) => this.session_token = param['session_token']
 		);
 		
+		this._Router.events.subscribe((val) => {
+			let routing = this._Router.url;
+			if (this.curRouting != routing) {
+				this.curRouting = routing;
+				this.initData();
+			}
+		});
 
 		let session_token = this.sessionStorage.get('session_token');
 
@@ -117,45 +125,7 @@ export class SearchResultComponent implements OnInit, AfterViewInit {
 
   	ngOnInit() {
 
-		var params = this.sessionStorage.get('session_flight');
-
-		this.session_flight = JSON.parse(String(params));
-
-
-
 		
-		let format_day = 'dddd, DD/MM/YYYY';
-		
-		this.search = this.clone(this.session_flight);
-		this.search['from_day'] = moment(this.search['from_date']).format(format_day);
-		if (this.search['to_date']) {
-			this.search['to_day'] = moment(this.search['to_date']).format(format_day);
-		}
-		
-		
-		// Combine fork join 3 airlines
-		const vietjet$ = this._AirlineDataService.vietjet(this.session_flight).cache();
-
-		const jetstar$ = this._AirlineDataService.jetstar(this.session_flight).cache();
-
-		const vna$ = this._AirlineDataService.vna(this.session_flight).cache();
-
-		Observable.forkJoin(vietjet$, jetstar$, vna$).subscribe(res => {
-			
-
-			this.airlines['vietjet'] = res[0];
-			this.airlines['jetstar'] = res[1];
-			this.airlines['vna'] = res[2];
-			
-			this.lowestFilter['vietjet'] = this.getLowestPrice(this.airlines['vietjet'].dep_flights);
-			this.lowestFilter['jetstar'] = this.getLowestPrice(this.airlines['jetstar'].dep_flights);
-			this.lowestFilter['vna'] = this.getLowestPrice(this.airlines['vna'].dep_flights);
-			this.filterAirlines();
-			this.selectedStep = 1;
-			this.sortTime();
-			this.sort = 'time';
-
-		});
 		
 
 		// Get locations
@@ -174,6 +144,45 @@ export class SearchResultComponent implements OnInit, AfterViewInit {
 				}
 				this.locations = locations;
 			}
+
+		});
+  	}
+
+  	initData() {
+		var params = this.sessionStorage.get('session_flight');
+
+		this.session_flight = JSON.parse(String(params));
+
+		let format_day = 'dddd, DD/MM/YYYY';
+
+		this.search = this.clone(this.session_flight);
+		this.search['from_day'] = moment(this.search['from_date']).format(format_day);
+		if (this.search['to_date']) {
+			this.search['to_day'] = moment(this.search['to_date']).format(format_day);
+		}
+
+
+		// Combine fork join 3 airlines
+		const vietjet$ = this._AirlineDataService.vietjet(this.session_flight).cache();
+
+		const jetstar$ = this._AirlineDataService.jetstar(this.session_flight).cache();
+
+		const vna$ = this._AirlineDataService.vna(this.session_flight).cache();
+
+		Observable.forkJoin(vietjet$, jetstar$, vna$).subscribe(res => {
+
+
+			this.airlines['vietjet'] = res[0];
+			this.airlines['jetstar'] = res[1];
+			this.airlines['vna'] = res[2];
+
+			this.lowestFilter['vietjet'] = this.getLowestPrice(this.airlines['vietjet'].dep_flights);
+			this.lowestFilter['jetstar'] = this.getLowestPrice(this.airlines['jetstar'].dep_flights);
+			this.lowestFilter['vna'] = this.getLowestPrice(this.airlines['vna'].dep_flights);
+			this.filterAirlines();
+			this.selectedStep = 1;
+			this.sortTime();
+			this.sort = 'time';
 
 		});
   	}
