@@ -153,4 +153,13 @@ jQuery(document).ready(function() {
     horizrailenabled:false,
     autohidemode:false
   });
+
+  jQuery('.owl-carousel-slider').owlCarousel({
+    navigation: true,
+    slideSpeed: 300,
+    paginationSpeed: 400,
+    singleItem: true,
+    autoPlay: 5000,
+    transitionStyle : "fade"
+  });
 });
