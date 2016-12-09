@@ -314,6 +314,12 @@ ul.footerlist li a:hover{color:#F69E1C; text-decoration:none;}
 .vc_custom_1430753455786 { margin-top: 100px !important; margin-bottom: 100px !important; }
 .vc_custom_1431947118714 { padding-right: 0px !important; padding-left: 0px !important; }
 
+@media screen and (max-width: 768px) {
+    .vc_custom_1431937582413 {
+        margin-top: 0px !important;
+    }
+}
+
 /***** STEP *****/
 /****************/
 .steps {max-width: 992px; width: 100%; margin: 10px auto;text-align: center;position: relative; }
@@ -1001,8 +1007,17 @@ only screen and (max-width: 767px) {
 @media screen and (max-width: 767px){
     .size20 { font-size: 15px; }
     .size28 { font-size: 18px; }
-    .size70 { font-size: 20px; }
+    .size60 { font-size: 20px; }
     .size40 { font-size: 18px; }
+
+    .sboxpurple p:nth-child(1) { margin-top: 0px; }
+    .sboxpurple p:nth-child(2) { margin-top: -30px; }
+    .sboxpurple p:nth-child(3) { margin-top: -20px; }
+    .sboxpurple p:nth-child(4) { margin-top: -20px; }
+}
+
+@media screen and (max-width: 480px) {
+    .sboxpurple p { display: none; }
 }
 
 .home-slider{ margin-top: -90px; }
@@ -1033,4 +1048,8 @@ only screen and (max-width: 767px) {
 
 @media screen and (max-width: 959px){
     .home-slider{ margin-top: -20px; }
+}
+
+@media screen and (max-width: 768px){
+    .owl-carousel-slider .item a{  padding-top: 60px; }
 }

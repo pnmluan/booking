@@ -160,6 +160,7 @@ jQuery(document).ready(function() {
     paginationSpeed: 400,
     singleItem: true,
     autoPlay: 5000,
-    transitionStyle : "fade"
+    transitionStyle : "fade",
+    pagination : false
   });
 });
