@@ -384,8 +384,8 @@ class AirlineController extends \App\Http\Controllers\ApiController
                 $data['start_time'] = $start_time;
                 $data['end_time'] = $end_time;
                 $data['flight_code'] = $flight_code;
-                $data['price'] = $price;
-                $data['fee'] = $fee;
+                $data['price'] = intval($price);
+                $data['fee'] = intval($fee);
                 $data['fee_service'] = 0;
                 $data['type'] = 'Vé tiết kiệm';
 
@@ -397,8 +397,8 @@ class AirlineController extends \App\Http\Controllers\ApiController
                 // $data['start_time'] = $start_time;
                 // $data['end_time'] = $end_time;
                 // $data['flight_code'] = $flight_code;
-                // $data['price'] = $price;
-                // $data['fee'] = $fee;
+                // $data['price'] = intval($price);
+                // $data['fee'] = intval($fee);
                 // $data['fee_service'] = $price1;
                 // $data['type'] = 'Vé linh hoạt';
 
@@ -410,8 +410,8 @@ class AirlineController extends \App\Http\Controllers\ApiController
                 // $data['start_time'] = $start_time;
                 // $data['end_time'] = $end_time;
                 // $data['flight_code'] = $flight_code;
-                // $data['price'] = $price;
-                // $data['fee'] = $fee;
+                // $data['price'] = intval($price);
+                // $data['fee'] = intval($fee);
                 // $data['fee_service'] = $price2;
                 // $data['type'] = 'Vé tối ưu';
 
@@ -455,8 +455,8 @@ class AirlineController extends \App\Http\Controllers\ApiController
                     $data['start_time'] = $start_time;
                     $data['end_time'] = $end_time;
                     $data['flight_code'] = $flight_code;
-                    $data['price'] = $price;
-                    $data['fee'] = $fee;
+                    $data['price'] = intval($price);
+                    $data['fee'] = intval($fee);
                     $data['fee_service'] = 0;
                     $data['type'] = 'Vé tiết kiệm';
 
@@ -468,8 +468,8 @@ class AirlineController extends \App\Http\Controllers\ApiController
                     // $data['start_time'] = $start_time;
                     // $data['end_time'] = $end_time;
                     // $data['flight_code'] = $flight_code;
-                    // $data['price'] = $price;
-                    // $data['fee'] = $fee;
+                    // $data['price'] = intval($price);
+                    // $data['fee'] = intval($fee);
                     // $data['fee_service'] = $price1;
                     // $data['type'] = 'Vé linh hoạt';
 
@@ -481,8 +481,8 @@ class AirlineController extends \App\Http\Controllers\ApiController
                     // $data['start_time'] = $start_time;
                     // $data['end_time'] = $end_time;
                     // $data['flight_code'] = $flight_code;
-                    // $data['price'] = $price;
-                    // $data['fee'] = $fee;
+                    // $data['price'] = intval($price);
+                    // $data['fee'] = intval($fee);
                     // $data['fee_service'] = $price2;
                     // $data['type'] = 'Vé tối ưu';
 
