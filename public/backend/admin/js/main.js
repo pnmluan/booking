@@ -135,6 +135,27 @@ MetronicApp.config(['$stateProvider', '$urlRouterProvider', function($stateProvi
 
     $stateProvider
 
+        // Booking
+        .state('booking', {
+            url: "/booking.html",
+            templateUrl: "views/booking/main.html",            
+            data: {pageTitle: 'Admin Booking Template'},
+            controller: "BookingController",
+            resolve: {
+                deps: ['$ocLazyLoad', function($ocLazyLoad) {
+                    return $ocLazyLoad.load({
+                        name: 'MetronicApp',
+                        insertBefore: '#ng_load_plugins_before', // load the above css files before a LINK element with this ID. Dynamic CSS files must be loaded between core and theme css files
+                        files: [
+                            '../assets/global/plugins/dropzone/dropzone.min.js',
+                            'js/controllers/BookingController.js',
+                            'js/services/booking.service.js'
+                        ] 
+                    });
+                }]
+            }
+        })
+
         // Banner
         .state('banner', {
             url: "/banner.html",

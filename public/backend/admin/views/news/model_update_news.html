@@ -1,0 +1,55 @@
+<div class="modal-header">
+  <h4 class="modal-title">Update News</h4>
+</div>
+<div class="modal-body">
+
+  <div class="portlet-body form">
+    <form role="form">
+      <div class="form-body">
+
+        <div class="form-group dropzone dropzone-file-area">
+          <div ngf-drop ngf-select ng-model="img" 
+          ngf-drag-over-class="'dragover'" ngf-allow-dir="true" style="width: 100%; height: 100%"
+          accept="image/*" ngf-pattern="'image/*'" ngf-max-size="2MB">
+          <h3 class="sbold" ng-if="!img">Drop files here <br/> or click to upload</h3>
+
+          <img ngf-src="!img.$error && img" style="width: 100%; height: 100%">
+        </div>
+      </div>
+
+      <div class="form-group form-md-line-input form-md-floating-label" ng-class="{'has-error': errorMsg.title.length}">
+          <input type="text" class="form-control" ng-model="mItem.title">
+          <label for="form_control_1">Title</label>
+          <span ng-show="errorMsg.title.length" class="help-block">{{ errorMsg.title[0] }}</span>
+
+        </div>
+
+        <div class="form-group form-md-line-input form-md-floating-label">
+          <textarea type="text" class="form-control edited" ng-model="mItem.description"></textarea>
+          <label for="form_control_1">Description</label>
+
+        </div>
+
+        <div class="form-group form-md-line-input form-md-floating-label">
+          <textarea type="text" class="form-control edited" ng-model="mItem.url"></textarea>
+          <label for="form_control_1">Url</label>
+
+        </div>
+
+        <div class="form-group form-md-line-input form-md-floating-label">
+          <select class="form-control edited" ng-model="optionStatus.selected" 
+          ng-options="option.name for option in optionStatus track by option.id"></select>
+          <label for="form_control_1">Status</label>
+          
+        </div>
+
+    </div>
+
+  </form>
+</div>
+</div>
+
+<div class="modal-footer">
+  <button type="button" class="btn default" data-dismiss="modal" ng-click="close()">Close</button>
+  <button type="button" class="btn blue" ng-click="save()" >Save</button>
+</div>
