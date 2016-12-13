@@ -21,7 +21,7 @@ export class BannerComponent implements OnInit {
 					options.push(res.data[key]);
   				}
 				this.bannerOptions = options;
-
+					console.log(this.bannerOptions);
 
 				setTimeout( () => {
 					jQuery('.owl-carousel-home-slider').owlCarousel({

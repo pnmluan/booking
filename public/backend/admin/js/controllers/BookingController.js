@@ -223,7 +223,7 @@ angular.module('MetronicApp').controller('BookingController', function($rootScop
             DTColumnBuilder.newColumn('children').withTitle('Children'),
             DTColumnBuilder.newColumn('infant').withTitle('infant'),
             DTColumnBuilder.newColumn('requirement').withTitle('Requirement'),
-            DTColumnBuilder.newColumn('state').withTitle('State'),
+            DTColumnBuilder.newCol umn('state').withTitle('State'),
             DTColumnBuilder.newColumn(null).withTitle('Action').withOption('createdCell',function(td,cellData,rowData,row,col){
                 
                var string_html = `</button>&nbsp;<button class="btn btn-warning clickToUpdate"><i class="fa fa-edit"></i>Edit</button>&nbsp;` +

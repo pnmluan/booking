@@ -24,7 +24,7 @@ export class BannerDataService {
 	public getAll() {
 		let headers = new Headers();
 		this.createAuthorizationHeader(headers);
-		return this._Http.get(this.actionUrl + 'index', { headers: headers })
+		return this._Http.get(this.actionUrl + 'index', { headers: headers, withCredentials: true })
 			.map(res => res.json())
 			.catch(this.handleError);
 
