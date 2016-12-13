@@ -47,6 +47,8 @@ CREATE TABLE booking (
     adult int NOT NULL,
     children int NOT NULL,
     infant int NOT NULL,
+	`state` varchar(45) NOT NULL,
+	`status` varchar(45) NOT NULL,
     created_at datetime NULL,
     updated_at datetime NULL,
     CONSTRAINT booking_pk PRIMARY KEY (id)

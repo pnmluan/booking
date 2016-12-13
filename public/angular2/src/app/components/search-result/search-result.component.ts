@@ -75,6 +75,7 @@ export class SearchResultComponent implements OnInit, AfterViewInit {
 		this._ActivatedRoute.params.subscribe(
 			(param: any) => this.session_token = param['session_token']
 		);
+
 		
 		this._Router.events.subscribe((val) => {
 			let routing = this._Router.url;
@@ -125,8 +126,7 @@ export class SearchResultComponent implements OnInit, AfterViewInit {
 
   	ngOnInit() {
 
-		
-		
+		this.searchingData();
 
 		// Get locations
 		this._LocationDataService.getAll().subscribe(res => {
@@ -148,7 +148,7 @@ export class SearchResultComponent implements OnInit, AfterViewInit {
 		});
   	}
 
-  	initData() {
+  	searchingData() {
 		var params = this.sessionStorage.get('session_flight');
 
 		this.session_flight = JSON.parse(String(params));
@@ -156,10 +156,15 @@ export class SearchResultComponent implements OnInit, AfterViewInit {
 		let format_day = 'dddd, DD/MM/YYYY';
 
 		this.search = this.clone(this.session_flight);
+
 		this.search['from_day'] = moment(this.search['from_date']).format(format_day);
 		if (this.search['to_date']) {
 			this.search['to_day'] = moment(this.search['to_date']).format(format_day);
 		}
+  	}
+
+  	initData() {
+		this.searchingData();
 
 
 		// Combine fork join 3 airlines
@@ -237,6 +242,7 @@ export class SearchResultComponent implements OnInit, AfterViewInit {
 	updateCheckedOptions(option, event) {
 		this.airlineOptions[option] = event.target.checked;
 		this.filterAirlines();
+		this.sort = 'airline';
 	}
 
 	// Filter airlines
@@ -313,6 +319,7 @@ export class SearchResultComponent implements OnInit, AfterViewInit {
 		} else {
 			this.search.to_date = date;
 		}
+		this.selectedStep = 0;
 		this.onResearch();
 	}
 
@@ -336,8 +343,9 @@ export class SearchResultComponent implements OnInit, AfterViewInit {
 			objectStore.to_date = moment(objectStore.to_date, viFormatDate).format(dateFormat);
 			objectStore.to_name = this.getNameFromCode(objectStore.to);
 		}
-
+		console.log(objectStore);
 		this.sessionStorage.set('session_flight', JSON.stringify(objectStore));
+
 		this._Router.navigate(['search-result/' + uuid]);
 	}
 
@@ -440,16 +448,8 @@ export class SearchResultComponent implements OnInit, AfterViewInit {
 				this._ContactDataService.create(params).subscribe(res => {
 
 				});
-
-
-				
 			}
 		});
-
-		
-
-		
-
 		
 	}
 

@@ -32,5 +32,16 @@ export class AppComponent {
 			locale: 'ja',
 			format: _Configuration.formatDate,
 		});
+
+
+		jQuery('.owl-carousel-slider').owlCarousel({
+			navigation: true,
+			slideSpeed: 300,
+			paginationSpeed: 400,
+			singleItem: true,
+			autoPlay: 5000,
+			transitionStyle: "fade",
+			pagination: false
+		});
 	}
 }

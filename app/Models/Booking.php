@@ -7,21 +7,22 @@ use Illuminate\Database\Eloquent\Model;
 class Booking extends BaseModel
 {
     protected $table = 'booking'; 
-    protected $fillable = ['code','one_way', 'adult', 'children', 'infant', 'ticket_type_id', 'remark'];
+    protected $fillable = ['code','round_trip', 'adult', 'children', 'infant', 'remark', 'state', 'status'];
 
     public function getModelValidations()
     {
         return [
-            //'full_name' => 'required|string|' //. $this->getUniqueValidatorForField('full_name')
+            // 'full_name' => 'required|string|' //. $this->getUniqueValidatorForField('full_name')
         ];
     }
 
     public static function listItems(array $param = null){
 
-        $aColumns = ['code','one_way', 'adult', 'children', 'infant', 'ticket_type_id', 'remark'];
+        $aColumns = ['code','round_trip', 'adult', 'children', 'infant', 'state', 'fullname', 'phone', 'email', 'requirement'];
 
         $query = \DB::table('booking')
-            ->select(\DB::raw('SQL_CALC_FOUND_ROWS id'),\DB::raw('id AS DT_RowId'),'booking.*');
+            ->select(\DB::raw('SQL_CALC_FOUND_ROWS booking.id'),\DB::raw('booking.id AS DT_RowId'),'booking.*', 'contact.fullname', 'contact.phone', 'contact.email', 'contact.requirement')
+            ->leftJoin('contact', 'booking.id', '=', 'contact.booking_id');
 
         // Filter search condition
         foreach ($aColumns as $key => $value) {
@@ -31,12 +32,15 @@ class Booking extends BaseModel
         //======================= SEARCH =================
         if(isset($param['columns'])) {
             $sWhere = "";
-            $count = count($param['columns']);
+            $count = count($aColumns);
             if(isset($param['search']) && $param['search']['value']){
                 $keyword = '%'. $param['search']['value'] .'%';
                 for($i=0; $i<$count; $i++){
                     $requestColumn = $param['columns'][$i];
+                    var_dump('---------------------------');
+                    var_dump($requestColumn);
                     if($requestColumn['searchable']=='true'){
+                        
                         $sWhere .= $aColumns[$i].' LIKE "'.$keyword.'" OR ';
                     }
                 }

@@ -26,7 +26,6 @@ declare let moment: any;
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
-  styleUrls: ['./home.component.css'],
   providers: [BannerComponent, NewsComponent, BannerComponent, LocationDataService, BannerDataService]
 })
 export class HomeComponent implements OnInit, AfterViewInit {
@@ -35,21 +34,6 @@ export class HomeComponent implements OnInit, AfterViewInit {
 	round_trip = 'off';
 	search = {};
 	filterBookForm: FormGroup;
-
-	myDatePickerOptions = {
-		todayBtnTxt: 'Today',
-		dateFormat: 'yyyy-mm-dd',
-		firstDayOfWeek: 'mo',
-		sunHighlight: true,
-		height: '34px',
-		width: '260px',
-		inline: false,
-		disableUntil: { year: 2016, month: 8, day: 10 },
-		selectionTxtFontSize: '16px'
-	};
-
-
-
 
 	constructor(private formBuilder: FormBuilder, private locationDataService: LocationDataService, private _configuration: Configuration,
 		private _bannerDataService: BannerDataService, private sessionStorage: LocalStorageService,

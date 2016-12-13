@@ -9,8 +9,8 @@ export class AirlineDataService {
 	private actionUrl: string;
 
 
-	constructor(private http: Http, private _configuration: Configuration) {
-		this.actionUrl = _configuration.apiUrl + 'airline/';
+	constructor(private http: Http, private _Configuration: Configuration) {
+		this.actionUrl = _Configuration.apiUrl + 'airline/';
 	}
 
 	public getAll() {
@@ -21,7 +21,8 @@ export class AirlineDataService {
 
 	createAuthorizationHeader(headers: Headers) {
 		// headers.append('Content-Type', 'application/json;charset=UTF-8');
-		headers.append('Authorization', 'Basic ' + this._configuration.authentic);
+
+		headers.append('Authorization', 'Basic ' + this._Configuration.authentic);
 	}
 
 
