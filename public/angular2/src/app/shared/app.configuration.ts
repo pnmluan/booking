@@ -10,4 +10,5 @@ export class Configuration {
 
 	public imgPath = this.server + "backend/assets/apps/img/";
 	public formatDate = "dddd - DD/MM/YYYY";
+	public viFormatDate = "DD/MM/YYYY";
 }

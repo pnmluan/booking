@@ -26,22 +26,25 @@ export class AppComponent {
 	}
 
 	onSetGobalScript() {
-		let _Configuration = this._Configuration;
+		setTimeout(() => {
+			let _Configuration = this._Configuration;
 
-		jQuery('.daterange-single').datetimepicker({
-			locale: 'ja',
-			format: _Configuration.formatDate,
-		});
+			jQuery('.datetimepicker').datetimepicker({
+				locale: 'vi',
+				format: _Configuration.viFormatDate,
+			});
 
 
-		jQuery('.owl-carousel-slider').owlCarousel({
-			navigation: true,
-			slideSpeed: 300,
-			paginationSpeed: 400,
-			singleItem: true,
-			autoPlay: 5000,
-			transitionStyle: "fade",
-			pagination: false
-		});
+			jQuery('.owl-carousel-slider').owlCarousel({
+				navigation: true,
+				slideSpeed: 300,
+				paginationSpeed: 400,
+				singleItem: true,
+				autoPlay: 5000,
+				transitionStyle: "fade",
+				pagination: false
+			});
+		}, 1000)
+		
 	}
 }

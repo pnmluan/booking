@@ -497,6 +497,14 @@ export class SearchResultComponent implements OnInit, AfterViewInit {
 		}
 	}
 
+	selectPlaneOption(round_trip) {
+		if (round_trip == 'off') {
+			jQuery('#date-back input').prop('disabled', true);
+		} else {
+			jQuery('#date-back input').prop('disabled', false);
+		}
+	}
+
 	// Inverse Flight
   	protected inverseFlight(session_flight) {
 		var temp = this.clone(session_flight);

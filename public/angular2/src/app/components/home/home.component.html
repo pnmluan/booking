@@ -66,7 +66,7 @@
                             <span class="field-label">Ngày đi</span>
                             <div class="field-input">
                               <div class="form-group">
-                                <div class='input-group date' id='date-go'>
+                                <div class='input-group date datetimepicker' id='date-go'>
 
                                   <input type='text' class="form-control"  #datePickerFrom [ngModel]="from_date" (blur)="from_date = datePickerFrom.value" formControlName="from_date" /> 
                                   
@@ -84,7 +84,7 @@
                             <span class="field-label">Ngày về</span>
                             <div class="field-input">
                               <div class="form-group">
-                                <div class='input-group date' id='date-back'>
+                                <div class='input-group date datetimepicker' id='date-back'>
 
                                   <input type='text' class="form-control" #datePickerTo [ngModel]="to_date" 
                                   (blur)="to_date = datePickerTo.value" formControlName="to_date" />

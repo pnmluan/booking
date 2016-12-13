@@ -187,11 +187,16 @@
                 <div class="field">
                   <span class="field-label">Điểm đi</span>
                   <div class="field-input">
-                    <select placeholder="Điểm đi"
+                    <!-- <select placeholder="Điểm đi"
                         [(ngModel)]="search.from" name="from" class="select2">
                       <option [value]="l.value" *ngFor="let l of locations">{{l.label}}</option>
-                    </select>
+                    </select> -->
 
+                    <ng-select placeholder="Điểm đi"
+                        name="from"
+                        [(ngModel)]="search.from"
+                        [options]="locations">
+                    </ng-select>
                   </div>
                 </div>
                 <div class="field">
@@ -201,10 +206,15 @@
                         formControlName="to"
                         [options]="locations">
                     </ng-select> -->
-                    <select placeholder="Điểm đi"
+                    <!-- <select placeholder="Điểm đi"
                         [(ngModel)]="search.to" name="to" class="select2">
                       <option [value]="l.value" *ngFor="let l of locations">{{l.label}}</option>
-                    </select>
+                    </select> -->
+                    <ng-select placeholder="Điểm đi"
+                        name="to"
+                        [(ngModel)]="search.to"
+                        [options]="locations">
+                    </ng-select>
                   </div>
                 </div>
                 <div class="field clearfix">
@@ -212,9 +222,9 @@
                     <span class="field-label">Ngày đi</span>
                     <div class="field-input">
                       <div class="form-group">
-                        <div class='input-group date' id='date-go'>
+                        <div class='input-group date datetimepicker' id='date-go'>
 
-                          <input type='text' class="form-control"  #datePickerFrom [ngModel]="search.from_date" 
+                          <input type='text' class="form-control"  #datePickerFrom [(ngModel)]="search.from_date" 
                           name="from_date" (blur)="from_date = datePickerFrom.value" /> 
 
                           <span class="input-group-addon">
@@ -228,9 +238,9 @@
                     <span class="field-label">Ngày về</span>
                     <div class="field-input">
                       <div class="form-group">
-                        <div class='input-group date' id='date-back'>
+                        <div class='input-group date datetimepicker' id='date-back'>
                           
-                          <input type='text' class="form-control" #datePickerTo [ngModel]="search.to_date" 
+                          <input type='text' class="form-control" #datePickerTo [(ngModel)]="search.to_date" 
                            name="to_date" (blur)="to_date = datePickerTo.value" [disabled]="search.round_trip == 'off'" />
 
                           <span class="input-group-addon">
@@ -247,7 +257,7 @@
                       <span class="field-label">Người lớn</span>
                     </div>
                     <div>
-                      <select class="select-adult" data-placeholder="" [(ngModel)]="search.adult" name="adult">
+                      <select class="select-adult form-control" data-placeholder="" [(ngModel)]="search.adult" name="adult">
                         <option *ngFor="let person of people" value="{{ person }}">{{ person }}</option>
                       </select>
                       
@@ -258,7 +268,7 @@
                       <span class="field-label">Trẻ em</span>
                     </div>
                     <div>
-                      <select class="select-child-1" data-placeholder="" [(ngModel)]="search.children" name="children">
+                      <select class="select-child-1 form-control" data-placeholder="" [(ngModel)]="search.children" name="children">
                         <option value="0">0</option>
                         <option *ngFor="let person of people" value="{{ person }}">{{ person }}</option>
                       </select>
@@ -271,7 +281,7 @@
                       <span class="field-label">Trẻ sơ sinh</span>
                     </div>
                     <div>
-                      <select class="select-child-2" data-placeholder="" [(ngModel)]="search.infant" name="infant">
+                      <select class="select-child-2 form-control" data-placeholder="" [(ngModel)]="search.infant" name="infant">
                         <option value="0">0</option>
                         <option *ngFor="let person of people" value="{{ person }}">{{ person }}</option>
                       </select>
@@ -280,7 +290,7 @@
                 </div>
                 <!-- field -->
                 <div class="field text-center">
-                  <button type="button" class="btn btn-plane btn-search" [disabled]="!f.valid"><i class=" icon-search-2"></i> Tìm chuyến bay</button>
+                  <button (click)="onResearch()" type="button" class="btn btn-plane btn-search" [disabled]="!f.valid"><i class=" icon-search-2"></i> Tìm chuyến bay</button>
                 </div>
                 <!-- field -->
               </form>
