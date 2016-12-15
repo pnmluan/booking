@@ -55,6 +55,7 @@ export class SearchResultComponent implements OnInit, AfterViewInit {
 	adultOptions = [];
 	childrenOptions = [];
 	infantOptions = [];
+	titleOptions = [];
 
 	curRouting?: string;
 
@@ -100,17 +101,19 @@ export class SearchResultComponent implements OnInit, AfterViewInit {
 
 		];
 
-		this.adultOptions = [
+		this.titleOptions['adult'] = [
 			{ id: 1, name: 'Ông' },
 			{ id: 2, name: 'Bà' },
 			{ id: 3, name: 'Anh' },
 			{ id: 4, name: 'Chị' }
 		];
-		this.childrenOptions = [
+
+		this.titleOptions['children'] = [
 			{ id: 5, name: 'Bé Trai' },
 			{ id: 6, name: 'Bé Gái' }
 		];
-		this.infantOptions = [
+
+		this.titleOptions['infant'] = [
 			{ id: 7, name: 'Em Bé Trai' },
 			{ id: 8, name: 'Em Bé Gái' }
 		];
@@ -323,6 +326,7 @@ export class SearchResultComponent implements OnInit, AfterViewInit {
 		this.onResearch();
 	}
 
+
 	// Research 
 	onResearch() {
 		let uuid = UUID.UUID();
@@ -366,9 +370,9 @@ export class SearchResultComponent implements OnInit, AfterViewInit {
 				&& this.listRoutes[1]['selectedFlight'])) {
 			this.selectedStep = 2;
 
-			this.generateNumberOptions(this.session_flight['adult'], 'Người lớn');
-			this.generateNumberOptions(this.session_flight['children'], 'Trẻ em');
-			this.generateNumberOptions(this.session_flight['infant'], 'Em bé');
+			this.generateNumberOptions(this.session_flight['adult'], 'Người lớn', 'adult');
+			this.generateNumberOptions(this.session_flight['children'], 'Trẻ em', 'children');
+			this.generateNumberOptions(this.session_flight['infant'], 'Em bé', 'infant');
 			
 			
 		}
@@ -376,10 +380,10 @@ export class SearchResultComponent implements OnInit, AfterViewInit {
 	}
 
 	// generate number options
-	generateNumberOptions(n: number, name: string) {
+	generateNumberOptions(n: number, name: string, key: string) {
 
 		for (let i = 1; i <= n; i++) {
-			let obj = {title: '', fullname: '', date_of_birth: '', name: name};
+			let obj = {title: '', fullname: '', date_of_birth: '', name: name, key: key};
 			this.passengers.push(obj);
 		}
 	}
@@ -591,7 +595,7 @@ export class SearchResultComponent implements OnInit, AfterViewInit {
 		var text = "";
 		var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
 
-		for (var i = 0; i < 5; i++)
+		for (var i = 0; i < 6; i++)
 			text += possible.charAt(Math.floor(Math.random() * possible.length));
 
 		return text;
