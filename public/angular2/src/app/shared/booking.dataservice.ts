@@ -25,7 +25,7 @@ export class BookingDataService {
 	public getAll() {
 		let headers = new Headers();
 		this.createAuthorizationHeader(headers);
-		return this._Http.get(this.actionUrl + 'index', {headers: headers})
+		return this._Http.get(this.actionUrl + 'index', { headers: headers, withCredentials: true })
 			.map(res => res.json())
 			.catch(this.handleError);
 	}
@@ -34,7 +34,8 @@ export class BookingDataService {
 		let headers = new Headers();
 		this.createAuthorizationHeader(headers);
 		return this._Http.post(this.actionUrl + 'create', params.toString(), {
-			headers: headers
+			headers: headers,
+			withCredentials: true
 		})
 			.map(res => res.json())
 			.catch(this.handleError);

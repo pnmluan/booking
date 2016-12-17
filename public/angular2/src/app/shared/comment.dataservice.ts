@@ -18,14 +18,14 @@ export class CommentDataService {
 	}
 
 	createAuthorizationHeader(headers: Headers) {
-		headers.append('Content-Type', 'application/x-www-form-urlencoded;charset=UTF-8');
+		headers.append('Content-Type', 'application/x-www-form-urlencoded');
 		headers.append('Authorization', 'Basic ' + this._configuration.authentic);
 	}
 
 	public getAll() {
 		let headers = new Headers();
 		this.createAuthorizationHeader(headers);
-		return this._Http.get(this.actionUrl + 'index', {headers: headers})
+		return this._Http.get(this.actionUrl + 'index', { headers: headers, withCredentials: true })
 			.map(res => res.json())
 			.catch(this.handleError);
 	}

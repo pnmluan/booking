@@ -126,10 +126,7 @@ jQuery(document).ready(function() {
     autoPlay: 5000
   });
 
-  jQuery('#date-go, #date-back, .date').datetimepicker({
-    format: 'DD/MM/YYYY',
-    allowInputToggle: true
-  });
+  
 
   indexScript.loadBookOption();
   indexScript.changeBookOption();

@@ -1,762 +1,528 @@
 <div style="float:left; width:100%;" id="post-32" class="post-32 page type-page status-publish hentry">
-
-  <!-- Loading -->
-  <section class="loading text-center" *ngIf="!selectedStep">
-    <h4>Vui lòng đợi, hệ thống đang tìm kiếm chuyến bay và mức giá tốt nhất ...</h4>
-    <div>
-      <h3>{{ search.from_name }}, Việt Nam ({{ search.from }}) <i class="fa fa-long-arrow-right" aria-hidden="true"></i> {{ search.to_name }}, Việt Nam ({{ search.to }})</h3>
-      <p><span>Ngày đi: {{ search.from_day }} </span><i *ngIf="round_trip" class="fa fa-long-arrow-right" aria-hidden="true"></i> <span *ngIf="round_trip">Ngày về: {{ search.to_day }}</span></p>
-    </div>
-    <img src="assets/img/pleasewait.gif" alt="">
-  </section>
-
-
-  <section class="steps" *ngIf="selectedStep">
-    <ul class="progressbar">
-      <li [ngClass]="{'active': selectedStep == s.id}" *ngFor="let s of steps">{{ s.name }}</li>
-    </ul>
-  </section>
-
-  <section class="list-plane" *ngIf="selectedStep == 1">
-    <div class="container clearfix">
-      <div class="list-plane-inner">
-        <div class="main-list-plane">
-          <div class="main-list-plane-inner">
-
-            <div class="main-list-plane-table" *ngFor="let route of listRoutes">
-              <div class="list-plane-title">
-                <h1>{{ route.from_name }} <span>đi</span> {{ route.to_name }} </h1>
-                <h2><span>Bay ngày:</span> {{ route.from_fly_date }}</h2>
-                <h3>(* Giá vé chưa bao gồm thuế và phí)</h3>
-              </div>
-              <div class="list-plane-date">
-                <ul class="clearfix">
-                  <li class="{{ d.class }}" *ngFor="let d of route['days']" (click)="setDate(d.date, route.option)">
-                    <span>{{ d.name }}</span><br/>
-                    <strong>{{ d.date }}</strong>
-                  </li>
-
-                </ul>
-              </div>
-              <div class="list-plane-table">
-                <table class="table table-striped table-hover">
-                  <thead>
-                    <tr>
-                      <th>Hàng không</th>
-                      <th>Chuyến bay</th>
-                      <th>Giờ đi</th>
-                      <th>Giờ đến</th>
-                      <th>Giá</th>
-                      <th></th>
-                    </tr>
-                  </thead>
-                  <tbody>
-
-                    <tr *ngFor="let f of route.flights">
-                      <td><img [src]="f.image" alt=""></td>
-                      <td>
-                        <p class="plane-id">{{ f.flight_code }}</p>
-                      </td>
-                      <td>
-                        <span class="city">{{ route.from_name }}</span>
-                        <p class="time">{{ f.start_time }}</p>
-                      </td>
-                      <td>
-                        <span class="city">{{ route.to_name }}</span>
-                        <p class="time">{{ f.end_time }}</p>
-                      </td>
-                      <td class="plane-price">{{ f.price | number }} <span>VNĐ</span></td>
-                      <td>
-                        <button type="button" class="btn-select-flight" (click)="onSelectFlight(f)">Chọn <i class="fa fa-angle-right" aria-hidden="true"></i></button>
-                      </td>
-                    </tr>
-
-                  </tbody>
-                </table>
-              </div>
-            </div>
-
-          </div>
+    <!-- Loading -->
+    <section class="loading text-center" *ngIf="!selectedStep">
+        <h4>Vui lòng đợi, hệ thống đang tìm kiếm chuyến bay và mức giá tốt nhất ...</h4>
+        <div>
+            <h3>{{ search.from_name }}, Việt Nam ({{ search.from }}) <i class="fa fa-long-arrow-right" aria-hidden="true"></i> {{ search.to_name }}, Việt Nam ({{ search.to }})</h3>
+            <p><span>Ngày đi: {{ search.from_day }} </span><i *ngIf="round_trip" class="fa fa-long-arrow-right" aria-hidden="true"></i> <span *ngIf="round_trip">Ngày về: {{ search.to_day }}</span></p>
         </div>
-        <!-- main-list-plane -->
-        <aside class="aside-search-plane">
-          <div class="filter-plane">
-            <h2>Lọc tìm kiếm</h2>
-            <div class="filter-plane-inner">
-              <h3>Chế độ hiển thị</h3>
-              <div class="radio">
-                <label>
-                  <input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked> Giá cơ bản cho 1 người lớn
-                </label>
-              </div>
-              <div class="radio">
-                <label>
-                  <input type="radio" name="optionsRadios" id="optionsRadios2" value="option2"> Giá đã gồm thuế & phí
-                </label>
-              </div>
-              <h3><i class="fa fa-check-circle"></i> Xắp xếp</h3>
-              <div class="box">
-                <div class="radio">
-                  <label>
-                    <input type="radio" name="sort" [(ngModel)]="sort" id="optionsRadios1" value="price" (click)="sortPrice()"> Giá (Thấp tới Cao)
-                  </label>
-                </div>
-                <div class="radio">
-                  <label>
-                    <input type="radio" name="sort" [(ngModel)]="sort" id="optionsRadios2" value="time" (click)="sortTime()"> Thời gian khởi hành (Thấp tới Cao)
-                  </label>
-                </div>
-                <div class="radio">
-                  <label>
-                    <input type="radio" name="sort" [(ngModel)]="sort" id="optionsRadios2" value="airline" (click)="sortAirline()"> Hãng hàng không
-                  </label>
-                </div>
-              </div>
-              <h3><i class="fa fa-check-circle"></i> Chọn lọc</h3>
-              <div class="box">
-                <table>
-                  <tbody>
-                    <tr>
-                      <td>Hãng hàng không</td>
-                      <td colspan="2"><a href="#" title="">Hiển thị tất cả</a></td>
-                    </tr>
-                    <tr>
-                      <td>
-                        <div class="checkbox">
-                          <label>
-                            <input type="checkbox" value="" [(ngModel)]="airlineOptions.vna"
-                            (change)="updateCheckedOptions('vna', $event)"> VietNam Airlines
-                          </label>
+        <img src="assets/img/pleasewait.gif" alt="">
+    </section>
+    <section class="steps" *ngIf="selectedStep">
+        <ul class="progressbar">
+            <li [ngClass]="{'active': selectedStep == s.id}" *ngFor="let s of steps">{{ s.name }}</li>
+        </ul>
+    </section>
+    <section class="list-plane" *ngIf="selectedStep == 1">
+        <div class="container clearfix">
+            <div class="list-plane-inner">
+                <div class="main-list-plane">
+                    <div class="main-list-plane-inner">
+                        <div class="main-list-plane-table" *ngFor="let route of listRoutes">
+                            <div class="list-plane-title">
+                                <h1>{{ route.from_name }} <span>đi</span> {{ route.to_name }} </h1>
+                                <h2><span>Bay ngày:</span> {{ route.from_fly_date }}</h2>
+                                <h3>(* Giá vé chưa bao gồm thuế và phí)</h3>
+                            </div>
+                            <div class="list-plane-date">
+                                <ul class="clearfix">
+                                    <li class="{{ d.class }}" *ngFor="let d of route['days']" (click)="setDate(d.date, route.option)">
+                                        <span>{{ d.name }}</span>
+                                        <br/>
+                                        <strong>{{ d.date }}</strong>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="list-plane-table">
+                                <table class="table table-striped table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th>Hàng không</th>
+                                            <th>Chuyến bay</th>
+                                            <th>Giờ đi</th>
+                                            <th>Giờ đến</th>
+                                            <th>Giá</th>
+                                            <th></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr *ngFor="let f of route.flights">
+                                            <td><img [src]="f.image" alt=""></td>
+                                            <td>
+                                                <p class="plane-id">{{ f.flight_code }}</p>
+                                            </td>
+                                            <td>
+                                                <span class="city">{{ route.from_name }}</span>
+                                                <p class="time">{{ f.start_time }}</p>
+                                            </td>
+                                            <td>
+                                                <span class="city">{{ route.to_name }}</span>
+                                                <p class="time">{{ f.end_time }}</p>
+                                            </td>
+                                            <td class="plane-price">{{ f.price | number }} <span>VNĐ</span></td>
+                                            <td>
+                                                <button type="button" class="btn-select-flight" (click)="onSelectFlight(f)">Chọn <i class="fa fa-angle-right" aria-hidden="true"></i></button>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
                         </div>
-                      </td>
-                      <td><img src="assets/img/vna.gif" alt=""></td>
-                      <td>{{ lowestFilter.vna | number }}</td>
-                    </tr>
-                    <tr>
-                      <td>
-                        <div class="checkbox">
-                          <label>
-                            <input type="checkbox" value="" [(ngModel)]="airlineOptions.jetstar"
-                            (change)="updateCheckedOptions('jetstar', $event)"> Jet Star
-                          </label>
+                    </div>
+                </div>
+                <!-- main-list-plane -->
+                <aside class="aside-search-plane">
+                    <div class="filter-plane">
+                        <h2>Lọc tìm kiếm</h2>
+                        <div class="filter-plane-inner">
+                            <h3>Chế độ hiển thị</h3>
+                            <div class="radio">
+                                <label>
+                                    <input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked> Giá cơ bản cho 1 người lớn
+                                </label>
+                            </div>
+                            <div class="radio">
+                                <label>
+                                    <input type="radio" name="optionsRadios" id="optionsRadios2" value="option2"> Giá đã gồm thuế & phí
+                                </label>
+                            </div>
+                            <h3><i class="fa fa-check-circle"></i> Xắp xếp</h3>
+                            <div class="box">
+                                <div class="radio">
+                                    <label>
+                                        <input type="radio" name="sort" [(ngModel)]="sort" id="optionsRadios1" value="price" (click)="sortPrice()"> Giá (Thấp tới Cao)
+                                    </label>
+                                </div>
+                                <div class="radio">
+                                    <label>
+                                        <input type="radio" name="sort" [(ngModel)]="sort" id="optionsRadios2" value="time" (click)="sortTime()"> Thời gian khởi hành (Thấp tới Cao)
+                                    </label>
+                                </div>
+                                <div class="radio">
+                                    <label>
+                                        <input type="radio" name="sort" [(ngModel)]="sort" id="optionsRadios2" value="airline" (click)="sortAirline()"> Hãng hàng không
+                                    </label>
+                                </div>
+                            </div>
+                            <h3><i class="fa fa-check-circle"></i> Chọn lọc</h3>
+                            <div class="box">
+                                <table>
+                                    <tbody>
+                                        <tr>
+                                            <td>Hãng hàng không</td>
+                                            <td colspan="2"><a href="#" title="">Hiển thị tất cả</a></td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <div class="checkbox">
+                                                    <label>
+                                                        <input type="checkbox" value="" [(ngModel)]="airlineOptions.vna" (change)="updateCheckedOptions('vna', $event)"> VietNam Airlines
+                                                    </label>
+                                                </div>
+                                            </td>
+                                            <td><img src="assets/img/vna.gif" alt=""></td>
+                                            <td>{{ lowestFilter.vna | number }}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <div class="checkbox">
+                                                    <label>
+                                                        <input type="checkbox" value="" [(ngModel)]="airlineOptions.jetstar" (change)="updateCheckedOptions('jetstar', $event)"> Jet Star
+                                                    </label>
+                                                </div>
+                                            </td>
+                                            <td><img src="assets/img/jetstar.gif" alt=""></td>
+                                            <td>{{ lowestFilter.jetstar | number }}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <div class="checkbox">
+                                                    <label>
+                                                        <input type="checkbox" value="" [(ngModel)]="airlineOptions.vietjet" (change)="updateCheckedOptions('vietjet', $event)"> VietjetAir
+                                                    </label>
+                                                </div>
+                                            </td>
+                                            <td><img src="assets/img/vietjet.gif" alt=""></td>
+                                            <td>{{ lowestFilter.vietjet | number }}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
                         </div>
-                      </td>
-                      <td><img src="assets/img/jetstar.gif" alt=""></td>
-                      <td>{{ lowestFilter.jetstar | number }}</td>
-                    </tr>
-                    <tr>
-                      <td>
-                        <div class="checkbox">
-                          <label>
-                            <input type="checkbox" value="" [(ngModel)]="airlineOptions.vietjet"
-                            (change)="updateCheckedOptions('vietjet', $event)"> VietjetAir
-                          </label>
-                        </div>
-                      </td>
-                      <td><img src="assets/img/vietjet.gif" alt=""></td>
-                      <td>{{ lowestFilter.vietjet | number }}</td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
-            
-            </div>
-          </div>
-          <!-- filter-plane -->
-          <div class="search-plane">
-            <h2>Đặt vé máy bay</h2>
-            <div class="search-plane-inner">
-              <form class="plane-form" (ngSubmit)="onSubmit(f)" #f="ngForm">
-                <div class="field">
-                  <div class="radio">
-                    <label>
-                      <input type="radio" (click)="selectPlaneOption('off')" [(ngModel)]="search.round_trip" name="round_trip" id="one-way" value="off"> Một chiểu
-                    </label>
-                  </div>
-                  <div class="radio">
-                    <label>
-                      <input type="radio" (click)="selectPlaneOption('on')" [(ngModel)]="search.round_trip" name="round_trip" id="round-trip" value="on"> Khứ hồi
-                    </label>
-                  </div>
-                  <!-- <div class="radio disabled">
+                    </div>
+                    <!-- filter-plane -->
+                    <div class="search-plane">
+                        <h2>Đặt vé máy bay</h2>
+                        <div class="search-plane-inner">
+                            <form class="plane-form" (ngSubmit)="onSubmit(f)" #f="ngForm">
+                                <div class="field">
+                                    <div class="radio">
+                                        <label>
+                                            <input type="radio" (click)="selectPlaneOption('off')" [(ngModel)]="search.round_trip" name="round_trip" id="one-way" value="off"> Một chiểu
+                                        </label>
+                                    </div>
+                                    <div class="radio">
+                                        <label>
+                                            <input type="radio" (click)="selectPlaneOption('on')" [(ngModel)]="search.round_trip" name="round_trip" id="round-trip" value="on"> Khứ hồi
+                                        </label>
+                                    </div>
+                                    <!-- <div class="radio disabled">
                     <label>
                       <input type="radio" name="optionsRadios" id="optionsRadios3" value="option3" disabled> Nhiều chặng
                     </label>
                   </div> -->
-                </div>
-                <div class="field">
-                  <span class="field-label">Điểm đi</span>
-                  <div class="field-input">
-                    <select placeholder="Điểm đi"
+                                </div>
+                                <div class="field">
+                                    <span class="field-label">Điểm đi</span>
+                                    <div class="field-input">
+                                        <!-- <select placeholder="Điểm đi"
                         [(ngModel)]="search.from" name="from" class="select2">
                       <option [value]="l.value" *ngFor="let l of locations">{{l.label}}</option>
-                    </select>
-
-                  </div>
-                </div>
-                <div class="field">
-                  <span class="field-label">Điểm đến</span>
-                  <div class="field-input">
-                    <!-- <ng-select placeholder="Điểm đến"
+                    </select> -->
+                                        <ng-select placeholder="Điểm đi" name="from" [(ngModel)]="search.from" [options]="locations">
+                                        </ng-select>
+                                    </div>
+                                </div>
+                                <div class="field">
+                                    <span class="field-label">Điểm đến</span>
+                                    <div class="field-input">
+                                        <!-- <ng-select placeholder="Điểm đến"
                         formControlName="to"
                         [options]="locations">
                     </ng-select> -->
-                    <select placeholder="Điểm đi"
+                                        <!-- <select placeholder="Điểm đi"
                         [(ngModel)]="search.to" name="to" class="select2">
                       <option [value]="l.value" *ngFor="let l of locations">{{l.label}}</option>
-                    </select>
-                  </div>
-                </div>
-                <div class="field clearfix">
-                  <div class="field-date-go">
-                    <span class="field-label">Ngày đi</span>
-                    <div class="field-input">
-                      <div class="form-group">
-                        <div class='input-group date' id='date-go'>
-
-                          <input type='text' class="form-control"  #datePickerFrom [ngModel]="search.from_date" 
-                          name="from_date" (blur)="from_date = datePickerFrom.value" /> 
-
-                          <span class="input-group-addon">
+                    </select> -->
+                                        <ng-select placeholder="Điểm đi" name="to" [(ngModel)]="search.to" [options]="locations">
+                                        </ng-select>
+                                    </div>
+                                </div>
+                                <div class="field clearfix">
+                                    <div class="field-date-go">
+                                        <span class="field-label">Ngày đi</span>
+                                        <div class="field-input">
+                                            <div class="form-group">
+                                                <div class='input-group date datetimepicker' id='date-go'>
+                                                    <input type='text' class="form-control" #datePickerFrom [(ngModel)]="search.from_date" name="from_date" (blur)="from_date = datePickerFrom.value" />
+                                                    <span class="input-group-addon">
                           <span class="glyphicon glyphicon-calendar"></span>
-                          </span>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="field-date-back">
-                    <span class="field-label">Ngày về</span>
-                    <div class="field-input">
-                      <div class="form-group">
-                        <div class='input-group date' id='date-back'>
-                          
-                          <input type='text' class="form-control" #datePickerTo [ngModel]="search.to_date" 
-                           name="to_date" (blur)="to_date = datePickerTo.value" [disabled]="search.round_trip == 'off'" />
-
-                          <span class="input-group-addon">
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="field-date-back">
+                                        <span class="field-label">Ngày về</span>
+                                        <div class="field-input">
+                                            <div class="form-group">
+                                                <div class='input-group date datetimepicker' id='date-back'>
+                                                    <input type='text' class="form-control" #datePickerTo [(ngModel)]="search.to_date" name="to_date" (blur)="to_date = datePickerTo.value" [disabled]="search.round_trip == 'off'" />
+                                                    <span class="input-group-addon">
                           <span class="glyphicon glyphicon-calendar"></span>
-                          </span>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="field clearfix">
+                                    <div class="field-1">
+                                        <div>
+                                            <span class="field-label">Người lớn</span>
+                                        </div>
+                                        <div>
+                                            <select class="select-adult form-control" data-placeholder="" [(ngModel)]="search.adult" name="adult">
+                                                <option *ngFor="let person of people" value="{{ person }}">{{ person }}</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="field-2">
+                                        <div>
+                                            <span class="field-label">Trẻ em</span>
+                                        </div>
+                                        <div>
+                                            <select class="select-child-1 form-control" data-placeholder="" [(ngModel)]="search.children" name="children">
+                                                <option value="0">0</option>
+                                                <option *ngFor="let person of people" value="{{ person }}">{{ person }}</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="field-3">
+                                        <div>
+                                            <span class="field-label">Trẻ sơ sinh</span>
+                                        </div>
+                                        <div>
+                                            <select class="select-child-2 form-control" data-placeholder="" [(ngModel)]="search.infant" name="infant">
+                                                <option value="0">0</option>
+                                                <option *ngFor="let person of people" value="{{ person }}">{{ person }}</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- field -->
+                                <div class="field text-center">
+                                    <button (click)="onResearch()" type="button" class="btn btn-plane btn-search" [disabled]="!f.valid"><i class=" icon-search-2"></i> Tìm chuyến bay</button>
+                                </div>
+                                <!-- field -->
+                            </form>
                         </div>
-                      </div>
                     </div>
-                  </div>
-                </div>
-                <div class="field clearfix">
-                  <div class="field-1">
-                    <div>
-                      <span class="field-label">Người lớn</span>
-                    </div>
-                    <div>
-                      <select class="select-adult" data-placeholder="" [(ngModel)]="search.adult" name="adult">
-                        <option *ngFor="let person of people" value="{{ person }}">{{ person }}</option>
-                      </select>
-                      
-                    </div>
-                  </div>
-                  <div class="field-2">
-                    <div>
-                      <span class="field-label">Trẻ em</span>
-                    </div>
-                    <div>
-                      <select class="select-child-1" data-placeholder="" [(ngModel)]="search.children" name="children">
-                        <option value="0">0</option>
-                        <option *ngFor="let person of people" value="{{ person }}">{{ person }}</option>
-                      </select>
-                    </div>
-                    
-                  </div>
-
-                  <div class="field-3">
-                    <div>
-                      <span class="field-label">Trẻ sơ sinh</span>
-                    </div>
-                    <div>
-                      <select class="select-child-2" data-placeholder="" [(ngModel)]="search.infant" name="infant">
-                        <option value="0">0</option>
-                        <option *ngFor="let person of people" value="{{ person }}">{{ person }}</option>
-                      </select>
-                    </div>
-                  </div>
-                </div>
-                <!-- field -->
-                <div class="field text-center">
-                  <button type="button" class="btn btn-plane btn-search" [disabled]="!f.valid"><i class=" icon-search-2"></i> Tìm chuyến bay</button>
-                </div>
-                <!-- field -->
-              </form>
+                    <!-- search-plane -->
+                </aside>
+                <!-- aside-search-plane -->
             </div>
-          </div>
-          <!-- search-plane -->
-        </aside>
-        <!-- aside-search-plane -->
-      </div>
-    </div>
-  </section>
-  
-
-  <section class="customer" *ngIf="selectedStep == 2">
-    <div class="container clearfix">
-      <div class="customer-inner">
-        <div class="customer-info">
-          <div class="customer-info-inner">
-            <div class="flight-info">
-              <h2 class="customer-title">Thông tin chuyến bay </h2>
-              <div class="flight-info-inner">
-                <div class="main-info clearfix">
-                  <div class="field">
-                    <label>Chuyến bay :</label>
-                    <div>
-                      {{ roundTripOptions[session_flight.round_trip] }}
-                    </div>
-                  </div>
-                  <div class="field">
-                    <label>Số lượng hành khách :</label>
-                    <div>
-                      1 Người lớn
-                    </div>
-                  </div>
-                  <div class="field">
-                    <label>Ngày xuất phát: </label>
-                    <div>
-                      {{ session_flight.from_date | date:"dd/MM/yyyy"  }}
-
-                    </div>
-                  </div>
-                  <div class="field" *ngIf="round_trip">
-                    <label>Ngày về: </label>
-                    <div>
-                      {{ session_flight.to_date | date:"dd/MM/yyyy"  }}
-                    </div>
-                  </div>
-                </div>
-                <div class="flight-go-back"  [ngClass]="r.class" *ngFor="let r of listRoutes">
-                  <div class="flight-title clearfix">
-                    <div class="field">
-                      <label>Khởi hành từ :</label>
-                      <div>
-                        {{ r.from_fly_date }}, {{ r.from_name }} , Việt Nam
-                      </div>
-                    </div>
-                    <div class="field">
-                      <label>Thời gian :</label>
-                      <div>
-                        02h + 05m
-                      </div>
-                    </div>
-                  </div>
-                  <div class="content clearfix">
-                    <div class="content-img">
-                      <img [src]="r.selectedFlight.image" alt="">
-                    </div>
-                    <div class="content-info clearfix">
-                      <div class="field">
-                        <p>Từ :<strong>{{ r.from_name }}</strong> ({{ r.from }})</p>
-                        <p><strong>{{ r.selectedFlight.start_time }}</strong></p>
-                      </div>
-                      <div class="field">
-                        <p>tới : <strong>{{ r.to_name }}</strong> ({{ r.to }})</p>
-                        <p><strong>{{ r.selectedFlight.end_time }}</strong></p>
-                      </div>
-                      <div class="field">
-                        <p>Vietjet Air <strong>({{ r.selectedFlight.flight_code }})</strong></p>
-                        <p>Loại vé :<strong> {{ r.selectedFlight.type }} </strong></p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-              </div>
-            </div>
-
-            <div class="people-info">
-              <h2 class="customer-title">Thông tin hành khách </h2>
-              <div class="people-info-inner clearfix">
-                <ul>
-                  <li *ngFor="let p of passengers; let i = index">
-                    <h3 class="people-title">{{ i + 1 }}. {{ p.name }}</h3>
-                    <table class="tbl-people-info">
-                      <thead>
-                      <tr>
-                        <th>Quý danh <span>*</span></th>
-                        <th>Họ và tên <span>*</span></th>
-                        <th>Ngày sinh <span>*</span></th>
-                      </tr>
-                      </thead>
-                      <tbody>
-                      <tr>
-                        <td>
-                          <select name="title" class="form-control select-adult" data-placeholder="" 
-                          [(ngModel)]="p.title">
-                            <option *ngFor="let a of adultOptions" value="{{ a.id }}">{{ a.name }}</option>
-                          </select>
-                        </td>
-                        <td>
-                          <input name="fullname" type='text' class="form-control" 
-                                    [(ngModel)]="p.fullname">
-                        </td>
-                        <td>
-                          <div class="form-group">
-                            <div class='input-group date'>
-                              <input name="date_of_birth" type='text' class="form-control" 
-                                    [(ngModel)]="p.date_of_birth" />
-                              <span class="input-group-addon">
+        </div>
+    </section>
+    <section class="customer" *ngIf="selectedStep == 2">
+        <div class="container clearfix">
+            <div class="customer-inner">
+                <div class="customer-info">
+                    <div class="customer-info-inner">
+                        <div class="flight-info">
+                            <h2 class="customer-title">Thông tin chuyến bay </h2>
+                            <div class="flight-info-inner">
+                                <div class="main-info clearfix">
+                                    <div class="field">
+                                        <label>Chuyến bay :</label>
+                                        <div>
+                                            {{ roundTripOptions[session_flight.round_trip] }}
+                                        </div>
+                                    </div>
+                                    <div class="field">
+                                        <label>Số lượng hành khách :</label>
+                                        <div>
+                                            1 Người lớn
+                                        </div>
+                                    </div>
+                                    <div class="field">
+                                        <label>Ngày xuất phát: </label>
+                                        <div>
+                                            {{ session_flight.from_date | date:"dd/MM/yyyy" }}
+                                        </div>
+                                    </div>
+                                    <div class="field" *ngIf="round_trip">
+                                        <label>Ngày về: </label>
+                                        <div>
+                                            {{ session_flight.to_date | date:"dd/MM/yyyy" }}
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="flight-go-back" [ngClass]="r.class" *ngFor="let r of listRoutes">
+                                    <div class="flight-title clearfix">
+                                        <div class="field">
+                                            <label>Khởi hành từ :</label>
+                                            <div>
+                                                {{ r.from_fly_date }}, {{ r.from_name }} , Việt Nam
+                                            </div>
+                                        </div>
+                                        <div class="field">
+                                            <label>Thời gian :</label>
+                                            <div>
+                                                02h + 05m
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="content clearfix">
+                                        <div class="content-img">
+                                            <img [src]="r.selectedFlight.image" alt="">
+                                        </div>
+                                        <div class="content-info clearfix">
+                                            <div class="field">
+                                                <p>Từ :<strong>{{ r.from_name }}</strong> ({{ r.from }})</p>
+                                                <p><strong>{{ r.selectedFlight.start_time }}</strong></p>
+                                            </div>
+                                            <div class="field">
+                                                <p>tới : <strong>{{ r.to_name }}</strong> ({{ r.to }})</p>
+                                                <p><strong>{{ r.selectedFlight.end_time }}</strong></p>
+                                            </div>
+                                            <div class="field">
+                                                <p>Vietjet Air <strong>({{ r.selectedFlight.flight_code }})</strong></p>
+                                                <p>Loại vé :<strong> {{ r.selectedFlight.type }} </strong></p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="people-info">
+                            <h2 class="customer-title">Thông tin hành khách </h2>
+                            <div class="people-info-inner clearfix">
+                                <ul>
+                                    <li *ngFor="let p of passengers; let i = index">
+                                        <h3 class="people-title">{{ i + 1 }}. {{ p.name }}</h3>
+                                        <table class="tbl-people-info">
+                                            <thead>
+                                                <tr>
+                                                    <th>Quý danh <span>*</span></th>
+                                                    <th>Họ và tên <span>*</span></th>
+                                                    <th>Ngày sinh <span>*</span></th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td>
+                                                        <select name="title" class="form-control select-adult" data-placeholder="" [(ngModel)]="p.title">
+                                                            <option *ngFor="let a of titleOptions[p.key]" value="{{ a.id }}">{{ a.name }}</option>
+                                                        </select>
+                                                    </td>
+                                                    <td>
+                                                        <input name="fullname" type='text' class="form-control" [(ngModel)]="p.fullname">
+                                                    </td>
+                                                    <td>
+                                                        <div class="form-group">
+                                                            <div class='input-group date datetimepicker'>
+                                                                <input name="date_of_birth" type='text' class="form-control" [(ngModel)]="p.date_of_birth" />
+                                                                <span class="input-group-addon">
                                 <span class="glyphicon glyphicon-calendar"></span>
-                              </span>
+                                                                </span>
+                                                            </div>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                        <div class="luggage-info">
+                                            <h4 class="luggage-title">Thông tin hành lý</h4>
+                                            <div class="field clearfix">
+                                                <label>Hành lý xách tay </label>
+                                                <div>
+                                                    <p>Mỗi hành khách được mang theo tối đa 7kg hành lý xách tay. </p>
+                                                </div>
+                                            </div>
+                                            <div class="field clearfix">
+                                                <label>Hành lý ký gửi</label>
+                                                <div>
+                                                    <p class="clearfix">
+                                                        <span>Chiều đi :&nbsp;</span>
+                                                        <select name="" class="form-control">
+                                                            <option value="">Không mang theo hành lý</option>
+                                                            <option value="">Thêm 15kg hành lý (140.000 VNĐ)</option>
+                                                            <option value="">Thêm 20kg hành lý (140.000 VNĐ)</option>
+                                                        </select>
+                                                    </p>
+                                                    <p class="clearfix">
+                                                        <span>Chiều về :</span>
+                                                        <select name="" class="form-control">
+                                                            <option value="">Không mang theo hành lý</option>
+                                                            <option value="">Thêm 15kg hành lý (140.000 VNĐ)</option>
+                                                            <option value="">Thêm 20kg hành lý (140.000 VNĐ)</option>
+                                                        </select>
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </li>
+                                </ul>
                             </div>
-                          </div>
-                        </td>
-                      </tr>
-                      </tbody>
-                    </table>
-                    <div class="luggage-info">
-                      <h4 class="luggage-title">Thông tin hành lý</h4>
-                      <div class="field clearfix">
-                            <label>Hành lý xách tay </label>
-                            <div>
-                              <p>Mỗi hành khách được mang theo tối đa 7kg hành lý xách tay. </p>
-                            </div>
-                          </div>
-                      <div class="field clearfix">
-                            <label>Hành lý ký gửi</label>
-                            <div>
-                              <p class="clearfix">
-                                <span>Chiều đi :&nbsp;</span>
-                                <select name="" class="form-control">
-                                  <option value="">Không mang theo hành lý</option>
-                                  <option value="">Thêm 15kg hành lý (140.000 VNĐ)</option>
-                                  <option value="">Thêm 20kg hành lý (140.000 VNĐ)</option>
-                                </select>
-                              </p>
-                              <p class="clearfix">
-                                <span>Chiều về :</span>
-                                <select name="" class="form-control">
-                                  <option value="">Không mang theo hành lý</option>
-                                  <option value="">Thêm 15kg hành lý (140.000 VNĐ)</option>
-                                  <option value="">Thêm 20kg hành lý (140.000 VNĐ)</option>
-                                </select>
-                              </p>
-                            </div>
-                          </div>
-                    </div>
-                  </li>
-                  <!-- <li>
-                    <h3 class="people-title">2. Người lớn</h3>
-                    <table class="tbl-people-info">
-                      <thead>
-                      <tr>
-                        <th>Quý danh <span>*</span></th>
-                        <th>Họ và tên <span>*</span></th>
-                        <th>Ngày sinh <span>*</span></th>
-                      </tr>
-                      </thead>
-                      <tbody>
-                      <tr>
-                        <td>
-                          <select name="" class="form-control">
-                            <option value="">Ông</option>
-                            <option value="">Bà</option>
-                            <option value="">Anh</option>
-                            <option value="">Chị</option>
-                          </select>
-                        </td>
-                        <td>
-                          <input type="text" class="form-control">
-                        </td>
-                        <td>
-                          <div class="form-group">
-                            <div class='input-group date'>
-                              <input type='text' class="form-control" />
-                              <span class="input-group-addon">
-                                <span class="glyphicon glyphicon-calendar"></span>
-                              </span>
-                            </div>
-                          </div>
-                        </td>
-                      </tr>
-                      </tbody>
-                    </table>
-                    <div class="luggage-info">
-                      <h4 class="luggage-title">Thông tin hành lý</h4>
-                      <div class="field clearfix">
-                        <label>Hành lý xách tay </label>
-                        <div>
-                          <p>Mỗi hành khách được mang theo tối đa 7kg hành lý xách tay. </p>
                         </div>
-                      </div>
-                      <div class="field clearfix">
-                        <label>Hành lý ký gửi</label>
-                        <div>
-                          <p class="clearfix">
-                            <span>Chiều đi :&nbsp;</span>
-                            <select name="" class="form-control">
-                              <option value="">Không mang theo hành lý</option>
-                              <option value="">Thêm 15kg hành lý (140.000 VNĐ)</option>
-                              <option value="">Thêm 20kg hành lý (140.000 VNĐ)</option>
-                            </select>
-                          </p>
-                          <p class="clearfix">
-                            <span>Chiều về :</span>
-                            <select name="" class="form-control">
-                              <option value="">Không mang theo hành lý</option>
-                              <option value="">Thêm 15kg hành lý (140.000 VNĐ)</option>
-                              <option value="">Thêm 20kg hành lý (140.000 VNĐ)</option>
-                            </select>
-                          </p>
-                        </div>
-                      </div>
-                    </div>
-                  </li>
-                  <li>
-                    <h3 class="people-title">3. Trẻ em</h3>
-                    <table class="tbl-people-info">
-                      <thead>
-                      <tr>
-                        <th>Quý danh <span>*</span></th>
-                        <th>Họ và tên <span>*</span></th>
-                        <th>Ngày sinh <span>*</span></th>
-                      </tr>
-                      </thead>
-                      <tbody>
-                      <tr>
-                        <td>
-                          <select name="" class="form-control">
-                            <option value="">Trẻ em trai</option>
-                            <option value="">Trẻ em gái</option>
-                          </select>
-                        </td>
-                        <td>
-                          <input type="text" class="form-control">
-                        </td>
-                        <td>
-                          <div class="form-group">
-                            <div class='input-group date'>
-                              <input type='text' class="form-control" />
-                              <span class="input-group-addon">
-                                <span class="glyphicon glyphicon-calendar"></span>
-                              </span>
-                            </div>
-                          </div>
-                        </td>
-                      </tr>
-                      </tbody>
-                    </table>
-                    <div class="luggage-info">
-                      <h4 class="luggage-title">Thông tin hành lý</h4>
-                      <div class="field clearfix">
-                        <label>Hành lý xách tay </label>
-                        <div>
-                          <p>Mỗi hành khách được mang theo tối đa 7kg hành lý xách tay. </p>
-                        </div>
-                      </div>
-                      <div class="field clearfix">
-                        <label>Hành lý ký gửi</label>
-                        <div>
-                          <p class="clearfix">
-                            <span>Chiều đi :&nbsp;</span>
-                            <select name="" class="form-control">
-                              <option value="">Không mang theo hành lý</option>
-                              <option value="">Thêm 15kg hành lý (140.000 VNĐ)</option>
-                              <option value="">Thêm 20kg hành lý (140.000 VNĐ)</option>
-                            </select>
-                          </p>
-                          <p class="clearfix">
-                            <span>Chiều về :</span>
-                            <select name="" class="form-control">
-                              <option value="">Không mang theo hành lý</option>
-                              <option value="">Thêm 15kg hành lý (140.000 VNĐ)</option>
-                              <option value="">Thêm 20kg hành lý (140.000 VNĐ)</option>
-                            </select>
-                          </p>
-                        </div>
-                      </div>
-                    </div>
-                  </li>
-                  <li>
-                    <h3 class="people-title">4. Em bé</h3>
-                    <table class="tbl-people-info">
-                      <thead>
-                      <tr>
-                        <th>Quý danh <span>*</span></th>
-                        <th>Họ và tên <span>*</span></th>
-                        <th>Ngày sinh <span>*</span></th>
-                      </tr>
-                      </thead>
-                      <tbody>
-                      <tr>
-                        <td>
-                          <select name="" class="form-control">
-                            <option value="">Em bé trai</option>
-                            <option value="">Em bé gái</option>
-                          </select>
-                        </td>
-                        <td>
-                          <input type="text" class="form-control">
-                        </td>
-                        <td>
-                          <div class="form-group">
-                            <div class='input-group date'>
-                              <input type='text' class="form-control" />
-                              <span class="input-group-addon">
-                                <span class="glyphicon glyphicon-calendar"></span>
-                              </span>
-                            </div>
-                          </div>
-                        </td>
-                      </tr>
-                      </tbody>
-                    </table>
-                    <div class="luggage-info">
-                      <h4 class="luggage-title">Thông tin hành lý</h4>
-                      <div class="field clearfix">
-                        <label>Hành lý xách tay </label>
-                        <div>
-                          <p>Mỗi hành khách được mang theo tối đa 7kg hành lý xách tay. </p>
-                        </div>
-                      </div>
-                      <div class="field clearfix">
-                        <label>Hành lý ký gửi</label>
-                        <div>
-                          <p class="clearfix">
-                            <span>Chiều đi :&nbsp;</span>
-                            <select name="" class="form-control">
-                              <option value="">Không mang theo hành lý</option>
-                              <option value="">Thêm 15kg hành lý (140.000 VNĐ)</option>
-                              <option value="">Thêm 20kg hành lý (140.000 VNĐ)</option>
-                            </select>
-                          </p>
-                          <p class="clearfix">
-                            <span>Chiều về :</span>
-                            <select name="" class="form-control">
-                              <option value="">Không mang theo hành lý</option>
-                              <option value="">Thêm 15kg hành lý (140.000 VNĐ)</option>
-                              <option value="">Thêm 20kg hành lý (140.000 VNĐ)</option>
-                            </select>
-                          </p>
-                        </div>
-                      </div>
-                    </div>
-                  </li> -->
-                </ul>
-
-              </div>
-
-            </div>
-
-
-            
-
-                    <div class="contact-info">
-                      <h2 class="customer-title">Thông tin người liên hệ </h2>
-                      <div class="contact-info-inner">
-                        <p>Vui lòng điền đây đủ thông tin, Nhân Viên Abay sẽ liên lạc với khách hàng qua địa chỉ này để hoàn tất thủ tục đặt vé.</p>
-                        <p><span>*</span> Các trường bắt buộc phải nhập ... </p>
-                        <div class="contact-info-field">
-                          <form class="plane-form" (ngSubmit)="onSubmit(formContact)" #formContact="ngForm">
-                          <!-- <div class="field clearfix">
+                        <div class="contact-info">
+                            <h2 class="customer-title">Thông tin người liên hệ </h2>
+                            <div class="contact-info-inner">
+                                <p>Vui lòng điền đây đủ thông tin, Nhân Viên Abay sẽ liên lạc với khách hàng qua địa chỉ này để hoàn tất thủ tục đặt vé.</p>
+                                <p><span>*</span> Các trường bắt buộc phải nhập ... </p>
+                                <div class="contact-info-field">
+                                    <form class="plane-form" (ngSubmit)="onSubmit(formContact)" #formContact="ngForm">
+                                        <!-- <div class="field clearfix">
                             <label>Mã khách hàng</label>
                             <div>
                               <input type="text" class="form-control">
                               <i>(Hoặc số điện thoại Quý khách đăng ký)</i>
                             </div>
                           </div> -->
-                          <div class="field field-name even clearfix">
-                            <div>
-                              <label>Quý danh</label>
-                              <div>
-                                <select name="title" class="form-control select-adult" data-placeholder="" 
-                                [(ngModel)]="contact.title">
-                                  <option *ngFor="let a of adultOptions" value="{{ a.id }}">{{ a.name }}</option>
-                                </select>
-
-                              </div>
-                            </div>
-                            <div>
-                              <label>Họ và tên <span>*</span></label>
-                              <div>
-                                <input name="fullname" [(ngModel)]="contact.fullname" type="text" class="form-control">
-                              </div>
-                            </div>
-                          </div>
-                          <div class="field field-phone odd clearfix">
-                            <label>Số điện thoại <span>*</span></label>
-                            <div>
-                              <input name="phone" [(ngModel)]="contact.phone" type="text" class="form-control">
-                            </div>
-                          </div>
-
-                          <div class="field even clearfix">
-                            <label>Email <span style="color: red">*</span></label>
-                            <div>
-                              <input name="email" [(ngModel)]="contact.email" type="text" class="form-control">
-                            </div>
-                          </div>
-
-                          <div class="field odd clearfix">
-                            <label>Yêu cầu đặc biệt</label>
-                            <div>
-                              <input name="requirement" [(ngModel)]="contact.requirement" type="text" class="form-control">
-                            </div>
-                          </div>
-                          <div class="field even clearfix">
-                            <div class="checkbox">
-                              <label>
-                                <input type="checkbox" value="" name="order-report" class="order-report"> Tôi muốn xuất hóa đơn
-                              </label>
-                            </div>
-                            <div class="bill">
-                              <h3>Chi tiết hóa đơn</h3>
-                              <p>Quý khách có nhu cầu lấy hóa đơn giá trị gia tăng phải yêu cầu với phía Abay trong vòng 7 ngày kể từ thời điểm thanh toán đơn hàng.
-                              </p>
-                              <p>Quý khách vui lòng <span>nhập tiếng Việt có dấu</span> để việc xuất hóa đơn tránh bị sai sót. </p>
-                              <div class="bill-field">
-                                <div class="field">
-                                  <label>Mã số thuế <span>*</span></label>
-                                  <div>
-                                    <input type="text" class="form-control">
-                                  </div>
-                                </div>
-                                <div class="field">
-                                  <label>Tên công ty<span>*</span></label>
-                                  <div>
-                                    <input type="text" class="form-control">
-                                  </div>
-                                </div>
-                                <div class="field">
-                                  <label>Địa chỉ <span>*</span></label>
-                                  <div>
-                                    <input type="text" class="form-control">
-                                  </div>
-                                </div>
-                                <div class="field">
-                                  <label>Địa chỉ nhận hóa đơn</label>
-                                  <div>
-                                    <input type="text" class="form-control">
-                                  </div>
-                                </div>
-                              </div>
-                              <div class="bill-note">
-                                <h4>Lưu ý về thời hạn xuất hóa đơn tại DatVeSieuRe:</h4>
-                                <p>
-                                  - Đối với vé được xuất bán trong thời gian từ nay đến hết ngày 31/12/2015 sẽ có HẠN XUẤT HÓA ĐƠN là ngày 08/01/2016.</p>
-                                <p>
-                                  - Đối với vé được xuất bán trong năm 2016, hạn cuối xuất hóa đơn sẽ là ngày mùng 10 của tháng kế tiếp sau tháng Quý khách xuất vé. </p>
-                                <p>
-                                  Nếu quá hạn trên ABAY sẽ KHÔNG xuất lại hóa đơn. Do đó, nếu có nhu cầu, Quý khách vui lòng cung cấp chính xác và đầy đủ thông tin cần thiết trong thời gian sớm nhất để được ABAY phục vụ.
-                                </p>
-                              </div>
-                            </div>
-                            <!-- <div class="checkbox">
+                                        <div class="field field-name even clearfix">
+                                            <div>
+                                                <label>Quý danh</label>
+                                                <div>
+                                                    <select name="title" class="form-control select-adult" data-placeholder="" [(ngModel)]="contact.title">
+                                                        <option *ngFor="let a of titleOptions['adult']" value="{{ a.id }}">{{ a.name }}</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div>
+                                                <label>Họ và tên <span>*</span></label>
+                                                <div>
+                                                    <input name="fullname" [(ngModel)]="contact.fullname" type="text" class="form-control">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="field field-phone odd clearfix">
+                                            <label>Số điện thoại <span>*</span></label>
+                                            <div>
+                                                <input name="phone" [(ngModel)]="contact.phone" type="text" class="form-control">
+                                            </div>
+                                        </div>
+                                        <div class="field even clearfix">
+                                            <label>Email <span style="color: red">*</span></label>
+                                            <div>
+                                                <input name="email" [(ngModel)]="contact.email" type="text" class="form-control">
+                                            </div>
+                                        </div>
+                                        <div class="field odd clearfix">
+                                            <label>Yêu cầu đặc biệt</label>
+                                            <div>
+                                                <input name="requirement" [(ngModel)]="contact.requirement" type="text" class="form-control">
+                                            </div>
+                                        </div>
+                                        <div class="field even clearfix">
+                                            <div class="checkbox">
+                                                <label>
+                                                    <input type="checkbox" value="" name="order-report" class="order-report"> Tôi muốn xuất hóa đơn
+                                                </label>
+                                            </div>
+                                            <div class="bill">
+                                                <h3>Chi tiết hóa đơn</h3>
+                                                <p>Quý khách có nhu cầu lấy hóa đơn giá trị gia tăng phải yêu cầu với phía Abay trong vòng 7 ngày kể từ thời điểm thanh toán đơn hàng.
+                                                </p>
+                                                <p>Quý khách vui lòng <span>nhập tiếng Việt có dấu</span> để việc xuất hóa đơn tránh bị sai sót. </p>
+                                                <div class="bill-field">
+                                                    <div class="field">
+                                                        <label>Mã số thuế <span>*</span></label>
+                                                        <div>
+                                                            <input type="text" class="form-control">
+                                                        </div>
+                                                    </div>
+                                                    <div class="field">
+                                                        <label>Tên công ty<span>*</span></label>
+                                                        <div>
+                                                            <input type="text" class="form-control">
+                                                        </div>
+                                                    </div>
+                                                    <div class="field">
+                                                        <label>Địa chỉ <span>*</span></label>
+                                                        <div>
+                                                            <input type="text" class="form-control">
+                                                        </div>
+                                                    </div>
+                                                    <div class="field">
+                                                        <label>Địa chỉ nhận hóa đơn</label>
+                                                        <div>
+                                                            <input type="text" class="form-control">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="bill-note">
+                                                    <h4>Lưu ý về thời hạn xuất hóa đơn tại DatVeSieuRe:</h4>
+                                                    <p>
+                                                        - Đối với vé được xuất bán trong thời gian từ nay đến hết ngày 31/12/2015 sẽ có HẠN XUẤT HÓA ĐƠN là ngày 08/01/2016.</p>
+                                                    <p>
+                                                        - Đối với vé được xuất bán trong năm 2016, hạn cuối xuất hóa đơn sẽ là ngày mùng 10 của tháng kế tiếp sau tháng Quý khách xuất vé. </p>
+                                                    <p>
+                                                        Nếu quá hạn trên ABAY sẽ KHÔNG xuất lại hóa đơn. Do đó, nếu có nhu cầu, Quý khách vui lòng cung cấp chính xác và đầy đủ thông tin cần thiết trong thời gian sớm nhất để được ABAY phục vụ.
+                                                    </p>
+                                                </div>
+                                            </div>
+                                            <!-- <div class="checkbox">
                               <label>
                                 <input type="checkbox" value="" checked> Tôi muốn nhận được thông tin về chương trình khuyến mãi, tin tức....
                               </label>
                             </div> -->
-                          </div>
-                          </form>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
                         </div>
-                      </div>
-                    </div>
-                    
-            <!-- <div class="sale-off-panel">
+                        <!-- <div class="sale-off-panel">
               <h2>MÃ GIẢM GIÁ / MÃ GIỚI THIỆU </h2>
               <div class="sale-off-inner">
                 <p>Quý khách vui lòng nhập chính xác <strong>Mã Giảm giá / Mã Giới thiệu</strong> vào ô bên dưới</p>
@@ -767,82 +533,81 @@
                 </div>
               </div>
             </div> -->
-            <div class="submit-customer clearfix">
-              <p>Khi nhấn nút "Tiếp Tục", đồng nghĩa với việc quý khách đã đồng ý với các <a href="#" title="">điều kiện và điều khoản của Datvesieure.com</a> (được quy định <a href="#" title="">tại đây</a>) </p>
-              <button (click)="onConfirm()" type="button">Tiếp tục <i class="fa fa-angle-double-right" aria-hidden="true"></i></button>
+                        <div class="submit-customer clearfix">
+                            <p>Khi nhấn nút "Tiếp Tục", đồng nghĩa với việc quý khách đã đồng ý với các <a href="#" title="">điều kiện và điều khoản của Datvesieure.com</a> (được quy định <a href="#" title="">tại đây</a>) </p>
+                            <button (click)="onConfirm()" type="button">Tiếp tục <i class="fa fa-angle-double-right" aria-hidden="true"></i></button>
+                        </div>
+                    </div>
+                </div>
+                <!-- customer-info -->
+                <aside class="aside-price-detail">
+                    <div class="price-detail">
+                        <h2>Chi tiết giá</h2>
+                        <div>
+                            <h3>Giá cơ bản</h3>
+                            <table>
+                                <tbody>
+                                    <tr>
+                                        <td>Người lớn</td>
+                                        <td>1 x 590.000 VNĐ</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <h3>Thuế và phí</h3>
+                            <table>
+                                <tbody>
+                                    <tr>
+                                        <td>Người lớn</td>
+                                        <td>1 x 590.000 VNĐ</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div>
+                            <table>
+                                <tbody>
+                                    <tr>
+                                        <td>Tổng giá</td>
+                                        <td><strong>990.000 VNĐ</strong></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Hành lý thêm</td>
+                                        <td><strong>0 VNĐ</strong></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="sale-off">Giảm giá</td>
+                                        <td><strong>-0 VNĐ</strong></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div>
+                            <table>
+                                <tbody>
+                                    <tr>
+                                        <td>Tổng</td>
+                                        <td><strong>990.000 VNĐ</strong></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="prev-page">
+                        <button type="button" class="btn"><i class="fa fa-angle-double-left" aria-hidden="true"></i> Quay về trang kết quả</button>
+                    </div>
+                    <div class="how-to">
+                        <h3>Tôi làm thế nào ?</h3>
+                        <ul>
+                            <li><a href="#" title=""><i class="fa fa-caret-right" aria-hidden="true"></i> Liên hệ</a></li>
+                            <li><a href="#" title=""><i class="fa fa-caret-right" aria-hidden="true"></i> Thanh toán</a></li>
+                            <li><a href="#" title=""><i class="fa fa-caret-right" aria-hidden="true"></i> Xem đơn hàng</a></li>
+                            <li><a href="#" title=""><i class="fa fa-caret-right" aria-hidden="true"></i> In vé điện tử</a></li>
+                            <li><a href="#" title=""><i class="fa fa-caret-right" aria-hidden="true"></i> Hướng dẫn đặt vé</a></li>
+                        </ul>
+                    </div>
+                </aside>
+                <!-- price-detail -->
             </div>
-
-          </div>
         </div>
-        <!-- customer-info -->
-        <aside class="aside-price-detail">
-          <div class="price-detail">
-            <h2>Chi tiết giá</h2>
-            <div>
-              <h3>Giá cơ bản</h3>
-              <table>
-                <tbody>
-                  <tr>
-                    <td>Người lớn</td>
-                    <td>1 x 590.000 VNĐ</td>
-                  </tr>
-                </tbody>
-              </table>
-              <h3>Thuế và phí</h3>
-              <table>
-                <tbody>
-                  <tr>
-                    <td>Người lớn</td>
-                    <td>1 x 590.000 VNĐ</td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-            <div>
-              <table>
-                <tbody>
-                  <tr>
-                    <td>Tổng giá</td>
-                    <td><strong>990.000 VNĐ</strong></td>
-                  </tr>
-                  <tr>
-                    <td>Hành lý thêm</td>
-                    <td><strong>0 VNĐ</strong></td>
-                  </tr>
-                  <tr>
-                    <td class="sale-off">Giảm giá</td>
-                    <td><strong>-0 VNĐ</strong></td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-            <div>
-              <table>
-                <tbody>
-                  <tr>
-                    <td>Tổng</td>
-                    <td><strong>990.000 VNĐ</strong></td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-          </div>
-          <div class="prev-page">
-            <button type="button" class="btn"><i class="fa fa-angle-double-left" aria-hidden="true"></i> Quay về trang kết quả</button>
-          </div>
-          <div class="how-to">
-            <h3>Tôi làm thế nào ?</h3>
-            <ul>
-              <li><a href="#" title=""><i class="fa fa-caret-right" aria-hidden="true"></i> Liên hệ</a></li>
-              <li><a href="#" title=""><i class="fa fa-caret-right" aria-hidden="true"></i> Thanh toán</a></li>
-              <li><a href="#" title=""><i class="fa fa-caret-right" aria-hidden="true"></i> Xem đơn hàng</a></li>
-              <li><a href="#" title=""><i class="fa fa-caret-right" aria-hidden="true"></i> In vé điện tử</a></li>
-              <li><a href="#" title=""><i class="fa fa-caret-right" aria-hidden="true"></i> Hướng dẫn đặt vé</a></li>
-            </ul>
-          </div>
-        </aside>
-        <!-- price-detail -->
-      </div>
-    </div>
-  </section>
+    </section>
 </div>

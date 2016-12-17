@@ -4,7 +4,7 @@ import { Observable } from 'rxjs/Rx';
 import { Configuration } from '../shared/app.configuration';
 
 @Injectable()
-export class BannerDataService {
+export class BaggageTypeDataService {
 
 	private actionUrl: string;
 
@@ -13,7 +13,7 @@ export class BannerDataService {
 	// @Output() foodDeleted: EventEmitter<any> = new EventEmitter();
 
 	constructor(private _Http: Http, private _configuration: Configuration) {
-		this.actionUrl = _configuration.apiUrl + 'banner/';
+		this.actionUrl = _configuration.apiUrl + 'bagage_type/';
 	}
 
 	createAuthorizationHeader(headers: Headers) {

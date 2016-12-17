@@ -110,10 +110,11 @@ export class HomeComponent implements OnInit, AfterViewInit {
 		var viFormatDate = 'DD/MM/YYYY';
 		objectStore.from_date = moment(objectStore.from_date, viFormatDate).format(dateFormat);
 		objectStore.from_name = this.getNameFromCode(objectStore.from);
-		
+		objectStore.to_name = this.getNameFromCode(objectStore.to);
+
 		if (objectStore.to_date == undefined) {
 			objectStore.to_date = '';
-			objectStore.to_name = '';
+			
 		} else {
 			objectStore.to_date = moment(objectStore.to_date, viFormatDate).format(dateFormat);
 			objectStore.to_name = this.getNameFromCode(objectStore.to);
