@@ -5,9 +5,10 @@
 -- Table: baggage_type
 CREATE TABLE baggage_type (
     id int NOT NULL AUTO_INCREMENT,
-    provider_id int NOT NULL,
+    provider varchar(45) NOT NULL,
     name varchar(150) NOT NULL,
     fare float NOT NULL,
+	status varchar(45) NOT NULL,
     created_at datetime NULL,
     updated_at datetime NULL,
     CONSTRAINT baggage_type_pk PRIMARY KEY (id)

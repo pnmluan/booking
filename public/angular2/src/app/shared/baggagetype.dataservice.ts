@@ -13,7 +13,7 @@ export class BaggageTypeDataService {
 	// @Output() foodDeleted: EventEmitter<any> = new EventEmitter();
 
 	constructor(private _Http: Http, private _configuration: Configuration) {
-		this.actionUrl = _configuration.apiUrl + 'bagage_type/';
+		this.actionUrl = _configuration.apiUrl + 'baggagetype/';
 	}
 
 	createAuthorizationHeader(headers: Headers) {
@@ -21,10 +21,10 @@ export class BaggageTypeDataService {
 		headers.append('Authorization', 'Basic ' + this._configuration.authentic);
 	}
 
-	public getAll() {
+	public getAll(provider) {
 		let headers = new Headers();
 		this.createAuthorizationHeader(headers);
-		return this._Http.get(this.actionUrl + 'index', { headers: headers, withCredentials: true })
+		return this._Http.get(this.actionUrl + 'index?provider=' + provider, { headers: headers, withCredentials: true })
 			.map(res => res.json())
 			.catch(this.handleError);
 

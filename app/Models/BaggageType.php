@@ -3,10 +3,10 @@ namespace App\Models;
   
 use Illuminate\Database\Eloquent\Model;
 
-class BaggageType extends Model
+class BaggageType extends BaseModel
 {
     protected $table = 'baggage_type';
-    protected $fillable = ['provider_id', 'name', 'fare'];
+    protected $fillable = ['provider', 'name', 'fare', 'status'];
 
     public function getModelValidations()
     {
@@ -17,7 +17,7 @@ class BaggageType extends Model
 
     public static function listItems(array $param = null){
 
-        $aColumns = ['provider_id', 'name', 'fare'];
+        $aColumns = ['provider', 'name', 'fare', 'status'];
 
         $query = \DB::table('baggage_type')
             ->select(\DB::raw('SQL_CALC_FOUND_ROWS id'),\DB::raw('id AS DT_RowId'),'baggage_type.*');

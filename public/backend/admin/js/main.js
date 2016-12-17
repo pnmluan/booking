@@ -68,7 +68,7 @@ MetronicApp.factory('settings', ['$rootScope', function($rootScope) {
         assetsPath: '../assets',
         globalPath: '../assets/global',
         layoutPath: '../assets/layouts/layout',
-        apiPath: '/booking/public/api/v1/',
+        apiPath: '/public/api/v1/',
         imgPath: '../assets/apps/img/',
     };
 
@@ -234,6 +234,27 @@ MetronicApp.config(['$stateProvider', '$urlRouterProvider', function($stateProvi
                             '../assets/global/plugins/dropzone/dropzone.min.js',
                             'js/controllers/LocationController.js',
                             'js/services/location.service.js'
+                        ] 
+                    });
+                }]
+            }
+        })
+
+        // baggagetype
+        .state('baggagetype', {
+            url: "/baggagetype.html",
+            templateUrl: "views/baggagetype/main.html",            
+            data: {pageTitle: 'Admin Baggage Type Template'},
+            controller: "BaggageTypeController",
+            resolve: {
+                deps: ['$ocLazyLoad', function($ocLazyLoad) {
+                    return $ocLazyLoad.load({
+                        name: 'MetronicApp',
+                        insertBefore: '#ng_load_plugins_before', // load the above css files before a LINK element with this ID. Dynamic CSS files must be loaded between core and theme css files
+                        files: [
+                            '../assets/global/plugins/dropzone/dropzone.min.js',
+                            'js/controllers/BaggageTypeController.js',
+                            'js/services/baggagetype.service.js'
                         ] 
                     });
                 }]

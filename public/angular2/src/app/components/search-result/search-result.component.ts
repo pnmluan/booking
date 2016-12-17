@@ -16,7 +16,8 @@ import { LocationDataService,
 	BookingDataService, 
 	BookingDetailDataService,
 	ContactDataService,
-	PassengerDataService
+	PassengerDataService,
+	BaggageTypeDataService
 } from '../../shared';
 
 import { Contact } from '../../models';
@@ -28,7 +29,7 @@ declare let jQuery: any;
   selector: 'search-result',
   templateUrl: './search-result.component.html',
   providers: [LocationDataService, AirlineDataService, BookingDataService, BookingDetailDataService, 
-	  ContactDataService, PassengerDataService]
+	  ContactDataService, PassengerDataService, BaggageTypeDataService]
 })
 export class SearchResultComponent implements OnInit, AfterViewInit {
 
@@ -56,6 +57,7 @@ export class SearchResultComponent implements OnInit, AfterViewInit {
 	childrenOptions = [];
 	infantOptions = [];
 	titleOptions = [];
+	baggageOptions = [];
 
 	curRouting?: string;
 
@@ -66,6 +68,7 @@ export class SearchResultComponent implements OnInit, AfterViewInit {
 		private _ContactDataService: ContactDataService,
 		private _BookingDetailDataService: BookingDetailDataService,
 		private _PassengerDataService: PassengerDataService,
+		private _BaggageTypeDataService: BaggageTypeDataService,
 		private sessionStorage: LocalStorageService, 
 		private _ActivatedRoute: ActivatedRoute, 
 		private _Router: Router,
@@ -294,6 +297,7 @@ export class SearchResultComponent implements OnInit, AfterViewInit {
 		if (result.dep_flights) {
 			let image = 'assets/img/' + type + '.gif';
 			for (let k in result.dep_flights) {
+				result.dep_flights[k].airline = type;
 				result.dep_flights[k].image = image;
 				result.dep_flights[k].direction = 'from';
 				flights.push(result.dep_flights[k]);
@@ -306,6 +310,7 @@ export class SearchResultComponent implements OnInit, AfterViewInit {
 		if (result.ret_flights) {
 			let image = 'assets/img/' + type + '.gif';
 			for (let k in result.ret_flights) {
+				result.ret_flights[k].airline = type;
 				result.ret_flights[k].image = image;
 				result.ret_flights[k].direction = 'to';
 				flights.push(result.ret_flights[k]);
@@ -364,7 +369,7 @@ export class SearchResultComponent implements OnInit, AfterViewInit {
 			this.listRoutes[1]['selectedFlight'] = flight;
 
 		}
-
+console.log(this.listRoutes);
 		if ((this.session_flight['round_trip'] == 'off' && this.listRoutes[0]['selectedFlight']) || 
 			(this.session_flight['round_trip'] == 'on' && this.listRoutes[0]['selectedFlight'] 
 				&& this.listRoutes[1]['selectedFlight'])) {
@@ -374,7 +379,15 @@ export class SearchResultComponent implements OnInit, AfterViewInit {
 			this.generateNumberOptions(this.session_flight['children'], 'Trẻ em', 'children');
 			this.generateNumberOptions(this.session_flight['infant'], 'Em bé', 'infant');
 			
-			
+			this._BaggageTypeDataService.getAll(flight.airline).subscribe(res => {
+				if(res.data) {
+					var options = [{ id: 0, name: 'Không mang theo hành lý' }];
+					for(let key in res.data) {
+						options.push(res.data[key]);
+					}
+					this.baggageOptions = options;
+				}
+			})
 		}
 
 	}

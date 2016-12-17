@@ -46,7 +46,7 @@ export class AirlineDataService {
 	public vna(data) {
 		let headers = new Headers();
 		this.createAuthorizationHeader(headers);
-		return this.http.post(this.actionUrl + 'vna', data, { headers: headers, withCredentials: true })
+		return this.http.post(this.actionUrl + 'vna', data, { headers: headers})
 			.map(res => res.json())
 			.catch(this.handleError);
 	}

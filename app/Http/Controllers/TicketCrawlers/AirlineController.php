@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers\TicketCrawlers;
 
+use App\Http\Controllers\ApiController;
+
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
 
-class AirlineController extends \App\Http\Controllers\ApiController
+class AirlineController extends ApiController
 {
     public function index(){
         $arr = ['api'=> 'test'];

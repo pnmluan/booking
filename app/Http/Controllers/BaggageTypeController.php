@@ -33,7 +33,7 @@ class BaggageTypeController extends ApiController
 
     public function create(Request $request){
         $baggageType = new BaggageType();
-        $data = $request['data'];
+        $data = $request->all();
 
         $baggageType->fill($data);
 
@@ -70,7 +70,7 @@ class BaggageTypeController extends ApiController
         if(!$baggageType) {
             return $this->respondNotFound();
         }
-        $data = $request['data'];
+        $data = $request->all();
 
         $baggageType->fill($data);
 

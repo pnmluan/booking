@@ -14,8 +14,8 @@
 $app->get('/', function () use ($app) {
     return $app->version();
 });
-
-$app->group(['prefix' => 'api/v1', 'middleware' => 'BasicAuth',  'namespace' => 'App\Http\Controllers'], function($app)
+// 'middleware' => 'BasicAuth',
+$app->group(['prefix' => 'api/v1',   'namespace' => 'App\Http\Controllers'], function($app)
 {
     /*
 	|--------------------------------------------------------------------------
@@ -120,15 +120,15 @@ $app->group(['prefix' => 'api/v1', 'middleware' => 'BasicAuth',  'namespace' => 
     | BaggageType
     |--------------------------------------------------------------------------
     */
-    $app->get('baggage_type','BaggageTypeController@index');
+    $app->get('baggagetype/index','BaggageTypeController@index');
 
-    $app->get('baggage_type/show/{id}','BaggageTypeController@show');
+    $app->get('baggagetype/show/{id}','BaggageTypeController@show');
 
-    $app->post('baggage_type/create','BaggageTypeController@create');
+    $app->post('baggagetype/create','BaggageTypeController@create');
 
-    $app->put('baggage_type/update/{id}','BaggageTypeController@update');
+    $app->put('baggagetype/update/{id}','BaggageTypeController@update');
 
-    $app->delete('baggage_type/delete/{id}','BaggageTypeController@delete');
+    $app->delete('baggagetype/delete/{id}','BaggageTypeController@delete');
 
     
 
@@ -210,7 +210,7 @@ $app->group(['prefix' => 'api/v1', 'middleware' => 'BasicAuth',  'namespace' => 
 });
 
 // Crawler API
-$app->group(['prefix' => 'api/v1', 'middleware' => 'BasicAuth', 'namespace' => 'App\Http\Controllers'], function($app)
+$app->group(['prefix' => 'api/v1',  'namespace' => 'App\Http\Controllers'], function($app)
 {
     $app->get('airline','TicketCrawlers\AirlineController@index');
 

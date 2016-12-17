@@ -6,3 +6,4 @@ export * from './comment.dataservice';
 export * from './contact.dataservice';
 export * from './passenger.dataservice';
 export * from './location.dataservice';
+export * from './baggagetype.dataservice';
