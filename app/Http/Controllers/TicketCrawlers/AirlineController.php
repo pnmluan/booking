@@ -384,8 +384,8 @@ class AirlineController extends \App\Http\Controllers\ApiController
                 $data['start_time'] = $start_time;
                 $data['end_time'] = $end_time;
                 $data['flight_code'] = $flight_code;
-                $data['price'] = intval($price);
-                $data['fee'] = intval($fee);
+                $data['price'] = $price;
+                $data['fee'] = $fee;
                 $data['fee_service'] = 0;
                 $data['type'] = 'Vé tiết kiệm';
 
@@ -397,8 +397,8 @@ class AirlineController extends \App\Http\Controllers\ApiController
                 // $data['start_time'] = $start_time;
                 // $data['end_time'] = $end_time;
                 // $data['flight_code'] = $flight_code;
-                // $data['price'] = intval($price);
-                // $data['fee'] = intval($fee);
+                // $data['price'] = $price;
+                // $data['fee'] = $fee;
                 // $data['fee_service'] = $price1;
                 // $data['type'] = 'Vé linh hoạt';
 
@@ -410,8 +410,8 @@ class AirlineController extends \App\Http\Controllers\ApiController
                 // $data['start_time'] = $start_time;
                 // $data['end_time'] = $end_time;
                 // $data['flight_code'] = $flight_code;
-                // $data['price'] = intval($price);
-                // $data['fee'] = intval($fee);
+                // $data['price'] = $price;
+                // $data['fee'] = $fee;
                 // $data['fee_service'] = $price2;
                 // $data['type'] = 'Vé tối ưu';
 
@@ -455,8 +455,8 @@ class AirlineController extends \App\Http\Controllers\ApiController
                     $data['start_time'] = $start_time;
                     $data['end_time'] = $end_time;
                     $data['flight_code'] = $flight_code;
-                    $data['price'] = intval($price);
-                    $data['fee'] = intval($fee);
+                    $data['price'] = $price;
+                    $data['fee'] = $fee;
                     $data['fee_service'] = 0;
                     $data['type'] = 'Vé tiết kiệm';
 
@@ -468,8 +468,8 @@ class AirlineController extends \App\Http\Controllers\ApiController
                     // $data['start_time'] = $start_time;
                     // $data['end_time'] = $end_time;
                     // $data['flight_code'] = $flight_code;
-                    // $data['price'] = intval($price);
-                    // $data['fee'] = intval($fee);
+                    // $data['price'] = $price;
+                    // $data['fee'] = $fee;
                     // $data['fee_service'] = $price1;
                     // $data['type'] = 'Vé linh hoạt';
 
@@ -481,8 +481,8 @@ class AirlineController extends \App\Http\Controllers\ApiController
                     // $data['start_time'] = $start_time;
                     // $data['end_time'] = $end_time;
                     // $data['flight_code'] = $flight_code;
-                    // $data['price'] = intval($price);
-                    // $data['fee'] = intval($fee);
+                    // $data['price'] = $price;
+                    // $data['fee'] = $fee;
                     // $data['fee_service'] = $price2;
                     // $data['type'] = 'Vé tối ưu';
 
@@ -521,6 +521,10 @@ class AirlineController extends \App\Http\Controllers\ApiController
         $infant = $request->input('infant');
 
         // SEARCH FLIGHT
+
+        $again = 0;
+        begin:
+        $again++;
         $curl = new \Curl();
 
         $curl->get('https://wl-prod.sabresonicweb.com/SSW2010/VNVN/webqtrip.html?' .
@@ -544,18 +548,34 @@ class AirlineController extends \App\Http\Controllers\ApiController
 
         $curl->get('https://wl-prod.sabresonicweb.com/SSW2010/VNVN/webqtrip.html?execution=e1s1');
 
+        if (empty($curl->response) && $again < 3)
+            goto begin;
+        else if ($again >= 3) {
+            echo 'Page return emtpy';
+            exit;
+        }
+
         $doc = new \DOMDocument();
         $doc->loadHTML($curl->response);
         $xpath = new \DOMXpath($doc);
 
         $result = [];
 
-
         // DEPARTURE FLIGHT
         $id = ($round_trip == 'RT') ? 'outbounds' : 'both';
         $flight_codes = $xpath->query("//*[@id='" . $id . "']//*[@class='flight-number']");
-        $start_times = $xpath->query("//*[@id='" . $id . "']//th[3]//*[@class='translate time wasTranslated']");
-        $end_times = $xpath->query("//*[@id='" . $id . "']//th[4]//*[@class='translate time wasTranslated']");
+        $start_times = $xpath->query("//*[@id='" . $id . "']/div/fieldset/table/tbody/tr/th[3]/span[@class='translate time wasTranslated']");
+        $end_times = $xpath->query("//*[@id='" . $id . "']/div/fieldset/table/tbody/tr/th[4]/span[@class='translate time wasTranslated']");
+
+        $temp = $xpath->query("//*[@id='" . $id . "']/div/fieldset/table/thead/tr/th[@class='price ']");
+
+        $types = [];
+
+        foreach ($temp as $key => $value) {
+            array_push($types, $value);
+        }
+
+        array_push($types, $xpath->query("//*[@id='" . $id . "']/div/fieldset/table/thead/tr/th[@class='price yui-dt-last']")[0]);
 
         for ($i = 0; $i < $flight_codes->length; $i++) {
             $flight_code = $flight_codes[$i]->nodeValue;
@@ -565,98 +585,24 @@ class AirlineController extends \App\Http\Controllers\ApiController
 
             $min = null;
 
-            // Thương gia Linh hoạt
-            $price = $xpath->query("(//*[@id='" . $id . "']//td[1]//div[@class='outer'])[" . ($i + 1) ."]//*[@class='prices-amount']");
+            foreach ($types as $index => $type) {
+                $price = $xpath->query("(//*[@id='" . $id . "']/div/fieldset/table/tbody/tr/td[" . ($index + 1) . "]/div/div)[" . ($i + 1) ."]/div/label/span/span/span[1]");
 
-            if ($price->length > 0) {
-                $data = [];
-                $data['flight_code'] = $flight_code;
-                $data['start_date'] = $start_date;
-                $data['start_time'] = $start_time;
-                $data['end_time'] = $end_time;
-                $data['price'] = str_replace(',', '', $price[0]->nodeValue);
-                $data['type'] = 'Thương gia Linh hoạt';
+                if ($price->length > 0) {
+                    $data = [];
+                    $data['flight_code'] = $flight_code;
+                    $data['start_date'] = $start_date;
+                    $data['start_time'] = $start_time;
+                    $data['end_time'] = $end_time;
+                    $data['price'] = str_replace(',', '', $price[0]->nodeValue);
+                    $data['type'] = utf8_decode($type->nodeValue);
 
-                $min = $data;
-            }
-
-            // Thương gia Tiêu chuẩn
-            $price = $xpath->query("(//*[@id='" . $id . "']//td[2]//div[@class='outer'])[" . ($i + 1) ."]//*[@class='prices-amount']");
-
-            if ($price->length > 0) {
-                $data = [];
-                $data['flight_code'] = $flight_code;
-                $data['start_date'] = $start_date;
-                $data['start_time'] = $start_time;
-                $data['end_time'] = $end_time;
-                $data['price'] = str_replace(',', '', $price[0]->nodeValue);
-                $data['type'] = 'Thương gia Tiêu chuẩn';
-
-                if ($min) {
-                    if (intval($min['price']) > intval($data['price']))
+                    if ($min) {
+                        if (intval($min['price']) > intval($data['price']))
+                            $min = $data;
+                    } else {
                         $min = $data;
-                } else {
-                    $min = $data;
-                }
-            }
-
-            // Phổ thông linh hoạt
-            $price = $xpath->query("(//*[@id='" . $id . "']//td[3]//div[@class='outer'])[" . ($i + 1) ."]//*[@class='prices-amount']");
-
-            if ($price->length > 0) {
-                $data = [];
-                $data['flight_code'] = $flight_code;
-                $data['start_date'] = $start_date;
-                $data['start_time'] = $start_time;
-                $data['end_time'] = $end_time;
-                $data['price'] = str_replace(',', '', $price[0]->nodeValue);
-                $data['type'] = 'Phổ thông linh hoạt';
-
-                if ($min) {
-                    if (intval($min['price']) > intval($data['price']))
-                        $min = $data;
-                } else {
-                    $min = $data;
-                }
-            }
-
-            // Phổ thông Tiêu chuẩn
-            $price = $xpath->query("(//*[@id='" . $id . "']//td[4]//div[@class='outer'])[" . ($i + 1) ."]//*[@class='prices-amount']");
-
-            if ($price->length > 0) {
-                $data = [];
-                $data['flight_code'] = $flight_code;
-                $data['start_date'] = $start_date;
-                $data['start_time'] = $start_time;
-                $data['end_time'] = $end_time;
-                $data['price'] = str_replace(',', '', $price[0]->nodeValue);
-                $data['type'] = 'Phổ thông Tiêu chuẩn';
-
-                if ($min) {
-                    if (intval($min['price']) > intval($data['price']))
-                        $min = $data;
-                } else {
-                    $min = $data;
-                }
-            }
-
-            // Phổ thông Phổ thông Tiết kiệm
-            $price = $xpath->query("(//*[@id='" . $id . "']//td[5]//div[@class='outer'])[" . ($i + 1) ."]//*[@class='prices-amount']");
-
-            if ($price->length > 0) {
-                $data = [];
-                $data['flight_code'] = $flight_code;
-                $data['start_date'] = $start_date;
-                $data['start_time'] = $start_time;
-                $data['end_time'] = $end_time;
-                $data['price'] = str_replace(',', '', $price[0]->nodeValue);
-                $data['type'] = 'Phổ thông Tiết kiệm';
-
-                if ($min) {
-                    if (intval($min['price']) > intval($data['price']))
-                        $min = $data;
-                } else {
-                    $min = $data;
+                    }
                 }
             }
 
@@ -664,12 +610,21 @@ class AirlineController extends \App\Http\Controllers\ApiController
                 $result['dep_flights'][] = $min;
         }
 
-
         // RETURN FLIGHT
         if (!empty($round_trip) && $round_trip == 'RT') {
             $flight_codes = $xpath->query("//*[@id='inbounds']//*[@class='flight-number']");
-            $start_times = $xpath->query("//*[@id='inbounds']//th[3]//*[@class='translate time wasTranslated']");
-            $end_times = $xpath->query("//*[@id='inbounds']//th[4]//*[@class='translate time wasTranslated']");
+            $start_times = $xpath->query("//*[@id='inbounds']/div/fieldset/table/tbody/tr/th[3]/span[@class='translate time wasTranslated']");
+            $end_times = $xpath->query("//*[@id='inbounds']/div/fieldset/table/tbody/tr/th[4]/span[@class='translate time wasTranslated']");
+
+            $temp = $xpath->query("//*[@id='inbounds']/div/fieldset/table/thead/tr/th[@class='price ']");
+
+            $types = [];
+
+            foreach ($temp as $key => $value) {
+                array_push($types, $value);
+            }
+
+            array_push($types, $xpath->query("//*[@id='inbounds']/div/fieldset/table/thead/tr/th[@class='price yui-dt-last']")[0]);
 
             for ($i = 0; $i < $flight_codes->length; $i++) {
                 $flight_code = $flight_codes[$i]->nodeValue;
@@ -679,98 +634,24 @@ class AirlineController extends \App\Http\Controllers\ApiController
 
                 $min = null;
 
-                // Thương gia Linh hoạt
-                $price = $xpath->query("(//*[@id='inbounds']//td[1]//div[@class='outer'])[" . ($i + 1) ."]//*[@class='prices-amount']");
+                foreach ($types as $index => $type) {
+                    $price = $xpath->query("(//*[@id='inbounds']/div/fieldset/table/tbody/tr/td[" . ($index + 1) . "]/div/div)[" . ($i + 1) ."]/div/label/span/span/span[1]");
 
-                if ($price->length > 0) {
-                    $data = [];
-                    $data['flight_code'] = $flight_code;
-                    $data['start_date'] = $start_date;
-                    $data['start_time'] = $start_time;
-                    $data['end_time'] = $end_time;
-                    $data['price'] = str_replace(',', '', $price[0]->nodeValue);
-                    $data['type'] = 'Thương gia Linh hoạt';
+                    if ($price->length > 0) {
+                        $data = [];
+                        $data['flight_code'] = $flight_code;
+                        $data['start_date'] = $start_date;
+                        $data['start_time'] = $start_time;
+                        $data['end_time'] = $end_time;
+                        $data['price'] = str_replace(',', '', $price[0]->nodeValue);
+                        $data['type'] = utf8_decode($type->nodeValue);
 
-                    $min = $data;
-                }
-
-                // Thương gia Tiêu chuẩn
-                $price = $xpath->query("(//*[@id='inbounds']//td[2]//div[@class='outer'])[" . ($i + 1) ."]//*[@class='prices-amount']");
-
-                if ($price->length > 0) {
-                    $data = [];
-                    $data['flight_code'] = $flight_code;
-                    $data['start_date'] = $start_date;
-                    $data['start_time'] = $start_time;
-                    $data['end_time'] = $end_time;
-                    $data['price'] = str_replace(',', '', $price[0]->nodeValue);
-                    $data['type'] = 'Thương gia Tiêu chuẩn';
-
-                    if ($min) {
-                        if (intval($min['price']) > intval($data['price']))
+                        if ($min) {
+                            if (intval($min['price']) > intval($data['price']))
+                                $min = $data;
+                        } else {
                             $min = $data;
-                    } else {
-                        $min = $data;
-                    }
-                }
-
-                // Phổ thông linh hoạt
-                $price = $xpath->query("(//*[@id='inbounds']//td[3]//div[@class='outer'])[" . ($i + 1) ."]//*[@class='prices-amount']");
-
-                if ($price->length > 0) {
-                    $data = [];
-                    $data['flight_code'] = $flight_code;
-                    $data['start_date'] = $start_date;
-                    $data['start_time'] = $start_time;
-                    $data['end_time'] = $end_time;
-                    $data['price'] = str_replace(',', '', $price[0]->nodeValue);
-                    $data['type'] = 'Phổ thông linh hoạt';
-
-                    if ($min) {
-                        if (intval($min['price']) > intval($data['price']))
-                            $min = $data;
-                    } else {
-                        $min = $data;
-                    }
-                }
-
-                // Phổ thông Tiêu chuẩn
-                $price = $xpath->query("(//*[@id='inbounds']//td[4]//div[@class='outer'])[" . ($i + 1) ."]//*[@class='prices-amount']");
-
-                if ($price->length > 0) {
-                    $data = [];
-                    $data['flight_code'] = $flight_code;
-                    $data['start_date'] = $start_date;
-                    $data['start_time'] = $start_time;
-                    $data['end_time'] = $end_time;
-                    $data['price'] = str_replace(',', '', $price[0]->nodeValue);
-                    $data['type'] = 'Phổ thông Tiêu chuẩn';
-
-                    if ($min) {
-                        if (intval($min['price']) > intval($data['price']))
-                            $min = $data;
-                    } else {
-                        $min = $data;
-                    }
-                }
-
-                // Phổ thông Phổ thông Tiết kiệm
-                $price = $xpath->query("(//*[@id='inbounds']//td[5]//div[@class='outer'])[" . ($i + 1) ."]//*[@class='prices-amount']");
-
-                if ($price->length > 0) {
-                    $data = [];
-                    $data['flight_code'] = $flight_code;
-                    $data['start_date'] = $start_date;
-                    $data['start_time'] = $start_time;
-                    $data['end_time'] = $end_time;
-                    $data['price'] = str_replace(',', '', $price[0]->nodeValue);
-                    $data['type'] = 'Phổ thông Tiết kiệm';
-
-                    if ($min) {
-                        if (intval($min['price']) > intval($data['price']))
-                            $min = $data;
-                    } else {
-                        $min = $data;
+                        }
                     }
                 }
 
