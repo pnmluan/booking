@@ -9,6 +9,9 @@ import { RouterModule } from '@angular/router';
 import { SelectModule } from 'angular2-select';
 import { LocalStorageService, LOCAL_STORAGE_SERVICE_CONFIG } from 'angular-2-local-storage';
 import { MomentModule } from 'angular2-moment';
+import { HTTP_INTERCEPTOR_PROVIDER } from 'ng2-http-interceptor';
+import { LoadingAnimateModule, LoadingAnimateService } from 'ng2-loading-animate';
+import { Ng2Bs3ModalModule } from 'ng2-bs3-modal/ng2-bs3-modal';
 
  
 // Create config options (see ILocalStorageServiceConfigOptions) for deets:
@@ -59,12 +62,16 @@ import { CustomerComponent } from './components/customer';
     HttpModule,
     ReactiveFormsModule,
     SelectModule,
-    MomentModule
+    MomentModule,
+    LoadingAnimateModule.forRoot(),
+    Ng2Bs3ModalModule
 
   ],
   providers: [
     Configuration,
     HttpClient,
+    ...HTTP_INTERCEPTOR_PROVIDER,
+    LoadingAnimateService,
     LocalStorageService,
     {
       provide: LOCAL_STORAGE_SERVICE_CONFIG, useValue: localStorageServiceConfig
