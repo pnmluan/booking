@@ -57,7 +57,9 @@ export class SearchResultComponent implements OnInit, AfterViewInit {
 	childrenOptions = [];
 	infantOptions = [];
 	titleOptions = [];
-	baggageOptions = [];
+	baggageOptionsFrom = [];
+	baggageOptionsTo = [];
+	generalData = {};
 
 	curRouting?: string;
 
@@ -156,6 +158,7 @@ export class SearchResultComponent implements OnInit, AfterViewInit {
 
   	searchingData() {
 		var params = this.sessionStorage.get('session_flight');
+		this.generalData['str_people'];
 
 		this.session_flight = JSON.parse(String(params));
 
@@ -274,7 +277,7 @@ export class SearchResultComponent implements OnInit, AfterViewInit {
 				airlines.push(k);
 			}
 		}
-		console.log(airlines);
+		
 		for (let key in airlines) {
 			dep_flights = this.pushDepFlights(airlines[key], this.airlines[airlines[key]], dep_flights);
 
@@ -369,7 +372,7 @@ export class SearchResultComponent implements OnInit, AfterViewInit {
 			this.listRoutes[1]['selectedFlight'] = flight;
 
 		}
-console.log(this.listRoutes);
+
 		if ((this.session_flight['round_trip'] == 'off' && this.listRoutes[0]['selectedFlight']) || 
 			(this.session_flight['round_trip'] == 'on' && this.listRoutes[0]['selectedFlight'] 
 				&& this.listRoutes[1]['selectedFlight'])) {
@@ -379,15 +382,29 @@ console.log(this.listRoutes);
 			this.generateNumberOptions(this.session_flight['children'], 'Trẻ em', 'children');
 			this.generateNumberOptions(this.session_flight['infant'], 'Em bé', 'infant');
 			
+			// Baggage Options
 			this._BaggageTypeDataService.getAll(flight.airline).subscribe(res => {
-				if(res.data) {
-					var options = [{ id: 0, name: 'Không mang theo hành lý' }];
-					for(let key in res.data) {
+				if (res.data) {
+					var options = [];
+					for (let key in res.data) {
 						options.push(res.data[key]);
 					}
-					this.baggageOptions = options;
+					this.baggageOptionsFrom = options;
 				}
-			})
+			});
+
+			if(this.round_trip) {
+				this._BaggageTypeDataService.getAll(flight.airline).subscribe(res => {
+					if (res.data) {
+						var options = [];
+						for (let key in res.data) {
+							options.push(res.data[key]);
+						}
+						this.baggageOptionsTo = options;
+					}
+				})
+			}
+
 		}
 
 	}
@@ -399,6 +416,21 @@ console.log(this.listRoutes);
 			let obj = {title: '', fullname: '', date_of_birth: '', name: name, key: key};
 			this.passengers.push(obj);
 		}
+	}
+
+	// generate string of customer
+	generateStrCustomers() {
+		let str = '';
+		if(this.session_flight['adult']) {
+			str += this.session_flight['adult'] + ' người lớn,';
+		}
+		if (this.session_flight['children']) {
+			str += this.session_flight['children'] + ' trẻ em,';
+		}
+		if (this.session_flight['infant']) {
+			str += this.session_flight['infant'] + ' em bé,';
+		}
+		str = str.substr(0, str.length - 2);
 	}
 
 
