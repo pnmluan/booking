@@ -4,7 +4,7 @@ namespace App\Models;
 use App\Models\BaseModel;
 use Illuminate\Database\Eloquent\Model;
   
-class Booking extends BaseModel
+class EntranceTicket extends BaseModel
 {
     protected $table = 'entrance_ticket'; 
     protected $fillable = ['name','adult_fare', 'children_fare', 'description', 'content', 'created_at'];

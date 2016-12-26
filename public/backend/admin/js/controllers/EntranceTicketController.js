@@ -21,7 +21,7 @@ angular.module('MetronicApp').controller('EntranceTicketController', function($r
     $scope.clickToAddNew = function() {
 
         ngDialog.openConfirm({
-            template: 'views/entrance_ticket/model_add_entrance_ticket.html',
+            template: 'views/entranceticket/model_add_entrance_ticket.html',
             className: 'ngdialog-theme-default',
             scope: $scope,
             controller: ['$scope', 'data', function($scope, data){
@@ -93,7 +93,7 @@ $scope.$watch('img', function() {
     // Click to Update
     $scope.clickToUpdate = function(item) {
         ngDialog.openConfirm({
-            template: 'views/entrance_ticket/model_update_entrance_ticket.html',
+            template: 'views/entranceticket/model_update_entrance_ticket.html',
             className: 'ngdialog-theme-default',
             scope: $scope,
             controller: ['$scope', '$filter', 'data', function($scope, $filter, data){

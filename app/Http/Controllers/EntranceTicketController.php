@@ -8,7 +8,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
 
-class entranceTicketController extends ApiController{
+class EntranceTicketController extends ApiController{
 
     public function index(Request $request){
 
