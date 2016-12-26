@@ -1070,8 +1070,22 @@ only screen and (max-width: 767px) {
 .intro-services .item .item-inner h3 { border-bottom: 1px solid #ddd; margin-bottom: 20px; text-transform: uppercase; font-size: 15px; font-weight: bold; padding: 0px 10px; padding-bottom: 15px; line-height: 20px; }
 .intro-services .item .item-inner p { color: #999; }
 
+.intro-who-inner {  }
+.intro-who-inner img { float: left; margin-right: 10px; }
+
 .intro-why-inner { margin: 0px -15px; }
 .intro-why .item { float: left; width: 25%; padding: 0px 16px; }
 .intro-why .item img { width: 40px; }
 .intro-why .item > div { margin-bottom: 20px; }
 .intro-sub-title { font-size: 15px; font-weight: bold; text-transform: uppercase; }
+
+
+@media screen and (max-width: 767px){
+    .intro-services .item { float: left; width: 50%; padding: 0px 15px; text-align: center; margin-bottom: 30px; }
+    .intro-why .item { float: left; width: 50%; padding: 0px 16px; margin-bottom: 0px; }
+}
+
+@media screen and (max-width: 480px){
+    .intro-services .item { float: left; width: 100%; padding: 0px 15px; text-align: center; margin-bottom: 30px; }
+    .intro-why .item { float: left; width: 100%; padding: 0px 16px; margin-bottom: 0px; }
+}
