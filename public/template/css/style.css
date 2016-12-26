@@ -1053,3 +1053,25 @@ only screen and (max-width: 767px) {
 @media screen and (max-width: 768px){
     .owl-carousel-slider .item a{  padding-top: 60px; }
 }
+
+/****** INTRO ******/
+/*******************/
+.intro-title { color: #649931; font-size: 20px; font-weight: bold; margin-bottom: 10px; border-left: 5px solid #649931; padding-left: 10px; margin-top: 50px; margin-bottom: 20px; }
+
+.intro-why p { margin-bottom: 20px; }
+.intro-why .intro-sub-title { margin-bottom: 10px; }
+
+.intro-services {}
+.intro-services .item { float: left; width: 33.33%; padding: 0px 15px; text-align: center; }
+.intro-services-inner { margin: 0px -15px; }
+.intro-services .item img { width: 100%; height: auto; display: block; }
+.intro-services .item .item-inner { box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); }
+.intro-services .item .item-inner div { padding: 30px; }
+.intro-services .item .item-inner h3 { border-bottom: 1px solid #ddd; margin-bottom: 20px; text-transform: uppercase; font-size: 15px; font-weight: bold; padding: 0px 10px; padding-bottom: 15px; line-height: 20px; }
+.intro-services .item .item-inner p { color: #999; }
+
+.intro-why-inner { margin: 0px -15px; }
+.intro-why .item { float: left; width: 25%; padding: 0px 16px; }
+.intro-why .item img { width: 40px; }
+.intro-why .item > div { margin-bottom: 20px; }
+.intro-sub-title { font-size: 15px; font-weight: bold; text-transform: uppercase; }

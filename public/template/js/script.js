@@ -56,10 +56,10 @@ var selectFlights = {
     });
   },
   scrollSubmit: function() {
-	 var m;
-	 if(jQuery('.submit-plane').length > 0){
-		 m = jQuery('.submit-plane').offset().top;
-	 }
+    var m;
+    if (jQuery('.submit-plane').length > 0) {
+      m = jQuery('.submit-plane').offset().top;
+    }
     var n = jQuery(window).height();
     var w = jQuery('.main-list-plane-inner').width();
 
@@ -88,13 +88,13 @@ var selectFlights = {
 };
 
 var guestDetails = {
-  init: function(){
+  init: function() {
     var checkbox = jQuery('input[name="order-report"]');
     checkbox.prop('checked', false);
   },
-  toggleBill: function(){
-    jQuery('input[name="order-report"]').on('change', function(){
-      if(!jQuery(this).is(':checked')){
+  toggleBill: function() {
+    jQuery('input[name="order-report"]').on('change', function() {
+      if (!jQuery(this).is(':checked')) {
         jQuery('.bill').hide();
       } else {
         jQuery('.bill').slideDown(300);
@@ -142,16 +142,16 @@ jQuery(document).ready(function() {
   guestDetails.toggleBill();
 
   jQuery("html").niceScroll({
-    cursorcolor:"#ccc",
-    cursorborder :"0px solid #fff",
-    railpadding:{top:0,right:0,left:0,bottom:0},
-    cursorwidth:"5px",
-    cursorborderradius:"0px",
-    cursoropacitymin:0,
-    cursoropacitymax:0.7,
-    boxzoom:true,
-    horizrailenabled:false,
-    autohidemode:false
+    cursorcolor: "#ccc",
+    cursorborder: "0px solid #fff",
+    railpadding: { top: 0, right: 0, left: 0, bottom: 0 },
+    cursorwidth: "5px",
+    cursorborderradius: "0px",
+    cursoropacitymin: 0,
+    cursoropacitymax: 0.7,
+    boxzoom: true,
+    horizrailenabled: false,
+    autohidemode: false
   });
 
   jQuery('.owl-carousel-slider').owlCarousel({
@@ -160,7 +160,23 @@ jQuery(document).ready(function() {
     paginationSpeed: 400,
     singleItem: true,
     autoPlay: 5000,
-    transitionStyle : "fade",
-    pagination : false
+    transitionStyle: "fade",
+    pagination: false
+  });
+
+  jQuery('.intro-services .item .item-inner').matchHeight({
+    byRow: true,
+    property: 'height',
+    target: null,
+    remove: false
+  });
+
+  //effect image our service
+  jQuery(".intro-why .item").mouseover(function() {
+    //Add hiệu ứng lúc hover vào icon
+    var objImg = jQuery(this).find("img:first");
+    objImg.removeClass().addClass("animated flip").one("webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend", function() {
+      objImg.removeClass();
+    });
   });
 });
