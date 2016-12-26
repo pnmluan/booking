@@ -156,6 +156,27 @@ MetronicApp.config(['$stateProvider', '$urlRouterProvider', function($stateProvi
             }
         })
 
+        // Booking
+        .state('entrance_ticket', {
+            url: "/entrance-ticket.html",
+            templateUrl: "views/entranceticket/main.html",            
+            data: {pageTitle: 'Admin Entrance Ticket Template'},
+            controller: "EntranceTicketController",
+            resolve: {
+                deps: ['$ocLazyLoad', function($ocLazyLoad) {
+                    return $ocLazyLoad.load({
+                        name: 'MetronicApp',
+                        insertBefore: '#ng_load_plugins_before', // load the above css files before a LINK element with this ID. Dynamic CSS files must be loaded between core and theme css files
+                        files: [
+                            '../assets/global/plugins/dropzone/dropzone.min.js',
+                            'js/controllers/EntranceTicketController.js',
+                            'js/services/entranceticket.service.js'
+                        ] 
+                    });
+                }]
+            }
+        })
+
         // Banner
         .state('banner', {
             url: "/banner.html",

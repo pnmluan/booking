@@ -1,0 +1,56 @@
+<!-- BEGIN PAGE HEADER-->
+<div class="page-bar">
+    <ul class="page-breadcrumb">
+        <li>
+            <a href="#/dashboard.html">Home</a>
+            <i class="fa fa-circle"></i>
+        </li>
+        <li>
+            <a href="#">Entrance Ticket</a>
+        </li>
+    </ul>
+
+</div>
+<h3 class="page-title"> Entrance Ticket </h3>
+<!-- END PAGE HEADER-->
+<!-- BEGIN MAIN CONTENT -->
+<div ng-controller="EntranceTicketController">
+
+    <!-- BEGIN TABLE Entrance Ticket -->
+    <div class="row">
+
+        <div class="col-md-12">
+            <!-- BEGIN EXAMPLE TABLE PORTLET-->
+            <div class="portlet light bordered">
+                <div class="portlet-title">
+                    <div class="caption font-dark">
+                        <i class="icon-settings font-dark"></i>
+                        <span class="caption-subject bold uppercase"> Entrance Ticket Management</span>
+                    </div>
+
+                </div>
+                <div class="portlet-body">
+                    <div class="table-toolbar">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="btn-group pull-right">
+                                    <button id="sample_editable_1_new" class="btn sbold green" ng-click="clickToAddNew()">
+                                        Add New
+                                        <i class="fa fa-plus"></i>
+                                    </button>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <table datatable="" dt-options="dtOptions" dt-columns="dtColumns" dt-instance="dtInstance" 
+                    id="dataTableEntranceTicket" class="table table-striped table-bordered table-hover table-checkable order-column"></table>
+                </div>
+            </div>
+            <!-- END EXAMPLE TABLE PORTLET-->
+        </div>
+
+    </div>
+    <!-- END TABLE item -->
+</div>
+<!-- END MAIN CONTENT -->

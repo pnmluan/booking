@@ -106,7 +106,7 @@ CREATE TABLE comment (
 CREATE TABLE contact (
     id int NOT NULL AUTO_INCREMENT,
     booking_id int NOT NULL,
-    title varchar20) NOT NULL,
+    title varchar(20) NOT NULL,
     first_name varchar(50) NOT NULL,
     last_name varchar(50) NOT NULL,
 	fullname varchar(100) NOT NULL,
@@ -172,6 +172,52 @@ CREATE TABLE provider (
     CONSTRAINT provider_pk PRIMARY KEY (id)
 );
 
+-- Table: album_ticket
+CREATE TABLE album_ticket (
+    id int NOT NULL,
+    name varchar(100) NOT NULL,
+    entrance_ticket_id int NOT NULL,
+    url varchar(100) NOT NULL,
+	created_at datetime NULL,
+    updated_at datetime NULL,
+    CONSTRAINT album_ticket_pk PRIMARY KEY (id)
+);
+
+-- Table: entrance_ticket
+CREATE TABLE entrance_ticket (
+    id int NOT NULL,
+    name varchar(100) NOT NULL,
+    adult_fare float NOT NULL,
+    children_fare float NOT NULL,
+    description varchar(1000) NOT NULL,
+	created_at datetime NULL,
+    updated_at datetime NULL,
+    CONSTRAINT entrance_ticket_pk PRIMARY KEY (id)
+);
+
+-- Table: ticket_bill
+CREATE TABLE ticket_bill (
+    id int NOT NULL,
+    departure datetime NOT NULL,
+    total_fare float NOT NULL,
+    contact_id int NOT NULL,
+    comment varchar(500) NOT NULL,
+	created_at datetime NULL,
+    updated_at datetime NULL,
+    CONSTRAINT ticket_bill_pk PRIMARY KEY (id)
+);
+
+-- Table: ticket_detail
+CREATE TABLE ticket_detail (
+    id int NOT NULL,
+    adult int NOT NULL,
+    entrance_ticket_id int NOT NULL,
+    children int NOT NULL,
+    ticket_bill_id int NOT NULL,
+	created_at datetime NULL,
+    updated_at datetime NULL,
+    CONSTRAINT ticket_detail_pk PRIMARY KEY (id)
+);
 -- Table: ticket_type
 CREATE TABLE ticket_type (
     id int NOT NULL AUTO_INCREMENT,
@@ -223,9 +269,19 @@ ALTER TABLE booking_detail ADD CONSTRAINT flight_location_depart FOREIGN KEY fli
 ALTER TABLE passenger ADD CONSTRAINT passengers_booking FOREIGN KEY passengers_booking (booking_id)
     REFERENCES booking (id);
 
--- Reference: ticket_type_airlines (table: ticket_type)
-ALTER TABLE ticket_type ADD CONSTRAINT ticket_type_airlines FOREIGN KEY ticket_type_airlines (provider)
-    REFERENCES provider (id);
+-- Reference: ticket_detail_contact (table: ticket_bill)
+ALTER TABLE ticket_bill ADD CONSTRAINT ticket_detail_contact FOREIGN KEY ticket_detail_contact (contact_id)
+    REFERENCES contact (id);
+
+-- Reference: ticket_detail_entrance_ticket (table: ticket_detail)
+ALTER TABLE ticket_detail ADD CONSTRAINT ticket_detail_entrance_ticket FOREIGN KEY ticket_detail_entrance_ticket (entrance_ticket_id)
+    REFERENCES entrance_ticket (id);
+
+-- Reference: ticket_detail_ticket_bill (table: ticket_detail)
+ALTER TABLE ticket_detail ADD CONSTRAINT ticket_detail_ticket_bill FOREIGN KEY ticket_detail_ticket_bill (ticket_bill_id)
+    REFERENCES ticket_bill (id);
+
+
 
 -- End of file.
 
