@@ -207,6 +207,21 @@ $app->group(['prefix' => 'api/v1',   'namespace' => 'App\Http\Controllers'], fun
     $app->put('fare/update/{id}','FareController@update');
 
     $app->delete('fare/delete/{id}','FareController@delete');
+
+    /*
+    |--------------------------------------------------------------------------
+    | Entrance Ticket
+    |--------------------------------------------------------------------------
+    */
+    $app->get('entrance_ticket/index','EntranceTicketController@index');
+
+    $app->get('entrance_ticket/show/{id}','EntranceTicketController@show');
+
+    $app->post('entrance_ticket/create','EntranceTicketController@create');
+
+    $app->put('entrance_ticket/update/{id}','EntranceTicketController@update');
+
+    $app->delete('entrance_ticket/delete/{id}','EntranceTicketController@delete');
 });
 
 // Crawler API
