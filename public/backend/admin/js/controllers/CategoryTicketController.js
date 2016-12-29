@@ -1,4 +1,4 @@
-angular.module('MetronicApp').controller('EntranceTicketController', function($rootScope, $scope, $http, $base64, $timeout, $location, $q, EntranceTicketService, ngDialog, toastr, DTOptionsBuilder, DTColumnBuilder, Upload) {
+angular.module('MetronicApp').controller('CategoryTicketController', function($rootScope, $scope, $http, $base64, $timeout, $location, $q, CategoryTicketService, ngDialog, toastr, DTOptionsBuilder, DTColumnBuilder, Upload) {
     $scope.$on('$viewContentLoaded', function() {
         // initialize core components
         App.initAjax();
@@ -21,8 +21,8 @@ angular.module('MetronicApp').controller('EntranceTicketController', function($r
     $scope.clickToAddNew = function() {
 
         ngDialog.openConfirm({
-            template: 'views/entranceticket/model_add_entrance_ticket.html',
-            className: 'ngdialog-theme-large',
+            template: 'views/categoryticket/model_add_category_ticket.html',
+            className: 'ngdialog-theme-default',
             scope: $scope,
             controller: ['$scope', 'data', function($scope, data){
                 $scope.mItem = {};
@@ -31,15 +31,11 @@ angular.module('MetronicApp').controller('EntranceTicketController', function($r
                 $scope.optionStatus = data.optionStatus;
                 $scope.optionStatus.selected = data.optionStatus[0];
 
-$scope.$watch('img', function() {
-    console.log($scope.img);
-})
-
-                // Create EntranceTicket
+                // Create category_ticket
                 $scope.save = function() {
-
+                    $scope.mItem.provider = $scope.optionProvider.selected.id;
                     $scope.mItem.status = $scope.optionStatus.selected.id;
-                    EntranceTicketService.create($scope.img, $scope.mItem).then(function(res) {
+                    CategoryTicketService.create($scope.mItem).then(function(res) {
 
                         if(res.data.status == 'success') {
                             data.dtInstance.reloadData();
@@ -54,7 +50,7 @@ $scope.$watch('img', function() {
                     });
                 }
 
-                // Close popup entrance_ticket
+                // Close popup CategoryTicket
                 $scope.close = function() {
                     ngDialog.close();
                 }
@@ -75,7 +71,7 @@ $scope.$watch('img', function() {
     function getItemByID(id) {
         var deferred = $q.defer();
         var item = {};
-        EntranceTicketService.getEntranceTickets().then(function(res) {
+        CategoryTicketService.getCategoryTickets().then(function(res) {
 
             if(res.statusText == 'OK') {
 
@@ -93,8 +89,8 @@ $scope.$watch('img', function() {
     // Click to Update
     $scope.clickToUpdate = function(item) {
         ngDialog.openConfirm({
-            template: 'views/entranceticket/model_update_entrance_ticket.html',
-            className: 'ngdialog-theme-large',
+            template: 'views/categoryticket/model_update_category_ticket.html',
+            className: 'ngdialog-theme-default',
             scope: $scope,
             controller: ['$scope', '$filter', 'data', function($scope, $filter, data){
                 $scope.mItem = item;
@@ -109,12 +105,13 @@ $scope.$watch('img', function() {
                 });
 
                 //Load Image
-                $scope.img = $scope.settings.imgPath + 'entrance_ticket/' + item.img; 
+                $scope.img = $scope.settings.imgPath + 'category_ticket/' + item.img; 
 
-                // Create entrance_ticket
+                // Create CategoryTicket
                 $scope.save = function() {
                     $scope.mItem.status = $scope.optionStatus.selected.id;
-                    EntranceTicketService.update($scope.img, $scope.mItem).then(function(res) {
+                    $scope.mItem.provider = $scope.optionProvider.selected.id;
+                    CategoryTicketService.update($scope.mItem).then(function(res) {
 
                         if(res.data.status == 'success') {
                             data.dtInstance.reloadData();
@@ -128,7 +125,7 @@ $scope.$watch('img', function() {
                     });
                 }
 
-                // Close popup EntranceTicket
+                // Close popup CategoryTicket
                 $scope.close = function() {
                     ngDialog.close();
                 }
@@ -164,7 +161,7 @@ $scope.$watch('img', function() {
           buttonsStyling: false
         }).then(function() {
 
-            EntranceTicketService.delete(id).then(function(res) {
+            CategoryTicketService.delete(id).then(function(res) {
                 if(res.data.status == 'success') {
                     toastr.success('Deleted an item', 'Success');
                     $scope.dtInstance.reloadData();
@@ -184,11 +181,18 @@ $scope.$watch('img', function() {
             {id: 'active', name: 'Active'},
             {id: 'inactive', name: 'Inactive'},
         ];
+
+        $scope.optionProvider = [
+            {id: 'vietjet', name: 'VietJet'},
+            {id: 'jetstar', name: 'JetStar'},
+            {id: 'vna', name: 'VietNam Airline'},
+        ];
+        $scope.optionProvider.selected = $scope.optionProvider[0];
         
         $scope.listItem = [];
         $scope.dtInstance = {};
 
-        var table = 'entrance_ticket'
+        var table = 'category_ticket'
         var params = $location.search();
         var imgUrl = $rootScope.settings.imgPath + table + '/';
 
@@ -218,13 +222,8 @@ $scope.$watch('img', function() {
 
         $scope.dtColumns = [
             DTColumnBuilder.newColumn('id').notVisible(),
-            
-            DTColumnBuilder.newColumn('name').withTitle('Title'),
-            DTColumnBuilder.newColumn('category_ticket_id').withTitle('Category'),
-            DTColumnBuilder.newColumn('adult_fare').withTitle('Adult Fare'),
-            DTColumnBuilder.newColumn('children_fare').withTitle('Children Fare'),
-            DTColumnBuilder.newColumn('description').withTitle('Description'),
-            DTColumnBuilder.newColumn('created_at').withTitle('Created Date'),
+            DTColumnBuilder.newColumn('name').withTitle('Name'),
+            DTColumnBuilder.newColumn('status').withTitle('Status'),
             DTColumnBuilder.newColumn(null).withTitle('Action').withOption('createdCell',function(td,cellData,rowData,row,col){
                 
                var string_html = `</button>&nbsp;<button class="btn btn-warning clickToUpdate"><i class="fa fa-edit"></i>Edit</button>&nbsp;` +
@@ -235,7 +234,7 @@ $scope.$watch('img', function() {
     }
 
     function loadListItem() {
-        EntranceTicketService.getEntranceTickets().then(function(res) {
+        CategoryTicketService.getCategoryTickets().then(function(res) {
 
             if(res.statusText == 'OK') {
                 $scope.listItem = res.data.data;

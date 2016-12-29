@@ -172,9 +172,19 @@ CREATE TABLE provider (
     CONSTRAINT provider_pk PRIMARY KEY (id)
 );
 
+-- Table: category_ticket
+CREATE TABLE category_ticket (
+    id int NOT NULL AUTO_INCREMENT,
+    name varchar(100) NOT NULL,
+	status varchar(45) NOT NULL,
+	created_at datetime NULL,
+    updated_at datetime NULL,
+    CONSTRAINT category_ticket_pk PRIMARY KEY (id)
+);
+
 -- Table: album_ticket
 CREATE TABLE album_ticket (
-    id int NOT NULL,
+    id int NOT NULL AUTO_INCREMENT,
     name varchar(100) NOT NULL,
     entrance_ticket_id int NOT NULL,
     url varchar(100) NOT NULL,
@@ -185,11 +195,20 @@ CREATE TABLE album_ticket (
 
 -- Table: entrance_ticket
 CREATE TABLE entrance_ticket (
-    id int NOT NULL,
+    id int NOT NULL AUTO_INCREMENT,
     name varchar(100) NOT NULL,
+	category_ticket_id int NOT NULL,
     adult_fare float NOT NULL,
     children_fare float NOT NULL,
-    description varchar(1000) NOT NULL,
+    description varchar(1000) NULL,
+	content TEXT NOT NULL,
+	include varchar(1000) NOT NULL,
+	not_include varchar(1000)  NULL,
+	notice varchar(1000)  NULL,
+	support varchar(1000)  NULL,
+	longitude varchar(100)  NULL,
+	latitude varchar(100)  NULL,
+	status varchar(45) NOT NULL,
 	created_at datetime NULL,
     updated_at datetime NULL,
     CONSTRAINT entrance_ticket_pk PRIMARY KEY (id)
@@ -197,7 +216,7 @@ CREATE TABLE entrance_ticket (
 
 -- Table: ticket_bill
 CREATE TABLE ticket_bill (
-    id int NOT NULL,
+    id int NOT NULL AUTO_INCREMENT,
     departure datetime NOT NULL,
     total_fare float NOT NULL,
     contact_id int NOT NULL,
@@ -209,7 +228,7 @@ CREATE TABLE ticket_bill (
 
 -- Table: ticket_detail
 CREATE TABLE ticket_detail (
-    id int NOT NULL,
+    id int NOT NULL AUTO_INCREMENT,
     adult int NOT NULL,
     entrance_ticket_id int NOT NULL,
     children int NOT NULL,

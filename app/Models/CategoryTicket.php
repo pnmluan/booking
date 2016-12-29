@@ -1,30 +1,26 @@
 <?php 
 namespace App\Models;
   
-use App\Models\BaseModel;
 use Illuminate\Database\Eloquent\Model;
-  
-class EntranceTicket extends BaseModel
+
+class CategoryTicket extends BaseModel
 {
-    protected $table = 'entrance_ticket'; 
-    protected $fillable = ['name', 'category_ticket_id', 'adult_fare', 'children_fare', 'description', 'content', 'include', 'not_include', 'notice', 'support', 'created_at'];
+    protected $table = 'category_ticket';
+    protected $fillable = [ 'name',  'status'];
 
     public function getModelValidations()
     {
         return [
-            // 'full_name' => 'required|string|' //. $this->getUniqueValidatorForField('full_name')
+            //'full_name' => 'required|string|' //. $this->getUniqueValidatorForField('full_name')
         ];
     }
 
     public static function listItems(array $param = null){
 
-        $aColumns = ['name', 'category_ticket_id', 'adult_fare', 'children_fare', 'description', 'created_at'];
+        $aColumns = ['name',  'status'];
 
-        $query = \DB::table('entrance_ticket')
-            ->select(\DB::raw('SQL_CALC_FOUND_ROWS entrance_ticket.id'),\DB::raw('entrance_ticket.id AS DT_RowId'),'entrance_ticket.*'
-            	// , 'album_ticket.name', 'album_ticket.url', 'album_ticket.email', 'album_ticket.requirement'
-            	);
-            // ->leftJoin('album_ticket', 'entrance_ticket.id', '=', 'album_ticket.entrance_ticket_id');
+        $query = \DB::table('category_ticket')
+            ->select(\DB::raw('SQL_CALC_FOUND_ROWS id'),\DB::raw('id AS DT_RowId'),'category_ticket.*');
 
         // Filter search condition
         foreach ($aColumns as $key => $value) {
@@ -34,13 +30,12 @@ class EntranceTicket extends BaseModel
         //======================= SEARCH =================
         if(isset($param['columns'])) {
             $sWhere = "";
-            $count = count($aColumns);
+            $count = count($param['columns']);
             if(isset($param['search']) && $param['search']['value']){
                 $keyword = '%'. $param['search']['value'] .'%';
                 for($i=0; $i<$count; $i++){
                     $requestColumn = $param['columns'][$i];
                     if($requestColumn['searchable']=='true'){
-                        
                         $sWhere .= $aColumns[$i].' LIKE "'.$keyword.'" OR ';
                     }
                 }

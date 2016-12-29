@@ -210,6 +210,21 @@ $app->group(['prefix' => 'api/v1',   'namespace' => 'App\Http\Controllers'], fun
 
     /*
     |--------------------------------------------------------------------------
+    | Category Ticket
+    |--------------------------------------------------------------------------
+    */
+    $app->get('category_ticket/index','CategoryTicketController@index');
+
+    $app->get('category_ticket/show/{id}','CategoryTicketController@show');
+
+    $app->post('category_ticket/create','CategoryTicketController@create');
+
+    $app->put('category_ticket/update/{id}','CategoryTicketController@update');
+
+    $app->delete('category_ticket/delete/{id}','CategoryTicketController@delete');
+
+    /*
+    |--------------------------------------------------------------------------
     | Entrance Ticket
     |--------------------------------------------------------------------------
     */
