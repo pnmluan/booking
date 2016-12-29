@@ -19,10 +19,10 @@
         </div>
 
 
-        <div class="form-group form-md-line-input form-md-floating-label" ng-class="{'has-error': errorMsg.full_name.length}">
-          <input type="text" class="form-control" ng-model="mItem.full_name">
-          <label for="form_control_1">Full Name</label>
-          <span ng-show="errorMsg.full_name.length" class="help-block">{{ errorMsg.full_name[0] }}</span>
+        <div class="form-group form-md-line-input form-md-floating-label" ng-class="{'has-error': errorMsg.name.length}">
+          <input type="text" class="form-control" ng-model="mItem.name">
+          <label for="form_control_1">Name</label>
+          <span ng-show="errorMsg.name.length" class="help-block">{{ errorMsg.name[0] }}</span>
 
         </div>
 
@@ -42,6 +42,16 @@
       </div>
 
     </form>
+     <form>
+            <textarea name="editor1" id="editor1" rows="10" cols="80">
+                This is my textarea to be replaced with CKEditor.
+            </textarea>
+            <script>
+                // Replace the <textarea id="editor1"> with a CKEditor
+                // instance, using default configuration.
+                CKEDITOR.replace( 'editor1' );
+            </script>
+        </form>
   </div>
 </div>
 
