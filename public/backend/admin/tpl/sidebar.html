@@ -7,28 +7,7 @@
     <!-- DOC: Set data-keep-expand="true" to keep the submenues expanded -->
     <!-- DOC: Set data-auto-speed="200" to adjust the sub menu slide up/down speed -->
     <ul class="page-sidebar-menu" data-keep-expanded="false" data-auto-scroll="true" data-slide-speed="200" ng-class="{'page-sidebar-menu-closed': settings.layout.pageSidebarClosed}">
-        <li class="start nav-item">
-            <a href="#/booking.html">
-                <i class="icon-plane"></i>
-                <span class="title">Booking</span>
-            </a>
-        </li>
-        <li class="nav-item">
-            <a href="javascript:;" class="nav-link nav-toggle">
-                <i class="icon-wrench"></i>
-                <span class="title">Ticket Management</span>
-                <span class="arrow "></span>
-            </a>
-            <ul class="sub-menu">
-                <li class="start nav-item">
-                    <a href="#/category-ticket.html">
-                        <i class="icon-briefcase"></i> Category Ticket</a>
-                </li>
-                <li class="start nav-item">
-                    <a href="#/entrance-ticket.html"><i class="fa fa-ticket"></i> Entrance Ticket</a>
-                </li>
-            </ul>
-        </li>
+        
         <li class="start nav-item">
             <a href="#/banner.html">
                 <i class="icon-home"></i>
@@ -53,12 +32,37 @@
                 <span class="title">Location</span>
             </a>
         </li>
-        <li class="start nav-item">
-            <a href="#/baggagetype.html">
-                <i class="icon-briefcase"></i>
-                <span class="title">BaggageType</span>
+        <li class="nav-item">
+            <a href="javascript:;" class="nav-link nav-toggle">
+                <i class="icon-wrench"></i>
+                <span class="title">Ticket Management</span>
+                <span class="arrow "></span>
             </a>
+            <ul class="sub-menu">
+                <li class="start nav-item">
+                    <a href="#/category-ticket.html"><i class="icon-briefcase"></i> Category Ticket</a>
+                </li>
+                <li class="start nav-item">
+                    <a href="#/entrance-ticket.html"><i class="fa fa-ticket"></i> Entrance Ticket</a>
+                </li>
+            </ul>
         </li>
+        <li class="nav-item">
+            <a href="javascript:;" class="nav-link nav-toggle">
+                <i class="icon-plane"></i>
+                <span class="title">Airline Management</span>
+                <span class="arrow "></span>
+            </a>
+            <ul class="sub-menu">
+                <li class="start nav-item">
+                    <a href="#/booking.html"><i class="icon-calendar"></i> Booking</a>
+                </li>
+                <li class="start nav-item">
+                    <a href="#/baggagetype.html"><i class="fa icon-briefcase"></i> Baggage Type</a>
+                </li>
+            </ul>
+        </li>
+<!-- 
         <li class="nav-item">
             <a href="javascript:;" class="nav-link nav-toggle">
                 <i class="icon-settings"></i>
@@ -141,7 +145,7 @@
                 <i class="icon-refresh"></i>
                 <span class="title">Blank Page</span>
             </a>
-        </li>
+        </li> -->
     </ul>
     <!-- END SIDEBAR MENU -->
 </div>

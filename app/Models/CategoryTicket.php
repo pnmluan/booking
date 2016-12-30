@@ -18,13 +18,19 @@ class CategoryTicket extends BaseModel
     public static function listItems(array $param = null){
 
         $aColumns = ['name',  'status'];
+        $aNotLike = ['status'];
 
         $query = \DB::table('category_ticket')
             ->select(\DB::raw('SQL_CALC_FOUND_ROWS id'),\DB::raw('id AS DT_RowId'),'category_ticket.*');
 
         // Filter search condition
         foreach ($aColumns as $key => $value) {
-            (isset($param[$value]) && $param[$value]) && $query->where($value,'like','%'.$param[$value].'%');
+            if(in_array($value, $aNotLike)) {
+                (isset($param[$value]) && $param[$value]) && $query->where($value,'=', $param[$value]);
+            } else {
+                (isset($param[$value]) && $param[$value]) && $query->where($value,'like','%'.$param[$value].'%');
+            }
+            
         }
 
         //======================= SEARCH =================
@@ -50,6 +56,7 @@ class CategoryTicket extends BaseModel
                     }else{
                         $sWhere .= " AND ";
                     }
+
                     $sWhere .= $aColumns[$i]." LIKE '%".mysql_real_escape_string($requestColumn['search']['value'])."%' ";
                 }
             }
