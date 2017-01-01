@@ -22,7 +22,7 @@ angular.module('MetronicApp').controller('EntranceTicketController', function($r
 
         ngDialog.openConfirm({
             template: 'views/entranceticket/model_add_entrance_ticket.html',
-            className: 'ngdialog-theme-default',
+            className: 'ngdialog-theme-large',
             scope: $scope,
             controller: ['$scope', 'data', function($scope, data){
                 $scope.mItem = {};
@@ -94,7 +94,7 @@ $scope.$watch('img', function() {
     $scope.clickToUpdate = function(item) {
         ngDialog.openConfirm({
             template: 'views/entranceticket/model_update_entrance_ticket.html',
-            className: 'ngdialog-theme-default',
+            className: 'ngdialog-theme-large',
             scope: $scope,
             controller: ['$scope', '$filter', 'data', function($scope, $filter, data){
                 $scope.mItem = item;
@@ -218,11 +218,11 @@ $scope.$watch('img', function() {
 
         $scope.dtColumns = [
             DTColumnBuilder.newColumn('id').notVisible(),
-            DTColumnBuilder.newColumn('img').withTitle('Image').withOption('createdCell',function(td, cellData, rowData, row, col){
-               var string_html = `<img class="medium-thumb-icon" src="` + imgUrl + rowData.img   + `">`;
-                $(td).html(string_html);
-            }).withOption('width','60px'),
+            
             DTColumnBuilder.newColumn('name').withTitle('Title'),
+            DTColumnBuilder.newColumn('category_ticket_id').withTitle('Category'),
+            DTColumnBuilder.newColumn('adult_fare').withTitle('Adult Fare'),
+            DTColumnBuilder.newColumn('children_fare').withTitle('Children Fare'),
             DTColumnBuilder.newColumn('description').withTitle('Description'),
             DTColumnBuilder.newColumn('created_at').withTitle('Created Date'),
             DTColumnBuilder.newColumn(null).withTitle('Action').withOption('createdCell',function(td,cellData,rowData,row,col){

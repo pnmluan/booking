@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class EntranceTicket extends BaseModel
 {
     protected $table = 'entrance_ticket'; 
-    protected $fillable = ['name','adult_fare', 'children_fare', 'description', 'content', 'created_at'];
+    protected $fillable = ['name', 'category_ticket_id', 'adult_fare', 'children_fare', 'description', 'content', 'include', 'not_include', 'notice', 'support', 'created_at'];
 
     public function getModelValidations()
     {
@@ -18,7 +18,7 @@ class EntranceTicket extends BaseModel
 
     public static function listItems(array $param = null){
 
-        $aColumns = ['name','adult_fare', 'children_fare', 'description', 'content', 'created_at'];
+        $aColumns = ['name', 'category_ticket_id', 'adult_fare', 'children_fare', 'description', 'created_at'];
 
         $query = \DB::table('entrance_ticket')
             ->select(\DB::raw('SQL_CALC_FOUND_ROWS entrance_ticket.id'),\DB::raw('entrance_ticket.id AS DT_RowId'),'entrance_ticket.*'

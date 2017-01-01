@@ -156,6 +156,27 @@ MetronicApp.config(['$stateProvider', '$urlRouterProvider', function($stateProvi
             }
         })
 
+         // categoryticket
+        .state('category_ticket', {
+            url: "/category-ticket.html",
+            templateUrl: "views/categoryticket/main.html",            
+            data: {pageTitle: 'Admin Category Ticket Template'},
+            controller: "CategoryTicketController",
+            resolve: {
+                deps: ['$ocLazyLoad', function($ocLazyLoad) {
+                    return $ocLazyLoad.load({
+                        name: 'MetronicApp',
+                        insertBefore: '#ng_load_plugins_before', // load the above css files before a LINK element with this ID. Dynamic CSS files must be loaded between core and theme css files
+                        files: [
+                            '../assets/global/plugins/dropzone/dropzone.min.js',
+                            'js/controllers/CategoryTicketController.js',
+                            'js/services/categoryticket.service.js'
+                        ] 
+                    });
+                }]
+            }
+        })
+
         // Booking
         .state('entrance_ticket', {
             url: "/entrance-ticket.html",
@@ -169,6 +190,7 @@ MetronicApp.config(['$stateProvider', '$urlRouterProvider', function($stateProvi
                         insertBefore: '#ng_load_plugins_before', // load the above css files before a LINK element with this ID. Dynamic CSS files must be loaded between core and theme css files
                         files: [
                             '../assets/global/plugins/dropzone/dropzone.min.js',
+                            '../assets/global/plugins/ckeditor/ckeditor.js',
                             'js/controllers/EntranceTicketController.js',
                             'js/services/entranceticket.service.js'
                         ] 

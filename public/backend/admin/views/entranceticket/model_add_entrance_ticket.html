@@ -1,51 +1,70 @@
-
 <div class="modal-header">
-  <h4 class="modal-title">Add New Entrance Ticket</h4>
+    <h4 class="modal-title">Add New Entrance Ticket</h4>
 </div>
 <div class="modal-body">
+    <div class="portlet-body form">
+        <form role="form">
+            <div class="form-body">
+                <div class="form-group dropzone dropzone-file-area">
+                    <div ngf-drop ngf-select ng-model="img" ngf-drag-over-class="'dragover'" ngf-allow-dir="true" style="width: 100%; height: 100%" accept="image/*" ngf-pattern="'image/*'" ngf-max-size="2MB">
+                        <h3 class="sbold" ng-if="!img && !img.$error">Drop files here <br/> or click to upload</h3>
+                        <img ngf-src="!img.$error && img" style="width: 100%; height: 100%">
+                    </div>
+                </div>
+                <div class="form-group form-md-line-input form-md-floating-label" ng-class="{'has-error': errorMsg.name.length}">
+                    <input type="text" class="form-control" ng-model="mItem.name">
+                    <label for="form_control_1">Name</label>
+                    <span ng-show="errorMsg.name.length" class="help-block">{{ errorMsg.name[0] }}</span>
+                </div>
+                <div class="form-group form-md-line-input form-md-floating-label">
+                    <select class="form-control edited" ng-model="optionTicketCategory.selected" ng-options="option.name for option in optionTicketCategory track by option.id"></select>
+                    <label for="form_control_1">Ticket Category</label>
+                </div>
+                <div class="form-group form-md-line-input form-md-floating-label" ng-class="{'has-error': errorMsg.adult_fare.length}">
+                    <input type="text" class="form-control" ng-model="mItem.adult_fare">
+                    <label for="form_control_1">Adult Fare</label>
+                    <span ng-show="errorMsg.adult_fare.length" class="help-block">{{ errorMsg.adult_fare[0] }}</span>
+                </div>
+                <div class="form-group form-md-line-input form-md-floating-label" ng-class="{'has-error': errorMsg.children_fare.length}">
+                    <input type="text" class="form-control" ng-model="mItem.children_fare">
+                    <label for="form_control_1">Children Fare</label>
+                    <span ng-show="errorMsg.children_fare.length" class="help-block">{{ errorMsg.children_fare[0] }}</span>
+                </div>
+                <div class="form-group form-md-line-input form-md-floating-label">
+                    <textarea class="form-control" ng-model="mItem.include"></textarea>
+                    <label for="form_control_1">Include</label>
+                </div>
+                <div class="form-group form-md-line-input form-md-floating-label">
+                    <textarea class="form-control" ng-model="mItem.not_include"></textarea>
+                    <label for="form_control_1">Not Include</label>
+                </div>
+                <div class="form-group form-md-line-input form-md-floating-label">
+                    <textarea class="form-control" ng-model="mItem.notice"></textarea>
+                    <label for="form_control_1">Notice</label>
+                </div>
+                <div class="form-group form-md-line-input form-md-floating-label">
+                    <textarea class="form-control" ng-model="mItem.support"></textarea>
+                    <label for="form_control_1">Support</label>
+                </div>
+                <div class="form-group form-md-line-input form-md-floating-label">
+                    <textarea type="text" class="form-control" ng-model="mItem.content" name="editor1" id="editor1" rows="10" cols="80"></textarea>
+                    <label for="form_control_1">Content</label>
+                </div>
+                <script>
+                // Replace the <textarea id="editor1"> with a CKEditor
+                // instance, using default configuration.
+                CKEDITOR.replace('editor1');
+                </script>
 
-  <div class="portlet-body form">
-
-    <form role="form">
-      <div class="form-body">
-        <div class="form-group dropzone dropzone-file-area">
-          <div ngf-drop ngf-select ng-model="img" 
-          ngf-drag-over-class="'dragover'" ngf-allow-dir="true" style="width: 100%; height: 100%"
-          accept="image/*" ngf-pattern="'image/*'" ngf-max-size="2MB">
-            <h3 class="sbold" ng-if="!img && !img.$error">Drop files here <br/> or click to upload</h3>
-
-            <img ngf-src="!img.$error && img" style="width: 100%; height: 100%">
-          </div>
-        </div>
-
-
-        <div class="form-group form-md-line-input form-md-floating-label" ng-class="{'has-error': errorMsg.full_name.length}">
-          <input type="text" class="form-control" ng-model="mItem.full_name">
-          <label for="form_control_1">Full Name</label>
-          <span ng-show="errorMsg.full_name.length" class="help-block">{{ errorMsg.full_name[0] }}</span>
-
-        </div>
-
-        <div class="form-group form-md-line-input form-md-floating-label">
-          <textarea type="text" class="form-control" ng-model="mItem.content"></textarea>
-          <label for="form_control_1">Content</label>
-
-        </div>
-
-        <div class="form-group form-md-line-input form-md-floating-label">
-          <select class="form-control edited" ng-model="optionStatus.selected" 
-          ng-options="option.name for option in optionStatus track by option.id"></select>
-          <label for="form_control_1">Status</label>
-          
-        </div>
-
-      </div>
-
-    </form>
-  </div>
+                <div class="form-group form-md-line-input form-md-floating-label">
+                    <select class="form-control edited" ng-model="optionStatus.selected" ng-options="option.name for option in optionStatus track by option.id"></select>
+                    <label for="form_control_1">Status</label>
+                </div>
+            </div>
+        </form>
+    </div>
 </div>
-
 <div class="modal-footer">
-  <button type="button" class="btn default" data-dismiss="modal" ng-click="close()">Close</button>
-  <button type="button" class="btn blue" ng-click="save()" >Save</button>
+    <button type="button" class="btn default" data-dismiss="modal" ng-click="close()">Close</button>
+    <button type="button" class="btn blue" ng-click="save()">Save</button>
 </div>
