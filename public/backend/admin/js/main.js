@@ -85,6 +85,58 @@ MetronicApp.controller('AppController', ['$scope', '$rootScope', function($scope
     });
 }]);
 
+/* Format Number Input */
+MetronicApp.directive('format', ['$filter', function ($filter) {
+    return {
+        require: '?ngModel',
+        link: function (scope, elem, attrs, ctrl) {
+            if (!ctrl) return;
+
+
+            ctrl.$formatters.unshift(function (a) {
+                return $filter(attrs.format)(ctrl.$modelValue)
+            });
+
+
+            ctrl.$parsers.unshift(function (viewValue) {
+                var plainNumber = viewValue.replace(/[^\d|\-+|\.+]/g, '');
+                elem.val($filter(attrs.format)(plainNumber));
+                return plainNumber;
+            });
+        }
+    };
+}]);
+
+/* Plugin ckEditor */
+MetronicApp.directive('ckEditor', function() {
+  return {
+    require: '?ngModel',
+    link: function(scope, elm, attr, ngModel) {
+      var ck = CKEDITOR.replace(elm[0]);
+
+      if (!ngModel) return;
+
+      ck.on('instanceReady', function() {
+        ck.setData(ngModel.$viewValue);
+      });
+
+      function updateModel() {
+          scope.$apply(function() {
+              ngModel.$setViewValue(ck.getData());
+          });
+      }
+
+      ck.on('change', updateModel);
+      ck.on('key', updateModel);
+      ck.on('dataReady', updateModel);
+
+      ngModel.$render = function(value) {
+        ck.setData(ngModel.$viewValue);
+      };
+    }
+  };
+});
+
 /***
 Layout Partials.
 By default the partials are loaded through AngularJS ng-include directive. In case they loaded in server side(e.g: PHP include function) then below partial 
@@ -192,7 +244,9 @@ MetronicApp.config(['$stateProvider', '$urlRouterProvider', function($stateProvi
                             '../assets/global/plugins/dropzone/dropzone.min.js',
                             '../assets/global/plugins/ckeditor/ckeditor.js',
                             'js/controllers/EntranceTicketController.js',
-                            'js/services/entranceticket.service.js'
+                            'js/services/entranceticket.service.js',
+                            'js/services/categoryticket.service.js',
+                            'js/services/albumticket.service.js'
                         ] 
                     });
                 }]

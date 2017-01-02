@@ -4,8 +4,8 @@ angular.module('MetronicApp')
     var urlBase = $rootScope.settings.apiPath + 'category_ticket';
     var CategoryTicketService = {};
 
-    CategoryTicketService.getAll = function () {
-        return $http.get(urlBase + '/index');
+    CategoryTicketService.getAll = function (params = null) {
+        return $http.get(urlBase + '/index?'+ params);
     };
 
     CategoryTicketService.create = function (cust) {

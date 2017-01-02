@@ -3,12 +3,14 @@
 namespace App\Http\Controllers;
 
 use Input;
-use App\Models\entranceTicket;
+use App\Models\EntranceTicket;
+use App\Models\AlbumTicket;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
 
 class EntranceTicketController extends ApiController{
+    private $path = 'backend/assets/apps/img/album_ticket';
 
     public function index(Request $request){
 
@@ -27,28 +29,9 @@ class EntranceTicketController extends ApiController{
         return $this->respondWithSuccess(['data'=>$entranceTicket]);
     }
 
-    protected function uploadImage($image) {
-        if($image) {
-            $filename  = time() . '.' . $image->getClientOriginalExtension();
-
-            $destinationPath = 'backend/assets/apps/img/entranceTicket'; // upload path
-
-            $image->move($destinationPath, $filename); // uploading file to given path
-
-            return $filename;
-        }
-        return null;
-
-    }
-
-    public function create(Request $request){
-        $entranceTicket = new entranceTicket();
-        $data = $request['data'];
-
-        $img = $this->uploadImage($request->file('img'));
-        if($img) {
-            $data['img'] = $img;
-        }
+   public function create(Request $request){
+        $entranceTicket = new EntranceTicket();
+        $data = $request->all();
 
         $entranceTicket->fill($data);
 
@@ -72,6 +55,14 @@ class EntranceTicketController extends ApiController{
         try {
             if (!$entranceTicket->delete()) {
                 return $this->respondWithError();
+            } else {
+                $removedModels  = AlbumTicket::where(['entrance_ticket_id' => $id])->get();
+                
+                foreach ($removedModels as $key => $value) {
+
+                    $value->delete();
+                    unlink($this->path . '/' . $value->img);
+                }
             }
         } catch (\Exception $ex) {
             return $this->respondWithError(['error' => $ex->getMessage()]);
@@ -85,11 +76,7 @@ class EntranceTicketController extends ApiController{
         if(!$entranceTicket) {
             return $this->respondNotFound();
         }
-        $data = $request['data'];
-        $img = $this->uploadImage($request->file('img'));
-        if($img) {
-            $data['img'] = $img;
-        }
+        $data = $request->all();
 
         $entranceTicket->fill($data);
 
