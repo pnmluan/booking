@@ -8,24 +8,12 @@ angular.module('MetronicApp')
         return $http.get(urlBase + '/index');
     };
 
-    EntranceTicketService.create = function (img,  cust) {
-        return Upload.upload({
-            url: urlBase + '/create',
-            data: {
-                data: cust,
-                img: img
-            },
-        });
+    EntranceTicketService.create = function (cust) {
+        return $http.post(urlBase + '/create', cust);
     };
 
-    EntranceTicketService.update = function (img, cust) {
-        return Upload.upload({
-            url: urlBase + '/update/' + cust.id,
-            data: {
-                data: cust,
-                img: img
-            },
-        });
+    EntranceTicketService.update = function (cust) {
+        return $http.put(urlBase + '/update/' + cust.id, cust)
     };
 
     EntranceTicketService.delete = function (id) {

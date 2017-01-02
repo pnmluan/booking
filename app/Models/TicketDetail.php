@@ -1,31 +1,26 @@
 <?php 
 namespace App\Models;
   
-use App\Models\BaseModel;
 use Illuminate\Database\Eloquent\Model;
-  
-class EntranceTicket extends BaseModel
+
+class TicketDetail extends BaseModel
 {
-    protected $table = 'entrance_ticket'; 
-    protected $fillable = ['name', 'category_ticket_id', 'adult_fare', 'children_fare', 'description', 'content', 'include', 'not_include', 'notice', 'support', 'longitude', 'latitude', 'created_at'];
+    protected $table = 'ticket_detail';
+    protected $fillable = ['adult', 'entrance_ticket_id', 'children', 'ticket_bill_id'];
 
     public function getModelValidations()
     {
         return [
-            // 'full_name' => 'required|string|' //. $this->getUniqueValidatorForField('full_name')
+            //'full_name' => 'required|string|' //. $this->getUniqueValidatorForField('full_name')
         ];
     }
 
     public static function listItems(array $param = null){
 
-        $aColumns = ['entrance_ticket.name', 'entrance_ticket.category_ticket_id', 'category_ticket.name', 'entrance_ticket.adult_fare', 'entrance_ticket.children_fare', 'entrance_ticket.description', 'entrance_ticket.created_at'];
+        $aColumns = ['adult', 'entrance_ticket_id', 'children', 'ticket_bill_id'];
 
-        $query = \DB::table('entrance_ticket')
-            ->select(\DB::raw('SQL_CALC_FOUND_ROWS entrance_ticket.id'),\DB::raw('entrance_ticket.id AS DT_RowId'),'entrance_ticket.*', \DB::raw('category_ticket.name AS category_ticket_name')
-            	// , 'album_ticket.name', 'album_ticket.url', 'album_ticket.email', 'album_ticket.requirement'
-            	)
-            ->leftJoin('category_ticket', 'entrance_ticket.category_ticket_id', '=', 'category_ticket.id');
-            // ->leftJoin('album_ticket', 'entrance_ticket.id', '=', 'album_ticket.entrance_ticket_id');
+        $query = \DB::table('ticket_detail')
+            ->select(\DB::raw('SQL_CALC_FOUND_ROWS id'),\DB::raw('id AS DT_RowId'),'ticket_detail.*');
 
         // Filter search condition
         foreach ($aColumns as $key => $value) {
@@ -35,13 +30,12 @@ class EntranceTicket extends BaseModel
         //======================= SEARCH =================
         if(isset($param['columns'])) {
             $sWhere = "";
-            $count = count($aColumns);
+            $count = count($param['columns']);
             if(isset($param['search']) && $param['search']['value']){
                 $keyword = '%'. $param['search']['value'] .'%';
                 for($i=0; $i<$count; $i++){
                     $requestColumn = $param['columns'][$i];
                     if($requestColumn['searchable']=='true'){
-                        
                         $sWhere .= $aColumns[$i].' LIKE "'.$keyword.'" OR ';
                     }
                 }

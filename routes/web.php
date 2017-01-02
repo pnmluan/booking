@@ -237,6 +237,21 @@ $app->group(['prefix' => 'api/v1',   'namespace' => 'App\Http\Controllers'], fun
     $app->put('entrance_ticket/update/{id}','EntranceTicketController@update');
 
     $app->delete('entrance_ticket/delete/{id}','EntranceTicketController@delete');
+
+    /*
+    |--------------------------------------------------------------------------
+    | Album Ticket
+    |--------------------------------------------------------------------------
+    */
+    $app->get('album_ticket/index','AlbumTicketController@index');
+
+    $app->get('album_ticket/show/{id}','AlbumTicketController@show');
+
+    $app->post('album_ticket/create','AlbumTicketController@create');
+
+    $app->put('album_ticket/update/{id}','AlbumTicketController@update');
+
+    $app->delete('album_ticket/delete/{id}','AlbumTicketController@delete');
 });
 
 // Crawler API
