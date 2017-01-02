@@ -32,7 +32,7 @@
 /********************************************************BASIC************************************************/
 
 .menu  * { margin: 0; padding: 0; list-style: none; }
-.menu  { float: right; margin: 0px 10px; padding: 5px 0px !important; }
+.menu  { float: right; margin: 0px 10px; padding: 10px 0px 0px 0px !important; }
 
 /*nicdark select*/
 .tinynav{ float: left; font-size: 15px; display:none; padding: 10px; margin-top: 20px; background-color: transparent; border: 1px solid #f1f1f1; border-radius: 0px; }

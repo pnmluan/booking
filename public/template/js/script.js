@@ -171,6 +171,20 @@ jQuery(document).ready(function() {
     remove: false
   });
 
+
+  jQuery('.tours-list .item .item-inner h3').matchHeight({
+    byRow: true,
+    property: 'height',
+    target: null,
+    remove: false
+  });
+  jQuery('.tours-list .item .item-inner p').matchHeight({
+    byRow: true,
+    property: 'height',
+    target: null,
+    remove: false
+  });
+
   //effect image our service
   jQuery(".intro-why .item").mouseover(function() {
     //Add hiệu ứng lúc hover vào icon
@@ -179,4 +193,21 @@ jQuery(document).ready(function() {
       objImg.removeClass();
     });
   });
+
+  // Slider with fixed minimum
+  jQuery("#slider-price").slider({
+    range: true,
+    step: 500000,
+    value: 0,
+    min: 0,
+    max: 15000000,
+    values: [0, 5000000],
+    slide: function(event, ui) {
+      jQuery("#min-price").text(ui.values[0] + " đ");
+      jQuery("#max-price").text(ui.values[1] + " đ");
+    }
+  });
+
+  jQuery("#min-price").text(jQuery("#slider-price").slider("values", 0) + " đ");
+  jQuery("#max-price").text(jQuery("#slider-price").slider("values", 1) + " đ");
 });
