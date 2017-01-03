@@ -18,10 +18,10 @@ export class BannerComponent implements OnInit {
   			if(res.data) {
 				var options = [];
   				for(let key in res.data) {
+					res.data[key].img = this._BannerDataService.imgPath + res.data[key].img;
 					options.push(res.data[key]);
   				}
 				this.bannerOptions = options;
-					console.log(this.bannerOptions);
 
 				setTimeout( () => {
 					jQuery('.owl-carousel-home-slider').owlCarousel({

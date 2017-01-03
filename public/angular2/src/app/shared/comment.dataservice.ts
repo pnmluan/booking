@@ -8,18 +8,16 @@ import { Configuration } from '../shared/app.configuration';
 export class CommentDataService {
 
 	private actionUrl: string;
+	public imgPath: string;
 
-
-	// @Output() foodAdded: EventEmitter<any> = new EventEmitter();
-	// @Output() foodDeleted: EventEmitter<any> = new EventEmitter();
-
-	constructor(private _Http: Http, private _configuration: Configuration) {
-		this.actionUrl = _configuration.apiUrl + 'comment/';
+	constructor(private _Http: Http, private _Configuration: Configuration) {
+		this.actionUrl = _Configuration.apiUrl + 'comment/';
+		this.imgPath = _Configuration.imgPath + 'comment/';
 	}
 
 	createAuthorizationHeader(headers: Headers) {
 		headers.append('Content-Type', 'application/x-www-form-urlencoded');
-		headers.append('Authorization', 'Basic ' + this._configuration.authentic);
+		headers.append('Authorization', 'Basic ' + this._Configuration.authentic);
 	}
 
 	public getAll() {
@@ -34,16 +32,4 @@ export class CommentDataService {
 		return Observable.throw(error.json().error || 'Server error');
 	}
 
-
-	// private prepareOptions = (options: RequestOptionsArgs): RequestOptionsArgs => {
-	// 	options = options || {};
-
-	// 	if (!options.headers) {
-	// 		options.headers = new Headers();
-	// 	}
-
-	// 	options.headers.append('Content-Type', 'application/json');
-
-	// 	return options;
-	// }
 }

@@ -1,33 +1,18 @@
-
-  <section class="home-slider">
+<section class="home-slider">
     <div class="owl-carousel-home-slider">
-      <div class="item"  *ngFor="let banner of bannerOptions">
-        <img src="assets/img/slider/paris.jpg" alt="">
-        <a class="sboxpurple text-center">
-          <p class="lato size28 slim caps white">Đà Nẵng</p><br/><br/>
-          <p class="lato size60 slim caps white">Sài Gòn</p><br/>
-          <p class="lato size20 normal caps white">Từ</p><br/>
-          <p class="lato size40 slim uppercase yellow">500.000 vnđ</p>
-        </a>
-      </div>
-<!--       <div class="item">
-        <img src="assets/img/slider/rome.jpg" alt="">
-        <a class="sboxpurple text-center">
-          <p class="lato size28 slim caps white">Đà Nẵng</p><br/><br/>
-          <p class="lato size60 slim caps white">Tp. Hồ Chí Minh</p><br/>
-          <p class="lato size20 normal caps white">Từ</p><br/>
-          <p class="lato size40 slim uppercase yellow">500.000 vnđ</p>
-        </a>
-      </div>
-      <div class="item">
-        <img src="assets/img/slider/santorini.jpg" alt="">
-        <a class="sboxpurple text-center">
-          <p class="lato size28 slim caps white">Hà Nội</p><br/><br/>
-          <p class="lato size60 slim caps white">Tp. Hồ Chí Minh</p><br/>
-          <p class="lato size20 normal caps white">Từ</p><br/>
-          <p class="lato size40 slim uppercase yellow">500.000 vnđ</p>
-        </a>
-      </div> -->
+        <div class="item" *ngFor="let banner of bannerOptions">
+            <img [src]="banner.img" alt="">
+            <a class="sboxpurple text-center">
+                <p class="lato size28 slim caps white">Đà Nẵng</p>
+                <br/>
+                <br/>
+                <p class="lato size60 slim caps white">Sài Gòn</p>
+                <br/>
+                <p class="lato size20 normal caps white">Từ</p>
+                <br/>
+                <p class="lato size40 slim uppercase yellow">500.000 vnđ</p>
+            </a>
+        </div>
     </div>
-  </section>
-  <!-- slider  -->
+</section>
+<!-- slider  -->

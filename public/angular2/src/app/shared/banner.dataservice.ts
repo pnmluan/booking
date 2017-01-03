@@ -7,18 +7,16 @@ import { Configuration } from '../shared/app.configuration';
 export class BannerDataService {
 
 	private actionUrl: string;
+	public imgPath: string;
 
-
-	// @Output() foodAdded: EventEmitter<any> = new EventEmitter();
-	// @Output() foodDeleted: EventEmitter<any> = new EventEmitter();
-
-	constructor(private _Http: Http, private _configuration: Configuration) {
-		this.actionUrl = _configuration.apiUrl + 'banner/';
+	constructor(private _Http: Http, private _Configuration: Configuration) {
+		this.actionUrl = _Configuration.apiUrl + 'banner/';
+		this.imgPath = _Configuration.imgPath + 'banner/';
 	}
 
 	createAuthorizationHeader(headers: Headers) {
 		headers.append('Content-Type', 'application/x-www-form-urlencoded');
-		headers.append('Authorization', 'Basic ' + this._configuration.authentic);
+		headers.append('Authorization', 'Basic ' + this._Configuration.authentic);
 	}
 
 	public getAll() {
