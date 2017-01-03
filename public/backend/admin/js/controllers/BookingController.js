@@ -221,7 +221,7 @@ angular.module('MetronicApp').controller('BookingController', function($rootScop
             DTColumnBuilder.newColumn('round_trip').withTitle('Round Trip'),
             DTColumnBuilder.newColumn('adult').withTitle('Adult'),
             DTColumnBuilder.newColumn('children').withTitle('Children'),
-            DTColumnBuilder.newColumn('infant').withTitle('infant'),
+            DTColumnBuilder.newColumn('infant').withTitle('Infant'),
             DTColumnBuilder.newColumn('requirement').withTitle('Requirement'),
             DTColumnBuilder.newColumn('state').withTitle('State'),
             DTColumnBuilder.newColumn(null).withTitle('Action').withOption('createdCell',function(td,cellData,rowData,row,col){

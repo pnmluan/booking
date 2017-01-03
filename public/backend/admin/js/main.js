@@ -253,6 +253,27 @@ MetronicApp.config(['$stateProvider', '$urlRouterProvider', function($stateProvi
             }
         })
 
+        // baggagetype
+        .state('ticket_bill', {
+            url: "/ticket-bill.html",
+            templateUrl: "views/ticketbill/main.html",            
+            data: {pageTitle: 'Admin Ticket Bill Template'},
+            controller: "TicketBillController",
+            resolve: {
+                deps: ['$ocLazyLoad', function($ocLazyLoad) {
+                    return $ocLazyLoad.load({
+                        name: 'MetronicApp',
+                        insertBefore: '#ng_load_plugins_before', // load the above css files before a LINK element with this ID. Dynamic CSS files must be loaded between core and theme css files
+                        files: [
+                            '../assets/global/plugins/dropzone/dropzone.min.js',
+                            'js/controllers/TicketBillController.js',
+                            'js/services/ticketbill.service.js'
+                        ] 
+                    });
+                }]
+            }
+        })
+
         // Banner
         .state('banner', {
             url: "/banner.html",

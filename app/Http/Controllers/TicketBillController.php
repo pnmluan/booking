@@ -12,7 +12,7 @@ namespace App\Http\Controllers;
 use App\Models\TicketBill;
 use Illuminate\Http\Request;
 
-class ticketBillController extends ApiController
+class TicketBillController extends ApiController
 {
     public function index(Request $request){
 

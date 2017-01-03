@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Input;
-use App\Models\albumTicket;
+use App\Models\AlbumTicket;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
