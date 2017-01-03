@@ -17,8 +17,7 @@ import { CommentComponent } from './comment';
 import { Location } from '../../models/Location';
 
 import { Configuration } from '../../shared/app.configuration';
-import { LocationDataService } from '../../shared/location.dataservice';
-import { BannerDataService } from '../../shared/banner.dataservice';
+import { LocationDataService, BannerDataService, NewsDataService } from '../../shared';
 declare let jQuery: any;
 declare let moment: any;
 
@@ -26,7 +25,7 @@ declare let moment: any;
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
-  providers: [BannerComponent, NewsComponent, BannerComponent, LocationDataService, BannerDataService]
+  providers: [BannerComponent, NewsComponent, BannerComponent, LocationDataService, BannerDataService, NewsDataService]
 })
 export class HomeComponent implements OnInit, AfterViewInit {
 	people = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];

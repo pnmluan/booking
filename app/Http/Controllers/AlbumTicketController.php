@@ -3,12 +3,12 @@
 namespace App\Http\Controllers;
 
 use Input;
-use App\Models\albumTicket;
+use App\Models\AlbumTicket;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
 
-class albumTicketController extends ApiController{
+class AlbumTicketController extends ApiController{
 
     private $path = 'backend/assets/apps/img/album_ticket';
 

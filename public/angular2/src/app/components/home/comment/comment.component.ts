@@ -7,7 +7,6 @@ import { CommentDataService } from '../../../shared/comment.dataservice';
 @Component({
   selector: 'app-comment',
   templateUrl: './comment.component.html',
-  styleUrls: ['./comment.component.css'],
   providers: [CommentDataService, Configuration]
 })
 export class CommentComponent implements OnInit {

@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 
 
 class CommentController extends ApiController{
+    private $path = 'backend/assets/apps/img/comment';
 
     public function index(Request $request){
 
@@ -31,7 +32,7 @@ class CommentController extends ApiController{
         if($image) {
             $filename  = time() . '.' . $image->getClientOriginalExtension();
 
-            $destinationPath = 'backend/assets/apps/img/comment'; // upload path
+            $destinationPath = $this->path; // upload path
 
             $image->move($destinationPath, $filename); // uploading file to given path
 
@@ -70,6 +71,7 @@ class CommentController extends ApiController{
             return $this->respondNotFound();
         }
         try {
+            unlink($this->path . '/' . $comment->img);
             if (!$comment->delete()) {
                 return $this->respondWithError();
             }
@@ -88,6 +90,7 @@ class CommentController extends ApiController{
         $data = $request['data'];
         $img = $this->uploadImage($request->file('img'));
         if($img) {
+            unlink($this->path . '/' . $comment->img);
             $data['img'] = $img;
         }
 
