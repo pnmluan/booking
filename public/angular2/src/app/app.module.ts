@@ -33,6 +33,7 @@ import { routing } from './app.routing';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './components/home';
 import { AboutComponent } from './components/about';
+import { IntrodutionComponent } from './components/introdution';
 import { PageNotFoundComponent } from './components/page-not-found';
 import { HeaderComponent } from './components/header';
 import { SearchResultComponent } from './components/search-result';
@@ -47,6 +48,7 @@ import { CustomerComponent } from './components/customer';
     AppComponent,
     HomeComponent,
     AboutComponent,
+    IntrodutionComponent,
     PageNotFoundComponent,
     HeaderComponent,
     SearchResultComponent,

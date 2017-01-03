@@ -177,11 +177,11 @@ export class SearchResultComponent implements OnInit, AfterViewInit {
 
 
 		// Combine fork join 3 airlines
-		const vietjet$ = this._AirlineDataService.vietjet(this.session_flight).cache();
+		const vietjet$ = this._AirlineDataService.vietjet(this.session_flight);
 
-		const jetstar$ = this._AirlineDataService.jetstar(this.session_flight).cache();
+		const jetstar$ = this._AirlineDataService.jetstar(this.session_flight);
 
-		const vna$ = this._AirlineDataService.vna(this.session_flight).cache();
+		const vna$ = this._AirlineDataService.vna(this.session_flight);
 
 		Observable.forkJoin(vietjet$, jetstar$, vna$).subscribe(res => {
 
