@@ -1183,11 +1183,11 @@ only screen and (max-width: 767px) {
 
 /****** TOUR-DETAILS ******/
 /**************************/
-.tour-details {}
+/*.tour-details {}*/
 
-.tour-details-inner { display: table; width: 100%; }
+.tour-details-inner {  width: 100%; }
 
-.tour-details-l { display: table-cell; padding-right: 20px; }
+.tour-details-l { width: calc(100% - 320px); padding-right: 20px; float: left }
 .tour-details-l-inner {}
 .tour-info { margin-bottom: 30px; }
 .tour-info .title { font-size: 20px; font-weight: bold; color: #649931; font-family: arial; line-height: 25px; margin-bottom: 5px; }
@@ -1198,7 +1198,7 @@ only screen and (max-width: 767px) {
 .tour-info .sh-cart input { width: 60px; display: inline-block !important; height: 40px; border-radius: 0px; }
 .tour-info .sh-cart button { background: #DE4131; color: #fff; text-transform: uppercase; height: 40px; font-size: 15px; border-radius: 0px; padding: 0px 20px; }
 
-.tour-details-r { display: table-cell; width: 320px; min-width: 260px; }
+.tour-details-r { width: 320px; float: left; }
 .tour-details-r-inner { border: 1px solid #ddd; }
 .tour-details-r-inner h3 { padding: 15px 10px; color: #fff; background: #649931; text-transform: uppercase; font-size: 16px; }
 .tour-details-r-inner > div { padding: 20px 10px 10px 10px; }
@@ -1219,6 +1219,13 @@ only screen and (max-width: 767px) {
 .tour-content .content-inner p,
 .tour-content .content-inner span{ line-height: 25px; text-align: justify; }
 
+.tour-content .tour-photos .content-inner div,
+.tour-content .tour-photos .content-inner li,
+.tour-content .tour-photos .content-inner h2,
+.tour-content .tour-photos .content-inner h3,
+.tour-content .tour-photos .content-inner p,
+.tour-content .tour-photos .content-inner span{ line-height: normal; text-align: center; }
+
 .content-title { font-size: 22px; text-transform: uppercase; color: #666; margin-top: 30px; }
 .content-inner .sub-title { font-weight: bold; font-size: 18px;  }
 .s-line { width: 30px; height: 3px; background: #ddd; margin: 15px 0px; }
@@ -1232,3 +1239,34 @@ only screen and (max-width: 767px) {
 .tour-include ul li span { margin-top: 3px; float: right; display: inline-block; width: 60px; height: 18px; line-height: 17px !important; font-size: 12px; text-align: center !important; color: #fff; }
 .tour-include ul li span.yes { background: #649931; }
 .tour-include ul li span.no { background: #DE4131; }
+
+
+#sync1 .item img{ display: block; width: 100%; height: auto; }
+#sync2 .item img{ display: block; width: 100%; height: auto; filter: grayscale(1); -webkit-filter: grayscale(1); }
+#sync2 .owl-item.synced .item img { filter: grayscale(0); -webkit-filter: grayscale(0);  }
+
+#sync1 .owl-controls div.owl-prev, #sync1 .owl-controls div.owl-next {
+    position: absolute;
+    top: 0px;
+    margin: 0px;
+    width: 40px;
+    height: 100%;
+    overflow: hidden;
+    text-indent: 99999px;
+}
+
+#sync1 .owl-controls div.owl-prev {
+    left: 0px;
+    background: transparent url("../img/prev2.png") no-repeat scroll center center;
+}
+
+#sync1 .owl-controls div.owl-next {
+    right: 0px;
+    background: transparent url("../img/next2.png") no-repeat scroll center center;
+}
+
+.photos-tab li { float: left; }
+.photos-tab li a { display: block; padding: 10px 30px; background: #ddd; color: #333; border-bottom: 1px solid #fff; }
+.photos-tab li a.active { background: #649931; color: #fff; }
+
+#map { display: none; }
