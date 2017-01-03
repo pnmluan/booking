@@ -33,12 +33,13 @@ import { routing } from './app.routing';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './components/home';
 import { AboutComponent } from './components/about';
+import { IntrodutionComponent } from './components/introdution';
 import { PageNotFoundComponent } from './components/page-not-found';
 import { HeaderComponent } from './components/header';
 import { SearchResultComponent } from './components/search-result';
 import { BannerComponent } from './components/home/banner';
 import { NewsComponent } from './components/home/news';
-import { CommentComponent } from './components/home/comment/comment.component';
+import { CommentComponent } from './components/home/comment';
 import { CustomerComponent } from './components/customer';
 
 
@@ -47,6 +48,7 @@ import { CustomerComponent } from './components/customer';
     AppComponent,
     HomeComponent,
     AboutComponent,
+    IntrodutionComponent,
     PageNotFoundComponent,
     HeaderComponent,
     SearchResultComponent,

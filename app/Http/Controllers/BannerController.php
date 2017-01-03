@@ -8,7 +8,8 @@ use Illuminate\Http\Request;
   
   
 class BannerController extends ApiController{
-  
+    private $path = 'backend/assets/apps/img/banner';
+
 	public function index(Request $request){
 
         $data = Banner::listItems($request->all());
@@ -30,7 +31,7 @@ class BannerController extends ApiController{
         if($image) {
             $filename  = time() . '.' . $image->getClientOriginalExtension();
 
-            $destinationPath = 'backend/assets/apps/img/banner'; // upload path
+            $destinationPath = $this->path; // upload path
 
             $image->move($destinationPath, $filename); // uploading file to given path
 
@@ -71,6 +72,7 @@ class BannerController extends ApiController{
             return $this->respondNotFound();
         }
         try {
+            unlink($this->path . '/' . $banner->img);
             if (!$banner->delete()) {
                 return $this->respondWithError();
             }
@@ -89,6 +91,7 @@ class BannerController extends ApiController{
         $data = $request['data'];
         $img = $this->uploadImage($request->file('img'));
         if($img) {
+            unlink($this->path . '/' . $banner->img);
             $data['img'] = $img;
         }
 

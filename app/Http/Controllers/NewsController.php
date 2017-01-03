@@ -8,7 +8,8 @@ use Illuminate\Http\Request;
   
   
 class NewsController extends ApiController{
-  
+    private $path = 'backend/assets/apps/img/news';
+
 	public function index(Request $request){
 
         $data = News::listItems($request->all());
@@ -30,7 +31,7 @@ class NewsController extends ApiController{
         if($image) {
             $filename  = time() . '.' . $image->getClientOriginalExtension();
 
-            $destinationPath = 'backend/assets/apps/img/news'; // upload path
+            $destinationPath = $this->path; // upload path
 
             $image->move($destinationPath, $filename); // uploading file to given path
 
@@ -71,6 +72,7 @@ class NewsController extends ApiController{
             return $this->respondNotFound();
         }
         try {
+            unlink($this->path . '/' . $news->img);
             if (!$news->delete()) {
                 return $this->respondWithError();
             }
@@ -89,6 +91,7 @@ class NewsController extends ApiController{
         $data = $request['data'];
         $img = $this->uploadImage($request->file('img'));
         if($img) {
+            unlink($this->path . '/' . $news->img);
             $data['img'] = $img;
         }
 

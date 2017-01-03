@@ -8,7 +8,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
 
-class albumTicketController extends ApiController{
+class AlbumTicketController extends ApiController{
 
     private $path = 'backend/assets/apps/img/album_ticket';
 

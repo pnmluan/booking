@@ -39,13 +39,13 @@
               <div class="menu-main-menu-container">
                 <ul id="menu-main-menu" class="menu">
                   <li class="menu-item">
-                    <a [routerLink]=" ['/'] " class="active">Trang chủ</a>
+                    <a [routerLink]=" ['./'] " [routerLinkActive]="['active']">Trang chủ</a>
                   </li>
                   <li class="menu-item">
-                    <a [routerLink]=" ['./home'] ">Đặt vé</a>
+                    <a [routerLink]=" ['./home'] " [routerLinkActive]="['active']">Đặt vé</a>
                   </li>
                   <li class="menu-item">
-                    <a [routerLink]=" ['./about'] ">Giới thiệu</a>
+                    <a [routerLink]=" ['./introdution'] " [routerLinkActive]="['active']">Giới thiệu</a>
                   </li>
                   <li class="menu-item">
                     <a [routerLink]=" ['./detail'] ">Hướng dẫn</a>
