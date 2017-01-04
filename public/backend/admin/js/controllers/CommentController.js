@@ -221,6 +221,7 @@ angular.module('MetronicApp').controller('CommentController', function($rootScop
             }).withOption('width','60px'),
             DTColumnBuilder.newColumn('full_name').withTitle('Fullname'),
             DTColumnBuilder.newColumn('content').withTitle('Content'),
+            DTColumnBuilder.newColumn('place').withTitle('Place'),
             DTColumnBuilder.newColumn('status').withTitle('Status'),
             DTColumnBuilder.newColumn(null).withTitle('Action').withOption('createdCell',function(td,cellData,rowData,row,col){
                 

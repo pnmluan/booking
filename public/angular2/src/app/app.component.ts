@@ -21,15 +21,15 @@ export class AppComponent {
 		private _LoadingAnimateService: LoadingAnimateService,
 	) {
 
-		// _HttpInterceptorService.request().addInterceptor((data, method) => {
-		// 	this._LoadingAnimateService.setValue(true);
-		// 	return data;
-		// });
+		_HttpInterceptorService.request().addInterceptor((data, method) => {
+			this._LoadingAnimateService.setValue(true);
+			return data;
+		});
 
-		// _HttpInterceptorService.response().addInterceptor((res, method) => {
-		// 	this._LoadingAnimateService.setValue(false);
-		// 	return res;
-		// });
+		_HttpInterceptorService.response().addInterceptor((res, method) => {
+			this._LoadingAnimateService.setValue(false);
+			return res;
+		});
 
 		this.onSetGobalScript();
 

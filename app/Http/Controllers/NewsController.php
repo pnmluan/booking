@@ -72,7 +72,11 @@ class NewsController extends ApiController{
             return $this->respondNotFound();
         }
         try {
-            unlink($this->path . '/' . $news->img);
+            $filename = $this->path . '/' . $news->img;
+            if(file_exists($filename)) {
+                unlink($filename);
+            }
+
             if (!$news->delete()) {
                 return $this->respondWithError();
             }
@@ -91,7 +95,11 @@ class NewsController extends ApiController{
         $data = $request['data'];
         $img = $this->uploadImage($request->file('img'));
         if($img) {
-            unlink($this->path . '/' . $news->img);
+            $filename = $this->path . '/' . $news->img;
+            if(file_exists($filename)) {
+                unlink($filename);
+            }
+            
             $data['img'] = $img;
         }
 

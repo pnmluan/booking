@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 class Comment extends BaseModel
 {
     protected $table = 'comment';
-    protected $fillable = ['full_name', 'content', 'img', 'status', 'created_at', 'updated_at'];
+    protected $fillable = ['full_name', 'content', 'img', 'place', 'status', 'created_at', 'updated_at'];
 
     public function getModelValidations()
 	{
@@ -17,7 +17,7 @@ class Comment extends BaseModel
 
 	public static function listItems(array $param = null){
 
-		$aColumns = ['full_name', 'content', 'status'];
+		$aColumns = ['full_name', 'content', 'place', 'status'];
 		
 		$query = \DB::table('comment')
 					->select(\DB::raw('SQL_CALC_FOUND_ROWS id'),\DB::raw('id AS DT_RowId'),'comment.*');

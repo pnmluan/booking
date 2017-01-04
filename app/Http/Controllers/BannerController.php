@@ -72,7 +72,11 @@ class BannerController extends ApiController{
             return $this->respondNotFound();
         }
         try {
-            unlink($this->path . '/' . $banner->img);
+            $filename = $this->path . '/' . $banner->img;
+            if(file_exists($filename)) {
+                unlink($filename);
+            }
+            
             if (!$banner->delete()) {
                 return $this->respondWithError();
             }
@@ -91,7 +95,11 @@ class BannerController extends ApiController{
         $data = $request['data'];
         $img = $this->uploadImage($request->file('img'));
         if($img) {
-            unlink($this->path . '/' . $banner->img);
+            $filename = $this->path . '/' . $banner->img;
+            if(file_exists($filename)) {
+                unlink($filename);
+            }
+            
             $data['img'] = $img;
         }
 

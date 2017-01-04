@@ -71,7 +71,11 @@ class CommentController extends ApiController{
             return $this->respondNotFound();
         }
         try {
-            unlink($this->path . '/' . $comment->img);
+            $filename = $this->path . '/' . $comment->img;
+            if(file_exists($filename)) {
+                unlink($filename);
+            }
+
             if (!$comment->delete()) {
                 return $this->respondWithError();
             }
@@ -90,7 +94,11 @@ class CommentController extends ApiController{
         $data = $request['data'];
         $img = $this->uploadImage($request->file('img'));
         if($img) {
-            unlink($this->path . '/' . $comment->img);
+            $filename = $this->path . '/' . $comment->img;
+            if(file_exists($filename)) {
+                unlink($filename);
+            }
+            
             $data['img'] = $img;
         }
 
