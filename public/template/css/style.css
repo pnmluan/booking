@@ -1269,4 +1269,13 @@ only screen and (max-width: 767px) {
 .photos-tab li a { display: block; padding: 10px 30px; background: #ddd; color: #333; border-bottom: 1px solid #fff; }
 .photos-tab li a.active { background: #649931; color: #fff; }
 
-#map { display: none; }
+.photos-wrapper .item:not(:first-child) { display: none; }
+
+.info-tab li { float: left; margin-right: 10px; }
+.info-tab li a { display: block; padding: 5px 30px; background: #ddd; color: #333; border-bottom: 1px solid #fff; position: relative; }
+.info-tab li a.active { background: #649931; color: #fff; }
+.info-tab li a:before {  position: absolute; bottom: -5px; left: 50%; margin-left: -10px; border-top: 5px solid #649931; border-left: 7px solid transparent; border-right: 7px solid transparent; content: ""; display: none; }
+.info-tab li a.active:before { display: block; }
+
+.info-wrapper .item:not(:first-child) { display: none; }
+.info-wrapper .item { padding: 20px 0px; }
