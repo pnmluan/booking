@@ -18,7 +18,7 @@ class Booking extends BaseModel
 
     public static function listItems(array $param = null){
 
-        $aColumns = ['code','round_trip', 'adult', 'children', 'infant', 'state', 'fullname', 'phone', 'email', 'requirement'];
+        $aColumns = ['booking.code','booking.round_trip', 'booking.adult', 'booking.children', 'booking.infant', 'booking.state', 'contact.fullname', 'contact.phone', 'contact.email', 'contact.requirement'];
 
         $query = \DB::table('booking')
             ->select(\DB::raw('SQL_CALC_FOUND_ROWS booking.id'),\DB::raw('booking.id AS DT_RowId'),'booking.*', 'contact.fullname', 'contact.phone', 'contact.email', 'contact.requirement')
@@ -37,8 +37,6 @@ class Booking extends BaseModel
                 $keyword = '%'. $param['search']['value'] .'%';
                 for($i=0; $i<$count; $i++){
                     $requestColumn = $param['columns'][$i];
-                    var_dump('---------------------------');
-                    var_dump($requestColumn);
                     if($requestColumn['searchable']=='true'){
                         
                         $sWhere .= $aColumns[$i].' LIKE "'.$keyword.'" OR ';

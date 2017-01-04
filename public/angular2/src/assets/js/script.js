@@ -118,14 +118,6 @@ jQuery(document).ready(function() {
     minimumResultsForSearch: -1
   });
 
-  jQuery('.owl-carousel').owlCarousel({
-    navigation: false,
-    slideSpeed: 300,
-    paginationSpeed: 400,
-    singleItem: true,
-    autoPlay: 5000
-  });
-
   
 
   indexScript.loadBookOption();

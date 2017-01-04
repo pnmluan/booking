@@ -80,7 +80,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
 
 	ngAfterViewInit() {
 		setTimeout(function() {
-			jQuery('.owl-carousel').owlCarousel({
+			jQuery('.owl-carousel.customer-comment').owlCarousel({
 				navigation: false,
 				slideSpeed: 300,
 				paginationSpeed: 400,

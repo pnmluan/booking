@@ -1,4 +1,4 @@
-angular.module('MetronicApp').controller('BookingController', function($rootScope, $scope, $http, $base64, $timeout, $location, $q, BookingService, ngDialog, toastr, DTOptionsBuilder, DTColumnBuilder, Upload) {
+angular.module('MetronicApp').controller('TicketBillController', function($rootScope, $scope, $http, $base64, $timeout, $location, $q, TicketBillService, ngDialog, toastr, DTOptionsBuilder, DTColumnBuilder, Upload) {
     $scope.$on('$viewContentLoaded', function() {
         // initialize core components
         App.initAjax();
@@ -21,7 +21,7 @@ angular.module('MetronicApp').controller('BookingController', function($rootScop
     $scope.clickToAddNew = function() {
 
         ngDialog.openConfirm({
-            template: 'views/booking/model_add_booking.html',
+            template: 'views/ticketbill/model_add_ticket_bill.html',
             className: 'ngdialog-theme-default',
             scope: $scope,
             controller: ['$scope', 'data', function($scope, data){
@@ -31,11 +31,11 @@ angular.module('MetronicApp').controller('BookingController', function($rootScop
                 $scope.optionStatus = data.optionStatus;
                 $scope.optionStatus.selected = data.optionStatus[0];
 
-                // Create Booking
+                // Create TicketBill
                 $scope.save = function() {
-
+                    $scope.mItem.provider = $scope.optionProvider.selected.id;
                     $scope.mItem.status = $scope.optionStatus.selected.id;
-                    BookingService.create($scope.img, $scope.mItem).then(function(res) {
+                    TicketBillService.create($scope.mItem).then(function(res) {
 
                         if(res.data.status == 'success') {
                             data.dtInstance.reloadData();
@@ -50,7 +50,7 @@ angular.module('MetronicApp').controller('BookingController', function($rootScop
                     });
                 }
 
-                // Close popup Booking
+                // Close popup TicketBill
                 $scope.close = function() {
                     ngDialog.close();
                 }
@@ -71,7 +71,7 @@ angular.module('MetronicApp').controller('BookingController', function($rootScop
     function getItemByID(id) {
         var deferred = $q.defer();
         var item = {};
-        BookingService.getBookings().then(function(res) {
+        TicketBillService.getTicketBills().then(function(res) {
 
             if(res.statusText == 'OK') {
 
@@ -86,10 +86,10 @@ angular.module('MetronicApp').controller('BookingController', function($rootScop
         return deferred.promise;
     }
 
-    // Click to Update
+    // Click to UpdateH
     $scope.clickToUpdate = function(item) {
         ngDialog.openConfirm({
-            template: 'views/booking/model_update_booking.html',
+            template: 'views/ticketbill/model_update_ticket_bill.html',
             className: 'ngdialog-theme-default',
             scope: $scope,
             controller: ['$scope', '$filter', 'data', function($scope, $filter, data){
@@ -105,12 +105,13 @@ angular.module('MetronicApp').controller('BookingController', function($rootScop
                 });
 
                 //Load Image
-                $scope.img = $scope.settings.imgPath + 'booking/' + item.img; 
+                $scope.img = $scope.settings.imgPath + 'ticket_bill/' + item.img; 
 
-                // Create Booking
+                // Create TicketBill
                 $scope.save = function() {
                     $scope.mItem.status = $scope.optionStatus.selected.id;
-                    BookingService.update($scope.img, $scope.mItem).then(function(res) {
+                    $scope.mItem.provider = $scope.optionProvider.selected.id;
+                    TicketBillService.update($scope.mItem).then(function(res) {
 
                         if(res.data.status == 'success') {
                             data.dtInstance.reloadData();
@@ -124,7 +125,7 @@ angular.module('MetronicApp').controller('BookingController', function($rootScop
                     });
                 }
 
-                // Close popup Booking
+                // Close popup TicketBill
                 $scope.close = function() {
                     ngDialog.close();
                 }
@@ -160,7 +161,7 @@ angular.module('MetronicApp').controller('BookingController', function($rootScop
           buttonsStyling: false
         }).then(function() {
 
-            BookingService.delete(id).then(function(res) {
+            TicketBillService.delete(id).then(function(res) {
                 if(res.data.status == 'success') {
                     toastr.success('Deleted an item', 'Success');
                     $scope.dtInstance.reloadData();
@@ -180,11 +181,18 @@ angular.module('MetronicApp').controller('BookingController', function($rootScop
             {id: 'active', name: 'Active'},
             {id: 'inactive', name: 'Inactive'},
         ];
+
+        $scope.optionProvider = [
+            {id: 'vietjet', name: 'VietJet'},
+            {id: 'jetstar', name: 'JetStar'},
+            {id: 'vna', name: 'VietNam Airline'},
+        ];
+        $scope.optionProvider.selected = $scope.optionProvider[0];
         
         $scope.listItem = [];
         $scope.dtInstance = {};
 
-        var table = 'booking'
+        var table = 'ticket_bill'
         var params = $location.search();
         var imgUrl = $rootScope.settings.imgPath + table + '/';
 
@@ -199,7 +207,7 @@ angular.module('MetronicApp').controller('BookingController', function($rootScop
         }).withDataProp('data')
             .withOption('processing',true)
             .withOption('serverSide',true)
-            .withOption('filter',true)
+            .withOption('filter',false)
             .withOption('lengthChange',false)
             .withDisplayLength(20)
             .withOption('rowCallback',function(row,data){
@@ -214,16 +222,10 @@ angular.module('MetronicApp').controller('BookingController', function($rootScop
 
         $scope.dtColumns = [
             DTColumnBuilder.newColumn('id').notVisible(),
-            DTColumnBuilder.newColumn('fullname').withTitle('Fullname'),
-            DTColumnBuilder.newColumn('phone').withTitle('Phone'),
-            DTColumnBuilder.newColumn('email').withTitle('Email'),
-            DTColumnBuilder.newColumn('code').withTitle('Code'),
-            DTColumnBuilder.newColumn('round_trip').withTitle('Round Trip'),
-            DTColumnBuilder.newColumn('adult').withTitle('Adult'),
-            DTColumnBuilder.newColumn('children').withTitle('Children'),
-            DTColumnBuilder.newColumn('infant').withTitle('Infant'),
-            DTColumnBuilder.newColumn('requirement').withTitle('Requirement'),
-            DTColumnBuilder.newColumn('state').withTitle('State'),
+            DTColumnBuilder.newColumn('name').withTitle('Name'),
+            DTColumnBuilder.newColumn('fare').withTitle('Price'),
+            DTColumnBuilder.newColumn('provider').withTitle('Provider'),
+            DTColumnBuilder.newColumn('status').withTitle('Status'),
             DTColumnBuilder.newColumn(null).withTitle('Action').withOption('createdCell',function(td,cellData,rowData,row,col){
                 
                var string_html = `</button>&nbsp;<button class="btn btn-warning clickToUpdate"><i class="fa fa-edit"></i>Edit</button>&nbsp;` +
@@ -234,7 +236,7 @@ angular.module('MetronicApp').controller('BookingController', function($rootScop
     }
 
     function loadListItem() {
-        BookingService.getBookings().then(function(res) {
+        TicketBillService.getTicketBills().then(function(res) {
 
             if(res.statusText == 'OK') {
                 $scope.listItem = res.data.data;

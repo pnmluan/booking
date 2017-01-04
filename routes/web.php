@@ -240,6 +240,21 @@ $app->group(['prefix' => 'api/v1',   'namespace' => 'App\Http\Controllers'], fun
 
     /*
     |--------------------------------------------------------------------------
+    | Ticket Bill
+    |--------------------------------------------------------------------------
+    */
+    $app->get('ticket_bill/index','TicketBillController@index');
+
+    $app->get('ticket_bill/show/{id}','TicketBillController@show');
+
+    $app->post('ticket_bill/create','TicketBillController@create');
+
+    $app->put('ticket_bill/update/{id}','TicketBillController@update');
+
+    $app->delete('ticket_bill/delete/{id}','TicketBillController@delete');
+
+    /*
+    |--------------------------------------------------------------------------
     | Album Ticket
     |--------------------------------------------------------------------------
     */
