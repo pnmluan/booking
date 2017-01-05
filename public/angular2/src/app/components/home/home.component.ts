@@ -28,14 +28,19 @@ declare let moment: any;
   providers: [BannerComponent, NewsComponent, BannerComponent, LocationDataService, BannerDataService, NewsDataService]
 })
 export class HomeComponent implements OnInit, AfterViewInit {
-	people = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+	people = this._Configuration.arr_number_people;
+	infants = this._Configuration.arr_number_infants;
 	locations = [];
 	round_trip = 'off';
 	search = {};
 	filterBookForm: FormGroup;
 
-	constructor(private formBuilder: FormBuilder, private locationDataService: LocationDataService, private _configuration: Configuration,
-		private _bannerDataService: BannerDataService, private sessionStorage: LocalStorageService,
+	constructor(
+		private formBuilder: FormBuilder, 
+		private locationDataService: LocationDataService, 
+		private _Configuration: Configuration,
+		private _bannerDataService: BannerDataService, 
+		private sessionStorage: LocalStorageService,
 		private router: Router) { 
 
 		this.filterBookForm = this.formBuilder.group({
