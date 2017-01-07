@@ -30,8 +30,8 @@
 .menu  > .greydark:not(.nicdark_megamenu) > .sub-menu li:hover, .nicdark_megamenu.greydark > ul > li > a{ background-color:#4a515b; }
 .nicdark_dark_widgets .widget.widget_product_search form input[type=text], .nicdark_bg_greydark .tinynav , .nicdark_dark_widgets .widget_search input[type="text"], .nicdark_dark_widgets .tagcloud a{ border: 0px solid #e5e5e5; background-color: #4a515b;}
 .menu  > .greydark .sub-menu li:last-child, .nicdark_shadow.nicdark_bg_greydark{ box-shadow: 0px 4px 0px 0px #4a515b; }
-.menu  > .greydark > .sub-menu li, .nicdark_megamenu.greydark ul li ol li a, .nicdark_dark_widgets .widget ul li, #payment ul li { border-bottom: 1px solid #4a515b; }
-.nicdark_dark_widgets .widget.widget_shopping_cart .widget_shopping_cart_content p.total { border-top: 3px double #4a515b; }
+.menu  > .greydark > .sub-menu li, .nicdark_megamenu.greydark ul li ol li a, .nicdark_dark_widgets .widget ul li, #payment ul li { border-bottom: 1px solid rgba(255, 255, 255, 0.5); }
+.nicdark_dark_widgets .widget.widget_shopping_cart .widget_shopping_cart_content p.total { border-top: 3px double rgba(255, 255, 255, 0.5); }
 .woocommerce .widget_price_filter .price_slider_amount .price_label{ box-shadow: 0px 4px 0px 0px #353b3d; background-color: #4a515b; }
 .woocommerce .widget_price_filter .price_slider_wrapper .ui-widget-content,.woocommerce-page .widget_price_filter .price_slider_wrapper .ui-widget-content{ background:#4a515b;}
 .nicdark_dark_widgets .widget_nav_menu .menu li .sub-menu li { border-bottom: 0px solid #4a515b; }
@@ -1151,9 +1151,10 @@ only screen and (max-width: 767px) {
 .tours .ui-slider .ui-slider-handle {
     position: absolute;
     z-index: 2;
-    width: 20px;
-    height: 20px;
-    top: -8px;
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    top: -5px;
     background: #649931;
 }
 
@@ -1324,6 +1325,16 @@ only screen and (max-width: 767px) {
 .tour-price-details .bottom button { width: 100%; }
 .tour-price-details .bottom .btn-book-now { color: #fff; background: #649931; }
 .tour-price-details .bottom .btn-shopping-cart { color: #fff; background: #DE4131; }
+
+.widget.widget_shopping_cart .widget_shopping_cart_content p.buttons a.button {
+    background-color: #F7B916;
+    box-shadow: 0px 0px 0px 1px #F7B916;
+}
+
+.widget.widget_shopping_cart .widget_shopping_cart_content p.buttons a.checkout {
+    background-color: #DE4131;
+    box-shadow: 0px 0px 0px 1px #DE4131;
+}
 
 
 
