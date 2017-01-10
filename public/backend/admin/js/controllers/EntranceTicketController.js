@@ -185,6 +185,7 @@ angular.module('MetronicApp').controller('EntranceTicketController', function($r
                     });
 
                     $scope.imgs.splice(index, 1);
+                    console.log($scope.imgs);
                 }
 
 

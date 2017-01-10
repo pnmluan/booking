@@ -11,4 +11,8 @@ export class Configuration {
 	public imgPath = this.server + "backend/assets/apps/img/";
 	public formatDate = "dddd - DD/MM/YYYY";
 	public viFormatDate = "DD/MM/YYYY";
+	public dateFormat = 'YYYY-MM-DD';
+
+	public arr_number_people = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+	public arr_number_infants = [1,2];
 }

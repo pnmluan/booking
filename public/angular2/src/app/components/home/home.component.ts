@@ -37,7 +37,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
 
 	constructor(
 		private formBuilder: FormBuilder, 
-		private locationDataService: LocationDataService, 
+		private _LocationDataService: LocationDataService, 
 		private _Configuration: Configuration,
 		private _bannerDataService: BannerDataService, 
 		private sessionStorage: LocalStorageService,
@@ -58,7 +58,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
 		// 	(data: any) => console.log(data)
 		// );
 
-		this.locationDataService.getAll().subscribe(res => {
+		this._LocationDataService.getAll().subscribe(res => {
 
 			if (res.data) {
 				var locations = [];
