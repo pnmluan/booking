@@ -13,11 +13,9 @@ export class CommentComponent implements OnInit {
 
 	public comment: Comment;
 	public comments = [];
-	public commentPath: string;
 	constructor(private _commentDataService: CommentDataService, private config: Configuration) { }
 
   	ngOnInit() {
-		this.commentPath = this.config.imgPath + 'comment/';
 		this._commentDataService.getAll().subscribe(res => {
 
 			if (res.data) {
@@ -27,14 +25,14 @@ export class CommentComponent implements OnInit {
 					var temp = [];
 					if (res.data[i]) {
 						if (res.data[i]['img']) {
-							res.data[i]['img'] = this.commentPath + res.data[i]['img'];
+							res.data[i]['img'] = this._commentDataService.imgPath + res.data[i]['img'];
 						}
 						
 						temp.push(res.data[i]);
 					}
 					if (res.data[i+1]) {
 						if (res.data[i + 1]['img']) {
-							res.data[i + 1]['img'] = this.commentPath + res.data[i + 1]['img'];
+							res.data[i + 1]['img'] = this._commentDataService.imgPath + res.data[i + 1]['img'];
 						}
 						
 						temp.push(res.data[i+1]);
@@ -46,8 +44,6 @@ export class CommentComponent implements OnInit {
 				this.comments = comments;
 
 			}
-			console.log(this.comments);
-
 		})
   	}
 

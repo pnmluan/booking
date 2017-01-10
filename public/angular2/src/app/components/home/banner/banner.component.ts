@@ -23,17 +23,6 @@ export class BannerComponent implements OnInit {
   				}
 				this.bannerOptions = options;
 
-				setTimeout( () => {
-					jQuery('.owl-carousel-home-slider').owlCarousel({
-						navigation: true,
-						slideSpeed: 300,
-						paginationSpeed: 400,
-						singleItem: true,
-						autoPlay: 5000,
-						transitionStyle: "fade",
-						pagination: false
-					});
-				}, 2000)
   			}
   		});
   	}

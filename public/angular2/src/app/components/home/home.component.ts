@@ -93,6 +93,16 @@ export class HomeComponent implements OnInit, AfterViewInit {
 				autoPlay: 5000
 			});
 
+			jQuery('.owl-carousel-home-slider').owlCarousel({
+				navigation: true,
+				slideSpeed: 300,
+				paginationSpeed: 400,
+				singleItem: true,
+				autoPlay: 5000,
+				transitionStyle: "fade",
+				pagination: false
+			});
+
 			jQuery(".select-adult, .select-child-1, .select-child-2").select2({
 			    width: '100%',
 			    minimumResultsForSearch: -1
