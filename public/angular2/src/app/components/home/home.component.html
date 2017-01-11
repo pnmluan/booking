@@ -1,154 +1,142 @@
 <div style="float:left; width:100%;" id="post-32" class="post-32 page type-page status-publish hentry">
-  <!--start slider-->
+    <!--start slider-->
     <app-banner></app-banner>
-  <!-- end slider -->
-  <section class="nicdark_section vc_row wpb_row vc_row-fluid">
-    <div class="nicdark_container nicdark_vc nicdark_clearfix">
-      <div class="vc_col-sm-12 nicdark_upper_level1 wpb_column vc_column_container vc_custom_1431937582413">
-        <div class="wpb_wrapper">
-          <div class="vc_empty_space  nicdark_displaynone_desktop nicdark_displayblock_iphonepotr nicdark_displayblock_iphoneland" style="height: 162px">
-            <span class="vc_empty_space_inner"></span>
-          </div>
-          <div class="wpb_tabs wpb_content_element nicdark_tab_dark" data-interval="0">
-            <div class="wpb_wrapper wpb_tour_tabs_wrapper ui-tabs vc_clearfix">
-              <ul class="wpb_tabs_nav ui-tabs-nav vc_clearfix">
-                <li class="nicdark_width100_iphonepotr nicdark_width100_iphoneland">
-                  <a class="title white" ><i class="icon-plane"></i> VÉ MÁY BAY</a>
-                </li>
-                <!-- <li class="nicdark_width100_iphonepotr nicdark_width100_iphoneland">
+    <!-- end slider -->
+    <section class="nicdark_section vc_row wpb_row vc_row-fluid">
+        <div class="nicdark_container nicdark_vc nicdark_clearfix">
+            <div class="vc_col-sm-12 nicdark_upper_level1 wpb_column vc_column_container vc_custom_1431937582413">
+                <div class="wpb_wrapper">
+                    <div class="vc_empty_space  nicdark_displaynone_desktop nicdark_displayblock_iphonepotr nicdark_displayblock_iphoneland" style="height: 162px">
+                        <span class="vc_empty_space_inner"></span>
+                    </div>
+                    <div class="wpb_tabs wpb_content_element nicdark_tab_dark" data-interval="0">
+                        <div class="wpb_wrapper wpb_tour_tabs_wrapper ui-tabs vc_clearfix">
+                            <ul class="wpb_tabs_nav ui-tabs-nav vc_clearfix">
+                                <li class="nicdark_width100_iphonepotr nicdark_width100_iphoneland">
+                                    <a class="title white"><i class="icon-plane"></i> VÉ MÁY BAY</a>
+                                </li>
+                                <!-- <li class="nicdark_width100_iphonepotr nicdark_width100_iphoneland">
                   <a class="title white" href="#tab-bus"><i class="fa fa-bus"></i> VÉ XE KHÁCH</a>
                 </li> -->
-              </ul>
-              <div id="tab-plane" class="wpb_tab ui-tabs-panel wpb_ui-tabs-hide vc_clearfix">
-                <form class="plane-form" [formGroup]="filterBookForm" (ngSubmit)="onSubmit()">
-                  <div class="plane-form-inner">
-                    <div class="col-md-12">
-                      <div class="plane-option clearfix">
-                        <label class="radio-inline radio-plane">
-                          <input class="plane-option" type="radio" (click)="selectPlaneOption('off')" formControlName="round_trip" name="round_trip" id="one-way" value="off" checked> Một chiều
-                        </label>
-                        <label class="radio-inline radio-plane">
-                          <input class="plane-option" type="radio" (click)="selectPlaneOption('on')" formControlName="round_trip" name="round_trip" id="round-trip" value="on"> Khứ hồi
-                        </label>
-                        <!-- <label class="radio-inline radio-plane">
+                            </ul>
+                            <div id="tab-plane" class="wpb_tab ui-tabs-panel wpb_ui-tabs-hide vc_clearfix">
+                                <form class="plane-form" [formGroup]="filterBookForm" (ngSubmit)="onSubmit()">
+                                    <div class="plane-form-inner">
+                                        <div class="col-md-12">
+                                            <div class="plane-option clearfix">
+                                                <label class="radio-inline radio-plane">
+                                                    <input class="plane-option" type="radio" (click)="selectPlaneOption('off')" formControlName="round_trip" name="round_trip" id="one-way" value="off" checked> Một chiều
+                                                </label>
+                                                <label class="radio-inline radio-plane">
+                                                    <input class="plane-option" type="radio" (click)="selectPlaneOption('on')" formControlName="round_trip" name="round_trip" id="round-trip" value="on"> Khứ hồi
+                                                </label>
+                                                <!-- <label class="radio-inline radio-plane">
                           <input class="plane-option" type="radio" name="plane-option" id="multiple" value="option3"> Nhiều chặng
                         </label> -->
-                      </div>
-                    </div>
-                    <div class="one">
-                      <div class="plane-input clearfix">
-                        <div class="col-md-3">
-                          <div class="field">
-                            <span class="field-label">Điểm đi</span>
-                            <div class="field-input">
-
-                              <ng-select placeholder="Điểm đi"
-                                  formControlName="from"
-                                  [options]="locations">
-                              </ng-select>
-                            </div>
-                          </div>
-                        </div>
-                        <div class="col-md-3">
-                          <div class="field">
-                            <span class="field-label">Điểm đến</span>
-                            <div class="field-input">
-
-                              <ng-select placeholder="Điểm đến"
-                                  formControlName="to"
-                                  [options]="locations">
-                              </ng-select>
-                            </div>
-                          </div>
-                        </div>
-                        <div class="col-md-3">
-                          <div class="field">
-                            <span class="field-label">Ngày đi</span>
-                            <div class="field-input">
-                              <div class="form-group">
-                                <div class='input-group date datetimepicker' id='date-go'>
-
-                                  <input type='text' class="form-control"  #datePickerFrom [ngModel]="from_date" (blur)="from_date = datePickerFrom.value" formControlName="from_date" /> 
-                                  
-                                  <span class="input-group-addon">
+                                            </div>
+                                        </div>
+                                        <div class="one">
+                                            <div class="plane-input clearfix">
+                                                <div class="col-md-3">
+                                                    <div class="field">
+                                                        <span class="field-label">Điểm đi</span>
+                                                        <div class="field-input">
+                                                            <ng-select placeholder="Điểm đi" formControlName="from" [options]="locations">
+                                                            </ng-select>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-3">
+                                                    <div class="field">
+                                                        <span class="field-label">Điểm đến</span>
+                                                        <div class="field-input">
+                                                            <ng-select placeholder="Điểm đến" formControlName="to" [options]="locations">
+                                                            </ng-select>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-3">
+                                                    <div class="field">
+                                                        <span class="field-label">Ngày đi</span>
+                                                        <div class="field-input">
+                                                            <div class="form-group">
+                                                                <div class='input-group date datetimepicker' id='date-go'>
+                                                                    <input type='text' class="form-control" #datePickerFrom [ngModel]="from_date" (blur)="from_date = datePickerFrom.value" formControlName="from_date" />
+                                                                    <span class="input-group-addon">
                                     <span class="glyphicon glyphicon-calendar"></span>
-                                  </span>
-                                </div>
-
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                        <div class="col-md-3">
-                          <div class="field">
-                            <span class="field-label">Ngày về</span>
-                            <div class="field-input">
-                              <div class="form-group">
-                                <div class='input-group date datetimepicker' id='date-back'>
-
-                                  <input type='text' class="form-control" #datePickerTo [ngModel]="to_date" 
-                                  (blur)="to_date = datePickerTo.value" formControlName="to_date" />
-
-                                  <span class="input-group-addon">
+                                                                    </span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-3">
+                                                    <div class="field">
+                                                        <span class="field-label">Ngày về</span>
+                                                        <div class="field-input">
+                                                            <div class="form-group">
+                                                                <div class='input-group date datetimepicker' id='date-back'>
+                                                                    <input type='text' class="form-control" #datePickerTo [ngModel]="to_date" (blur)="to_date = datePickerTo.value" formControlName="to_date" />
+                                                                    <span class="input-group-addon">
                                     <span class="glyphicon glyphicon-calendar"></span>
-                                  </span>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                      <div class="plane-age clearfix">
-                        <div class="col-md-3">
-                          <div class="field">
-                            <div>
-                              <span class="field-label">Người lớn</span>
-                              <i>( >12 tuổi )</i>
-                            </div>
-                            <div>
-                              <select class="select-adult" data-placeholder="" formControlName="adult">
-                                <option *ngFor="let person of people" value="{{ person }}">{{ person }}</option>
-                              </select>
-                            </div>
-                          </div>
-                        </div>
-                        <div class="col-md-3">
-                          <div class="field">
-                            <div>
-                              <span class="field-label">Trẻ em</span>
-                              <i> ( 2 - 12 tuổi ) </i>
-                            </div>
-                            <div>
-                              <select class="select-child-1" data-placeholder="" formControlName="children">
-                                <option value="0">0</option>
-                                <option *ngFor="let person of people" value="{{ person }}">{{ person }}</option>
-                              </select>
-                            </div>
-                          </div>
-                        </div>
-                        <div class="col-md-3">
-                          <div class="field">
-                            <div>
-                              <span class="field-label">Em bé</span>
-                              <i> ( < 2 tuổi ) </i>
-                            </div>
-                            <div>
-                              <select class="select-child-2" data-placeholder="" formControlName="infant">
-                                <option value="0">0</option>
-                                <option *ngFor="let person of infants" value="{{ person }}">{{ person }}</option>
-                              </select>
-                            </div>
-                          </div>
-                        </div>
-                        <div class="col-md-3">
-                          <span class="field-label">&nbsp;</span>
-                          <div class="plane-submit">
-                            <button type="submit" class="btn btn-plane btn-search" [disabled]="!filterBookForm.valid"><i class=" icon-search-2"></i> Tìm chuyến bay</button>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <!-- <div class="multiple">
+                                                                    </span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="plane-age clearfix">
+                                                <div class="col-md-3">
+                                                    <div class="field">
+                                                        <div>
+                                                            <span class="field-label">Người lớn</span>
+                                                            <i>( >12 tuổi )</i>
+                                                        </div>
+                                                        <div>
+                                                            <select class="select-adult" data-placeholder="" formControlName="adult">
+                                                                <option *ngFor="let person of people" value="{{ person }}">{{ person }}</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-3">
+                                                    <div class="field">
+                                                        <div>
+                                                            <span class="field-label">Trẻ em</span>
+                                                            <i> ( 2 - 12 tuổi ) </i>
+                                                        </div>
+                                                        <div>
+                                                            <select class="select-child-1" data-placeholder="" formControlName="children">
+                                                                <option value="0">0</option>
+                                                                <option *ngFor="let person of people" value="{{ person }}">{{ person }}</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-3">
+                                                    <div class="field">
+                                                        <div>
+                                                            <span class="field-label">Em bé</span>
+                                                            <i> ( < 2 tuổi ) </i>
+                                                        </div>
+                                                        <div>
+                                                            <select class="select-child-2" data-placeholder="" formControlName="infant">
+                                                                <option value="0">0</option>
+                                                                <option *ngFor="let person of infants" value="{{ person }}">{{ person }}</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-3">
+                                                    <span class="field-label">&nbsp;</span>
+                                                    <div class="plane-submit">
+                                                        <button type="submit" class="btn btn-plane btn-search" [disabled]="!filterBookForm.valid"><i class=" icon-search-2"></i> Tìm chuyến bay</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- <div class="multiple">
                       <div class="plane-input clearfix">
                         <div class="field clearfix">
                           <label>Hành trình 1</label>
@@ -284,10 +272,10 @@
                         </div>
                       </div>
                     </div> -->
-                  </div>
-                </form>
-              </div>
-              <!-- <div id="tab-bus" class="wpb_tab ui-tabs-panel wpb_ui-tabs-hide vc_clearfix">
+                                    </div>
+                                </form>
+                            </div>
+                            <!-- <div id="tab-bus" class="wpb_tab ui-tabs-panel wpb_ui-tabs-hide vc_clearfix">
                 <form class="bus-form" action="#" method="">
                   <div class="bus-form-inner">
                     <div class="bus-input clearfix">
@@ -347,49 +335,48 @@
                   </div>
                 </form>
               </div> -->
+                        </div>
+                    </div>
+                </div>
             </div>
-          </div>
         </div>
-      </div>
-    </div>
-  </section>
-  
-  <!-- main-form -->
-  <section class="main-intro nicdark_section vc_row wpb_row vc_row-fluid">
-    <div class="container">
-      <h2 class="intro-title title">ĐẶT VÉ SIÊU RẺ</h2>
-      <p>Datvesieure.com là hệ thống bán vé máy bay, vé xe lớn nhất và uy tín nhất tại Việt Nam</p>
-    </div>
-  </section>
-  <!-- main-intro -->
-  <section class="main-promotions nicdark_section vc_row wpb_row vc_row-fluid">
-    <div class="container">
-      <div class="row">
-        <div class="col-md-6">
-            <app-news></app-news>
-          </div>
-          <div class="col-md-6">
-            <app-comment></app-comment>
-          </div>
+    </section>
+    <!-- main-form -->
+    <section class="main-intro nicdark_section vc_row wpb_row vc_row-fluid">
+        <div class="container">
+            <h2 class="intro-title title">ĐẶT VÉ SIÊU RẺ</h2>
+            <p>Datvesieure.com là hệ thống bán vé máy bay, vé xe lớn nhất và uy tín nhất tại Việt Nam</p>
         </div>
-      </div>
+    </section>
+    <!-- main-intro -->
+    <section class="main-promotions nicdark_section vc_row wpb_row vc_row-fluid">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <app-news></app-news>
+                </div>
+                <div class="col-md-6">
+                    <app-comment></app-comment>
+                </div>
+            </div>
+        </div>
     </section>
     <section class="service-method nicdark_section vc_row wpb_row vc_row-fluid">
-      <div class="container">
-        <div class="row">
-          <div class="col-md-6 ticket-book">
-            <div class="section-title">các hình thức đặt vé</div>
-            <div class="border-title"></div>
-            <div class="row form-group">
-              <div class="col-md-12">
-                <div class="icon-bookticket"><img src="assets/img/web.png" alt="" style="width: 45px;"></div>
-                <div class="text-desc">
-                  <div class="text-big">Đặt vé trực tiếp trên website.</div>
-                  <div class="text-small">Sẽ được nhân viên xác nhận sau vài phút</div>
-                </div>
-              </div>
-            </div>
-            <!-- <div class="row form-group">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 ticket-book">
+                    <div class="section-title">các hình thức đặt vé</div>
+                    <div class="border-title"></div>
+                    <div class="row form-group">
+                        <div class="col-md-12">
+                            <div class="icon-bookticket"><img src="assets/img/web.png" alt="" style="width: 45px;"></div>
+                            <div class="text-desc">
+                                <div class="text-big">Đặt vé trực tiếp trên website.</div>
+                                <div class="text-small">Sẽ được nhân viên xác nhận sau vài phút</div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- <div class="row form-group">
             <div class="col-md-12">
               <div class="icon-book"><i class="fa fa-comments"></i></div>
               <div class="text-desc">
@@ -400,42 +387,42 @@
               </div>
             </div>
           </div> -->
-          <div class="row form-group">
-            <div class="col-md-12">
-              <div class="icon-bookticket"><img src="assets/img/phone.png" alt=""></div>
-              <div class="text-desc">
-                <div class="text-big">Đặt vé qua điện thoại</div>
-                <div class="text-small">
-                  <a href="tel:0873050500">(0511) 38 88 408</a>
-                  <!-- <a href="tel:0902985355">0986.125.225</a> -->
+                    <div class="row form-group">
+                        <div class="col-md-12">
+                            <div class="icon-bookticket"><img src="assets/img/phone.png" alt=""></div>
+                            <div class="text-desc">
+                                <div class="text-big">Đặt vé qua điện thoại</div>
+                                <div class="text-small">
+                                    <a href="tel:0873050500">(0511) 38 88 408</a>
+                                    <!-- <a href="tel:0902985355">0986.125.225</a> -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row form-group">
+                        <div class="col-md-12">
+                            <div class="icon-bookticket"><img src="assets/img/index.jpg" alt="" style="width: 45px;"></div>
+                            <div class="text-desc">
+                                <div class="text-big">Tại văn phòng Công ty TNHH MTV Thương mại và Du lịch Ba Lô</div>
+                                <div class="text-small">06 Tân Lập 1, phường Thạch Thang, quận Hải Châu, Đà Nẵng</div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-              </div>
-            </div>
-          </div>
-          <div class="row form-group">
-            <div class="col-md-12">
-              <div class="icon-bookticket"><img src="assets/img/index.jpg" alt="" style="width: 45px;"></div>
-              <div class="text-desc">
-                <div class="text-big">Tại văn phòng Công ty TNHH MTV Thương mại và Du lịch Ba Lô</div>
-                <div class="text-small">06 Tân Lập 1, phường Thạch Thang, quận Hải Châu, Đà Nẵng</div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-6 payment-method">
-          <div class="section-title">các hình thức thanh toán</div>
-          <div class="border-title"></div>
-          <div class="row form-group">
-            <div class="col-md-12">
-              <div class="icon-payment"><img src="assets/img/money.jpg" alt="" style="width: 45px;"></div>
-              <div class="text-desc">
-                <div class="text-big">Thanh toán trực tiếp tại văn phòng</div>
-                <div class="text-small"> Quý khách vui lòng qua văn phòng Đặt Vé Siêu Rẻ để thanh toán và nhận vé.
-                </div>
-              </div>
-            </div>
-          </div>
-            <!-- <div class="row form-group">
+                <div class="col-md-6 payment-method">
+                    <div class="section-title">các hình thức thanh toán</div>
+                    <div class="border-title"></div>
+                    <div class="row form-group">
+                        <div class="col-md-12">
+                            <div class="icon-payment"><img src="assets/img/money.jpg" alt="" style="width: 45px;"></div>
+                            <div class="text-desc">
+                                <div class="text-big">Thanh toán trực tiếp tại văn phòng</div>
+                                <div class="text-small"> Quý khách vui lòng qua văn phòng Đặt Vé Siêu Rẻ để thanh toán và nhận vé.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- <div class="row form-group">
             <div class="col-md-12">
               <div class="icon-payment" style="font-size: 34px;"><i class="fa fa-cc-visa"></i></div>
               <div class="text-desc">
@@ -444,90 +431,103 @@
               </div>
             </div>
           </div> -->
-          <div class="row form-group">
-            <div class="col-md-12">
-              <div class="icon-payment"><img src="assets/img/house.png" alt=""></div>
-              <div class="text-desc">
-                <div class="text-big">Thanh toán tại nhà</div>
-                <div class="text-small">Sẽ giao vé &amp; thu tiền tại nhà theo địa chỉ Quý khách cung cấp.</div>
-              </div>
-            </div>
-          </div>
-          <div class="row form-group">
-            <div class="col-md-12">
-              <div class="icon-payment"><img src="assets/img/bank.png" alt=""></div>
-              <div class="text-desc">
-                <div class="text-big">Thanh toán qua chuyển khoản ngân hàng</div>
-                <div class="text-small">Chuyển khoản trực tiếp tại ngân hàng, thẻ ATM, hoặc qua Internet banking.
+                    <div class="row form-group">
+                        <div class="col-md-12">
+                            <div class="icon-payment"><img src="assets/img/house.png" alt=""></div>
+                            <div class="text-desc">
+                                <div class="text-big">Thanh toán tại nhà</div>
+                                <div class="text-small">Sẽ giao vé &amp; thu tiền tại nhà theo địa chỉ Quý khách cung cấp.</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row form-group">
+                        <div class="col-md-12">
+                            <div class="icon-payment"><img src="assets/img/bank.png" alt=""></div>
+                            <div class="text-desc">
+                                <div class="text-big">Thanh toán qua chuyển khoản ngân hàng</div>
+                                <div class="text-small">Chuyển khoản trực tiếp tại ngân hàng, thẻ ATM, hoặc qua Internet banking.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-              </div>
             </div>
-          </div>
         </div>
-      </div>
-    </div>
-  </section>
-  <!-- service-method -->
-  <section class="container">
-    <div class="partner">
-      <div class="section-title">Đối tác của chúng tôi</div>
-      <div class="border-title"></div>
-      <div class="swiper-container">
-        <div class="swiper-wrapper">
-          <div class="swiper-slide item">
-            <a href="#" target="_blank">
-              <img src="assets/img/partners/boditech.png" alt="" /><span class="imba"></span>
-            </a>
-          </div>
-          <div class="swiper-slide item">
-            <a href="#" target="_blank">
-              <img src="assets/img/partners/namyangi.png" alt="" /><span class="imba"></span>
-            </a>
-          </div>
-          <div class="swiper-slide item">
-            <a href="#" target="_blank">
-              <img src="assets/img/partners/geumsan.png" alt="" /><span class="imba"></span>
-            </a>
-          </div>
-          <div class="swiper-slide item">
-            <a href="#" target="_blank">
-              <img src="assets/img/partners/hicook.png" alt="" /><span class="imba"></span>
-            </a>
-          </div>
-          <div class="swiper-slide item">
-            <a href="#" target="_blank">
-              <img src="assets/img/partners/customer_2.png" alt="" /><span class="imba"></span>
-            </a>
-          </div>
-          <div class="swiper-slide item">
-            <a href="#" target="_blank">
-              <img src="assets/img/partners/boditech.png" alt="" /><span class="imba"></span>
-            </a>
-          </div>
-          <div class="swiper-slide item">
-            <a href="#" target="_blank">
-              <img src="assets/img/partners/namyangi.png" alt="" /><span class="imba"></span>
-            </a>
-          </div>
-          <div class="swiper-slide item">
-            <a href="#" target="_blank">
-              <img src="assets/img/partners/geumsan.png" alt="" /><span class="imba"></span>
-            </a>
-          </div>
+    </section>
+    <!-- service-method -->
+    <section class="container">
+        <div class="partner">
+            <div class="section-title">Đối tác của chúng tôi</div>
+            <div class="border-title"></div>
+            <div class="swiper-container">
+                <div class="swiper-wrapper">
+                    <div class="swiper-slide item">
+                        <a href="#" target="_blank">
+                            <img src="assets/img/partners/boditech.png" alt="" /><span class="imba"></span>
+                        </a>
+                    </div>
+                    <div class="swiper-slide item">
+                        <a href="#" target="_blank">
+                            <img src="assets/img/partners/namyangi.png" alt="" /><span class="imba"></span>
+                        </a>
+                    </div>
+                    <div class="swiper-slide item">
+                        <a href="#" target="_blank">
+                            <img src="assets/img/partners/geumsan.png" alt="" /><span class="imba"></span>
+                        </a>
+                    </div>
+                    <div class="swiper-slide item">
+                        <a href="#" target="_blank">
+                            <img src="assets/img/partners/hicook.png" alt="" /><span class="imba"></span>
+                        </a>
+                    </div>
+                    <div class="swiper-slide item">
+                        <a href="#" target="_blank">
+                            <img src="assets/img/partners/customer_2.png" alt="" /><span class="imba"></span>
+                        </a>
+                    </div>
+                    <div class="swiper-slide item">
+                        <a href="#" target="_blank">
+                            <img src="assets/img/partners/boditech.png" alt="" /><span class="imba"></span>
+                        </a>
+                    </div>
+                    <div class="swiper-slide item">
+                        <a href="#" target="_blank">
+                            <img src="assets/img/partners/namyangi.png" alt="" /><span class="imba"></span>
+                        </a>
+                    </div>
+                    <div class="swiper-slide item">
+                        <a href="#" target="_blank">
+                            <img src="assets/img/partners/geumsan.png" alt="" /><span class="imba"></span>
+                        </a>
+                    </div>
+                </div>
+            </div>
         </div>
-      </div>
+    </section>
+    <!-- partner -->
+    <div class="skyline hidden-xs hidden-sm">
+        <!-- <script src="js/prefixfree.min.js"></script> -->
+        <div class="skyline-city"></div>
+        <div class="bus-img">
+            <img style="opacity: 0.3;filter: alpha(opacity=30);" src="assets/img/banh-xe.gif">
+        </div>
+        <div class="plane-img">
+            <img src="assets/img/plane.png" alt="" style="width: 250px;">
+        </div>
     </div>
-  </section>
-  <!-- partner -->
-  <div class="skyline hidden-xs hidden-sm">
-    <!-- <script src="js/prefixfree.min.js"></script> -->
-    <div class="skyline-city"></div>
-    <div class="bus-img">
-      <img style="opacity: 0.3;filter: alpha(opacity=30);" src="assets/img/banh-xe.gif">
-    </div>
-    <div class="plane-img">
-      <img src="assets/img/plane.png" alt="" style="width: 250px;">
-    </div>
-  </div>
-  
 </div>
+<modal #warning class="modal fade small-modal in">
+    <modal-header [show-close]="true">
+        <h4 class="modal-title">Lưu ý</h4>
+    </modal-header>
+    <modal-body>
+        <section class="g-filter clearfix">
+            {{ warningMsg }}
+        </section>
+        <section class="g-button clearfix text-center">
+            <div class="h20px"></div>
+            <button (click)="warning.close()" class="btn btn-default btn-style btn-find-again"><i class="fa fa-check"></i>&nbsp; Đồng ý</button>
+        </section>
+    </modal-body>
+</modal>
