@@ -110,6 +110,11 @@ export class HomeComponent implements OnInit, AfterViewInit {
 			    width: '100%',
 			    minimumResultsForSearch: -1
 			});
+
+			jQuery('.date').datetimepicker({
+				format: 'DD/MM/YYYY',
+				allowInputToggle: true
+			});
 		}, 500);
 	}
 	

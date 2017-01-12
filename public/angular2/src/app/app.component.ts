@@ -44,15 +44,15 @@ export class AppComponent {
 	}
 
 	onSetGobalScript() {
-		setTimeout(() => {
-			let _Configuration = this._Configuration;
+		// setTimeout(() => {
+		// 	let _Configuration = this._Configuration;
 
-			jQuery('.datetimepicker').datetimepicker({
-				locale: 'vi',
-				format: _Configuration.viFormatDate,
-			});
+		// 	jQuery('.datetimepicker').datetimepicker({
+		// 		locale: 'vi',
+		// 		format: _Configuration.viFormatDate,
+		// 	});
 
-		}, 1000)
+		// }, 1000)
 		
 	}
 }

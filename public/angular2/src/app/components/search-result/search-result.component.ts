@@ -199,13 +199,11 @@ export class SearchResultComponent implements OnInit, AfterViewInit {
 			this.sort = 'time';
 
 		});
-  	}
 
-	ngAfterViewInit() {
 		var params = this.sessionStorage.get('session_flight');
 
 		let session_flight = JSON.parse(String(params));
-		setTimeout(function() {
+		setTimeout(() => {
 			jQuery('.select2').select2();
 			jQuery('#date-go input').val(session_flight['from_date']);
 			if (session_flight['to_date']) {
@@ -217,7 +215,7 @@ export class SearchResultComponent implements OnInit, AfterViewInit {
 				minimumResultsForSearch: -1
 			});
 
-			jQuery('.date').datetimepicker({
+			jQuery('.datetimepicker').datetimepicker({
 				format: 'DD/MM/YYYY',
 				allowInputToggle: true
 			});
@@ -245,6 +243,10 @@ export class SearchResultComponent implements OnInit, AfterViewInit {
 			});
 
 		}, 5000);
+  	}
+
+	ngAfterViewInit() {
+		
 		
 	}
 
