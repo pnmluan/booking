@@ -1180,7 +1180,29 @@ only screen and (max-width: 767px) {
 .tours .tours-sort-r { float: right; }
 .tours .tours-sort-r ul li { float: left; margin-left: 5px; }
 .tours .tours-sort-r ul li a { display: block; width: 25px; height: 25px; text-align: center; line-height: 25px; color: #333; }
-.tours      .tours-sort-r ul li a.active, .tours-sort-r ul li a:hover { color: #fff; background: #DE4131; }
+.tours .tours-sort-r ul li a.active, .tours-sort-r ul li a:hover { color: #fff; background: #DE4131; }
+
+@media screen and (max-width: 991px) {
+    .tours-filter { width: 100%; float: none; padding-right: 0px; margin-bottom: 20px; }
+    .tours-main { width: 100%; float: none; margin-bottom: 30px; }
+}
+
+@media screen and (max-width: 767px) {
+    .tours-list .item { float: left; width: 50%; padding: 0px 10px; margin-bottom: 20px; }
+}
+
+@media screen and (max-width: 479px) {
+    .tours-list .item { float: left; width: 100%; padding: 0px 10px; margin-bottom: 20px; }
+}
+
+@media screen and (max-width: 360px) {
+    .tours .tours-sort-l ul li { float: none; }
+    .tours .tours-sort-l ul li:nth-child(2) { display: none; }
+    .tours .tours-sort-l ul li:last-child { margin-top: 5px; }
+    .tours .tours-sort-l ul li label { width: 60px; }
+}
+
+
 
 /****** TOUR-DETAILS ******/
 /**************************/
@@ -1275,7 +1297,7 @@ only screen and (max-width: 767px) {
 .info-tab li { float: left; margin-right: 10px; }
 .info-tab li a { display: block; padding: 5px 30px; background: #ddd; color: #333; border-bottom: 1px solid #fff; position: relative; }
 .info-tab li a.active { background: #649931; color: #fff; }
-.info-tab li a:before {  position: absolute; bottom: -5px; left: 50%; margin-left: -10px; border-top: 5px solid #649931; border-left: 7px solid transparent; border-right: 7px solid transparent; content: ""; display: none; }
+.info-tab li a:before {  position: absolute; bottom: -5px; left: 50%; margin-left: -10px; border-top: 5px solid #649931; border-left: 7px solid transparent; border-right: 7px solid transparent; content: ""; display: none; z-index: 999; }
 .info-tab li a.active:before { display: block; }
 
 .info-wrapper .item:not(:first-child) { display: none; }
@@ -1370,6 +1392,34 @@ only screen and (max-width: 767px) {
     box-shadow: 0px 0px 0px 1px #F7B916;
 }
 
+@media screen and (max-width: 991px) {
+    .tour-details-l { width: 100%; padding-right: 0px; float: none; margin-bottom: 20px; }
+    .tour-details-r { width: 100%; float: none; margin-bottom: 20px; }
+}
+
+@media screen and (max-width: 767px) {
+    .f-tour-view-price .field { float: left; width: 100%; padding: 5px; }
+    .f-tour-view-price .field:last-child { width: 100%; }
+
+    .tour-price-details .bottom .bottom-info { width: 100%; float: none; padding-right: 0px; margin-bottom: 10px; }
+
+    .tour-price-details .bottom .bottom-button { width: 100%; float: none; }
+}
+
+@media screen and (max-width: 479px) {
+    .info-tab li { float: none; margin-right: 0px; }
+
+    #map iframe { height: 300px !important; }
+    .tour-price-details .bottom .bottom-info .field .field-col:first-child { width: 100%; float: none; }
+    .tour-price-details .bottom .bottom-info .field .field-col:last-child { width: 100%; float: none; font-weight: bold; }
+
+    .shopping-cart-total p.total-price { margin-bottom: 10px; }
+    .shopping-cart-total .g-button div:first-child {
+        float: none;
+        padding-top: 5px;
+        margin-bottom: 10px;
+    }
+}
 
 
 
