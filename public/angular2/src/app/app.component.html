@@ -1,74 +1,86 @@
 <div class="nicdark_preloader"><img src="assets/img/loading.gif" alt=""></div>
 <!-- preloader -->
 <div style="" class="nicdark_site">
-  <div class="nicdark_site_fullwidth_boxed nicdark_site_fullwidth nicdark_clearfix">
-    <div class="nicdark_overlay"></div>
-
-    <!--start header Navigation-->
-    <div class="nicdark_section nicdark_navigation nicdark_upper_level2">
-      <!--decide fullwidth or boxed header-->
-      <div class='nicdark_menu_fullwidth_boxed nicdark_menu_fullwidth'>
-        <!--start top header-->
-        <div class="nicdark_section nicdark_displaynone_responsive top-menu">
-          <div class="nicdark_container nicdark_clearfix">
-            <div class="grid grid_12">
-              <div class="nicdark_focus">
-                <h6 class="text-right">
+    <div class="nicdark_site_fullwidth_boxed nicdark_site_fullwidth nicdark_clearfix">
+        <div class="nicdark_overlay"></div>
+        <!--start header Navigation-->
+        <div class="nicdark_section nicdark_navigation nicdark_upper_level2">
+            <!--decide fullwidth or boxed header-->
+            <div class='nicdark_menu_fullwidth_boxed nicdark_menu_fullwidth'>
+                <!--start top header-->
+                <div class="nicdark_section nicdark_displaynone_responsive top-menu">
+                    <div class="nicdark_container nicdark_clearfix">
+                        <div class="grid grid_12">
+                            <div class="nicdark_focus">
+                                <h6 class="text-right">
                   <i class="icon-mail"></i> <a class="title" href="#">balotravelco@gmail.com</a>
                   <span class="greydark2 nicdark_marginright10 nicdark_marginleft10">|</span>
                   <i class="icon-phone"></i> <a class="title" href="tel:05113888408">+(0511) 38 88 408</a>
                 </h6>
-              </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--end top header-->
+                <!--decide gradient or not-->
+                <div class="nicdark_space3 nicdark_bg_gradient"></div>
+                <!--start header-->
+                <div class="nicdark_bg_white nicdark_section nicdark_sizing">
+                    <!--start container-->
+                    <div class="nicdark_container nicdark_clearfix">
+                        <div class="grid grid_12 percentage">
+                            <div class="nicdark_space20"></div>
+                            <!--logo-->
+                            <div class="nicdark_logo nicdark_marginleft10">
+                                <a href="#"><img alt="" src="assets/img/logo.png"></a>
+                            </div>
+                            <!--end logo-->
+                            <div class="menu-main-menu-container">
+                                <ul id="menu-main-menu" class="menu">
+                                    <li class="menu-item">
+                                        <a [routerLink]=" ['./'] " [routerLinkActive]="['active']">Trang chủ</a>
+                                    </li>
+                                    <li class="menu-item">
+                                        <a [routerLink]=" ['./home'] " [routerLinkActive]="['active']">Đặt vé</a>
+                                    </li>
+                                    <li class="menu-item">
+                                        <a [routerLink]=" ['./introdution'] " [routerLinkActive]="['active']">Giới thiệu</a>
+                                    </li>
+                                    <li class="menu-item">
+                                        <a [routerLink]=" ['./detail'] ">Hướng dẫn</a>
+                                    </li>
+                                    <li class="menu-item">
+                                        <a [routerLink]=" ['./detail'] ">Liên hệ</a>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="nicdark_space20"></div>
+                        </div>
+                    </div>
+                    <!--end container-->
+                </div>
+                <!--end header-->
             </div>
-          </div>
         </div>
-        <!--end top header-->
-        <!--decide gradient or not-->
-        <div class="nicdark_space3 nicdark_bg_gradient"></div>
-        <!--start header-->
-        <div class="nicdark_bg_white nicdark_section nicdark_sizing">
-          <!--start container-->
-          <div class="nicdark_container nicdark_clearfix">
-            <div class="grid grid_12 percentage">
-              <div class="nicdark_space20"></div>
-              <!--logo-->
-              <div class="nicdark_logo nicdark_marginleft10">
-                <a href="#"><img alt="" src="assets/img/logo.png"></a>
-              </div>
-              <!--end logo-->
-              <div class="menu-main-menu-container">
-                <ul id="menu-main-menu" class="menu">
-                  <li class="menu-item">
-                    <a [routerLink]=" ['./'] " [routerLinkActive]="['active']">Trang chủ</a>
-                  </li>
-                  <li class="menu-item">
-                    <a [routerLink]=" ['./home'] " [routerLinkActive]="['active']">Đặt vé</a>
-                  </li>
-                  <li class="menu-item">
-                    <a [routerLink]=" ['./introdution'] " [routerLinkActive]="['active']">Giới thiệu</a>
-                  </li>
-                  <li class="menu-item">
-                    <a [routerLink]=" ['./detail'] ">Hướng dẫn</a>
-                  </li>
-                  <li class="menu-item">
-                    <a [routerLink]=" ['./detail'] ">Liên hệ</a>
-                  </li>
-                </ul>
-              </div>
-              <div class="nicdark_space20"></div>
-            </div>
-          </div>
-          <!--end container-->
-        </div>
-        <!--end header-->
-      </div>
+        <!--start header parallax image-->
+        <div class="nicdark_space130"></div>
+        <main>
+            <router-outlet></router-outlet>
+        </main>
     </div>
-    <!--start header parallax image-->
-    <div class="nicdark_space130"></div>
-    
-    <main>
-      <router-outlet></router-outlet>
-    </main>
-  </div>
 </div>
-
+<modal #warning class="modal fade small-modal in">
+    <modal-header [show-close]="true">
+        <h4 class="modal-title">Lưu ý</h4>
+    </modal-header>
+    <modal-body>
+        <section class="g-filter clearfix">
+            {{ warningMsg }}
+        </section>
+        <section class="g-button clearfix text-center">
+            <div class="h20px"></div>
+            <button class="btn btn-default btn-style btn-find-again" (click)="onSearchAgain()"><i class="fa fa-repeat"></i>&nbsp; Tìm kiếm lại</button>&nbsp;
+            <button class="btn btn-default btn-style btn-go-home" (click)="onGoHome()"><i class="fa fa-long-arrow-left"></i>&nbsp; Về trang chủ</button>
+        </section>
+    </modal-body>
+</modal>

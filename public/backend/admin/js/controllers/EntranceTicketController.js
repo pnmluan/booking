@@ -333,7 +333,7 @@ angular.module('MetronicApp').controller('EntranceTicketController', function($r
         $scope.dtColumns = [
             DTColumnBuilder.newColumn('id').notVisible(),
 
-            DTColumnBuilder.newColumn('name').withTitle('Title'),
+            DTColumnBuilder.newColumn('name').withTitle('Title').withOption('width', '200px'),
             DTColumnBuilder.newColumn('category_ticket_name').withTitle('Category'),
             DTColumnBuilder.newColumn('adult_fare').withTitle('Adult Fare').withOption('createdCell', function(td, cellData, rowData, row, col) {
 
@@ -344,7 +344,7 @@ angular.module('MetronicApp').controller('EntranceTicketController', function($r
                 $(td).html(cellData.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
             }).withOption('width', 'auto'),
             DTColumnBuilder.newColumn('description').withTitle('Description'),
-            DTColumnBuilder.newColumn('created_at').withTitle('Created Date'),
+            // DTColumnBuilder.newColumn('created_at').withTitle('Created Date'),
             DTColumnBuilder.newColumn(null).withTitle('Action').withOption('createdCell', function(td, cellData, rowData, row, col) {
 
                 var string_html = `</button>&nbsp;<button class="btn btn-warning clickToUpdate"><i class="fa fa-edit"></i>Edit</button>&nbsp;` +
