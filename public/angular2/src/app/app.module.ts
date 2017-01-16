@@ -17,7 +17,7 @@ import { Ng2Bs3ModalModule } from 'ng2-bs3-modal/ng2-bs3-modal';
 // Create config options (see ILocalStorageServiceConfigOptions) for deets:
 let localStorageServiceConfig = {
     prefix: 'my-app',
-    storageType: 'sessionStorage'
+    storageType: 'localStorage'
 };
 
 import { Configuration } from './shared/app.configuration';

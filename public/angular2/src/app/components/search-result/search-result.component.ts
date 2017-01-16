@@ -1,4 +1,4 @@
-import { Component, OnInit, AfterViewInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit, ViewChild } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { UUID } from 'angular2-uuid';
 import { Router, ActivatedRoute } from "@angular/router";
@@ -8,6 +8,7 @@ import {
 	Validators,
 	FormArray
 } from "@angular/forms";
+import { ModalComponent } from 'ng2-bs3-modal/ng2-bs3-modal';
 import { URLSearchParams } from '@angular/http';
 import { LocalStorageService } from 'angular-2-local-storage';
 
@@ -32,8 +33,9 @@ declare let jQuery: any;
 	  ContactDataService, PassengerDataService, BaggageTypeDataService]
 })
 export class SearchResultComponent implements OnInit, AfterViewInit {
-
-	people = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+	@ViewChild('warning') warning: ModalComponent;
+	people = this._Configuration.arr_number_people;
+	infants = this._Configuration.arr_number_infants;
 	listRoutes = [];
 	locations = [];
 	flightsFromDate = [];
@@ -60,6 +62,7 @@ export class SearchResultComponent implements OnInit, AfterViewInit {
 	baggageOptionsFrom = [];
 	baggageOptionsTo = [];
 	generalData = {};
+	warningMsg: string = '';
 
 	curRouting?: string;
 
@@ -205,10 +208,10 @@ export class SearchResultComponent implements OnInit, AfterViewInit {
 		let session_flight = JSON.parse(String(params));
 		setTimeout(() => {
 			jQuery('.select2').select2();
-			jQuery('#date-go input').val(session_flight['from_date']);
-			if (session_flight['to_date']) {
-				jQuery('#date-back input').val(session_flight['to_date']);
-			}
+			// jQuery('#date-go input').val(session_flight['from_date']);
+			// if (session_flight['to_date']) {
+			// 	jQuery('#date-back input').val(session_flight['to_date']);
+			// }
 
 			jQuery(".select-adult, .select-child-1, .select-child-2").select2({
 				width: '100%',
@@ -219,10 +222,11 @@ export class SearchResultComponent implements OnInit, AfterViewInit {
 				format: 'DD/MM/YYYY',
 				allowInputToggle: true
 			});
+			console.log('test');
 
 		}, 1000);
 
-		setTimeout(function() {
+		setTimeout(()=>{
 
 			jQuery('.btn-select-flight').click(function() {
 				if (!jQuery(this).closest('.flights').hasClass('selected')) {
@@ -339,28 +343,73 @@ export class SearchResultComponent implements OnInit, AfterViewInit {
 
 	// Research 
 	onResearch() {
+		var objectStore = this.search;
+		console.log(this.search);
+
+		if (objectStore.from == objectStore.to) {
+			this.warningMsg = 'Điểm đi và Điểm đến không được trùng nhau.';
+			this.warning.open();
+			return;
+		}
+		objectStore.from_date = moment(objectStore.from_date, this._Configuration.viFormatDate).format(this._Configuration.dateFormat);
+		if (objectStore.from_date < moment().format(this._Configuration.dateFormat)) {
+			this.warningMsg = 'Ngày đi phải nhỏ hơn ngày hiện tại.';
+			this.warning.open('sm');
+			return;
+		}
+
+		objectStore.adult = jQuery('.select-adult').val();
+		objectStore.children = jQuery('.select-child-1').val();
+		objectStore.infant = jQuery('.select-child-2').val();
+
+
+		objectStore.from_name = this.getNameFromCode(objectStore.from);
+		objectStore.to_name = this.getNameFromCode(objectStore.to);
+
+		if (objectStore.to_date == undefined) {
+			objectStore.to_date = '';
+
+		} else {
+			objectStore.to_date = moment(objectStore.to_date, this._Configuration.viFormatDate).format(this._Configuration.dateFormat);
+			if (objectStore.from_date > objectStore.to_date) {
+				this.warningMsg = 'Ngày đi phải nhỏ hơn Ngày đến.';
+				this.warning.open();
+				return;
+			}
+			objectStore.to_name = this.getNameFromCode(objectStore.to);
+		}
+
 		let uuid = UUID.UUID();
 		this.sessionStorage.remove('session_flight');
 		this.sessionStorage.remove('session_token');
 		this.sessionStorage.set('session_token', uuid);
-
-		var objectStore = this.search;
-		var dateFormat = 'YYYY-MM-DD';
-		var viFormatDate = 'DD/MM/YYYY';
-		objectStore.from_date = moment(objectStore.from_date, viFormatDate).format(dateFormat);
-		objectStore.from_name = this.getNameFromCode(objectStore.from);
-
-		if (objectStore.to_date == undefined) {
-			objectStore.to_date = '';
-			objectStore.to_name = '';
-		} else {
-			objectStore.to_date = moment(objectStore.to_date, viFormatDate).format(dateFormat);
-			objectStore.to_name = this.getNameFromCode(objectStore.to);
-		}
-		console.log(objectStore);
 		this.sessionStorage.set('session_flight', JSON.stringify(objectStore));
-
 		this._Router.navigate(['search-result/' + uuid]);
+
+
+
+		// let uuid = UUID.UUID();
+		// this.sessionStorage.remove('session_flight');
+		// this.sessionStorage.remove('session_token');
+		// this.sessionStorage.set('session_token', uuid);
+
+		// var objectStore = this.search;
+		// var dateFormat = 'YYYY-MM-DD';
+		// var viFormatDate = 'DD/MM/YYYY';
+		// objectStore.from_date = moment(objectStore.from_date, viFormatDate).format(dateFormat);
+		// objectStore.from_name = this.getNameFromCode(objectStore.from);
+
+		// if (objectStore.to_date == undefined) {
+		// 	objectStore.to_date = '';
+		// 	objectStore.to_name = '';
+		// } else {
+		// 	objectStore.to_date = moment(objectStore.to_date, viFormatDate).format(dateFormat);
+		// 	objectStore.to_name = this.getNameFromCode(objectStore.to);
+		// }
+		// console.log(objectStore);
+		// this.sessionStorage.set('session_flight', JSON.stringify(objectStore));
+
+		// this._Router.navigate(['search-result/' + uuid]);
 	}
 
 	// Select Flights
