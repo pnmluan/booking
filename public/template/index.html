@@ -106,27 +106,39 @@
             <div class="item">
               <img src="img/slider/paris.jpg" alt="">
               <a class="sboxpurple text-center">
-                <p class="lato size28 slim caps white">Đà Nẵng</p><br/><br/>
-                <p class="lato size60 slim caps white">Sài Gòn</p><br/>
-                <p class="lato size20 normal caps white">Từ</p><br/>
+                <p class="lato size28 slim caps white">Đà Nẵng</p>
+                <br/>
+                <br/>
+                <p class="lato size60 slim caps white">Sài Gòn</p>
+                <br/>
+                <p class="lato size20 normal caps white">Từ</p>
+                <br/>
                 <p class="lato size40 slim uppercase yellow">500.000 vnđ</p>
               </a>
             </div>
             <div class="item">
               <img src="img/slider/rome.jpg" alt="">
               <a class="sboxpurple text-center">
-                <p class="lato size28 slim caps white">Đà Nẵng</p><br/><br/>
-                <p class="lato size60 slim caps white">Tp. Hồ Chí Minh</p><br/>
-                <p class="lato size20 normal caps white">Từ</p><br/>
+                <p class="lato size28 slim caps white">Đà Nẵng</p>
+                <br/>
+                <br/>
+                <p class="lato size60 slim caps white">Tp. Hồ Chí Minh</p>
+                <br/>
+                <p class="lato size20 normal caps white">Từ</p>
+                <br/>
                 <p class="lato size40 slim uppercase yellow">500.000 vnđ</p>
               </a>
             </div>
             <div class="item">
               <img src="img/slider/santorini.jpg" alt="">
               <a class="sboxpurple text-center">
-                <p class="lato size28 slim caps white">Hà Nội</p><br/><br/>
-                <p class="lato size60 slim caps white">Tp. Hồ Chí Minh</p><br/>
-                <p class="lato size20 normal caps white">Từ</p><br/>
+                <p class="lato size28 slim caps white">Hà Nội</p>
+                <br/>
+                <br/>
+                <p class="lato size60 slim caps white">Tp. Hồ Chí Minh</p>
+                <br/>
+                <p class="lato size20 normal caps white">Từ</p>
+                <br/>
                 <p class="lato size40 slim uppercase yellow">500.000 vnđ</p>
               </a>
             </div>
@@ -145,6 +157,9 @@
                       </li>
                       <li class="nicdark_width100_iphonepotr nicdark_width100_iphoneland">
                         <a class="title white" href="#tab-bus"><i class="fa fa-bus"></i> VÉ XE KHÁCH</a>
+                      </li>
+                      <li class="nicdark_width100_iphonepotr nicdark_width100_iphoneland">
+                        <a class="title white" href="#tab-tour"><i class="fa fa-bus"></i> VÉ THAM QUAN</a>
                       </li>
                     </ul>
                     <div id="tab-plane" class="wpb_tab ui-tabs-panel wpb_ui-tabs-hide vc_clearfix">
@@ -477,6 +492,42 @@
                           <div class="col-md-12">
                             <div class="bus-submit text-right">
                               <button type="button" class="btn btn-bus btn-search"><i class=" icon-search-2"></i> Tìm vé xe</button>
+                            </div>
+                          </div>
+                        </div>
+                      </form>
+                    </div>
+                    <div id="tab-tour" class="wpb_tab ui-tabs-panel wpb_ui-tabs-hide vc_clearfix">
+                      <form class="tour-form" action="#" method="">
+                        <div class="tour-form-inner">
+                          <div class="tour-input clearfix">
+                            <div class="col-md-4">
+                              <div class="field">
+                                <span class="field-label">Điểm đến</span>
+                                <div class="field-input">
+                                  <select class="select-to" data-placeholder="Điểm đến">
+                                    <option value=""></option>
+                                    <option value="Hanoi">Hà Nội</option>
+                                    <option value="Saigon">Tp.Hồ Chí Minh</option>
+                                  </select>
+                                </div>
+                              </div>
+                            </div>
+                            <div class="col-md-4">
+                              <div class="field">
+                                <div class="slider-price clearfix">
+                                  <div class="clearfix">
+                                    <span id="min-price"></span>
+                                    <span id="max-price"></span>
+                                  </div>
+                                  <div id="slider-price"></div>
+                                </div>
+                              </div>
+                            </div>
+                            <div class="col-md-4">
+                              <div class="field">
+                                <button type="button" class="btn btn-search-tour"><i class="icon-search-2"></i> Tìm kiếm</button>
+                              </div>
                             </div>
                           </div>
                         </div>
@@ -896,6 +947,7 @@
   <script src="plugins/owl-carousel/owl.carousel.js"></script>
   <script src="plugins/moment.js"></script>
   <script src="plugins/datetimepicker/js/bootstrap-datetimepicker.min.js"></script>
+  <script src="plugins/jquery.matchHeight.js"></script>
   <script src="js/script.js"></script>
 </body>
 

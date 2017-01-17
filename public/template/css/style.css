@@ -1421,6 +1421,51 @@ only screen and (max-width: 767px) {
     }
 }
 
+#tab-tour .slider-price > div:first-child {
+    margin-bottom: 10px;
+}
+#tab-tour .slider-price #min-price {
+    float: left; font-size: 18px;
+}
+#tab-tour .slider-price #max-price {
+    float: right; font-size: 18px;
+}
+
+#tab-tour .ui-corner-all,
+#tab-tour .ui-corner-top,
+#tab-tour .ui-corner-left,
+#tab-tour .ui-corner-tl {
+    border-top-left-radius: 0px;
+    border-top-right-radius: 0px;
+    border-bottom-left-radius: 0px;
+    border-bottom-right-radius: 0px;
+}
+#tab-tour .ui-widget-header {
+    background: #649931;
+}
+#tab-tour .ui-widget-content {
+    background: #555;
+}
+#tab-tour .ui-widget {
+    font-size: 9px;
+}
+
+#tab-tour .ui-slider .ui-slider-handle {
+    position: absolute;
+    z-index: 2;
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    top: -5px;
+    background: #649931;
+}
+
+#tab-tour .ui-state-default,
+#tab-tour .ui-widget-content .ui-state-default,
+#tab-tour .ui-widget-header .ui-state-default { border: 0px; }
+
+#tab-tour .btn-search-tour { margin-top: 22px; background: #E44803; border-radius: 4px; }
+
 
 
 
