@@ -57,9 +57,6 @@ export class HomeComponent implements OnInit, AfterViewInit {
 			'infant': ['0']
 		});
 
-		// this.filterBookForm.statusChanges.subscribe(
-		// 	(data: any) => console.log(data)
-		// );
 
 		this._LocationDataService.getAll().subscribe(res => {
 
@@ -83,10 +80,11 @@ export class HomeComponent implements OnInit, AfterViewInit {
 	
 
 	ngOnInit() {
-		
+		console.log('ngOnInit')
 	}
 
 	ngAfterViewInit() {
+		console.log('ngAfterViewInit')
 		setTimeout(function() {
 			jQuery('.owl-carousel.customer-comment').owlCarousel({
 				navigation: false,
@@ -96,15 +94,15 @@ export class HomeComponent implements OnInit, AfterViewInit {
 				autoPlay: 5000
 			});
 
-			jQuery('.owl-carousel-home-slider').owlCarousel({
-				navigation: true,
-				slideSpeed: 300,
-				paginationSpeed: 400,
-				singleItem: true,
-				autoPlay: 5000,
-				transitionStyle: "fade",
-				pagination: false
-			});
+			// jQuery('.owl-carousel-home-slider').owlCarousel({
+			// 	navigation: true,
+			// 	slideSpeed: 300,
+			// 	paginationSpeed: 400,
+			// 	singleItem: true,
+			// 	autoPlay: 5000,
+			// 	transitionStyle: "fade",
+			// 	pagination: false
+			// });
 
 			jQuery(".select-adult, .select-child-1, .select-child-2").select2({
 			    width: '100%',

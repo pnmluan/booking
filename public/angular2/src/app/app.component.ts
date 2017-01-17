@@ -19,6 +19,7 @@ export class AppComponent {
 	private session_expired?: any;
 	curRouting?: string;
 	warningMsg: string = '';
+	first_time = true;
 
 	constructor(
 		private _Http: Http,
@@ -88,27 +89,34 @@ export class AppComponent {
 
 	// Go Home Page
 	onGoHome() {
+		this.first_time = true;
 		this.warning.close();
-		this._Router.navigate(['/home']);
+		let now = new Date().getTime();
+		this._LocalStorageService.set('user_session_start', now);
+		this._Router.navigate(['home']);
 	}
 
 	// Search Again
 	onSearchAgain() {
+		this.first_time = true;
+		let now = new Date().getTime();
+		this._LocalStorageService.set('user_session_start', now);
 		this.warning.close();
 		
 	}
 
-	private checkUserSession() {
+	protected checkUserSession() {
 		let now = new Date().getTime();
 		var user_session_start = this._LocalStorageService.get('user_session_start');
 
 		if (now - +user_session_start > this.session_expired * 60 * 60 * 1000) {
 			let routing = this._Router.url;
 
-			if (routing.match(/^\/search-result.*/i)) {
-				this._LocalStorageService.set('user_session_start', now);
+			if (routing.match(/^\/search-result.*/i) && this.first_time) {
+				
 				this.warningMsg = 'Bạn đã không thao tác gì trong một thời gian, dữ liệu chuyến bay có thể đã thay đổi, vui lòng thực hiện tìm kiếm lại!';
 				this.warning.open('sm');
+				this.first_time = false;
 			}
 			
 			
