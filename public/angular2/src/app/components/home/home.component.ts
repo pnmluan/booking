@@ -1,7 +1,6 @@
 import { Component, OnInit, AfterViewInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import {
-	FormGroup,
 	FormControl,
 	Validators,
 	FormArray
@@ -15,10 +14,9 @@ import { Subscription } from 'rxjs/Rx';
 import { BannerComponent } from './banner';
 import { NewsComponent } from './news';
 import { CommentComponent } from './comment';
-import { Location } from '../../models/Location';
 
 import { Configuration } from '../../shared/app.configuration';
-import { LocationDataService, BannerDataService, NewsDataService } from '../../shared';
+import { LocationDataService, CategoryTicketDataService, BannerDataService, NewsDataService } from '../../shared';
 declare let jQuery: any;
 declare let moment: any;
 
@@ -26,24 +24,25 @@ declare let moment: any;
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
-  providers: [BannerComponent, NewsComponent, BannerComponent, LocationDataService, BannerDataService, NewsDataService]
+  providers: [BannerComponent, NewsComponent, BannerComponent, BannerDataService, LocationDataService, CategoryTicketDataService, NewsDataService]
 })
 export class HomeComponent implements OnInit, AfterViewInit {
 	@ViewChild('warning') warning: ModalComponent;
 	private subscriptionEvents: Subscription;
 	Filter = {};
+	Search = {};
 	curRouting?: string;
 	warningMsg = '';
 	adultOptions = [];
 	infantOptions = [];
-	locations = [];
+	locationOptions = [];
+	categoryTicketOptions = [];
 	round_trip = 'off';
-	search = {};
-	filterBookForm: FormGroup;
+	datepickerOptions = { format: this._Configuration.viFormatDate };
 	constructor(
 		private _LocationDataService: LocationDataService, 
 		private _Configuration: Configuration,
-		private _bannerDataService: BannerDataService, 
+		private _CategoryTicketDataService: CategoryTicketDataService, 
 		private sessionStorage: LocalStorageService,
 		private _Router: Router) { 
 
@@ -61,20 +60,40 @@ export class HomeComponent implements OnInit, AfterViewInit {
 	initData() {
 		this.Filter['round_trip'] = 'off';
 		
+		// Location Options
 		this._LocationDataService.getAll().subscribe(res => {
 
 			if (res.data) {
-				var locations = [];
+				var locationOptions = [];
 				for (var key in res.data) {
 
 					var temp = {
 						value: res.data[key].code,
 						label: res.data[key].name
 					};
-					locations.push(temp);
+					locationOptions.push(temp);
 
 				}
-				this.locations = locations;
+				this.locationOptions = locationOptions;
+			}
+
+		});
+
+		// CategoryTicket Options
+		this._CategoryTicketDataService.getAll().subscribe(res => {
+
+			if (res.data) {
+				var categoryTicketOptions = [];
+				for (var key in res.data) {
+
+					var temp = {
+						value: res.data[key].code,
+						label: res.data[key].name
+					};
+					categoryTicketOptions.push(temp);
+
+				}
+				this.categoryTicketOptions = categoryTicketOptions;
 			}
 
 		});
@@ -138,9 +157,10 @@ export class HomeComponent implements OnInit, AfterViewInit {
 
 	ngAfterViewInit() {}
 	
-	onSubmit() {
-
-		console.log(this.Filter['adult']);
+	/*=================================
+	 * Filter Arlines
+	 *=================================*/
+	onFilterArlines() {
 		var objectStore = this.Filter;
 
 		if (objectStore['from'] == objectStore['to']) {
@@ -181,27 +201,23 @@ export class HomeComponent implements OnInit, AfterViewInit {
 		
 	}
 
-	selectPlaneOption(round_trip) {
-		if(round_trip == 'off') {
-			jQuery('#date-back input').prop('disabled', true);
-		} else {
-			jQuery('#date-back input').prop('disabled', false);
-		}
+	/*=================================
+	 * Search Ticket
+	 *=================================*/
+	onSearchTicket() {
+		console.log(this.Search);
 	}
 
-	// Get Name From Code
+	/*=================================
+	 * Get Name From Code
+	 *=================================*/
 	protected getNameFromCode(code: string) {
 		let label = '';
-		for (var key in this.locations) {
-			if (this.locations[key].value == code)
-				return this.locations[key].label;
+		for (var key in this.locationOptions) {
+			if (this.locationOptions[key].value == code)
+				return this.locationOptions[key].label;
 		}
 		return label;
-	}
-
-
-	onDateChanged(event: any) {
-		console.log('onDateChanged(): ', event.date, ' - formatted: ', event.formatted, ' - epoc timestamp: ', event.epoc);
 	}
 
 	ngOnDestroy() {

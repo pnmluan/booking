@@ -8,3 +8,5 @@ export * from './contact.dataservice';
 export * from './passenger.dataservice';
 export * from './location.dataservice';
 export * from './baggagetype.dataservice';
+export * from './categoryticket.dataservice';
+export * from './entranceticket.dataservice';

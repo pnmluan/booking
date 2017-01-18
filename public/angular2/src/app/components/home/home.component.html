@@ -17,15 +17,15 @@
                                         <a class="title white"><i class="icon-plane"></i> VÉ MÁY BAY</a>
                                     </span>
                                     <div id="tab-plane" class="wpb_tab ui-tabs-panel wpb_ui-tabs-hide vc_clearfix">
-                                        <form class="plane-form" #f="ngForm" (ngSubmit)="onSubmit(f)">
+                                        <form class="plane-form" #f="ngForm" (ngSubmit)="onFilterArlines(f)">
                                             <div class="plane-form-inner">
                                                 <div class="col-md-12">
                                                     <div class="plane-option clearfix">
                                                         <label class="radio-inline radio-plane">
-                                                            <input class="plane-option" type="radio" (click)="selectPlaneOption('off')" [(ngModel)]="Filter.round_trip" name="round_trip" id="one-way" value="off" checked> Một chiều
+                                                            <input class="plane-option" type="radio" [(ngModel)]="Filter.round_trip" name="round_trip" id="one-way" value="off" checked> Một chiều
                                                         </label>
                                                         <label class="radio-inline radio-plane">
-                                                            <input class="plane-option" type="radio" (click)="selectPlaneOption('on')" [(ngModel)]="Filter.round_trip" name="round_trip" id="round-trip" value="on"> Khứ hồi
+                                                            <input class="plane-option" type="radio" [(ngModel)]="Filter.round_trip" name="round_trip" id="round-trip" value="on"> Khứ hồi
                                                         </label>
                                                         <!-- <label class="radio-inline radio-plane">
                           <input class="plane-option" type="radio" name="plane-option" id="multiple" value="option3"> Nhiều chặng
@@ -38,7 +38,7 @@
                                                             <div class="field">
                                                                 <span class="field-label">Điểm đi</span>
                                                                 <div class="field-input">
-                                                                    <ng-select placeholder="Điểm đi" name="from" [(ngModel)]="Filter.from" [options]="locations" required>
+                                                                    <ng-select placeholder="Điểm đi" name="from" [(ngModel)]="Filter.from" [options]="locationOptions" required>
                                                                     </ng-select>
                                                                 </div>
                                                             </div>
@@ -47,7 +47,7 @@
                                                             <div class="field">
                                                                 <span class="field-label">Điểm đến</span>
                                                                 <div class="field-input">
-                                                                    <ng-select placeholder="Điểm đến" name="to" [(ngModel)]="Filter.to" [options]="locations" required>
+                                                                    <ng-select placeholder="Điểm đến" name="to" [(ngModel)]="Filter.to" [options]="locationOptions" required>
                                                                     </ng-select>
                                                                 </div>
                                                             </div>
@@ -57,11 +57,8 @@
                                                                 <span class="field-label">Ngày đi</span>
                                                                 <div class="field-input">
                                                                     <div class="form-group">
-                                                                        <div class='input-group date datetimepicker' id='date-go'>
-                                                                            <input type='text' class="form-control" #datePickerFrom (blur)="Filter.from_date = datePickerFrom.value" [(ngModel)]="Filter.from_date" name="from_date" required/>
-                                                                            <span class="input-group-addon">
-                                    <span class="glyphicon glyphicon-calendar"></span>
-                                                                            </span>
+                                                                        <div class='input-group'>
+                                                                            <ng2-datepicker name="from_date" class="form-control" [options]="datepickerOptions" [(ngModel)]="Filter.from_date" required></ng2-datepicker>
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -72,11 +69,8 @@
                                                                 <span class="field-label">Ngày về</span>
                                                                 <div class="field-input">
                                                                     <div class="form-group">
-                                                                        <div class='input-group date datetimepicker' id='date-back'>
-                                                                            <input type='text' class="form-control" #datePickerTo (blur)="Filter.to_date = datePickerTo.value" [(ngModel)]="Filter.to_date" name="to_date" />
-                                                                            <span class="input-group-addon">
-                                    <span class="glyphicon glyphicon-calendar"></span>
-                                                                            </span>
+                                                                        <div class='input-group '>
+                                                                            <ng2-datepicker name="from_date" class="form-control" [disabled]="Filter.round_trip == 'off'" [options]="datepickerOptions" [(ngModel)]="Filter.to_date" required></ng2-datepicker>
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -281,35 +275,21 @@
                                         <a class="title white"><i class="fa fa-bus"></i> VÉ THAM QUAN</a>
                                     </span>
                                     <div id="tab-tour" class="wpb_tab ui-tabs-panel wpb_ui-tabs-hide vc_clearfix">
-                                        <form class="tour-form" action="#" method="">
+                                        <form class="tour-form" #t="ngForm" (ngSubmit)="onSearchTicket(t)">
                                             <div class="tour-form-inner">
                                                 <div class="tour-input clearfix">
-                                                    <div class="col-md-4">
+                                                    <div class="col-md-8">
                                                         <div class="field">
                                                             <span class="field-label">Điểm đến</span>
                                                             <div class="field-input">
-                                                                <select class="select-to" data-placeholder="Điểm đến">
-                                                                    <option value=""></option>
-                                                                    <option value="Hanoi">Hà Nội</option>
-                                                                    <option value="Saigon">Tp.Hồ Chí Minh</option>
-                                                                </select>
+                                                                <ng-select placeholder="Điểm đến" name="category_ticket" [(ngModel)]="Search.category_ticket" [options]="categoryTicketOptions" [allowClear]="true" required>
+                                                                </ng-select>
                                                             </div>
                                                         </div>
                                                     </div>
                                                     <div class="col-md-4">
                                                         <div class="field">
-                                                            <div class="slider-price clearfix">
-                                                                <div class="clearfix">
-                                                                    <span id="min-price"></span>
-                                                                    <span id="max-price"></span>
-                                                                </div>
-                                                                <div id="slider-price"></div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-md-4">
-                                                        <div class="field">
-                                                            <button type="button" class="btn btn-search-tour"><i class="icon-search-2"></i> Tìm kiếm</button>
+                                                            <button type="submit" class="btn btn-search-tour"><i class="icon-search-2"></i> Tìm kiếm</button>
                                                         </div>
                                                     </div>
                                                 </div>

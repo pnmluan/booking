@@ -157,6 +157,34 @@ export class SearchResultComponent implements OnInit, AfterViewInit {
 			}
 
 		});
+
+		// List Options Adult
+		let adultOptions = [];
+		let arr_number_people = this._Configuration.arr_number_people;
+		for (let key in arr_number_people) {
+
+			var temp = {
+				value: arr_number_people[key],
+				label: arr_number_people[key]
+			};
+			adultOptions.push(temp);
+
+		}
+		this.adultOptions = adultOptions;
+
+		// List Options Infant
+		let infantOptions = [];
+		let arr_number_infants = this._Configuration.arr_number_infants;
+		for (let key in arr_number_people) {
+
+			var temp = {
+				value: arr_number_infants[key],
+				label: arr_number_infants[key]
+			};
+			infantOptions.push(temp);
+
+		}
+		this.infantOptions = infantOptions;
   	}
 
   	searchingData() {

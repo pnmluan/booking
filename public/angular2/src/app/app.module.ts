@@ -13,6 +13,7 @@ import { MomentModule } from 'angular2-moment';
 import { HTTP_INTERCEPTOR_PROVIDER } from 'ng2-http-interceptor';
 import { LoadingAnimateModule, LoadingAnimateService } from 'ng2-loading-animate';
 import { Ng2Bs3ModalModule } from 'ng2-bs3-modal/ng2-bs3-modal';
+import { DatePickerModule } from 'ng2-datepicker';
 
  
 // Create config options (see ILocalStorageServiceConfigOptions) for deets:
@@ -68,7 +69,8 @@ import { CustomerComponent } from './components/customer';
     MomentModule,
     LoadingAnimateModule.forRoot(),
     Ng2Bs3ModalModule,
-    TabsModule
+    TabsModule,
+    DatePickerModule
   ],
   providers: [
     Configuration,

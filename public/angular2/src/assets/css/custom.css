@@ -15,3 +15,7 @@ ng-select {
     background-color: #F8F3E7;
     color: #333;
 }
+
+select-dropdown > div {
+	z-index: 10 !important;
+}

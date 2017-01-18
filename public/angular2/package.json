@@ -26,6 +26,7 @@
     "angular2-uuid": "^1.1.0",
     "core-js": "^2.4.1",
     "ng2-bs3-modal": "^0.10.4",
+    "ng2-datepicker": "^1.4.8",
     "ng2-http-interceptor": "^0.4.2",
     "ng2-loading-animate": "^0.0.16",
     "ng2-tabs": "0.0.11",
