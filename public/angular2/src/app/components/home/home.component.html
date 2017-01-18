@@ -11,132 +11,132 @@
                     </div>
                     <div class="wpb_tabs wpb_content_element nicdark_tab_dark" data-interval="0">
                         <div class="wpb_wrapper wpb_tour_tabs_wrapper ui-tabs vc_clearfix">
-                            <ul class="wpb_tabs_nav ui-tabs-nav vc_clearfix">
-                                <li class="nicdark_width100_iphonepotr nicdark_width100_iphoneland">
-                                    <a class="title white"><i class="icon-plane"></i> VÉ MÁY BAY</a>
-                                </li>
-                                <!-- <li class="nicdark_width100_iphonepotr nicdark_width100_iphoneland">
-                  <a class="title white" href="#tab-bus"><i class="fa fa-bus"></i> VÉ XE KHÁCH</a>
-                </li> -->
-                            </ul>
-                            <div id="tab-plane" class="wpb_tab ui-tabs-panel wpb_ui-tabs-hide vc_clearfix">
-                                <form class="plane-form" [formGroup]="filterBookForm" (ngSubmit)="onSubmit()">
-                                    <div class="plane-form-inner">
-                                        <div class="col-md-12">
-                                            <div class="plane-option clearfix">
-                                                <label class="radio-inline radio-plane">
-                                                    <input class="plane-option" type="radio" (click)="selectPlaneOption('off')" formControlName="round_trip" name="round_trip" id="one-way" value="off" checked> Một chiều
-                                                </label>
-                                                <label class="radio-inline radio-plane">
-                                                    <input class="plane-option" type="radio" (click)="selectPlaneOption('on')" formControlName="round_trip" name="round_trip" id="round-trip" value="on"> Khứ hồi
-                                                </label>
-                                                <!-- <label class="radio-inline radio-plane">
+                            <tabset>
+                                <tab>
+                                    <span *tabHeading>
+                                        <a class="title white"><i class="icon-plane"></i> VÉ MÁY BAY</a>
+                                    </span>
+                                    <div id="tab-plane" class="wpb_tab ui-tabs-panel wpb_ui-tabs-hide vc_clearfix">
+                                        <form class="plane-form" #f="ngForm" (ngSubmit)="onSubmit(f)">
+                                            <div class="plane-form-inner">
+                                                <div class="col-md-12">
+                                                    <div class="plane-option clearfix">
+                                                        <label class="radio-inline radio-plane">
+                                                            <input class="plane-option" type="radio" (click)="selectPlaneOption('off')" [(ngModel)]="Filter.round_trip" name="round_trip" id="one-way" value="off" checked> Một chiều
+                                                        </label>
+                                                        <label class="radio-inline radio-plane">
+                                                            <input class="plane-option" type="radio" (click)="selectPlaneOption('on')" [(ngModel)]="Filter.round_trip" name="round_trip" id="round-trip" value="on"> Khứ hồi
+                                                        </label>
+                                                        <!-- <label class="radio-inline radio-plane">
                           <input class="plane-option" type="radio" name="plane-option" id="multiple" value="option3"> Nhiều chặng
                         </label> -->
-                                            </div>
-                                        </div>
-                                        <div class="one">
-                                            <div class="plane-input clearfix">
-                                                <div class="col-md-3">
-                                                    <div class="field">
-                                                        <span class="field-label">Điểm đi</span>
-                                                        <div class="field-input">
-                                                            <ng-select placeholder="Điểm đi" formControlName="from" [options]="locations">
-                                                            </ng-select>
-                                                        </div>
                                                     </div>
                                                 </div>
-                                                <div class="col-md-3">
-                                                    <div class="field">
-                                                        <span class="field-label">Điểm đến</span>
-                                                        <div class="field-input">
-                                                            <ng-select placeholder="Điểm đến" formControlName="to" [options]="locations">
-                                                            </ng-select>
+                                                <div class="one">
+                                                    <div class="plane-input clearfix">
+                                                        <div class="col-md-3">
+                                                            <div class="field">
+                                                                <span class="field-label">Điểm đi</span>
+                                                                <div class="field-input">
+                                                                    <ng-select placeholder="Điểm đi" name="from" [(ngModel)]="Filter.from" [options]="locations" required>
+                                                                    </ng-select>
+                                                                </div>
+                                                            </div>
                                                         </div>
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-3">
-                                                    <div class="field">
-                                                        <span class="field-label">Ngày đi</span>
-                                                        <div class="field-input">
-                                                            <div class="form-group">
-                                                                <div class='input-group date datetimepicker' id='date-go'>
-                                                                    <input type='text' class="form-control" #datePickerFrom [ngModel]="from_date" (blur)="from_date = datePickerFrom.value" formControlName="from_date" />
-                                                                    <span class="input-group-addon">
+                                                        <div class="col-md-3">
+                                                            <div class="field">
+                                                                <span class="field-label">Điểm đến</span>
+                                                                <div class="field-input">
+                                                                    <ng-select placeholder="Điểm đến" name="to" [(ngModel)]="Filter.to" [options]="locations" required>
+                                                                    </ng-select>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-3">
+                                                            <div class="field">
+                                                                <span class="field-label">Ngày đi</span>
+                                                                <div class="field-input">
+                                                                    <div class="form-group">
+                                                                        <div class='input-group date datetimepicker' id='date-go'>
+                                                                            <input type='text' class="form-control" #datePickerFrom (blur)="Filter.from_date = datePickerFrom.value" [(ngModel)]="Filter.from_date" name="from_date" required/>
+                                                                            <span class="input-group-addon">
                                     <span class="glyphicon glyphicon-calendar"></span>
-                                                                    </span>
+                                                                            </span>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-3">
+                                                            <div class="field">
+                                                                <span class="field-label">Ngày về</span>
+                                                                <div class="field-input">
+                                                                    <div class="form-group">
+                                                                        <div class='input-group date datetimepicker' id='date-back'>
+                                                                            <input type='text' class="form-control" #datePickerTo (blur)="Filter.to_date = datePickerTo.value" [(ngModel)]="Filter.to_date" name="to_date" />
+                                                                            <span class="input-group-addon">
+                                    <span class="glyphicon glyphicon-calendar"></span>
+                                                                            </span>
+                                                                        </div>
+                                                                    </div>
                                                                 </div>
                                                             </div>
                                                         </div>
                                                     </div>
-                                                </div>
-                                                <div class="col-md-3">
-                                                    <div class="field">
-                                                        <span class="field-label">Ngày về</span>
-                                                        <div class="field-input">
-                                                            <div class="form-group">
-                                                                <div class='input-group date datetimepicker' id='date-back'>
-                                                                    <input type='text' class="form-control" #datePickerTo [ngModel]="to_date" (blur)="to_date = datePickerTo.value" formControlName="to_date" />
-                                                                    <span class="input-group-addon">
-                                    <span class="glyphicon glyphicon-calendar"></span>
-                                                                    </span>
+                                                    <div class="plane-age clearfix">
+                                                        <div class="col-md-3">
+                                                            <div class="field">
+                                                                <div>
+                                                                    <span class="field-label">Người lớn</span>
+                                                                    <i>( >12 tuổi )</i>
                                                                 </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="plane-age clearfix">
-                                                <div class="col-md-3">
-                                                    <div class="field">
-                                                        <div>
-                                                            <span class="field-label">Người lớn</span>
-                                                            <i>( >12 tuổi )</i>
-                                                        </div>
-                                                        <div>
-                                                            <select class="select-adult" data-placeholder="" formControlName="adult">
+                                                                <div>
+                                                                    <ng-select data-placeholder="" name="adult" [(ngModel)]="Filter.adult" [options]="adultOptions" [noFilter]="1" required></ng-select>
+                                                                    <!-- <select class="select-adult" data-placeholder="" [(ngModel)]="Filter.adult" name="adult">
                                                                 <option *ngFor="let person of people" value="{{ person }}">{{ person }}</option>
-                                                            </select>
+                                                            </select> -->
+                                                                </div>
+                                                            </div>
                                                         </div>
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-3">
-                                                    <div class="field">
-                                                        <div>
-                                                            <span class="field-label">Trẻ em</span>
-                                                            <i> ( 2 - 12 tuổi ) </i>
-                                                        </div>
-                                                        <div>
-                                                            <select class="select-child-1" data-placeholder="" formControlName="children">
+                                                        <div class="col-md-3">
+                                                            <div class="field">
+                                                                <div>
+                                                                    <span class="field-label">Trẻ em</span>
+                                                                    <i> ( 2 - 12 tuổi ) </i>
+                                                                </div>
+                                                                <div>
+                                                                    <ng-select data-placeholder="" name="children" [(ngModel)]="Filter.children" [options]="adultOptions" [noFilter]="1"></ng-select>
+                                                                    <!-- <select class="select-child-1" data-placeholder="" [(ngModel)]="Filter.children" name="children">
                                                                 <option value="0">0</option>
                                                                 <option *ngFor="let person of people" value="{{ person }}">{{ person }}</option>
-                                                            </select>
+                                                            </select> -->
+                                                                </div>
+                                                            </div>
                                                         </div>
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-3">
-                                                    <div class="field">
-                                                        <div>
-                                                            <span class="field-label">Em bé</span>
-                                                            <i> ( < 2 tuổi ) </i>
-                                                        </div>
-                                                        <div>
-                                                            <select class="select-child-2" data-placeholder="" formControlName="infant">
+                                                        <div class="col-md-3">
+                                                            <div class="field">
+                                                                <div>
+                                                                    <span class="field-label">Em bé</span>
+                                                                    <i> ( < 2 tuổi ) </i>
+                                                                </div>
+                                                                <div>
+                                                                    <ng-select data-placeholder="" name="infant" [(ngModel)]="Filter.infant" [options]="infantOptions" [noFilter]="1"></ng-select>
+                                                                    <!-- <select class="select-child-2" data-placeholder="" [(ngModel)]="Filter.infant" name="infant">
                                                                 <option value="0">0</option>
                                                                 <option *ngFor="let person of infants" value="{{ person }}">{{ person }}</option>
-                                                            </select>
+                                                            </select> -->
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-3">
+                                                            <span class="field-label">&nbsp;</span>
+                                                            <div class="plane-submit">
+                                                                <button type="submit" class="btn btn-plane btn-search" [disabled]="!f.valid"><i class=" icon-search-2"></i> Tìm chuyến bay</button>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div class="col-md-3">
-                                                    <span class="field-label">&nbsp;</span>
-                                                    <div class="plane-submit">
-                                                        <button type="submit" class="btn btn-plane btn-search" [disabled]="!filterBookForm.valid"><i class=" icon-search-2"></i> Tìm chuyến bay</button>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <!-- <div class="multiple">
+                                                <!-- <div class="multiple">
                       <div class="plane-input clearfix">
                         <div class="field clearfix">
                           <label>Hành trình 1</label>
@@ -272,69 +272,52 @@
                         </div>
                       </div>
                     </div> -->
+                                            </div>
+                                        </form>
                                     </div>
-                                </form>
-                            </div>
-                            <!-- <div id="tab-bus" class="wpb_tab ui-tabs-panel wpb_ui-tabs-hide vc_clearfix">
-                <form class="bus-form" action="#" method="">
-                  <div class="bus-form-inner">
-                    <div class="bus-input clearfix">
-                      <div class="col-md-3">
-                        <div class="field">
-                          <span class="field-label">Điểm đi</span>
-                          <div class="field-input">
-                            <select class="select-from" data-placeholder="Điểm đến">
-                              <option value=""></option>
-                              <option value="Hanoi">Hà Nội</option>
-                              <option value="Saigon">Tp.Hồ Chí Minh</option>
-                            </select>
-                          </div>
-                        </div>
-                      </div>
-                      <div class="col-md-3">
-                        <div class="field">
-                          <span class="field-label">Điểm đến</span>
-                          <div class="field-input">
-                            <select class="select-to" data-placeholder="Điểm đến">
-                              <option value=""></option>
-                              <option value="Hanoi">Hà Nội</option>
-                              <option value="Saigon">Tp.Hồ Chí Minh</option>
-                            </select>
-                          </div>
-                        </div>
-                      </div>
-                      <div class="col-md-3">
-                        <div class="field">
-                          <span class="field-label">Ngày đi</span>
-                          <div class="field-input">
-                            <div class="form-group">
-                              <div class='input-group date' id='date-go'>
-                                <input type='text' class="form-control" />
-                                <span class="input-group-addon">
-                                  <span class="glyphicon glyphicon-calendar"></span>
-                                </span>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                      <div class="col-md-3">
-                        <div class="field">
-                          <span class="field-label">Số lượng vé</span>
-                          <div class="field-input">
-                            <input type="datetime" name="" value="" placeholder="" class="form-control">
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="col-md-12">
-                      <div class="bus-submit text-right">
-                        <button type="button" class="btn btn-bus btn-search"><i class=" icon-search-2"></i> Tìm vé xe</button>
-                      </div>
-                    </div>
-                  </div>
-                </form>
-              </div> -->
+                                </tab>
+                                <tab>
+                                    <span *tabHeading>
+                                        <a class="title white"><i class="fa fa-bus"></i> VÉ THAM QUAN</a>
+                                    </span>
+                                    <div id="tab-tour" class="wpb_tab ui-tabs-panel wpb_ui-tabs-hide vc_clearfix">
+                                        <form class="tour-form" action="#" method="">
+                                            <div class="tour-form-inner">
+                                                <div class="tour-input clearfix">
+                                                    <div class="col-md-4">
+                                                        <div class="field">
+                                                            <span class="field-label">Điểm đến</span>
+                                                            <div class="field-input">
+                                                                <select class="select-to" data-placeholder="Điểm đến">
+                                                                    <option value=""></option>
+                                                                    <option value="Hanoi">Hà Nội</option>
+                                                                    <option value="Saigon">Tp.Hồ Chí Minh</option>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-4">
+                                                        <div class="field">
+                                                            <div class="slider-price clearfix">
+                                                                <div class="clearfix">
+                                                                    <span id="min-price"></span>
+                                                                    <span id="max-price"></span>
+                                                                </div>
+                                                                <div id="slider-price"></div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-4">
+                                                        <div class="field">
+                                                            <button type="button" class="btn btn-search-tour"><i class="icon-search-2"></i> Tìm kiếm</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </tab>
+                            </tabset>
                         </div>
                     </div>
                 </div>

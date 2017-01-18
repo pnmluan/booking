@@ -31,6 +31,18 @@ export class AppComponent {
 	) {
 		this.session_expired = this._Configuration.session_expired;
 
+		var current_href = window.location.href;
+		let current_domain = window.location.origin;
+		current_href = current_href.replace(current_domain, '');
+		this._Router.events.subscribe((val) => {
+			console.log('this._Router.events.subscribe')
+			if (current_href.match(/^\/search-result.*/i)) {
+				let now = new Date().getTime();
+				this._LocalStorageService.set('user_session_start', now);
+			}
+
+		});
+
 		_HttpInterceptorService.request().addInterceptor((data, method) => {
 			this._LoadingAnimateService.setValue(true);
 			return data;
@@ -44,9 +56,8 @@ export class AppComponent {
 		this.onSetGlobalScript();
 
 		setInterval(() => {
-			
 			this.checkUserSession();
-		}, 3000)
+		}, 3000);
 	}
 
 	ngAfterContentChecked() {
@@ -93,7 +104,10 @@ export class AppComponent {
 		this.warning.close();
 		let now = new Date().getTime();
 		this._LocalStorageService.set('user_session_start', now);
-		this._Router.navigate(['home']);
+		setTimeout(() => {
+			this._Router.navigate(['home']);
+		}, 1000);
+		
 	}
 
 	// Search Again

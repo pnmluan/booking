@@ -6,6 +6,7 @@ import { HttpModule } from '@angular/http';
 import { RouterModule } from '@angular/router';
 
 // Third party
+import { TabsModule } from "ng2-tabs";
 import { SelectModule } from 'angular2-select';
 import { LocalStorageService, LOCAL_STORAGE_SERVICE_CONFIG } from 'angular-2-local-storage';
 import { MomentModule } from 'angular2-moment';
@@ -66,8 +67,8 @@ import { CustomerComponent } from './components/customer';
     SelectModule,
     MomentModule,
     LoadingAnimateModule.forRoot(),
-    Ng2Bs3ModalModule
-
+    Ng2Bs3ModalModule,
+    TabsModule
   ],
   providers: [
     Configuration,

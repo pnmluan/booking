@@ -30,8 +30,8 @@
 .menu  > .greydark:not(.nicdark_megamenu) > .sub-menu li:hover, .nicdark_megamenu.greydark > ul > li > a{ background-color:#4a515b; }
 .nicdark_dark_widgets .widget.widget_product_search form input[type=text], .nicdark_bg_greydark .tinynav , .nicdark_dark_widgets .widget_search input[type="text"], .nicdark_dark_widgets .tagcloud a{ border: 0px solid #e5e5e5; background-color: #4a515b;}
 .menu  > .greydark .sub-menu li:last-child, .nicdark_shadow.nicdark_bg_greydark{ box-shadow: 0px 4px 0px 0px #4a515b; }
-.menu  > .greydark > .sub-menu li, .nicdark_megamenu.greydark ul li ol li a, .nicdark_dark_widgets .widget ul li, #payment ul li { border-bottom: 1px solid #4a515b; }
-.nicdark_dark_widgets .widget.widget_shopping_cart .widget_shopping_cart_content p.total { border-top: 3px double #4a515b; }
+.menu  > .greydark > .sub-menu li, .nicdark_megamenu.greydark ul li ol li a, .nicdark_dark_widgets .widget ul li, #payment ul li { border-bottom: 1px solid rgba(255, 255, 255, 0.5); }
+.nicdark_dark_widgets .widget.widget_shopping_cart .widget_shopping_cart_content p.total { border-top: 3px double rgba(255, 255, 255, 0.5); }
 .woocommerce .widget_price_filter .price_slider_amount .price_label{ box-shadow: 0px 4px 0px 0px #353b3d; background-color: #4a515b; }
 .woocommerce .widget_price_filter .price_slider_wrapper .ui-widget-content,.woocommerce-page .widget_price_filter .price_slider_wrapper .ui-widget-content{ background:#4a515b;}
 .nicdark_dark_widgets .widget_nav_menu .menu li .sub-menu li { border-bottom: 0px solid #4a515b; }
@@ -1151,9 +1151,10 @@ only screen and (max-width: 767px) {
 .tours .ui-slider .ui-slider-handle {
     position: absolute;
     z-index: 2;
-    width: 20px;
-    height: 20px;
-    top: -8px;
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    top: -5px;
     background: #649931;
 }
 
@@ -1179,7 +1180,29 @@ only screen and (max-width: 767px) {
 .tours .tours-sort-r { float: right; }
 .tours .tours-sort-r ul li { float: left; margin-left: 5px; }
 .tours .tours-sort-r ul li a { display: block; width: 25px; height: 25px; text-align: center; line-height: 25px; color: #333; }
-.tours      .tours-sort-r ul li a.active, .tours-sort-r ul li a:hover { color: #fff; background: #DE4131; }
+.tours .tours-sort-r ul li a.active, .tours-sort-r ul li a:hover { color: #fff; background: #DE4131; }
+
+@media screen and (max-width: 991px) {
+    .tours-filter { width: 100%; float: none; padding-right: 0px; margin-bottom: 20px; }
+    .tours-main { width: 100%; float: none; margin-bottom: 30px; }
+}
+
+@media screen and (max-width: 767px) {
+    .tours-list .item { float: left; width: 50%; padding: 0px 10px; margin-bottom: 20px; }
+}
+
+@media screen and (max-width: 479px) {
+    .tours-list .item { float: left; width: 100%; padding: 0px 10px; margin-bottom: 20px; }
+}
+
+@media screen and (max-width: 360px) {
+    .tours .tours-sort-l ul li { float: none; }
+    .tours .tours-sort-l ul li:nth-child(2) { display: none; }
+    .tours .tours-sort-l ul li:last-child { margin-top: 5px; }
+    .tours .tours-sort-l ul li label { width: 60px; }
+}
+
+
 
 /****** TOUR-DETAILS ******/
 /**************************/
@@ -1269,4 +1292,216 @@ only screen and (max-width: 767px) {
 .photos-tab li a { display: block; padding: 10px 30px; background: #ddd; color: #333; border-bottom: 1px solid #fff; }
 .photos-tab li a.active { background: #649931; color: #fff; }
 
-#map { display: none; }
+.photos-wrapper .item:not(:first-child) { display: none; }
+
+.info-tab li { float: left; margin-right: 10px; }
+.info-tab li a { display: block; padding: 5px 30px; background: #ddd; color: #333; border-bottom: 1px solid #fff; position: relative; }
+.info-tab li a.active { background: #649931; color: #fff; }
+.info-tab li a:before {  position: absolute; bottom: -5px; left: 50%; margin-left: -10px; border-top: 5px solid #649931; border-left: 7px solid transparent; border-right: 7px solid transparent; content: ""; display: none; z-index: 999; }
+.info-tab li a.active:before { display: block; }
+
+.info-wrapper .item:not(:first-child) { display: none; }
+.info-wrapper .item { padding: 20px 0px; }
+
+.tour-book { background: #f5f5f5; padding: 15px; margin-top: 20px; }
+.f-tour-view-price { background: #fff; padding: 15px 10px; }
+.f-tour-view-price .field { float: left; width: 36%; padding: 0px 5px; }
+.f-tour-view-price .field:last-child { width: 28%; }
+.f-tour-view-price .field:last-child button { width: 100%; color: #fff; background: #649931; }
+.f-tour-view-price .field:last-child button.no { background: #DE4131; }
+.f-tour-view-price .field .field-inner {  }
+.field-select-people { position: relative; }
+.input-select-people { height: 34px; line-height: 32px; border: 1px solid #ccc; border-radius: 3px; cursor: pointer; }
+.input-select-people > div { float: left; }
+.input-select-people > div:first-child { width: calc(100% - 40px); float: left; padding-left: 12px; }
+.input-select-people > div:last-child { width: 40px; text-align: center; float: left; border-left: 1px solid #ddd; background: #eee; height: 32px; line-height: 32px; }
+.tbl-select-people { position:  absolute; top: 100%; left: 0px; width: 100%; padding: 10px;  background: #fff; border: 1px solid #ddd; display: none; }
+.tbl-select-people table { width: 100%; }
+.tbl-select-people table td { vertical-align: middle; padding: 5px 0px;  }
+.tbl-select-people table td:last-child { text-align: right; }
+.tbl-select-people table td:last-child a { color: #DE4131; }
+.tbl-select-people table td:last-child a:last-child { color: #649931; }
+.tbl-select-people table input { width: 50px !important; display: inline-block; text-align: center; }
+
+
+.tour-price-details { margin-top: 15px; background: #fff; padding: 15px; display: none; }
+.tour-price-details .top { border-bottom: 1px solid #ddd; padding-bottom: 10px; margin-bottom: 15px; }
+.tour-price-details .top table { width: 100%; }
+.tour-price-details .top table td { vertical-align: middle; }
+.tour-price-details .top table td:first-child { text-transform: uppercase; font-weight: bold; font-size: 22px; color: #649931; }
+.tour-price-details .top table td:last-child { max-width: 200px; width: 200px; color: #DE4131; font-weight: bold; font-size: 22px;  }
+.tour-price-details .top table td:last-child span { color: #999; font-size: 15px; }
+.tour-price-details .top table td:last-child p { text-transform: uppercase; color: #666; font-size: 15px; }
+
+.tour-price-details .bottom {}
+.tour-price-details .bottom .bottom-info { width: calc(100% - 200px); float: left; padding-right: 15px; }
+.tour-price-details .bottom .bottom-info .field { min-height: 34px; line-height: 34px; }
+.tour-price-details .bottom .bottom-info .field:first-child { margin-bottom: 10px; }
+.tour-price-details .bottom .bottom-info .field > div {}
+.tour-price-details .bottom .bottom-info .field .field-col:first-child { width: calc(100% - 160px); float: left; }
+.tour-price-details .bottom .bottom-info .field .field-col:last-child { width: 150px; float: right; font-weight: bold; }
+.tour-price-details .bottom .bottom-info .field table { width: 100%; }
+
+.tour-price-details .bottom .bottom-button { width: 200px; float: left; }
+.tour-price-details .bottom .bottom-button div:first-child { margin-bottom: 10px; }
+.tour-price-details .bottom button { width: 100%; }
+.tour-price-details .bottom .btn-book-now { color: #fff; background: #649931; }
+.tour-price-details .bottom .btn-shopping-cart { color: #fff; background: #DE4131; }
+
+.widget.widget_shopping_cart .widget_shopping_cart_content p.buttons a.button {
+    background-color: #F7B916;
+    box-shadow: 0px 0px 0px 1px #F7B916;
+}
+
+.widget.widget_shopping_cart .widget_shopping_cart_content p.buttons a.checkout {
+    background-color: #DE4131;
+    box-shadow: 0px 0px 0px 1px #DE4131;
+}
+
+.shopping-cart-details h1 { text-transform: uppercase; font-weight: bold; font-size: 20px; margin-bottom: 30px; border-left: 5px solid #649931; margin-top: 15px; color: #649931; padding-left: 5px; }
+.table-details table { border-collapse: collapse; }
+.table-details table th { background: #649931; color: #fff; text-align: center; }
+.table-details table td, .table-details table td img { vertical-align: middle !important; text-align: center; }
+.table-details table td:first-child { text-align: left; }
+.table-details table td:last-child a { font-size: 15px; color: red; }
+.minus-people { color: #DE4131; }
+.add-people { color: #649931; }
+.input-quantity { width: 50px !important; display: inline-block; text-align: center; }
+
+.shopping-cart-total {}
+.shopping-cart-total p { padding: 3px 0px; }
+.shopping-cart-total p span { display: inline-block; width: 150px; text-align: right; font-size: 14px; font-weight: bold; }
+.shopping-cart-total p.total-price { border-top: 1px solid #ddd; margin-top: 15px; margin-bottom: 30px; padding-top: 15px; font-weight: bold; }
+.shopping-cart-total p.total-price span { font-weight: bold; font-size: 20px; color: #DE4131; }
+.shopping-cart-total .g-button { margin-bottom: 50px; }
+.shopping-cart-total .g-button div:first-child { float: left; padding-top: 5px; }
+.shopping-cart-total .g-button div:first-child a { color: #649931; }
+.shopping-cart-total .g-button div:first-child a:hover { color: #DE4131; }
+.shopping-cart-total .g-button div:last-child { float: right; }
+.shopping-cart-total .g-button div:last-child button {
+    color: #fff;
+    padding: 5px 10px;
+    font-size: 15px;
+    border-radius: 0px;
+    text-transform: uppercase;
+}
+.btn-checkout { background-color: #DE4131;
+    box-shadow: 0px 0px 0px 1px #DE4131;}
+.btn-update-cart {
+    background-color: #F7B916;
+    box-shadow: 0px 0px 0px 1px #F7B916;
+}
+
+@media screen and (max-width: 991px) {
+    .tour-details-l { width: 100%; padding-right: 0px; float: none; margin-bottom: 20px; }
+    .tour-details-r { width: 100%; float: none; margin-bottom: 20px; }
+}
+
+@media screen and (max-width: 767px) {
+    .f-tour-view-price .field { float: left; width: 100%; padding: 5px; }
+    .f-tour-view-price .field:last-child { width: 100%; }
+
+    .tour-price-details .bottom .bottom-info { width: 100%; float: none; padding-right: 0px; margin-bottom: 10px; }
+
+    .tour-price-details .bottom .bottom-button { width: 100%; float: none; }
+}
+
+@media screen and (max-width: 479px) {
+    .info-tab li { float: none; margin-right: 0px; }
+
+    #map iframe { height: 300px !important; }
+    .tour-price-details .bottom .bottom-info .field .field-col:first-child { width: 100%; float: none; }
+    .tour-price-details .bottom .bottom-info .field .field-col:last-child { width: 100%; float: none; font-weight: bold; }
+
+    .shopping-cart-total p.total-price { margin-bottom: 10px; }
+    .shopping-cart-total .g-button div:first-child {
+        float: none;
+        padding-top: 5px;
+        margin-bottom: 10px;
+    }
+}
+
+#tab-tour .slider-price > div:first-child {
+    margin-bottom: 10px;
+}
+#tab-tour .slider-price #min-price {
+    float: left; font-size: 18px;
+}
+#tab-tour .slider-price #max-price {
+    float: right; font-size: 18px;
+}
+
+#tab-tour .ui-corner-all,
+#tab-tour .ui-corner-top,
+#tab-tour .ui-corner-left,
+#tab-tour .ui-corner-tl {
+    border-top-left-radius: 0px;
+    border-top-right-radius: 0px;
+    border-bottom-left-radius: 0px;
+    border-bottom-right-radius: 0px;
+}
+#tab-tour .ui-widget-header {
+    background: #649931;
+}
+#tab-tour .ui-widget-content {
+    background: #555;
+}
+#tab-tour .ui-widget {
+    font-size: 9px;
+}
+
+#tab-tour .ui-slider .ui-slider-handle {
+    position: absolute;
+    z-index: 2;
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    top: -5px;
+    background: #649931;
+}
+
+#tab-tour .ui-state-default,
+#tab-tour .ui-widget-content .ui-state-default,
+#tab-tour .ui-widget-header .ui-state-default { border: 0px; }
+
+#tab-tour .btn-search-tour { margin-top: 22px; background: #E44803; border-radius: 4px; }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -343,7 +343,7 @@ p.stars a.star-5:after {content: "\e82a\e82a\e82a\e82a\e82a";}
 /*cart*/
 .widget.widget_shopping_cart .widget_shopping_cart_content ul li{ padding: 20px; box-sizing: border-box; min-height: 100px; }
 .widget.widget_shopping_cart .widget_shopping_cart_content ul li.empty{ min-height: 10px; }
-.widget.widget_shopping_cart .widget_shopping_cart_content ul li a{ margin: 0px; padding: 0px; float: left; padding-left: 80px; width: 100%; box-sizing:border-box; text-transform: uppercase; }
+.widget.widget_shopping_cart .widget_shopping_cart_content ul li a{ margin: 0px; padding: 0px; float: left; padding-left: 80px; width: 100%; box-sizing:border-box; }
 .widget.widget_shopping_cart .widget_shopping_cart_content ul li img{ width: 60px; height: auto; border-radius: 0px; position: absolute; margin-left: -80px;}
 .widget.widget_shopping_cart .widget_shopping_cart_content ul li .quantity{ margin: 10px 0px 0px 80px !important; background: none; box-shadow: 0px 0px 0px 0px; }
 .widget.widget_shopping_cart .widget_shopping_cart_content p.total { float: left;width: 100%; padding: 20px; box-sizing: border-box; border-top: 3px double #F4F4F6; text-transform: uppercase;}
