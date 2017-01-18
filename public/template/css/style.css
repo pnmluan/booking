@@ -1464,7 +1464,11 @@ only screen and (max-width: 767px) {
 #tab-tour .ui-widget-content .ui-state-default,
 #tab-tour .ui-widget-header .ui-state-default { border: 0px; }
 
-#tab-tour .btn-search-tour { margin-top: 22px; background: #E44803; border-radius: 4px; }
+#tab-tour .btn-search-tour { margin-top: 22px;  border-radius: 4px; background: #E77741; }
+#tab-tour .btn-search-tour:hover { background: #E44803; }
+.cart_anchor { position: relative; }
+.cart_anchor i { font-size: 20px; color: #649931; }
+.item-number { color: #fff; background: #E44803; display: block; width: 16px; height: 16px; border-radius: 50%; position: absolute; top: -5px; right: -7px; font-size: 10px; font-weight: bold;  }
 
 
 
