@@ -56,7 +56,6 @@ export class SearchResultComponent implements OnInit, AfterViewInit {
 	airlineOptions = {};
 
 	adultOptions = [];
-	childrenOptions = [];
 	infantOptions = [];
 	titleOptions = [];
 	baggageOptionsFrom = [];
@@ -65,6 +64,10 @@ export class SearchResultComponent implements OnInit, AfterViewInit {
 	warningMsg: string = '';
 
 	curRouting?: string;
+	filter_from_date: any;
+	filter_to_date: any;
+	fromDateOptions = {};
+	toDateOptions = {};
 
 	constructor(
 		private _AirlineDataService: AirlineDataService, 
@@ -128,7 +131,7 @@ export class SearchResultComponent implements OnInit, AfterViewInit {
 
 		this.airlineOptions = {
 			vietjet:true,
-			jetstar: true,
+			jetstar: false,
 			vna: true
 
 		};
@@ -163,11 +166,12 @@ export class SearchResultComponent implements OnInit, AfterViewInit {
 		let arr_number_people = this._Configuration.arr_number_people;
 		for (let key in arr_number_people) {
 
-			var temp = {
+			var temp_adult = {
 				value: arr_number_people[key],
 				label: arr_number_people[key]
 			};
-			adultOptions.push(temp);
+
+			adultOptions.push(temp_adult);
 
 		}
 		this.adultOptions = adultOptions;
@@ -175,13 +179,13 @@ export class SearchResultComponent implements OnInit, AfterViewInit {
 		// List Options Infant
 		let infantOptions = [];
 		let arr_number_infants = this._Configuration.arr_number_infants;
-		for (let key in arr_number_people) {
+		for (let key in arr_number_infants) {
 
-			var temp = {
+			var temp_infant = {
 				value: arr_number_infants[key],
 				label: arr_number_infants[key]
 			};
-			infantOptions.push(temp);
+			infantOptions.push(temp_infant);
 
 		}
 		this.infantOptions = infantOptions;
@@ -197,6 +201,7 @@ export class SearchResultComponent implements OnInit, AfterViewInit {
 
 		this.search = this.clone(this.session_flight);
 
+
 		this.search['from_day'] = moment(this.search['from_date']).format(format_day);
 		if (this.search['to_date']) {
 			this.search['to_day'] = moment(this.search['to_date']).format(format_day);
@@ -210,19 +215,19 @@ export class SearchResultComponent implements OnInit, AfterViewInit {
 		// Combine fork join 3 airlines
 		const vietjet$ = this._AirlineDataService.vietjet(this.session_flight);
 
-		const jetstar$ = this._AirlineDataService.jetstar(this.session_flight);
+		// const jetstar$ = this._AirlineDataService.jetstar(this.session_flight);
 
 		const vna$ = this._AirlineDataService.vna(this.session_flight);
 
-		Observable.forkJoin(vietjet$, jetstar$, vna$).subscribe(res => {
-
+		// Observable.forkJoin(vietjet$, jetstar$, vna$).subscribe(res => {
+		Observable.forkJoin(vietjet$, vna$).subscribe(res => {
 
 			this.airlines['vietjet'] = res[0];
-			this.airlines['jetstar'] = res[1];
-			this.airlines['vna'] = res[2];
+			// this.airlines['jetstar'] = res[1];
+			this.airlines['vna'] = res[1];
 
 			this.lowestFilter['vietjet'] = this.getLowestPrice(this.airlines['vietjet'].dep_flights);
-			this.lowestFilter['jetstar'] = this.getLowestPrice(this.airlines['jetstar'].dep_flights);
+			// this.lowestFilter['jetstar'] = this.getLowestPrice(this.airlines['jetstar'].dep_flights);
 			this.lowestFilter['vna'] = this.getLowestPrice(this.airlines['vna'].dep_flights);
 			this.filterAirlines();
 			this.selectedStep = 1;
@@ -233,26 +238,25 @@ export class SearchResultComponent implements OnInit, AfterViewInit {
 
 		var params = this.sessionStorage.get('session_flight');
 
+		// Load session flight with from_date, to_date
 		let session_flight = JSON.parse(String(params));
-		setTimeout(() => {
-			jQuery('.select2').select2();
-			// jQuery('#date-go input').val(session_flight['from_date']);
-			// if (session_flight['to_date']) {
-			// 	jQuery('#date-back input').val(session_flight['to_date']);
-			// }
+		
+		this.fromDateOptions = {
+			format: this._Configuration.viFormatDate, 
+			autoApply: true, locate: 'vi', 
+			initialDate: new Date(session_flight['from_date'])
+		};
 
-			jQuery(".select-adult, .select-child-1, .select-child-2").select2({
-				width: '100%',
-				minimumResultsForSearch: -1
-			});
+		if (session_flight['to_date']) {
+			this.toDateOptions = { 
+				format: this._Configuration.viFormatDate, 
+				autoApply: true, locate: 'vi', 
+				initialDate: new Date(session_flight['to_date'])
+			};
+		}
 
-			jQuery('.datetimepicker').datetimepicker({
-				format: 'DD/MM/YYYY',
-				allowInputToggle: true
-			});
-			console.log('test');
-
-		}, 1000);
+		
+		console.log(this.search)
 
 		setTimeout(()=>{
 
@@ -277,9 +281,10 @@ export class SearchResultComponent implements OnInit, AfterViewInit {
 		}, 5000);
   	}
 
-	ngAfterViewInit() {
-		
-		
+	ngAfterViewInit() {}
+
+	onFilterArlines() {
+
 	}
 
 	updateCheckedOptions(option, event) {
@@ -287,6 +292,8 @@ export class SearchResultComponent implements OnInit, AfterViewInit {
 		this.filterAirlines();
 		this.sort = 'airline';
 	}
+
+
 
 	// Filter airlines
 	filterAirlines() {
@@ -358,53 +365,59 @@ export class SearchResultComponent implements OnInit, AfterViewInit {
 
 	// Set Date
 	setDate(date, option) {
-		this.search = this.clone(this.session_flight);
-		if(option === 'from') {
-			this.search.from_date = date;
-		} else {
-			this.search.to_date = date;
+
+		let current = moment().format(this._Configuration.dateFormat);
+		let selectedDate = moment(date, this._Configuration.viFormatDate).format(this._Configuration.dateFormat);
+		if (selectedDate >= current) {
+			console.log('abc');
+			this.search = this.clone(this.session_flight);
+			if(option === 'from') {
+				this.search.from_date = date;
+			} else {
+				this.search.to_date = date;
+			}
+			this.selectedStep = 0;
+			this.onResearch();
 		}
-		this.selectedStep = 0;
-		this.onResearch();
 	}
 
 
 	// Research 
 	onResearch() {
 		var objectStore = this.search;
-		console.log(this.search);
-
-		if (objectStore.from == objectStore.to) {
+		
+		if (objectStore['from'] == objectStore['to']) {
 			this.warningMsg = 'Điểm đi và Điểm đến không được trùng nhau.';
-			this.warning.open('sm');
+			this.warning.open();
 			return;
 		}
-		objectStore.from_date = moment(objectStore.from_date, this._Configuration.viFormatDate).format(this._Configuration.dateFormat);
-		if (objectStore.from_date < moment().format(this._Configuration.dateFormat)) {
-			this.warningMsg = 'Ngày đi phải nhỏ hơn ngày hiện tại.';
-			this.warning.open('sm');
-			return;
-		}
-
-		objectStore.adult = jQuery('.select-adult').val();
-		objectStore.children = jQuery('.select-child-1').val();
-		objectStore.infant = jQuery('.select-child-2').val();
-
-
-		objectStore.from_name = this.getNameFromCode(objectStore.from);
-		objectStore.to_name = this.getNameFromCode(objectStore.to);
-
-		if (objectStore.to_date == undefined) {
-			objectStore.to_date = '';
-
-		} else {
-			objectStore.to_date = moment(objectStore.to_date, this._Configuration.viFormatDate).format(this._Configuration.dateFormat);
-			if (objectStore.from_date > objectStore.to_date) {
-				this.warningMsg = 'Ngày đi phải nhỏ hơn Ngày đến.';
-				this.warning.open();
+		if (this.filter_from_date['formatted']) {
+			objectStore['from_date'] = moment(this.filter_from_date['formatted'], this._Configuration.viFormatDate).format(this._Configuration.dateFormat);
+			if (objectStore['from_date'] < moment().format(this._Configuration.dateFormat)) {
+				this.warningMsg = 'Ngày đi phải nhỏ hơn ngày hiện tại.';
+				this.warning.open('sm');
 				return;
 			}
-			objectStore.to_name = this.getNameFromCode(objectStore.to);
+		}
+
+
+		objectStore['from_name'] = this.getNameFromCode(objectStore['from']);
+		objectStore['to_name'] = this.getNameFromCode(objectStore['to']);
+
+		if (objectStore['to_date'] == undefined) {
+			objectStore['to_date'] = '';
+
+		} else {
+			if (this.filter_to_date) {
+				objectStore['to_date'] = moment(this.filter_to_date['formatted'], this._Configuration.viFormatDate).format(this._Configuration.dateFormat);
+				if (objectStore['from_date'] > objectStore['to_date']) {
+					this.warningMsg = 'Ngày đi phải nhỏ hơn Ngày đến.';
+					this.warning.open();
+					return;
+				}
+			}
+
+			objectStore['to_name'] = this.getNameFromCode(objectStore['to']);
 		}
 
 		let uuid = UUID.UUID();
@@ -413,31 +426,7 @@ export class SearchResultComponent implements OnInit, AfterViewInit {
 		this.sessionStorage.set('session_token', uuid);
 		this.sessionStorage.set('session_flight', JSON.stringify(objectStore));
 		this._Router.navigate(['search-result/' + uuid]);
-
-
-
-		// let uuid = UUID.UUID();
-		// this.sessionStorage.remove('session_flight');
-		// this.sessionStorage.remove('session_token');
-		// this.sessionStorage.set('session_token', uuid);
-
-		// var objectStore = this.search;
-		// var dateFormat = 'YYYY-MM-DD';
-		// var viFormatDate = 'DD/MM/YYYY';
-		// objectStore.from_date = moment(objectStore.from_date, viFormatDate).format(dateFormat);
-		// objectStore.from_name = this.getNameFromCode(objectStore.from);
-
-		// if (objectStore.to_date == undefined) {
-		// 	objectStore.to_date = '';
-		// 	objectStore.to_name = '';
-		// } else {
-		// 	objectStore.to_date = moment(objectStore.to_date, viFormatDate).format(dateFormat);
-		// 	objectStore.to_name = this.getNameFromCode(objectStore.to);
-		// }
-		// console.log(objectStore);
-		// this.sessionStorage.set('session_flight', JSON.stringify(objectStore));
-
-		// this._Router.navigate(['search-result/' + uuid]);
+		this.selectedStep = 0;
 	}
 
 	// Select Flights

@@ -58,19 +58,22 @@
                                                                 <div class="field-input">
                                                                     <div class="form-group">
                                                                         <div class='input-group'>
-                                                                            <ng2-datepicker name="from_date" class="form-control" [options]="datepickerOptions" [(ngModel)]="Filter.from_date" required></ng2-datepicker>
+                                                                            <ng2-datepicker name="from_date" class="form-control" [options]="datepickerOptions" [(ngModel)]="filter_from_date" required></ng2-datepicker>
                                                                         </div>
                                                                     </div>
                                                                 </div>
                                                             </div>
                                                         </div>
                                                         <div class="col-md-3">
-                                                            <div class="field">
+                                                            <div class="field" *ngIf="Filter.round_trip != 'off'">
                                                                 <span class="field-label">Ngày về</span>
                                                                 <div class="field-input">
                                                                     <div class="form-group">
-                                                                        <div class='input-group '>
-                                                                            <ng2-datepicker name="from_date" class="form-control" [disabled]="Filter.round_trip == 'off'" [options]="datepickerOptions" [(ngModel)]="Filter.to_date" required></ng2-datepicker>
+                                                                        <div class='input-group'>
+                                                                            <ng2-datepicker name="to_date" 
+                                                                            class="form-control"
+                                                                            [options]="datepickerOptions" 
+                                                                            [(ngModel)]="filter_to_date" required></ng2-datepicker>
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -99,11 +102,10 @@
                                                                     <i> ( 2 - 12 tuổi ) </i>
                                                                 </div>
                                                                 <div>
-                                                                    <ng-select data-placeholder="" name="children" [(ngModel)]="Filter.children" [options]="adultOptions" [noFilter]="1"></ng-select>
-                                                                    <!-- <select class="select-child-1" data-placeholder="" [(ngModel)]="Filter.children" name="children">
-                                                                <option value="0">0</option>
-                                                                <option *ngFor="let person of people" value="{{ person }}">{{ person }}</option>
-                                                            </select> -->
+                                                                    <ng-select data-placeholder="" name="children" [(ngModel)]="Filter.children" 
+                                                                    [allowClear]="true"
+                                                                    [options]="adultOptions" [noFilter]="1">
+                                                                    </ng-select>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -114,11 +116,10 @@
                                                                     <i> ( < 2 tuổi ) </i>
                                                                 </div>
                                                                 <div>
-                                                                    <ng-select data-placeholder="" name="infant" [(ngModel)]="Filter.infant" [options]="infantOptions" [noFilter]="1"></ng-select>
-                                                                    <!-- <select class="select-child-2" data-placeholder="" [(ngModel)]="Filter.infant" name="infant">
-                                                                <option value="0">0</option>
-                                                                <option *ngFor="let person of infants" value="{{ person }}">{{ person }}</option>
-                                                            </select> -->
+                                                                    <ng-select data-placeholder="" name="infant" 
+                                                                    [allowClear]="true"
+                                                                    [(ngModel)]="Filter.infant" [options]="infantOptions" [noFilter]="1">
+                                                                    </ng-select>
                                                                 </div>
                                                             </div>
                                                         </div>

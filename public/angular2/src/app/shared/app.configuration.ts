@@ -12,8 +12,8 @@ export class Configuration {
 	public formatDate = "dddd - DD/MM/YYYY";
 	public viFormatDate = "DD/MM/YYYY";
 	public dateFormat = 'YYYY-MM-DD';
-	public session_expired = 0.5/60; //Session 15 mins
+	public session_expired = 30/60; //Session 15 mins
 
-	public arr_number_people = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
-	public arr_number_infants = [1,2];
+	public arr_number_people = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10'];
+	public arr_number_infants = ['1','2'];
 }

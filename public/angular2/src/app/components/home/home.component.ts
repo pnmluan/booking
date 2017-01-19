@@ -38,7 +38,9 @@ export class HomeComponent implements OnInit, AfterViewInit {
 	locationOptions = [];
 	categoryTicketOptions = [];
 	round_trip = 'off';
-	datepickerOptions = { format: this._Configuration.viFormatDate };
+	filter_from_date: any;
+	filter_to_date: any;
+	datepickerOptions = { format: this._Configuration.viFormatDate, autoApply: true, locate: 'vi', style: 'big' };
 	constructor(
 		private _LocationDataService: LocationDataService, 
 		private _Configuration: Configuration,
@@ -115,7 +117,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
 		// List Options Infant
 		let infantOptions = [];
 		let arr_number_infants = this._Configuration.arr_number_infants;
-		for (let key in arr_number_people) {
+		for (let key in arr_number_infants) {
 
 			var temp = {
 				value: arr_number_infants[key],
@@ -168,12 +170,15 @@ export class HomeComponent implements OnInit, AfterViewInit {
 			this.warning.open();
 			return;
 		}
-		objectStore['from_date'] = moment(objectStore['from_date'], this._Configuration.viFormatDate).format(this._Configuration.dateFormat);
-		if (objectStore['from_date'] < moment().format(this._Configuration.dateFormat)) {
-			this.warningMsg = 'Ngày đi phải nhỏ hơn ngày hiện tại.';
-			this.warning.open('sm');
-			return;
+		if (this.filter_from_date['formatted']) {
+			objectStore['from_date'] = moment(this.filter_from_date['formatted'], this._Configuration.viFormatDate).format(this._Configuration.dateFormat);
+			if (objectStore['from_date'] < moment().format(this._Configuration.dateFormat)) {
+				this.warningMsg = 'Ngày đi phải nhỏ hơn ngày hiện tại.';
+				this.warning.open('sm');
+				return;
+			}
 		}
+		
 		
 		objectStore['from_name'] = this.getNameFromCode(objectStore['from']);
 		objectStore['to_name'] = this.getNameFromCode(objectStore['to']);
@@ -182,12 +187,15 @@ export class HomeComponent implements OnInit, AfterViewInit {
 			objectStore['to_date'] = '';
 
 		} else {
-			objectStore['to_date'] = moment(objectStore['to_date'], this._Configuration.viFormatDate).format(this._Configuration.dateFormat);
-			if (objectStore['from_date'] > objectStore['to_date']) {
-				this.warningMsg = 'Ngày đi phải nhỏ hơn Ngày đến.';
-				this.warning.open();
-				return;
+			if (this.filter_to_date) {
+				objectStore['to_date'] = moment(this.filter_to_date['formatted'], this._Configuration.viFormatDate).format(this._Configuration.dateFormat);
+				if (objectStore['from_date'] > objectStore['to_date']) {
+					this.warningMsg = 'Ngày đi phải nhỏ hơn Ngày đến.';
+					this.warning.open();
+					return;
+				}
 			}
+			
 			objectStore['to_name'] = this.getNameFromCode(objectStore['to']);
 		}
 

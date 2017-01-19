@@ -154,7 +154,7 @@
                     <div class="search-plane">
                         <h2>Đặt vé máy bay</h2>
                         <div class="search-plane-inner">
-                            <form class="plane-form" (ngSubmit)="onSubmit(f)" #f="ngForm">
+                            <form class="plane-form" (ngSubmit)="onResearch()" #fSearch="ngForm">
                                 <div class="field">
                                     <div class="radio">
                                         <label>
@@ -175,10 +175,6 @@
                                 <div class="field">
                                     <span class="field-label">Điểm đi</span>
                                     <div class="field-input">
-                                        <!-- <select placeholder="Điểm đi"
-                        [(ngModel)]="search.from" name="from" class="select2">
-                      <option [value]="l.value" *ngFor="let l of locations">{{l.label}}</option>
-                    </select> -->
                                         <ng-select placeholder="Điểm đi" name="from" [(ngModel)]="search.from" [options]="locations">
                                         </ng-select>
                                     </div>
@@ -186,42 +182,26 @@
                                 <div class="field">
                                     <span class="field-label">Điểm đến</span>
                                     <div class="field-input">
-                                        <!-- <ng-select placeholder="Điểm đến"
-                        formControlName="to"
-                        [options]="locations">
-                    </ng-select> -->
-                                        <!-- <select placeholder="Điểm đi"
-                        [(ngModel)]="search.to" name="to" class="select2">
-                      <option [value]="l.value" *ngFor="let l of locations">{{l.label}}</option>
-                    </select> -->
                                         <ng-select placeholder="Điểm đi" name="to" [(ngModel)]="search.to" [options]="locations">
                                         </ng-select>
                                     </div>
                                 </div>
                                 <div class="field clearfix">
-                                    <div class="field-date-go">
-                                        <span class="field-label">Ngày đi</span>
-                                        <div class="field-input">
-                                            <div class="form-group">
-                                                <div class='input-group date datetimepicker' id='date-go'>
-                                                    <input type='text' class="form-control" #datePickerFrom [(ngModel)]="search.from_date" name="from_date" (blur)="from_date = datePickerFrom.value" />
-                                                    <span class="input-group-addon">
-                          <span class="glyphicon glyphicon-calendar"></span>
-                                                    </span>
-                                                </div>
+                                    <span class="field-label">Ngày đi</span>
+                                    <div class="field-input">
+                                        <div class="form-group">
+                                            <div class='input-group'>
+                                                <ng2-datepicker name="from_date" class="form-control" [options]="fromDateOptions" [(ngModel)]="filter_from_date" required></ng2-datepicker>
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="field-date-back">
-                                        <span class="field-label">Ngày về</span>
-                                        <div class="field-input">
-                                            <div class="form-group">
-                                                <div class='input-group date datetimepicker' id='date-back'>
-                                                    <input type='text' class="form-control" #datePickerTo [(ngModel)]="search.to_date" name="to_date" (blur)="to_date = datePickerTo.value" [disabled]="search.round_trip == 'off'" />
-                                                    <span class="input-group-addon">
-                          <span class="glyphicon glyphicon-calendar"></span>
-                                                    </span>
-                                                </div>
+                                </div>
+                                <div class="field clearfix" *ngIf="search.round_trip != 'off'">
+                                    <span class="field-label">Ngày về</span>
+                                    <div class="field-input">
+                                        <div class="form-group">
+                                            <div class='input-group'>
+                                                <ng2-datepicker name="to_date" class="form-control" [options]="toDateOptions" [(ngModel)]="filter_to_date" required></ng2-datepicker>
                                             </div>
                                         </div>
                                     </div>
@@ -232,11 +212,7 @@
                                             <span class="field-label">Người lớn</span>
                                         </div>
                                         <div>
-                                            <ng-select data-placeholder="" name="adult" [(ngModel)]="search.adult" [options]="adultOptions" [noFilter]="1" required></ng-select>
-
-                                            <!-- <select class="select-adult form-control" data-placeholder="" [(ngModel)]="search.adult" name="adult">
-                                                <option *ngFor="let person of people" value="{{ person }}">{{ person }}</option>
-                                            </select> -->
+                                            <ng-select name="adult" [(ngModel)]="adult" [options]="adultOptions" [noFilter]="11" required></ng-select>
                                         </div>
                                     </div>
                                     <div class="field-2">
@@ -244,11 +220,7 @@
                                             <span class="field-label">Trẻ em</span>
                                         </div>
                                         <div>
-                                            <ng-select data-placeholder="" name="children" [(ngModel)]="search.children" [options]="adultOptions" [noFilter]="1"></ng-select>
-                                            <!-- <select class="select-child-1 form-control" data-placeholder="" [(ngModel)]="search.children" name="children">
-                                                <option value="0">0</option>
-                                                <option *ngFor="let person of people" value="{{ person }}">{{ person }}</option>
-                                            </select> -->
+                                            <ng-select name="children" [(ngModel)]="search.children" [allowClear]="true" [options]="adultOptions" [noFilter]="11"></ng-select>
                                         </div>
                                     </div>
                                     <div class="field-3">
@@ -256,17 +228,13 @@
                                             <span class="field-label">Trẻ sơ sinh</span>
                                         </div>
                                         <div>
-                                            <ng-select data-placeholder="" name="infant" [(ngModel)]="search.infant" [options]="infantOptions" [noFilter]="1"></ng-select>
-                                            <!-- <select class="select-child-2 form-control" data-placeholder="" [(ngModel)]="search.infant" name="infant">
-                                                <option value="0">0</option>
-                                                <option *ngFor="let person of infants" value="{{ person }}">{{ person }}</option>
-                                            </select> -->
+                                            <ng-select name="infant" [(ngModel)]="search.infant" [allowClear]="true" [options]="infantOptions" [noFilter]="11"></ng-select>
                                         </div>
                                     </div>
                                 </div>
                                 <!-- field -->
                                 <div class="field text-center">
-                                    <button (click)="onResearch()" type="button" class="btn btn-plane btn-search" [disabled]="!f.valid"><i class=" icon-search-2"></i> Tìm chuyến bay</button>
+                                    <button (click)="onResearch()" type="button" class="btn btn-plane btn-search" [disabled]="!fSearch.valid"><i class=" icon-search-2"></i> Tìm chuyến bay</button>
                                 </div>
                                 <!-- field -->
                             </form>
@@ -991,7 +959,6 @@
             </div>
         </div>
     </section>
-
     <!-- partner -->
     <div class="skyline hidden-xs hidden-sm">
         <!-- <script src="js/prefixfree.min.js"></script> -->
