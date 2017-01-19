@@ -11,6 +11,7 @@ import {
 import { ModalComponent } from 'ng2-bs3-modal/ng2-bs3-modal';
 import { URLSearchParams } from '@angular/http';
 import { LocalStorageService } from 'angular-2-local-storage';
+import { ToastsManager } from 'ng2-toastr/ng2-toastr';
 
 import { LocationDataService, 
 	AirlineDataService, 
@@ -80,7 +81,8 @@ export class SearchResultComponent implements OnInit, AfterViewInit {
 		private sessionStorage: LocalStorageService, 
 		private _ActivatedRoute: ActivatedRoute, 
 		private _Router: Router,
-		private _Configuration: Configuration
+		private _Configuration: Configuration,
+		private toastr: ToastsManager
 	) { 
 		moment.locale('vi');
 
@@ -502,72 +504,72 @@ export class SearchResultComponent implements OnInit, AfterViewInit {
 	}
 
 
-	// Confirm
-	onConfirm() {
+	// Submit Info Customer
+	onSubmitInfoCustomer() {
+		this.toastr.error('This is not good!', 'Oops!');
 
 		// Insert Booking
-		var params: URLSearchParams = new URLSearchParams();
-		params.set('code', this.generateCode());
-		params.set('round_trip', this.session_flight['round_trip']);
-		params.set('adult', this.session_flight['adult']);
-		params.set('children', this.session_flight['children']);
-		params.set('infant', this.session_flight['infant']);
+		// var params: URLSearchParams = new URLSearchParams();
+		// params.set('code', this.generateCode());
+		// params.set('round_trip', this.session_flight['round_trip']);
+		// params.set('adult', this.session_flight['adult']);
+		// params.set('children', this.session_flight['children']);
+		// params.set('infant', this.session_flight['infant']);
 
-		this._BookingDataService.create(params).subscribe(res => {
-			if(res.status == 'success') {
-				let booking = res.data;
+		// this._BookingDataService.create(params).subscribe(res => {
+		// 	if (res.status == 'success') {
+		// 		let booking = res.data;
 
-				// Insert Booking Detail
-				for(let key in this.listRoutes) {
+		// 		// Insert Booking Detail
+		// 		for (let key in this.listRoutes) {
 
-					var params: URLSearchParams = new URLSearchParams();
-					params.set('booking_id', booking.id);
-					params.set('from', this.listRoutes[key].from);
-					params.set('start_date', this.listRoutes[key].selectedFlight.start_date);
-					params.set('start_time', this.listRoutes[key].selectedFlight.start_time);
+		// 			var params: URLSearchParams = new URLSearchParams();
+		// 			params.set('booking_id', booking.id);
+		// 			params.set('from', this.listRoutes[key].from);
+		// 			params.set('start_date', this.listRoutes[key].selectedFlight.start_date);
+		// 			params.set('start_time', this.listRoutes[key].selectedFlight.start_time);
 
-					params.set('to', this.listRoutes[key].to);
-					params.set('end_date', this.listRoutes[key].selectedFlight.end_date);
-					params.set('end_time', this.listRoutes[key].selectedFlight.end_time);
+		// 			params.set('to', this.listRoutes[key].to);
+		// 			params.set('end_date', this.listRoutes[key].selectedFlight.end_date);
+		// 			params.set('end_time', this.listRoutes[key].selectedFlight.end_time);
 
-					params.set('ticket_type', this.listRoutes[key].selectedFlight.type);
+		// 			params.set('ticket_type', this.listRoutes[key].selectedFlight.type);
 
-					this._BookingDetailDataService.create(params).subscribe(res => {
-						if (res.status == 'success') {
-							let booking_detail = res.data;
-							// Insert Passengers
-							for (let k in this.passengers) {
-								var params: URLSearchParams = new URLSearchParams();
-								params.set('booking_detail_id', booking_detail.id);
-								params.set('title', this.passengers[k].title);
-								params.set('fullname', this.passengers[k].fullname);
-								params.set('date_of_birth', this.passengers[k].date_of_birth);
-								params.set('fare', this.listRoutes[key].price);
+		// 			this._BookingDetailDataService.create(params).subscribe(res => {
+		// 				if (res.status == 'success') {
+		// 					let booking_detail = res.data;
+		// 					// Insert Passengers
+		// 					for (let k in this.passengers) {
+		// 						var params: URLSearchParams = new URLSearchParams();
+		// 						params.set('booking_detail_id', booking_detail.id);
+		// 						params.set('title', this.passengers[k].title);
+		// 						params.set('fullname', this.passengers[k].fullname);
+		// 						params.set('date_of_birth', this.passengers[k].date_of_birth);
+		// 						params.set('fare', this.listRoutes[key].price);
 
-								this._PassengerDataService.create(params).subscribe(res => {
+		// 						this._PassengerDataService.create(params).subscribe(res => {
 
-								});
-							}
+		// 						});
+		// 					}
 
-						}
-					});
-				}
+		// 				}
+		// 			});
+		// 		}
 
-				// Insert Contact
-				var params: URLSearchParams = new URLSearchParams();
-				params.set('booking_id', booking.id);
-				params.set('title', this.contact['title']);
-				params.set('fullname', this.contact['fullname']);
-				params.set('phone', this.contact['phone']);
-				params.set('email', this.contact['email']);
-				params.set('requirement', this.contact['requirement']);
+		// 		// Insert Contact
+		// 		var params: URLSearchParams = new URLSearchParams();
+		// 		params.set('booking_id', booking.id);
+		// 		params.set('title', this.contact['title']);
+		// 		params.set('fullname', this.contact['fullname']);
+		// 		params.set('phone', this.contact['phone']);
+		// 		params.set('email', this.contact['email']);
+		// 		params.set('requirement', this.contact['requirement']);
 
-				this._ContactDataService.create(params).subscribe(res => {
+		// 		this._ContactDataService.create(params).subscribe(res => {
 
-				});
-			}
-		});
-		
+		// 		});
+		// 	}
+		// });
 	}
 
 	// Sort Price From min to max
