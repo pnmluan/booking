@@ -56,8 +56,14 @@ export class SearchResultComponent implements OnInit, AfterViewInit {
 	passengers = [];
 	airlines = {};
 	airlineOptions = {};
+	title: any;
 
-	adultTitleOptions = [];
+	adultTitleOptions = [
+		{ value: 1, label: 'Ông' },
+		{ value: 2, label: 'Bà' },
+		{ value: 3, label: 'Anh' },
+		{ value: 4, label: 'Chị' }
+	];
 	adultOptions = [];
 	infantOptions = [];
 	titleOptions = [];
@@ -111,6 +117,7 @@ export class SearchResultComponent implements OnInit, AfterViewInit {
 			mul: 'Nhiều chặng'
 		}
 
+		this.contact['title'] = 1;
 		this.steps = [
 			{ value: 1, label: 'Tìm chuyến bay' },
 			{ value: 2, label: 'Thông tin hành khác và chuyến bay' },
@@ -118,7 +125,7 @@ export class SearchResultComponent implements OnInit, AfterViewInit {
 
 		];
 
-		this.adultTitleOptions = this.titleOptions['adult'] = [
+		this.titleOptions['adult'] = [
 			{ value: 1, label: 'Ông' },
 			{ value: 2, label: 'Bà' },
 			{ value: 3, label: 'Anh' },
@@ -492,7 +499,6 @@ export class SearchResultComponent implements OnInit, AfterViewInit {
 
 	}
 
-	// generate number options
 	/*=================================
 	 * Generate string of customer
 	 *=================================*/
@@ -626,7 +632,7 @@ export class SearchResultComponent implements OnInit, AfterViewInit {
 									params.set('fare', this.listRoutes[key].price);
 
 									this._PassengerDataService.create(params).subscribe(res => {
-
+										this.selectedStep = 3;
 									});
 								}
 
@@ -653,7 +659,9 @@ export class SearchResultComponent implements OnInit, AfterViewInit {
 		
 	}
 
-	// Sort Price From min to max
+	/*=================================
+	 * Sort Price From min to max
+	 *=================================*/
 	sortPrice() {
 		for (var key in this.listRoutes) {
 
@@ -669,7 +677,9 @@ export class SearchResultComponent implements OnInit, AfterViewInit {
 
 	}
 
-	// Sort Time From min to max
+	/*=================================
+	 * Sort Time From min to max
+	 *=================================*/
 	sortTime() {
 		for (var key in this.listRoutes) {
 
@@ -684,7 +694,9 @@ export class SearchResultComponent implements OnInit, AfterViewInit {
 		}
 	}
 
-	// Sort Time From min to max
+	/*=================================
+	 * Sort Time From min to max
+	 *=================================*/
 	sortAirline() {
 		for (var key in this.listRoutes) {
 
@@ -705,7 +717,9 @@ export class SearchResultComponent implements OnInit, AfterViewInit {
 		}
 	}
 
-	// Inverse Flight
+	/*=================================
+	 * Inverse Flight
+	 *=================================*/
   	protected inverseFlight(session_flight) {
 		var temp = this.clone(session_flight);
 		temp['from'] = session_flight['to'];
@@ -717,7 +731,9 @@ export class SearchResultComponent implements OnInit, AfterViewInit {
 
   	}
 
-	// Get Lowest Price 
+	/*=================================
+	 * Get Lowest Price
+	 *=================================*/
 	getLowestPrice(data) {
 		let arr = [];
 		for (var key in data) {
