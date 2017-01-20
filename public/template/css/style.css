@@ -1470,6 +1470,42 @@ only screen and (max-width: 767px) {
 .cart_anchor i { font-size: 20px; color: #649931; }
 .item-number { color: #fff; background: #E44803; display: block; width: 16px; height: 16px; border-radius: 50%; position: absolute; top: -5px; right: -7px; font-size: 10px; font-weight: bold;  }
 
+ng-select > div > div.single > div.clear, ng-select > div > div.single > div.toggle {
+    width: 20px !important;
+}
+
+.datepicker-container[_ngcontent-nnq-9] .datepicker-calendar[_ngcontent-nnq-9] {
+    top: 100% !important;
+}
+
+.datepicker-container[_ngcontent-nnq-9] {
+    display: block !important;
+    position: relative;
+}
+
+.datepicker-container[_ngcontent-nnq-9] .datepicker-input-container[_ngcontent-nnq-9] {
+    display: block !important;
+}
+
+.datepicker-container[_ngcontent-nnq-9] .datepicker-input-container[_ngcontent-nnq-9] .datepicker-input[_ngcontent-nnq-9] {
+    display: block !important;
+    width: 100% !important;
+    margin-right: 0px !important;
+    outline: none;
+    font-size: 14px;
+    color: #000000;
+    text-align: center;
+    height: 30px !important;
+    border: 1px solid #ddd !important;
+}
+
+.datepicker-container[_ngcontent-nnq-9] .datepicker-input-container[_ngcontent-nnq-9] .datepicker-input-icon[_ngcontent-nnq-9] {
+    display: inline-block;
+    position: absolute;
+    top: 1px;
+    right: 5px;
+}
+
 
 
 
