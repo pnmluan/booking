@@ -6,7 +6,7 @@ import { HttpModule } from '@angular/http';
 import { RouterModule } from '@angular/router';
 
 // Third party
-import { ToastModule, ToastsManager } from 'ng2-toastr/ng2-toastr';
+import { ToasterModule, ToasterService } from 'angular2-toaster';
 import { TabsModule } from "ng2-tabs";
 import { SelectModule } from 'angular2-select';
 import { LocalStorageService, LOCAL_STORAGE_SERVICE_CONFIG } from 'angular-2-local-storage';
@@ -72,7 +72,7 @@ import { CustomerComponent } from './components/customer';
     Ng2Bs3ModalModule,
     TabsModule,
     DatePickerModule,
-    ToastModule
+    ToasterModule
   ],
   providers: [
     Configuration,
@@ -80,7 +80,6 @@ import { CustomerComponent } from './components/customer';
     ...HTTP_INTERCEPTOR_PROVIDER,
     LoadingAnimateService,
     LocalStorageService,
-    ToastsManager,
     {
       provide: LOCAL_STORAGE_SERVICE_CONFIG, useValue: localStorageServiceConfig
     }

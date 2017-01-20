@@ -11,7 +11,8 @@ import {
 import { ModalComponent } from 'ng2-bs3-modal/ng2-bs3-modal';
 import { URLSearchParams } from '@angular/http';
 import { LocalStorageService } from 'angular-2-local-storage';
-import { ToastsManager } from 'ng2-toastr/ng2-toastr';
+import { ToasterModule, ToasterService } from 'angular2-toaster';
+
 
 import { LocationDataService, 
 	AirlineDataService, 
@@ -56,6 +57,7 @@ export class SearchResultComponent implements OnInit, AfterViewInit {
 	airlines = {};
 	airlineOptions = {};
 
+	adultTitleOptions = [];
 	adultOptions = [];
 	infantOptions = [];
 	titleOptions = [];
@@ -67,8 +69,10 @@ export class SearchResultComponent implements OnInit, AfterViewInit {
 	curRouting?: string;
 	filter_from_date: any;
 	filter_to_date: any;
+	filter_date_of_birth: any;
 	fromDateOptions = {};
 	toDateOptions = {};
+	datepickerOptions = { format: this._Configuration.viFormatDate, autoApply: true, locate: 'vi', style: 'big' };
 
 	constructor(
 		private _AirlineDataService: AirlineDataService, 
@@ -82,7 +86,7 @@ export class SearchResultComponent implements OnInit, AfterViewInit {
 		private _ActivatedRoute: ActivatedRoute, 
 		private _Router: Router,
 		private _Configuration: Configuration,
-		private toastr: ToastsManager
+		private _ToasterService: ToasterService
 	) { 
 		moment.locale('vi');
 
@@ -108,27 +112,27 @@ export class SearchResultComponent implements OnInit, AfterViewInit {
 		}
 
 		this.steps = [
-			{ id: 1, name: 'Tìm chuyến bay' },
-			{ id: 2, name: 'Thông tin hành khác và chuyến bay' },
-			{ id: 3, name: 'Xác nhận & Thanh toán' },
+			{ value: 1, label: 'Tìm chuyến bay' },
+			{ value: 2, label: 'Thông tin hành khác và chuyến bay' },
+			{ value: 3, label: 'Xác nhận & Thanh toán' },
 
 		];
 
-		this.titleOptions['adult'] = [
-			{ id: 1, name: 'Ông' },
-			{ id: 2, name: 'Bà' },
-			{ id: 3, name: 'Anh' },
-			{ id: 4, name: 'Chị' }
+		this.adultTitleOptions = this.titleOptions['adult'] = [
+			{ value: 1, label: 'Ông' },
+			{ value: 2, label: 'Bà' },
+			{ value: 3, label: 'Anh' },
+			{ value: 4, label: 'Chị' }
 		];
 
 		this.titleOptions['children'] = [
-			{ id: 5, name: 'Bé Trai' },
-			{ id: 6, name: 'Bé Gái' }
+			{ value: 5, label: 'Bé Trai' },
+			{ value: 6, label: 'Bé Gái' }
 		];
 
 		this.titleOptions['infant'] = [
-			{ id: 7, name: 'Em Bé Trai' },
-			{ id: 8, name: 'Em Bé Gái' }
+			{ value: 7, label: 'Em Bé Trai' },
+			{ value: 8, label: 'Em Bé Gái' }
 		];
 
 		this.airlineOptions = {
@@ -383,8 +387,9 @@ export class SearchResultComponent implements OnInit, AfterViewInit {
 		}
 	}
 
-
-	// Research 
+	/*=================================
+	 * Research
+	 *=================================*/
 	onResearch() {
 		var objectStore = this.search;
 		
@@ -431,14 +436,22 @@ export class SearchResultComponent implements OnInit, AfterViewInit {
 		this.selectedStep = 0;
 	}
 
-	// Select Flights
+	/*=================================
+	 * Select Flights
+	 *=================================*/
 	onSelectFlight(flight) {
+		let number_children = this.session_flight['children'] ? +this.session_flight['children'] : 0;
+		let number_infants = this.session_flight['infant'] ? +this.session_flight['infant'] : 0;
+		flight['sum'] = (+this.session_flight['adult'] + number_children + number_infants) * ((+flight.price) + (+flight.fee))
+		console.log(flight)
 		if (flight.direction == 'from') {
+			flight['directionvi'] = 'Lượt đi';
 			this.listRoutes[0]['selectedFlight'] = flight;
 		
 		}
 
 		if (flight.direction == 'to') {
+			flight['directionvi'] = 'Lượt về';
 			this.listRoutes[1]['selectedFlight'] = flight;
 
 		}
@@ -480,15 +493,20 @@ export class SearchResultComponent implements OnInit, AfterViewInit {
 	}
 
 	// generate number options
-	generateNumberOptions(n: number, name: string, key: string) {
+	/*=================================
+	 * Generate string of customer
+	 *=================================*/
+	generateNumberOptions(n: number, label: string, key: string) {
 
 		for (let i = 1; i <= n; i++) {
-			let obj = {title: '', fullname: '', date_of_birth: '', name: name, key: key};
+			let obj = {title: '', fullname: '', date_of_birth: '', label: name, key: key};
 			this.passengers.push(obj);
 		}
 	}
 
-	// generate string of customer
+	/*=================================
+	 * Generate string of customer
+	 *=================================*/
 	generateStrCustomers() {
 		let str = '';
 		if(this.session_flight['adult']) {
@@ -504,72 +522,135 @@ export class SearchResultComponent implements OnInit, AfterViewInit {
 	}
 
 
-	// Submit Info Customer
+	/*=================================
+	 * Submit Info Customer
+	 *=================================*/
 	onSubmitInfoCustomer() {
-		this.toastr.error('This is not good!', 'Oops!');
+		let isError = false;
+		// Validate passengers
+		for (let key in this.passengers) {
+			if(!this.passengers[key].fullname) {
+				console.log('fullname')
+				isError = true;
+				this.passengers[key].error_fullname = true;
+			} else {
+				this.passengers[key].error_fullname = false;
+			}
 
-		// Insert Booking
-		// var params: URLSearchParams = new URLSearchParams();
-		// params.set('code', this.generateCode());
-		// params.set('round_trip', this.session_flight['round_trip']);
-		// params.set('adult', this.session_flight['adult']);
-		// params.set('children', this.session_flight['children']);
-		// params.set('infant', this.session_flight['infant']);
+			if (!this.passengers[key].date_of_birth) {
+				console.log('date_of_birth')
+				isError = true;
+				this.passengers[key].error_error_date_of_birth = true;
+			} else {
+				this.passengers[key].error_error_date_of_birth = false;
+			}
+		}
 
-		// this._BookingDataService.create(params).subscribe(res => {
-		// 	if (res.status == 'success') {
-		// 		let booking = res.data;
+		// Validate Contact
+		if (!this.contact['fullname']) {
+			isError = true;
+			this.contact['error_fullname'] = true;
+		} else {
+			this.contact['error_fullname'] = false;
+		}
 
-		// 		// Insert Booking Detail
-		// 		for (let key in this.listRoutes) {
+		if (!this.contact['phone']) {
+			isError = true;
+			this.contact['error_phone'] = true;
+		} else {
+			var pattern = /^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4}|[0-9]{5})$/;
+			if (!this.contact['phone'].match(pattern)) {
+				isError = true;
+				this.contact['error_phone'] = true;
+				this._ToasterService.pop('error', 'Số điện thoại không hợp lệ', 'Vui lòng điền đúng thông tin của số điện thoại.');
+			} else {
+				this.contact['error_phone'] = false;
+			}
 
-		// 			var params: URLSearchParams = new URLSearchParams();
-		// 			params.set('booking_id', booking.id);
-		// 			params.set('from', this.listRoutes[key].from);
-		// 			params.set('start_date', this.listRoutes[key].selectedFlight.start_date);
-		// 			params.set('start_time', this.listRoutes[key].selectedFlight.start_time);
+		}
 
-		// 			params.set('to', this.listRoutes[key].to);
-		// 			params.set('end_date', this.listRoutes[key].selectedFlight.end_date);
-		// 			params.set('end_time', this.listRoutes[key].selectedFlight.end_time);
+		if (!this.contact['email']) {
+			isError = true;
+			this.contact['error_email'] = true;
+		} else {
+			var pattern = /^\S*@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/;
+			if (!this.contact['email'].match(pattern)) {
+				isError = true;
+				this.contact['error_email'] = true;
+				this._ToasterService.pop('error', 'Email không hợp lệ', 'Vui lòng điền đúng thông tin của email.');
+			} else {
+				this.contact['error_email'] = false;
+			}
 
-		// 			params.set('ticket_type', this.listRoutes[key].selectedFlight.type);
+		}
 
-		// 			this._BookingDetailDataService.create(params).subscribe(res => {
-		// 				if (res.status == 'success') {
-		// 					let booking_detail = res.data;
-		// 					// Insert Passengers
-		// 					for (let k in this.passengers) {
-		// 						var params: URLSearchParams = new URLSearchParams();
-		// 						params.set('booking_detail_id', booking_detail.id);
-		// 						params.set('title', this.passengers[k].title);
-		// 						params.set('fullname', this.passengers[k].fullname);
-		// 						params.set('date_of_birth', this.passengers[k].date_of_birth);
-		// 						params.set('fare', this.listRoutes[key].price);
+		if(isError) {
+			this._ToasterService.pop('error', 'Lỗi nhập liệu', 'Vui lòng điền đầy đủ thông tin.');
+		} else {
+			// Insert Booking
+			var params: URLSearchParams = new URLSearchParams();
+			params.set('code', this.generateCode());
+			params.set('round_trip', this.session_flight['round_trip']);
+			params.set('adult', this.session_flight['adult']);
+			params.set('children', this.session_flight['children']);
+			params.set('infant', this.session_flight['infant']);
 
-		// 						this._PassengerDataService.create(params).subscribe(res => {
+			this._BookingDataService.create(params).subscribe(res => {
+				if (res.status == 'success') {
+					let booking = res.data;
 
-		// 						});
-		// 					}
+					// Insert Booking Detail
+					for (let key in this.listRoutes) {
 
-		// 				}
-		// 			});
-		// 		}
+						var params: URLSearchParams = new URLSearchParams();
+						params.set('booking_id', booking.id);
+						params.set('from', this.listRoutes[key].from);
+						params.set('start_date', this.listRoutes[key].selectedFlight.start_date);
+						params.set('start_time', this.listRoutes[key].selectedFlight.start_time);
+						params.set('to', this.listRoutes[key].to);
+						params.set('end_date', this.listRoutes[key].selectedFlight.end_date);
+						params.set('end_time', this.listRoutes[key].selectedFlight.end_time);
+						params.set('ticket_type', this.listRoutes[key].selectedFlight.type);
 
-		// 		// Insert Contact
-		// 		var params: URLSearchParams = new URLSearchParams();
-		// 		params.set('booking_id', booking.id);
-		// 		params.set('title', this.contact['title']);
-		// 		params.set('fullname', this.contact['fullname']);
-		// 		params.set('phone', this.contact['phone']);
-		// 		params.set('email', this.contact['email']);
-		// 		params.set('requirement', this.contact['requirement']);
+						this._BookingDetailDataService.create(params).subscribe(res => {
+							if (res.status == 'success') {
+								let booking_detail = res.data;
+								// Insert Passengers
+								for (let k in this.passengers) {
+									var params: URLSearchParams = new URLSearchParams();
+									params.set('booking_detail_id', booking_detail.id);
+									params.set('title', this.passengers[k].title);
+									params.set('fullname', this.passengers[k].fullname);
+									var date_of_birth = moment(this.passengers[k].date_of_birth['formatted'], this._Configuration.viFormatDate).format(this._Configuration.formatDate);
+									params.set('date_of_birth', date_of_birth);
+									params.set('fare', this.listRoutes[key].price);
 
-		// 		this._ContactDataService.create(params).subscribe(res => {
+									this._PassengerDataService.create(params).subscribe(res => {
 
-		// 		});
-		// 	}
-		// });
+									});
+								}
+
+							}
+						});
+					}
+
+					// Insert Contact
+					var params: URLSearchParams = new URLSearchParams();
+					params.set('booking_id', booking.id);
+					params.set('title', this.contact['title']);
+					params.set('fullname', this.contact['fullname']);
+					params.set('phone', this.contact['phone']);
+					params.set('email', this.contact['email']);
+					params.set('requirement', this.contact['requirement']);
+
+					this._ContactDataService.create(params).subscribe(res => {
+
+					});
+				}
+			});
+		}
+		
+		
 	}
 
 	// Sort Price From min to max

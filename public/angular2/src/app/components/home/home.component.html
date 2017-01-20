@@ -56,11 +56,7 @@
                                                             <div class="field">
                                                                 <span class="field-label">Ngày đi</span>
                                                                 <div class="field-input">
-                                                                    <div class="form-group">
-                                                                        <div class='input-group'>
-                                                                            <ng2-datepicker name="from_date" class="form-control" [options]="datepickerOptions" [(ngModel)]="filter_from_date" required></ng2-datepicker>
-                                                                        </div>
-                                                                    </div>
+                                                                    <ng2-datepicker name="from_date" [options]="datepickerOptions" [(ngModel)]="filter_from_date" required></ng2-datepicker>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -68,14 +64,7 @@
                                                             <div class="field" *ngIf="Filter.round_trip != 'off'">
                                                                 <span class="field-label">Ngày về</span>
                                                                 <div class="field-input">
-                                                                    <div class="form-group">
-                                                                        <div class='input-group'>
-                                                                            <ng2-datepicker name="to_date" 
-                                                                            class="form-control"
-                                                                            [options]="datepickerOptions" 
-                                                                            [(ngModel)]="filter_to_date" required></ng2-datepicker>
-                                                                        </div>
-                                                                    </div>
+                                                                    <ng2-datepicker name="to_date" [options]="datepickerOptions" [(ngModel)]="filter_to_date" required></ng2-datepicker>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -102,9 +91,7 @@
                                                                     <i> ( 2 - 12 tuổi ) </i>
                                                                 </div>
                                                                 <div>
-                                                                    <ng-select data-placeholder="" name="children" [(ngModel)]="Filter.children" 
-                                                                    [allowClear]="true"
-                                                                    [options]="adultOptions" [noFilter]="1">
+                                                                    <ng-select data-placeholder="" name="children" [(ngModel)]="Filter.children" [allowClear]="true" [options]="adultOptions" [noFilter]="1">
                                                                     </ng-select>
                                                                 </div>
                                                             </div>
@@ -116,9 +103,7 @@
                                                                     <i> ( < 2 tuổi ) </i>
                                                                 </div>
                                                                 <div>
-                                                                    <ng-select data-placeholder="" name="infant" 
-                                                                    [allowClear]="true"
-                                                                    [(ngModel)]="Filter.infant" [options]="infantOptions" [noFilter]="1">
+                                                                    <ng-select data-placeholder="" name="infant" [allowClear]="true" [(ngModel)]="Filter.infant" [options]="infantOptions" [noFilter]="1">
                                                                     </ng-select>
                                                                 </div>
                                                             </div>
@@ -477,7 +462,7 @@
             <img style="opacity: 0.3;filter: alpha(opacity=30);" src="assets/img/banh-xe.gif">
         </div>
         <div class="plane-img">
-            <img src="assets/img/plane.png" alt="" style="width: 250px;">
+            <img src="assets/img/logo.png" alt="" style="width: 250px;">
         </div>
     </div>
 </div>

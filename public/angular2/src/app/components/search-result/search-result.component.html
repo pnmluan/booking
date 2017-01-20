@@ -10,7 +10,7 @@
     </section>
     <section class="steps" *ngIf="selectedStep">
         <ul class="progressbar">
-            <li [ngClass]="{'active': selectedStep == s.id}" *ngFor="let s of steps">{{ s.name }}</li>
+            <li [ngClass]="{'active': selectedStep == s.value}" *ngFor="let s of steps">{{ s.label }}</li>
         </ul>
     </section>
     <section class="list-plane" *ngIf="selectedStep == 1">
@@ -189,21 +189,13 @@
                                 <div class="field clearfix">
                                     <span class="field-label">Ngày đi</span>
                                     <div class="field-input">
-                                        <div class="form-group">
-                                            <div class='input-group'>
-                                                <ng2-datepicker name="from_date" class="form-control" [options]="fromDateOptions" [(ngModel)]="filter_from_date" required></ng2-datepicker>
-                                            </div>
-                                        </div>
+                                        <ng2-datepicker name="from_date" [options]="fromDateOptions" [(ngModel)]="filter_from_date" required></ng2-datepicker>
                                     </div>
                                 </div>
                                 <div class="field clearfix" *ngIf="search.round_trip != 'off'">
                                     <span class="field-label">Ngày về</span>
                                     <div class="field-input">
-                                        <div class="form-group">
-                                            <div class='input-group'>
-                                                <ng2-datepicker name="to_date" class="form-control" [options]="toDateOptions" [(ngModel)]="filter_to_date" required></ng2-datepicker>
-                                            </div>
-                                        </div>
+                                        <ng2-datepicker name="to_date" [options]="toDateOptions" [(ngModel)]="filter_to_date" required></ng2-datepicker>
                                     </div>
                                 </div>
                                 <div class="field clearfix">
@@ -327,7 +319,7 @@
                                             <table class="tbl-people-info">
                                                 <thead>
                                                     <tr>
-                                                        <th>Quý danh <span>*</span></th>
+                                                        <th>Quý danh</th>
                                                         <th>Họ và tên <span>*</span></th>
                                                         <th>Ngày sinh <span>*</span></th>
                                                     </tr>
@@ -335,22 +327,14 @@
                                                 <tbody>
                                                     <tr>
                                                         <td>
-                                                            <select name="title" class="form-control select-adult" data-placeholder="" [(ngModel)]="p.title">
-                                                                <option *ngFor="let a of titleOptions[p.key]" value="{{ a.id }}">{{ a.name }}</option>
-                                                            </select>
+                                                            <ng-select name="title" [(ngModel)]="p.title" [options]="titleOptions[p.key]" [noFilter]="11">
+                                                            </ng-select>
                                                         </td>
                                                         <td>
-                                                            <input name="fullname" type='text' class="form-control" [(ngModel)]="p.fullname">
+                                                            <input name="fullname" type='text' class="form-control" [ngClass]="{'has-error': p.error_fullname}" [(ngModel)]="p.fullname">
                                                         </td>
-                                                        <td>
-                                                            <div class="form-group">
-                                                                <div class='input-group date datetimepicker'>
-                                                                    <input name="date_of_birth" type='text' class="form-control" [(ngModel)]="p.date_of_birth" />
-                                                                    <span class="input-group-addon">
-                                <span class="glyphicon glyphicon-calendar"></span>
-                                                                    </span>
-                                                                </div>
-                                                            </div>
+                                                        <td class='input-group' [ngClass]="{'has-error': p.error_date_of_birth}">
+                                                            <ng2-datepicker name="date_of_birth" [options]="datepickerOptions" [(ngModel)]="p.date_of_birth" required></ng2-datepicker>
                                                         </td>
                                                     </tr>
                                                 </tbody>
@@ -400,8 +384,7 @@
                             <div class="contact-info">
                                 <h2 class="customer-title">Thông tin người liên hệ </h2>
                                 <div class="contact-info-inner">
-                                    <p>Vui lòng điền đây đủ thông tin, Nhân Viên Abay sẽ liên lạc với khách hàng qua địa chỉ này để hoàn tất thủ tục đặt vé.</p>
-                                    <p><span>*</span> Các trường bắt buộc phải nhập ... </p>
+                                    <p>Vui lòng điền đây đủ thông tin, Nhân viên DatVeSieuRe sẽ liên lạc với khách hàng qua địa chỉ này để hoàn tất thủ tục đặt vé.</p>
                                     <div class="contact-info-field">
                                         <!-- <div class="field clearfix">
                             <label>Mã khách hàng</label>
@@ -414,28 +397,27 @@
                                             <div>
                                                 <label>Quý danh</label>
                                                 <div>
-                                                    <select name="title" class="form-control select-adult" data-placeholder="" [(ngModel)]="contact.title">
-                                                        <option *ngFor="let a of titleOptions['adult']" value="{{ a.id }}">{{ a.name }}</option>
-                                                    </select>
+                                                    <ng-select name="contact_title" [(ngModel)]="contact.title" [options]="adultTitleOptions" [noFilter]="11">
+                                                    </ng-select>
                                                 </div>
                                             </div>
                                             <div>
                                                 <label>Họ và tên <span>*</span></label>
                                                 <div>
-                                                    <input name="fullname" [(ngModel)]="contact.fullname" type="text" class="form-control">
+                                                    <input name="fullname" [ngClass]="{'has-error': contact.error_fullname}" [(ngModel)]="contact.fullname" type="text" class="form-control">
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="field field-phone odd clearfix">
                                             <label>Số điện thoại <span>*</span></label>
                                             <div>
-                                                <input name="phone" [(ngModel)]="contact.phone" type="text" class="form-control">
+                                                <input name="phone" [ngClass]="{'has-error': contact.error_phone}" [(ngModel)]="contact.phone" type="text" class="form-control">
                                             </div>
                                         </div>
                                         <div class="field even clearfix">
                                             <label>Email <span style="color: red">*</span></label>
                                             <div>
-                                                <input name="email" [(ngModel)]="contact.email" type="text" class="form-control">
+                                                <input name="email" [ngClass]="{'has-error': contact.error_email}" [(ngModel)]="contact.email" type="text" class="form-control">
                                             </div>
                                         </div>
                                         <div class="field odd clearfix">
@@ -514,21 +496,29 @@
             </div> -->
                             <div class="submit-customer clearfix">
                                 <p>Khi nhấn nút "Tiếp Tục", đồng nghĩa với việc quý khách đã đồng ý với các <a href="#" title="">điều kiện và điều khoản của Datvesieure.com</a> (được quy định <a href="#" title="">tại đây</a>) </p>
-                                <button  type="submit">Tiếp tục <i class="fa fa-angle-double-right" aria-hidden="true"></i></button>
+                                <button type="submit">Tiếp tục <i class="fa fa-angle-double-right" aria-hidden="true"></i></button>
                             </div>
                         </div>
                     </div>
                     <!-- customer-info -->
                     <aside class="aside-price-detail">
                         <div class="price-detail">
-                            <h2>Chi tiết giá</h2>
-                            <div>
+                            <div *ngFor="let route of listRoutes">
+                                <h2>{{ route.selectedFlight.directionvi }}</h2>
                                 <h3>Giá cơ bản</h3>
                                 <table>
                                     <tbody>
                                         <tr>
                                             <td>Người lớn</td>
-                                            <td>1 x 590.000 VNĐ</td>
+                                            <td>{{ session_flight.adult }} x {{ route.selectedFlight.price | number }} VNĐ</td>
+                                        </tr>
+                                        <tr *ngIf="session_flight.children">
+                                            <td>Trẻ em</td>
+                                            <td>{{ session_flight.children }} x {{ route.selectedFlight.price | number }} VNĐ</td>
+                                        </tr>
+                                        <tr *ngIf="session_flight.infants">
+                                            <td>Em bé</td>
+                                            <td>{{ session_flight.infants }} x {{ route.selectedFlight.price | number }} VNĐ</td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -537,35 +527,33 @@
                                     <tbody>
                                         <tr>
                                             <td>Người lớn</td>
-                                            <td>1 x 590.000 VNĐ</td>
+                                            <td>{{ session_flight.adult }} x {{ route.selectedFlight.fee | number }} VNĐ</td>
+                                        </tr>
+                                        <tr *ngIf="session_flight.children">
+                                            <td>Trẻ em</td>
+                                            <td>{{ session_flight.children }} x {{ route.selectedFlight.fee | number }} VNĐ</td>
+                                        </tr>
+                                        <tr *ngIf="session_flight.infants">
+                                            <td>Em bé</td>
+                                            <td>{{ session_flight.infants }} x {{ route.selectedFlight.fee | number }} VNĐ</td>
                                         </tr>
                                     </tbody>
                                 </table>
-                            </div>
-                            <div>
                                 <table>
                                     <tbody>
                                         <tr>
-                                            <td>Tổng giá</td>
-                                            <td><strong>990.000 VNĐ</strong></td>
-                                        </tr>
-                                        <tr>
-                                            <td>Hành lý thêm</td>
-                                            <td><strong>0 VNĐ</strong></td>
-                                        </tr>
-                                        <tr>
-                                            <td class="sale-off">Giảm giá</td>
-                                            <td><strong>-0 VNĐ</strong></td>
+                                            <td>
+                                                <h3>Hành lý thêm</h3></td>
+                                            <td>{{ session_flight.adult }} x {{ route.selectedFlight.fee | number }} VNĐ</td>
                                         </tr>
                                     </tbody>
                                 </table>
-                            </div>
-                            <div>
+                                <hr>
                                 <table>
                                     <tbody>
                                         <tr>
-                                            <td>Tổng</td>
-                                            <td><strong>990.000 VNĐ</strong></td>
+                                            <td><strong><h3>Tổng</h3></strong></td>
+                                            <td><strong>{{ route.selectedFlight.sum | number }} VNĐ</strong></td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -967,7 +955,7 @@
             <img style="opacity: 0.3;filter: alpha(opacity=30);" src="assets/img/banh-xe.gif">
         </div>
         <div class="plane-img">
-            <img src="assets/img/plane.png" alt="" style="width: 250px;">
+            <img src="assets/img/logo.png" alt="" style="width: 250px;">
         </div>
     </div>
 </div>

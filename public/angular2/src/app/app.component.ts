@@ -1,6 +1,7 @@
 import { Component, ViewChild } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { HttpInterceptorService } from 'ng2-http-interceptor';
+import { ToasterConfig } from 'angular2-toaster/angular2-toaster';
 import { LoadingAnimateService } from 'ng2-loading-animate';
 import { ModalComponent } from 'ng2-bs3-modal/ng2-bs3-modal';
 import { LocalStorageService } from 'angular-2-local-storage';
@@ -17,6 +18,13 @@ declare var jQuery: any;
 export class AppComponent {
 	@ViewChild('warning') warning: ModalComponent;
 	private session_expired?: any;
+	public toasterconfig: ToasterConfig =
+	new ToasterConfig({
+		limit: 7,
+		showCloseButton: true,
+		positionClass: "toast-bottom-right",
+		timeout: "6000"
+	});
 	curRouting?: string;
 	warningMsg: string = '';
 	first_time = true;
