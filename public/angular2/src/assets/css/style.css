@@ -483,8 +483,8 @@ ul.footerlist li a:hover{color:#F69E1C; text-decoration:none;}
 
 .flight-go-back {}
 .flight-go-back .flight-title {  padding: 10px; padding-left: 60px; background: rgba(241, 241, 241, 0.9) url(../img/go.png) no-repeat 10px 4px;  }
-.flight-go-back .flight-title .field { float: left; width: calc(100% - 145px); }
-.flight-go-back .flight-title .field:last-child { width: 145px; text-align: right; }
+.flight-go-back .flight-title .field { float: left; width: calc(100% - 180px); }
+.flight-go-back .flight-title .field:last-child { width: 180px; text-align: right; }
 .flight-go-back .flight-title .field label { float: left; margin-right: 10px; }
 .flight-go-back .flight-title .field div { overflow: hidden; font-weight: bold; }
 .flight-go.flight-go-back .flight-title {  padding: 10px; padding-left: 60px; background: rgba(241, 241, 241, 0.9) url(../img/go.png) no-repeat 10px 4px;  }

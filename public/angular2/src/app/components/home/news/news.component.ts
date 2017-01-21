@@ -11,7 +11,6 @@ declare let moment: any;
 export class NewsComponent implements OnInit {
 
 	public news = [];
-	public bannerPath: string;
 	constructor(private _NewsDataService: NewsDataService, private _Configuration: Configuration) { }
 
 	ngOnInit() {

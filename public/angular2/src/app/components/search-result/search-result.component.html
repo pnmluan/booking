@@ -3,8 +3,16 @@
     <section class="loading text-center" *ngIf="!selectedStep">
         <h4>Vui lòng đợi, hệ thống đang tìm kiếm chuyến bay và mức giá tốt nhất ...</h4>
         <div>
-            <h3>{{ search.from_name }}, Việt Nam ({{ search.from }}) <i class="fa fa-long-arrow-right" aria-hidden="true"></i> {{ search.to_name }}, Việt Nam ({{ search.to }})</h3>
-            <p><span>Ngày đi: {{ search.from_day }} </span><i *ngIf="round_trip" class="fa fa-long-arrow-right" aria-hidden="true"></i> <span *ngIf="round_trip">Ngày về: {{ search.to_day }}</span></p>
+            <h3>
+                {{ search.from_name }}, Việt Nam ({{ search.from }}) 
+                <i class="fa fa-long-arrow-right" aria-hidden="true"></i> 
+                {{ search.to_name }}, Việt Nam ({{ search.to }})
+            </h3>
+            <p>
+                <span>Ngày đi: {{ search.from_day }} </span>
+                <i *ngIf="session_flight.round_trip == 'on'" class="fa fa-long-arrow-right" aria-hidden="true"></i>
+                <span *ngIf="session_flight.round_trip == 'on'">Ngày về: {{ search.to_day }}</span>
+            </p>
         </div>
         <img src="assets/img/pleasewait.gif" alt="">
     </section>
@@ -158,12 +166,12 @@
                                 <div class="field">
                                     <div class="radio">
                                         <label>
-                                            <input type="radio" (click)="selectPlaneOption('off')" [(ngModel)]="search.round_trip" name="round_trip" id="one-way" value="off"> Một chiểu
+                                            <input type="radio" [(ngModel)]="search.round_trip" name="round_trip" id="one-way" value="off"> Một chiểu
                                         </label>
                                     </div>
                                     <div class="radio">
                                         <label>
-                                            <input type="radio" (click)="selectPlaneOption('on')" [(ngModel)]="search.round_trip" name="round_trip" id="round-trip" value="on"> Khứ hồi
+                                            <input type="radio" [(ngModel)]="search.round_trip" name="round_trip" id="round-trip" value="on"> Khứ hồi
                                         </label>
                                     </div>
                                     <!-- <div class="radio disabled">
@@ -204,7 +212,7 @@
                                             <span class="field-label">Người lớn</span>
                                         </div>
                                         <div>
-                                            <ng-select name="adult" [(ngModel)]="adult" [options]="adultOptions" [noFilter]="11" required></ng-select>
+                                            <ng-select name="adult" [(ngModel)]="search.adult"  [options]="adultOptions" [noFilter]="11" required></ng-select>
                                         </div>
                                     </div>
                                     <div class="field-2">
@@ -284,7 +292,7 @@
                                             <div class="field">
                                                 <label>Thời gian :</label>
                                                 <div>
-                                                    02h + 05m
+                                                    {{ generalData?.spend_time }}
                                                 </div>
                                             </div>
                                         </div>
@@ -591,7 +599,7 @@
                         </ul>
                         <div class="TTdh">
                             <p>
-                                <strong>MÃ ĐƠN HÀNG:</strong><span class="order-id"> 1128120 </span>
+                                <strong>MÃ ĐƠN HÀNG:</strong><span class="order-id"> {{generalData?.generateCode}} </span>
                                 <br> Tình trạng:<span class="orangeBold"> Chờ thanh toán</span>
                             </p>
                         </div>
@@ -602,7 +610,7 @@
                                     <div class="field">
                                         <label>Chuyến bay :</label>
                                         <div>
-                                            Khứ hồi
+                                            {{ roundTripOptions[session_flight.round_trip] }}
                                         </div>
                                     </div>
                                     <div class="field">
@@ -614,82 +622,47 @@
                                     <div class="field">
                                         <label>Ngày xuất phát: </label>
                                         <div>
-                                            25/01/2017
+                                            {{ session_flight.from_date | date:"dd/MM/yyyy" }}
                                         </div>
                                     </div>
-                                    <div class="field">
+                                    <div class="field" *ngIf="round_trip">
                                         <label>Ngày về: </label>
                                         <div>
-                                            27/01/2017
+                                            {{ session_flight.to_date | date:"dd/MM/yyyy" }}
                                         </div>
                                     </div>
                                 </div>
-                                <div class="flight-go flight-go-back">
+                                <div class="flight-go-back" [ngClass]="r.class" *ngFor="let r of listRoutes">
                                     <div class="flight-title clearfix">
                                         <div class="field">
                                             <label>Khởi hành từ :</label>
                                             <div>
-                                                Ho Chi Minh City ,Viet nam
+                                                {{ r.from_fly_date }}, {{ r.from_name }} , Việt Nam
                                             </div>
                                         </div>
                                         <div class="field">
                                             <label>Thời gian :</label>
                                             <div>
-                                                02h + 05m
+                                                {{ generalData?.spend_time }}
                                             </div>
                                         </div>
                                     </div>
                                     <div class="content clearfix">
                                         <div class="content-img">
-                                            <img src="img/smVJ.gif" alt="">
+                                            <img [src]="r.selectedFlight.image" alt="">
                                         </div>
                                         <div class="content-info clearfix">
                                             <div class="field">
-                                                <p>Từ :<strong>Thành phố Hồ Chí Minh</strong> (SGN)</p>
-                                                <p><strong>19:40</strong>, 25/01/2017</p>
+                                                <p>Từ :<strong>{{ r.from_name }}</strong> ({{ r.from }})</p>
+                                                <p><strong>{{ r.selectedFlight.start_time }}</strong></p>
                                             </div>
                                             <div class="field">
-                                                <p>tới : <strong>Hà Nội</strong> (HAN)</p>
-                                                <p><strong>21:45</strong>, 25/01/2017</p>
+                                                <p>tới : <strong>{{ r.to_name }}</strong> ({{ r.to }})</p>
+                                                <p><strong>{{ r.selectedFlight.end_time }}</strong></p>
                                             </div>
                                             <div class="field">
-                                                <p>Vietjet Air <strong>(VJ 160)</strong></p>
-                                                <p>Loại vé :<strong> Tiết kiệm </strong></p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="flight-back flight-go-back">
-                                    <div class="flight-title clearfix">
-                                        <div class="field">
-                                            <label>Khởi hành từ: </label>
-                                            <div>
-                                                Ho Chi Minh City ,Viet nam
-                                            </div>
-                                        </div>
-                                        <div class="field">
-                                            <label>Thời gian :</label>
-                                            <div>
-                                                02h + 05m
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="content clearfix">
-                                        <div class="content-img">
-                                            <img src="img/smVN.gif" alt="">
-                                        </div>
-                                        <div class="content-info clearfix">
-                                            <div class="field">
-                                                <p>Từ :<strong>Thành phố Hồ Chí Minh</strong> (SGN)</p>
-                                                <p><strong>19:40</strong>, 25/01/2017</p>
-                                            </div>
-                                            <div class="field">
-                                                <p>tới : <strong>Hà Nội</strong> (HAN)</p>
-                                                <p><strong>21:45</strong>, 25/01/2017</p>
-                                            </div>
-                                            <div class="field">
-                                                <p>Vietjet Air <strong>(VJ 160)</strong></p>
-                                                <p>Loại vé :<strong> Tiết kiệm </strong></p>
+                                                <p>Vietjet Air <strong>({{ r.selectedFlight.flight_code }})</strong></p>
+                                                <p>Loại vé :<strong> {{ r.selectedFlight.type }} </strong></p>
                                             </div>
                                         </div>
                                     </div>
@@ -737,49 +710,49 @@
                                                             <th>Chi nhánh</th>
                                                         </tr>
                                                         <tr>
-                                                            <td><img src="img/bank/bank-logo-VCB.jpg" alt=""></td>
+                                                            <td><img src="assets/img/bank/bank-logo-VCB.jpg" alt=""></td>
                                                             <td>TMCP Ngoại thương Việt Nam - Vietcombank </td>
                                                             <td>0071000764340</td>
                                                             <td>PGD số 10 CN Hồ Chí Minh</td>
                                                         </tr>
                                                         <tr>
-                                                            <td><img src="img/bank/bank-logo-TCB.jpg" alt=""></td>
+                                                            <td><img src="assets/img/bank/bank-logo-TCB.jpg" alt=""></td>
                                                             <td>TMCP Kỹ Thương Việt Nam</td>
                                                             <td>012170730001</td>
                                                             <td>Phòng giao dịch Võ Văn Tần</td>
                                                         </tr>
                                                         <tr>
-                                                            <td><img src="img/bank/bank-logo-ACB.jpg" alt=""></td>
+                                                            <td><img src="assets/img/bank/bank-logo-ACB.jpg" alt=""></td>
                                                             <td>TMCP Á Châu - ACB</td>
                                                             <td>624704060033559</td>
                                                             <td>PGD Võ Thị Sáu CN Hồ Chí Minh</td>
                                                         </tr>
                                                         <tr>
-                                                            <td><img src="img/bank/bank-logo-EAB.jpg" alt=""></td>
+                                                            <td><img src="assets/img/bank/bank-logo-EAB.jpg" alt=""></td>
                                                             <td>TMCP Đông Á </td>
                                                             <td>102010001851074 </td>
                                                             <td>Chi Nhánh 3</td>
                                                         </tr>
                                                         <tr>
-                                                            <td><img src="img/bank/bank-logo-AGR.jpg" alt=""></td>
+                                                            <td><img src="assets/img/bank/bank-logo-AGR.jpg" alt=""></td>
                                                             <td>Nông Nghiệp Và Phát Triển Nông Thôn Việt Nam - Agribank</td>
                                                             <td>1602201359662</td>
                                                             <td>Chi nhánh 3</td>
                                                         </tr>
                                                         <tr>
-                                                            <td><img src="img/bank/bank-logo-VTB.jpg" alt=""></td>
+                                                            <td><img src="assets/img/bank/bank-logo-VTB.jpg" alt=""></td>
                                                             <td>TMCP Công Thương Việt Nam - Vietinbank</td>
                                                             <td>060077605811</td>
                                                             <td>Phòng giao dịch Võ Văn Tần</td>
                                                         </tr>
                                                         <tr>
-                                                            <td><img src="img/bank/bank-logo-MBB.jpg" alt=""></td>
+                                                            <td><img src="assets/img/bank/bank-logo-MBB.jpg" alt=""></td>
                                                             <td>Quân Đội</td>
                                                             <td>19128300324018</td>
                                                             <td>Chi nhánh Tdắng Lợi</td>
                                                         </tr>
                                                         <tr>
-                                                            <td><img src="img/bank/bank-logo-MSB.jpg" alt=""></td>
+                                                            <td><img src="assets/img/bank/bank-logo-MSB.jpg" alt=""></td>
                                                             <td>TMCP Hàng Hải Việt Nam</td>
                                                             <td>16810000136466</td>
                                                             <td>chi nhánh Bến Thành - PGD Bắc Hải</td>
@@ -844,7 +817,7 @@
                                 <tbody>
                                     <tr>
                                         <td class="col1" width="69">Mã đơn hàng</td>
-                                        <td class="col2" width="150"> <strong style="font-size: 15px;">1128159</strong></td>
+                                        <td class="col2" width="150"> <strong style="font-size: 15px;">{{generalData?.generateCode}}</strong></td>
                                     </tr>
                                     <tr>
                                         <td class="col1" width="69">Trạng thái</td>
@@ -862,19 +835,19 @@
                                 <tbody>
                                     <tr>
                                         <td class="col1" width="69">Điểm đi</td>
-                                        <td class="col2" width="150"> Thành phố Hồ Chí Minh</td>
+                                        <td class="col2" width="150"> {{session_flight.from_name}}</td>
                                     </tr>
                                     <tr>
                                         <td class="col1" width="69">Điểm Đến</td>
-                                        <td class="col2" width="150"> Hà Nội</td>
+                                        <td class="col2" width="150"> {{session_flight.to_name}}</td>
                                     </tr>
                                     <tr>
                                         <td class="col1" width="69">Loại vé</td>
-                                        <td class="col2" width="150"> Khứ Hồi</td>
+                                        <td class="col2" width="150"> {{generalData?.round}}</td>
                                     </tr>
                                     <tr>
-                                        <td class="col1" width="69">Tóm tắt</td>
-                                        <td class="col2" width="150"> 1 người lớn</td>
+                                        <td class="col1" width="69">Số lượng</td>
+                                        <td class="col2" width="150"> {{generalData?.str_people}}</td>
                                     </tr>
                                     <tr>
                                         <td class="col1" width="69">Ngày xuất phát</td>
@@ -884,52 +857,49 @@
                                         <td class="col1" width="69">Ngày về</td>
                                         <td class="col2" width="150"> <strong class="color-orange" style="color: #fbba00;">06:00, Thứ sáu<br> ngày 27/01/2017</strong></td>
                                     </tr>
-                                    <tr>
-                                        <td class="col1" width="69">Hãng hàng không</td>
-                                        <td class="col2" width="150"> <img src="img/smVJ.gif" style="padding:0 5px 5px 0;">
-                                            <br>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td class="col1">Ông</td>
-                                        <td class="col2"> NGUYEN VAN A</td>
-                                    </tr>
-                                    <tr>
-                                    </tr>
                                 </tbody>
                             </table>
                         </div>
-                        <a href="#" class="btn-flight-details"><i class="fa fa-angle-double-right"></i> Xem thông tin chi tiết chuyến bay</a>
                     </div>
                     <div class="contact-info">
                         <h3>Thông tin liên hệ</h3>
                         <div class="contact-info-inner">
-                            <div class="field clearfix">
-                                <label>Tên liên hệ</label>
-                                <div class="clearfix">
-                                    <select name="" class="form-control">
-                                        <option value=""></option>
-                                        <option value="">Ông</option>
-                                        <option value="">Bà</option>
-                                    </select>
-                                    <input type="text" class="form-control" value="Nguyen Van A">
+                            <form (ngSubmit)="onSubmitContact(formContact)" #formContact="ngForm">
+                                <div class="field clearfix">
+                                    <label>Tên liên hệ</label>
+                                    <div class="clearfix">
+                                        <select name="" class="form-control">
+                                            <option value="">Ông</option>
+                                            <option value="">Bà</option>
+                                        </select>
+                                        <input name="fullname" [ngClass]="{'has-error': contact.error_fullname}" [(ngModel)]="contact.fullname" type="text" class="form-control">
+                                        <!-- <input type="text" class="form-control" value="Nguyen Van A"> -->
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="field clearfix">
-                                <label>Điện thoại liên hệ</label>
-                                <div>
-                                    <input type="text" class="form-control" value="0908223344">
+                                <div class="field clearfix">
+                                    <label>Điện thoại liên hệ</label>
+                                    <div>
+                                        <input name="phone" [ngClass]="{'has-error': contact.error_phone}" [(ngModel)]="contact.phone" type="text" class="form-control">
+                                        <!-- <input type="text" class="form-control" value="0908223344"> -->
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="field clearfix">
-                                <label>Email liên hệ</label>
-                                <div>
-                                    <input type="text" class="form-control" value="lethianh@gmail.com">
+                                <div class="field clearfix">
+                                    <label>Email liên hệ</label>
+                                    <div>
+                                        <input name="email" [ngClass]="{'has-error': contact.error_email}" [(ngModel)]="contact.email" type="text" class="form-control">
+                                        <!-- <input type="text" class="form-control" value="lethianh@gmail.com"> -->
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="field clearfix">
-                                <button type="button">Cập nhật</button>
-                            </div>
+                                <div class="field clearfix">
+                                    <label>Yêu cầu đặc biệt</label>
+                                    <div>
+                                        <input name="requirement" [(ngModel)]="contact.requirement" type="text" class="form-control">
+                                    </div>
+                                </div>
+                                <div class="field clearfix">
+                                    <button type="button">Cập nhật</button>
+                                </div>
+                            </form>
                         </div>
                     </div>
                     <div class="how-to">

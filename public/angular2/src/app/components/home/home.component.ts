@@ -183,11 +183,11 @@ export class HomeComponent implements OnInit, AfterViewInit {
 		objectStore['from_name'] = this.getNameFromCode(objectStore['from']);
 		objectStore['to_name'] = this.getNameFromCode(objectStore['to']);
 
-		if (objectStore['to_date'] == undefined) {
+		if (this.filter_to_date['formatted'] == undefined) {
 			objectStore['to_date'] = '';
 
 		} else {
-			if (this.filter_to_date) {
+			if (this.filter_to_date['formatted']) {
 				objectStore['to_date'] = moment(this.filter_to_date['formatted'], this._Configuration.viFormatDate).format(this._Configuration.dateFormat);
 				if (objectStore['from_date'] > objectStore['to_date']) {
 					this.warningMsg = 'Ngày đi phải nhỏ hơn Ngày đến.';
