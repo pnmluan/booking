@@ -19,10 +19,12 @@ export class EntranceTicketDataService {
 		headers.append('Authorization', 'Basic ' + this._Configuration.authentic);
 	}
 
-	public getAll() {
+	public getAll(params = null) {
 		let headers = new Headers();
 		this.createAuthorizationHeader(headers);
-		return this._Http.get(this.actionUrl + 'index', { headers: headers, withCredentials: true })
+		return this._Http.get(this.actionUrl + 'index', { 
+			search: params,
+			headers: headers, withCredentials: true })
 			.map(res => res.json())
 			.catch(this.handleError);
 	}

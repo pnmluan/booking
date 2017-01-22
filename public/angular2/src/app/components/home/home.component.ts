@@ -11,12 +11,10 @@ import { UUID } from 'angular2-uuid';
 import { ModalComponent } from 'ng2-bs3-modal/ng2-bs3-modal';
 import { Subscription } from 'rxjs/Rx';
 
-import { BannerComponent } from './banner';
-import { NewsComponent } from './news';
-import { CommentComponent } from './comment';
+
 
 import { Configuration } from '../../shared/app.configuration';
-import { LocationDataService, CategoryTicketDataService, BannerDataService, NewsDataService } from '../../shared';
+import { LocationDataService, CategoryTicketDataService } from '../../shared';
 declare let jQuery: any;
 declare let moment: any;
 
@@ -24,7 +22,7 @@ declare let moment: any;
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
-  providers: [BannerComponent, NewsComponent, BannerComponent, BannerDataService, LocationDataService, CategoryTicketDataService, NewsDataService]
+  providers: [ LocationDataService, CategoryTicketDataService]
 })
 export class HomeComponent implements OnInit, AfterViewInit {
 	@ViewChild('warning') warning: ModalComponent;

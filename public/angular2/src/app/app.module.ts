@@ -34,16 +34,13 @@ import { routing } from './app.routing';
 
 // App is our top level component
 import { AppComponent } from './app.component';
-import { HomeComponent } from './components/home';
+import { HomeComponent, BannerComponent, CommentComponent, NewsComponent } from './components/home';
 import { AboutComponent } from './components/about';
 import { IntrodutionComponent } from './components/introdution';
 import { PageNotFoundComponent } from './components/page-not-found';
 import { HeaderComponent } from './components/header';
 import { SearchResultComponent } from './components/search-result';
-import { BannerComponent } from './components/home/banner';
-import { NewsComponent } from './components/home/news';
-import { CommentComponent } from './components/home/comment';
-import { CustomerComponent } from './components/customer';
+import { ListTicketComponent } from './components/ticket';
 
 
 @NgModule({
@@ -58,13 +55,13 @@ import { CustomerComponent } from './components/customer';
     BannerComponent,
     NewsComponent,
     CommentComponent,
-    CustomerComponent,
+    ListTicketComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
-    routing,
     HttpModule,
+    routing,
     ReactiveFormsModule,
     SelectModule,
     MomentModule,
