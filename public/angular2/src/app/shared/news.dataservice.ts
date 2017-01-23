@@ -22,14 +22,15 @@ export class NewsDataService {
 	public getAll() {
 		let headers = new Headers();
 		this.createAuthorizationHeader(headers);
-		return this._Http.get(this.actionUrl + 'index', { headers: headers, withCredentials: true })
+		return this._Http.get(this.actionUrl + 'index', { 
+			headers: headers, 
+			withCredentials: true })
 			.map(res => res.json())
 			.catch(this.handleError);
 
 	}
 
 	private handleError(error: Response) {
-		console.error(error);
 		return Observable.throw(error.json().error || 'Server error');
 	}
 }

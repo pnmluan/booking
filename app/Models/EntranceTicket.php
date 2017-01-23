@@ -18,7 +18,7 @@ class EntranceTicket extends BaseModel
 
     public static function listItems(array $param = null){
 
-        $aColumns = ['entrance_ticket.name', 'entrance_ticket.category_ticket_id', 'category_ticket.name', 'entrance_ticket.adult_fare', 'entrance_ticket.children_fare', 'entrance_ticket.description', 'entrance_ticket.created_at'];
+        $aColumns = ['entrance_ticket.name', 'category_ticket_id', 'category_ticket.name', 'entrance_ticket.adult_fare', 'entrance_ticket.children_fare', 'entrance_ticket.description', 'entrance_ticket.created_at'];
 
         $query = \DB::table('entrance_ticket')
             ->select(\DB::raw('SQL_CALC_FOUND_ROWS entrance_ticket.id'),\DB::raw('entrance_ticket.id AS DT_RowId'),'entrance_ticket.*', \DB::raw('category_ticket.name AS category_ticket_name')
@@ -84,6 +84,12 @@ class EntranceTicket extends BaseModel
         // $query = preg_replace('# null#', '', $query);
 
         $data = $query->get();
+
+        // Add album_ticket 
+        foreach ($data as $key => $value) {
+            $album = \DB::table('album_ticket')->where('entrance_ticket_id', $value->id)->get();
+            $data[$key]->album = $album;
+        }
 
         \DB::setFetchMode(\PDO::FETCH_ASSOC);
         $total = \DB::select('SELECT FOUND_ROWS() as rows');

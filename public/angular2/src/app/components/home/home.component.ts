@@ -28,7 +28,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
 	@ViewChild('warning') warning: ModalComponent;
 	private subscriptionEvents: Subscription;
 	Filter = {};
-	Search = {};
+	filterTicket = {};
 	curRouting?: string;
 	warningMsg = '';
 	adultOptions = [];
@@ -87,7 +87,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
 				for (var key in res.data) {
 
 					var temp = {
-						value: res.data[key].code,
+						value: res.data[key].id,
 						label: res.data[key].name
 					};
 					categoryTicketOptions.push(temp);
@@ -162,6 +162,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
 	 *=================================*/
 	onFilterArlines() {
 		var objectStore = this.Filter;
+		console.log(this.Filter);
 
 		if (objectStore['from'] == objectStore['to']) {
 			this.warningMsg = 'Điểm đi và Điểm đến không được trùng nhau.';
@@ -181,7 +182,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
 		objectStore['from_name'] = this.getNameFromCode(objectStore['from']);
 		objectStore['to_name'] = this.getNameFromCode(objectStore['to']);
 
-		if (this.filter_to_date['formatted'] == undefined) {
+		if (!this.filter_to_date) {
 			objectStore['to_date'] = '';
 
 		} else {
@@ -211,7 +212,13 @@ export class HomeComponent implements OnInit, AfterViewInit {
 	 * Search Ticket
 	 *=================================*/
 	onSearchTicket() {
-		console.log(this.Search);
+		// let queryParams = '';
+		// if (this.filterTicket['category_ticket_id']) {
+		// 	queryParams = '?category_ticket_id=' + this.filterTicket['category_ticket_id'];
+		// }
+
+		// this._Router.navigateByUrl('/list-tickets/' + queryParams);
+		this._Router.navigate(['list-tickets'], { queryParams : this.filterTicket })
 	}
 
 	/*=================================

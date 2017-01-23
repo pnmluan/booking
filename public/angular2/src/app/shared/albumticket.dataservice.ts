@@ -1,37 +1,30 @@
 import { Injectable, EventEmitter, Output } from '@angular/core';
 import { Http, Headers, Response } from '@angular/http';
 import { Observable } from 'rxjs/Rx';
-import { Comment } from '../models/comment';
 import { Configuration } from '../shared/app.configuration';
 
 @Injectable()
-export class PassengerDataService {
+export class AlbumTicketDataService {
 
 	private actionUrl: string;
+	public imgPath: string;
 
 	constructor(private _Http: Http, private _Configuration: Configuration) {
-		this.actionUrl = _Configuration.apiUrl + 'passenger/';
+		this.actionUrl = _Configuration.apiUrl + 'album_ticket/';
+		this.imgPath = _Configuration.imgPath + 'album_ticket/';
 	}
 
 	createAuthorizationHeader(headers: Headers) {
-		headers.append('Content-Type', 'application/x-www-form-urlencoded;charset=UTF-8');
+		headers.append('Content-Type', 'application/x-www-form-urlencoded');
 		headers.append('Authorization', 'Basic ' + this._Configuration.authentic);
 	}
 
-	public getAll() {
+	public getAll(params = null) {
 		let headers = new Headers();
 		this.createAuthorizationHeader(headers);
-		return this._Http.get(this.actionUrl + 'index', {headers: headers})
-			.map(res => res.json())
-			.catch(this.handleError);
-	}
-
-	public create(params) {
-		let headers = new Headers();
-		this.createAuthorizationHeader(headers);
-		return this._Http.post(this.actionUrl + 'create', params.toString(), {
-			headers: headers
-		})
+		return this._Http.get(this.actionUrl + 'index', { 
+			search: params,
+			headers: headers, withCredentials: true })
 			.map(res => res.json())
 			.catch(this.handleError);
 	}

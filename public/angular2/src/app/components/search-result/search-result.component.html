@@ -54,7 +54,7 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr *ngFor="let f of route.flights">
+                                        <tr *ngFor="let f of route.flights" [ngClass]="{'ac': f.selected}">
                                             <td><img [src]="f.image" alt=""></td>
                                             <td>
                                                 <p class="plane-id">{{ f.flight_code }}</p>

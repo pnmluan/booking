@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { URLSearchParams } from '@angular/http';
 
 import { Configuration } from '../../../shared/app.configuration';
@@ -8,6 +8,7 @@ import { CategoryTicketDataService } from '../../../shared/categoryticket.datase
 import { EntranceTicketDataService } from '../../../shared/entranceticket.dataservice';
 
 import { Subscription } from 'rxjs/Rx';
+declare let jQuery: any;
 
 @Component({
   selector: 'app-list-ticket',
@@ -16,16 +17,29 @@ import { Subscription } from 'rxjs/Rx';
 })
 export class ListTicketComponent implements OnInit {
 	private subscriptionEvents: Subscription;
+	private querySubscription: Subscription;
 	public categoryTicketOptions = [];
+	queryParams = {};
 	listItem = [];
 	curRouting?: string;
 	search = {};
+	imgPath: string = this._EntranceTicketDataService.imgPath;
 	constructor(
 		private _CategoryTicketDataService: CategoryTicketDataService, 
 		private _EntranceTicketDataService: EntranceTicketDataService,
 		private config: Configuration,
-		private _Router: Router) { 
+		private _Router: Router,
+		private _ActivatedRoute: ActivatedRoute) { 
 
+		this.querySubscription = _ActivatedRoute.queryParams.subscribe(
+			(param: any) => {
+				this.queryParams = param;
+			}
+		)
+		setTimeout(() => {
+			this.search['category_ticket_id'] = this.queryParams['category_ticket_id'];
+		}, 500);
+		
 		this.subscriptionEvents = this._Router.events.subscribe((val) => {
 			let routing = this._Router.url;
 			if (this.curRouting != routing) {
@@ -36,13 +50,14 @@ export class ListTicketComponent implements OnInit {
 	}
 
   	ngOnInit() {
+		
 		this._CategoryTicketDataService.getAll().subscribe(res => {
 			let categoryTicketOptions = [];
 			if (res.data) {
 				for (let key in res.data) {
 
 					var temp = {
-						value: res.data[key].id,
+						value: String(res.data[key].id),
 						label: res.data[key].name
 					};
 
@@ -50,13 +65,15 @@ export class ListTicketComponent implements OnInit {
 
 				}
 				this.categoryTicketOptions = categoryTicketOptions;
+				console.log(categoryTicketOptions)
 			}
 		});
   	}
 
   	initData() {
-			var params: URLSearchParams = new URLSearchParams();
-			params.set('category_ticket_id', this.search['category_ticket_id']);
+			console.log(typeof this.search['category_ticket_id']);
+		var params: URLSearchParams = new URLSearchParams();
+		params.set('category_ticket_id', this.search['category_ticket_id']);
 			// params.set('round_trip', this.session_flight['round_trip']);
 		this._EntranceTicketDataService.getAll(params).subscribe(res => {
 			let listItem = [];
@@ -69,6 +86,24 @@ export class ListTicketComponent implements OnInit {
 				this.listItem = listItem;
 			}
 		});
+
+		setTimeout(()=>{
+			jQuery('.tours-list .item .item-inner h3').matchHeight({
+				byRow: true,
+				property: 'height',
+				target: null,
+				remove: false
+			});
+			jQuery('.tours-list .item .item-inner p').matchHeight({
+				byRow: true,
+				property: 'height',
+				target: null,
+				remove: false
+			});
+
+			this.resizeImage();
+			
+		},1000)
   	}
 
   	/*=================================
@@ -78,8 +113,16 @@ export class ListTicketComponent implements OnInit {
 		this.initData();
 	}
 
+	resizeImage() {
+		var a = jQuery('.item-inner').width();
+		jQuery('.item-inner > a').height(a * 10 / 16);
+	}
+
+
+
 	ngOnDestroy() {
 		this.subscriptionEvents.unsubscribe();
+		this.querySubscription.unsubscribe();
 	}
 
 }

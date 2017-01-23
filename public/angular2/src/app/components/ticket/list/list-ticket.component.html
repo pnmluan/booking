@@ -4,14 +4,15 @@
             <div class="tours-inner clearfix">
                 <div class="tours-filter">
                     <div class="tours-filter-inner">
-                        <form (ngSubmit)="onSearch()" #fSearch="ngForm">
+                        <!-- <form (ngSubmit)="onSearch()" #fSearch="ngForm"> -->
                             <div class="results-founded">
                                 Bộ lọc
                             </div>
                             <div class="g-field">
                                 <div class="field mb15">
                                     
-                                    <ng-select placeholder="Điểm đi" name="category_ticket_id" [(ngModel)]="search.category_ticket_id" [options]="categoryTicketOptions">
+                                    <ng-select placeholder="Điểm đi" name="category_ticket_id" [(ngModel)]="search.category_ticket_id" [options]="categoryTicketOptions"
+                                    [allowClear]="true">
                                     </ng-select>
                                 </div>
                                 <div class="field mb30">
@@ -24,10 +25,10 @@
                                     </div>
                                 </div>
                                 <div class="field mb5">
-                                    <button type="submit" class="btn btn-search-tour">Search</button>
+                                    <button (click)="onSearch()" type="submit" class="btn btn-search-tour"><i class="icon-search-2"></i>Tìm kiếm</button>
                                 </div>
                             </div>
-                        </form>
+                        <!-- </form> -->
                     </div>
                 </div>
                 <div class="tours-main">
@@ -61,16 +62,16 @@
                     <div class="tours-list clearfix">
                         <div class="item" *ngFor="let item of listItem">
                             <div class="item-inner">
-                                <a href=""><img src="assets/img/train.jpg" alt=""></a>
+                                <a href=""><img *ngIf="item.album[0]?.img" src="{{imgPath + item.album[0]?.img}}" alt=""></a>
                                 <div>
                                     <h3>
-                          <a href="#">Đại lý cấp 1 chính thức của các hãng hàng không tại Việt Nam và châu Á</a>
-                        </h3>
+                                      <a href="#">{{ item.name }}</a>
+                                    </h3>
                                     <p>
-                                        cung cấp vé máy bay giá rẻ các chặng nội địa và quốc tế.
+                                        {{ item.description }}
                                     </p>
                                     <div class="item-book clearfix">
-                                        <div class="price">500.000 <span>VNĐ</span></div>
+                                        <div class="price">{{ item.adult_fare | number }} <span>VNĐ</span></div>
                                         <div class="s-cart">
                                             <input type="text" value="1">
                                             <a href="#" title="ADD TO CART" class="add-to-cart"><i class="fa fa-shopping-cart"></i></a>

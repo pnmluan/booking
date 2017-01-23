@@ -144,7 +144,7 @@ export class SearchResultComponent implements OnInit, AfterViewInit {
 
 		this.airlineOptions = {
 			vietjet:true,
-			jetstar: false,
+			jetstar: true,
 			vna: true
 
 		};
@@ -228,19 +228,19 @@ export class SearchResultComponent implements OnInit, AfterViewInit {
 		// Combine fork join 3 airlines
 		const vietjet$ = this._AirlineDataService.vietjet(this.session_flight);
 
-		// const jetstar$ = this._AirlineDataService.jetstar(this.session_flight);
+		const jetstar$ = this._AirlineDataService.jetstar(this.session_flight);
 
 		const vna$ = this._AirlineDataService.vna(this.session_flight);
 
-		// Observable.forkJoin(vietjet$, jetstar$, vna$).subscribe(res => {
-		Observable.forkJoin(vietjet$, vna$).subscribe(res => {
+		Observable.forkJoin(vietjet$, jetstar$, vna$).subscribe(res => {
+		// Observable.forkJoin(vietjet$, vna$).subscribe(res => {
 
 			this.airlines['vietjet'] = res[0];
-			// this.airlines['jetstar'] = res[1];
-			this.airlines['vna'] = res[1];
+			this.airlines['jetstar'] = res[1];
+			this.airlines['vna'] = res[2];
 
 			this.lowestFilter['vietjet'] = this.getLowestPrice(this.airlines['vietjet'].dep_flights);
-			// this.lowestFilter['jetstar'] = this.getLowestPrice(this.airlines['jetstar'].dep_flights);
+			this.lowestFilter['jetstar'] = this.getLowestPrice(this.airlines['jetstar'].dep_flights);
 			this.lowestFilter['vna'] = this.getLowestPrice(this.airlines['vna'].dep_flights);
 			this.filterAirlines();
 			this.selectedStep = 1;
@@ -450,6 +450,8 @@ export class SearchResultComponent implements OnInit, AfterViewInit {
 		let number_infants = this.session_flight['infant'] ? +this.session_flight['infant'] : 0;
 		flight['sum'] = (+this.session_flight['adult'] + number_children + number_infants) * ((+flight.price) + (+flight.fee))
 		console.log(flight)
+
+		flight.selected = true;
 		if (flight.direction == 'from') {
 			flight['directionvi'] = 'Lượt đi';
 			this.listRoutes[0]['selectedFlight'] = flight;

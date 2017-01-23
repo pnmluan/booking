@@ -11,7 +11,7 @@ export class EntranceTicketDataService {
 
 	constructor(private _Http: Http, private _Configuration: Configuration) {
 		this.actionUrl = _Configuration.apiUrl + 'entrance_ticket/';
-		this.imgPath = _Configuration.imgPath + 'entrance_ticket/';
+		this.imgPath = _Configuration.imgPath + 'album_ticket/';
 	}
 
 	createAuthorizationHeader(headers: Headers) {

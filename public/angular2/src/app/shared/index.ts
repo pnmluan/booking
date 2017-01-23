@@ -10,3 +10,4 @@ export * from './location.dataservice';
 export * from './baggagetype.dataservice';
 export * from './categoryticket.dataservice';
 export * from './entranceticket.dataservice';
+export * from './albumticket.dataservice';

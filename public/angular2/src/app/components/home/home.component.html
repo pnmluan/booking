@@ -261,14 +261,18 @@
                                         <a class="title white"><i class="fa fa-bus"></i> VÉ THAM QUAN</a>
                                     </span>
                                     <div id="tab-tour" class="wpb_tab ui-tabs-panel wpb_ui-tabs-hide vc_clearfix">
-                                        <form class="tour-form" #t="ngForm" (ngSubmit)="onSearchTicket(t)">
+                                        <form class="tour-form" #t="ngForm" (ngSubmit)="onSearchTicket()">
                                             <div class="tour-form-inner">
                                                 <div class="tour-input clearfix">
                                                     <div class="col-md-8">
                                                         <div class="field">
                                                             <span class="field-label">Điểm đến</span>
                                                             <div class="field-input">
-                                                                <ng-select placeholder="Điểm đến" name="category_ticket" [(ngModel)]="Search.category_ticket" [options]="categoryTicketOptions" [allowClear]="true" required>
+                                                                <ng-select placeholder="Điểm đến" 
+                                                                name="category_ticket_id" 
+                                                                [(ngModel)]="filterTicket.category_ticket_id" 
+                                                                [options]="categoryTicketOptions" 
+                                                                [allowClear]="true">
                                                                 </ng-select>
                                                             </div>
                                                         </div>

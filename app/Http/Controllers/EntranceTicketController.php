@@ -13,7 +13,6 @@ class EntranceTicketController extends ApiController{
     private $path = 'backend/assets/apps/img/album_ticket';
 
     public function index(Request $request){
-
         $data = EntranceTicket::listItems($request->all());
         return response()->json($data);
 
