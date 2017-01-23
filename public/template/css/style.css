@@ -1105,6 +1105,19 @@ only screen and (max-width: 767px) {
 .tours-list .item { float: left; width: 33.33%; padding: 0px 10px; margin-bottom: 20px; }
 .tours-list .item img { width: 100%; height: auto; display: block; }
 .tours-list .item .item-inner { box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); }
+.tours-list .item .item-inner > a { display: block; width: 100%; position: relative; }
+.tours-list .item .item-inner > a img {
+    max-width: 100%;
+    max-height: 100%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    -ms-transform: translate(-50%,-50%);
+    -webkit-transform: translate(-50%,-50%);
+    -moz-transform: translate(-50%,-50%);
+    -o-transform: translate(-50%,-50%);
+}
 .tours-list .item .item-inner > div { padding: 15px; }
 .tours-list .item .item-inner h3 { border-bottom: 1px solid #ddd; margin-bottom: 10px; text-transform: capitalize; font-size: 13px; font-weight: bold; padding-bottom: 15px; line-height: 20px; }
 .tours-list .item .item-inner h3 a{ color: #333; }

@@ -228,7 +228,7 @@
                   </div>
                   <div class="item">
                     <div class="item-inner">
-                      <a href=""><img src="img/bus.jpg" alt=""></a>
+                      <a href=""><img src="img/logo.png" alt=""></a>
                       <div>
                         <h3>
                           <a href="">Tour du lịch ngắn ngày/city tour</a>
@@ -561,6 +561,10 @@
       var itemImg = jQuery(this).closest('.item').find('img').eq(0);
       flyToElement(jQuery(itemImg), jQuery('.cart_anchor'));
     });
+
+
+    var a = jQuery('.item-inner').width();
+    jQuery('.item-inner > a').height(a * 10 / 16);
 
 
   });
