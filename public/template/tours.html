@@ -526,6 +526,8 @@
         gotoY = 117;
       }
 
+
+
       jQuery(window).resize(function() {
         if (jQuery(window).width() < 1200) {
           gotoY = 46;
@@ -562,10 +564,15 @@
       flyToElement(jQuery(itemImg), jQuery('.cart_anchor'));
     });
 
+    function resizeImage(){
+      var a = jQuery('.item-inner').width();
+      jQuery('.item-inner > a').height(a * 10 / 16);
+    }
 
-    var a = jQuery('.item-inner').width();
-    jQuery('.item-inner > a').height(a * 10 / 16);
-
+    resizeImage();
+    jQuery(window).resize(function() {
+      resizeImage();
+    });
 
   });
   </script>
