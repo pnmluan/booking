@@ -39,7 +39,8 @@
   <div style="" class="nicdark_site">
     <div class="nicdark_site_fullwidth_boxed nicdark_site_fullwidth nicdark_clearfix">
       <div class="nicdark_overlay"></div>
-      <!--END RIGHT SIDEBAR OPEN-->		<!--START RIGHT SIDEBAR OPEN-->
+      <!--END RIGHT SIDEBAR OPEN-->
+      <!--START RIGHT SIDEBAR OPEN-->
       <div class="nicdark_right_sidebar nicdark_bg_greydark nicdark_nicescrool nicdark_dark_widgets">
         <a style="z-index:9;" class="nicdark_right_sidebar_btn_close nicdark_btn_icon small white nicdark_absolute_right10"><i class="icon-cancel"></i></a>
         <!--start widgets-->
@@ -50,7 +51,7 @@
               <ul class="cart_list product_list_widget ">
                 <li>
                   <a href="#">
-                  <img width="90" height="90" src="img/bb.jpg" class="attachment-shop_thumbnail wp-post-image" alt="">Combo vé bảo tàng tượng sáp Madame Tussauds</a>
+                    <img width="90" height="90" src="img/bb.jpg" class="attachment-shop_thumbnail wp-post-image" alt="">Combo vé bảo tàng tượng sáp Madame Tussauds</a>
                   <span class="quantity">1 × <span class="amount">1.000.000 VNĐ</span></span>
                 </li>
                 <li>
@@ -67,12 +68,11 @@
               </p>
             </div>
           </div>
-
-
         </div>
         <!--end widgets-->
       </div>
-      <!--END RIGHT SIDEBAR OPEN-->		<!--end left right sidebar open-->
+      <!--END RIGHT SIDEBAR OPEN-->
+      <!--end left right sidebar open-->
       <div class="nicdark_section nicdark_navigation nicdark_upper_level2">
         <!--decide fullwidth or boxed header-->
         <div class='nicdark_menu_fullwidth_boxed nicdark_menu_fullwidth'>
@@ -154,48 +154,183 @@
                   <div class="table-responsive">
                     <table class="table table-bordered" cellspacing="0">
                       <thead>
-                      <tr>
-                        <th>Tour</th>
-                        <th>Giá</th>
-                        <th>Số lượng</th>
-                        <th>Tổng</th>
-                        <th></th>
-                      </tr>
+                        <tr>
+                          <th>Tour</th>
+                          <th>Giá</th>
+                          <th style="min-width: 250px; width: 250px;">Số lượng</th>
+                          <th>Tổng</th>
+                          <th></th>
+                        </tr>
                       </thead>
                       <tbody>
-                      <tr>
-                        <td><img src="img/bb.jpg" alt="" width="90" height="90"> Combo vé bảo tàng tượng sáp Madame Tussauds</td>
-                        <td>1.000.000 VNĐ</td>
-                        <td><a href="#" class="minus-people"><i class="fa fa-minus"></i></a>&nbsp;
+                        <tr>
+                          <td>
+                            <table>
+                              <tbody>
+                                <tr>
+                                  <td><img src="img/bb.jpg" alt="" width="90" height="90"></td>
+                                  <td style="padding-left: 10px; text-align: left">Combo vé bảo tàng tượng sáp Madame Tussauds</td>
+                                </tr>
+                              </tbody>
+                            </table>
+                          </td>
+                          <td>
+                            <span>Người lớn :</span> 1.000.000 VNĐ
+                            <br/>
+                            <span>Trẻ em :</span> 1.000.000 VNĐ
+                          </td>
+                          <td>
+                            <!-- <a href="#" class="minus-people"><i class="fa fa-minus"></i></a>&nbsp;
                           <input type="text" class="input-quantity form-control" value="1">&nbsp;
-                          <a href="#" class="add-people"><i class="fa fa-plus"></i></a></td>
-                        <td>1.000.000 VNĐ</td>
-                        <td>
-                          <a href="#"><i class="fa fa-trash-o"></i></a>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td><img src="img/bb.jpg" alt="" width="90" height="90"> Combo vé bảo tàng tượng sáp Madame Tussauds</td>
-                        <td>1.000.000 VNĐ</td>
-                        <td><a href="#" class="minus-people"><i class="fa fa-minus"></i></a>&nbsp;
-                          <input type="text" class="input-quantity form-control" value="3">&nbsp;
-                          <a href="#" class="add-people"><i class="fa fa-plus"></i></a></td>
-                        <td>1.000.000 VNĐ</td>
-                        <td>
-                          <a href="#"><i class="fa fa-trash-o"></i></a>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td><img src="img/bb.jpg" alt="" width="90" height="90"> Combo vé bảo tàng tượng sáp Madame Tussauds</td>
-                        <td>1.000.000 VNĐ</td>
-                        <td><a href="#" class="minus-people"><i class="fa fa-minus"></i></a>&nbsp;
-                          <input type="text" class="input-quantity form-control" value="2">&nbsp;
-                          <a href="#" class="add-people"><i class="fa fa-plus"></i></a></td>
-                        <td>1.000.000 VNĐ</td>
-                        <td>
-                          <a href="#"><i class="fa fa-trash-o"></i></a>
-                        </td>
-                      </tr>
+                          <a href="#" class="add-people"><i class="fa fa-plus"></i></a> -->
+                            <div class="field">
+                              <div class="field-inner field-select-people">
+                                <div class="input-select-people clearfix">
+                                  <div>
+                                    1 x Người lớn, 0 x Trẻ em
+                                  </div>
+                                  <div>
+                                    <i class="fa fa-user-plus"></i>
+                                  </div>
+                                </div>
+                                <div class="tbl-select-people">
+                                  <table>
+                                    <tr>
+                                      <td>Người lớn</td>
+                                      <td>
+                                        <a href="#" class="minus-people"><i class="fa fa-minus"></i></a>&nbsp;
+                                        <input type="text" class="input-quantity form-control" value="1">&nbsp;
+                                        <a href="#" class="add-people"><i class="fa fa-plus"></i></a>
+                                      </td>
+                                    </tr>
+                                    <tr>
+                                      <td>Trẻ em</td>
+                                      <td>
+                                        <a href="#" class="minus-people"><i class="fa fa-minus"></i></a>&nbsp;
+                                        <input type="text" class="input-quantity form-control" value="0">&nbsp;
+                                        <a href="#" class="add-people"><i class="fa fa-plus"></i></a>
+                                      </td>
+                                    </tr>
+                                  </table>
+                                </div>
+                              </div>
+                            </div>
+                          </td>
+                          <td>1.000.000 VNĐ</td>
+                          <td>
+                            <a href="#"><i class="fa fa-trash-o"></i></a>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td>
+                            <table>
+                              <tbody>
+                                <tr>
+                                  <td><img src="img/bb.jpg" alt="" width="90" height="90"></td>
+                                  <td style="padding-left: 10px; text-align: left">Combo vé bảo tàng tượng sáp Madame Tussauds</td>
+                                </tr>
+                              </tbody>
+                            </table>
+                          </td>
+                          <td>
+                            <span>Người lớn :</span> 1.000.000 VNĐ
+                            <br/>
+                            <span>Trẻ em :</span> 1.000.000 VNĐ
+                          </td>
+                          <td>
+                            <div class="field">
+                              <div class="field-inner field-select-people">
+                                <div class="input-select-people clearfix">
+                                  <div>
+                                    1 x Người lớn, 0 x Trẻ em
+                                  </div>
+                                  <div>
+                                    <i class="fa fa-user-plus"></i>
+                                  </div>
+                                </div>
+                                <div class="tbl-select-people">
+                                  <table>
+                                    <tr>
+                                      <td>Người lớn</td>
+                                      <td>
+                                        <a href="#" class="minus-people"><i class="fa fa-minus"></i></a>&nbsp;
+                                        <input type="text" class="input-quantity form-control" value="1">&nbsp;
+                                        <a href="#" class="add-people"><i class="fa fa-plus"></i></a>
+                                      </td>
+                                    </tr>
+                                    <tr>
+                                      <td>Trẻ em</td>
+                                      <td>
+                                        <a href="#" class="minus-people"><i class="fa fa-minus"></i></a>&nbsp;
+                                        <input type="text" class="input-quantity form-control" value="0">&nbsp;
+                                        <a href="#" class="add-people"><i class="fa fa-plus"></i></a>
+                                      </td>
+                                    </tr>
+                                  </table>
+                                </div>
+                              </div>
+                            </div>
+                          </td>
+                          <td>1.000.000 VNĐ</td>
+                          <td>
+                            <a href="#"><i class="fa fa-trash-o"></i></a>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td>
+                            <table>
+                              <tbody>
+                                <tr>
+                                  <td><img src="img/bb.jpg" alt="" width="90" height="90"></td>
+                                  <td style="padding-left: 10px; text-align: left">Combo vé bảo tàng tượng sáp Madame Tussauds</td>
+                                </tr>
+                              </tbody>
+                            </table>
+                          </td>
+                          <td>
+                            <span>Người lớn :</span> 1.000.000 VNĐ
+                            <br/>
+                            <span>Trẻ em :</span> 1.000.000 VNĐ
+                          </td>
+                          <td>
+                            <div class="field">
+                              <div class="field-inner field-select-people">
+                                <div class="input-select-people clearfix">
+                                  <div>
+                                    1 x Người lớn, 0 x Trẻ em
+                                  </div>
+                                  <div>
+                                    <i class="fa fa-user-plus"></i>
+                                  </div>
+                                </div>
+                                <div class="tbl-select-people">
+                                  <table>
+                                    <tr>
+                                      <td>Người lớn</td>
+                                      <td>
+                                        <a href="#" class="minus-people"><i class="fa fa-minus"></i></a>&nbsp;
+                                        <input type="text" class="input-quantity form-control" value="1">&nbsp;
+                                        <a href="#" class="add-people"><i class="fa fa-plus"></i></a>
+                                      </td>
+                                    </tr>
+                                    <tr>
+                                      <td>Trẻ em</td>
+                                      <td>
+                                        <a href="#" class="minus-people"><i class="fa fa-minus"></i></a>&nbsp;
+                                        <input type="text" class="input-quantity form-control" value="0">&nbsp;
+                                        <a href="#" class="add-people"><i class="fa fa-plus"></i></a>
+                                      </td>
+                                    </tr>
+                                  </table>
+                                </div>
+                              </div>
+                            </div>
+                          </td>
+                          <td>1.000.000 VNĐ</td>
+                          <td>
+                            <a href="#"><i class="fa fa-trash-o"></i></a>
+                          </td>
+                        </tr>
                       </tbody>
                     </table>
                   </div>
@@ -215,7 +350,6 @@
                   </div>
                 </div>
                 <div>
-
                 </div>
               </div>
             </div>
@@ -325,7 +459,7 @@
   <script src="js/script.js"></script>
   <script type="text/javascript">
   jQuery(document).ready(function() {
-    function photosGallery(){
+    function photosGallery() {
       var sync1 = jQuery("#sync1");
       var sync2 = jQuery("#sync2");
 
@@ -400,20 +534,20 @@
     }
     photosGallery();
 
-//    jQuery('.photos-tab li a').click(function() {
-//      jQuery('.photos-tab li a').removeClass('active');
-//      jQuery(this).addClass('active');
-//
-//      jQuery('.photos-wrapper .item').hide();
-//      jQuery(jQuery(this).attr('href')).show()
-//
-//      if(jQuery('#photos').is(':visible')){
-//
-//      } else {
-//
-//      }
-//      return false;
-//    });
+    //    jQuery('.photos-tab li a').click(function() {
+    //      jQuery('.photos-tab li a').removeClass('active');
+    //      jQuery(this).addClass('active');
+    //
+    //      jQuery('.photos-wrapper .item').hide();
+    //      jQuery(jQuery(this).attr('href')).show()
+    //
+    //      if(jQuery('#photos').is(':visible')){
+    //
+    //      } else {
+    //
+    //      }
+    //      return false;
+    //    });
 
     jQuery('.info-tab li a').click(function() {
       jQuery('.info-tab li a').removeClass('active');
@@ -424,8 +558,8 @@
       return false;
     });
 
-    jQuery('.input-select-people').click(function(){
-      if(!jQuery(this).next('.tbl-select-people').is(':visible')){
+    jQuery('.input-select-people').click(function() {
+      if (!jQuery(this).next('.tbl-select-people').is(':visible')) {
         jQuery(this).next('.tbl-select-people').slideDown('fast');
       } else {
         jQuery(this).next('.tbl-select-people').slideUp('fast');
@@ -433,8 +567,8 @@
       return false;
     });
 
-    jQuery('.btn-view-price').click(function(){
-      if(!jQuery('.tour-price-details').is(':visible')){
+    jQuery('.btn-view-price').click(function() {
+      if (!jQuery('.tour-price-details').is(':visible')) {
         jQuery('.tour-price-details').slideDown('fast');
         jQuery(this).addClass('no');
         jQuery(this).html('<i class="fa fa-times"></i> ẨN GIÁ')
@@ -446,7 +580,7 @@
       return false;
     })
 
-    jQuery(document).click(function(){
+    jQuery(document).click(function() {
 
     });
 
