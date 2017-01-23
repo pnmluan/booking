@@ -602,7 +602,7 @@ only screen and (max-width: 767px) {
 .contact-info-field .field { margin-bottom: 7px; }
 .contact-info-field .field label { font-weight: bold; margin-bottom: 3px; }
 .contact-info-field .field:first-child {}
-.contact-info-field .field:first-child > div { overflow: hidden; }
+.contact-info-field .field:first-child > div { }
 .contact-info-field .field.even { width: 49%; float: left; margin-right: 2%; }
 .contact-info-field .field.odd { width: 49%; float: right; }
 .contact-info-field .field.field-name > div:first-child { width: 80px; float: left; }
