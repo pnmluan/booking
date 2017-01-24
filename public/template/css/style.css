@@ -1301,6 +1301,8 @@ only screen and (max-width: 767px) {
     background: transparent url("../img/next2.png") no-repeat scroll center center;
 }
 
+#sync2 { border: 1px solid #ddd; padding: 10px; }
+
 .photos-tab li { float: left; }
 .photos-tab li a { display: block; padding: 10px 30px; background: #ddd; color: #333; border-bottom: 1px solid #fff; }
 .photos-tab li a.active { background: #649931; color: #fff; }
