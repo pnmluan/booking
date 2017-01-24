@@ -29,6 +29,16 @@ export class EntranceTicketDataService {
 			.catch(this.handleError);
 	}
 
+	public getByID(id) {
+		let headers = new Headers();
+		this.createAuthorizationHeader(headers);
+		return this._Http.get(this.actionUrl + 'show/' + id, {
+			headers: headers, withCredentials: true
+		})
+			.map(res => res.json())
+			.catch(this.handleError);
+	}
+
 	private handleError(error: Response) {
 		return Observable.throw(error.json().error || 'Server error');
 	}

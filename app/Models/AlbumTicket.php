@@ -24,7 +24,7 @@ class AlbumTicket extends BaseModel
 
 		// Filter search condition
 		foreach ($aColumns as $key => $value) {
-			(isset($param[$value]) && $param[$value]) && $query->where($value,'like','%'.$param[$value].'%');
+			(isset($param[$value]) && $param[$value]) && $query->where($value,'=',$param[$value]);
 		}
 
 		//======================= SEARCH =================
