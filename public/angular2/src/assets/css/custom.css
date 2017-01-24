@@ -7,13 +7,13 @@ ng-select {
 	background: #fff;
 }
 
-.tabset ul li a {
+.filter-tab ul li a {
     background: #E6E1DA;
     color: #333;
     font-family: 'diavlo-book';
 }
 
-.tabset ul li.active a{
+.filter-tab ul li.active a{
     background-image: url("../img/pattern_vang.svg");
     background-repeat: repeat;
     background-size: 250px;
@@ -66,3 +66,9 @@ ng-select > div > div.single > div.clear, ng-select > div > div.single > div.tog
     top: 1px;
     right: 5px;
 }
+
+.info-tab li { float: left; margin-right: 10px; }
+.info-tab li a { display: block; padding: 5px; background: #ddd; color: #333; border-bottom: 1px solid #fff; position: relative; }
+.info-tab li a.active { background: #649931; color: #fff; }
+.info-tab li a:before {  position: absolute; bottom: -5px; left: 50%; margin-left: -10px; border-top: 5px solid #649931; border-left: 7px solid transparent; border-right: 7px solid transparent; content: ""; display: none; z-index: 999; }
+.info-tab li a.active:before { display: block; }

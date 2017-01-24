@@ -25,6 +25,11 @@ class EntranceTicketController extends ApiController{
         if (!$entranceTicket) {
             return $this->respondNotFound();
         }
+        $album = AlbumTicket::where('entrance_ticket_id', $id)->get();
+        if(!empty($album)) {
+            $entranceTicket->album = $album;
+        }
+         
         return $this->respondWithSuccess(['data'=>$entranceTicket]);
     }
 

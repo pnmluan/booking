@@ -62,10 +62,10 @@
                     <div class="tours-list clearfix">
                         <div class="item" *ngFor="let item of listItem">
                             <div class="item-inner">
-                                <a href=""><img *ngIf="item.album[0]?.img" src="{{imgPath + item.album[0]?.img}}" alt=""></a>
+                                <a [routerLink]="['/detail-ticket', item.id]"><img *ngIf="item.album[0]?.img" src="{{imgPath + item.album[0]?.img}}" alt=""></a>
                                 <div>
                                     <h3>
-                                      <a href="#">{{ item.name }}</a>
+                                      <a [routerLink]="['/detail-ticket', item.id]">{{ item.name }}</a>
                                     </h3>
                                     <p>
                                         {{ item.description }}

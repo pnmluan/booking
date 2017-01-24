@@ -40,7 +40,7 @@ import { IntrodutionComponent } from './components/introdution';
 import { PageNotFoundComponent } from './components/page-not-found';
 import { HeaderComponent } from './components/header';
 import { SearchResultComponent } from './components/search-result';
-import { ListTicketComponent } from './components/ticket';
+import { ListTicketComponent, DetailTicketComponent } from './components/ticket';
 
 
 @NgModule({
@@ -55,7 +55,8 @@ import { ListTicketComponent } from './components/ticket';
     BannerComponent,
     NewsComponent,
     CommentComponent,
-    ListTicketComponent
+    ListTicketComponent,
+    DetailTicketComponent
   ],
   imports: [
     BrowserModule,
