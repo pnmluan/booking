@@ -60,6 +60,16 @@ ng-select > div > div.single > div.clear, ng-select > div > div.single > div.tog
     border: 1px solid #ddd !important;
 }
 
+.tour-book .datepicker-container .datepicker-input-container .datepicker-input {
+    height: 34px !important;
+    border: 1px solid #ccc !important;
+    border-radius: 4px;
+}
+
+.tour-book .datepicker-container .datepicker-input-container .datepicker-input-icon {
+    top: 3px;
+}
+
 .datepicker-container .datepicker-input-container .datepicker-input-icon {
     display: inline-block;
     position: absolute;
@@ -68,7 +78,15 @@ ng-select > div > div.single > div.clear, ng-select > div > div.single > div.tog
 }
 
 .info-tab li { float: left; margin-right: 10px; }
-.info-tab li a { display: block; padding: 5px; background: #ddd; color: #333; border-bottom: 1px solid #fff; position: relative; }
+.info-tab li a { display: block; padding: 5px 30px; background: #ddd; color: #333; border-bottom: 1px solid #fff; position: relative; }
 .info-tab li a.active { background: #649931; color: #fff; }
 .info-tab li a:before {  position: absolute; bottom: -5px; left: 50%; margin-left: -10px; border-top: 5px solid #649931; border-left: 7px solid transparent; border-right: 7px solid transparent; content: ""; display: none; z-index: 999; }
 .info-tab li a.active:before { display: block; }
+.info-tab .nav-tabs>li>a {border-radius: 0px;}
+
+.info-tab .nav-tabs>li.active>a, .info-tab .nav-tabs>li.active>a:focus, .info-tab .nav-tabs>li.active>a:hover {
+    background: #649931;
+    color: #fff;
+}
+
+.info-tab .nav-tabs {  border: 0px; }

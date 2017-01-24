@@ -21,6 +21,9 @@ export class DetailTicketComponent implements OnInit {
 	curRouting?: string;
 	_params = {};
 	Ticket = {};
+	number_children: number = 0;
+	number_adult: number = 1;
+	isAddPeople = false;
 	imgPath: string = this._EntranceTicketDataService.imgPath;
 
 	constructor(
@@ -145,14 +148,14 @@ export class DetailTicketComponent implements OnInit {
 					return false;
 				});
 
-				jQuery('.input-select-people').click(function() {
-					if (!jQuery(this).next('.tbl-select-people').is(':visible')) {
-						jQuery(this).next('.tbl-select-people').slideDown('fast');
-					} else {
-						jQuery(this).next('.tbl-select-people').slideUp('fast');
-					}
-					return false;
-				});
+				// jQuery('.input-select-people').click(function() {
+				// 	if (!jQuery(this).next('.tbl-select-people').is(':visible')) {
+				// 		jQuery(this).next('.tbl-select-people').slideDown('fast');
+				// 	} else {
+				// 		jQuery(this).next('.tbl-select-people').slideUp('fast');
+				// 	}
+				// 	return false;
+				// });
 
 				jQuery('.btn-view-price').click(function() {
 					if (!jQuery('.tour-price-details').is(':visible')) {
@@ -168,6 +171,18 @@ export class DetailTicketComponent implements OnInit {
 				})
 			}, 1000);
 
+  	}
+
+  	onPlusPeople(value) {
+		value = value + 1;
+		console.log(value)
+  	}
+
+	onMinusPeople(value) {
+		console.log(value)
+		if(value) {
+			value = value - 1;
+		}
   	}
 
 	ngOnDestroy() {
