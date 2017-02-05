@@ -301,8 +301,8 @@ class AirlineController extends ApiController
         $from_date = strtotime($request->input('from_date'));
         $to_date = strtotime($request->input('to_date'));
         $adult = $request->input('adult');
-        $children = $request->input('children');
-        $infant = $request->input('infant');
+        $children = $request->input('children') ?: 0;
+        $infant = $request->input('infant') ?: 0;
 
         // GET SESSION ID
         $again = 0;
