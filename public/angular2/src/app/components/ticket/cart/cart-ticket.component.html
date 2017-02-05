@@ -48,7 +48,7 @@
                                                         <div>
                                                             {{ item.number_adult }} x Người lớn, {{ item.number_children }} x Trẻ em
                                                         </div>
-                                                        <div>
+                                                        <div (click)="item.is_show = !item.is_show">
                                                             <i class="fa fa-user-plus"></i>
                                                         </div>
                                                     </div>
@@ -57,17 +57,18 @@
                                                             <tr>
                                                                 <td>Người lớn</td>
                                                                 <td>
-                                                                    <a href="#" class="minus-people"><i class="fa fa-minus"></i></a>&nbsp;
-                                                                    <input type="text" class="input-quantity form-control" value="1">&nbsp;
-                                                                    <a href="#" class="add-people"><i class="fa fa-plus"></i></a>
+                                                                    <a (click)="item.number_adult = (item.number_adult ? item.number_adult - 1 : item.number_adult)" class="minus-people"><i class="fa fa-minus"></i></a>&nbsp;
+                                                                    <input type="text" class="input-quantity form-control" [(ngModel)]="item.number_adult">&nbsp;
+                                                                    <a (click)="item.number_adult = item.number_adult + 1" class="add-people"><i class="fa fa-plus"></i></a>
                                                                 </td>
                                                             </tr>
                                                             <tr>
                                                                 <td>Trẻ em</td>
                                                                 <td>
-                                                                    <a href="#" class="minus-people"><i class="fa fa-minus"></i></a>&nbsp;
-                                                                    <input type="text" class="input-quantity form-control" value="0">&nbsp;
-                                                                    <a href="#" class="add-people"><i class="fa fa-plus"></i></a>
+                                                                    <a 
+                                                                    (click)="item.number_children = (item.number_children ? item.number_children - 1 : item.number_children)" class="minus-people"><i class="fa fa-minus"></i></a>&nbsp;
+                                                                    <input type="text" class="input-quantity form-control" [(ngModel)]="item.number_children">&nbsp;
+                                                                    <a (click)="item.number_children = item.number_children + 1" class="add-people"><i class="fa fa-plus"></i></a>
                                                                 </td>
                                                             </tr>
                                                         </table>
