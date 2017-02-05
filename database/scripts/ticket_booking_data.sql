@@ -99,10 +99,10 @@ INSERT INTO `passenger` (`id`, `booking_id`, `title`, `first_name`, `last_name`,
 -- Dumping data for table `provider`
 --
 
-INSERT INTO `provider` (`id`, `name`, `created_at`, `updated_at`) VALUES
-(1, 'VietnamAirlines', NULL, NULL),
-(2, 'Jetstar', NULL, NULL),
-(3, 'VietjetAir', NULL, NULL);
+INSERT INTO `provider` (`id`, `name`, `vat`, `admin_fee`, `adult_airport_fee`, `child_airport_fee`, `adult_security_fee`, `child_security_fee`, `other_tax`, `payment_fee`, `created_at`, `updated_at`) VALUES 
+('1', 'Jetstar', '10', '100000', '70000', '35000', '10000', '5000', '0', '50000', CURRENT_DATE(), CURRENT_DATE()), 
+('2', 'VietnamAirlines', '10', '50000', '70000', '35000', '0', '0', '10000', '50000', CURRENT_DATE(), CURRENT_DATE()),
+('3', 'VietjetAir', '10', '100000', '70000', '35000', '10000', '5000', '0', '50000', CURRENT_DATE(), CURRENT_DATE());
 
 --
 -- Dumping data for table `ticket_type`

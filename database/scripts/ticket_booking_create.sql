@@ -127,11 +127,16 @@ CREATE TABLE contact (
 CREATE TABLE fare (
     id int NOT NULL AUTO_INCREMENT,
     passenger_id int NOT NULL,
-    round_trip  varchar(10)  NOT NULL,
-    fare float NOT NULL,
-    charge float NOT NULL,
-    tax float NOT NULL,
+    round_trip varchar(10) NOT NULL,
     baggage_type_id int NOT NULL,
+    fare float NOT NULL DEFAULT 0,
+    charge float NOT NULL DEFAULT 0,
+    vat float NOT NULL DEFAULT 0,
+    admin_fee float NOT NULL DEFAULT 0,
+    airport_fee float NOT NULL DEFAULT 0,
+    security_fee float NOT NULL DEFAULT 0,
+    other_tax float NOT NULL DEFAULT 0,
+    payment_fee float NOT NULL DEFAULT 0,
     created_at datetime NOT NULL,
     updated_at datetime NOT NULL,
     CONSTRAINT fare_pk PRIMARY KEY (id)
@@ -172,6 +177,14 @@ CREATE TABLE passenger (
 CREATE TABLE provider (
     id int NOT NULL AUTO_INCREMENT,
     name varchar(20) NOT NULL,
+    vat int NOT NULL DEFAULT 0,
+    admin_fee float NOT NULL DEFAULT 0,
+    adult_airport_fee float NOT NULL DEFAULT 0,
+    child_airport_fee float NOT NULL DEFAULT 0,
+    adult_security_fee float NOT NULL DEFAULT 0,
+    child_security_fee float NOT NULL DEFAULT 0,
+    other_tax float NOT NULL DEFAULT 0,
+    payment_fee float NOT NULL DEFAULT 0,
     created_at datetime NULL,
     updated_at datetime NULL,
     CONSTRAINT provider_pk PRIMARY KEY (id)
@@ -253,13 +266,6 @@ CREATE TABLE ticket_type (
 );
 
 -- foreign keys
--- Reference: baggage_type_provider (table: baggage_type)
-ALTER TABLE baggage_type ADD CONSTRAINT baggage_type_provider FOREIGN KEY baggage_type_provider (provider_id)
-    REFERENCES provider (id);
-
--- Reference: booking_ticket_type (table: booking)
-ALTER TABLE booking ADD CONSTRAINT booking_ticket_type FOREIGN KEY booking_ticket_type (ticket_type_id)
-    REFERENCES ticket_type (id);
 
 -- Reference: bus_route_ticket_type (table: bus_route)
 ALTER TABLE bus_route ADD CONSTRAINT bus_route_ticket_type FOREIGN KEY bus_route_ticket_type (ticket_type_id)
@@ -280,14 +286,6 @@ ALTER TABLE fare ADD CONSTRAINT fare_passengers FOREIGN KEY fare_passengers (pas
 -- Reference: flight_booking (table: booking_detail)
 ALTER TABLE booking_detail ADD CONSTRAINT flight_booking FOREIGN KEY flight_booking (booking_id)
     REFERENCES booking (id);
-
--- Reference: flight_location_arrive (table: booking_detail)
-ALTER TABLE booking_detail ADD CONSTRAINT flight_location_arrive FOREIGN KEY flight_location_arrive (arrive)
-    REFERENCES location (id);
-
--- Reference: flight_location_depart (table: booking_detail)
-ALTER TABLE booking_detail ADD CONSTRAINT flight_location_depart FOREIGN KEY flight_location_depart (depart)
-    REFERENCES location (id);
 
 -- Reference: passengers_booking (table: passenger)
 ALTER TABLE passenger ADD CONSTRAINT passengers_booking FOREIGN KEY passengers_booking (booking_id)
