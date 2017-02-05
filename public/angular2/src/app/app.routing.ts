@@ -3,7 +3,7 @@ import { HomeComponent } from './components/home';
 import { AboutComponent } from './components/about';
 import { IntrodutionComponent } from './components/introdution';
 import { SearchResultComponent } from './components/search-result';
-import { ListTicketComponent, DetailTicketComponent } from './components/ticket';
+import { ListTicketComponent, DetailTicketComponent, CartTicketComponent } from './components/ticket';
 import { PageNotFoundComponent } from './components/page-not-found';
 
 const APP_ROUTES: Routes = [
@@ -12,6 +12,7 @@ const APP_ROUTES: Routes = [
 	{ path: 'search-result/:session_token', component: SearchResultComponent },
 	{ path: 'list-tickets', component: ListTicketComponent },
 	{ path: 'detail-ticket/:ticket_id', component: DetailTicketComponent },
+	{ path: 'cart-ticket', component: CartTicketComponent },
 	{ path: 'about', component: AboutComponent },
 	{ path: 'introdution', component: IntrodutionComponent },
 	// {

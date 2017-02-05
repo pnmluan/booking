@@ -28,7 +28,7 @@ export class AppComponent {
 	curRouting?: string;
 	warningMsg: string = '';
 	first_time = true;
-
+	
 	constructor(
 		private _Http: Http,
 		private _Router: Router,

@@ -6,7 +6,7 @@ import { Configuration } from '../../../shared/app.configuration';
 
 import { CategoryTicketDataService } from '../../../shared/categoryticket.dataservice';
 import { EntranceTicketDataService } from '../../../shared/entranceticket.dataservice';
-
+import { LocalStorageService } from 'angular-2-local-storage';
 import { Subscription } from 'rxjs/Rx';
 declare let jQuery: any;
 
@@ -29,7 +29,9 @@ export class ListTicketComponent implements OnInit {
 		private _EntranceTicketDataService: EntranceTicketDataService,
 		private config: Configuration,
 		private _Router: Router,
-		private _ActivatedRoute: ActivatedRoute) { 
+		private _ActivatedRoute: ActivatedRoute,
+		private sessionStorage: LocalStorageService, 
+	) { 
 
 		this.querySubscription = _ActivatedRoute.queryParams.subscribe(
 			(param: any) => {
@@ -71,7 +73,6 @@ export class ListTicketComponent implements OnInit {
   	}
 
   	initData() {
-			console.log(typeof this.search['category_ticket_id']);
 		var params: URLSearchParams = new URLSearchParams();
 		params.set('category_ticket_id', this.search['category_ticket_id']);
 			// params.set('round_trip', this.session_flight['round_trip']);
@@ -79,7 +80,7 @@ export class ListTicketComponent implements OnInit {
 			let listItem = [];
 			if (res.data) {
 				for (let key in res.data) {
-
+					res.data[key].order = 1;
 					listItem.push(res.data[key]);
 
 				}
@@ -111,6 +112,51 @@ export class ListTicketComponent implements OnInit {
 	 *=================================*/
 	onSearch() {
 		this.initData();
+	}
+
+	/*=================================
+	 * Add To Cart
+	 *=================================*/
+	addToCart(item) {
+		if (this.sessionStorage.get('cartItems')) {
+			let cartItems = this.sessionStorage.get('cartItems');
+			let count = 0;
+			for(let key in cartItems) {
+				if(cartItems[key].id == item.id) {
+					cartItems[key].number_adult = +cartItems[key].number_adult + item.order;
+				}
+				count++;
+			}
+
+			let obj = {
+				id: item.id,
+				name: item.name,
+				img: item.album[0].img,
+				adult_fare: item.adult_fare,
+				children_fare: item.children_fare,
+				number_adult: item.order,
+				number_children: 0
+			};
+			cartItems[count] = obj;
+			this.sessionStorage.set('cartItems', cartItems);
+			
+
+		} else {
+			
+			let obj = {
+				id: item.id,
+				name: item.name,
+				img: item.album[0].img,
+				adult_fare: item.adult_fare,
+				children_fare: item.children_fare,
+				number_adult: item.order,
+				number_children: 0
+			};
+			let cartItems = [obj];
+			this.sessionStorage.set('cartItems', cartItems);
+		}
+		item.order = 1;
+
 	}
 
 	resizeImage() {
