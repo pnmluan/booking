@@ -73,8 +73,8 @@
                                     <div class="item-book clearfix">
                                         <div class="price">{{ item.adult_fare | number }} <span>VNĐ</span></div>
                                         <div class="s-cart">
-                                            <input type="text" value="1">
-                                            <a href="#" title="ADD TO CART" class="add-to-cart"><i class="fa fa-shopping-cart"></i></a>
+                                            <input type="text" [(ngModel)]="item.order">
+                                            <a title="ADD TO CART" class="add-to-cart" (click)="addToCart(item)"><i class="fa fa-shopping-cart"></i></a>
                                         </div>
                                     </div>
                                 </div>

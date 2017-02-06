@@ -1,35 +1,40 @@
-<!--START RIGHT SIDEBAR OPEN-->
-<div class="nicdark_right_sidebar nicdark_bg_greydark nicdark_nicescrool nicdark_dark_widgets">
-    <a style="z-index:9;" class="nicdark_right_sidebar_btn_close nicdark_btn_icon small white nicdark_absolute_right10"><i class="icon-cancel"></i></a>
-    <!--start widgets-->
-    <div class="nicdark_margin020">
-        <div id="woocommerce_widget_cart-2" class="widget woocommerce widget_shopping_cart">
-            <h2>GIỎ HÀNG</h2>
-            <div class="widget_shopping_cart_content">
-                <ul class="cart_list product_list_widget ">
-                    <li>
-                        <a href="#">
-                            <img width="90" height="90" src="img/bb.jpg" class="attachment-shop_thumbnail wp-post-image" alt="">Combo vé bảo tàng tượng sáp Madame Tussauds</a>
-                        <span class="quantity">1 × <span class="amount">1.000.000 VNĐ</span></span>
-                    </li>
-                    <li>
-                        <a href="#">
-                            <img width="90" height="90" src="img/bb.jpg" class="attachment-shop_thumbnail wp-post-image" alt="">Combo vé bảo tàng tượng sáp Madame Tussauds</a>
-                        <span class="quantity">1 × <span class="amount">1.000.000 VNĐ</span></span>
-                    </li>
-                </ul>
-                <!-- end product list -->
-                <p class="total"><strong>Tổng :</strong> <span class="amount">1.000.000 VNĐ</span></p>
-                <p class="buttons">
-                    <a href="#" class="button wc-forward">Vào Giỏ Hàng</a>
-                    <a href="#" class="button checkout wc-forward">Thanh Toán</a>
-                </p>
+<ng-sidebar 
+[(opened)]="_opened"
+ [position]="'right'"
+
+>
+    <!--START RIGHT SIDEBAR OPEN-->
+    <div class="nicdark_bg_greydark nicdark_nicescrool nicdark_dark_widgets">
+        <a style="z-index:9;" class="nicdark_right_sidebar_btn_close nicdark_btn_icon small white nicdark_absolute_right10"
+        (click)="_toggleSidebar()"><i class="icon-cancel"></i></a>
+        <!--start widgets-->
+        <div class="nicdark_margin020">
+            <div id="woocommerce_widget_cart-2" class="widget woocommerce widget_shopping_cart">
+                <h2>GIỎ HÀNG</h2>
+                <div class="widget_shopping_cart_content">
+                    <ul class="cart_list product_list_widget ">
+                        <li *ngFor="let item of cartItems">
+                            <a href="#">
+                                <img width="90" height="90" src="{{imgPath + item.img}}" class="attachment-shop_thumbnail wp-post-image" alt="">{{ item.name }}</a>
+                            <span class="quantity">{{ item.number_adult }} × <span class="amount">{{ item.adult_fare | number }} VNĐ</span></span>
+                            <br>
+                            <span *ngIf="item.number_children" class="quantity">{{ item.number_children }} × <span class="amount">{{ item.children_fare | number }} VNĐ</span></span>
+                        </li>
+                       
+                    </ul>
+                    <!-- end product list -->
+                    <p class="total"><strong>Tổng :</strong> <span class="amount"> {{ sumPrice | number }} VNĐ</span></p>
+                    <p class="buttons">
+                        <!-- <a href="#" class="button wc-forward">Vào Giỏ Hàng</a> -->
+                        <a [routerLink]="['./cart-ticket']" class="button checkout wc-forward">Thanh Toán</a>
+                    </p>
+                </div>
             </div>
         </div>
+        <!--end widgets-->
     </div>
-    <!--end widgets-->
-</div>
-<!--END RIGHT SIDEBAR OPEN-->
+    <!--END RIGHT SIDEBAR OPEN-->
+</ng-sidebar>
 <div class="nicdark_section nicdark_navigation nicdark_upper_level2">
     <!--decide fullwidth or boxed header-->
     <div class='nicdark_menu_fullwidth_boxed nicdark_menu_fullwidth'>
@@ -60,8 +65,8 @@
                     <div class="nicdark_logo nicdark_marginleft10">
                         <a href="#"><img alt="" src="assets/img/logo.png"></a>
                     </div>
-                    <a class="cart_anchor nicdark_btn_icon nicdark_right_sidebar_btn_open extrasmall right" style="display: block;">
-                        <span class="item-number">2</span><i class="fa fa-shopping-cart"></i>
+                    <a class="cart_anchor nicdark_btn_icon nicdark_right_sidebar_btn_open extrasmall right" style="display: block;" (click)="_toggleSidebar()">
+                        <span *ngIf="number_order" class="item-number">{{ number_order }}</span><i class="fa fa-shopping-cart"></i>
                     </a>
                     <!--end logo-->
                     <div class="menu-main-menu-container">

@@ -11,11 +11,11 @@ import { AgmCoreModule } from 'angular2-google-maps/core';
 declare let jQuery: any;
 
 @Component({
-  selector: 'app-detail-ticket',
-  templateUrl: './detail-ticket.component.html',
+  selector: 'app-paymment-ticket',
+  templateUrl: './paymment-ticket.component.html',
   providers: [EntranceTicketDataService, Configuration]
 })
-export class DetailTicketComponent implements OnInit {
+export class PaymentTicketComponent implements OnInit {
 	private subscriptionEvents: Subscription;
 	private subscriptionParam: Subscription;
 	public comments = [];

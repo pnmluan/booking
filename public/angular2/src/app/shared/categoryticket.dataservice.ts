@@ -15,7 +15,7 @@ export class CategoryTicketDataService {
 	}
 
 	createAuthorizationHeader(headers: Headers) {
-		headers.append('Content-Type', 'application/x-www-form-urlencoded');
+		headers.append('Content-Type', 'application/json;charset=UTF-8');
 		headers.append('Authorization', 'Basic ' + this._Configuration.authentic);
 	}
 

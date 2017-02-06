@@ -9,19 +9,21 @@ import { RouterModule } from '@angular/router';
 import { ToasterModule, ToasterService } from 'angular2-toaster';
 import { TabsModule } from "ng2-tabs";
 import { SelectModule } from 'angular2-select';
-import { LocalStorageService, LOCAL_STORAGE_SERVICE_CONFIG } from 'angular-2-local-storage';
+// import { LocalStorageService, LOCAL_STORAGE_SERVICE_CONFIG } from 'angular-2-local-storage';
+import { LocalStorageModule } from 'angular-2-local-storage';
 import { MomentModule } from 'angular2-moment';
 import { HTTP_INTERCEPTOR_PROVIDER } from 'ng2-http-interceptor';
 import { LoadingAnimateModule, LoadingAnimateService } from 'ng2-loading-animate';
 import { Ng2Bs3ModalModule } from 'ng2-bs3-modal/ng2-bs3-modal';
 import { DatePickerModule } from 'ng2-datepicker';
-
+import { AgmCoreModule } from 'angular2-google-maps/core';
+import { SidebarModule } from 'ng-sidebar';
  
 // Create config options (see ILocalStorageServiceConfigOptions) for deets:
-let localStorageServiceConfig = {
-    prefix: 'my-app',
-    storageType: 'localStorage'
-};
+// let localStorageServiceConfig = {
+//     prefix: 'my-app',
+//     storageType: 'localStorage'
+// };
 
 import { Configuration } from './shared/app.configuration';
 import { HttpClient } from './shared/http-client';
@@ -40,7 +42,7 @@ import { IntrodutionComponent } from './components/introdution';
 import { PageNotFoundComponent } from './components/page-not-found';
 import { HeaderComponent } from './components/header';
 import { SearchResultComponent } from './components/search-result';
-import { ListTicketComponent, DetailTicketComponent } from './components/ticket';
+import { ListTicketComponent, DetailTicketComponent, CartTicketComponent } from './components/ticket';
 
 
 @NgModule({
@@ -56,7 +58,8 @@ import { ListTicketComponent, DetailTicketComponent } from './components/ticket'
     NewsComponent,
     CommentComponent,
     ListTicketComponent,
-    DetailTicketComponent
+    DetailTicketComponent,
+    CartTicketComponent
   ],
   imports: [
     BrowserModule,
@@ -70,17 +73,25 @@ import { ListTicketComponent, DetailTicketComponent } from './components/ticket'
     Ng2Bs3ModalModule,
     TabsModule,
     DatePickerModule,
-    ToasterModule
+    ToasterModule,
+    AgmCoreModule.forRoot({
+        apiKey: 'AIzaSyA-KHUk6ARqo3uBome6suVzr-Na9nAooZA'
+    }),
+    LocalStorageModule.withConfig({
+        prefix: 'my-app',
+        storageType: 'localStorage'
+    }),
+    SidebarModule
   ],
   providers: [
     Configuration,
     HttpClient,
     ...HTTP_INTERCEPTOR_PROVIDER,
     LoadingAnimateService,
-    LocalStorageService,
-    {
-      provide: LOCAL_STORAGE_SERVICE_CONFIG, useValue: localStorageServiceConfig
-    }
+    // LocalStorageService,
+    // {
+    //   provide: LOCAL_STORAGE_SERVICE_CONFIG, useValue: localStorageServiceConfig
+    // }
   ],
   bootstrap: [AppComponent]
 })

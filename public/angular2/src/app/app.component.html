@@ -1,17 +1,21 @@
 <div class="nicdark_preloader"><img src="assets/img/loading.gif" alt=""></div>
 <!-- preloader -->
-<div style="" class="nicdark_site">
-    <div class="nicdark_site_fullwidth_boxed nicdark_site_fullwidth nicdark_clearfix">
-        <div class="nicdark_overlay"></div>
-        <!--start header Navigation-->
-        <app-header></app-header>
-        <!--start header parallax image-->
-        <div class="nicdark_space130"></div>
-        <main>
-            <router-outlet></router-outlet>
-        </main>
+<ng-sidebar-container>
+    <!-- Page content -->
+    <div style="" class="nicdark_site">
+        <div class="nicdark_site_fullwidth_boxed nicdark_site_fullwidth nicdark_clearfix">
+            <div class="nicdark_overlay"></div>
+            <!--start header Navigation-->
+            <app-header></app-header>
+            {{ storageCart }}
+            <!--start header parallax image-->
+            <div class="nicdark_space130"></div>
+            <main>
+                <router-outlet></router-outlet>
+            </main>
+        </div>
     </div>
-</div>
+</ng-sidebar-container>
 <toaster-container [toasterconfig]="toasterconfig"></toaster-container>
 <modal #warning class="modal fade small-modal in">
     <modal-header [show-close]="true">
