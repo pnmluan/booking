@@ -1338,6 +1338,9 @@ only screen and (max-width: 767px) {
 .tbl-select-people table td:last-child a:last-child { color: #649931; }
 .tbl-select-people table input { width: 50px !important; display: inline-block; text-align: center; }
 
+.shopping-cart .tbl-select-people { position: static; padding: 0px; border: 0px; }
+.shopping-cart .tbl-select-people table td { text-align: center !important; }
+
 
 .tour-price-details { margin-top: 15px; background: #fff; padding: 15px; display: none; }
 .tour-price-details .top { border-bottom: 1px solid #ddd; padding-bottom: 10px; margin-bottom: 15px; }
