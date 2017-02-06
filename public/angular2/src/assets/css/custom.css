@@ -97,3 +97,7 @@ ng-select > div > div.single > div.clear, ng-select > div > div.single > div.tog
 .sebm-google-map-container {
   height: 400px;
 }
+
+a.pointer {
+    cursor: pointer;
+}

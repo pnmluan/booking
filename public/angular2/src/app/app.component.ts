@@ -6,6 +6,7 @@ import { LoadingAnimateService } from 'ng2-loading-animate';
 import { ModalComponent } from 'ng2-bs3-modal/ng2-bs3-modal';
 import { LocalStorageService } from 'angular-2-local-storage';
 import { Configuration } from './shared/app.configuration';
+import { EntranceTicketDataService } from './shared';
 import { Http } from '@angular/http';
 
 declare var jQuery: any;
@@ -13,10 +14,12 @@ declare var jQuery: any;
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  styleUrls: ['./app.component.css'],
+  providers: [EntranceTicketDataService]
 })
 export class AppComponent {
-	@ViewChild('warning') warning: ModalComponent;
+	@ViewChild('warning') warningModal: ModalComponent;
+	@ViewChild('cart') cartModal: ModalComponent;
 	private session_expired?: any;
 	public toasterconfig: ToasterConfig =
 	new ToasterConfig({
@@ -28,6 +31,12 @@ export class AppComponent {
 	curRouting?: string;
 	warningMsg: string = '';
 	first_time = true;
+
+	private _opened: boolean = false;
+	public number_order: number = 0;
+	cartItems: any;
+	sumPrice: number = 0;
+	imgPath: string = this._EntranceTicketDataService.imgPath;
 	
 	constructor(
 		private _Http: Http,
@@ -35,7 +44,8 @@ export class AppComponent {
 		private _Configuration: Configuration,
 		private _HttpInterceptorService: HttpInterceptorService,
 		private _LoadingAnimateService: LoadingAnimateService,
-		private _LocalStorageService: LocalStorageService
+		private _LocalStorageService: LocalStorageService,
+		private _EntranceTicketDataService: EntranceTicketDataService,
 	) {
 		this.session_expired = this._Configuration.session_expired;
 
@@ -109,7 +119,7 @@ export class AppComponent {
 	// Go Home Page
 	onGoHome() {
 		this.first_time = true;
-		this.warning.close();
+		this.warningModal.close();
 		let now = new Date().getTime();
 		this._LocalStorageService.set('user_session_start', now);
 		setTimeout(() => {
@@ -123,8 +133,38 @@ export class AppComponent {
 		this.first_time = true;
 		let now = new Date().getTime();
 		this._LocalStorageService.set('user_session_start', now);
-		this.warning.close();
+		this.warningModal.close();
 		
+	}
+
+	/*=================================
+	 * Open Popup Cart
+	 *=================================*/
+	onOpenCart() {
+		this.cartModal.open();
+	}
+
+	/*=================================
+	 * Toggle Sidebar
+	 *=================================*/
+	_toggleSidebar() {
+
+		this._opened = !this._opened;
+		this.cartItems = this._LocalStorageService.get('cartItems');
+		let sum = 0;
+		for (let key in this.cartItems) {
+			var item = this.cartItems[key];
+			sum = sum + item.number_adult * item.adult_fare + item.children_adult * item.children_fare
+		}
+		this.sumPrice = sum;
+	}
+
+	/*=================================
+	 * Link to cart-ticket
+	 *=================================*/
+	onLinkToCartTicket() {
+		this.cartModal.close();
+		this._Router.navigate(['cart-ticket']);
 	}
 
 	protected checkUserSession() {
@@ -137,7 +177,7 @@ export class AppComponent {
 			if (routing.match(/^\/search-result.*/i) && this.first_time) {
 				
 				this.warningMsg = 'Bạn đã không thao tác gì trong một thời gian, dữ liệu chuyến bay có thể đã thay đổi, vui lòng thực hiện tìm kiếm lại!';
-				this.warning.open('sm');
+				this.warningModal.open('sm');
 				this.first_time = false;
 			}
 			

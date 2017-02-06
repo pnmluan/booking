@@ -22,10 +22,10 @@ export class CartTicketComponent implements OnInit {
 		let sum = 0;
 		for (let key in this.cartItems) {
 			var item = this.cartItems[key];
-			console.log(item);
+
 			var total = (item.number_adult * item.adult_fare) + (item.number_children * item.children_fare);
 			sum = sum + total;
-			console.log(total)
+
 			this.cartItems[key].total = total;
 			this.cartItems[key].is_show = false;
 		}
@@ -34,6 +34,29 @@ export class CartTicketComponent implements OnInit {
 	/*=================================
 	 * Toggle Sidebar
 	 *=================================*/
+	onRemoveTicket(index, item) {
+		this.sumPrice = this.sumPrice - (item.number_adult * item.adult_fare) - (item.number_children * item.children_fare);
+		this.cartItems.splice(index, 1);
+		
+	}
+
+	/*=================================
+	 * Plus People
+	 *=================================*/
+	onPlusPeople(value) {
+		value = value + 1;
+		console.log(value)
+		return value;
+	}
+
+	/*=================================
+	 * Minus People
+	 *=================================*/
+	onMinusPeople(value) {
+		if (value) {
+			value = value - 1;
+		}
+	}
 
 
 }
