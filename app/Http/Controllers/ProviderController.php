@@ -5,11 +5,10 @@
  * Date: 13-Nov-16
  * Time: 9:07 AM
  */
-
 namespace App\Http\Controllers;
 
-
 use App\Models\Provider;
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
 class ProviderController extends ApiController
@@ -33,7 +32,7 @@ class ProviderController extends ApiController
 
     public function create(Request $request){
         $provider = new Provider();
-        $data = $request['data'];
+        $data = $request->all();
 
         $provider->fill($data);
 
@@ -70,7 +69,7 @@ class ProviderController extends ApiController
         if(!$provider) {
             return $this->respondNotFound();
         }
-        $data = $request['data'];
+        $data = $request->all();
 
         $provider->fill($data);
 

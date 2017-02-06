@@ -11,7 +11,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Provider extends Model
+class Provider extends BaseModel
 {
     protected $table = 'provider';
     protected $fillable = ['name'];
@@ -19,7 +19,7 @@ class Provider extends Model
     public function getModelValidations()
     {
         return [
-            //'full_name' => 'required|string|' //. $this->getUniqueValidatorForField('full_name')
+            'name' => 'required|string|' . $this->getUniqueValidatorForField('name')
         ];
     }
 

@@ -1,0 +1,85 @@
+<!-- BEGIN PAGE HEADER-->
+<div class="page-bar">
+    <ul class="page-breadcrumb">
+        <li>
+            <a href="#/dashboard.html">Home</a>
+            <i class="fa fa-circle"></i>
+        </li>
+        <li>
+            <a href="#">Airline</a>
+        </li>
+    </ul>
+
+</div>
+<h3 class="page-title"> Airline </h3>
+<!-- END PAGE HEADER-->
+<!-- BEGIN MAIN CONTENT -->
+<div>
+
+    <!-- BEGIN TABLE Airline -->
+    <div class="row">
+
+        <div class="col-md-12">
+            <!-- BEGIN EXAMPLE TABLE PORTLET-->
+            <div class="portlet light bordered">
+                <div class="portlet-title">
+                    <div class="caption font-dark">
+                        <i class="icon-settings font-dark"></i>
+                        <span class="caption-subject bold uppercase"> Airline Management</span>
+                    </div>
+
+                </div>
+
+                <div class="portlet-body">
+                    <div class="table-toolbar">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="btn-group pull-right">
+                                    <button id="sample_editable_1_new" class="btn sbold green" ng-click="clickToAddNew()">
+                                        Add New
+                                        <i class="fa fa-plus"></i>
+                                    </button>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <!-- <table class="table table-striped table-bordered table-hover table-checkable order-column" id="dataTable">
+                        <thead>
+                            <tr>
+                                <th class="text-center" width="200px"> Full Name </th>
+                                <th class="text-center"> Content </th>
+                                <th class="text-center" width="100px"> Status </th>
+                                <th class="text-center" width="170px"> Created At </th>
+                                <th class="text-center" width="170px"> Updated At </th>
+                                <th class="text-center" width="100px"></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="odd gradeX" ng-repeat="item in listItem track by $index">
+                                <td class="text-center" ng-bind="item.full_name"></td>
+                                <td class="text-center" ng-bind="item.content"></td>
+                                <td class="text-center">
+                                    <span ng-class="classNameStatus(item.status)" ng-bind="item.status"></span>
+                                </td>
+                                <td class="text-center" ng-bind="item.created_at"></td>
+                                <td class="text-center" ng-bind="item.updated_at"></td>
+                                <td class="text-center actions-table">
+                                    <span aria-hidden="true" class="icon-pencil" ng-click="clickToUpdate(item)"></span>
+                                    <span aria-hidden="true" class="icon-trash" ng-click="clickToDelete(item.id)"></span>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table> -->
+
+                    <table datatable dt-options="dtOptions" dt-columns="dtColumns" dt-instance="dtInstance" id="dataTable"
+                    class="table table-striped table-bordered table-hover table-checkable order-column"></table>
+                </div>
+            </div>
+            <!-- END EXAMPLE TABLE PORTLET-->
+        </div>
+
+    </div>
+    <!-- END TABLE item -->
+</div>
+<!-- END MAIN CONTENT -->

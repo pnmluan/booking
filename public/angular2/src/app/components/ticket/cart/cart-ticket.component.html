@@ -52,17 +52,17 @@
                                                     <tr>
                                                         <td>Người lớn</td>
                                                         <td>
-                                                            <a (click)="item.number_adult = (item.number_adult ? item.number_adult - 1 : item.number_adult)" class="minus-people"><i class="fa fa-minus"></i></a>&nbsp;
+                                                            <a (click)="onMinusPeople(i,'number_adult')" class="minus-people pointer"><i class="fa fa-minus"></i></a>&nbsp;
                                                             <input type="text" class="input-quantity form-control" [(ngModel)]="item.number_adult">&nbsp;
-                                                            <a (click)="item.number_adult = item.number_adult + 1" class="add-people"><i class="fa fa-plus"></i></a>
+                                                            <a (click)="onPlusPeople(i, 'number_adult')" class="add-people pointer"><i class="fa fa-plus"></i></a>
                                                         </td>
                                                     </tr>
                                                     <tr>
                                                         <td>Trẻ em</td>
                                                         <td>
-                                                            <a (click)="item.number_children = (item.number_children ? item.number_children - 1 : item.number_children)" class="pointer minus-people"><i class="fa fa-minus"></i></a>&nbsp;
+                                                            <a (click)="onMinusPeople(i,'number_children')" class="pointer minus-people"><i class="fa fa-minus"></i></a>&nbsp;
                                                             <input type="text" class="input-quantity form-control" [(ngModel)]="item.number_children">&nbsp;
-                                                            <a (click)="item.number_children = item.number_children + 1" class="pointer add-people"><i class="fa fa-plus"></i></a>
+                                                            <a (click)="onPlusPeople(i, 'number_children')" class="pointer add-people"><i class="fa fa-plus"></i></a>
                                                         </td>
                                                     </tr>
                                                 </table>

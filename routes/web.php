@@ -90,7 +90,7 @@ $app->group(['prefix' => 'api/v1',   'namespace' => 'App\Http\Controllers'], fun
    | Provider
    |--------------------------------------------------------------------------
    */
-    $app->get('provider','ProviderController@index');
+    $app->get('provider/index','ProviderController@index');
 
     $app->get('provider/show/{id}','ProviderController@show');
 

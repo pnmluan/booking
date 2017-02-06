@@ -19,6 +19,12 @@ export class CartTicketComponent implements OnInit {
 	) { }
 	ngOnInit() {
 		this.cartItems = this.sessionStorage.get('cartItems');
+		this.processTotal();
+	}
+	/*=================================
+	 * Process Total
+	 *=================================*/
+	processTotal() {
 		let sum = 0;
 		for (let key in this.cartItems) {
 			var item = this.cartItems[key];
@@ -27,34 +33,36 @@ export class CartTicketComponent implements OnInit {
 			sum = sum + total;
 
 			this.cartItems[key].total = total;
-			this.cartItems[key].is_show = false;
 		}
 		this.sumPrice = sum;
 	}
+
 	/*=================================
-	 * Toggle Sidebar
+	 * Remove Ticket
 	 *=================================*/
 	onRemoveTicket(index, item) {
-		this.sumPrice = this.sumPrice - (item.number_adult * item.adult_fare) - (item.number_children * item.children_fare);
 		this.cartItems.splice(index, 1);
+		this.processTotal();
 		
 	}
 
 	/*=================================
 	 * Plus People
 	 *=================================*/
-	onPlusPeople(value) {
-		value = value + 1;
-		console.log(value)
-		return value;
+	onPlusPeople(index, key) {
+		this.cartItems[index][key]++;
+		this.processTotal();
 	}
+
 
 	/*=================================
 	 * Minus People
 	 *=================================*/
-	onMinusPeople(value) {
-		if (value) {
-			value = value - 1;
+	onMinusPeople(index, key) {
+		console.log(this.cartItems[index][key])
+		if (this.cartItems[index][key]) {
+			this.cartItems[index][key]--;
+			this.processTotal();
 		}
 	}
 

@@ -358,6 +358,27 @@ MetronicApp.config(['$stateProvider', '$urlRouterProvider', function($stateProvi
             }
         })
 
+        // Location
+        .state('provider', {
+            url: "/provider.html",
+            templateUrl: "views/provider/main.html",            
+            data: {pageTitle: 'Admin Provider Template'},
+            controller: "ProviderController",
+            resolve: {
+                deps: ['$ocLazyLoad', function($ocLazyLoad) {
+                    return $ocLazyLoad.load({
+                        name: 'MetronicApp',
+                        insertBefore: '#ng_load_plugins_before', // load the above css files before a LINK element with this ID. Dynamic CSS files must be loaded between core and theme css files
+                        files: [
+                            // '../assets/global/plugins/dropzone/dropzone.min.js',
+                            'js/controllers/ProviderController.js',
+                            'js/services/provider.service.js'
+                        ] 
+                    });
+                }]
+            }
+        })
+
         // baggagetype
         .state('baggagetype', {
             url: "/baggagetype.html",
