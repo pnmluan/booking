@@ -196,7 +196,16 @@ angular.module('MetronicApp').controller('ProviderController', function($rootSco
         $scope.dtColumns = [
             DTColumnBuilder.newColumn('id').notVisible(),
             DTColumnBuilder.newColumn('name').withTitle('Name'),
-            DTColumnBuilder.newColumn('code').withTitle('Code'),
+            DTColumnBuilder.newColumn('vat').withTitle('VAT'),
+            DTColumnBuilder.newColumn('infant_fare').withTitle('Infant Fare'),
+            DTColumnBuilder.newColumn('admin_fee').withTitle('Admin Fee'),
+            DTColumnBuilder.newColumn('adult_airport_fee').withTitle('A Airport Fee'),
+            DTColumnBuilder.newColumn('child_airport_fee').withTitle('C Airport Fee'),
+            DTColumnBuilder.newColumn('adult_security_fee').withTitle('A Security Fee'),
+            DTColumnBuilder.newColumn('child_security_fee').withTitle('C Security Fee'),
+            DTColumnBuilder.newColumn('other_tax').withTitle('Other Tax'),
+            DTColumnBuilder.newColumn('payment_fee').withTitle('Payment Fee'),
+
             DTColumnBuilder.newColumn(null).withTitle('Action').withOption('createdCell',function(td,cellData,rowData,row,col){
                 
                var string_html = `</button>&nbsp;<button class="btn btn-warning clickToUpdate"><i class="fa fa-edit"></i>Edit</button>&nbsp;` +

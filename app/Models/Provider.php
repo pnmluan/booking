@@ -14,7 +14,7 @@ use Illuminate\Database\Eloquent\Model;
 class Provider extends BaseModel
 {
     protected $table = 'provider';
-    protected $fillable = ['name'];
+    protected $fillable = ['name', 'infant_fare', 'vat', 'admin_fee', 'adult_airport_fee', 'child_airport_fee', 'adult_security_fee', 'child_security_fee', 'payment_fee', 'other_tax'];
 
     public function getModelValidations()
     {
@@ -25,7 +25,7 @@ class Provider extends BaseModel
 
     public static function listItems(array $param = null){
 
-        $aColumns = ['name'];
+        $aColumns = ['name', 'infant_fare', 'vat', 'admin_fee', 'adult_airport_fee', 'child_airport_fee', 'adult_security_fee', 'child_security_fee', 'payment_fee', 'other_tax'];
 
         $query = \DB::table('provider')
             ->select(\DB::raw('SQL_CALC_FOUND_ROWS id'),\DB::raw('id AS DT_RowId'),'provider.*');
