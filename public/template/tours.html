@@ -39,41 +39,6 @@
   <!-- preloader -->
   <div style="" class="nicdark_site">
     <div class="nicdark_site_fullwidth_boxed nicdark_site_fullwidth nicdark_clearfix">
-      <div class="nicdark_overlay"></div>
-      <!--END RIGHT SIDEBAR OPEN-->
-      <!--START RIGHT SIDEBAR OPEN-->
-      <div class="nicdark_right_sidebar nicdark_bg_greydark nicdark_nicescrool nicdark_dark_widgets">
-        <a style="z-index:9;" class="nicdark_right_sidebar_btn_close nicdark_btn_icon small white nicdark_absolute_right10"><i class="icon-cancel"></i></a>
-        <!--start widgets-->
-        <div class="nicdark_margin020">
-          <div id="woocommerce_widget_cart-2" class="widget woocommerce widget_shopping_cart">
-            <h2>GIỎ HÀNG</h2>
-            <div class="widget_shopping_cart_content">
-              <ul class="cart_list product_list_widget ">
-                <li>
-                  <a href="#">
-                    <img width="90" height="90" src="img/bb.jpg" class="attachment-shop_thumbnail wp-post-image" alt="">Combo vé bảo tàng tượng sáp Madame Tussauds</a>
-                  <span class="quantity">1 × <span class="amount">1.000.000 VNĐ</span></span>
-                </li>
-                <li>
-                  <a href="#">
-                    <img width="90" height="90" src="img/bb.jpg" class="attachment-shop_thumbnail wp-post-image" alt="">Combo vé bảo tàng tượng sáp Madame Tussauds</a>
-                  <span class="quantity">1 × <span class="amount">1.000.000 VNĐ</span></span>
-                </li>
-              </ul>
-              <!-- end product list -->
-              <p class="total"><strong>Tổng :</strong> <span class="amount">1.000.000 VNĐ</span></p>
-              <p class="buttons">
-                <a href="#" class="button wc-forward">Vào Giỏ Hàng</a>
-                <a href="#" class="button checkout wc-forward">Thanh Toán</a>
-              </p>
-            </div>
-          </div>
-        </div>
-        <!--end widgets-->
-      </div>
-      <!--END RIGHT SIDEBAR OPEN-->
-      <!--end left right sidebar open-->
       <div class="nicdark_section nicdark_navigation nicdark_upper_level2">
         <!--decide fullwidth or boxed header-->
         <div class='nicdark_menu_fullwidth_boxed nicdark_menu_fullwidth'>
@@ -105,7 +70,7 @@
                   <a href="#"><img alt="" src="img/logo.png"></a>
                 </div>
                 <!--end logo-->
-                <a class="cart_anchor nicdark_btn_icon nicdark_right_sidebar_btn_open extrasmall right"><span class="item-number">2</span><i class="fa fa-shopping-cart"></i></a>
+                <a class="cart_anchor nicdark_btn_icon nicdark_right_sidebar_btn_open extrasmall right" data-toggle="modal" data-target="#modalShoppingCart"><span class="item-number">2</span><i class="fa fa-shopping-cart"></i></a>
                 <div class="menu-main-menu-container">
                   <ul id="menu-main-menu" class="menu">
                     <li class="menu-item">
@@ -487,6 +452,46 @@
     <!--end nicdark_site_fullwidth-->
   </div>
   <!--end nicdark_site-->
+  <!-- Modal -->
+  <div>
+    <div id="modalShoppingCart" class="modal fade" role="dialog">
+      <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">GIỎ HÀNG</h4>
+        </div>
+          <div class="modal-body">
+            <div class="nicdark_margin020">
+              <div id="woocommerce_widget_cart-2" class="widget woocommerce widget_shopping_cart">
+                <div class="widget_shopping_cart_content">
+                  <ul class="cart_list product_list_widget ">
+                    <li>
+                      <a href="#">
+                        <img src="img/bb.jpg" class="attachment-shop_thumbnail wp-post-image" alt="" width="90" height="90">Combo vé bảo tàng tượng sáp Madame Tussauds</a>
+                      <span class="quantity">1 × <span class="amount">1.000.000 VNĐ</span></span>
+                    </li>
+                    <li>
+                      <a href="#">
+                        <img src="img/bb.jpg" class="attachment-shop_thumbnail wp-post-image" alt="" width="90" height="90">Combo vé bảo tàng tượng sáp Madame Tussauds</a>
+                      <span class="quantity">1 × <span class="amount">1.000.000 VNĐ</span></span>
+                    </li>
+                  </ul>
+                  <!-- end product list -->
+                  <p class="total"><strong>Tổng :</strong> <span class="amount">1.000.000 VNĐ</span></p>
+                  <p class="buttons">
+                    <a href="#" class="button wc-forward">Vào Giỏ Hàng</a>
+                    <a href="#" class="button checkout wc-forward">Thanh Toán</a>
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
   <script src='plugins/jquery-ui/jquery-ui.js'></script>
   <script src='plugins/menu/superfish.min.js'></script>
   <script src='plugins/menu/tinynav.min.js'></script>
@@ -564,7 +569,7 @@
       flyToElement(jQuery(itemImg), jQuery('.cart_anchor'));
     });
 
-    function resizeImage(){
+    function resizeImage() {
       var a = jQuery('.item-inner').width();
       jQuery('.item-inner > a').height(a * 10 / 16);
     }

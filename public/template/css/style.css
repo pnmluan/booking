@@ -1524,6 +1524,13 @@ ng-select > div > div.single > div.clear, ng-select > div > div.single > div.tog
     right: 5px;
 }
 
+/***** #modalShoppingCart *****/
+#modalShoppingCart .modal-header { background-color: #649931; color: #fff; border-top-left-radius: 6px; border-top-right-radius: 6px; }
+#modalShoppingCart .widget { margin-bottom: 0px; }
+#modalShoppingCart .nicdark_margin020 { margin: 0px; }
+.widget ul li { color: #333; }
+.widget ul li a { color: #649931; }
+
 
 
 
