@@ -196,7 +196,6 @@ angular.module('MetronicApp').controller('ProviderController', function($rootSco
         $scope.dtColumns = [
             DTColumnBuilder.newColumn('id').notVisible(),
             DTColumnBuilder.newColumn('name').withTitle('Name'),
-            DTColumnBuilder.newColumn('vat').withTitle('VAT'),
             DTColumnBuilder.newColumn('infant_fare').withTitle('Infant Fare'),
             DTColumnBuilder.newColumn('admin_fee').withTitle('Admin Fee'),
             DTColumnBuilder.newColumn('adult_airport_fee').withTitle('A Airport Fee'),
