@@ -24,7 +24,7 @@ class MailController extends ApiController
 
         Mail::send('_booking_mail',  ['data'=>$data], function($message) use ($data)
         {
-            $message->from('banamlehsb@gmail.com' , 'Đặt vé giá rẻ');
+            $message->from(env('MAIL_USERNAME') , 'Đặt vé giá rẻ');
             $message->to($data['to'], $data['full_name']);
             $message->subject('Thông tin đặt vé - ' . $data['full_name']);
         });

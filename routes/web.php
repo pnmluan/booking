@@ -152,7 +152,7 @@ $app->group(['prefix' => 'api/v1',   'namespace' => 'App\Http\Controllers'], fun
     | BookingDetail
     |--------------------------------------------------------------------------
     */
-    $app->get('booking_detail','BookingDetailController@index');
+    $app->get('booking_detail/index','BookingDetailController@index');
 
     $app->get('booking_detail/show/{id}','BookingDetailController@show');
 
@@ -167,7 +167,7 @@ $app->group(['prefix' => 'api/v1',   'namespace' => 'App\Http\Controllers'], fun
     | Contact
     |--------------------------------------------------------------------------
     */
-    $app->get('contact','ContactController@index');
+    $app->get('contact/index','ContactController@index');
 
     $app->get('contact/show/{id}','ContactController@show');
 
@@ -183,7 +183,7 @@ $app->group(['prefix' => 'api/v1',   'namespace' => 'App\Http\Controllers'], fun
     | Passenger
     |--------------------------------------------------------------------------
     */
-    $app->get('passenger','PassengerController@index');
+    $app->get('passenger/index','PassengerController@index');
 
     $app->get('passenger/show/{id}','PassengerController@show');
 
@@ -198,7 +198,7 @@ $app->group(['prefix' => 'api/v1',   'namespace' => 'App\Http\Controllers'], fun
     | Fare
     |--------------------------------------------------------------------------
     */
-    $app->get('fare','FareController@index');
+    $app->get('fare/index','FareController@index');
 
     $app->get('fare/show/{id}','FareController@show');
 

@@ -30,7 +30,7 @@
                             <div class="list-plane-title">
                                 <h1>{{ route.from_name }} <span>đi</span> {{ route.to_name }} </h1>
                                 <h2><span>Bay ngày:</span> {{ route.from_fly_date }}</h2>
-                                <h3>(* Giá vé chưa bao gồm thuế và phí)</h3>
+                                <h3>(* Giá vé <span *ngIf="optionsTax == 'not_tax'">chưa</span><span *ngIf="optionsTax == 'tax'">đã</span> bao gồm thuế và phí)</h3>
                             </div>
                             <div class="list-plane-date">
                                 <ul class="clearfix">
@@ -67,7 +67,8 @@
                                                 <span class="city">{{ route.to_name }}</span>
                                                 <p class="time">{{ f.end_time }}</p>
                                             </td>
-                                            <td class="plane-price">{{ f.price | number }} <span>VNĐ</span></td>
+                                            <td class="plane-price" *ngIf="optionsTax == 'not_tax'">{{ f.price | number }} <span>VNĐ</span></td>
+                                            <td class="plane-price" *ngIf="optionsTax == 'tax'">{{ f.price_tax | number }} <span>VNĐ</span></td>
                                             <td>
                                                 <button type="button" class="btn-select-flight" (click)="onSelectFlight(f)">Chọn <i class="fa fa-angle-right" aria-hidden="true"></i></button>
                                             </td>
@@ -86,12 +87,12 @@
                             <h3>Chế độ hiển thị</h3>
                             <div class="radio">
                                 <label>
-                                    <input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked> Giá cơ bản cho 1 người lớn
+                                    <input type="radio" name="optionsTax" (ngModelChange)="onChangeOptionTax($event)" [(ngModel)]="optionsTax" id="optionsPrice1" value="not_tax" checked> Giá cơ bản cho 1 người lớn
                                 </label>
                             </div>
                             <div class="radio">
                                 <label>
-                                    <input type="radio" name="optionsRadios" id="optionsRadios2" value="option2"> Giá đã gồm thuế & phí
+                                    <input type="radio" name="optionsTax" (ngModelChange)="onChangeOptionTax($event)" [(ngModel)]="optionsTax" id="optionsPrice2" value="tax"> Giá đã gồm thuế & phí cho 1 người lớn
                                 </label>
                             </div>
                             <h3><i class="fa fa-check-circle"></i> Xắp xếp</h3>
@@ -513,37 +514,20 @@
                         <div class="price-detail">
                             <div *ngFor="let route of listRoutes">
                                 <h2>{{ route.selectedFlight.directionvi }}</h2>
-                                <h3>Giá cơ bản</h3>
+                                <h3>Giá đã gồm thuế & phí</h3>
                                 <table>
                                     <tbody>
                                         <tr>
                                             <td>Người lớn</td>
-                                            <td>{{ session_flight.adult }} x {{ route.selectedFlight.price | number }} VNĐ</td>
+                                            <td>{{ session_flight.adult }} x {{ route.selectedFlight.price_tax | number }} VNĐ</td>
                                         </tr>
                                         <tr *ngIf="session_flight.children">
                                             <td>Trẻ em</td>
-                                            <td>{{ session_flight.children }} x {{ route.selectedFlight.price | number }} VNĐ</td>
+                                            <td>{{ session_flight.children }} x {{ route.selectedFlight.price_tax | number }} VNĐ</td>
                                         </tr>
                                         <tr *ngIf="session_flight.infants">
                                             <td>Em bé</td>
-                                            <td>{{ session_flight.infants }} x {{ route.selectedFlight.price | number }} VNĐ</td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                                <h3>Thuế và phí</h3>
-                                <table>
-                                    <tbody>
-                                        <tr>
-                                            <td>Người lớn</td>
-                                            <td>{{ session_flight.adult }} x {{ route.selectedFlight.fee | number }} VNĐ</td>
-                                        </tr>
-                                        <tr *ngIf="session_flight.children">
-                                            <td>Trẻ em</td>
-                                            <td>{{ session_flight.children }} x {{ route.selectedFlight.fee | number }} VNĐ</td>
-                                        </tr>
-                                        <tr *ngIf="session_flight.infants">
-                                            <td>Em bé</td>
-                                            <td>{{ session_flight.infants }} x {{ route.selectedFlight.fee | number }} VNĐ</td>
+                                            <td>{{ session_flight.infants }} x {{ route.selectedFlight.price_tax | number }} VNĐ</td>
                                         </tr>
                                     </tbody>
                                 </table>

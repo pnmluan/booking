@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 class Fare extends BaseModel
 {
     protected $table = 'fare'; 
-    protected $fillable = ['passenger_id', 'one_way', 'fare', 'charge', 'tax', 'baggage_type_id'];
+    protected $fillable = ['passenger_id', 'round_trip', 'fare', 'admin_fee', 'airport_fee', 'security_fee', 'other_tax', 'payment_fee', 'charge', 'tax', 'baggage_type_id'];
 
     public function getModelValidations()
     {
@@ -17,7 +17,7 @@ class Fare extends BaseModel
 
     public static function listItems(array $param = null){
 
-        $aColumns = ['passenger_id', 'one_way', 'fare', 'charge', 'tax', 'baggage_type_id'];
+        $aColumns = ['passenger_id', 'round_trip', 'fare', 'admin_fee', 'airport_fee', 'security_fee', 'other_tax', 'payment_fee', 'charge', 'tax', 'baggage_type_id'];
 
         $query = \DB::table('fare')
             ->select(\DB::raw('SQL_CALC_FOUND_ROWS id'),\DB::raw('id AS DT_RowId'),'fare.*');

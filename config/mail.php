@@ -56,8 +56,8 @@ return [
     */
 
     'from' => [
-        'address' => env('MAIL_FROM_ADDRESS', 'minhluan.hpl.is03@gmail.com'),
-        'name' => env('MAIL_FROM_NAME', 'Luan'),
+        'address' => env('MAIL_FROM_ADDRESS', 'sales@datvesieure.com'),
+        'name' => env('MAIL_FROM_NAME', 'Sales DatVeSieuRe'),
     ],
 
     /*
@@ -84,7 +84,7 @@ return [
     |
     */
 
-    'username' => env('MAIL_USERNAME', 'minhluan.hpl.is03@gmail.com'),
+    'username' => env('MAIL_USERNAME', 'sales@datvesieure.com'),
 
     /*
     |--------------------------------------------------------------------------
@@ -97,7 +97,7 @@ return [
     |
     */
 
-    'password' => env('MAIL_PASSWORD', '00minhluan'),
+    'password' => env('MAIL_PASSWORD', 'datvesieure.com123'),
 
     /*
     |--------------------------------------------------------------------------

@@ -196,14 +196,30 @@ angular.module('MetronicApp').controller('ProviderController', function($rootSco
         $scope.dtColumns = [
             DTColumnBuilder.newColumn('id').notVisible(),
             DTColumnBuilder.newColumn('name').withTitle('Name'),
-            DTColumnBuilder.newColumn('infant_fare').withTitle('Infant Fare'),
-            DTColumnBuilder.newColumn('admin_fee').withTitle('Admin Fee'),
-            DTColumnBuilder.newColumn('adult_airport_fee').withTitle('A Airport Fee'),
-            DTColumnBuilder.newColumn('child_airport_fee').withTitle('C Airport Fee'),
-            DTColumnBuilder.newColumn('adult_security_fee').withTitle('A Security Fee'),
-            DTColumnBuilder.newColumn('child_security_fee').withTitle('C Security Fee'),
-            DTColumnBuilder.newColumn('other_tax').withTitle('Other Tax'),
-            DTColumnBuilder.newColumn('payment_fee').withTitle('Payment Fee'),
+            DTColumnBuilder.newColumn('infant_fare').withTitle('Infant Fare').withOption('createdCell', function(td, cellData, rowData, row, col) {
+                $(td).html(cellData.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+            }),
+            DTColumnBuilder.newColumn('admin_fee').withTitle('Admin Fee').withOption('createdCell', function(td, cellData, rowData, row, col) {
+                $(td).html(cellData.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+            }),
+            DTColumnBuilder.newColumn('adult_airport_fee').withTitle('A Airport Fee').withOption('createdCell', function(td, cellData, rowData, row, col) {
+                $(td).html(cellData.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+            }),
+            DTColumnBuilder.newColumn('child_airport_fee').withTitle('C Airport Fee').withOption('createdCell', function(td, cellData, rowData, row, col) {
+                $(td).html(cellData.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+            }),
+            DTColumnBuilder.newColumn('adult_security_fee').withTitle('A Security Fee').withOption('createdCell', function(td, cellData, rowData, row, col) {
+                $(td).html(cellData.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+            }),
+            DTColumnBuilder.newColumn('child_security_fee').withTitle('C Security Fee').withOption('createdCell', function(td, cellData, rowData, row, col) {
+                $(td).html(cellData.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+            }),
+            DTColumnBuilder.newColumn('other_tax').withTitle('Other Tax').withOption('createdCell', function(td, cellData, rowData, row, col) {
+                $(td).html(cellData.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+            }),
+            DTColumnBuilder.newColumn('payment_fee').withTitle('Payment Fee').withOption('createdCell', function(td, cellData, rowData, row, col) {
+                $(td).html(cellData.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+            }),
 
             DTColumnBuilder.newColumn(null).withTitle('Action').withOption('createdCell',function(td,cellData,rowData,row,col){
                 

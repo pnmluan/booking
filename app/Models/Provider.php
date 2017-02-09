@@ -87,6 +87,11 @@ class Provider extends BaseModel
 
         $data = $query->get();
 
+        $convertedData = [];
+        foreach ($data as $key => $value) {
+            $convertedData[$value->name] = $value;
+        }
+
         \DB::setFetchMode(\PDO::FETCH_ASSOC);
         $total = \DB::select('SELECT FOUND_ROWS() as rows');
 
@@ -98,7 +103,7 @@ class Provider extends BaseModel
 
         return [
             'draw' => $draw,
-            'data' => $data,
+            'data' => $convertedData,
             'recordsTotal' => $total[0]['rows'],
             'recordsFiltered' => $total[0]['rows'],
         ];

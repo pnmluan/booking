@@ -20,7 +20,9 @@ import { LocationDataService,
 	BookingDetailDataService,
 	ContactDataService,
 	PassengerDataService,
-	BaggageTypeDataService
+	BaggageTypeDataService,
+	ProviderDataService,
+	FareDataService
 } from '../../shared';
 
 import { Contact } from '../../models';
@@ -32,13 +34,14 @@ declare let jQuery: any;
   selector: 'search-result',
   templateUrl: './search-result.component.html',
   providers: [LocationDataService, AirlineDataService, BookingDataService, BookingDetailDataService, 
-	  ContactDataService, PassengerDataService, BaggageTypeDataService]
+	  ContactDataService, PassengerDataService, BaggageTypeDataService, ProviderDataService, FareDataService]
 })
 export class SearchResultComponent implements OnInit, AfterViewInit {
 	@ViewChild('warning') warning: ModalComponent;
 	people = this._Configuration.arr_number_people;
 	infants = this._Configuration.arr_number_infants;
 	listRoutes = [];
+	providers = [];
 	locations = [];
 	flightsFromDate = [];
 	flightsToDate = [];
@@ -57,6 +60,7 @@ export class SearchResultComponent implements OnInit, AfterViewInit {
 	airlines = {};
 	airlineOptions = {};
 	title: any;
+	optionsTax: string = 'not_tax';
 
 	adultTitleOptions = [
 		{ value: 1, label: 'Ông' },
@@ -88,6 +92,8 @@ export class SearchResultComponent implements OnInit, AfterViewInit {
 		private _BookingDetailDataService: BookingDetailDataService,
 		private _PassengerDataService: PassengerDataService,
 		private _BaggageTypeDataService: BaggageTypeDataService,
+		private _ProviderDataService: ProviderDataService,
+		private _FareDataService: FareDataService,
 		private sessionStorage: LocalStorageService, 
 		private _ActivatedRoute: ActivatedRoute, 
 		private _Router: Router,
@@ -148,6 +154,15 @@ export class SearchResultComponent implements OnInit, AfterViewInit {
 			vna: true
 
 		};
+
+		// Get Provider's Fee
+		this._ProviderDataService.getAll().subscribe(res => {
+
+			if (res.data) {
+				this.providers = res.data;
+			}
+
+		});
 
 	}
 
@@ -224,7 +239,6 @@ export class SearchResultComponent implements OnInit, AfterViewInit {
   	initData() {
 		this.searchingData();
 
-
 		// Combine fork join 3 airlines
 		const vietjet$ = this._AirlineDataService.vietjet(this.session_flight);
 
@@ -233,15 +247,15 @@ export class SearchResultComponent implements OnInit, AfterViewInit {
 		const vna$ = this._AirlineDataService.vna(this.session_flight);
 
 		Observable.forkJoin(vietjet$, jetstar$, vna$).subscribe(res => {
-		// Observable.forkJoin(vietjet$, vna$).subscribe(res => {
 
-			this.airlines['vietjet'] = res[0];
-			this.airlines['jetstar'] = res[1];
-			this.airlines['vna'] = res[2];
 
-			this.lowestFilter['vietjet'] = this.getLowestPrice(this.airlines['vietjet'].dep_flights);
-			this.lowestFilter['jetstar'] = this.getLowestPrice(this.airlines['jetstar'].dep_flights);
-			this.lowestFilter['vna'] = this.getLowestPrice(this.airlines['vna'].dep_flights);
+			this.airlines['vietjet'] = this.convertTaxAirline('vietjet',res[0]);
+			this.airlines['jetstar'] = this.convertTaxAirline('jetstar', res[1]);
+			this.airlines['vna'] = this.convertTaxAirline('vna', res[2]);
+
+			this.lowestFilter['vietjet'] = this.getLowestPrice(this.airlines['vietjet'].dep_flights, this.optionsTax);
+			this.lowestFilter['jetstar'] = this.getLowestPrice(this.airlines['jetstar'].dep_flights, this.optionsTax);
+			this.lowestFilter['vna'] = this.getLowestPrice(this.airlines['vna'].dep_flights, this.optionsTax);
 			this.filterAirlines();
 			this.selectedStep = 1;
 			this.sortTime();
@@ -296,19 +310,42 @@ export class SearchResultComponent implements OnInit, AfterViewInit {
 
 	ngAfterViewInit() {}
 
-	onFilterArlines() {
-
-	}
-
+	/*=================================
+	 * Update Checkeck Options
+	 *=================================*/
 	updateCheckedOptions(option, event) {
 		this.airlineOptions[option] = event.target.checked;
 		this.filterAirlines();
 		this.sort = 'airline';
 	}
 
+	/*=================================
+	 * Convert Tax Airline
+	 *=================================*/
+	convertTaxAirline(key, airline) {
+		if (airline) {
+			if (airline.dep_flights) {
+				for (let k in airline.dep_flights) {
+					airline.dep_flights[k].price_tax = this.processFareWithTaxAdult(+airline.dep_flights[k].price, this.providers[key]);
+				}
+			}
+		}
+		return airline;
+	}
 
+	/*=================================
+	 * Process Fare With Tax
+	 *=================================*/
+	processFareWithTaxAdult(price, provider) {
+		let vat = (price + provider.admin_fee) * 0.1;
+		let sum = Math.round(price + vat + provider.adult_airport_fee + provider.adult_security_fee + provider.payment_fee);
 
-	// Filter airlines
+		return sum;
+	}
+
+	/*=================================
+	 * Filter airlines
+	 *=================================*/
 	filterAirlines() {
 		this.listRoutes = [];
 		let from_flights = this.getRoute(this.session_flight, 'from');
@@ -351,6 +388,9 @@ export class SearchResultComponent implements OnInit, AfterViewInit {
 		}
 	}
 
+	/*=================================
+	 * Push Departure Flights
+	 *=================================*/
 	pushDepFlights(type, result, flights) {
 		if (result.dep_flights) {
 			let image = 'assets/img/' + type + '.gif';
@@ -364,6 +404,9 @@ export class SearchResultComponent implements OnInit, AfterViewInit {
 		return flights;
 	}
 
+	/*=================================
+	 * Push Return Flights
+	 *=================================*/
 	pushRetFlights(type, result, flights) {
 		if (result.ret_flights) {
 			let image = 'assets/img/' + type + '.gif';
@@ -377,7 +420,9 @@ export class SearchResultComponent implements OnInit, AfterViewInit {
 		return flights;
 	}
 
-	// Set Date
+	/*=================================
+	 * Set Date
+	 *=================================*/
 	setDate(date, option) {
 		let current = moment().format(this._Configuration.dateFormat);
 		let selectedDate = moment(date, this._Configuration.viFormatDate).format(this._Configuration.dateFormat);
@@ -638,37 +683,15 @@ export class SearchResultComponent implements OnInit, AfterViewInit {
 						this._BookingDetailDataService.create(params).subscribe(res => {
 							if (res.status == 'success') {
 								let booking_detail = res.data;
-								// Insert Passengers
-								for (let k in this.passengers) {
-									var params: URLSearchParams = new URLSearchParams();
-									params.set('booking_detail_id', booking_detail.id);
-									params.set('title', this.passengers[k].title);
-									params.set('fullname', this.passengers[k].fullname);
-									var date_of_birth = moment(this.passengers[k].date_of_birth['formatted'], this._Configuration.viFormatDate).format(this._Configuration.formatDate);
-									params.set('date_of_birth', date_of_birth);
-									params.set('fare', this.listRoutes[key].price);
 
-									this._PassengerDataService.create(params).subscribe(res => {
-										this.selectedStep = 3;
-									});
-								}
+								// Insert Passengers
+								this.insertPassengerWithFare(booking_detail.id, this.listRoutes[key]);
 
 							}
 						});
 					}
 
-					// Insert Contact
-					var params: URLSearchParams = new URLSearchParams();
-					params.set('booking_id', booking.id);
-					params.set('title', this.contact['title']);
-					params.set('fullname', this.contact['fullname']);
-					params.set('phone', this.contact['phone']);
-					params.set('email', this.contact['email']);
-					params.set('requirement', this.contact['requirement']);
-
-					this._ContactDataService.create(params).subscribe(res => {
-
-					});
+					this.insertContactInfo(booking.id);
 				}
 			});
 		}
@@ -677,10 +700,86 @@ export class SearchResultComponent implements OnInit, AfterViewInit {
 	}
 
 	/*=================================
+	 * Insert Passenger with Fare
+	 *=================================*/
+	insertPassengerWithFare(booking_detail_id, route) {
+		
+		for (let k in this.passengers) {
+			var params: URLSearchParams = new URLSearchParams();
+			params.set('booking_detail_id', booking_detail_id);
+			params.set('title', this.passengers[k].title);
+			params.set('fullname', this.passengers[k].fullname);
+			var date_of_birth = moment(this.passengers[k].date_of_birth['formatted'], this._Configuration.viFormatDate).format(this._Configuration.formatDate);
+			params.set('date_of_birth', date_of_birth);
+			params.set('fare', route.price);
+
+			this._PassengerDataService.create(params).subscribe(res => {
+				console.log(res.data);
+				if (res.data) {
+					let passenger = res.data;
+					this.insertFareInfoAndBaggageType(passenger.id, 1, route);
+
+				}
+				this.selectedStep = 3;
+			});
+		}
+	}
+
+	/*=================================
+	 * Insert Fare Info And Baggage Type
+	 *=================================*/
+	insertFareInfoAndBaggageType(passenger_id, baggage_type_id, route) {
+		// Insert Contact
+		let provider = this.providers[route.airline];
+		let tax = (+route.price + provider.admin_fee) * 0.1;
+		var params: URLSearchParams = new URLSearchParams();
+		params.set('passenger_id', passenger_id);
+		params.set('round_trip', String(this.listRoutes.length));
+		params.set('fare', route.price);
+		params.set('charge', String(50000));
+		params.set('tax', String(tax));
+		params.set('admin_fee', provider.admin_fee);
+		params.set('airport_fee', provider.airport_fee);
+		params.set('security_fee', provider.security_fee);
+		params.set('other_tax', provider.other_tax);
+		params.set('payment_fee', provider.payment_fee);
+		this._FareDataService.create(params).subscribe(res => {
+
+		});
+	}
+
+	/*=================================
+	 * Insert Contact Info
+	 *=================================*/
+	insertContactInfo(booking_id) {
+		// Insert Contact
+		var params: URLSearchParams = new URLSearchParams();
+		params.set('booking_id', booking_id);
+		params.set('title', this.contact['title']);
+		params.set('fullname', this.contact['fullname']);
+		params.set('phone', this.contact['phone']);
+		params.set('email', this.contact['email']);
+		params.set('requirement', this.contact['requirement']);
+
+		this._ContactDataService.create(params).subscribe(res => {
+
+		});
+	}
+
+	/*=================================
 	 * Submit Contact Form
 	 *=================================*/
 	onSubmitContact() {
 
+	}
+
+	/*=================================
+	 * Change Option Tax
+	 *=================================*/
+	onChangeOptionTax(option) {
+		this.lowestFilter['vietjet'] = this.getLowestPrice(this.airlines['vietjet'].dep_flights, option);
+		this.lowestFilter['jetstar'] = this.getLowestPrice(this.airlines['jetstar'].dep_flights, option);
+		this.lowestFilter['vna'] = this.getLowestPrice(this.airlines['vna'].dep_flights, option);
 	}
 
 	/*=================================
@@ -737,11 +836,18 @@ export class SearchResultComponent implements OnInit, AfterViewInit {
 	/*=================================
 	 * Get Lowest Price
 	 *=================================*/
-	getLowestPrice(data) {
+	getLowestPrice(data, option) {
 		let arr = [];
-		for (var key in data) {
-			arr.push(data[key].price);
+		if(option == 'tax') {
+			for (var key in data) {
+				arr.push(data[key].price_tax);
+			}
+		} else {
+			for (var key in data) {
+				arr.push(data[key].price);
+			}
 		}
+		
 		return this.min(arr);
 
 	}
