@@ -160,7 +160,7 @@
                                                                     <tr style="box-sizing:border-box;padding:0;vertical-align:top;text-align:left">
                                                                         <td style="box-sizing:border-box;word-break:break-word;padding:0px 0px 10px;vertical-align:top;text-align:left;color:rgba(66,66,66,0.7);font-family:Arial,sans-serif;font-weight:normal;margin:0;line-height:19px;font-size:14px;padding-left:7px;border-collapse:collapse!important">
                                                                             <div style="box-sizing:border-box;font-size:16px;vertical-align:super">MÃ ĐẶT CHỖ</div>
-                                                                            <p style="box-sizing:border-box;margin:0;margin-bottom:5px;color:#424242!important;font-family:Arial,sans-serif;font-weight:bold;padding:0;text-align:left;line-height:19px;font-size:1rem;padding-left:9px">40300449</p>
+                                                                            <p style="box-sizing:border-box;margin:0;margin-bottom:5px;color:#424242!important;font-family:Arial,sans-serif;font-weight:bold;padding:0;text-align:left;line-height:19px;font-size:1rem;padding-left:9px">{{ $data['code'] }}</p>
                                                                             <a href="" style="text-decoration:none">
                                                                                 <p style="box-sizing:border-box;margin:0;margin-bottom:0px;color:#999!important;font-family:Arial,sans-serif;font-style:italic;padding:0;text-align:left;line-height:11px;font-size:11px;padding-left:5px">(Xem mặt vé từ hãng)</p>
                                                                             </a>

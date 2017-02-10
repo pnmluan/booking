@@ -4,14 +4,14 @@ import { Observable } from 'rxjs/Rx';
 import { Configuration } from '../shared/app.configuration';
 
 @Injectable()
-export class ProviderDataService {
+export class MailDataService {
 
 	private actionUrl: string;
 	public imgPath: string;
 
 	constructor(private _Http: Http, private _Configuration: Configuration) {
-		this.actionUrl = _Configuration.apiUrl + 'provider/';
-		this.imgPath = _Configuration.imgPath + 'provider/';
+		this.actionUrl = _Configuration.apiUrl + 'mail/';
+		this.imgPath = _Configuration.imgPath + 'mail/';
 	}
 
 	createAuthorizationHeader(headers: Headers) {
