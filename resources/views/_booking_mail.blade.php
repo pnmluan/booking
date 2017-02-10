@@ -67,7 +67,7 @@
                                                                     <tr style="box-sizing:border-box;padding:0;vertical-align:top;text-align:left">
                                                                         <td style="box-sizing:border-box;word-break:break-word;padding:0px 0px 10px;vertical-align:top;text-align:left;color:rgba(66,66,66,0.7);font-family:Arial,sans-serif;font-weight:normal;margin:0;line-height:19px;font-size:14px;border-collapse:collapse!important">
                                                                             <a style="box-sizing:border-box;color:#2ba6cb;text-decoration:none"></a>
-                                                                            <h6 style="box-sizing:border-box;color:rgba(97,97,97,0.5);font-family:Arial,sans-serif;font-weight:normal;padding:0;margin:0;text-align:right!important;line-height:1.3;word-break:normal;font-size:20px">MÃ HỒ SƠ: <a href="#" style="color:#E44803!important;box-sizing:border-box;text-decoration:none"  target="_blank">235125G309</a></h6>
+                                                                            <h6 style="box-sizing:border-box;color:rgba(97,97,97,0.5);font-family:Arial,sans-serif;font-weight:normal;padding:0;margin:0;text-align:right!important;line-height:1.3;word-break:normal;font-size:20px">MÃ THANH TOÁN: <a href="#" style="color:#E44803!important;box-sizing:border-box;text-decoration:none"  target="_blank">{{ $data['code'] }}</a></h6>
                                                                         </td>
                                                                     </tr>
                                                                 </tbody>

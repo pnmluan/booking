@@ -494,7 +494,6 @@ export class SearchResultComponent implements OnInit, AfterViewInit {
 		let number_children = this.session_flight['children'] ? +this.session_flight['children'] : 0;
 		let number_infants = this.session_flight['infant'] ? +this.session_flight['infant'] : 0;
 		flight['sum'] = (+this.session_flight['adult'] + number_children + number_infants) * ((+flight.price) + (+flight.fee))
-		console.log(flight)
 
 		flight.selected = true;
 		if (flight.direction == 'from') {
@@ -662,6 +661,7 @@ export class SearchResultComponent implements OnInit, AfterViewInit {
 			params.set('adult', this.session_flight['adult']);
 			params.set('children', this.session_flight['children']);
 			params.set('infant', this.session_flight['infant']);
+			params.set('state', 'pending');
 
 			this._BookingDataService.create(params).subscribe(res => {
 				if (res.status == 'success') {
@@ -669,23 +669,24 @@ export class SearchResultComponent implements OnInit, AfterViewInit {
 
 					// Insert Booking Detail
 					for (let key in this.listRoutes) {
-
+						console.log(this.listRoutes[key])
+						var selectedFlight = this.listRoutes[key].selectedFlight;
 						var params: URLSearchParams = new URLSearchParams();
 						params.set('booking_id', booking.id);
-						params.set('from', this.listRoutes[key].from);
-						params.set('start_date', this.listRoutes[key].selectedFlight.start_date);
-						params.set('start_time', this.listRoutes[key].selectedFlight.start_time);
-						params.set('to', this.listRoutes[key].to);
-						params.set('end_date', this.listRoutes[key].selectedFlight.end_date);
-						params.set('end_time', this.listRoutes[key].selectedFlight.end_time);
-						params.set('ticket_type', this.listRoutes[key].selectedFlight.type);
+						params.set('from', selectedFlight.from);
+						params.set('start_date', selectedFlight.start_date);
+						params.set('start_time', selectedFlight.start_time);
+						params.set('to', selectedFlight.to);
+						params.set('end_date', selectedFlight.end_date);
+						params.set('end_time', selectedFlight.end_time);
+						params.set('ticket_type', selectedFlight.type);
 
 						this._BookingDetailDataService.create(params).subscribe(res => {
 							if (res.status == 'success') {
 								let booking_detail = res.data;
 
 								// Insert Passengers
-								this.insertPassengerWithFare(booking_detail.id, this.listRoutes[key]);
+								this.insertPassengerWithFare(booking_detail.id, selectedFlight);
 
 							}
 						});
@@ -702,25 +703,25 @@ export class SearchResultComponent implements OnInit, AfterViewInit {
 	/*=================================
 	 * Insert Passenger with Fare
 	 *=================================*/
-	insertPassengerWithFare(booking_detail_id, route) {
+	insertPassengerWithFare(booking_detail_id, selectedFlight) {
 		
 		for (let k in this.passengers) {
 			var params: URLSearchParams = new URLSearchParams();
 			params.set('booking_detail_id', booking_detail_id);
-			params.set('title', this.passengers[k].title);
+			params.set('customer_type', this.passengers[k].title);
 			params.set('fullname', this.passengers[k].fullname);
 			var date_of_birth = moment(this.passengers[k].date_of_birth['formatted'], this._Configuration.viFormatDate).format(this._Configuration.formatDate);
 			params.set('date_of_birth', date_of_birth);
-			params.set('fare', route.price);
 
 			this._PassengerDataService.create(params).subscribe(res => {
-				console.log(res.data);
 				if (res.data) {
 					let passenger = res.data;
-					this.insertFareInfoAndBaggageType(passenger.id, 1, route);
+					console.log(passenger);
+					// Insert Fare Info
+					this.insertFareInfoAndBaggageType(passenger, 1, selectedFlight);
 
 				}
-				this.selectedStep = 3;
+				
 			});
 		}
 	}
@@ -728,23 +729,38 @@ export class SearchResultComponent implements OnInit, AfterViewInit {
 	/*=================================
 	 * Insert Fare Info And Baggage Type
 	 *=================================*/
-	insertFareInfoAndBaggageType(passenger_id, baggage_type_id, route) {
-		// Insert Contact
-		let provider = this.providers[route.airline];
-		let tax = (+route.price + provider.admin_fee) * 0.1;
+	insertFareInfoAndBaggageType(passenger, baggage_type_id, selectedFlight) {
+		let provider = this.providers[selectedFlight.airline];
+		let key = this.getKeyByAge(passenger.customer_type);
 		var params: URLSearchParams = new URLSearchParams();
-		params.set('passenger_id', passenger_id);
+		params.set('passenger_id', String(passenger.id));
+		params.set('baggage_type_id', String(baggage_type_id));
 		params.set('round_trip', String(this.listRoutes.length));
-		params.set('fare', route.price);
+		
 		params.set('charge', String(50000));
-		params.set('tax', String(tax));
-		params.set('admin_fee', provider.admin_fee);
-		params.set('airport_fee', provider.airport_fee);
-		params.set('security_fee', provider.security_fee);
-		params.set('other_tax', provider.other_tax);
-		params.set('payment_fee', provider.payment_fee);
+		let vat: number;
+		let price: number;
+		if(key == 'infant') {
+			price = provider[key + '_infant'];
+			vat = 0;
+			params.set('airport_fee', String(0));
+			params.set('security_fee', String(0));
+		} else {
+			price = selectedFlight.price;
+			vat = (+selectedFlight.price + provider.admin_fee) * 0.1;
+			params.set('airport_fee', String(provider[key + '_airport_fee']));
+			params.set('security_fee', String(provider[key + '_security_fee']));
+		}
+		params.set('fare', String(price));
+		params.set('vat', String(vat));
+		params.set('admin_fee', String(provider.admin_fee));
+		params.set('other_tax', String(provider.other_tax));
+		params.set('payment_fee', String(provider.payment_fee));
+		console.log(params)
 		this._FareDataService.create(params).subscribe(res => {
-
+			if(res.data) {
+				this.selectedStep = 3;
+			}
 		});
 	}
 
@@ -766,6 +782,26 @@ export class SearchResultComponent implements OnInit, AfterViewInit {
 		});
 	}
 
+	/*=================================
+	 * Get Key By Age
+	 *=================================*/
+	getKeyByAge(customer_type) {
+		let title = '';
+		switch (customer_type) {
+			case 5:
+			case 6:
+				title = 'children';
+				break;
+			case 7:
+			case 8:
+				title = 'children';
+				break;
+			default:
+				title = 'adult';
+				break;
+		}
+		return title;
+	}
 	/*=================================
 	 * Submit Contact Form
 	 *=================================*/
@@ -870,7 +906,9 @@ export class SearchResultComponent implements OnInit, AfterViewInit {
 
 	}
 
-  	// Get Route
+  	/*=================================
+	 * Get Route Flight
+	 *=================================*/
   	protected getRoute(route, option) {
 		route['from_fly_date'] = moment(route['from_date']).format(this._Configuration.formatDate);
 		route['days'] = [];
@@ -886,7 +924,9 @@ export class SearchResultComponent implements OnInit, AfterViewInit {
 		return route;
   	}
 
-  	// Get Date Object
+  	/*=================================
+	 * Get Date Object
+	 *=================================*/
 	protected getDateObject(number, date, isCurrent = false) {
 		var item = {};
 		var format = 'DD-MM-YYYY';
@@ -907,7 +947,9 @@ export class SearchResultComponent implements OnInit, AfterViewInit {
 
   	}
 
-	// Get Name From Code
+	/*=================================
+	 * Get Name From Code
+	 *=================================*/
 	protected getNameFromCode(code: string) {
 		let label = '';
 		for (var key in this.locations) {
@@ -917,6 +959,9 @@ export class SearchResultComponent implements OnInit, AfterViewInit {
 		return label;
 	}
 
+	/*=================================
+	 * Clone
+	 *=================================*/
   	protected clone(obj) {
 		if (null == obj || "object" != typeof obj) return obj;
 		var copy = obj.constructor();
@@ -926,6 +971,9 @@ export class SearchResultComponent implements OnInit, AfterViewInit {
 		return copy;
 	}
 
+	/*=================================
+	 * Generate Code
+	 *=================================*/
 	protected generateCode() {
 		var text = "";
 		var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";

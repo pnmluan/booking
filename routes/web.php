@@ -22,7 +22,7 @@ $app->group(['prefix' => 'api/v1',   'namespace' => 'App\Http\Controllers'], fun
 	| Banner
 	|--------------------------------------------------------------------------
 	*/
-    $app->post('mail/send','MailController@send');
+    $app->post('mail/sendInfoPayment','MailController@sendInfoPayment');
 
 	/*
 	|--------------------------------------------------------------------------

@@ -15,19 +15,20 @@ use Illuminate\Support\Facades\Mail;
 class MailController extends ApiController
 {
 
-    public function send(Request $request) {
-        $email = $request->input('email');
-        $full_name = $request->input('first_name') . ' ' . $request->input('last_name');
+    public function sendInfoPayment(Request $request) {
+        $data = $request->all();
+        if(!empty($data)) {
+            $data['full_name'] = $data['last_name'] . ' ' . $data['first_name'];
 
-
-        $data = ['full_name' => $full_name, 'to' => $email];
-
-        Mail::send('_booking_mail',  ['data'=>$data], function($message) use ($data)
-        {
-            $message->from(env('MAIL_USERNAME') , 'Đặt vé giá rẻ');
-            $message->to($data['to'], $data['full_name']);
-            $message->subject('Thông tin đặt vé - ' . $data['full_name']);
-        });
+            Mail::send('_booking_mail',  ['data'=>$data], function($message) use ($data)
+            {
+                $message->from(env('MAIL_USERNAME') , 'Đặt vé giá rẻ');
+                $message->to($data['email'], $data['full_name']);
+                $message->subject('Thông tin đặt vé - ' . $data['full_name']);
+            });
+        }
 
     }
+
+    
 }
