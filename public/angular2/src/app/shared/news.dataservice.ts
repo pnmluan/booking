@@ -25,6 +25,7 @@ export class NewsDataService {
 		return this._Http.get(this.actionUrl + 'index', { 
 			headers: headers, 
 			withCredentials: true })
+			.retryWhen(errors => errors.delay(1000))
 			.map(res => res.json())
 			.catch(this.handleError);
 

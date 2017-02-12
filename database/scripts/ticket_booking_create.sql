@@ -69,7 +69,7 @@ CREATE TABLE booking_detail (
     `to` varchar(10) NOT NULL,
     end_date varchar(20) NOT NULL,
 	end_time varchar(20) NOT NULL,
-    round_trip  varchar(10)  NOT NULL,
+    direction  varchar(10)  NOT NULL,
 	ticket_type int NOT NULL,
     duration varchar(10) NOT NULL,
     created_at datetime NULL,

@@ -361,27 +361,17 @@
                                                     <div>
                                                         <p class="clearfix">
                                                             <span>Chiều đi :&nbsp;</span>
-                                                            <!--  <select name="" class="form-control">
-                                                            <option value="">Không mang theo hành lý</option>
-                                                            <option value="">Thêm 15kg hành lý (140.000 VNĐ)</option>
-                                                            <option value="">Thêm 20kg hành lý (140.000 VNĐ)</option>
-                                                        </select> -->
-                                                            <select name="from_baggage" class="form-control" [(ngModel)]="baggageOptionsFrom.from_selected">
-                                                                <option value="0">Không mang theo hành lý</option>
-                                                                <option *ngFor="let b of baggageOptionsFrom" value="{{ b.id }}">Thêm {{ b.name }} hành lý ({{ b.fare | number }} VNĐ)</option>
-                                                            </select>
+                                                            <ng-select 
+                                                            name="from_baggage" [(ngModel)]="p.from_baggage" [options]="baggageOptions" [noFilter]="11"
+                                                            (selected)="onChangeBaggageType($event)">
+                                                            </ng-select>
+                                                            
                                                         </p>
                                                         <p class="clearfix" *ngIf="round_trip">
                                                             <span>Chiều về :</span>
-                                                            <!-- <select name="" class="form-control">
-                                                            <option value="">Không mang theo hành lý</option>
-                                                            <option value="">Thêm 15kg hành lý (140.000 VNĐ)</option>
-                                                            <option value="">Thêm 20kg hành lý (140.000 VNĐ)</option>
-                                                        </select> -->
-                                                            <select name="to_baggage" class="form-control" [(ngModel)]="baggageOptionsTo.to_selected">
-                                                                <option value="0">Không mang theo hành lý</option>
-                                                                <option *ngFor="let b of baggageOptionsTo" value="{{ b.id }}">Thêm {{ b.name }} hành lý ({{ b.fare | number }} VNĐ)</option>
-                                                            </select>
+                                                            <ng-select name="to_baggage" [(ngModel)]="p.to_baggage" [options]="baggageOptions" [noFilter]="11">
+                                                            </ng-select>
+                                                            
                                                         </p>
                                                     </div>
                                                 </div>
@@ -406,7 +396,7 @@
                                             <div>
                                                 <label>Quý danh</label>
                                                 <div>
-                                                    <ng-select name="contact_title" [(ngModel)]="contact.title" [options]="adultTitleOptions" [noFilter]="11">
+                                                    <ng-select name="contact_title" [(ngModel)]="contact.title" [options]="titleOptions['adult']" [noFilter]="11">
                                                     </ng-select>
                                                 </div>
                                             </div>
@@ -536,7 +526,7 @@
                                         <tr>
                                             <td>
                                                 <h3>Hành lý thêm</h3></td>
-                                            <td>{{ session_flight.adult }} x {{ route.selectedFlight.fee | number }} VNĐ</td>
+                                            <td>{{ session_flight.adult }} x {{ route.selectedFlight.sum_baggage_type }} VNĐ</td>
                                         </tr>
                                     </tbody>
                                 </table>

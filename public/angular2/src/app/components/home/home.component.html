@@ -77,10 +77,7 @@
                                                                     <i>( >12 tuổi )</i>
                                                                 </div>
                                                                 <div>
-                                                                    <ng-select data-placeholder="" name="adult" [(ngModel)]="Filter.adult" [options]="adultOptions" [noFilter]="1" required></ng-select>
-                                                                    <!-- <select class="select-adult" data-placeholder="" [(ngModel)]="Filter.adult" name="adult">
-                                                                <option *ngFor="let person of people" value="{{ person }}">{{ person }}</option>
-                                                            </select> -->
+                                                                    <ng-select [allowClear]="true" name="adult" [(ngModel)]="Filter.adult" [options]="adultOptions" [noFilter]="1" required></ng-select>
                                                                 </div>
                                                             </div>
                                                         </div>

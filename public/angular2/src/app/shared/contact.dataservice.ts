@@ -22,6 +22,7 @@ export class ContactDataService {
 		let headers = new Headers();
 		this.createAuthorizationHeader(headers);
 		return this._Http.get(this.actionUrl + 'index', {headers: headers})
+			.retryWhen(errors => errors.delay(1000))
 			.map(res => res.json())
 			.catch(this.handleError);
 	}

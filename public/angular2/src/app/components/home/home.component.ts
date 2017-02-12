@@ -53,13 +53,13 @@ export class HomeComponent implements OnInit, AfterViewInit {
 				this.initData();
 			}
 		});
-
+		
+		
 	}
 
 	// initialize data
 	initData() {
 		this.Filter['round_trip'] = 'off';
-		
 		// Location Options
 		this._LocationDataService.getAll().subscribe(res => {
 
