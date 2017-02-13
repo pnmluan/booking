@@ -361,7 +361,7 @@
                                                     <div>
                                                         <div class="clearfix">
                                                             <span>Chiều đi :&nbsp;</span>
-                                                            <div style="overflow: hidden;">
+                                                            <div class="item">
                                                                 <ng-select 
                                                                 name="from_baggage" [(ngModel)]="p.from_baggage" [options]="baggageOptions" [noFilter]="11"
                                                                 (selected)="onChangeBaggageType($event)">
@@ -370,7 +370,7 @@
                                                         </div>
                                                         <div class="clearfix" *ngIf="round_trip">
                                                             <span>Chiều về :</span>
-                                                            <div style="overflow: hidden;">
+                                                            <div class="item">
                                                                 <ng-select name="to_baggage" [(ngModel)]="p.to_baggage" [options]="baggageOptions" [noFilter]="11">
                                                                 </ng-select>
                                                             </div>
