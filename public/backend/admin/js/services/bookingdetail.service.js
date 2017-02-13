@@ -1,10 +1,13 @@
 angular.module('MetronicApp')
     .factory('BookingDetailService', ['$http', '$rootScope', function($http, $rootScope) {
 
-    var urlBase = $rootScope.settings.apiPath + 'BookingDetail';
+    var urlBase = $rootScope.settings.apiPath + 'booking_detail';
     var BookingDetailService = {};
 
-    BookingDetailService.getAll = function () {
+    BookingDetailService.getAll = function (params = null) {
+        if(params) {
+            return $http.get(urlBase + '/index?'+ params);
+        }
         return $http.get(urlBase + '/index');
     };
 

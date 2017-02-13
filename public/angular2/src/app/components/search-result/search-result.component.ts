@@ -493,7 +493,7 @@ export class SearchResultComponent implements OnInit, AfterViewInit {
 	onSelectFlight(flight) {
 		let number_children = this.session_flight['children'] ? +this.session_flight['children'] : 0;
 		let number_infants = this.session_flight['infant'] ? +this.session_flight['infant'] : 0;
-		flight['sum'] = (+this.session_flight['adult'] + number_children + number_infants) * ((+flight.price) + (+flight.fee))
+		// flight['sum'] = (+this.session_flight['adult'] + number_children + number_infants) * ((+flight.price) + (+flight.fee))
 
 		flight.selected = true;
 		if (flight.direction == 'from') {
@@ -678,16 +678,17 @@ export class SearchResultComponent implements OnInit, AfterViewInit {
 					// Insert Booking Detail
 					for (let key in this.listRoutes) {
 						var selectedFlight = this.listRoutes[key].selectedFlight;
+
 						var params: URLSearchParams = new URLSearchParams();
 						params.set('booking_id', booking.id);
-						params.set('from', selectedFlight.from);
+						params.set('from', this.listRoutes[key].from);
 						params.set('start_date', selectedFlight.start_date);
 						params.set('start_time', selectedFlight.start_time);
-						params.set('to', selectedFlight.to);
+						params.set('to', this.listRoutes[key].to);
 						params.set('end_date', selectedFlight.end_date);
 						params.set('end_time', selectedFlight.end_time);
 						params.set('ticket_type', selectedFlight.type);
-						params.set('ticket_type', selectedFlight.type);
+						params.set('provider', selectedFlight.airline);
 
 						this._BookingDetailDataService.create(params).subscribe(res => {
 							if (res.status == 'success') {
@@ -718,7 +719,7 @@ export class SearchResultComponent implements OnInit, AfterViewInit {
 			params.set('booking_detail_id', booking_detail_id);
 			params.set('customer_type', this.passengers[k].title);
 			params.set('fullname', this.passengers[k].fullname);
-			var date_of_birth = moment(this.passengers[k].date_of_birth['formatted'], this._Configuration.viFormatDate).format(this._Configuration.formatDate);
+			var date_of_birth = moment(this.passengers[k].date_of_birth['formatted'], this._Configuration.viFormatDate).format(this._Configuration.dateFormat);
 			params.set('date_of_birth', date_of_birth);
 
 			this._PassengerDataService.create(params).subscribe(res => {
@@ -737,6 +738,7 @@ export class SearchResultComponent implements OnInit, AfterViewInit {
 	 * Insert Fare Info And Baggage Type
 	 *=================================*/
 	insertFareInfoAndBaggageType(passenger, baggage_type_id, selectedFlight) {
+		console.log(passenger)
 		let provider = this.providers[selectedFlight.airline];
 		let key = this.getKeyByAge(passenger.customer_type);
 		var params: URLSearchParams = new URLSearchParams();
@@ -763,6 +765,7 @@ export class SearchResultComponent implements OnInit, AfterViewInit {
 		params.set('admin_fee', String(provider.admin_fee));
 		params.set('other_tax', String(provider.other_tax));
 		params.set('payment_fee', String(provider.payment_fee));
+		console.log(params);
 		this._FareDataService.create(params).subscribe(res => {
 			if(res.data) {
 				this.selectedStep = 3;
@@ -794,12 +797,12 @@ export class SearchResultComponent implements OnInit, AfterViewInit {
 	getKeyByAge(customer_type) {
 		let title = '';
 		switch (customer_type) {
-			case 5:
-			case 6:
+			case '5':
+			case '6':
 				title = 'children';
 				break;
-			case 7:
-			case 8:
+			case '7':
+			case '8':
 				title = 'children';
 				break;
 			default:
@@ -916,7 +919,7 @@ export class SearchResultComponent implements OnInit, AfterViewInit {
 	 * Get Route Flight
 	 *=================================*/
   	protected getRoute(route, option) {
-		route['from_fly_date'] = moment(route['from_date']).format(this._Configuration.formatDate);
+			route['from_fly_date'] = moment(route['from_date']).format(this._Configuration.longFormatDate);
 		route['days'] = [];
 		route['days'].push(this.getDateObject(-3, route['from_date']));
 		route['days'].push(this.getDateObject(-2, route['from_date']));

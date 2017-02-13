@@ -1,0 +1,234 @@
+<div class="modal-header">
+    <h4 class="modal-title">Booking Detail Order #: {{ mItem.code }} <span class="label label-info label-sm"> Email confirmation was sent </span></h4>
+</div>
+<div class="modal-body">
+    <div class="portlet-body">
+        <div class="row">
+            <div class="col-md-6 col-sm-12">
+                <div class="portlet yellow-crusta box">
+                    <div class="portlet-title">
+                        <div class="caption">Order Details </div>
+                    </div>
+                    <div class="portlet-body">
+                        <div class="row static-info">
+                            <div class="col-md-5 name"> Round Trip: </div>
+                            <div class="col-md-7 value"> {{ mItem.round_trip }} </div>
+                        </div>
+                        <div class="row static-info">
+                            <div class="col-md-5 name"> Number: </div>
+                            <div class="col-md-7 value"> Adult: {{ mItem.adult }}, Children: {{ mItem.children }}, Infant: {{ mItem.infant }}</div>
+                        </div>
+                        <div class="row static-info">
+                            <div class="col-md-5 name"> Order Date &amp; Time: </div>
+                            <div class="col-md-7 value"> {{ mItem.created_at }} </div>
+                        </div>
+                        <div class="row static-info">
+                            <div class="col-md-5 name"> Order Status: </div>
+                            <div class="col-md-7 value">
+                                <span ng-if="mItem.state == 'approve'" class="label label-success"> Approved </span>
+                                <span ng-if="mItem.state != 'approve'" class="label label-info"> Pending </span>
+                            </div>
+                        </div>
+                        <!-- <div class="row static-info">
+                                        <div class="col-md-5 name"> Grand Total: </div>
+                                        <div class="col-md-7 value"> $175.25 </div>
+                                    </div> -->
+                        <!-- <div class="row static-info">
+                                        <div class="col-md-5 name"> Payment Information: </div>
+                                        <div class="col-md-7 value"> Credit Card </div>
+                                    </div> -->
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-sm-12">
+                <div class="portlet blue-hoki box">
+                    <div class="portlet-title">
+                        <div class="caption">Customer Information </div>
+                    </div>
+                    <div class="portlet-body">
+                        <div class="row static-info">
+                            <div class="col-md-5 name"> Customer Name: </div>
+                            <div class="col-md-7 value"> {{ mItem.fullname }} </div>
+                        </div>
+                        <div class="row static-info">
+                            <div class="col-md-5 name"> Email: </div>
+                            <div class="col-md-7 value"> {{ mItem.email }} </div>
+                        </div>
+                        <div class="row static-info">
+                            <div class="col-md-5 name"> Phone Number: </div>
+                            <div class="col-md-7 value"> {{ mItem.phone }} </div>
+                        </div>
+                        <div class="row static-info">
+                            <div class="col-md-5 name"> Requirement: </div>
+                            <div class="col-md-7 value"> {{ mItem.requirement }} </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- <div class="row">
+                        <div class="col-md-6 col-sm-12">
+                            <div class="portlet green-meadow box">
+                                <div class="portlet-title">
+                                    <div class="caption">
+                                        <i class="fa fa-cogs"></i>Billing Address </div>
+                                    <div class="actions">
+                                        <a href="javascript:;" class="btn btn-default btn-sm">
+                                            <i class="fa fa-pencil"></i> Edit </a>
+                                    </div>
+                                </div>
+                                <div class="portlet-body">
+                                    <div class="row static-info">
+                                        <div class="col-md-12 value"> Jhon Done
+                                            <br> #24 Park Avenue Str
+                                            <br> New York
+                                            <br> Connecticut, 23456 New York
+                                            <br> United States
+                                            <br> T: 123123232
+                                            <br> F: 231231232
+                                            <br> </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-sm-12">
+                            <div class="portlet red-sunglo box">
+                                <div class="portlet-title">
+                                    <div class="caption">
+                                        <i class="fa fa-cogs"></i>Shipping Address </div>
+                                    <div class="actions">
+                                        <a href="javascript:;" class="btn btn-default btn-sm">
+                                            <i class="fa fa-pencil"></i> Edit </a>
+                                    </div>
+                                </div>
+                                <div class="portlet-body">
+                                    <div class="row static-info">
+                                        <div class="col-md-12 value"> Jhon Done
+                                            <br> #24 Park Avenue Str
+                                            <br> New York
+                                            <br> Connecticut, 23456 New York
+                                            <br> United States
+                                            <br> T: 123123232
+                                            <br> F: 231231232
+                                            <br> </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div> -->
+        <div class="row">
+            <div class="col-md-12 col-sm-12">
+                <div class="portlet grey-cascade box">
+                    <div class="portlet-title">
+                        <div class="caption">Route </div>
+                    </div>
+                    <div class="portlet-body">
+                        <div class="table-responsive">
+                            <table class="table table-hover table-bordered table-striped">
+                                <thead>
+                                    <tr>
+                                        <!-- <th class="bs-checkbox " style="width: 36px; " data-field="state" tabindex="0">
+                                            <div class="th-inner ">
+                                                <label class="mt-checkbox mt-checkbox-single mt-checkbox-outline">
+                                                    <input ng-click="onShowPassengers()" name="btSelectAll" type="checkbox"><span></span></label>
+                                            </div>
+                                        </th> -->
+                                        <th> From </th>
+                                        <th> To </th>
+                                        <th> Date </th>
+                                        <th> Start Time </th>
+                                        <th> End Time </th>
+                                        <th> Total </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr ng-repeat="detail in mItem.details">
+                                        <!-- <td>
+                                            <div class="th-inner ">
+                                                <label class="mt-checkbox mt-checkbox-single mt-checkbox-outline">
+                                                    <input ng-click="onShowPassengers($index)" name="btSelectAll" type="checkbox"><span></span></label>
+                                            </div>
+                                        </td> -->
+                                        <td>{{ detail.from }}</td>
+                                        <td>{{ detail.to }}</td>
+                                        <td> {{ detail.start_date }} </td>
+                                        <td> {{ detail.start_time }} </td>
+                                        <td> {{ detail.end_time }} </td>
+                                        <td> {{ detail.total | number }} </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row"  ng-repeat="detail in mItem.details">
+          <div class="col-md-12 col-sm-12">
+                <div class="portlet grey-cascade box">
+                    <div class="portlet-title">
+                        <div class="caption">Route: {{ detail.from }} -> {{ detail.to }}</div>
+                    </div>
+                    <div class="portlet-body">
+                        <div class="table-responsive">
+                            <table class="table table-hover table-bordered table-striped">
+                                <thead>
+                                    <tr>
+                                    <th>Customer Type</th>
+                                    <th>Fullname </th>
+                                    <th>BirthDay </th>
+                                    <th>Fare with Tax</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                    <tr ng-repeat="p in detail.passengers">
+                                    <td>{{ customerTypeOptions[p.customer_type] }}</td>
+                                    <td>{{ p.fullname }}</td>
+                                    <td>{{ p.birthday }}</td>
+                                    <td>{{ p.fare_tax | number }}</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+        <div class="row">
+            <div class="col-md-6"> </div>
+            <div class="col-md-6">
+                <div class="well">
+                    <div class="row static-info align-reverse">
+                        <div class="col-md-8 name"> Sub Total: </div>
+                        <div class="col-md-3 value"> $1,124.50 </div>
+                    </div>
+                    <div class="row static-info align-reverse">
+                        <div class="col-md-8 name"> Shipping: </div>
+                        <div class="col-md-3 value"> $40.50 </div>
+                    </div>
+                    <div class="row static-info align-reverse">
+                        <div class="col-md-8 name"> Grand Total: </div>
+                        <div class="col-md-3 value"> $1,260.00 </div>
+                    </div>
+                    <div class="row static-info align-reverse">
+                        <div class="col-md-8 name"> Total Paid: </div>
+                        <div class="col-md-3 value"> $1,260.00 </div>
+                    </div>
+                    <div class="row static-info align-reverse">
+                        <div class="col-md-8 name"> Total Refunded: </div>
+                        <div class="col-md-3 value"> $0.00 </div>
+                    </div>
+                    <div class="row static-info align-reverse">
+                        <div class="col-md-8 name"> Total Due: </div>
+                        <div class="col-md-3 value"> $1,124.50 </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal-footer">
+    <button type="button" class="btn default" data-dismiss="modal" ng-click="close()">Close</button>
+    <button type="button" class="btn blue" ng-click="onApprove()">Approve</button>
+</div>

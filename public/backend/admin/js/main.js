@@ -70,6 +70,22 @@ MetronicApp.factory('settings', ['$rootScope', function($rootScope) {
         layoutPath: '../assets/layouts/layout',
         apiPath: '/booking/public/api/v1/',
         imgPath: '../assets/apps/img/',
+        btnUpdate: `<button class="btn btn-sm green btn-outline filter-submit margin-bottom clickToUpdate"><i class="fa fa-edit"></i> Edit</button>`,
+        btnDelete: `<button class="btn btn-sm red btn-outline filter-cancel clickToDelete"><i class="fa fa-trash"></i> Delete</button>`,
+        btnView: `<button class="btn btn-sm blue btn-outline filter-cancel clickToView"><i class="fa fa-book"></i> View</button>`,
+        statePending: `<span class="label label-sm label-info"> Pending </span>`,
+        stateApproved: `<span class="label label-sm label-success"> Approved </span>`,
+        customerTypeOptions:{
+            '1': 'Anh',
+            '2': 'Chị',
+            '3': 'Ông',
+            '4': 'Bà',
+            '5': 'Bé Trai',
+            '6': 'Bé Gái',
+            '7': 'Em Bé Trai',
+            '8': 'Em Bé Gái' 
+        }
+            
     };
 
     $rootScope.settings = settings;
@@ -199,9 +215,11 @@ MetronicApp.config(['$stateProvider', '$urlRouterProvider', function($stateProvi
                         name: 'MetronicApp',
                         insertBefore: '#ng_load_plugins_before', // load the above css files before a LINK element with this ID. Dynamic CSS files must be loaded between core and theme css files
                         files: [
-                            '../assets/global/plugins/dropzone/dropzone.min.js',
                             'js/controllers/BookingController.js',
-                            'js/services/booking.service.js'
+                            'js/services/booking.service.js',
+                            'js/services/bookingdetail.service.js',
+                            'js/services/passenger.service.js',
+                            'js/services/baggagetype.service.js',
                         ] 
                     });
                 }]

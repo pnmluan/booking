@@ -10,7 +10,7 @@ export class Configuration {
 	public authentic = btoa(this.userAuth + ':' + this.passAuth);
 
 	public imgPath = this.server + "backend/assets/apps/img/";
-	public formatDate = "dddd - DD/MM/YYYY";
+	public longFormatDate = "dddd - DD/MM/YYYY";
 	public viFormatDate = "DD/MM/YYYY";
 	public dateFormat = 'YYYY-MM-DD';
 	public session_expired = 30/60; //Session 15 mins

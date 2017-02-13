@@ -27,12 +27,19 @@ class BookingDetail extends BaseModel
 
         $aColumns = ['booking_id', 'code', 'from', 'start_time', 'start_date', 'from', 'end_time', 'end_date', 'round_trip', 'duration'];
 
+        $equalColumns = ['booking_id'];
+
         $query = \DB::table('booking_detail')
             ->select(\DB::raw('SQL_CALC_FOUND_ROWS id'),\DB::raw('id AS DT_RowId'),'booking_detail.*');
 
         // Filter search condition
         foreach ($aColumns as $key => $value) {
-            (isset($param[$value]) && $param[$value]) && $query->where($value,'like','%'.$param[$value].'%');
+            if(in_array($value, $equalColumns)) {
+                (isset($param[$value]) && $param[$value]) && $query->where($value,'=', $param[$value]);
+            } else {
+                (isset($param[$value]) && $param[$value]) && $query->where($value,'like','%'.$param[$value].'%');
+            }
+            
         }
 
         //======================= SEARCH =================
@@ -86,6 +93,16 @@ class BookingDetail extends BaseModel
         // $query = preg_replace('# null#', '', $query);
 
         $data = $query->get();
+
+        // Add album_ticket 
+        foreach ($data as $key => $value) {
+            $passenger = \DB::table('passenger')
+            ->select('passenger.*', 'fare.*')
+            ->leftJoin('fare', 'fare.passenger_id', '=', 'passenger.id')
+            ->where('booking_detail_id', $value->id)->get();
+            $data[$key]->passengers = $passenger;
+        }
+
 
         \DB::setFetchMode(\PDO::FETCH_ASSOC);
         $total = \DB::select('SELECT FOUND_ROWS() as rows');

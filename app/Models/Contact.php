@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Contact extends BaseModel
 {
     protected $table = 'contact'; 
-    protected $fillable = ['booking_id', 'title', 'first_name', 'last_name', 'phone', 'email'];
+    protected $fillable = ['booking_id', 'title', 'first_name', 'last_name', 'fullname', 'phone', 'email'];
 
     public function getModelValidations()
     {
@@ -18,7 +18,7 @@ class Contact extends BaseModel
 
     public static function listItems(array $param = null){
 
-        $aColumns = ['booking_id', 'title', 'first_name', 'last_name', 'phone', 'email'];
+        $aColumns = ['booking_id', 'title', 'first_name', 'last_name', 'fullname', 'phone', 'email'];
 
         $query = \DB::table('contact')
             ->select(\DB::raw('SQL_CALC_FOUND_ROWS id'),\DB::raw('id AS DT_RowId'),'contact.*');

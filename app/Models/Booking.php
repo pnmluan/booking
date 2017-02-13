@@ -18,7 +18,7 @@ class Booking extends BaseModel
 
     public static function listItems(array $param = null){
 
-        $aColumns = ['booking.code','booking.round_trip', 'booking.adult', 'booking.children', 'booking.infant', 'booking.state', 'contact.fullname', 'contact.phone', 'contact.email', 'contact.requirement'];
+        $aColumns = ['booking.code','booking.round_trip', 'booking.adult', 'booking.children', 'booking.infant', 'booking.state',  'contact.phone', 'contact.email', 'contact.requirement'];
 
         $query = \DB::table('booking')
             ->select(\DB::raw('SQL_CALC_FOUND_ROWS booking.id'),\DB::raw('booking.id AS DT_RowId'),'booking.*', 'contact.fullname', 'contact.phone', 'contact.email', 'contact.requirement')
@@ -45,17 +45,19 @@ class Booking extends BaseModel
                 $sWhere = substr_replace( $sWhere, "", -4 );
             }
             /* Individual column filtering */
-            for($i=0; $i<$count; $i++){
-                $requestColumn = $param['columns'][$i];
-                if ($requestColumn['searchable']=="true" && $requestColumn['search']['value'] != '' ){
-                    if ($sWhere == "" ){
-                        $sWhere = "WHERE ";
-                    }else{
-                        $sWhere .= " AND ";
-                    }
-                    $sWhere .= $aColumns[$i]." LIKE '%".mysql_real_escape_string($requestColumn['search']['value'])."%' ";
-                }
-            }
+            // for($i=0; $i<$count; $i++){
+            //     $requestColumn = $param['columns'][$i];
+            //     var_dump($requestColumn);
+            //     var_dump('---------');
+            //     if ($requestColumn['searchable']=="true" && $requestColumn['search']['value'] != '' ){
+            //         if ($sWhere == "" ){
+            //             $sWhere = "WHERE ";
+            //         }else{
+            //             $sWhere .= " AND ";
+            //         }
+            //         $sWhere .= $aColumns[$i]." LIKE '%".mysql_real_escape_string($requestColumn['search']['value'])."%' ";
+            //     }
+            // }die;
 
             if($sWhere != ""){
                 $query->where(\DB::raw($sWhere));
