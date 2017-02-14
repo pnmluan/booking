@@ -1,5 +1,5 @@
 import { Component, OnInit, AfterViewInit, ViewChild } from '@angular/core';
-import { Observable } from 'rxjs/Observable';
+import { Observable } from 'rxjs/Rx';
 import { UUID } from 'angular2-uuid';
 import { Router, ActivatedRoute } from "@angular/router";
 import {
@@ -22,7 +22,8 @@ import { LocationDataService,
 	PassengerDataService,
 	BaggageTypeDataService,
 	ProviderDataService,
-	FareDataService
+	FareDataService,
+	MailDataService
 } from '../../shared';
 
 import { Contact } from '../../models';
@@ -34,7 +35,8 @@ declare let jQuery: any;
   selector: 'search-result',
   templateUrl: './search-result.component.html',
   providers: [LocationDataService, AirlineDataService, BookingDataService, BookingDetailDataService, 
-	  ContactDataService, PassengerDataService, BaggageTypeDataService, ProviderDataService, FareDataService]
+	  ContactDataService, PassengerDataService, BaggageTypeDataService, ProviderDataService, FareDataService,
+	  MailDataService]
 })
 export class SearchResultComponent implements OnInit, AfterViewInit {
 	@ViewChild('warning') warning: ModalComponent;
@@ -86,6 +88,7 @@ export class SearchResultComponent implements OnInit, AfterViewInit {
 		private _BaggageTypeDataService: BaggageTypeDataService,
 		private _ProviderDataService: ProviderDataService,
 		private _FareDataService: FareDataService,
+		private _MailDataService: MailDataService,
 		private sessionStorage: LocalStorageService, 
 		private _ActivatedRoute: ActivatedRoute, 
 		private _Router: Router,
@@ -326,7 +329,7 @@ export class SearchResultComponent implements OnInit, AfterViewInit {
 		if (airline) {
 			if (airline.dep_flights) {
 				for (let k in airline.dep_flights) {
-					airline.dep_flights[k].price_tax = this.processFareWithTaxAdult(+airline.dep_flights[k].price, this.providers[key]);
+					airline.dep_flights[k].price_tax = this.processFareWithTax('adult', +airline.dep_flights[k].price, this.providers[key]);
 				}
 			}
 		}
@@ -336,12 +339,30 @@ export class SearchResultComponent implements OnInit, AfterViewInit {
 	/*=================================
 	 * Process Fare With Tax
 	 *=================================*/
-	processFareWithTaxAdult(price, provider) {
-		let vat = (price + provider.admin_fee) * 0.1;
-		let sum = Math.round(price + vat + provider.adult_airport_fee + provider.adult_security_fee + provider.payment_fee);
-
+	processFareWithTax(type:String, price:number, provider) {
+		let vat = 0;
+		if(provider != 'vna') {
+			vat = price * 0.1;
+		} else {
+			vat = (price + provider.admin_fee) * 0.1;
+		}
+		
+		let sum = 0;
+		switch (type) {
+			case "adult":
+				sum = provider.adult_airport_fee + provider.adult_security_fee;
+				break;
+			case "children":
+				sum = provider.children_airport_fee + provider.children_security_fee;
+				break;
+			default:
+				sum = 0;
+				break;
+		}
+		sum = Math.round(price + vat + sum + provider.payment_fee);
 		return sum;
 	}
+
 
 	/*=================================
 	 * Filter airlines
@@ -493,9 +514,17 @@ export class SearchResultComponent implements OnInit, AfterViewInit {
 	onSelectFlight(flight) {
 		let number_children = this.session_flight['children'] ? +this.session_flight['children'] : 0;
 		let number_infants = this.session_flight['infant'] ? +this.session_flight['infant'] : 0;
-		// flight['sum'] = (+this.session_flight['adult'] + number_children + number_infants) * ((+flight.price) + (+flight.fee))
-
+		flight.children_price_tax = 0;
+		if(number_children) {
+			flight.children_price_tax = this.processFareWithTax('children', +flight.price, this.providers[flight.airline]);
+		}
+		flight.infant_price_tax = 0;
+		if(number_infants) {
+			flight.infant_price_tax = this.processFareWithTax('infant', +flight.price, this.providers[flight.airline]);
+		}
+		flight.sum = (+this.session_flight['adult'] * (+flight.price) + number_children * flight.children_price_tax + number_infants * flight.infant_price_tax);
 		flight.selected = true;
+		
 		if (flight.direction == 'from') {
 			flight['directionvi'] = 'Lượt đi';
 			this.listRoutes[0]['selectedFlight'] = flight;
@@ -512,10 +541,10 @@ export class SearchResultComponent implements OnInit, AfterViewInit {
 			(this.session_flight['round_trip'] == 'on' && this.listRoutes[0]['selectedFlight'] 
 				&& this.listRoutes[1]['selectedFlight'])) {
 
-			this.generateNumberOptions(+this.session_flight['adult'], 'Người lớn', 'adult');
-			this.generateNumberOptions(+this.session_flight['children'], 'Trẻ em', 'children');
-			this.generateNumberOptions(+this.session_flight['infant'], 'Em bé', 'infant');
-
+			this.generateNumberOptions(+this.session_flight['adult'], 'Người lớn', 'adult', '1');
+			this.generateNumberOptions(+this.session_flight['children'], 'Trẻ em', 'children', '5');
+			this.generateNumberOptions(+this.session_flight['infant'], 'Em bé', 'infant', '7');
+console.log(this.passengers)
 			this.generalData['str_people'] = this.generateStrCustomers();
 			this.generalData['spend_time'] = this.estimateSpendTime(flight['start_time'], flight['end_time']);
 			
@@ -540,7 +569,7 @@ export class SearchResultComponent implements OnInit, AfterViewInit {
 				let options = [{ value: '0', label: 'Không mang theo hành lý' }];
 				for (let key in baggageTypes) {
 					var label = 'Thêm ' + baggageTypes[key].name + ' hành lý ' + baggageTypes[key].fare + ' VNĐ';
-					var temp = { value: baggageTypes[key].id, label: label };
+					var temp = { value: String(baggageTypes[key].id), label: label };
 					options.push(temp);
 				}
 				this.baggageOptions = options;
@@ -552,10 +581,10 @@ export class SearchResultComponent implements OnInit, AfterViewInit {
 	/*=================================
 	 * Generate string of customer
 	 *=================================*/
-	generateNumberOptions(n: number, label: string, key: string) {
+	generateNumberOptions(n: number, label: string, key: string, customer_type: string) {
 		for (let i = 1; i <= n; i++) {
 			let obj = {
-				title: String(this.titleOptions[key][0].value), 
+				customer_type: customer_type, 
 				fullname: '', 
 				date_of_birth: '', 
 				name: label, 
@@ -674,17 +703,18 @@ export class SearchResultComponent implements OnInit, AfterViewInit {
 			this._BookingDataService.create(params).subscribe(res => {
 				if (res.status == 'success') {
 					let booking = res.data;
-
+					let routes = [];
 					// Insert Booking Detail
 					for (let key in this.listRoutes) {
-						var selectedFlight = this.listRoutes[key].selectedFlight;
+						var detailRoute = this.listRoutes[key];
+						var selectedFlight = detailRoute.selectedFlight;
 
 						var params: URLSearchParams = new URLSearchParams();
 						params.set('booking_id', booking.id);
-						params.set('from', this.listRoutes[key].from);
+						params.set('from', detailRoute.from);
 						params.set('start_date', selectedFlight.start_date);
 						params.set('start_time', selectedFlight.start_time);
-						params.set('to', this.listRoutes[key].to);
+						params.set('to', detailRoute.to);
 						params.set('end_date', selectedFlight.end_date);
 						params.set('end_time', selectedFlight.end_time);
 						params.set('ticket_type', selectedFlight.type);
@@ -699,8 +729,13 @@ export class SearchResultComponent implements OnInit, AfterViewInit {
 
 							}
 						});
-					}
+						var route = JSON.parse(JSON.stringify(detailRoute));
+						delete route.days;
+						delete route.flights;
 
+						routes.push(route);
+					}
+					this.sendInfoPayment(routes);
 					this.insertContactInfo(booking.id);
 				}
 			});
@@ -717,7 +752,7 @@ export class SearchResultComponent implements OnInit, AfterViewInit {
 		for (let k in this.passengers) {
 			var params: URLSearchParams = new URLSearchParams();
 			params.set('booking_detail_id', booking_detail_id);
-			params.set('customer_type', this.passengers[k].title);
+			params.set('customer_type', this.passengers[k].customer_type);
 			params.set('fullname', this.passengers[k].fullname);
 			var date_of_birth = moment(this.passengers[k].date_of_birth['formatted'], this._Configuration.viFormatDate).format(this._Configuration.dateFormat);
 			params.set('date_of_birth', date_of_birth);
@@ -738,7 +773,6 @@ export class SearchResultComponent implements OnInit, AfterViewInit {
 	 * Insert Fare Info And Baggage Type
 	 *=================================*/
 	insertFareInfoAndBaggageType(passenger, baggage_type_id, selectedFlight) {
-		console.log(passenger)
 		let provider = this.providers[selectedFlight.airline];
 		let key = this.getKeyByAge(passenger.customer_type);
 		var params: URLSearchParams = new URLSearchParams();
@@ -765,11 +799,31 @@ export class SearchResultComponent implements OnInit, AfterViewInit {
 		params.set('admin_fee', String(provider.admin_fee));
 		params.set('other_tax', String(provider.other_tax));
 		params.set('payment_fee', String(provider.payment_fee));
-		console.log(params);
+		
 		this._FareDataService.create(params).subscribe(res => {
 			if(res.data) {
 				this.selectedStep = 3;
+				
 			}
+		});
+	}
+
+	/*=================================
+	 * Send Info Payment Mail
+	 *=================================*/
+	sendInfoPayment(routes) {
+
+		var params: URLSearchParams = new URLSearchParams();
+		params.set('routes', JSON.stringify(routes));
+		params.set('fullname', this.contact['fullname']);
+		params.set('phone', this.contact['phone']);
+		params.set('email', this.contact['email']);
+		params.set('requirement', this.contact['requirement']);
+		params.set('code', this.generalData['generateCode']);
+		
+
+		this._MailDataService.sendInfoPayment(params).subscribe(res => {
+
 		});
 	}
 
@@ -803,7 +857,7 @@ export class SearchResultComponent implements OnInit, AfterViewInit {
 				break;
 			case '7':
 			case '8':
-				title = 'children';
+				title = 'infant';
 				break;
 			default:
 				title = 'adult';
@@ -812,10 +866,18 @@ export class SearchResultComponent implements OnInit, AfterViewInit {
 		return title;
 	}
 	/*=================================
-	 * Submit Contact Form
+	 * Back to First Step
 	 *=================================*/
-	onSubmitContact() {
+	onBackToFirstStep() {
+		this.selectedStep = 0;
+		this.onResearch(true);
+	}
 
+	/*=================================
+	 * Change Baggage Type
+	 *=================================*/
+	onChangeBaggageType(value) {
+			console.log(value)
 	}
 
 	/*=================================

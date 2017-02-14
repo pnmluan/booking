@@ -14,7 +14,7 @@ use Illuminate\Database\Eloquent\Model;
 class BookingDetail extends BaseModel
 {
     protected $table = 'booking_detail';
-    protected $fillable = ['booking_id', 'from', 'start_time', 'start_date', 'from', 'end_time', 'end_date', 'round_trip', 'duration'];
+    protected $fillable = ['booking_id', 'from', 'start_time', 'start_date', 'to', 'end_time', 'end_date', 'round_trip', 'duration'];
 
     public function getModelValidations()
     {
@@ -25,7 +25,7 @@ class BookingDetail extends BaseModel
 
     public static function listItems(array $param = null){
 
-        $aColumns = ['booking_id', 'code', 'from', 'start_time', 'start_date', 'from', 'end_time', 'end_date', 'round_trip', 'duration'];
+        $aColumns = ['booking_id', 'code', 'from', 'start_time', 'start_date', 'to', 'end_time', 'end_date', 'round_trip', 'duration'];
 
         $equalColumns = ['booking_id'];
 
@@ -97,8 +97,9 @@ class BookingDetail extends BaseModel
         // Add album_ticket 
         foreach ($data as $key => $value) {
             $passenger = \DB::table('passenger')
-            ->select('passenger.*', 'fare.*')
+            ->select('passenger.*', 'fare.*', \DB::raw('baggage_type.fare AS baggage_type_fare'), \DB::raw('baggage_type.name AS baggage_type_name'), 'baggage_type.provider')
             ->leftJoin('fare', 'fare.passenger_id', '=', 'passenger.id')
+            ->leftJoin('baggage_type', 'fare.baggage_type_id', '=', 'baggage_type.id')
             ->where('booking_detail_id', $value->id)->get();
             $data[$key]->passengers = $passenger;
         }

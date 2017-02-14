@@ -336,19 +336,19 @@
                                                 <tbody>
                                                     <tr>
                                                         <td>
-                                                            <ng-select name="title" [(ngModel)]="p.title" [options]="titleOptions[p.key]" [noFilter]="11">
+                                                            <ng-select name="customer_type{{i}}" [(ngModel)]="p.customer_type" [options]="titleOptions[p.key]" [noFilter]="11">
                                                             </ng-select>
                                                         </td>
                                                         <td>
                                                             <input name="fullname" type='text' class="form-control" [ngClass]="{'has-error': p.error_fullname}" [(ngModel)]="p.fullname">
                                                         </td>
                                                         <td class='input-group' [ngClass]="{'has-error': p.error_date_of_birth}">
-                                                            <ng2-datepicker name="date_of_birth" [options]="datepickerOptions" [(ngModel)]="p.date_of_birth" required></ng2-datepicker>
+                                                            <ng2-datepicker name="date_of_birth{{i}}" [options]="datepickerOptions" [(ngModel)]="p.date_of_birth" required></ng2-datepicker>
                                                         </td>
                                                     </tr>
                                                 </tbody>
                                             </table>
-                                            <div class="luggage-info">
+                                            <div class="luggage-info" *ngIf="p.key == 'adult'">
                                                 <h4 class="luggage-title">Thông tin hành lý</h4>
                                                 <div class="field clearfix">
                                                     <label>Hành lý xách tay </label>
@@ -517,11 +517,11 @@
                                         </tr>
                                         <tr *ngIf="session_flight.children">
                                             <td>Trẻ em</td>
-                                            <td>{{ session_flight.children }} x {{ route.selectedFlight.price_tax | number }} VNĐ</td>
+                                            <td>{{ session_flight.children }} x {{ route.selectedFlight.children_price_tax | number }} VNĐ</td>
                                         </tr>
-                                        <tr *ngIf="session_flight.infants">
+                                        <tr *ngIf="session_flight.infant">
                                             <td>Em bé</td>
-                                            <td>{{ session_flight.infants }} x {{ route.selectedFlight.price_tax | number }} VNĐ</td>
+                                            <td>{{ session_flight.infant }} x {{ route.selectedFlight.infant_price_tax | number }} VNĐ</td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -546,7 +546,7 @@
                             </div>
                         </div>
                         <div class="prev-page">
-                            <button type="button" class="btn"><i class="fa fa-angle-double-left" aria-hidden="true"></i> Quay về trang kết quả</button>
+                            <button (click)="onBackToFirstStep()" type="button" class="btn"><i class="fa fa-angle-double-left" aria-hidden="true"></i> Quay về trang kết quả</button>
                         </div>
                         <div class="how-to">
                             <h3>Tôi làm thế nào ?</h3>

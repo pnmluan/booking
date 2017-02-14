@@ -17,14 +17,14 @@ class MailController extends ApiController
 
     public function sendInfoPayment(Request $request) {
         $data = $request->all();
+        $data['routes'] = json_decode($data['routes']);
         if(!empty($data)) {
-            $data['full_name'] = $data['last_name'] . ' ' . $data['first_name'];
 
             Mail::send('_booking_mail',  ['data'=>$data], function($message) use ($data)
             {
                 $message->from(env('MAIL_USERNAME') , 'Đặt vé giá rẻ');
-                $message->to($data['email'], $data['full_name']);
-                $message->subject('Thông tin đặt vé - ' . $data['full_name']);
+                $message->to($data['email'], $data['fullname']);
+                $message->subject('Thông tin đặt vé - ' . $data['fullname']);
             });
         }
 

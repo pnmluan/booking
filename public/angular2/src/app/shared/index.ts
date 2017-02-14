@@ -13,3 +13,4 @@ export * from './baggagetype.dataservice';
 export * from './categoryticket.dataservice';
 export * from './entranceticket.dataservice';
 export * from './albumticket.dataservice';
+export * from './mail.dataservice';

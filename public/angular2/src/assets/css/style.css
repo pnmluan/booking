@@ -522,14 +522,19 @@ ul.footerlist li a:hover{color:#F69E1C; text-decoration:none;}
 .luggage-info .field { margin-bottom: 5px; }
 .price-condition .field label,
 .luggage-info .field label { width: 150px; float: left; font-style: italic; }
-.price-condition .field > div,
-.luggage-info .field > div { overflow: hidden; }
+.price-condition .field > div { overflow: hidden; }
 .luggage-info .field > div p { margin-bottom: 10px; }
 .luggage-info .field label { font-weight: normal; }
 .customer-title-1 { font-weight: bold; margin-bottom: 5px; }
 .luggage-info p span { float: left; margin-right: 10px;}
 .luggage-info p select { border: 1px solid #ddd; float: left; display: inline-block; width: auto; height: 28px; padding: 0px 5px; }
 .customer-info .form-control { height: 28px; padding: 0px 5px; }
+
+
+.luggage-info .field > div { float: left; width: calc(100% - 160px); }
+.luggage-info .item { margin-bottom: 10px; }
+.luggage-info .item span { float: left; display: block; width: 80px; }
+.luggage-info .item > div { float: left; width: calc(100% - 80px); max-width: 350px; }
 
 .people-info { margin-bottom: 25px; }
 .people-info-inner {}
@@ -1523,6 +1528,13 @@ ng-select > div > div.single > div.clear, ng-select > div > div.single > div.tog
     top: 1px;
     right: 5px;
 }
+
+/***** #modalShoppingCart *****/
+#modalShoppingCart .modal-header { background-color: #649931; color: #fff; border-top-left-radius: 6px; border-top-right-radius: 6px; }
+#modalShoppingCart .widget { margin-bottom: 0px; }
+#modalShoppingCart .nicdark_margin020 { margin: 0px; }
+.widget ul li { color: #333; }
+.widget ul li a { color: #649931; }
 
 
 

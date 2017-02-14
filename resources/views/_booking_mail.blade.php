@@ -151,6 +151,7 @@
                                                     </tr>
                                                 </tbody>
                                             </table>
+                                            @foreach ($data['routes'] as $route)
                                             <table style="box-sizing:border-box;border-spacing:0;border-collapse:collapse;padding:0;vertical-align:top;text-align:center!important;width:100%;background:rgba(250,250,250,0.8);border:1px solid #ddd;padding-bottom:0!important">
                                                 <tbody>
                                                     <tr style="box-sizing:border-box;padding:0;vertical-align:top;text-align:left">
@@ -161,9 +162,9 @@
                                                                         <td style="box-sizing:border-box;word-break:break-word;padding:0px 0px 10px;vertical-align:top;text-align:left;color:rgba(66,66,66,0.7);font-family:Arial,sans-serif;font-weight:normal;margin:0;line-height:19px;font-size:14px;padding-left:7px;border-collapse:collapse!important">
                                                                             <div style="box-sizing:border-box;font-size:16px;vertical-align:super">MÃ ĐẶT CHỖ</div>
                                                                             <p style="box-sizing:border-box;margin:0;margin-bottom:5px;color:#424242!important;font-family:Arial,sans-serif;font-weight:bold;padding:0;text-align:left;line-height:19px;font-size:1rem;padding-left:9px">{{ $data['code'] }}</p>
-                                                                            <a href="" style="text-decoration:none">
+                                                                            <!-- <a href="" style="text-decoration:none">
                                                                                 <p style="box-sizing:border-box;margin:0;margin-bottom:0px;color:#999!important;font-family:Arial,sans-serif;font-style:italic;padding:0;text-align:left;line-height:11px;font-size:11px;padding-left:5px">(Xem mặt vé từ hãng)</p>
-                                                                            </a>
+                                                                            </a> -->
                                                                         </td>
                                                                         <td style="box-sizing:border-box;word-break:break-word;padding:0!important;vertical-align:top;text-align:left;color:rgba(66,66,66,0.7);font-family:Arial,sans-serif;font-weight:normal;margin:0;line-height:19px;font-size:14px;width:0px;border-collapse:collapse!important"></td>
                                                                     </tr>
@@ -175,11 +176,11 @@
                                                                 <tbody>
                                                                     <tr style="box-sizing:border-box;padding:0;vertical-align:top;text-align:left">
                                                                         <td style="box-sizing:border-box;word-break:break-word;padding:0px 0px 10px;vertical-align:top;text-align:left;color:rgba(66,66,66,0.7);font-family:Arial,sans-serif;font-weight:normal;margin:0;line-height:19px;font-size:14px;border-collapse:collapse!important">
-                                                                            <h5 style="box-sizing:border-box;color:#424242!important;font-family:Arial,sans-serif;font-weight:normal;padding:0;margin:0;text-align:left;line-height:2;word-break:normal;font-size:24px;display:inline-table;margin-left:30px">HAN</h5>
+                                                                            <h5 style="box-sizing:border-box;color:#424242!important;font-family:Arial,sans-serif;font-weight:normal;padding:0;margin:0;text-align:left;line-height:2;word-break:normal;font-size:24px;display:inline-table;margin-left:30px">{{ $route['from'] }}</h5>
                                                                             <img src="http://datvesieure.com/public/template/email_template/from.png" style="box-sizing:border-box;outline:none;text-decoration:none;width:auto;max-width:100%;clear:both;display:inline-block;opacity:0.8">
-                                                                            <span style="box-sizing:border-box;color:#E44803;font-weight:bold;display:inline-table;vertical-align:middle;margin-bottom:12px">VJ403</span>
+                                                                            <span style="box-sizing:border-box;color:#E44803;font-weight:bold;display:inline-table;vertical-align:middle;margin-bottom:12px">{{ $route['selectedFlight']['flight_code'] }}</span>
                                                                             <img src="http://datvesieure.com/public/template/email_template/to.png" style="box-sizing:border-box;outline:none;text-decoration:none;width:auto;max-width:100%;clear:both;display:inline-block;opacity:0.8">
-                                                                            <h5 style="display:inline-table;color:#424242;box-sizing:border-box;font-family:Arial,sans-serif;font-weight:normal;padding:0;margin:0;text-align:left;line-height:1.3;word-break:normal;font-size:24px">DLI</h5>
+                                                                            <h5 style="display:inline-table;color:#424242;box-sizing:border-box;font-family:Arial,sans-serif;font-weight:normal;padding:0;margin:0;text-align:left;line-height:1.3;word-break:normal;font-size:24px">{{ $route['to'] }}</h5>
                                                                         </td>
                                                                     </tr>
                                                                 </tbody>
@@ -188,6 +189,7 @@
                                                     </tr>
                                                 </tbody>
                                             </table>
+                                            
                                             <table style="box-sizing:border-box;border-spacing:0;border-collapse:collapse;padding:0;vertical-align:top;text-align:center!important;margin-bottom:20px;width:100%;border:1px solid #ddd;padding-top:0!important">
                                                 <tbody>
                                                     <tr style="box-sizing:border-box;padding:0;vertical-align:top;text-align:left">
@@ -211,11 +213,11 @@
                                                                 <tbody>
                                                                     <tr style="box-sizing:border-box;padding:0;vertical-align:top;text-align:left">
                                                                         <td style="box-sizing:border-box;word-break:break-word;padding:0 10px;vertical-align:top;text-align:left;color:rgba(66,66,66,0.7);font-family:Arial,sans-serif;font-weight:normal;margin:0;line-height:19px;font-size:14px;padding-right:0px;border-collapse:collapse!important">
-                                                                            <div style="box-sizing:border-box;font-size:16px;vertical-align:super">Hà Nội</div>
-                                                                            <h2 style="box-sizing:border-box;color:#424242!important;font-family:Arial,sans-serif;font-weight:normal;padding:0;margin:0;text-align:left;line-height:1.3;word-break:normal;font-size:36px;display:inline-table;float:left;margin-right:30px">07:15</h2>
+                                                                            <div style="box-sizing:border-box;font-size:16px;vertical-align:super">{{ $route['from_name'] }}</div>
+                                                                            <h2 style="box-sizing:border-box;color:#424242!important;font-family:Arial,sans-serif;font-weight:normal;padding:0;margin:0;text-align:left;line-height:1.3;word-break:normal;font-size:36px;display:inline-table;float:left;margin-right:30px">{{ $route['start_time'] }}</h2>
                                                                             <p style="box-sizing:border-box;margin:0;margin-bottom:10px;color:rgba(66,66,66,0.7);font-family:Arial,sans-serif;font-weight:normal;padding:0;text-align:left;line-height:19px;font-size:14px;display:inline-table;float:left">
                                                                             </p>
-                                                                            <h6 style="box-sizing:border-box;color:#424242!important;font-family:Arial,sans-serif;font-weight:normal;padding:0;margin:0;text-align:left;line-height:1.3;word-break:normal;font-size:20px">06</h6>
+                                                                            <h6 style="box-sizing:border-box;color:#424242!important;font-family:Arial,sans-serif;font-weight:normal;padding:0;margin:0;text-align:left;line-height:1.3;word-break:normal;font-size:20px"></h6>
                                                                             <span style="box-sizing:border-box;color:#424242!important">Tháng 1, 2017 Thứ 6</span>
                                                                             <p></p>
                                                                         </td>
@@ -229,11 +231,11 @@
                                                                 <tbody>
                                                                     <tr style="box-sizing:border-box;padding:0;vertical-align:top;text-align:left">
                                                                         <td style="box-sizing:border-box;word-break:break-word;padding:0 10px;vertical-align:top;text-align:left;color:rgba(66,66,66,0.7);font-family:Arial,sans-serif;font-weight:normal;margin:0;line-height:19px;font-size:14px;padding-right:0px;border-collapse:collapse!important">
-                                                                            <div style="box-sizing:border-box;font-size:16px;vertical-align:super">Đà Lạt</div>
-                                                                            <h2 style="box-sizing:border-box;color:#424242!important;font-family:Arial,sans-serif;font-weight:normal;padding:0;margin:0;text-align:left;line-height:1.3;word-break:normal;font-size:36px;display:inline-table;float:left;margin-right:30px">09:05</h2>
+                                                                            <div style="box-sizing:border-box;font-size:16px;vertical-align:super">{{ $route['to_name'] }}</div>
+                                                                            <h2 style="box-sizing:border-box;color:#424242!important;font-family:Arial,sans-serif;font-weight:normal;padding:0;margin:0;text-align:left;line-height:1.3;word-break:normal;font-size:36px;display:inline-table;float:left;margin-right:30px">{{ $route['end_time'] }}</h2>
                                                                             <p style="box-sizing:border-box;margin:0;margin-bottom:10px;color:rgba(66,66,66,0.7);font-family:Arial,sans-serif;font-weight:normal;padding:0;text-align:left;line-height:19px;font-size:14px;display:inline-table;float:left">
                                                                             </p>
-                                                                            <h6 style="box-sizing:border-box;color:#424242!important;font-family:Arial,sans-serif;font-weight:normal;padding:0;margin:0;text-align:left;line-height:1.3;word-break:normal;font-size:20px">06</h6>
+                                                                            <h6 style="box-sizing:border-box;color:#424242!important;font-family:Arial,sans-serif;font-weight:normal;padding:0;margin:0;text-align:left;line-height:1.3;word-break:normal;font-size:20px"></h6>
                                                                             <span style="box-sizing:border-box;color:#424242!important">Tháng 1, 2017 Thứ 6</span>
                                                                             <p></p>
                                                                         </td>
@@ -245,6 +247,7 @@
                                                     </tr>
                                                 </tbody>
                                             </table>
+                                            @endforeach
                                             <table style="box-sizing:border-box;border-spacing:0;border-collapse:collapse;padding:0;vertical-align:top;text-align:center!important;margin-bottom:20px;width:100%;border:1px solid #ddd;padding-top:0!important">
                                                 <tbody>
                                                     <tr style="box-sizing:border-box;padding:0;vertical-align:top;text-align:left">
@@ -253,7 +256,7 @@
                                                                 <tbody>
                                                                     <tr style="box-sizing:border-box;padding:0;vertical-align:top;text-align:left">
                                                                         <td style="text-align:center;box-sizing:border-box;word-break:break-word;padding:0px 0px 10px;vertical-align:top;color:rgba(66,66,66,0.7);font-family:Arial,sans-serif;font-weight:normal;margin:0;line-height:19px;font-size:14px;border-collapse:collapse!important">
-                                                                            <p style="box-sizing:border-box;margin:0;margin-bottom:10px;color:#616161;font-family:Arial,sans-serif;font-weight:normal;padding:0 10px;text-align:left;line-height:19px;font-size:14px;display:inline-block;background:#fafafa;border-radius:10px;font-style:italic;border:1px solid #ddd">MS. CAO, THI NGOC THUY</p>
+                                                                            <p style="box-sizing:border-box;margin:0;margin-bottom:10px;color:#616161;font-family:Arial,sans-serif;font-weight:normal;padding:0 10px;text-align:left;line-height:19px;font-size:14px;display:inline-block;background:#fafafa;border-radius:10px;font-style:italic;border:1px solid #ddd">{{ $data['title'] }}. CAO, THI NGOC THUY</p>
                                                                         </td>
                                                                     </tr>
                                                                 </tbody>
