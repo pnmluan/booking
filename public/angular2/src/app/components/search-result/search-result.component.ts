@@ -76,6 +76,8 @@ export class SearchResultComponent implements OnInit, AfterViewInit {
 	filter_date_of_birth: any;
 	fromDateOptions = {};
 	toDateOptions = {};
+	fromBaggageTypeFare = 0;
+	toBaggageTypeFare = 0;
 	datepickerOptions = { format: this._Configuration.viFormatDate, autoApply: true, locate: 'vi', style: 'big' };
 
 	constructor(
@@ -371,6 +373,7 @@ export class SearchResultComponent implements OnInit, AfterViewInit {
 		this.listRoutes = [];
 		let from_flights = this.getRoute(this.session_flight, 'from');
 		from_flights['class'] = 'flight-go';
+		from_flights['direction_vi'] = 'Chiều đi';
 		let to_flights = {};
 		// Check one-way or round-trip
 		if (this.session_flight['round_trip'] === 'on') {
@@ -404,6 +407,7 @@ export class SearchResultComponent implements OnInit, AfterViewInit {
 				ret_flights = this.pushRetFlights(airlines[key], this.airlines[airlines[key]], ret_flights);
 
 			}
+			to_flights['direction_vi'] = 'Chiều đi';
 			to_flights['flights'] = ret_flights;
 			this.listRoutes.push(to_flights);
 		}
@@ -569,7 +573,7 @@ console.log(this.passengers)
 				let options = [{ value: '0', label: 'Không mang theo hành lý' }];
 				for (let key in baggageTypes) {
 					var label = 'Thêm ' + baggageTypes[key].name + ' hành lý ' + baggageTypes[key].fare + ' VNĐ';
-					var temp = { value: String(baggageTypes[key].id), label: label };
+					var temp = { value: String(baggageTypes[key].id), label: label, fare: baggageTypes[key].fare };
 					options.push(temp);
 				}
 				this.baggageOptions = options;
@@ -589,8 +593,8 @@ console.log(this.passengers)
 				date_of_birth: '', 
 				name: label, 
 				key: key,
-				from_baggage_type: '0',
-				to_baggage_type: '0'
+				from_baggage_type_id: '0',
+				to_baggage_type_id: '0'
 			};
 			this.passengers.push(obj);
 		}
@@ -704,6 +708,7 @@ console.log(this.passengers)
 				if (res.status == 'success') {
 					let booking = res.data;
 					let routes = [];
+					let total_sum = 0;
 					// Insert Booking Detail
 					for (let key in this.listRoutes) {
 						var detailRoute = this.listRoutes[key];
@@ -729,13 +734,14 @@ console.log(this.passengers)
 
 							}
 						});
+						total_sum += selectedFlight.sum;
 						var route = JSON.parse(JSON.stringify(detailRoute));
 						delete route.days;
 						delete route.flights;
 
 						routes.push(route);
 					}
-					this.sendInfoPayment(routes);
+					this.sendInfoPayment(routes, total_sum);
 					this.insertContactInfo(booking.id);
 				}
 			});
@@ -811,7 +817,7 @@ console.log(this.passengers)
 	/*=================================
 	 * Send Info Payment Mail
 	 *=================================*/
-	sendInfoPayment(routes) {
+	sendInfoPayment(routes, total_sum) {
 
 		var params: URLSearchParams = new URLSearchParams();
 		params.set('routes', JSON.stringify(routes));
@@ -820,7 +826,8 @@ console.log(this.passengers)
 		params.set('email', this.contact['email']);
 		params.set('requirement', this.contact['requirement']);
 		params.set('code', this.generalData['generateCode']);
-		
+		params.set('title', this.contact['title']);
+		params.set('total_sum', String(total_sum));
 
 		this._MailDataService.sendInfoPayment(params).subscribe(res => {
 
@@ -876,8 +883,12 @@ console.log(this.passengers)
 	/*=================================
 	 * Change Baggage Type
 	 *=================================*/
-	onChangeBaggageType(value) {
-			console.log(value)
+	onChangeBaggageType(option, direction) {
+		if(direction == 'from') {
+			this.fromBaggageTypeFare = option.fare;
+		} else {
+			this.toBaggageTypeFare = option.fare;
+		}
 	}
 
 	/*=================================
