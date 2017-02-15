@@ -373,6 +373,7 @@ export class SearchResultComponent implements OnInit, AfterViewInit {
 		this.listRoutes = [];
 		let from_flights = this.getRoute(this.session_flight, 'from');
 		from_flights['class'] = 'flight-go';
+		from_flights['direction'] = 'from';
 		from_flights['direction_vi'] = 'Chiều đi';
 		let to_flights = {};
 		// Check one-way or round-trip
@@ -408,6 +409,7 @@ export class SearchResultComponent implements OnInit, AfterViewInit {
 
 			}
 			to_flights['direction_vi'] = 'Chiều đi';
+			to_flights['direction'] = 'to';
 			to_flights['flights'] = ret_flights;
 			this.listRoutes.push(to_flights);
 		}
@@ -531,12 +533,14 @@ export class SearchResultComponent implements OnInit, AfterViewInit {
 		
 		if (flight.direction == 'from') {
 			flight['directionvi'] = 'Lượt đi';
+			this.getBaggageType(flight.airline, this.listRoutes[0]['baggageOptions']);
 			this.listRoutes[0]['selectedFlight'] = flight;
 		
 		}
 
 		if (flight.direction == 'to') {
 			flight['directionvi'] = 'Lượt về';
+			this.getBaggageType(flight.airline, this.listRoutes[1]['baggageOptions']);
 			this.listRoutes[1]['selectedFlight'] = flight;
 
 		}
@@ -554,7 +558,7 @@ console.log(this.passengers)
 			
 			// Baggage Options
 
-			this.getBaggageType(flight.airline);
+			
 			console.log(this.listRoutes);
 			this.selectedStep = 2;
 		}
@@ -564,22 +568,28 @@ console.log(this.passengers)
 	/*=================================
 	 * Get Baggage Type
 	 *=================================*/
-	getBaggageType(airline) {
+	getBaggageType(airline, baggageOptions) {
 		let options = [];
 		this._BaggageTypeDataService.getAll(airline).subscribe(res => {
 			let baggageTypes = res.data;
 			if (baggageTypes) {
 			
-				let options = [{ value: '0', label: 'Không mang theo hành lý' }];
+				let options = [{ value: '0', label: 'Không mang theo hành lý', fare: 0 }];
 				for (let key in baggageTypes) {
 					var label = 'Thêm ' + baggageTypes[key].name + ' hành lý ' + baggageTypes[key].fare + ' VNĐ';
 					var temp = { value: String(baggageTypes[key].id), label: label, fare: baggageTypes[key].fare };
 					options.push(temp);
 				}
-				this.baggageOptions = options;
 			} 
-			console.log(this.baggageOptions);
+			baggageOptions = options;
 		})
+	}
+
+	/*=================================
+	 * Process Baggage Type
+	 *=================================*/
+	processBaggageType() {
+
 	}
 
 	/*=================================
@@ -593,8 +603,8 @@ console.log(this.passengers)
 				date_of_birth: '', 
 				name: label, 
 				key: key,
-				from_baggage_type_id: '0',
-				to_baggage_type_id: '0'
+				from: { baggage_type_id: '0' },
+				to: { baggage_type_id: '0' }
 			};
 			this.passengers.push(obj);
 		}
@@ -730,10 +740,16 @@ console.log(this.passengers)
 								let booking_detail = res.data;
 
 								// Insert Passengers
-								this.insertPassengerWithFare(booking_detail.id, selectedFlight);
+								this.insertPassengerWithFare(booking_detail.id, selectedFlight, detailRoute['direction']);
 
 							}
 						});
+						var sum_baggage_type = 0;
+						for(let k in this.passengers) {
+							var passenger = this.passengers[k];
+							console.log(passenger[detailRoute['direction']]);
+
+						}
 						total_sum += selectedFlight.sum;
 						var route = JSON.parse(JSON.stringify(detailRoute));
 						delete route.days;
@@ -741,7 +757,8 @@ console.log(this.passengers)
 
 						routes.push(route);
 					}
-					this.sendInfoPayment(routes, total_sum);
+					this.generalData['total_sum'] = total_sum;
+					this.sendInfoPayment(routes);
 					this.insertContactInfo(booking.id);
 				}
 			});
@@ -753,21 +770,22 @@ console.log(this.passengers)
 	/*=================================
 	 * Insert Passenger with Fare
 	 *=================================*/
-	insertPassengerWithFare(booking_detail_id, selectedFlight) {
+	insertPassengerWithFare(booking_detail_id, selectedFlight, direction) {
 		
 		for (let k in this.passengers) {
+			var detailPassenger = this.passengers[k];
 			var params: URLSearchParams = new URLSearchParams();
 			params.set('booking_detail_id', booking_detail_id);
-			params.set('customer_type', this.passengers[k].customer_type);
-			params.set('fullname', this.passengers[k].fullname);
-			var date_of_birth = moment(this.passengers[k].date_of_birth['formatted'], this._Configuration.viFormatDate).format(this._Configuration.dateFormat);
+			params.set('customer_type', detailPassenger.customer_type);
+			params.set('fullname', detailPassenger.fullname);
+			var date_of_birth = moment(detailPassenger.date_of_birth['formatted'], this._Configuration.viFormatDate).format(this._Configuration.dateFormat);
 			params.set('date_of_birth', date_of_birth);
 
 			this._PassengerDataService.create(params).subscribe(res => {
 				if (res.data) {
 					let passenger = res.data;
 					// Insert Fare Info
-					this.insertFareInfoAndBaggageType(passenger, 1, selectedFlight);
+					this.insertFareInfoAndBaggageType(passenger, detailPassenger[direction].baggage_type_id, selectedFlight);
 
 				}
 				
@@ -790,7 +808,7 @@ console.log(this.passengers)
 		let vat: number;
 		let price: number;
 		if(key == 'infant') {
-			price = provider[key + '_infant'];
+			price = provider[key + '_fare'];
 			vat = 0;
 			params.set('airport_fee', String(0));
 			params.set('security_fee', String(0));
@@ -817,7 +835,7 @@ console.log(this.passengers)
 	/*=================================
 	 * Send Info Payment Mail
 	 *=================================*/
-	sendInfoPayment(routes, total_sum) {
+	sendInfoPayment(routes) {
 
 		var params: URLSearchParams = new URLSearchParams();
 		params.set('routes', JSON.stringify(routes));
@@ -826,8 +844,8 @@ console.log(this.passengers)
 		params.set('email', this.contact['email']);
 		params.set('requirement', this.contact['requirement']);
 		params.set('code', this.generalData['generateCode']);
-		params.set('title', this.contact['title']);
-		params.set('total_sum', String(total_sum));
+		params.set('title', this.adultOptions[this.contact['title']]);
+		params.set('total_sum', String(this.generalData['total_sum']));
 
 		this._MailDataService.sendInfoPayment(params).subscribe(res => {
 

@@ -359,16 +359,16 @@
                                                 <div class="field clearfix">
                                                     <label>Hành lý ký gửi</label>
                                                     <div>
-                                                        <div class="clearfix">
-                                                            <span>Chiều đi :&nbsp;</span>
+                                                        <div class="clearfix" *ngFor="let route of listRoutes">
+                                                            <span>{{ route.direction_vi }} :&nbsp;</span>
                                                             <div class="item">
                                                                 <ng-select 
-                                                                name="from_baggage" [(ngModel)]="p.from_baggage_type_id" [options]="baggageOptions" [noFilter]="11"
+                                                                name="from_baggage" [(ngModel)]="p[route.direction].baggage_type_id" [options]="route.baggageOptions" [noFilter]="11"
                                                                 (selected)="onChangeBaggageType($event, 'from')">
                                                                 </ng-select>
                                                             </div>
                                                         </div>
-                                                        <div class="clearfix" *ngIf="round_trip">
+                                                        <!-- <div class="clearfix" *ngIf="round_trip">
                                                             <span>Chiều về :</span>
                                                             <div class="item">
                                                                 <ng-select name="to_baggage" [(ngModel)]="p.to_baggage_type_id" [options]="baggageOptions" [noFilter]="11"
@@ -377,7 +377,7 @@
                                                             </div>
                                                             
                                                             
-                                                        </div>
+                                                        </div> -->
                                                     </div>
                                                 </div>
                                             </div>
@@ -526,12 +526,12 @@
                                         </tr>
                                     </tbody>
                                 </table>
-                                <table>
+                                <table *ngIf="route.selectedFlight.sum_baggage_type">
                                     <tbody>
                                         <tr>
                                             <td>
                                                 <h3>Hành lý thêm</h3></td>
-                                            <td>{{ session_flight.adult }} x {{ route.selectedFlight.sum_baggage_type }} VNĐ</td>
+                                            <td>{{ route.selectedFlight.sum_baggage_type }} VNĐ</td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -804,7 +804,7 @@
                                     </tr>
                                     <tr>
                                         <td class="col1" width="69">Tổng giá</td>
-                                        <td class="col2" width="150"> <strong style="font-size: 18px; color: #fbba00;">7,280,000 VNĐ</strong></td>
+                                        <td class="col2" width="150"> <strong style="font-size: 18px; color: #fbba00;">{{ generalData.total_sum | number }} VNĐ</strong></td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -830,11 +830,11 @@
                                     </tr>
                                     <tr>
                                         <td class="col1" width="69">Ngày xuất phát</td>
-                                        <td class="col2" width="150"> <strong class="color-orange" style="color: #fbba00;">06:00, Thứ tư<br> ngày 25/01/2017</strong></td>
+                                        <td class="col2" width="150"> <strong class="color-orange" style="color: #fbba00;">{{ listRoutes[0].selectedFlight.start_time }}, <br> {{ listRoutes[0].selectedFlight.from_fly_date }}</strong></td>
                                     </tr>
-                                    <tr>
+                                    <tr *ngIf="round_trip">
                                         <td class="col1" width="69">Ngày về</td>
-                                        <td class="col2" width="150"> <strong class="color-orange" style="color: #fbba00;">06:00, Thứ sáu<br> ngày 27/01/2017</strong></td>
+                                        <td class="col2" width="150"> <strong class="color-orange" style="color: #fbba00;">{{ listRoutes[1].selectedFlight.start_time }}, <br> {{ listRoutes[1].selectedFlight.from_fly_date }}</strong></td>
                                     </tr>
                                 </tbody>
                             </table>

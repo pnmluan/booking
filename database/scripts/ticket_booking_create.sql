@@ -182,6 +182,7 @@ CREATE TABLE provider (
     children_security_fee float NOT NULL DEFAULT 0,
     other_tax float NOT NULL DEFAULT 0,
     payment_fee float NOT NULL DEFAULT 0,
+	expired_payment float NOT NULL DEFAULT 0,
     created_at datetime NULL,
     updated_at datetime NULL,
     CONSTRAINT provider_pk PRIMARY KEY (id)
