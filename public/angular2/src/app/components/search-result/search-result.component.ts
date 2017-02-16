@@ -66,6 +66,8 @@ export class SearchResultComponent implements OnInit, AfterViewInit {
 	adultOptions = [];
 	infantOptions = [];
 	titleOptions = [];
+	titleAdultOptions = {};
+	providerOptions = {};
 	baggageOptions:any;
 	generalData = {};
 	warningMsg: string = '';
@@ -128,6 +130,13 @@ export class SearchResultComponent implements OnInit, AfterViewInit {
 
 		];
 
+		this.titleAdultOptions = {
+			'1': 'Anh',
+			'2': 'Chị',
+			'3': 'Ông',
+			'4': 'Bà'
+		};
+
 		this.titleOptions['adult'] = [
 			{ value: '1', label: 'Anh' },
 			{ value: '2', label: 'Chị' },
@@ -153,6 +162,11 @@ export class SearchResultComponent implements OnInit, AfterViewInit {
 			jetstar: true,
 			vna: true
 
+		};
+		this.providerOptions = {
+			vietjet: 'Vietjet Air',
+			jetstar: 'Jetstar Pacific',
+			vna: 'Vietnam Airlines'
 		};
 
 		// Get Provider's Fee
@@ -332,6 +346,11 @@ export class SearchResultComponent implements OnInit, AfterViewInit {
 			if (airline.dep_flights) {
 				for (let k in airline.dep_flights) {
 					airline.dep_flights[k].price_tax = this.processFareWithTax('adult', +airline.dep_flights[k].price, this.providers[key]);
+				}
+			}
+			if (airline.ret_flights) {
+				for (let k in airline.ret_flights) {
+					airline.ret_flights[k].price_tax = this.processFareWithTax('adult', +airline.ret_flights[k].price, this.providers[key]);
 				}
 			}
 		}
@@ -528,7 +547,7 @@ export class SearchResultComponent implements OnInit, AfterViewInit {
 		if(number_infants) {
 			flight.infant_price_tax = this.processFareWithTax('infant', +flight.price, this.providers[flight.airline]);
 		}
-		flight.sum = (+this.session_flight['adult'] * (+flight.price) + number_children * flight.children_price_tax + number_infants * flight.infant_price_tax);
+		flight.sum = (+this.session_flight['adult'] * (+flight.price_tax) + number_children * flight.children_price_tax + number_infants * flight.infant_price_tax);
 		flight.selected = true;
 		
 		if (flight.direction == 'from') {
@@ -705,6 +724,8 @@ console.log(this.passengers)
 			this._ToasterService.pop('error', 'Lỗi nhập liệu', 'Vui lòng điền đầy đủ thông tin.');
 		} else {
 			// Insert Booking
+			let expired_payment_date = moment().add(24, 'h').format(this._Configuration.longFormatDateTime);
+			
 			this.generalData['generateCode'] = this.generateCode()
 			var params: URLSearchParams = new URLSearchParams();
 			params.set('code', this.generalData['generateCode']);
@@ -712,6 +733,7 @@ console.log(this.passengers)
 			params.set('adult', this.session_flight['adult']);
 			params.set('children', this.session_flight['children']);
 			params.set('infant', this.session_flight['infant']);
+			params.set('expired_payment_date', expired_payment_date);
 			params.set('state', 'pending');
 
 			this._BookingDataService.create(params).subscribe(res => {
@@ -719,11 +741,13 @@ console.log(this.passengers)
 					let booking = res.data;
 					let routes = [];
 					let total_sum = 0;
+					
 					// Insert Booking Detail
 					for (let key in this.listRoutes) {
 						var detailRoute = this.listRoutes[key];
 						var selectedFlight = detailRoute.selectedFlight;
-
+						let airline = selectedFlight.airline;
+					
 						var params: URLSearchParams = new URLSearchParams();
 						params.set('booking_id', booking.id);
 						params.set('from', detailRoute.from);
@@ -733,7 +757,7 @@ console.log(this.passengers)
 						params.set('end_date', selectedFlight.end_date);
 						params.set('end_time', selectedFlight.end_time);
 						params.set('ticket_type', selectedFlight.type);
-						params.set('provider', selectedFlight.airline);
+						params.set('provider', airline);
 
 						this._BookingDetailDataService.create(params).subscribe(res => {
 							if (res.status == 'success') {
@@ -751,6 +775,7 @@ console.log(this.passengers)
 
 						}
 						total_sum += selectedFlight.sum;
+						detailRoute['airline'] = this.providerOptions[airline];
 						var route = JSON.parse(JSON.stringify(detailRoute));
 						delete route.days;
 						delete route.flights;
@@ -758,7 +783,7 @@ console.log(this.passengers)
 						routes.push(route);
 					}
 					this.generalData['total_sum'] = total_sum;
-					this.sendInfoPayment(routes);
+					this.sendInfoPayment(routes, expired_payment_date);
 					this.insertContactInfo(booking.id);
 				}
 			});
@@ -802,7 +827,7 @@ console.log(this.passengers)
 		var params: URLSearchParams = new URLSearchParams();
 		params.set('passenger_id', String(passenger.id));
 		params.set('baggage_type_id', String(baggage_type_id));
-		params.set('round_trip', String(this.listRoutes.length));
+		params.set('round_trip', String(this.listRoutes.length)); 
 		
 		params.set('charge', String(50000));
 		let vat: number;
@@ -835,16 +860,17 @@ console.log(this.passengers)
 	/*=================================
 	 * Send Info Payment Mail
 	 *=================================*/
-	sendInfoPayment(routes) {
+	sendInfoPayment(routes, expired_payment_date) {
 
 		var params: URLSearchParams = new URLSearchParams();
 		params.set('routes', JSON.stringify(routes));
+		params.set('expired_payment_date', expired_payment_date);
 		params.set('fullname', this.contact['fullname']);
 		params.set('phone', this.contact['phone']);
 		params.set('email', this.contact['email']);
 		params.set('requirement', this.contact['requirement']);
 		params.set('code', this.generalData['generateCode']);
-		params.set('title', this.adultOptions[this.contact['title']]);
+		params.set('title', this.titleAdultOptions[this.contact['title']]);
 		params.set('total_sum', String(this.generalData['total_sum']));
 
 		this._MailDataService.sendInfoPayment(params).subscribe(res => {

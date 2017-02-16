@@ -142,19 +142,21 @@ export class AppComponent {
 	 *=================================*/
 	onOpenCart() {
 		this.cartModal.open();
+		this.loadCartItemsStorage();
 	}
 
 	/*=================================
 	 * Toggle Sidebar
 	 *=================================*/
-	_toggleSidebar() {
+	loadCartItemsStorage() {
 
-		this._opened = !this._opened;
 		this.cartItems = this._LocalStorageService.get('cartItems');
 		let sum = 0;
 		for (let key in this.cartItems) {
 			var item = this.cartItems[key];
-			sum = sum + item.number_adult * item.adult_fare + item.children_adult * item.children_fare
+			console.log(item);
+			sum = sum + item.number_adult * item.adult_fare + item.number_children * item.children_fare;
+			console.log(sum);
 		}
 		this.sumPrice = sum;
 	}

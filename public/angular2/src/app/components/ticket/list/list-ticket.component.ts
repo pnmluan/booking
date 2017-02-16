@@ -103,6 +103,71 @@ export class ListTicketComponent implements OnInit {
 			});
 
 			this.resizeImage();
+
+			function flyToElement(flyer, flyingTo) {
+				var $func = jQuery(this);
+				var flyerClone = jQuery(flyer).clone();
+				jQuery(flyerClone).css({
+					position: 'absolute',
+					top: jQuery(flyer).offset().top + "px",
+					left: jQuery(flyer).offset().left + "px",
+					maxWidth: 266,
+					opacity: 1,
+					'z-index': 1000
+				});
+				jQuery('body').append(jQuery(flyerClone));
+				var gotoX = jQuery(flyingTo).offset().left + "px";
+				var gotoY;
+				if (jQuery(window).width() < 1200) {
+					gotoY = 46;
+				} else {
+					gotoY = 117;
+				}
+
+
+
+				jQuery(window).resize(function() {
+					if (jQuery(window).width() < 1200) {
+						gotoY = 46;
+					} else {
+						gotoY = 117;
+					}
+				});
+
+				jQuery(flyerClone).animate({
+					opacity: 0.4,
+					left: gotoX,
+					top: gotoY,
+					width: 30,
+					height: 34
+				}, 700,
+					function() {
+						jQuery(flyingTo).fadeOut('fast', function() {
+							jQuery(flyingTo).fadeIn('fast', function() {
+								jQuery(flyerClone).fadeOut('fast', function() {
+									jQuery(flyerClone).remove();
+								});
+							});
+						});
+					});
+			}
+
+			jQuery('.add-to-cart').on('click', function() {
+				//Scroll to top if cart icon is hidden on top
+				jQuery('html, body').animate({
+					'scrollTop': jQuery(".cart_anchor").position().top
+				});
+				//Select item image and pass to the function
+				var itemImg = jQuery(this).closest('.item').find('img').eq(0);
+				flyToElement(jQuery(itemImg), jQuery('.cart_anchor'));
+			});
+
+			function resizeImage() {
+				var a = jQuery('.item-inner').width();
+				jQuery('.item-inner > a').height(a * 10 / 16);
+			}
+
+			
 			
 		},1000)
   	}

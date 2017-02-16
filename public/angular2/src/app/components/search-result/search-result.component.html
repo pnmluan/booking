@@ -847,10 +847,8 @@
                                 <div class="field clearfix">
                                     <label>Tên liên hệ</label>
                                     <div class="clearfix">
-                                        <select name="" class="form-control">
-                                            <option value="">Ông</option>
-                                            <option value="">Bà</option>
-                                        </select>
+                                        <ng-select name="contact_title" [(ngModel)]="contact.title" [options]="titleOptions['adult']" [noFilter]="11">
+                                        </ng-select>
                                         <input name="fullname" [ngClass]="{'has-error': contact.error_fullname}" [(ngModel)]="contact.fullname" type="text" class="form-control">
                                         <!-- <input type="text" class="form-control" value="Nguyen Van A"> -->
                                     </div>

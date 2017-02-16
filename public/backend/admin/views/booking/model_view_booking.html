@@ -133,11 +133,13 @@
                                                     <input ng-click="onShowPassengers()" name="btSelectAll" type="checkbox"><span></span></label>
                                             </div>
                                         </th> -->
+                                        <th> Airline </th>
                                         <th> From </th>
                                         <th> To </th>
                                         <th> Date </th>
                                         <th> Start Time </th>
                                         <th> End Time </th>
+                                        <th> Ticket Type </th>
                                         <th> Total </th>
                                     </tr>
                                 </thead>
@@ -149,11 +151,13 @@
                                                     <input ng-click="onShowPassengers($index)" name="btSelectAll" type="checkbox"><span></span></label>
                                             </div>
                                         </td> -->
+                                        <td>{{ detail.provider }}</td>
                                         <td>{{ detail.from }}</td>
                                         <td>{{ detail.to }}</td>
                                         <td> {{ detail.start_date }} </td>
                                         <td> {{ detail.start_time }} </td>
                                         <td> {{ detail.end_time }} </td>
+                                         <td>{{ detail.ticket_type }}</td>
                                         <td> {{ detail.total | number }} </td>
                                     </tr>
                                 </tbody>

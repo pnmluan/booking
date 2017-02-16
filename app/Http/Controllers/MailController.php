@@ -17,6 +17,7 @@ class MailController extends ApiController
 
     public function sendInfoPayment(Request $request) {
         $data = $request->all();
+        $data['expiredDate'] = explode('-', $data['expired_payment_date']);
         $data['routes'] = json_decode($data['routes']);
         if(!empty($data)) {
 

@@ -5,34 +5,32 @@
                 <div class="tours-filter">
                     <div class="tours-filter-inner">
                         <!-- <form (ngSubmit)="onSearch()" #fSearch="ngForm"> -->
-                            <div class="results-founded">
-                                Bộ lọc
+                        <div class="results-founded">
+                            Bộ lọc
+                        </div>
+                        <div class="g-field">
+                            <div class="field mb15">
+                                <ng-select placeholder="Điểm đi" name="category_ticket_id" [(ngModel)]="search.category_ticket_id" [options]="categoryTicketOptions" [allowClear]="true">
+                                </ng-select>
                             </div>
-                            <div class="g-field">
-                                <div class="field mb15">
-                                    
-                                    <ng-select placeholder="Điểm đi" name="category_ticket_id" [(ngModel)]="search.category_ticket_id" [options]="categoryTicketOptions"
-                                    [allowClear]="true">
-                                    </ng-select>
-                                </div>
-                                <div class="field mb30">
-                                    <div class="slider-price clearfix">
-                                        <div class="clearfix">
-                                            <span id="min-price"></span>
-                                            <span id="max-price"></span>
-                                        </div>
-                                        <div id="slider-price"></div>
+                            <div class="field mb30">
+                                <div class="slider-price clearfix">
+                                    <div class="clearfix">
+                                        <span id="min-price"></span>
+                                        <span id="max-price"></span>
                                     </div>
-                                </div>
-                                <div class="field mb5">
-                                    <button (click)="onSearch()" type="submit" class="btn btn-search-tour"><i class="icon-search-2"></i>Tìm kiếm</button>
+                                    <div id="slider-price"></div>
                                 </div>
                             </div>
+                            <div class="field mb5">
+                                <button (click)="onSearch()" type="submit" class="btn btn-search-tour"><i class="icon-search-2"></i>Tìm kiếm</button>
+                            </div>
+                        </div>
                         <!-- </form> -->
                     </div>
                 </div>
                 <div class="tours-main">
-                    <div class="tours-sort clearfix">
+                    <!-- <div class="tours-sort clearfix">
                         <div class="tours-sort-l">
                             <ul class="clearfix">
                                 <li>
@@ -52,13 +50,13 @@
                                 </li>
                             </ul>
                         </div>
-                        <!--<div class="tours-sort-r">-->
-                        <!--<ul class="clearfix">-->
-                        <!--<li><a href="#" class="active"><i class="fa fa-bars" aria-hidden="true"></i></a></li>-->
-                        <!--<li><a href="#"><i class="fa fa-th" aria-hidden="true"></i></a></li>-->
-                        <!--</ul>-->
-                        <!--</div>-->
-                    </div>
+                        <div class="tours-sort-r">
+                            <ul class="clearfix">
+                                <li><a href="#" class="active"><i class="fa fa-bars" aria-hidden="true"></i></a></li>
+                                <li><a href="#"><i class="fa fa-th" aria-hidden="true"></i></a></li>
+                            </ul>
+                        </div>
+                    </div> -->
                     <div class="tours-list clearfix">
                         <div class="item" *ngFor="let item of listItem">
                             <div class="item-inner">
@@ -80,9 +78,8 @@
                                 </div>
                             </div>
                         </div>
-                       
                     </div>
-                    <div class="pagi">
+                    <!-- <div class="pagi">
                         <ul class="clearfix">
                             <li><a href="#"><i class="fa fa-angle-double-left" aria-hidden="true"></i></a></li>
                             <li><a href="#"><i class="fa fa-angle-left" aria-hidden="true"></i></a></li>
@@ -92,7 +89,7 @@
                             <li><a href="#"><i class="fa fa-angle-right" aria-hidden="true"></i></a></li>
                             <li><a href="#"><i class="fa fa-angle-double-right" aria-hidden="true"></i></a></li>
                         </ul>
-                    </div>
+                    </div> -->
                 </div>
             </div>
         </div>
