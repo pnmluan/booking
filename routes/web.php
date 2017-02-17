@@ -255,6 +255,23 @@ $app->group(['prefix' => 'api/v1',   'namespace' => 'App\Http\Controllers'], fun
 
     /*
     |--------------------------------------------------------------------------
+    | Ticket Detail
+    |--------------------------------------------------------------------------
+    */
+    $app->get('ticket_detail/index','TicketDetailController@index');
+
+    $app->get('ticket_detail/show/{id}','TicketDetailController@show');
+
+    $app->post('ticket_detail/create','TicketDetailController@create');
+
+    $app->put('ticket_detail/update/{id}','TicketDetailController@update');
+
+    $app->delete('ticket_detail/delete/{id}','TicketDetailController@delete');
+
+    /*
+
+    /*
+    |--------------------------------------------------------------------------
     | Album Ticket
     |--------------------------------------------------------------------------
     */

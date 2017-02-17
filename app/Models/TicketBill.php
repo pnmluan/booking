@@ -20,7 +20,11 @@ class TicketBill extends BaseModel
         $aColumns = ['departure', 'total_fare', 'contact_id', 'comment'];
 
         $query = \DB::table('ticket_bill')
-            ->select(\DB::raw('SQL_CALC_FOUND_ROWS id'),\DB::raw('id AS DT_RowId'),'ticket_bill.*');
+            ->select(\DB::raw('SQL_CALC_FOUND_ROWS ticket_bill.id'),\DB::raw('ticket_bill.id AS DT_RowId'),'ticket_bill.*', 'contact.fullname', 'contact.phone', 'contact.email', 'contact.requirement')
+            ->leftJoin('contact', 'ticket_bill.contact_id', '=', 'contact.id');
+
+        // $query = \DB::table('ticket_bill')
+        //     ->select(\DB::raw('SQL_CALC_FOUND_ROWS id'),\DB::raw('id AS DT_RowId'),'ticket_bill.*');
 
         // Filter search condition
         foreach ($aColumns as $key => $value) {
