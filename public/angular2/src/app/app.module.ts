@@ -42,7 +42,7 @@ import { IntrodutionComponent } from './components/introdution';
 import { PageNotFoundComponent } from './components/page-not-found';
 import { HeaderComponent } from './components/header';
 import { SearchResultComponent } from './components/search-result';
-import { ListTicketComponent, DetailTicketComponent, CartTicketComponent } from './components/ticket';
+import { ListTicketComponent, DetailTicketComponent, CartTicketComponent, PaymentTicketComponent } from './components/ticket';
 
 
 @NgModule({
@@ -59,7 +59,8 @@ import { ListTicketComponent, DetailTicketComponent, CartTicketComponent } from 
     CommentComponent,
     ListTicketComponent,
     DetailTicketComponent,
-    CartTicketComponent
+    CartTicketComponent,
+    PaymentTicketComponent
   ],
   imports: [
     BrowserModule,

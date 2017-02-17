@@ -21,8 +21,10 @@ export class DetailTicketComponent implements OnInit {
 	public comments = [];
 	filter_from_date: any;
 	curRouting?: string;
+	listItem = [];
 	_params = {};
 	Ticket = {};
+	category_ticket_id: number;
 	number_children: number = 0;
 	number_adult: number = 1;
 	isAddPeople = false;
@@ -60,10 +62,29 @@ export class DetailTicketComponent implements OnInit {
 
 			if (res.data) {
 				this.Ticket = res.data;
+				this.category_ticket_id = res.data.category_ticket_id;
 				this.lat = +this.Ticket['latitude'];
 				this.lng = +this.Ticket['longitude'];
 			}
 		})
+  	}
+
+  	ngAfterViewInit(){
+  		setTimeout(() => {
+  			var params: URLSearchParams = new URLSearchParams();
+			params.set('category_ticket_id', String(this.category_ticket_id));
+			this._EntranceTicketDataService.getAll(params).subscribe(res => {
+				let listItem = [];
+				if (res.data) {
+					for (let key in res.data) {
+						if(res.data[key].id != this._params['ticket_id']){
+							listItem.push(res.data[key]);	
+						}
+					}
+					this.listItem = listItem;
+				}
+			});
+  		},1000);
   	}
 
   	initData() {

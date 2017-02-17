@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { EntranceTicketDataService } from './../../../shared';
 import { LocalStorageService } from 'angular-2-local-storage';
 
@@ -16,6 +17,7 @@ export class CartTicketComponent implements OnInit {
 	constructor(
 		private sessionStorage: LocalStorageService,
 		private _EntranceTicketDataService: EntranceTicketDataService,
+		private _Router: Router,
 	) { }
 	ngOnInit() {
 		this.cartItems = this.sessionStorage.get('cartItems');
@@ -66,6 +68,9 @@ export class CartTicketComponent implements OnInit {
 		}
 	}
 
+	onLinkToPaymentTicket(){
+		this._Router.navigate(['payment-ticket']);
+	}
 
 }
 

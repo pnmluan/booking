@@ -135,7 +135,7 @@
                                         </div>
                                         <div class="bottom-button">
                                             <div>
-                                                <button type="button" class="btn btn-shopping-cart"><i class="fa fa-shopping-cart"></i> Thên vào giỏ hàng</button>
+                                                <button type="button" class="btn btn-shopping-cart"><i class="fa fa-shopping-cart"></i> Thêm vào giỏ hàng</button>
                                             </div>
                                             <div>
                                                 <button type="button" class="btn btn-book-now"><i class="fa fa-check"></i> ĐẶT NGAY</button>
@@ -286,48 +286,12 @@
                         <h3>Ưu đãi phút chót</h3>
                         <div>
                             <ul>
-                                <li>
-                                    <a href="#" class="clearfix">
-                                        <img src="assets/img/bb.jpg" alt="">
+                                <li *ngFor="let item of listItem">
+                                    <a class="clearfix" [routerLink]=" ['/detail-ticket', item.id] ">
+                                        <img src="{{ imgPath + item.album[0].img }}">
                                         <div>
-                                            <p>Combo vé bảo tàng tượng sáp Madame Tussauds và bảo tàng lịch sử Image of Singapore</p>
-                                            <span>1.200.000 VNĐ</span>
-                                        </div>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#" class="clearfix">
-                                        <img src="assets/img/bb.jpg" alt="">
-                                        <div>
-                                            <p>Combo vé bảo tàng tượng sáp Madame Tussauds và bảo tàng lịch sử Image of Singapore</p>
-                                            <span>1.200.000 VNĐ</span>
-                                        </div>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#" class="clearfix">
-                                        <img src="assets/img/bb.jpg" alt="">
-                                        <div>
-                                            <p>Combo vé bảo tàng tượng sáp Madame Tussauds và bảo tàng lịch sử Image of Singapore</p>
-                                            <span>1.200.000 VNĐ</span>
-                                        </div>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#" class="clearfix">
-                                        <img src="assets/img/bb.jpg" alt="">
-                                        <div>
-                                            <p>Combo vé bảo tàng tượng sáp Madame Tussauds và bảo tàng lịch sử Image of Singapore</p>
-                                            <span>1.200.000 VNĐ</span>
-                                        </div>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#" class="clearfix">
-                                        <img src="assets/img/bb.jpg" alt="">
-                                        <div>
-                                            <p>Combo vé bảo tàng tượng sáp Madame Tussauds và bảo tàng lịch sử Image of Singapore</p>
-                                            <span>1.200.000 VNĐ</span>
+                                            <p>{{ item.name }}</p>
+                                            <span>{{ item.adult_fare | number }} VNĐ</span>
                                         </div>
                                     </a>
                                 </li>

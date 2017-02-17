@@ -7,12 +7,13 @@ import { EntranceTicketDataService } from '../../../shared/entranceticket.datase
 
 import { Subscription } from 'rxjs/Rx';
 import { AgmCoreModule } from 'angular2-google-maps/core';
+import { LocalStorageService } from 'angular-2-local-storage';
 
 declare let jQuery: any;
 
 @Component({
   selector: 'app-paymment-ticket',
-  templateUrl: './paymment-ticket.component.html',
+  templateUrl: './payment-ticket.component.html',
   providers: [EntranceTicketDataService, Configuration]
 })
 export class PaymentTicketComponent implements OnInit {
@@ -22,7 +23,9 @@ export class PaymentTicketComponent implements OnInit {
 	filter_from_date: any;
 	curRouting?: string;
 	_params = {};
+	contact = {};
 	Ticket = {};
+	titleOptions = [];
 	number_children: number = 0;
 	number_adult: number = 1;
 	isAddPeople = false;
@@ -35,7 +38,8 @@ export class PaymentTicketComponent implements OnInit {
 		private config: Configuration,
 		private _Router: Router,
 		private _ActivatedRoute: ActivatedRoute,
-		) { 
+		private sessionStorage: LocalStorageService
+	) { 
 		// subscribe to router event
 		this.subscriptionParam = _ActivatedRoute.params.subscribe(
 			(param: any) => {
@@ -46,16 +50,26 @@ export class PaymentTicketComponent implements OnInit {
 
 		this.subscriptionEvents = this._Router.events.subscribe((val) => {
 
-
 			let routing = this._Router.url;
 			if (this.curRouting != routing) {
 				this.curRouting = routing;
 				this.initData();
 			}
 		});
+
+		this.contact['title'] = '1';
+
+		this.titleOptions['adult'] = [
+			{ value: '1', label: 'Anh' },
+			{ value: '2', label: 'Chị' },
+			{ value: '3', label: 'Ông' },
+			{ value: '4', label: 'Bà' },
+			
+		];
 	}
 
   	ngOnInit() {
+  		console.log(this.sessionStorage.get('cartItems'));
 		this._EntranceTicketDataService.getByID(this._params['ticket_id']).subscribe(res => {
 
 			if (res.data) {
