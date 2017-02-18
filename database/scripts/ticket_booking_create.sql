@@ -111,7 +111,8 @@ CREATE TABLE comment (
 -- Table: contact
 CREATE TABLE contact (
     id int NOT NULL AUTO_INCREMENT,
-    booking_id int NOT NULL,
+    booking_id int NULL,
+	ticket_bill_id int NULL,
     title varchar(20) NOT NULL,
     first_name varchar(50) NOT NULL,
     last_name varchar(50) NOT NULL,

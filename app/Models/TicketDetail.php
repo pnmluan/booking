@@ -17,14 +17,21 @@ class TicketDetail extends BaseModel
 
     public static function listItems(array $param = null){
 
-        $aColumns = ['adult', 'entrance_ticket_id', 'children', 'ticket_bill_id'];
+        $aColumns = ['adult', 'entrance_ticket_id', 'children', 'ticket_bill_id', 'ticket_name', 'adult_fare', 'children_fare'];
+        $equalColumns = ['ticket_bill_id'];
 
         $query = \DB::table('ticket_detail')
-            ->select(\DB::raw('SQL_CALC_FOUND_ROWS id'),\DB::raw('id AS DT_RowId'),'ticket_detail.*');
+            ->select(\DB::raw('SQL_CALC_FOUND_ROWS ticket_detail.id'),\DB::raw('ticket_detail.id AS DT_RowId'),'ticket_detail.*', \DB::raw('entrance_ticket.name AS ticket_name'), 'entrance_ticket.adult_fare', 'entrance_ticket.children_fare')
+            ->leftJoin('entrance_ticket', 'ticket_detail.entrance_ticket_id', '=', 'entrance_ticket.id');
 
         // Filter search condition
         foreach ($aColumns as $key => $value) {
-            (isset($param[$value]) && $param[$value]) && $query->where($value,'like','%'.$param[$value].'%');
+            if(in_array($value, $equalColumns)) {
+                (isset($param[$value]) && $param[$value]) && $query->where($value,'=', $param[$value]);
+            } else {
+                (isset($param[$value]) && $param[$value]) && $query->where($value,'like','%'.$param[$value].'%');
+            }
+            
         }
 
         //======================= SEARCH =================

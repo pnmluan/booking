@@ -79,7 +79,7 @@ angular.module('MetronicApp').controller('TicketBillController', function($rootS
                 
                 // Get Booking Detail with Passengers
                 var params = {
-                    booking_id: item.id
+                    ticket_bill_id: item.id
                 };
                 TicketDetailService.getAll($.param(params)).then((res) => {
                     var details = res.data.data;
