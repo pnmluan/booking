@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { URLSearchParams } from '@angular/http';
 
@@ -19,6 +19,7 @@ export class ListTicketComponent implements OnInit {
 	private subscriptionEvents: Subscription;
 	private querySubscription: Subscription;
 	public categoryTicketOptions = [];
+	@Output('order') orderOutput = new EventEmitter();
 	queryParams = {};
 	listItem = [];
 	curRouting?: string;
@@ -30,7 +31,7 @@ export class ListTicketComponent implements OnInit {
 		private config: Configuration,
 		private _Router: Router,
 		private _ActivatedRoute: ActivatedRoute,
-		private sessionStorage: LocalStorageService, 
+		private sessionStorage: LocalStorageService,
 	) { 
 
 		this.querySubscription = _ActivatedRoute.queryParams.subscribe(
@@ -52,7 +53,6 @@ export class ListTicketComponent implements OnInit {
 	}
 
   	ngOnInit() {
-		
 		this._CategoryTicketDataService.getAll().subscribe(res => {
 			let categoryTicketOptions = [];
 			if (res.data) {
@@ -183,45 +183,42 @@ export class ListTicketComponent implements OnInit {
 	 * Add To Cart
 	 *=================================*/
 	addToCart(item) {
+		let count = 0;
+		let obj = {
+			id: item.id,
+			name: item.name,
+			img: item.album[0].img,
+			adult_fare: item.adult_fare,
+			children_fare: item.children_fare,
+			number_adult: item.order,
+			number_children: 0
+		};
+
 		if (this.sessionStorage.get('cartItems')) {
 			let cartItems = this.sessionStorage.get('cartItems');
-			let count = 0;
+			let existed = false;
+			
 			for(let key in cartItems) {
 				if(cartItems[key].id == item.id) {
 					cartItems[key].number_adult = +cartItems[key].number_adult + item.order;
+					existed = true;
 				}
 				count++;
 			}
 
-			let obj = {
-				id: item.id,
-				name: item.name,
-				img: item.album[0].img,
-				adult_fare: item.adult_fare,
-				children_fare: item.children_fare,
-				number_adult: item.order,
-				number_children: 0
-			};
-			cartItems[count] = obj;
+			if(!existed){
+				cartItems[count] = obj;
+				count++; 	
+			}
 			this.sessionStorage.set('cartItems', cartItems);
-			
 
 		} else {
-			
-			let obj = {
-				id: item.id,
-				name: item.name,
-				img: item.album[0].img,
-				adult_fare: item.adult_fare,
-				children_fare: item.children_fare,
-				number_adult: item.order,
-				number_children: 0
-			};
 			let cartItems = [obj];
 			this.sessionStorage.set('cartItems', cartItems);
+			count++; 
 		}
 		item.order = 1;
-
+		this.config.number_order = count;
 	}
 
 	resizeImage() {

@@ -7,12 +7,14 @@ import { EntranceTicketDataService } from '../../../shared/entranceticket.datase
 
 import { Subscription } from 'rxjs/Rx';
 import { AgmCoreModule } from 'angular2-google-maps/core';
+import { LocalStorageService } from 'angular-2-local-storage';
+import { ToasterModule, ToasterService } from 'angular2-toaster';
 
 declare let jQuery: any;
 
 @Component({
   selector: 'app-paymment-ticket',
-  templateUrl: './paymment-ticket.component.html',
+  templateUrl: './payment-ticket.component.html',
   providers: [EntranceTicketDataService, Configuration]
 })
 export class PaymentTicketComponent implements OnInit {
@@ -22,9 +24,11 @@ export class PaymentTicketComponent implements OnInit {
 	filter_from_date: any;
 	curRouting?: string;
 	_params = {};
+	contact = {};
 	Ticket = {};
-	number_children: number = 0;
-	number_adult: number = 1;
+	listItems = {};
+	titleOptions = [];
+	amount: number = 0;
 	isAddPeople = false;
 	imgPath: string = this._EntranceTicketDataService.imgPath;
 	lat: number;
@@ -35,7 +39,9 @@ export class PaymentTicketComponent implements OnInit {
 		private config: Configuration,
 		private _Router: Router,
 		private _ActivatedRoute: ActivatedRoute,
-		) { 
+		private _ToasterService: ToasterService,
+		private sessionStorage: LocalStorageService
+	) { 
 		// subscribe to router event
 		this.subscriptionParam = _ActivatedRoute.params.subscribe(
 			(param: any) => {
@@ -46,25 +52,33 @@ export class PaymentTicketComponent implements OnInit {
 
 		this.subscriptionEvents = this._Router.events.subscribe((val) => {
 
-
 			let routing = this._Router.url;
 			if (this.curRouting != routing) {
 				this.curRouting = routing;
 				this.initData();
 			}
 		});
+
+		this.contact['title'] = '1';
+
+		this.titleOptions['adult'] = [
+			{ value: '1', label: 'Anh' },
+			{ value: '2', label: 'Chị' },
+			{ value: '3', label: 'Ông' },
+			{ value: '4', label: 'Bà' },
+			
+		];
 	}
 
   	ngOnInit() {
-		this._EntranceTicketDataService.getByID(this._params['ticket_id']).subscribe(res => {
-
-			if (res.data) {
-				this.Ticket = res.data;
-				this.lat = +this.Ticket['latitude'];
-				this.lng = +this.Ticket['longitude'];
+		this.listItems = this.sessionStorage.get('cartItems');
+		if(this.listItems){
+			for(let key in this.listItems){
+				this.amount += ((+this.listItems[key].number_adult * +this.listItems[key].adult_fare) 
+								+ (+this.listItems[key].number_children * +this.listItems[key].children_fare));
 			}
-		})
-  	}
+		}
+	}
 
   	initData() {
 
@@ -178,6 +192,61 @@ export class PaymentTicketComponent implements OnInit {
 			value = value - 1;
 		}
   	}
+
+  	onLinkToCart(){
+  		this._Router.navigate(['cart-ticket']);
+  	}
+
+  	/*=================================
+	 * Submit Info Customer
+	 *=================================*/
+	onSubmitInfoCustomer() {
+		let isError = false;
+		// Validate Contact
+		if (!this.contact['fullname']) {
+			isError = true;
+			this.contact['error_fullname'] = true;
+		} else {
+			this.contact['error_fullname'] = false;
+		}
+
+		if (!this.contact['phone']) {
+			isError = true;
+			this.contact['error_phone'] = true;
+		} else {
+			var pattern = /^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4}|[0-9]{5})$/;
+			if (!this.contact['phone'].match(pattern)) {
+				isError = true;
+				this.contact['error_phone'] = true;
+				this._ToasterService.pop('error', 'Số điện thoại không hợp lệ', 'Vui lòng điền đúng thông tin của số điện thoại.');
+			} else {
+				this.contact['error_phone'] = false;
+			}
+
+		}
+
+		if (!this.contact['email']) {
+			isError = true;
+			this.contact['error_email'] = true;
+		} else {
+			var pattern = /^\S*@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/;
+			if (!this.contact['email'].match(pattern)) {
+				isError = true;
+				this.contact['error_email'] = true;
+				this._ToasterService.pop('error', 'Email không hợp lệ', 'Vui lòng điền đúng thông tin của email.');
+			} else {
+				this.contact['error_email'] = false;
+			}
+
+		}
+
+		if(isError) {
+			this._ToasterService.pop('error', 'Lỗi nhập liệu', 'Vui lòng điền đầy đủ thông tin.');
+		}else{
+			let params: URLSearchParams = new URLSearchParams();
+			//params.set();
+		}
+	}
 
 	ngOnDestroy() {
 		this.subscriptionEvents.unsubscribe();

@@ -1133,7 +1133,8 @@ only screen and (max-width: 767px) {
 .tours-list .item .item-inner .item-book .s-cart { float: right; }
 .tours-list .item .item-inner .item-book .s-cart input,
 .tours-list .item .item-inner .item-book .s-cart a { float: left; border-radius: 0px; margin-right: 5px; }
-.tours-list .item .item-inner .item-book .s-cart input[type="text"] { padding: 5px; height: 30px; width: 60px; border: 1px solid #ddd; }
+.tours-list .item .item-inner .item-book .s-cart input[type="text"],
+.tours-list .item .item-inner .item-book .s-cart input[type="number"] { padding: 5px; height: 30px; width: 60px; border: 1px solid #ddd; }
 .tours-list .item .item-inner .item-book .s-cart a { text-align: center; line-height: 30px; display: block; width: 30px; height: 30px; font-size: 15px; background: #DE4131; color: #fff; }
 .tours-list .item .item-inner .item-book .s-cart a:hover { background: #DE4131; }
 
