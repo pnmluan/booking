@@ -25,9 +25,9 @@ export class PaymentTicketComponent implements OnInit {
 	_params = {};
 	contact = {};
 	Ticket = {};
+	listItems = {};
 	titleOptions = [];
-	number_children: number = 0;
-	number_adult: number = 1;
+	amount: number = 0;
 	isAddPeople = false;
 	imgPath: string = this._EntranceTicketDataService.imgPath;
 	lat: number;
@@ -69,16 +69,14 @@ export class PaymentTicketComponent implements OnInit {
 	}
 
   	ngOnInit() {
-  		console.log(this.sessionStorage.get('cartItems'));
-		this._EntranceTicketDataService.getByID(this._params['ticket_id']).subscribe(res => {
-
-			if (res.data) {
-				this.Ticket = res.data;
-				this.lat = +this.Ticket['latitude'];
-				this.lng = +this.Ticket['longitude'];
+		this.listItems = this.sessionStorage.get('cartItems');
+		if(this.listItems){
+			for(let key in this.listItems){
+				this.amount += ((+this.listItems[key].number_adult * +this.listItems[key].adult_fare) 
+								+ (+this.listItems[key].number_children * +this.listItems[key].children_fare));
 			}
-		})
-  	}
+		}
+	}
 
   	initData() {
 
@@ -192,6 +190,17 @@ export class PaymentTicketComponent implements OnInit {
 			value = value - 1;
 		}
   	}
+
+  	onLinkToCart(){
+  		this._Router.navigate(['cart-ticket']);
+  	}
+
+  	/*=================================
+	 * Submit Info Customer
+	 *=================================*/
+	onSubmitInfoCustomer() {
+
+	}
 
 	ngOnDestroy() {
 		this.subscriptionEvents.unsubscribe();

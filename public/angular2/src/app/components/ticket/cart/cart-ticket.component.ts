@@ -36,6 +36,8 @@ export class CartTicketComponent implements OnInit {
 
 			this.cartItems[key].total = total;
 		}
+		//update cart
+		this.sessionStorage.set('cartItems', this.cartItems);
 		this.sumPrice = sum;
 	}
 

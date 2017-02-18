@@ -190,6 +190,13 @@ export class DetailTicketComponent implements OnInit {
 
   	}
 
+  	/*=================================
+	 * Add To Cart
+	 *=================================*/
+	addToCart(item) {
+		
+	}
+
   	onPlusPeople(value) {
 		value = value + 1;
   	}
