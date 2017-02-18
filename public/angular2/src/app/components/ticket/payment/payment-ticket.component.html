@@ -6,108 +6,110 @@
             <div class="customer-inner">
               	<div class="customer-info">
 	                <div class="customer-info-inner">
-	                  	<!-- Contact info -->
-						<div class="contact-info">
-							<h2 class="customer-title">Thông tin người liên hệ </h2>
-							<div class="contact-info-inner">
-								<p>Vui lòng điền đây đủ thông tin, Nhân Viên DatVeSieuRe sẽ liên lạc với khách hàng qua địa chỉ này để hoàn tất thủ tục đặt vé.</p>
-								<div class="contact-info-field">
-									<div class="field field-name even clearfix">
-										<div>
-											<label>Quý danh</label>
-												<div>
-													<ng-select name="contact_title" [(ngModel)]="contact.title" [options]="titleOptions['adult']" [noFilter]="11">
-													</ng-select>
-												</div>
-										</div>
-										<div>
-											<label>Họ và tên <span>*</span></label>
+	                  	<form class="plane-form" (ngSubmit)="onSubmitInfoCustomer(formCustomer)" #formCustomer="ngForm">
+	                  		<!-- Contact info -->
+							<div class="contact-info">
+								<h2 class="customer-title">Thông tin người liên hệ </h2>
+								<div class="contact-info-inner">
+									<p>Vui lòng điền đây đủ thông tin, Nhân Viên DatVeSieuRe sẽ liên lạc với khách hàng qua địa chỉ này để hoàn tất thủ tục đặt vé.</p>
+									<div class="contact-info-field">
+										<div class="field field-name even clearfix">
 											<div>
-												<input name="fullname" [ngClass]="{'has-error': contact.error_fullname}" [(ngModel)]="contact.fullname" type="text" class="form-control">
+												<label>Quý danh</label>
+													<div>
+														<ng-select name="contact_title" [(ngModel)]="contact.title" [options]="titleOptions['adult']" [noFilter]="11">
+														</ng-select>
+													</div>
+											</div>
+											<div>
+												<label>Họ và tên <span>*</span></label>
+												<div>
+													<input name="fullname" [ngClass]="{'has-error': contact.error_fullname}" [(ngModel)]="contact.fullname" type="text" class="form-control">
+												</div>
 											</div>
 										</div>
-									</div>
-									<div class="field field-phone odd clearfix">
-										<label>Số điện thoại <span>*</span></label>
-										<div>
-											<input name="phone" [ngClass]="{'has-error': contact.error_phone}" [(ngModel)]="contact.phone" type="text" class="form-control">
+										<div class="field field-phone odd clearfix">
+											<label>Số điện thoại <span>*</span></label>
+											<div>
+												<input name="phone" [ngClass]="{'has-error': contact.error_phone}" [(ngModel)]="contact.phone" type="text" class="form-control">
+											</div>
 										</div>
-									</div>
-									<div class="field even clearfix">
-										<label>Email <span style="color: red">*</span></label>
-										<div>
-											<input name="email" [ngClass]="{'has-error': contact.error_email}" [(ngModel)]="contact.email" type="text" class="form-control">
+										<div class="field even clearfix">
+											<label>Email <span style="color: red">*</span></label>
+											<div>
+												<input name="email" [ngClass]="{'has-error': contact.error_email}" [(ngModel)]="contact.email" type="text" class="form-control">
+											</div>
 										</div>
-									</div>
-									<div class="field odd clearfix">
-										<label>Yêu cầu đặc biệt</label>
-										<div>
-											<input name="requirement" [(ngModel)]="contact.requirement" type="text" class="form-control">
+										<div class="field odd clearfix">
+											<label>Yêu cầu đặc biệt</label>
+											<div>
+												<input name="requirement" [(ngModel)]="contact.requirement" type="text" class="form-control">
+											</div>
 										</div>
-									</div>
-									<div class="field even clearfix">
-										<div class="bill">
-											<h3>Chi tiết hóa đơn</h3>
-	                                        <p>Quý khách có nhu cầu lấy hóa đơn giá trị gia tăng phải yêu cầu với phía Abay trong vòng 7 ngày kể từ thời điểm thanh toán đơn hàng.
-	                                        </p>
-	                                        <p>Quý khách vui lòng <span>nhập tiếng Việt có dấu</span> để việc xuất hóa đơn tránh bị sai sót. </p>
-	                                        <div class="bill-field">
-	                                            <div class="field">
-	                                                <label>Mã số thuế <span>*</span></label>
-	                                                <div>
-	                                                    <input type="text" class="form-control">
-	                                                </div>
-	                                            </div>
-	                                            <div class="field">
-	                                                <label>Tên công ty<span>*</span></label>
-	                                                <div>
-	                                                    <input type="text" class="form-control">
-	                                                </div>
-	                                            </div>
-	                                            <div class="field">
-	                                                <label>Địa chỉ <span>*</span></label>
-	                                                <div>
-	                                                    <input type="text" class="form-control">
-	                                                </div>
-	                                            </div>
-												<div class="field">
-													<label>Địa chỉ nhận hóa đơn</label>
-													<div>
-												    	<input type="text" class="form-control">
+										<div class="field even clearfix">
+											<div class="bill">
+												<h3>Chi tiết hóa đơn</h3>
+		                                        <p>Quý khách có nhu cầu lấy hóa đơn giá trị gia tăng phải yêu cầu với phía Abay trong vòng 7 ngày kể từ thời điểm thanh toán đơn hàng.
+		                                        </p>
+		                                        <p>Quý khách vui lòng <span>nhập tiếng Việt có dấu</span> để việc xuất hóa đơn tránh bị sai sót. </p>
+		                                        <div class="bill-field">
+		                                            <div class="field">
+		                                                <label>Mã số thuế <span>*</span></label>
+		                                                <div>
+		                                                    <input type="text" class="form-control">
+		                                                </div>
+		                                            </div>
+		                                            <div class="field">
+		                                                <label>Tên công ty<span>*</span></label>
+		                                                <div>
+		                                                    <input type="text" class="form-control">
+		                                                </div>
+		                                            </div>
+		                                            <div class="field">
+		                                                <label>Địa chỉ <span>*</span></label>
+		                                                <div>
+		                                                    <input type="text" class="form-control">
+		                                                </div>
+		                                            </div>
+													<div class="field">
+														<label>Địa chỉ nhận hóa đơn</label>
+														<div>
+													    	<input type="text" class="form-control">
+														</div>
 													</div>
-												</div>
-	                                        </div>
-											<div class="bill-note">
-	                                            <h4>Lưu ý về thời hạn xuất hóa đơn tại DatVeSieuRe:</h4>
-	                                            <p>
-	                                                - Đối với vé được xuất bán trong thời gian từ nay đến hết ngày 31/12/2015 sẽ có HẠN XUẤT HÓA ĐƠN là ngày 08/01/2016.</p>
-	                                            <p>
-	                                                - Đối với vé được xuất bán trong năm 2016, hạn cuối xuất hóa đơn sẽ là ngày mùng 10 của tháng kế tiếp sau tháng Quý khách xuất vé. </p>
-	                                            <p>
-	                                                Nếu quá hạn trên ABAY sẽ KHÔNG xuất lại hóa đơn. Do đó, nếu có nhu cầu, Quý khách vui lòng cung cấp chính xác và đầy đủ thông tin cần thiết trong thời gian sớm nhất để được ABAY phục vụ.
-	                                            </p>
-	                                        </div>
+		                                        </div>
+												<div class="bill-note">
+		                                            <h4>Lưu ý về thời hạn xuất hóa đơn tại DatVeSieuRe:</h4>
+		                                            <p>
+		                                                - Đối với vé được xuất bán trong thời gian từ nay đến hết ngày 31/12/2015 sẽ có HẠN XUẤT HÓA ĐƠN là ngày 08/01/2016.</p>
+		                                            <p>
+		                                                - Đối với vé được xuất bán trong năm 2016, hạn cuối xuất hóa đơn sẽ là ngày mùng 10 của tháng kế tiếp sau tháng Quý khách xuất vé. </p>
+		                                            <p>
+		                                                Nếu quá hạn trên ABAY sẽ KHÔNG xuất lại hóa đơn. Do đó, nếu có nhu cầu, Quý khách vui lòng cung cấp chính xác và đầy đủ thông tin cần thiết trong thời gian sớm nhất để được ABAY phục vụ.
+		                                            </p>
+		                                        </div>
+											</div>
 										</div>
 									</div>
 								</div>
 							</div>
-						</div>
-						<!-- End Contact info -->
-	                  <!-- <div class="sale-off-panel">
-	                    <h2>MÃ GIẢM GIÁ / MÃ GIỚI THIỆU </h2>
-	                    <div class="sale-off-inner">
-	                      <p>Quý khách vui lòng nhập chính xác <strong>Mã Giảm giá / Mã Giới thiệu</strong> vào ô bên dưới</p>
-	                      <p><strong>Lưu ý:</strong> <i>mỗi Mã Giảm giá / Mã Giới thiệu có giá trị sử dụng cho 01 lần Đặt vé duy nhất</i></p>
-	                      <div>
-	                        <label>Mã Giảm giá / Mã Giới thiệu</label>
-	                        <div><input type="text" class="form-control"></div>
-	                      </div>
-	                    </div>
-	                  </div> -->
-						<div class="submit-customer clearfix">
-							<p>Khi nhấn nút "Tiếp Tục", đồng nghĩa với việc quý khách đã đồng ý với các <a href="#" title="">điều kiện và điều khoản của Datvesieure.com</a> (được quy định <a href="#" title="">tại đây</a>) </p>
-							<button type="button">Tiếp tục <i class="fa fa-angle-double-right" aria-hidden="true"></i></button>
-						</div>
+							<!-- End Contact info -->
+		                  <!-- <div class="sale-off-panel">
+		                    <h2>MÃ GIẢM GIÁ / MÃ GIỚI THIỆU </h2>
+		                    <div class="sale-off-inner">
+		                      <p>Quý khách vui lòng nhập chính xác <strong>Mã Giảm giá / Mã Giới thiệu</strong> vào ô bên dưới</p>
+		                      <p><strong>Lưu ý:</strong> <i>mỗi Mã Giảm giá / Mã Giới thiệu có giá trị sử dụng cho 01 lần Đặt vé duy nhất</i></p>
+		                      <div>
+		                        <label>Mã Giảm giá / Mã Giới thiệu</label>
+		                        <div><input type="text" class="form-control"></div>
+		                      </div>
+		                    </div>
+		                  </div> -->
+							<div class="submit-customer clearfix">
+								<p>Khi nhấn nút "Tiếp Tục", đồng nghĩa với việc quý khách đã đồng ý với các <a href="#" title="">điều kiện và điều khoản của Datvesieure.com</a> (được quy định <a href="#" title="">tại đây</a>) </p>
+								<button type="submit">Tiếp tục <i class="fa fa-angle-double-right" aria-hidden="true"></i></button>
+							</div>
+						</form>
 					</div>
 				</div>
 				<!-- customer-info -->
@@ -128,7 +130,7 @@
 									</tr>
 									<tr *ngIf="item.number_children">
 										<td>Trẻ em</td>
-										<td>{{ item.number_childrend }} x {{ item.children_fare | number }} VNĐ</td>
+										<td>{{ item.number_children }} x {{ item.children_fare | number }} VNĐ</td>
 									</tr>
 								</tbody>
 		                    </table>

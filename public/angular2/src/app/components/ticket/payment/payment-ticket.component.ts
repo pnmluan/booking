@@ -8,6 +8,7 @@ import { EntranceTicketDataService } from '../../../shared/entranceticket.datase
 import { Subscription } from 'rxjs/Rx';
 import { AgmCoreModule } from 'angular2-google-maps/core';
 import { LocalStorageService } from 'angular-2-local-storage';
+import { ToasterModule, ToasterService } from 'angular2-toaster';
 
 declare let jQuery: any;
 
@@ -38,6 +39,7 @@ export class PaymentTicketComponent implements OnInit {
 		private config: Configuration,
 		private _Router: Router,
 		private _ActivatedRoute: ActivatedRoute,
+		private _ToasterService: ToasterService,
 		private sessionStorage: LocalStorageService
 	) { 
 		// subscribe to router event
@@ -199,7 +201,48 @@ export class PaymentTicketComponent implements OnInit {
 	 * Submit Info Customer
 	 *=================================*/
 	onSubmitInfoCustomer() {
+		let isError = false;
+		// Validate Contact
+		if (!this.contact['fullname']) {
+			isError = true;
+			this.contact['error_fullname'] = true;
+		} else {
+			this.contact['error_fullname'] = false;
+		}
 
+		if (!this.contact['phone']) {
+			isError = true;
+			this.contact['error_phone'] = true;
+		} else {
+			var pattern = /^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4}|[0-9]{5})$/;
+			if (!this.contact['phone'].match(pattern)) {
+				isError = true;
+				this.contact['error_phone'] = true;
+				this._ToasterService.pop('error', 'Số điện thoại không hợp lệ', 'Vui lòng điền đúng thông tin của số điện thoại.');
+			} else {
+				this.contact['error_phone'] = false;
+			}
+
+		}
+
+		if (!this.contact['email']) {
+			isError = true;
+			this.contact['error_email'] = true;
+		} else {
+			var pattern = /^\S*@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/;
+			if (!this.contact['email'].match(pattern)) {
+				isError = true;
+				this.contact['error_email'] = true;
+				this._ToasterService.pop('error', 'Email không hợp lệ', 'Vui lòng điền đúng thông tin của email.');
+			} else {
+				this.contact['error_email'] = false;
+			}
+
+		}
+
+		if(isError) {
+			this._ToasterService.pop('error', 'Lỗi nhập liệu', 'Vui lòng điền đầy đủ thông tin.');
+		}
 	}
 
 	ngOnDestroy() {
