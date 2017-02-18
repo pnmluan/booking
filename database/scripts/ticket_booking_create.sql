@@ -238,6 +238,8 @@ CREATE TABLE ticket_bill (
     total_fare float NOT NULL,
     contact_id int NOT NULL,
     comment varchar(500) NOT NULL,
+	`state` varchar(45) NOT NULL,
+	`status` varchar(45) NOT NULL,
 	created_at datetime NULL,
     updated_at datetime NULL,
     CONSTRAINT ticket_bill_pk PRIMARY KEY (id)

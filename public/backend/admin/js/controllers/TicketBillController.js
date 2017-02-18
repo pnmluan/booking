@@ -1,4 +1,4 @@
-angular.module('MetronicApp').controller('TicketBillController', function($rootScope, $scope, $http, $base64, $timeout, $location, $q, TicketBillService, ngDialog, toastr, DTOptionsBuilder, DTColumnBuilder, Upload) {
+angular.module('MetronicApp').controller('TicketBillController', function($rootScope, $scope, $http, $base64, $timeout, $location, $q, TicketBillService, TicketDetailService, ngDialog, toastr, DTOptionsBuilder, DTColumnBuilder, Upload) {
     $scope.$on('$viewContentLoaded', function() {
         // initialize core components
         App.initAjax();
@@ -66,6 +66,86 @@ angular.module('MetronicApp').controller('TicketBillController', function($rootS
             }
         });
     };
+
+    // Click to View
+    $scope.clickToView = function(item) {
+        ngDialog.openConfirm({
+            template: 'views/ticketbill/model_view_ticket_bill.html',
+            className: 'ngdialog-theme-large',
+            scope: $scope,
+            controller: ['$scope', '$filter', 'data', ($scope, $filter, data) => {
+                $scope.customerTypeOptions = data.customerTypeOptions;
+                $scope.mItem = item;
+                
+                // Get Booking Detail with Passengers
+                var params = {
+                    booking_id: item.id
+                };
+                TicketDetailService.getAll($.param(params)).then((res) => {
+                    var details = res.data.data;
+                    if(details) {
+                        var total_payment = 0;
+                        angular.forEach(details, (detail, key) => {
+                            var total = 0;
+                            angular.forEach(detail.passengers, (p, k) => {
+                                p.fare_tax = p.admin_fee + p.airport_fee + p.charge + p.fare + p.payment_fee + p.security_fee + p.other_tax;
+                                total += p.fare_tax;
+                            });
+                            detail.total = total;
+                            total_payment += total;
+                        });
+                        $scope.mItem.total_payment = total_payment;
+                        $scope.mItem.details = details;
+                        console.log(details);
+                    }
+                });
+
+                // Show Data Passengers
+                $scope.onShowPassengers = function(val = null) {
+
+                }
+
+                // Create Booking
+                $scope.onApprove = function() {
+
+                    var params = {
+                        id: $scope.mItem.id,
+                        state: 'approve'
+                    };
+                    BookingService.update(params).then((res) => {
+
+                        if(res.data.status == 'success') {
+                            data.dtInstance.reloadData();
+                            ngDialog.close();
+                            toastr.success('Updated an item', 'Success');
+                        } else {
+                            $scope.errorMsg = res.data.error;
+                            
+                        }
+
+                    });
+                }
+
+                // Close popup Booking
+                $scope.close = function() {
+                    ngDialog.close();
+                }
+
+            }],
+            resolve: {
+                data: function () {
+                    var data = {
+                        optionStatus: $scope.optionStatus,
+                        dtInstance: $scope.dtInstance,
+                        customerTypeOptions: $scope.settings.customerTypeOptions
+                    }
+                    return data;
+                }
+            }
+        });
+
+        
+    }
 
     // Get item By ID
     function getItemByID(id) {
@@ -215,6 +295,10 @@ angular.module('MetronicApp').controller('TicketBillController', function($rootS
                     $scope.clickToUpdate(data);
                 });
 
+                $('td > .clickToView', row).bind('click', function(){
+                    $scope.clickToView(data);
+                });
+
                 $('td > .clickToDelete', row).bind('click', function(){
                     $scope.clickToDelete(data.id);
                 });
@@ -222,14 +306,19 @@ angular.module('MetronicApp').controller('TicketBillController', function($rootS
 
         $scope.dtColumns = [
             DTColumnBuilder.newColumn('id').notVisible(),
-            DTColumnBuilder.newColumn('name').withTitle('Name'),
-            DTColumnBuilder.newColumn('fare').withTitle('Price'),
-            DTColumnBuilder.newColumn('provider').withTitle('Provider'),
-            DTColumnBuilder.newColumn('status').withTitle('Status'),
+            DTColumnBuilder.newColumn('fullname').withTitle('Name'),
+            DTColumnBuilder.newColumn('email').withTitle('Email'),
+            DTColumnBuilder.newColumn('phone').withTitle('Phone'),
+            DTColumnBuilder.newColumn('total_fare').withTitle('Total'),
+            DTColumnBuilder.newColumn('state').withTitle('State').withOption('createdCell',function(td,cellData,rowData,row,col){
+               var string_html = $scope.settings.statePending;
+               if(cellData == 'approve') {
+                    string_html = $scope.settings.stateApproved;
+               }
+                $(td).html(string_html);
+            }).withOption('width','auto'),
             DTColumnBuilder.newColumn(null).withTitle('Action').withOption('createdCell',function(td,cellData,rowData,row,col){
-                
-               var string_html = `</button>&nbsp;<button class="btn btn-warning clickToUpdate"><i class="fa fa-edit"></i>Edit</button>&nbsp;` +
-                                 `<button class="btn btn-danger clickToDelete"><i class="fa fa-trash-o"></i>Delete </button>`;
+               var string_html = $scope.settings.btnView + $scope.settings.btnDelete;
                 $(td).html(string_html);
             }).withOption('width','auto'),
         ];

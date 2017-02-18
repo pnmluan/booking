@@ -47,8 +47,6 @@ class Booking extends BaseModel
             /* Individual column filtering */
             // for($i=0; $i<$count; $i++){
             //     $requestColumn = $param['columns'][$i];
-            //     var_dump($requestColumn);
-            //     var_dump('---------');
             //     if ($requestColumn['searchable']=="true" && $requestColumn['search']['value'] != '' ){
             //         if ($sWhere == "" ){
             //             $sWhere = "WHERE ";
@@ -57,7 +55,7 @@ class Booking extends BaseModel
             //         }
             //         $sWhere .= $aColumns[$i]." LIKE '%".mysql_real_escape_string($requestColumn['search']['value'])."%' ";
             //     }
-            // }die;
+            // }
 
             if($sWhere != ""){
                 $query->where(\DB::raw($sWhere));
@@ -65,6 +63,8 @@ class Booking extends BaseModel
         }
 
         //======================= Ordering =================
+        $query->orderBy('booking.state', 'desc');
+        $query->orderBy('booking.created_at', 'asc');
         // $sOrder = '';
         // if (isset($param['order']) && count($param['order'])){
         // 	for ($i=0 ; $i<count($param['order']); $i++){

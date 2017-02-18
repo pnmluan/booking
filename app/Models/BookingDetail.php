@@ -94,7 +94,7 @@ class BookingDetail extends BaseModel
 
         $data = $query->get();
 
-        // Add album_ticket 
+        // Filter Passenger, Fare
         foreach ($data as $key => $value) {
             $passenger = \DB::table('passenger')
             ->select('passenger.*', 'fare.*', \DB::raw('baggage_type.fare AS baggage_type_fare'), \DB::raw('baggage_type.name AS baggage_type_name'), 'baggage_type.provider')

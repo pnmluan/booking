@@ -285,7 +285,8 @@ MetronicApp.config(['$stateProvider', '$urlRouterProvider', function($stateProvi
                         files: [
                             '../assets/global/plugins/dropzone/dropzone.min.js',
                             'js/controllers/TicketBillController.js',
-                            'js/services/ticketbill.service.js'
+                            'js/services/ticketbill.service.js',
+                            'js/services/ticketdetail.service.js'
                         ] 
                     });
                 }]
