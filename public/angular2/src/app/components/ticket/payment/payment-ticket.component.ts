@@ -3,7 +3,9 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { URLSearchParams } from '@angular/http';
 
 import { Configuration } from '../../../shared/app.configuration';
-import { EntranceTicketDataService } from '../../../shared/entranceticket.dataservice';
+import { EntranceTicketDataService, TicketBillDataService, TicketDetailDataService,
+	ContactDataService
+} from '../../../shared';
 
 import { Subscription } from 'rxjs/Rx';
 import { AgmCoreModule } from 'angular2-google-maps/core';
@@ -15,7 +17,8 @@ declare let jQuery: any;
 @Component({
   selector: 'app-paymment-ticket',
   templateUrl: './payment-ticket.component.html',
-  providers: [EntranceTicketDataService, Configuration]
+  providers: [EntranceTicketDataService, TicketBillDataService, TicketDetailDataService,
+	  ContactDataService, Configuration]
 })
 export class PaymentTicketComponent implements OnInit {
 	private subscriptionEvents: Subscription;
@@ -35,7 +38,10 @@ export class PaymentTicketComponent implements OnInit {
 	lng: number;
 
 	constructor(
-		private _EntranceTicketDataService: EntranceTicketDataService, 
+		private _EntranceTicketDataService: EntranceTicketDataService,
+		private _TicketBillDataService: TicketBillDataService,
+		private _TicketDetailDataService: TicketDetailDataService,
+		private _ContactDataService: ContactDataService,
 		private config: Configuration,
 		private _Router: Router,
 		private _ActivatedRoute: ActivatedRoute,
@@ -243,14 +249,79 @@ export class PaymentTicketComponent implements OnInit {
 		if(isError) {
 			this._ToasterService.pop('error', 'Lỗi nhập liệu', 'Vui lòng điền đầy đủ thông tin.');
 		}else{
-			let params: URLSearchParams = new URLSearchParams();
-			//params.set();
+			// Insert Ticket Bill
+			let cartItems = this.sessionStorage.get('cartItems');
+			let total_fare = 0;
+			for(let key in cartItems) {
+				total_fare += +cartItems[key].total;
+			}
+			let code = this.generateCode()
+			var params: URLSearchParams = new URLSearchParams();
+			params.set('code', code);
+			params.set('departure', '0');
+			params.set('total_fare', String(total_fare));
+			params.set('state', 'pending');
+
+			this._TicketBillDataService.create(params).subscribe(res => {
+				if (res.status == 'success') {
+					let ticketBill = res.data;
+
+					// Insert Ticket Detail
+					for (let key in cartItems) {
+						var selectedTicket = cartItems[key];
+						var params: URLSearchParams = new URLSearchParams();
+						params.set('ticket_bill_id', ticketBill.id);
+						params.set('entrance_ticket_id', selectedTicket.id);
+						params.set('adult', selectedTicket.adult);
+						params.set('children', selectedTicket.children);
+
+						this._TicketDetailDataService.create(params).subscribe(res => {
+							if (res.status == 'success') {
+
+							}
+						});
+					}
+
+					this.insertContactInfo(ticketBill.id);
+				}
+			});
 		}
+	}
+
+	/*=================================
+	 * Insert Contact Info
+	 *=================================*/
+	insertContactInfo(ticket_bill_id) {
+		// Insert Contact
+		var params: URLSearchParams = new URLSearchParams();
+		params.set('ticket_bill_id', ticket_bill_id);
+		params.set('title', this.contact['title']);
+		params.set('fullname', this.contact['fullname']);
+		params.set('phone', this.contact['phone']);
+		params.set('email', this.contact['email']);
+		params.set('requirement', this.contact['requirement']);
+
+		this._ContactDataService.create(params).subscribe(res => {
+
+		});
 	}
 
 	ngOnDestroy() {
 		this.subscriptionEvents.unsubscribe();
 		this.subscriptionParam.unsubscribe();
+	}
+
+	/*=================================
+	 * Generate Code
+	 *=================================*/
+	protected generateCode() {
+		var text = "";
+		var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+
+		for (var i = 0; i < 6; i++)
+			text += possible.charAt(Math.floor(Math.random() * possible.length));
+
+		return text;
 	}
 
 }

@@ -235,6 +235,7 @@ CREATE TABLE entrance_ticket (
 -- Table: ticket_bill
 CREATE TABLE ticket_bill (
     id int NOT NULL AUTO_INCREMENT,
+	code varchar(10) NOT NULL,
     departure datetime NOT NULL,
     total_fare float NOT NULL,
     contact_id int NOT NULL,

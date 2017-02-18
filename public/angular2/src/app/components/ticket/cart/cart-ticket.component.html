@@ -84,9 +84,9 @@
                         <p class="total-price">Total: <span> {{ sumPrice | number }} VNĐ</span></p>
                         <div class="g-button clearfix">
                             <div>
-                                <a class="pointer" ><i class="fa fa-long-arrow-left" aria-hidden="true"></i> Tiếp tục mua hàng</a></div>
+                                <a [routerLink]="['/list-tickets']" class="pointer" ><i class="fa fa-long-arrow-left" aria-hidden="true"></i> Tiếp tục mua hàng</a></div>
                             <div>
-                                <button type="btn" class="btn btn-update-cart">UPDATE CART</button>&nbsp;&nbsp;
+                                
                                 <button type="btn" class="btn btn-checkout" (click)="onLinkToPaymentTicket()">THANH TOÁN</button>
                             </div>
                         </div>
