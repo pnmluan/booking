@@ -183,6 +183,7 @@ export class ListTicketComponent implements OnInit {
 	 * Add To Cart
 	 *=================================*/
 	addToCart(item) {
+		let count = 0;
 		let obj = {
 			id: item.id,
 			name: item.name,
@@ -195,7 +196,6 @@ export class ListTicketComponent implements OnInit {
 
 		if (this.sessionStorage.get('cartItems')) {
 			let cartItems = this.sessionStorage.get('cartItems');
-			let count = 0;
 			let existed = false;
 			
 			for(let key in cartItems) {
@@ -207,16 +207,18 @@ export class ListTicketComponent implements OnInit {
 			}
 
 			if(!existed){
-				cartItems[count] = obj;	
+				cartItems[count] = obj;
+				count++; 	
 			}
 			this.sessionStorage.set('cartItems', cartItems);
 
 		} else {
 			let cartItems = [obj];
 			this.sessionStorage.set('cartItems', cartItems);
+			count++; 
 		}
 		item.order = 1;
-
+		this.config.number_order = count;
 	}
 
 	resizeImage() {

@@ -36,7 +36,7 @@
                                 <a href="#"><img alt="" src="assets/img/logo.png"></a>
                             </div>
                             <a class="cart_anchor nicdark_btn_icon nicdark_right_sidebar_btn_open extrasmall right" style="display: block;" (click)="onOpenCart()">
-                                <span *ngIf="number_order" class="item-number">{{ number_order }}</span><i class="fa fa-shopping-cart"></i>
+                                <span *ngIf="_Configuration.number_order" class="item-number">{{ _Configuration.number_order }}</span><i class="fa fa-shopping-cart"></i>
                             </a>
                             <!--end logo-->
                             <div class="menu-main-menu-container">

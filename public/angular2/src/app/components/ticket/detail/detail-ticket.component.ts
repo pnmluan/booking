@@ -194,6 +194,7 @@ export class DetailTicketComponent implements OnInit {
 	 * Add To Cart
 	 *=================================*/
 	addToCart(item) {
+		let count = 0;
 		let obj = {
 			id: item.id,
 			name: item.name,
@@ -219,13 +220,16 @@ export class DetailTicketComponent implements OnInit {
 			}
 
 			if(!existed){
-				cartItems[count] = obj;	
+				cartItems[count] = obj;
+				count++;
 			}
 			this.sessionStorage.set('cartItems', cartItems);
 		} else {
 			let cartItems = [obj];
 			this.sessionStorage.set('cartItems', cartItems);
+			count++;
 		}
+		this.config.number_order = count;
 	}
 
   	onPlusPeople(value) {

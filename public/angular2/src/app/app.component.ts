@@ -46,6 +46,7 @@ export class AppComponent {
 		private _LoadingAnimateService: LoadingAnimateService,
 		private _LocalStorageService: LocalStorageService,
 		private _EntranceTicketDataService: EntranceTicketDataService,
+		private sessionStorage: LocalStorageService
 	) {
 		this.session_expired = this._Configuration.session_expired;
 
@@ -76,6 +77,14 @@ export class AppComponent {
 		setInterval(() => {
 			this.checkUserSession();
 		}, 3000);
+
+		let cartItems = this.sessionStorage.get('cartItems');
+		if(cartItems){
+			for(let key in cartItems){
+				this.number_order++;
+			}
+		}
+		this._Configuration.number_order = this.number_order;
 	}
 
 	ngAfterContentChecked() {

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { Configuration } from '../../../shared/app.configuration';
 import { EntranceTicketDataService } from './../../../shared';
 import { LocalStorageService } from 'angular-2-local-storage';
 
@@ -18,6 +19,7 @@ export class CartTicketComponent implements OnInit {
 		private sessionStorage: LocalStorageService,
 		private _EntranceTicketDataService: EntranceTicketDataService,
 		private _Router: Router,
+		private config: Configuration,
 	) { }
 	ngOnInit() {
 		this.cartItems = this.sessionStorage.get('cartItems');
@@ -27,7 +29,7 @@ export class CartTicketComponent implements OnInit {
 	 * Process Total
 	 *=================================*/
 	processTotal() {
-		let sum = 0;
+		let sum = 0, count = 0;
 		for (let key in this.cartItems) {
 			var item = this.cartItems[key];
 
@@ -35,10 +37,12 @@ export class CartTicketComponent implements OnInit {
 			sum = sum + total;
 
 			this.cartItems[key].total = total;
+			count++; 
 		}
 		//update cart
 		this.sessionStorage.set('cartItems', this.cartItems);
 		this.sumPrice = sum;
+		this.config.number_order = count;
 	}
 
 	/*=================================

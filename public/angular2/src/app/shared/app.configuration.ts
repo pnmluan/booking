@@ -19,4 +19,5 @@ export class Configuration {
 
 	public arr_number_people = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10'];
 	public arr_number_infants = ['1','2'];
+	public number_order: number = 0;
 }

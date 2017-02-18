@@ -242,6 +242,9 @@ export class PaymentTicketComponent implements OnInit {
 
 		if(isError) {
 			this._ToasterService.pop('error', 'Lỗi nhập liệu', 'Vui lòng điền đầy đủ thông tin.');
+		}else{
+			let params: URLSearchParams = new URLSearchParams();
+			//params.set();
 		}
 	}
 
