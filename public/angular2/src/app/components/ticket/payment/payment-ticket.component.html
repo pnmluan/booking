@@ -1,100 +1,99 @@
- <!--#post-->
-      <div style="float:left; width:100%;" id="post-32" class="post-32 page type-page status-publish hentry">
-
-        <section class="customer">
-          <div class="container clearfix">
+<!--#post-->
+<div style="float:left; width:100%;" id="post-32" class="post-32 page type-page status-publish hentry">
+    <section class="customer" *ngIf="selectedStep == 1">
+        <div class="container clearfix">
             <div class="customer-inner">
-              	<div class="customer-info">
-	                <div class="customer-info-inner">
-	                  	<form class="plane-form" (ngSubmit)="onSubmitInfoCustomer(formCustomer)" #formCustomer="ngForm">
-	                  		<!-- Contact info -->
-							<div class="contact-info">
-								<h2 class="customer-title">Thông tin người liên hệ </h2>
-								<div class="contact-info-inner">
-									<p>Vui lòng điền đây đủ thông tin, Nhân Viên DatVeSieuRe sẽ liên lạc với khách hàng qua địa chỉ này để hoàn tất thủ tục đặt vé.</p>
-									<div class="contact-info-field">
-										<div class="field field-name even clearfix">
-											<div>
-												<label>Quý danh</label>
-													<div>
-														<ng-select name="contact_title" [(ngModel)]="contact.title" [options]="titleOptions['adult']" [noFilter]="11">
-														</ng-select>
-													</div>
-											</div>
-											<div>
-												<label>Họ và tên <span>*</span></label>
-												<div>
-													<input name="fullname" [ngClass]="{'has-error': contact.error_fullname}" [(ngModel)]="contact.fullname" type="text" class="form-control">
-												</div>
-											</div>
-										</div>
-										<div class="field field-phone odd clearfix">
-											<label>Số điện thoại <span>*</span></label>
-											<div>
-												<input name="phone" [ngClass]="{'has-error': contact.error_phone}" [(ngModel)]="contact.phone" type="text" class="form-control">
-											</div>
-										</div>
-										<div class="field even clearfix">
-											<label>Email <span style="color: red">*</span></label>
-											<div>
-												<input name="email" [ngClass]="{'has-error': contact.error_email}" [(ngModel)]="contact.email" type="text" class="form-control">
-											</div>
-										</div>
-										<div class="field odd clearfix">
-											<label>Yêu cầu đặc biệt</label>
-											<div>
-												<input name="requirement" [(ngModel)]="contact.requirement" type="text" class="form-control">
-											</div>
-										</div>
-										<div class="field even clearfix">
-											<div class="bill">
-												<h3>Chi tiết hóa đơn</h3>
-		                                        <p>Quý khách có nhu cầu lấy hóa đơn giá trị gia tăng phải yêu cầu với phía Abay trong vòng 7 ngày kể từ thời điểm thanh toán đơn hàng.
-		                                        </p>
-		                                        <p>Quý khách vui lòng <span>nhập tiếng Việt có dấu</span> để việc xuất hóa đơn tránh bị sai sót. </p>
-		                                        <div class="bill-field">
-		                                            <div class="field">
-		                                                <label>Mã số thuế <span>*</span></label>
-		                                                <div>
-		                                                    <input type="text" class="form-control">
-		                                                </div>
-		                                            </div>
-		                                            <div class="field">
-		                                                <label>Tên công ty<span>*</span></label>
-		                                                <div>
-		                                                    <input type="text" class="form-control">
-		                                                </div>
-		                                            </div>
-		                                            <div class="field">
-		                                                <label>Địa chỉ <span>*</span></label>
-		                                                <div>
-		                                                    <input type="text" class="form-control">
-		                                                </div>
-		                                            </div>
-													<div class="field">
-														<label>Địa chỉ nhận hóa đơn</label>
-														<div>
-													    	<input type="text" class="form-control">
-														</div>
-													</div>
-		                                        </div>
-												<div class="bill-note">
-		                                            <h4>Lưu ý về thời hạn xuất hóa đơn tại DatVeSieuRe:</h4>
-		                                            <p>
-		                                                - Đối với vé được xuất bán trong thời gian từ nay đến hết ngày 31/12/2015 sẽ có HẠN XUẤT HÓA ĐƠN là ngày 08/01/2016.</p>
-		                                            <p>
-		                                                - Đối với vé được xuất bán trong năm 2016, hạn cuối xuất hóa đơn sẽ là ngày mùng 10 của tháng kế tiếp sau tháng Quý khách xuất vé. </p>
-		                                            <p>
-		                                                Nếu quá hạn trên ABAY sẽ KHÔNG xuất lại hóa đơn. Do đó, nếu có nhu cầu, Quý khách vui lòng cung cấp chính xác và đầy đủ thông tin cần thiết trong thời gian sớm nhất để được ABAY phục vụ.
-		                                            </p>
-		                                        </div>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
-							<!-- End Contact info -->
-		                  <!-- <div class="sale-off-panel">
+                <div class="customer-info">
+                    <div class="customer-info-inner">
+                        <form class="plane-form" (ngSubmit)="onSubmitInfoCustomer(formCustomer)" #formCustomer="ngForm">
+                            <!-- Contact info -->
+                            <div class="contact-info">
+                                <h2 class="customer-title">Thông tin người liên hệ </h2>
+                                <div class="contact-info-inner">
+                                    <p>Vui lòng điền đây đủ thông tin, Nhân Viên DatVeSieuRe sẽ liên lạc với khách hàng qua địa chỉ này để hoàn tất thủ tục đặt vé.</p>
+                                    <div class="contact-info-field">
+                                        <div class="field field-name even clearfix">
+                                            <div>
+                                                <label>Quý danh</label>
+                                                <div>
+                                                    <ng-select name="contact_title" [(ngModel)]="contact.title" [options]="titleOptions['adult']" [noFilter]="11">
+                                                    </ng-select>
+                                                </div>
+                                            </div>
+                                            <div>
+                                                <label>Họ và tên <span>*</span></label>
+                                                <div>
+                                                    <input name="fullname" [ngClass]="{'has-error': contact.error_fullname}" [(ngModel)]="contact.fullname" type="text" class="form-control">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="field field-phone odd clearfix">
+                                            <label>Số điện thoại <span>*</span></label>
+                                            <div>
+                                                <input name="phone" [ngClass]="{'has-error': contact.error_phone}" [(ngModel)]="contact.phone" type="text" class="form-control">
+                                            </div>
+                                        </div>
+                                        <div class="field even clearfix">
+                                            <label>Email <span style="color: red">*</span></label>
+                                            <div>
+                                                <input name="email" [ngClass]="{'has-error': contact.error_email}" [(ngModel)]="contact.email" type="text" class="form-control">
+                                            </div>
+                                        </div>
+                                        <div class="field odd clearfix">
+                                            <label>Yêu cầu đặc biệt</label>
+                                            <div>
+                                                <input name="requirement" [(ngModel)]="contact.requirement" type="text" class="form-control">
+                                            </div>
+                                        </div>
+                                        <div class="field even clearfix">
+                                            <div class="bill">
+                                                <h3>Chi tiết hóa đơn</h3>
+                                                <p>Quý khách có nhu cầu lấy hóa đơn giá trị gia tăng phải yêu cầu với phía Abay trong vòng 7 ngày kể từ thời điểm thanh toán đơn hàng.
+                                                </p>
+                                                <p>Quý khách vui lòng <span>nhập tiếng Việt có dấu</span> để việc xuất hóa đơn tránh bị sai sót. </p>
+                                                <div class="bill-field">
+                                                    <div class="field">
+                                                        <label>Mã số thuế <span>*</span></label>
+                                                        <div>
+                                                            <input type="text" class="form-control">
+                                                        </div>
+                                                    </div>
+                                                    <div class="field">
+                                                        <label>Tên công ty<span>*</span></label>
+                                                        <div>
+                                                            <input type="text" class="form-control">
+                                                        </div>
+                                                    </div>
+                                                    <div class="field">
+                                                        <label>Địa chỉ <span>*</span></label>
+                                                        <div>
+                                                            <input type="text" class="form-control">
+                                                        </div>
+                                                    </div>
+                                                    <div class="field">
+                                                        <label>Địa chỉ nhận hóa đơn</label>
+                                                        <div>
+                                                            <input type="text" class="form-control">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="bill-note">
+                                                    <h4>Lưu ý về thời hạn xuất hóa đơn tại DatVeSieuRe:</h4>
+                                                    <p>
+                                                        - Đối với vé được xuất bán trong thời gian từ nay đến hết ngày 31/12/2015 sẽ có HẠN XUẤT HÓA ĐƠN là ngày 08/01/2016.</p>
+                                                    <p>
+                                                        - Đối với vé được xuất bán trong năm 2016, hạn cuối xuất hóa đơn sẽ là ngày mùng 10 của tháng kế tiếp sau tháng Quý khách xuất vé. </p>
+                                                    <p>
+                                                        Nếu quá hạn trên ABAY sẽ KHÔNG xuất lại hóa đơn. Do đó, nếu có nhu cầu, Quý khách vui lòng cung cấp chính xác và đầy đủ thông tin cần thiết trong thời gian sớm nhất để được ABAY phục vụ.
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- End Contact info -->
+                            <!-- <div class="sale-off-panel">
 		                    <h2>MÃ GIẢM GIÁ / MÃ GIỚI THIỆU </h2>
 		                    <div class="sale-off-inner">
 		                      <p>Quý khách vui lòng nhập chính xác <strong>Mã Giảm giá / Mã Giới thiệu</strong> vào ô bên dưới</p>
@@ -105,78 +104,329 @@
 		                      </div>
 		                    </div>
 		                  </div> -->
-							<div class="submit-customer clearfix">
-								<p>Khi nhấn nút "Tiếp Tục", đồng nghĩa với việc quý khách đã đồng ý với các <a href="#" title="">điều kiện và điều khoản của Datvesieure.com</a> (được quy định <a href="#" title="">tại đây</a>) </p>
-								<button type="submit">Tiếp tục <i class="fa fa-angle-double-right" aria-hidden="true"></i></button>
-							</div>
-						</form>
-					</div>
-				</div>
-				<!-- customer-info -->
-              	<aside class="aside-price-detail">
-                	<!-- Price detail -->
-                	<div class="price-detail">
-                  		<h2>Chi tiết giá</h2>
-                  		<div>
-                    		<h3>Giá đã gồm thuế & phí</h3>
-		                    <table *ngFor="let item of listItems">
-								<tbody>
-									<tr>
-										<td colspan="2">{{ item.name }}</td>
-									</tr>
-									<tr *ngIf="item.number_adult">
-										<td>Người lớn</td>
-										<td>{{ item.number_adult }} x {{ item.adult_fare | number }} VNĐ</td>
-									</tr>
-									<tr *ngIf="item.number_children">
-										<td>Trẻ em</td>
-										<td>{{ item.number_children }} x {{ item.children_fare | number }} VNĐ</td>
-									</tr>
-								</tbody>
-		                    </table>
-                  		</div>
-                  		<div>
-		                    <table>
-								<tbody>
-									<tr>
-										<td>Tổng giá</td>
-										<td><strong>{{ amount | number }} VNĐ</strong></td>
-									</tr>
-								</tbody>
-		                    </table>
-                  		</div>
-                	</div>
-                	<!-- End Price detail -->
-                <div class="prev-page">
-					<button type="button" class="btn" (click)="onLinkToCart()"><i class="fa fa-angle-double-left" aria-hidden="true"></i> Quay về trang kết quả</button>
+                            <div class="submit-customer clearfix">
+                                <p>Khi nhấn nút "Tiếp Tục", đồng nghĩa với việc quý khách đã đồng ý với các <a href="#" title="">điều kiện và điều khoản của Datvesieure.com</a> (được quy định <a href="#" title="">tại đây</a>) </p>
+                                <button type="submit">Tiếp tục <i class="fa fa-angle-double-right" aria-hidden="true"></i></button>
+                            </div>
+                        </form>
+                    </div>
                 </div>
-                <div class="how-to">
-                  <h3>Tôi làm thế nào ?</h3>
-                  <ul>
-                    <li><a href="#" title=""><i class="fa fa-caret-right" aria-hidden="true"></i> Liên hệ</a></li>
-                    <li><a href="#" title=""><i class="fa fa-caret-right" aria-hidden="true"></i> Thanh toán</a></li>
-                    <li><a href="#" title=""><i class="fa fa-caret-right" aria-hidden="true"></i> Xem đơn hàng</a></li>
-                    <li><a href="#" title=""><i class="fa fa-caret-right" aria-hidden="true"></i> In vé điện tử</a></li>
-                    <li><a href="#" title=""><i class="fa fa-caret-right" aria-hidden="true"></i> Hướng dẫn đặt vé</a></li>
-                  </ul>
-                </div>
-              </aside>
-              <!-- price-detail -->
+                <!-- customer-info -->
+                <aside class="aside-price-detail">
+                    <!-- Price detail -->
+                    <div class="price-detail">
+                        <h2>Chi tiết giá đã gồm thuế & phí</h2>
+                        <div>
+                            <table *ngFor="let item of listItems">
+                                <tbody>
+                                    <tr>
+                                        <td colspan="2">
+                                            <h3>{{ item.name }} </h3>
+                                        </td>
+                                    </tr>
+                                    <tr *ngIf="item.number_adult">
+                                        <td>Người lớn</td>
+                                        <td>{{ item.number_adult }} x {{ item.adult_fare | number }} VNĐ</td>
+                                    </tr>
+                                    <tr *ngIf="item.number_children">
+                                        <td>Trẻ em</td>
+                                        <td>{{ item.number_children }} x {{ item.children_fare | number }} VNĐ</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div>
+                            <table>
+                                <tbody>
+                                    <tr>
+                                        <td>Tổng giá</td>
+                                        <td><strong>{{ amount | number }} VNĐ</strong></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <!-- End Price detail -->
+                    <div class="prev-page">
+                        <button type="button" class="btn" (click)="onLinkToCart()"><i class="fa fa-angle-double-left" aria-hidden="true"></i> Quay về trang kết quả</button>
+                    </div>
+                    <div class="how-to">
+                        <h3>Tôi làm thế nào ?</h3>
+                        <ul>
+                            <li><a href="#" title=""><i class="fa fa-caret-right" aria-hidden="true"></i> Liên hệ</a></li>
+                            <li><a href="#" title=""><i class="fa fa-caret-right" aria-hidden="true"></i> Thanh toán</a></li>
+                            <li><a href="#" title=""><i class="fa fa-caret-right" aria-hidden="true"></i> Xem đơn hàng</a></li>
+                            <li><a href="#" title=""><i class="fa fa-caret-right" aria-hidden="true"></i> In vé điện tử</a></li>
+                            <li><a href="#" title=""><i class="fa fa-caret-right" aria-hidden="true"></i> Hướng dẫn đặt vé</a></li>
+                        </ul>
+                    </div>
+                </aside>
+                <!-- price-detail -->
             </div>
-          </div>
-        </section>
-        <div class="skyline hidden-xs hidden-sm">
-          <!-- <script src="js/prefixfree.min.js"></script> -->
-          <div class="skyline-city"></div>
-          <div class="bus-img">
-            <img style="opacity: 0.3;filter: alpha(opacity=30);" src="img/banh-xe.gif">
-          </div>
-          <div class="plane-img">
-            <img src="img/plane.png" alt="" style="width: 250px;">
-          </div>
         </div>
-     
-      </div>
-      <!--#post-->
-
-
+    </section>
+    <section class="payment payment-confirm" *ngIf="selectedStep == 2">
+        <div class="container clearfix">
+            <div class="payment-inner">
+                <div class="payment-info">
+                    <div class="payment-info-inner">
+                        <h1>Yêu cầu đặt vé của quý khách đã được xử lý trên hệ thống của chúng tôi.</h1>
+                        <ul>
+                            <li>- Cảm ơn quý khách đã sử dụng dịch vụ của chúng tôi.</li>
+                            <li>- Chúng tôi sẽ liên hệ với bạn trong thời gian sớm nhất để hoàn tất giao dịch.</li>
+                            <li style="color: red;">- Không thực hiện Chuyển Khoản hoặc Thanh toán qua Cổng THANH TOÁN TRỰC TUYẾN khi nhân viên Datvesieure chưa liên hệ với Quý khách.</li>
+                        </ul>
+                        <div class="TTdh">
+                            <p>
+                                <strong>MÃ ĐƠN HÀNG:</strong><span class="order-id"> {{generalData?.generateCode}} </span>
+                                <br> Tình trạng:<span class="orangeBold"> Chờ thanh toán</span>
+                            </p>
+                        </div>
+                     
+                        <h1 style="margin-top: 20px;">Cảm ơn quý khách đã đặt vé tại DATVESIEURE.COM</h1>
+                        <h2>Quý Khách Vui Lòng CHỌN HÌNH THỨC THANH TOÁN</h2>
+                        <p>(Ngay sau khi thanh toán thành công đơn hàng Datvesieure.com sẽ xuất vé cho quý khách, Vui lòng chọn hình thức thanh toán tiện nhất cho khách hàng)</p>
+                        <section class="">
+                            <div class="panel-group" id="accordion">
+                                <!-- FAQ1 -->
+                                <div class="panel panel-default">
+                                    <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
+                                        <div class="panel-heading" style="">
+                                            <h4 class="panel-title">
+                                1. Thanh toán qua chuyển khoản ngân hàng
+                              </h4>
+                                        </div>
+                                    </a>
+                                    <div id="collapseOne" class="panel-collapse collapse in">
+                                        <div class="panel-body">
+                                            <p>Quý khách có thể thanh toán cho chúng tôi bằng cách chuyển khoản trực tiếp tại ngân hàng, chuyển qua thẻ ATM, hoặc qua Internet banking.</p>
+                                            <div class="warning">
+                                                <b><u>Chi tiết thanh toán:</u></b>
+                                                <p><strong>Tên tài khoản: </strong><span class="tetp">Công ty TNHH MTV Thương mại và Du lịch Ba Lô</span></p>
+                                                <p><strong>Nội dung chuyển khoản:</strong> <span class="tetp">"MDH 1128103, Le Van A, Noi dung thanh toan"</span></p>
+                                                <p>
+                                                    <u>Ví dụ:</u>
+                                                    <br> "MDH 1128103, Le Van A, TT ve may bay "
+                                                    <br> "MDH 1128103, Le Van A, TT them hanh ly ky gui "
+                                                    <br> "MDH 1128103, Le Van A, TT phi doi ten, dich vu khac "
+                                                    <br>
+                                                </p>
+                                                <p class="bold-font">
+                                                    Ðể việc thanh toán được chính xác. Xin cảm ơn quý khách!</p>
+                                            </div>
+                                            <div class="table-responsive">
+                                                <table class="table table-bank">
+                                                    <tbody>
+                                                        <tr>
+                                                            <th>&nbsp;</th>
+                                                            <th>Ngân hàng</th>
+                                                            <th>Số tài khoản</th>
+                                                            <th>Chi nhánh</th>
+                                                        </tr>
+                                                        <tr>
+                                                            <td><img src="assets/img/bank/bank-logo-VCB.jpg" alt=""></td>
+                                                            <td>TMCP Ngoại thương Việt Nam - Vietcombank </td>
+                                                            <td>0071000764340</td>
+                                                            <td>PGD số 10 CN Hồ Chí Minh</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td><img src="assets/img/bank/bank-logo-TCB.jpg" alt=""></td>
+                                                            <td>TMCP Kỹ Thương Việt Nam</td>
+                                                            <td>012170730001</td>
+                                                            <td>Phòng giao dịch Võ Văn Tần</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td><img src="assets/img/bank/bank-logo-ACB.jpg" alt=""></td>
+                                                            <td>TMCP Á Châu - ACB</td>
+                                                            <td>624704060033559</td>
+                                                            <td>PGD Võ Thị Sáu CN Hồ Chí Minh</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td><img src="assets/img/bank/bank-logo-EAB.jpg" alt=""></td>
+                                                            <td>TMCP Đông Á </td>
+                                                            <td>102010001851074 </td>
+                                                            <td>Chi Nhánh 3</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td><img src="assets/img/bank/bank-logo-AGR.jpg" alt=""></td>
+                                                            <td>Nông Nghiệp Và Phát Triển Nông Thôn Việt Nam - Agribank</td>
+                                                            <td>1602201359662</td>
+                                                            <td>Chi nhánh 3</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td><img src="assets/img/bank/bank-logo-VTB.jpg" alt=""></td>
+                                                            <td>TMCP Công Thương Việt Nam - Vietinbank</td>
+                                                            <td>060077605811</td>
+                                                            <td>Phòng giao dịch Võ Văn Tần</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td><img src="assets/img/bank/bank-logo-MBB.jpg" alt=""></td>
+                                                            <td>Quân Đội</td>
+                                                            <td>19128300324018</td>
+                                                            <td>Chi nhánh Tdắng Lợi</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td><img src="assets/img/bank/bank-logo-MSB.jpg" alt=""></td>
+                                                            <td>TMCP Hàng Hải Việt Nam</td>
+                                                            <td>16810000136466</td>
+                                                            <td>chi nhánh Bến Thành - PGD Bắc Hải</td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- FAQ2 -->
+                                <div class="panel panel-default">
+                                    <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">
+                                        <div class="panel-heading">
+                                            <h4 class="panel-title" id="2">
+                                2. Thanh Toán Tại Văn phòng của Đặt Vé Siêu Rẻ
+                              </h4>
+                                        </div>
+                                    </a>
+                                    <div id="collapseTwo" class="panel-collapse collapse">
+                                        <div class="panel-body">
+                                            <p>Sau khi đặt hàng thành công, Quý khách vui lòng qua văn phòng Datvesieure.com để thanh toán và nhận vé.</p>
+                                            <br/>
+                                            <strong style="text-transform: uppercase;">Công ty TNHH MTV Thương mại và Du lịch Ba Lô</strong>
+                                            <br/>
+                                            <span>06 Tân Lập 1, phường Thạch Thang, quận Hải Châu, Đà Nẵng</span>
+                                            <br/>
+                                            <span>Điện thoại: (0511) 38 88 408</span>
+                                            <br/>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- FAQ3 -->
+                                <div class="panel panel-default">
+                                    <a data-toggle="collapse" data-parent="#accordion" href="#collapseThree">
+                                        <div class="panel-heading">
+                                            <h4 class="panel-title">
+                                3. Thanh toán tại nhà <span>(+30,000vnđ)</span>
+                              </h4>
+                                        </div>
+                                    </a>
+                                    <div id="collapseThree" class="panel-collapse collapse">
+                                        <div class="panel-body">
+                                            <p>Nhân viên Datvesieure.com sẽ giao vé & thu tiền tại nhà theo địa chỉ Quý khách cung cấp. Với hình thức này, quý khách sẽ mất phí giao vé là <strong style="color: red">30,000 vnđ</strong></p>
+                                            <p>Quý khách vui lòng điền đầy đủ thông tin địa chỉ để nhân viên Datvesieure giao vé và thu tiền.</p>
+                                            <div class="warning-2">
+                                                Quý khách lưu ý: Hình thức thanh toán này chỉ áp dụng cho các địa chỉ tại khu vực nội thành Hà Nội và Tp Hồ Chí Minh.
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+                    </div>
+                </div>
+                <!-- payment-info -->
+                <aside class="aside-price-detail">
+                    <div class="ticket-details">
+                        <h3>Thông tin đặt vé</h3>
+                        <div class="price-basic">
+                            <table class="">
+                                <tbody>
+                                    <tr>
+                                        <td class="col1" width="69">Mã đơn hàng</td>
+                                        <td class="col2" width="150"> <strong style="font-size: 15px;">{{generalData?.generateCode}}</strong></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="col1" width="69">Trạng thái</td>
+                                        <td class="col2" width="150"> Chờ xác nhận</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="col1" width="69">Tổng giá</td>
+                                        <td class="col2" width="150"> <strong style="font-size: 18px; color: #fbba00;">{{ generalData.total_fare | number }} VNĐ</strong></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="price-total">
+                            <table *ngFor="let item of listItems">
+                                <tbody>
+                                    <tr>
+                                        <td colspan="2">
+                                            <h3>{{ item.name }} </h3>
+                                        </td>
+                                    </tr>
+                                    <tr *ngIf="item.number_adult">
+                                        <td>Người lớn</td>
+                                        <td>{{ item.number_adult }} x {{ item.adult_fare | number }} VNĐ</td>
+                                    </tr>
+                                    <tr *ngIf="item.number_children">
+                                        <td>Trẻ em</td>
+                                        <td>{{ item.number_children }} x {{ item.children_fare | number }} VNĐ</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="contact-info">
+                        <h3>Thông tin liên hệ</h3>
+                        <div class="contact-info-inner">
+                            <form (ngSubmit)="onSubmitContact(formContact)" #formContact="ngForm">
+                                <div class="field clearfix">
+                                    <label>Tên liên hệ</label>
+                                    <div class="clearfix">
+                                        <ng-select name="contact_title" [(ngModel)]="contact.title" [options]="titleOptions['adult']" [noFilter]="11">
+                                        </ng-select>
+                                        <input name="fullname" [ngClass]="{'has-error': contact.error_fullname}" [(ngModel)]="contact.fullname" type="text" class="form-control">
+                                        <!-- <input type="text" class="form-control" value="Nguyen Van A"> -->
+                                    </div>
+                                </div>
+                                <div class="field clearfix">
+                                    <label>Điện thoại liên hệ</label>
+                                    <div>
+                                        <input name="phone" [ngClass]="{'has-error': contact.error_phone}" [(ngModel)]="contact.phone" type="text" class="form-control">
+                                        <!-- <input type="text" class="form-control" value="0908223344"> -->
+                                    </div>
+                                </div>
+                                <div class="field clearfix">
+                                    <label>Email liên hệ</label>
+                                    <div>
+                                        <input name="email" [ngClass]="{'has-error': contact.error_email}" [(ngModel)]="contact.email" type="text" class="form-control">
+                                        <!-- <input type="text" class="form-control" value="lethianh@gmail.com"> -->
+                                    </div>
+                                </div>
+                                <div class="field clearfix">
+                                    <label>Yêu cầu đặc biệt</label>
+                                    <div>
+                                        <input name="requirement" [(ngModel)]="contact.requirement" type="text" class="form-control">
+                                    </div>
+                                </div>
+                                <div class="field clearfix">
+                                    <button type="button">Cập nhật</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="how-to">
+                        <h3>Tôi làm thế nào ?</h3>
+                        <ul>
+                            <li><a href="#" title=""><i class="fa fa-caret-right" aria-hidden="true"></i> Liên hệ</a></li>
+                            <li><a href="#" title=""><i class="fa fa-caret-right" aria-hidden="true"></i> Thanh toán</a></li>
+                            <li><a href="#" title=""><i class="fa fa-caret-right" aria-hidden="true"></i> Xem đơn hàng</a></li>
+                            <li><a href="#" title=""><i class="fa fa-caret-right" aria-hidden="true"></i> In vé điện tử</a></li>
+                            <li><a href="#" title=""><i class="fa fa-caret-right" aria-hidden="true"></i> Hướng dẫn đặt vé</a></li>
+                        </ul>
+                    </div>
+                </aside>
+                <!-- price-detail -->
+            </div>
+        </div>
+    </section>
+    <div class="skyline hidden-xs hidden-sm">
+        <!-- <script src="js/prefixfree.min.js"></script> -->
+        <div class="skyline-city"></div>
+        <div class="bus-img">
+            <img style="opacity: 0.3;filter: alpha(opacity=30);" src="assets/img/banh-xe.gif">
+        </div>
+        <div class="plane-img">
+            <img src="assets/img/plane.png" alt="" style="width: 250px;">
+        </div>
+    </div>
+</div>
+<!--#post-->

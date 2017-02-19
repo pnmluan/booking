@@ -32,10 +32,11 @@ export class DetailTicketComponent implements OnInit {
 	imgPath: string = this._EntranceTicketDataService.imgPath;
 	lat: number;
 	lng: number;
+	datepickerOptions = { format: this._Configuration.viFormatDate, autoApply: true, locate: 'vi', style: 'big' };
 
 	constructor(
 		private _EntranceTicketDataService: EntranceTicketDataService, 
-		private config: Configuration,
+		private _Configuration: Configuration,
 		private _Router: Router,
 		private _ActivatedRoute: ActivatedRoute,
 		private sessionStorage: LocalStorageService
@@ -229,7 +230,7 @@ export class DetailTicketComponent implements OnInit {
 			this.sessionStorage.set('cartItems', cartItems);
 			count++;
 		}
-		this.config.number_order = count;
+		this._Configuration.number_order = count;
 	}
 
   	onPlusPeople(value) {
@@ -237,7 +238,7 @@ export class DetailTicketComponent implements OnInit {
   	}
 
 	onMinusPeople(value) {
-		if(value) {
+		if(value > 1) {
 			value = value - 1;
 		}
   	}

@@ -68,7 +68,7 @@ export class CartTicketComponent implements OnInit {
 	 *=================================*/
 	onMinusPeople(index, key) {
 		console.log(this.cartItems[index][key])
-		if (this.cartItems[index][key]) {
+		if (this.cartItems[index][key] > 1) {
 			this.cartItems[index][key]--;
 			this.processTotal();
 		}

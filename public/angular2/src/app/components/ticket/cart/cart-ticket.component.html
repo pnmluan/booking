@@ -35,7 +35,7 @@
                                                 <tbody>
                                                     <tr>
                                                         <td><img src="{{imgPath + item.img}}" width="90" height="90"></td>
-                                                        <td style="padding-left: 10px; text-align: left">{{ item.name }}</td>
+                                                        <td [routerLink]="['./detail-ticket', item.id]" style="padding-left: 10px; text-align: left">{{ item.name }}</td>
                                                     </tr>
                                                 </tbody>
                                             </table>
@@ -87,7 +87,7 @@
                                 <a [routerLink]="['/list-tickets']" class="pointer" ><i class="fa fa-long-arrow-left" aria-hidden="true"></i> Tiếp tục mua hàng</a></div>
                             <div>
                                 
-                                <button type="btn" class="btn btn-checkout" (click)="onLinkToPaymentTicket()">THANH TOÁN</button>
+                                <button type="btn" class="btn btn-checkout" (click)="onLinkToPaymentTicket()" [disabled]="!sumPrice">THANH TOÁN</button>
                             </div>
                         </div>
                     </div>

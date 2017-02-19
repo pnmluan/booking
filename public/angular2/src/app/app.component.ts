@@ -150,8 +150,11 @@ export class AppComponent {
 	 * Open Popup Cart
 	 *=================================*/
 	onOpenCart() {
-		this.cartModal.open();
-		this.loadCartItemsStorage();
+		if (this._Configuration.number_order) {
+			this.cartModal.open();
+			this.loadCartItemsStorage();
+		}
+		
 	}
 
 	/*=================================

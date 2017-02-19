@@ -24,6 +24,7 @@ export class PaymentTicketComponent implements OnInit {
 	private subscriptionEvents: Subscription;
 	private subscriptionParam: Subscription;
 	public comments = [];
+	selectedStep = 1;
 	filter_from_date: any;
 	curRouting?: string;
 	_params = {};
@@ -31,6 +32,7 @@ export class PaymentTicketComponent implements OnInit {
 	Ticket = {};
 	listItems = {};
 	titleOptions = [];
+	generalData = {};
 	amount: number = 0;
 	isAddPeople = false;
 	imgPath: string = this._EntranceTicketDataService.imgPath;
@@ -42,7 +44,7 @@ export class PaymentTicketComponent implements OnInit {
 		private _TicketBillDataService: TicketBillDataService,
 		private _TicketDetailDataService: TicketDetailDataService,
 		private _ContactDataService: ContactDataService,
-		private config: Configuration,
+		private _Configuration: Configuration,
 		private _Router: Router,
 		private _ActivatedRoute: ActivatedRoute,
 		private _ToasterService: ToasterService,
@@ -60,8 +62,12 @@ export class PaymentTicketComponent implements OnInit {
 
 			let routing = this._Router.url;
 			if (this.curRouting != routing) {
-				this.curRouting = routing;
-				this.initData();
+				if (this._Configuration.number_order) {
+					this.curRouting = routing;
+					this.initData();
+				} 
+
+				
 			}
 		});
 
@@ -256,6 +262,8 @@ export class PaymentTicketComponent implements OnInit {
 				total_fare += +cartItems[key].total;
 			}
 			let code = this.generateCode()
+			this.generalData['generateCode'] = code;
+			this.generalData['total_fare'] = total_fare;
 			var params: URLSearchParams = new URLSearchParams();
 			params.set('code', code);
 			params.set('departure', '0');
@@ -281,7 +289,9 @@ export class PaymentTicketComponent implements OnInit {
 							}
 						});
 					}
-
+					this.sessionStorage.remove('cartItems');
+					this.selectedStep = 2;
+					this._Configuration.number_order = 0;
 					this.insertContactInfo(ticketBill.id);
 				}
 			});
@@ -302,7 +312,10 @@ export class PaymentTicketComponent implements OnInit {
 		params.set('requirement', this.contact['requirement']);
 
 		this._ContactDataService.create(params).subscribe(res => {
-
+			if(res.data) {
+				
+			}
+			
 		});
 	}
 

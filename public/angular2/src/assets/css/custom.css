@@ -101,3 +101,7 @@ ng-select > div > div.single > div.clear, ng-select > div > div.single > div.tog
 a.pointer {
     cursor: pointer;
 }
+
+.payment-confirm .contact-info .contact-info-inner ng-select {
+    width: 30%;
+}
