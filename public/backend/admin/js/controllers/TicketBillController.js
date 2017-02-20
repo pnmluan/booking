@@ -112,7 +112,7 @@ angular.module('MetronicApp').controller('TicketBillController', function($rootS
                         id: $scope.mItem.id,
                         state: 'approve'
                     };
-                    BookingService.update(params).then((res) => {
+                    TicketBillService.update(params).then((res) => {
 
                         if(res.data.status == 'success') {
                             data.dtInstance.reloadData();
