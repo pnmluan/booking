@@ -4,6 +4,7 @@
             <div class="tour-detals-inner">
                 <div class="tour-details-l">
                     <div class="tour-details-l-inner">
+                        <!-- Tour info -->
                         <div class="tour-info">
                             <h1 class="title">{{ Ticket.name }}</h1>
                             <p class="line"></p>
@@ -12,24 +13,15 @@
                                 <del><span class="amount">{{ Ticket.adult_fare | number }} VNĐ</span></del>
                                 <ins><span class="amount">{{ Ticket.children_fare | number }} VNĐ</span></ins>
                             </div>
-                            <!--<div class="sh-cart">-->
-                            <!--<input class="form-control" type="text" value="1">&nbsp;-->
-                            <!--<button class="btn" type="button">ADD TO CART</button>-->
-                            <!--</div>-->
                         </div>
+                        <!-- End Tour info -->
+
+                        <!-- Tour content -->
                         <div class="tour-content">
                             <div class="tour-photos">
                                 <h2 class="content-title">VIEW THE PHOTOS</h2>
                                 <p class="s-line"></p>
                                 <div class="content-inner">
-                                    <!--<ul class="photos-tab clearfix">-->
-                                    <!--<li>-->
-                                    <!--<a class="active" href="#photos">TOUR GALLERY</a>-->
-                                    <!--</li>-->
-                                    <!--<li>-->
-                                    <!--<a href="#map">TOUR MAP</a>-->
-                                    <!--</li>-->
-                                    <!--</ul>-->
                                     <div class="photos-wrapper">
                                         <div id="photos" class="item">
                                             <div id="sync1" class="owl-carousel">
@@ -279,6 +271,7 @@
                                 </div>
                             </div>
                         </div>
+                        <!-- End Tour content -->
                     </div>
                 </div>
                 <div class="tour-details-r">
@@ -299,7 +292,7 @@
                         </div>
                     </div>
                     <div class="prev-page">
-                        <button type="button" class="btn"><i class="fa fa-angle-double-left" aria-hidden="true"></i> Quay về trang kết quả</button>
+                        <button type="button" class="btn" (click)="onLinkToListTicket()"><i class="fa fa-angle-double-left" aria-hidden="true"></i> Quay về trang kết quả</button>
                     </div>
                 </div>
             </div>

@@ -205,9 +205,9 @@ export class PaymentTicketComponent implements OnInit {
 		}
   	}
 
-  	onLinkToCart(){
-  		this._Router.navigate(['cart-ticket']);
-  	}
+	onLinkToCart(){
+		this._Router.navigate(['cart-ticket']);
+	}
 
   	/*=================================
 	 * Submit Info Customer

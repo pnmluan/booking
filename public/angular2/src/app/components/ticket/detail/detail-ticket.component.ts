@@ -7,9 +7,11 @@ import { EntranceTicketDataService } from '../../../shared/entranceticket.datase
 
 import { Subscription } from 'rxjs/Rx';
 import { LocalStorageService } from 'angular-2-local-storage';
+import { ToasterModule, ToasterService } from 'angular2-toaster';
 import { AgmCoreModule } from 'angular2-google-maps/core';
 
 declare let jQuery: any;
+declare let moment: any;
 
 @Component({
   selector: 'app-detail-ticket',
@@ -25,21 +27,21 @@ export class DetailTicketComponent implements OnInit {
 	listItem = [];
 	_params = {};
 	Ticket = {};
-	category_ticket_id: number;
 	number_children: number = 0;
 	number_adult: number = 1;
 	isAddPeople = false;
 	imgPath: string = this._EntranceTicketDataService.imgPath;
 	lat: number;
 	lng: number;
-	datepickerOptions = { format: this._Configuration.viFormatDate, autoApply: true, locate: 'vi', style: 'big' };
+	datepickerOptions = { format: this._Configuration.viFormatDate, autoApply: true, locate: 'vi', style: 'big', minDate: moment().format(this._Configuration.dateFormat) };
 
 	constructor(
 		private _EntranceTicketDataService: EntranceTicketDataService, 
 		private _Configuration: Configuration,
 		private _Router: Router,
 		private _ActivatedRoute: ActivatedRoute,
-		private sessionStorage: LocalStorageService
+		private sessionStorage: LocalStorageService,
+		private _ToasterService: ToasterService
 		) { 
 		// subscribe to router event
 		this.subscriptionParam = _ActivatedRoute.params.subscribe(
@@ -61,21 +63,19 @@ export class DetailTicketComponent implements OnInit {
   	ngOnInit() { }
 
   	ngAfterViewInit(){
-  		setTimeout(() => {
-  			var params: URLSearchParams = new URLSearchParams();
-			params.set('category_ticket_id', String(this.category_ticket_id));
-			this._EntranceTicketDataService.getAll(params).subscribe(res => {
-				let listItem = [];
-				if (res.data) {
-					for (let key in res.data) {
-						if(res.data[key].id != this._params['ticket_id']){
-							listItem.push(res.data[key]);	
-						}
-					}
-					this.listItem = listItem;
-				}
-			});
-  		},1000);
+  		//event view price
+  		jQuery('.btn-view-price').click(function() {
+			if (!jQuery('.tour-price-details').is(':visible')) {
+				jQuery('.tour-price-details').slideDown('fast');
+				jQuery(this).addClass('no');
+				jQuery(this).html('<i class="fa fa-times"></i> ẨN GIÁ')
+			} else {
+				jQuery('.tour-price-details').slideUp('fast');
+				jQuery(this).removeClass('no');
+				jQuery(this).html('<i class="fa fa-check"></i> XEM GIÁ')
+			}
+			return false;
+		});
   	}
 
   	initData() {
@@ -84,9 +84,9 @@ export class DetailTicketComponent implements OnInit {
 
 			if (res.data) {
 				this.Ticket = res.data;
-				this.category_ticket_id = res.data.category_ticket_id;
 				this.lat = +this.Ticket['latitude'];
 				this.lng = +this.Ticket['longitude'];
+				this.loadCategoryTickets(res.data.category_ticket_id);
 			}
 		})
 
@@ -174,31 +174,41 @@ export class DetailTicketComponent implements OnInit {
 				jQuery(jQuery(this).attr('href')).show();
 				return false;
 			});
-
-			jQuery('.btn-view-price').click(function() {
-				if (!jQuery('.tour-price-details').is(':visible')) {
-					jQuery('.tour-price-details').slideDown('fast');
-					jQuery(this).addClass('no');
-					jQuery(this).html('<i class="fa fa-times"></i> ẨN GIÁ')
-				} else {
-					jQuery('.tour-price-details').slideUp('fast');
-					jQuery(this).removeClass('no');
-					jQuery(this).html('<i class="fa fa-check"></i> XEM GIÁ')
-				}
-				return false;
-			});
 		}, 1000);
 
+  	}
+
+  	loadCategoryTickets(category_ticket_id){
+  		var params: URLSearchParams = new URLSearchParams();
+		params.set('category_ticket_id', category_ticket_id);
+		params.set('except_id',this._params['ticket_id']);
+		this._EntranceTicketDataService.getAll(params).subscribe(res => {
+			if (res.data) {
+				this.listItem = res.data;
+			}
+		});
   	}
 
   	/*=================================
 	 * Add To Cart
 	 *=================================*/
 	addToCart(item) {
+		if(!this.filter_from_date){
+			this._ToasterService.pop('error', 'Lỗi nhập liệu', 'Vui lòng chọn ngày tham quan.');
+			return;
+		}
+
+		let booking_date = moment(this.filter_from_date.formatted, this._Configuration.viFormatDate).format(this._Configuration.dateFormat);
+		if(booking_date < moment().format(this._Configuration.dateFormat)){
+			this._ToasterService.pop('error', 'Lỗi nhập liệu', 'Vui lòng kiểm tra lại ngày tham quan.');
+			return;
+		}
+
 		let count = 0;
 		let obj = {
 			id: item.id,
 			name: item.name,
+			booking_date: booking_date,
 			img: item.album[0].img,
 			adult_fare: item.adult_fare,
 			children_fare: item.children_fare,
@@ -242,6 +252,10 @@ export class DetailTicketComponent implements OnInit {
 			value = value - 1;
 		}
   	}
+
+  	onLinkToListTicket(){
+		this._Router.navigate(['list-tickets']);
+	}
 
 	ngOnDestroy() {
 		this.subscriptionEvents.unsubscribe();
