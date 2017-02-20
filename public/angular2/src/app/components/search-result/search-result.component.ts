@@ -892,8 +892,31 @@ console.log(this.passengers)
 		params.set('requirement', this.contact['requirement']);
 
 		this._ContactDataService.create(params).subscribe(res => {
-
+			this.generalData['contact_id'] = res.data.id;
 		});
+	}
+
+	/*=================================
+	 * Update Contact Info
+	 *=================================*/
+	onUpdateContactInfo() {
+		let contact_id = this.generalData['contact_id'];
+		if (contact_id) {
+			// Update Contact
+			var params: URLSearchParams = new URLSearchParams();
+			params.set('title', this.contact['title']);
+			params.set('fullname', this.contact['fullname']);
+			params.set('phone', this.contact['phone']);
+			params.set('email', this.contact['email']);
+			params.set('requirement', this.contact['requirement']);
+
+			this._ContactDataService.update(contact_id, params).subscribe(res => {
+				if (res.data) {
+					this._ToasterService.pop('success', 'Cập nhật thành công.');
+				}
+			});
+		}
+		
 	}
 
 	/*=================================

@@ -565,7 +565,7 @@
             </div>
         </form>
     </section>
-    <section class="payment" *ngIf="selectedStep == 3">
+    <section class="payment payment-confirm" *ngIf="selectedStep == 3">
         <div class="container clearfix">
             <div class="payment-inner">
                 <div class="payment-info">
@@ -874,7 +874,7 @@
                                     </div>
                                 </div>
                                 <div class="field clearfix">
-                                    <button type="button">Cập nhật</button>
+                                    <button (click)="onUpdateContactInfo()" type="button">Cập nhật</button>
                                 </div>
                             </form>
                         </div>
