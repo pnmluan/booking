@@ -23,6 +23,7 @@ $app->group(['prefix' => 'api/v1',   'namespace' => 'App\Http\Controllers'], fun
 	|--------------------------------------------------------------------------
 	*/
     $app->post('mail/sendInfoPayment','MailController@sendInfoPayment');
+    $app->post('mail/sendEntranceTicketPayment','MailController@sendEntranceTicketPayment');
 
 	/*
 	|--------------------------------------------------------------------------
@@ -261,7 +262,7 @@ $app->group(['prefix' => 'api/v1',   'namespace' => 'App\Http\Controllers'], fun
     $app->get('ticket_detail/index','TicketDetailController@index');
 
     $app->get('ticket_detail/show/{id}','TicketDetailController@show');
-
+  
     $app->post('ticket_detail/create','TicketDetailController@create');
 
     $app->put('ticket_detail/update/{id}','TicketDetailController@update');

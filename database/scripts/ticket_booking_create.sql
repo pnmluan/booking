@@ -54,6 +54,7 @@ CREATE TABLE booking (
     infant int NOT NULL,
 	`state` varchar(45) NOT NULL,
 	`status` varchar(45) NOT NULL,
+	expired_payment_date datetime NULL,
     created_at datetime NULL,
     updated_at datetime NULL,
     CONSTRAINT booking_pk PRIMARY KEY (id)
@@ -241,6 +242,7 @@ CREATE TABLE ticket_bill (
     contact_id int NOT NULL,
     comment varchar(500) NOT NULL,
 	`state` varchar(45) NOT NULL,
+	expired_payment_date datetime NULL,
 	`status` varchar(45) NOT NULL,
 	created_at datetime NULL,
     updated_at datetime NULL,
