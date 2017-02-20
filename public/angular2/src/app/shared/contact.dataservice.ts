@@ -37,6 +37,16 @@ export class ContactDataService {
 			.catch(this.handleError);
 	}
 
+	public update(id, params) {
+		let headers = new Headers();
+		this.createAuthorizationHeader(headers);
+		return this._Http.put(this.actionUrl + 'update/' + id, params.toString(), {
+			headers: headers
+		})
+			.map(res => res.json())
+			.catch(this.handleError);
+	}
+
 	private handleError(error: Response) {
 		return Observable.throw(error.json().error || 'Server error');
 	}
