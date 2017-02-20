@@ -191,6 +191,7 @@ export class ListTicketComponent implements OnInit {
 		let obj = {
 			id: item.id,
 			name: item.name,
+			departure: null,
 			img: img,
 			adult_fare: item.adult_fare,
 			children_fare: item.children_fare,

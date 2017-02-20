@@ -104,6 +104,8 @@
                             <li *ngFor="let item of cartItems">
                                 <a href="#">
                                     <img width="90" height="90" src="{{imgPath + item.img}}" class="attachment-shop_thumbnail wp-post-image" alt="">{{ item.name }}</a>
+                                <span class="quantity" *ngIf="item.departure">Ngày đặt: {{ item.departure }}</span>
+                                <span class="quantity" *ngIf="!item.departure">Ngày đặt: <i>N/A</i></span>
                                 <span class="quantity">{{ item.number_adult }} × <span class="amount">{{ item.adult_fare | number }} VNĐ</span></span>
                                 <br>
                                 <span *ngIf="item.number_children" class="quantity">{{ item.number_children }} × <span class="amount">{{ item.children_fare | number }} VNĐ</span></span>
@@ -112,9 +114,7 @@
                         <!-- end product list -->
                         <p class="total"><strong>Tổng :</strong> <span class="amount">{{ sumPrice | number }} VNĐ</span></p>
                         <p class="buttons">
-                            
                             <a (click)="onLinkToCartTicket()"  class="button checkout wc-forward pointer">GIỎ HÀNG</a>
-
                         </p>
                     </div>
                 </div>
