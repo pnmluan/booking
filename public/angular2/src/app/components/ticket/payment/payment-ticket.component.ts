@@ -275,7 +275,7 @@ export class PaymentTicketComponent implements OnInit {
 			this.generalData['generateCode'] = code;
 			this.generalData['total_fare'] = total_fare;
 			let now = moment().add(24, 'h');
-			let expired_payment_date = now.format(this._Configuration.longFormat);
+			let expired_payment_date = now.format(this._Configuration.longDateTime);
 			let long_expired_payment_date = now.format(this._Configuration.longFormatDateTime)
 			var params: URLSearchParams = new URLSearchParams();
 			params.set('code', code);
