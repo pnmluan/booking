@@ -4,7 +4,7 @@ import { URLSearchParams } from '@angular/http';
 
 import { Configuration } from '../../../shared/app.configuration';
 import { EntranceTicketDataService, TicketBillDataService, TicketDetailDataService,
-	ContactDataService
+	ContactDataService, MailDataService
 } from '../../../shared';
 
 import { Subscription } from 'rxjs/Rx';
@@ -13,12 +13,13 @@ import { LocalStorageService } from 'angular-2-local-storage';
 import { ToasterModule, ToasterService } from 'angular2-toaster';
 
 declare let jQuery: any;
+declare let moment: any;
 
 @Component({
   selector: 'app-paymment-ticket',
   templateUrl: './payment-ticket.component.html',
   providers: [EntranceTicketDataService, TicketBillDataService, TicketDetailDataService,
-	  ContactDataService, Configuration]
+	  ContactDataService, MailDataService, Configuration]
 })
 export class PaymentTicketComponent implements OnInit {
 	private subscriptionEvents: Subscription;
@@ -32,6 +33,7 @@ export class PaymentTicketComponent implements OnInit {
 	Ticket = {};
 	listItems = {};
 	titleOptions = [];
+	titleAdultOptions = {};
 	generalData = {};
 	amount: number = 0;
 	isAddPeople = false;
@@ -44,6 +46,7 @@ export class PaymentTicketComponent implements OnInit {
 		private _TicketBillDataService: TicketBillDataService,
 		private _TicketDetailDataService: TicketDetailDataService,
 		private _ContactDataService: ContactDataService,
+		private _MailDataService: MailDataService,
 		private _Configuration: Configuration,
 		private _Router: Router,
 		private _ActivatedRoute: ActivatedRoute,
@@ -80,6 +83,13 @@ export class PaymentTicketComponent implements OnInit {
 			{ value: '4', label: 'Bà' },
 			
 		];
+
+		this.titleAdultOptions = {
+			'1': 'Anh',
+			'2': 'Chị',
+			'3': 'Ông',
+			'4': 'Bà'
+		};
 	}
 
   	ngOnInit() {
@@ -264,10 +274,13 @@ export class PaymentTicketComponent implements OnInit {
 			let code = this.generateCode()
 			this.generalData['generateCode'] = code;
 			this.generalData['total_fare'] = total_fare;
+			let now = moment().add(24, 'h');
+			let expired_payment_date = now.format(this._Configuration.longFormat);
+			let long_expired_payment_date = now.format(this._Configuration.longFormatDateTime)
 			var params: URLSearchParams = new URLSearchParams();
 			params.set('code', code);
-			params.set('departure', '0');
 			params.set('total_fare', String(total_fare));
+			params.set('expired_payment_date', expired_payment_date);
 			params.set('state', 'pending');
 
 			this._TicketBillDataService.create(params).subscribe(res => {
@@ -282,6 +295,7 @@ export class PaymentTicketComponent implements OnInit {
 						params.set('entrance_ticket_id', selectedTicket.id);
 						params.set('adult', selectedTicket.adult);
 						params.set('children', selectedTicket.children);
+						params.set('departure', selectedTicket.departure);
 
 						this._TicketDetailDataService.create(params).subscribe(res => {
 							if (res.status == 'success') {
@@ -289,10 +303,13 @@ export class PaymentTicketComponent implements OnInit {
 							}
 						});
 					}
-					this.sessionStorage.remove('cartItems');
+					
+					this.sendEntranceTicketPayment(cartItems, long_expired_payment_date);
 					this.selectedStep = 2;
 					this._Configuration.number_order = 0;
 					this.insertContactInfo(ticketBill.id);
+					this.sessionStorage.remove('cartItems');
+
 				}
 			});
 		}
@@ -316,6 +333,27 @@ export class PaymentTicketComponent implements OnInit {
 				
 			}
 			
+		});
+	}
+
+	/*=================================
+	 * Send Info Payment Mail
+	 *=================================*/
+	sendEntranceTicketPayment(routes, expired_payment_date) {
+
+		var params: URLSearchParams = new URLSearchParams();
+		params.set('tickets', JSON.stringify(routes));
+		params.set('expired_payment_date', expired_payment_date);
+		params.set('fullname', this.contact['fullname']);
+		params.set('phone', this.contact['phone']);
+		params.set('email', this.contact['email']);
+		params.set('requirement', this.contact['requirement']);
+		params.set('code', this.generalData['generateCode']);
+		params.set('title', this.titleAdultOptions[this.contact['title']]);
+		params.set('total_fare', String(this.generalData['total_fare']));
+
+		this._MailDataService.sendEntranceTicketPayment(params).subscribe(res => {
+
 		});
 	}
 

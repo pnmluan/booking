@@ -30,6 +30,17 @@ export class MailDataService {
 			.catch(this.handleError);
 	}
 
+	public sendEntranceTicketPayment(params) {
+		let headers = new Headers();
+		this.createAuthorizationHeader(headers);
+		return this._Http.post(this.actionUrl + 'sendEntranceTicketPayment', params.toString(), {
+			headers: headers,
+			withCredentials: true
+		})
+			.map(res => res.json())
+			.catch(this.handleError);
+	}
+
 	private handleError(error: Response) {
 		return Observable.throw(error.json().error || 'Server error');
 	}

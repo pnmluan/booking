@@ -31,5 +31,21 @@ class MailController extends ApiController
 
     }
 
+    public function sendEntranceTicketPayment(Request $request) {
+        $data = $request->all();
+        $data['expiredDate'] = explode('-', $data['expired_payment_date']);
+        $data['tickets'] = json_decode($data['tickets']);
+        if(!empty($data)) {
+
+            Mail::send('_entrance_ticket_mail',  ['data'=>$data], function($message) use ($data)
+            {
+                $message->from(env('MAIL_USERNAME') , 'Đặt vé giá rẻ');
+                $message->to($data['email'], $data['fullname']);
+                $message->subject('Thông tin đặt vé - ' . $data['fullname']);
+            });
+        }
+
+    }
+
     
 }

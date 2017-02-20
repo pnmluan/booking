@@ -205,13 +205,13 @@ angular.module('MetronicApp').controller('ProviderController', function($rootSco
             DTColumnBuilder.newColumn('adult_airport_fee').withTitle('A Airport Fee').withOption('createdCell', function(td, cellData, rowData, row, col) {
                 $(td).html(cellData.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
             }),
-            DTColumnBuilder.newColumn('child_airport_fee').withTitle('C Airport Fee').withOption('createdCell', function(td, cellData, rowData, row, col) {
+            DTColumnBuilder.newColumn('children_airport_fee').withTitle('C Airport Fee').withOption('createdCell', function(td, cellData, rowData, row, col) {
                 $(td).html(cellData.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
             }),
             DTColumnBuilder.newColumn('adult_security_fee').withTitle('A Security Fee').withOption('createdCell', function(td, cellData, rowData, row, col) {
                 $(td).html(cellData.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
             }),
-            DTColumnBuilder.newColumn('child_security_fee').withTitle('C Security Fee').withOption('createdCell', function(td, cellData, rowData, row, col) {
+            DTColumnBuilder.newColumn('children_security_fee').withTitle('C Security Fee').withOption('createdCell', function(td, cellData, rowData, row, col) {
                 $(td).html(cellData.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
             }),
             DTColumnBuilder.newColumn('other_tax').withTitle('Other Tax').withOption('createdCell', function(td, cellData, rowData, row, col) {

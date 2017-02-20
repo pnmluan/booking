@@ -32,6 +32,10 @@ class EntranceTicket extends BaseModel
             (isset($param[$value]) && $param[$value]) && $query->where($value,'like','%'.$param[$value].'%');
         }
 
+        if(isset($param['except_id'])) {
+            $query->where('id','!=', $param['except_id']);
+        }
+
         //======================= SEARCH =================
         if(isset($param['columns'])) {
             $sWhere = "";

@@ -7,16 +7,16 @@
             <div class="col-md-6 col-sm-12">
                 <div class="portlet yellow-crusta box">
                     <div class="portlet-title">
-                        <div class="caption">Order Details </div>
+                        <div class="caption">Order Infomation </div>
                     </div>
                     <div class="portlet-body">
                         <div class="row static-info">
-                            <div class="col-md-5 name"> Round Trip: </div>
-                            <div class="col-md-7 value"> {{ mItem.round_trip }} </div>
+                            <div class="col-md-5 name"> Total: </div>
+                            <div class="col-md-7 value"> {{ mItem.total_Fare }} </div>
                         </div>
                         <div class="row static-info">
-                            <div class="col-md-5 name"> Number: </div>
-                            <div class="col-md-7 value"> Adult: {{ mItem.adult }}, Children: {{ mItem.children }}, Infant: {{ mItem.infant }}</div>
+                            <div class="col-md-5 name"> code: </div>
+                            <div class="col-md-7 value"> {{ mItem.code }} </div>
                         </div>
                         <div class="row static-info">
                             <div class="col-md-5 name"> Order Date &amp; Time: </div>
@@ -120,7 +120,7 @@
             <div class="col-md-12 col-sm-12">
                 <div class="portlet grey-cascade box">
                     <div class="portlet-title">
-                        <div class="caption">Route </div>
+                        <div class="caption">Ticket Details </div>
                     </div>
                     <div class="portlet-body">
                         <div class="table-responsive">
@@ -133,13 +133,10 @@
                                                     <input ng-click="onShowPassengers()" name="btSelectAll" type="checkbox"><span></span></label>
                                             </div>
                                         </th> -->
-                                        <th> Airline </th>
-                                        <th> From </th>
-                                        <th> To </th>
-                                        <th> Date </th>
-                                        <th> Start Time </th>
-                                        <th> End Time </th>
-                                        <th> Ticket Type </th>
+                                        <th> Ticket </th>
+                                        <th> Adults </th>
+                                        <th> Children </th>
+                                        <th> Departure </th>
                                         <th> Total </th>
                                     </tr>
                                 </thead>
@@ -151,13 +148,10 @@
                                                     <input ng-click="onShowPassengers($index)" name="btSelectAll" type="checkbox"><span></span></label>
                                             </div>
                                         </td> -->
-                                        <td>{{ detail.provider }}</td>
-                                        <td>{{ detail.from }}</td>
-                                        <td>{{ detail.to }}</td>
-                                        <td> {{ detail.start_date }} </td>
-                                        <td> {{ detail.start_time }} </td>
-                                        <td> {{ detail.end_time }} </td>
-                                         <td>{{ detail.ticket_type }}</td>
+                                        <td>{{ detail.ticket_name }}</td>
+                                        <td>{{ detail.adult }} x {{ detail.adult_fare }}</td>
+                                        <td>{{ detail.children }} x {{ detail.children_fare }} </td>
+                                        <td>{{ detail.departure }}</td>
                                         <td> {{ detail.total | number }} </td>
                                     </tr>
                                 </tbody>
@@ -167,38 +161,7 @@
                 </div>
             </div>
         </div>
-        <div class="row"  ng-repeat="detail in mItem.details">
-          <div class="col-md-12 col-sm-12">
-                <div class="portlet grey-cascade box">
-                    <div class="portlet-title">
-                        <div class="caption"><span style="float: left;">Route: {{ detail.from }} </span> <i class="fa fa-long-arrow-right" aria-hidden="true"></i> <span style="float: left;"> {{ detail.to }}</span></div>
-                    </div>
-                    <div class="portlet-body">
-                        <div class="table-responsive">
-                            <table class="table table-hover table-bordered table-striped">
-                                <thead>
-                                    <tr>
-                                    <th>Customer Type</th>
-                                    <th>Fullname </th>
-                                    <th>BirthDay </th>
-                                    <th>Fare with Tax</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                    <tr ng-repeat="p in detail.passengers">
-                                    <td>{{ customerTypeOptions[p.customer_type] }}</td>
-                                    <td>{{ p.fullname }}</td>
-                                    <td>{{ p.date_of_birth }}</td>
-                                    <td>{{ p.fare_tax | number }}</td>
-                                </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-        </div>
+        
         <!-- <div class="row">
             <div class="col-md-6"> </div>
             <div class="col-md-6">
