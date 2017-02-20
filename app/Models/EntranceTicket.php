@@ -33,7 +33,7 @@ class EntranceTicket extends BaseModel
         }
 
         if(isset($param['except_id'])) {
-            $query->where('id','!=', $param['except_id']);
+            $query->where('entrance_ticket.id','!=', $param['except_id']);
         }
 
         //======================= SEARCH =================
