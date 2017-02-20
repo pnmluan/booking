@@ -69,11 +69,11 @@
 
 
 .nicdark_dark_widgets input[type="text"],
-.nicdark_dark_widgets input[type="email"], 
-.nicdark_dark_widgets input[type="url"], 
-.nicdark_dark_widgets input[type="tel"], 
+.nicdark_dark_widgets input[type="email"],
+.nicdark_dark_widgets input[type="url"],
+.nicdark_dark_widgets input[type="tel"],
 .nicdark_dark_widgets input[type="number"],
-.nicdark_dark_widgets input[type="date"], 
+.nicdark_dark_widgets input[type="date"],
 .nicdark_dark_widgets textarea{ border: 0px solid #e5e5e5; }
 /***************************************************END WIDGET IN THE FOOTER*******************************************************/
 
@@ -95,13 +95,13 @@
 
 	border: 1px solid #f1f1f1;
 	box-sizing: border-box;
-	
+
 	/*-webkit-box-shadow: 0px 4px 0px 0px #f1f1f1;
 	box-shadow: 0px 4px 0px 0px #f1f1f1;
 	border-radius: 5px 5px 5px 5px;*/
 }
 .widget img{
-	max-width: 100%;	
+	max-width: 100%;
 }
 .widget ul{
 	float:left;
@@ -119,29 +119,28 @@
 	border-bottom:1px solid #f1f1f1;
 	color: #A9A9A9;
 
-	/*background-image:url(../img/blog/bglisidebar.png);	
+	/*background-image:url(../img/blog/bglisidebar.png);
 	background-repeat:no-repeat;
 	background-position: top 25px right 20px;
 	background-size: 8px 11px;*/
-	
+
 }
 .widget ul li:last-child{
-	border-bottom-width:0px;	
+	border-bottom-width:0px;
 }
 .widget ul li a{
-	padding:20px;
 	color:#A9A9A9;
 	font-size:15px;
-	display: inline-block;	
+	display: inline-block;
 }
 .widget ul li .children li a{
-	padding-left: 40px;	
+	padding-left: 40px;
 }
 .widget h2{
 	color:#fff;
 	font-weight:300;
 	padding:20px;
-	font-size:17px;	
+	font-size:17px;
 	/*border-radius: 5px 5px 0px 0px;*/
 }
 .widget h2 a{
@@ -165,7 +164,7 @@
 	font-size:17px;
 	text-align: left;
 	text-transform: uppercase;
-	
+
 }
 #wp-calendar a{
 	color:#868585;
@@ -190,11 +189,11 @@
 }
 .tagcloud{
 	float:left;
-	padding:10px;	
+	padding:10px;
 }
 .tagcloud a{
 	background-color:#f9f9f9;
-	
+
 	border: 1px solid #f1f1f1;
 	float:left;
 	padding:5px 10px;
@@ -205,7 +204,7 @@
 
 /*start search*/
 .widget_search label{
-	display: none; 
+	display: none;
 }
 
 .widget_search .searchform{
@@ -217,12 +216,12 @@
 	font-size: 17px;
 	color: #FFF;
 	display: inline-block;
-	
+
 	text-transform: uppercase;
 }
 .widget_search input[type="text"]{
 	border: 1px solid #f1f1f1;
-	
+
 	background-color: #f9f9f9;
 	font-size: 15px;
 	padding: 10px 20px;
@@ -257,10 +256,10 @@
 	background:none;
 }
 .widget_recent_comments .recentcomments a:first-child{
-	color: #a4a4a4;	
+	color: #a4a4a4;
 }
 .widget_recent_comments .recentcomments a:last-child{
-	display: block;	
+	display: block;
 }
 
 
@@ -340,7 +339,7 @@
 	float: left;
     font-weight: normal;
     width: 100%;
-	margin-bottom:20px;	
+	margin-bottom:20px;
 	margin-top: 30px;
 	text-transform: uppercase;
 	position: relative;
@@ -383,28 +382,28 @@
 	padding:0px;
 	float:left;
 	width:100%;
-	list-style:none;	
+	list-style:none;
 }
 .comment{
 	margin:0px;
-	border-bottom:1px solid #f1f1f1;	
+	border-bottom:1px solid #f1f1f1;
 	float:left;
 	width:100%;
 	padding:0px;
 }
 .comment:last-child{
-	border-bottom:0px solid #f1f1f1;	
+	border-bottom:0px solid #f1f1f1;
 }
 .comment .children{
 	margin:0px;
 	padding:0px;
 	list-style:none;
-	margin-left:20px;	
+	margin-left:20px;
 }
 .comment-body{
 	float:left;
 	width:100%;
-	font-size:15px;	
+	font-size:15px;
 	position:relative;
 }
 .comment-body p{
@@ -446,11 +445,11 @@
 	font-size: 17px;
 }
 .comment-body a{
-	color:#888888;	
+	color:#888888;
 }
 .commentavatar{
 	float:left;
-	margin-right:20px;	
+	margin-right:20px;
 }
 .commentavatar img{
 	float:left;
@@ -467,7 +466,7 @@
 }
 .commentreply{
 	background-color:#1BBC9B;
-	color:#fff;	
+	color:#fff;
 }
 .commentreply a{
 	float:left;
@@ -484,7 +483,7 @@
 	width:100%;
 }
 .comment-body .reply{
-	
+
 }
 .comment-reply-link{
     padding: 5px 10px;

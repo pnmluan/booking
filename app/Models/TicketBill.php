@@ -64,6 +64,8 @@ class TicketBill extends BaseModel
         }
 
         //======================= Ordering =================
+        $query->orderBy('ticket_bill.state', 'desc');
+        $query->orderBy('ticket_bill.created_at', 'asc');
         // $sOrder = '';
         // if (isset($param['order']) && count($param['order'])){
         // 	for ($i=0 ; $i<count($param['order']); $i++){

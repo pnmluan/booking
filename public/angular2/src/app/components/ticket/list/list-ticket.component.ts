@@ -41,7 +41,7 @@ export class ListTicketComponent implements OnInit {
 		)
 		setTimeout(() => {
 			this.search['category_ticket_id'] = this.queryParams['category_ticket_id'];
-		}, 500);
+		}, 200);
 		
 		this.subscriptionEvents = this._Router.events.subscribe((val) => {
 			let routing = this._Router.url;
@@ -169,7 +169,7 @@ export class ListTicketComponent implements OnInit {
 
 			
 			
-		},1000)
+		},500)
   	}
 
   	/*=================================

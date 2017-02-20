@@ -1,7 +1,7 @@
 angular.module('MetronicApp')
     .factory('TicketBillService', ['$http', '$rootScope', 'Upload', function($http, $rootScope, Upload) {
 
-    var urlBase = $rootScope.settings.apiPath + 'album_ticket';
+    var urlBase = $rootScope.settings.apiPath + 'ticket_bill';
     var TicketBillService = {};
 
     TicketBillService.getAll = function (params = null) {
