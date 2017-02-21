@@ -185,12 +185,15 @@ export class ListTicketComponent implements OnInit {
 	addToCart(item) {
 		let count = 0;
 		let img = '';
+
 		if (item.album[0]) {
 			img = item.album[0].img;
 		}
+
 		let obj = {
 			id: item.id,
 			name: item.name,
+			departure: null,
 			img: img,
 			adult_fare: item.adult_fare,
 			children_fare: item.children_fare,

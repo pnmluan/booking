@@ -102,19 +102,32 @@
                     <div class="widget_shopping_cart_content">
                         <ul class="cart_list product_list_widget ">
                             <li *ngFor="let item of cartItems">
-                                <a href="#">
-                                    <img width="90" height="90" src="{{imgPath + item.img}}" class="attachment-shop_thumbnail wp-post-image" alt="">{{ item.name }}</a>
-                                <span class="quantity">{{ item.number_adult }} × <span class="amount">{{ item.adult_fare | number }} VNĐ</span></span>
-                                <br>
-                                <span *ngIf="item.number_children" class="quantity">{{ item.number_children }} × <span class="amount">{{ item.children_fare | number }} VNĐ</span></span>
+                                <table>
+                                    <tbody>
+                                        <tr>
+                                            <td>
+                                                <a href="#">
+                                                    <img width="90" height="90" src="{{imgPath + item.img}}" class="attachment-shop_thumbnail wp-post-image" alt="">
+                                                </a>
+                                            </td>
+                                            <td>
+                                                <a [routerLink]=" ['/detail-ticket', item.id] ">{{ item.name }}</a>
+                                                <p *ngIf="item.departure">Ngày đặt: {{ item.departure }}</p>
+                                                <p *ngIf="!item.departure">Ngày đặt: <i>N/A</i></p>
+                                                <p>
+                                                    <span>Người lớn: {{ item.number_adult }} × {{ item.adult_fare | number }} VNĐ</span>
+                                                    <span *ngIf="item.number_children">Trẻ em: {{ item.number_children }} × {{ item.children_fare | number }} VNĐ</span>
+                                                </p>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
                             </li>
                         </ul>
                         <!-- end product list -->
                         <p class="total"><strong>Tổng :</strong> <span class="amount">{{ sumPrice | number }} VNĐ</span></p>
                         <p class="buttons">
-                            
                             <a (click)="onLinkToCartTicket()"  class="button checkout wc-forward pointer">GIỎ HÀNG</a>
-
                         </p>
                     </div>
                 </div>

@@ -18,6 +18,7 @@
                                 <thead>
                                     <tr>
                                         <th rowspan="2">Vé tham quan</th>
+                                        <th rowspan="2">Ngày</th>
                                         <th colspan="2">Giá</th>
                                         <th rowspan="2" style="min-width: 250px; width: 250px;">Số lượng</th>
                                         <th rowspan="2">Tổng</th>
@@ -35,10 +36,17 @@
                                                 <tbody>
                                                     <tr>
                                                         <td><img src="{{imgPath + item.img}}" width="90" height="90"></td>
-                                                        <td [routerLink]="['./detail-ticket', item.id]" style="padding-left: 10px; text-align: left">{{ item.name }}</td>
+                                                        <td style="padding-left: 10px; text-align: left">
+                                                            <a [routerLink]="['/detail-ticket', item.id]">{{ item.name }}</a>
+                                                        </td>
                                                     </tr>
                                                 </tbody>
                                             </table>
+                                        </td>
+                                        <td>
+                                            <div class="field">
+                                                <ng2-datepicker name="departure" [options]="datepickerOptions[i]" [(ngModel)]="item.departure" required></ng2-datepicker>
+                                            </div>
                                         </td>
                                         <td>
                                             <span> {{ item.adult_fare | number }} VNĐ</span> 

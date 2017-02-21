@@ -33,7 +33,7 @@ export class DetailTicketComponent implements OnInit {
 	imgPath: string = this._EntranceTicketDataService.imgPath;
 	lat: number;
 	lng: number;
-	datepickerOptions = { format: this._Configuration.viFormatDate, autoApply: true, locate: 'vi', style: 'big', minDate: moment().format(this._Configuration.dateFormat) };
+	datepickerOptions = { format: this._Configuration.viFormatDate, autoApply: true, locate: 'vi', style: 'big' };
 
 	constructor(
 		private _EntranceTicketDataService: EntranceTicketDataService, 
@@ -205,11 +205,17 @@ export class DetailTicketComponent implements OnInit {
 		}
 
 		let count = 0;
+		let img = '';
+
+		if (item.album[0]) {
+			img = item.album[0].img;
+		}
+
 		let obj = {
 			id: item.id,
 			name: item.name,
-			booking_date: booking_date,
-			img: item.album[0].img,
+			departure: this.filter_from_date.formatted,
+			img: img,
 			adult_fare: item.adult_fare,
 			children_fare: item.children_fare,
 			number_adult: this.number_adult,
@@ -218,14 +224,15 @@ export class DetailTicketComponent implements OnInit {
 
 		if (this.sessionStorage.get('cartItems')) {
 			let cartItems = this.sessionStorage.get('cartItems');
-			let count = 0;
 			let existed = false;
 			
 			for(let key in cartItems) {
 				if(cartItems[key].id == item.id) {
-					cartItems[key].number_adult = +cartItems[key].number_adult + this.number_adult;
-					cartItems[key].number_children = +cartItems[key].number_children + this.number_children;
-					existed = true;
+					if(cartItems[key].departure == this.filter_from_date.formatted){
+						cartItems[key].number_adult = +cartItems[key].number_adult + this.number_adult;
+						cartItems[key].number_children = +cartItems[key].number_children + this.number_children;
+						existed = true;
+					}
 				}
 				count++;
 			}
@@ -240,7 +247,9 @@ export class DetailTicketComponent implements OnInit {
 			this.sessionStorage.set('cartItems', cartItems);
 			count++;
 		}
+		console.log(count);
 		this._Configuration.number_order = count;
+		console.log(this._Configuration.number_order);
 	}
 
   	onPlusPeople(value) {
