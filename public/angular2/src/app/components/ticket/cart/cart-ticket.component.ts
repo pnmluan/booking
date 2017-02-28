@@ -5,6 +5,7 @@ import { EntranceTicketDataService } from './../../../shared';
 import { LocalStorageService } from 'angular-2-local-storage';
 import { ToasterModule, ToasterService } from 'angular2-toaster';
 
+declare let jQuery: any;
 declare let moment: any;
 
 @Component({
@@ -26,9 +27,19 @@ export class CartTicketComponent implements OnInit {
 		private _Configuration: Configuration,
 		private _ToasterService: ToasterService
 	) { }
+
 	ngOnInit() {
 		this.cartItems = this.sessionStorage.get('cartItems');
 		this.processTotal();
+	}
+
+	ngAfterViewInit(){
+		let self = this,
+			Configuration = this._Configuration;
+
+		jQuery('.daterange-single').datetimepicker({
+			format: Configuration.viFormatDate
+		});
 	}
 	/*=================================
 	 * Process Total

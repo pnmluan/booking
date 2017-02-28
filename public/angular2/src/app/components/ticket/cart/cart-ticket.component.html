@@ -30,6 +30,9 @@
                                     </tr>
                                 </thead>
                                 <tbody>
+                                    <tr *ngIf="cartItems.length == 0">
+                                        <td colspan="7">Your Cart is empty</td>
+                                    </tr>
                                     <tr *ngFor="let item of cartItems; let i = index">
                                         <td>
                                             <table>
@@ -44,8 +47,12 @@
                                             </table>
                                         </td>
                                         <td>
-                                            <div class="field">
+                                            <!--<div class="field">
                                                 <ng2-datepicker name="departure" [options]="datepickerOptions[i]" [(ngModel)]="item.departure" required></ng2-datepicker>
+                                            </div>-->
+                                            <div class="input-group">
+                                                <input type="text" class="form-control daterange-single">
+                                                <span class="input-group-addon"><i class="icon-calendar"></i></span>
                                             </div>
                                         </td>
                                         <td>
@@ -94,7 +101,6 @@
                             <div>
                                 <a [routerLink]="['/list-tickets']" class="pointer" ><i class="fa fa-long-arrow-left" aria-hidden="true"></i> Tiếp tục mua hàng</a></div>
                             <div>
-                                
                                 <button type="btn" class="btn btn-checkout" (click)="onLinkToPaymentTicket()" [disabled]="!sumPrice">THANH TOÁN</button>
                             </div>
                         </div>
