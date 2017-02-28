@@ -42,7 +42,7 @@ import { IntrodutionComponent } from './components/introdution';
 import { PageNotFoundComponent } from './components/page-not-found';
 import { HeaderComponent } from './components/header';
 import { SearchResultComponent } from './components/search-result';
-import { ListTicketComponent, DetailTicketComponent, CartTicketComponent, PaymentTicketComponent } from './components/ticket';
+import { ListTicketComponent, DetailTicketComponent, DetailTicketPhotoComponent, CartTicketComponent, PaymentTicketComponent } from './components/ticket';
 
 
 @NgModule({
@@ -59,6 +59,7 @@ import { ListTicketComponent, DetailTicketComponent, CartTicketComponent, Paymen
     CommentComponent,
     ListTicketComponent,
     DetailTicketComponent,
+    DetailTicketPhotoComponent,
     CartTicketComponent,
     PaymentTicketComponent
   ],
@@ -94,6 +95,7 @@ import { ListTicketComponent, DetailTicketComponent, CartTicketComponent, Paymen
     //   provide: LOCAL_STORAGE_SERVICE_CONFIG, useValue: localStorageServiceConfig
     // }
   ],
+  entryComponents: [ DetailTicketPhotoComponent ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

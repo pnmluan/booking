@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { URLSearchParams } from '@angular/http';
 
@@ -19,7 +19,7 @@ export class ListTicketComponent implements OnInit {
 	private subscriptionEvents: Subscription;
 	private querySubscription: Subscription;
 	public categoryTicketOptions = [];
-	@Output('order') orderOutput = new EventEmitter();
+
 	queryParams = {};
 	listItem = [];
 	curRouting?: string;
@@ -28,7 +28,7 @@ export class ListTicketComponent implements OnInit {
 	constructor(
 		private _CategoryTicketDataService: CategoryTicketDataService, 
 		private _EntranceTicketDataService: EntranceTicketDataService,
-		private config: Configuration,
+		private _Configuration: Configuration,
 		private _Router: Router,
 		private _ActivatedRoute: ActivatedRoute,
 		private sessionStorage: LocalStorageService,
@@ -166,8 +166,6 @@ export class ListTicketComponent implements OnInit {
 				var a = jQuery('.item-inner').width();
 				jQuery('.item-inner > a').height(a * 10 / 16);
 			}
-
-			
 			
 		},500)
   	}
@@ -225,7 +223,7 @@ export class ListTicketComponent implements OnInit {
 			count++; 
 		}
 		item.order = 1;
-		this.config.number_order = count;
+		this._Configuration.number_order = count;
 	}
 
 	resizeImage() {

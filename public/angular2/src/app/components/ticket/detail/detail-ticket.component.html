@@ -18,29 +18,8 @@
 
                         <!-- Tour content -->
                         <div class="tour-content">
-                            <div class="tour-photos">
-                                <h2 class="content-title">VIEW THE PHOTOS</h2>
-                                <p class="s-line"></p>
-                                <div class="content-inner">
-                                    <div class="photos-wrapper">
-                                        <div id="photos" class="item">
-                                            <div id="sync1" class="owl-carousel">
-                                                <div class="item" *ngFor="let album of Ticket.album">
-                                                    <img src="{{imgPath + album.img}}" alt="">
-                                                </div>
-                                            </div>
-                                            <div id="sync2" class="owl-carousel">
-                                                <div class="item" *ngFor="let album of Ticket.album">
-                                                    <img src="{{imgPath + album.img}}" alt="">
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <!--<div id="map" class="item">-->
-                                        <!--<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3918.594877281655!2d106.65486751518642!3d10.842282960938542!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x317529a3c994361d%3A0x5514fcf08ad040d4!2zQ8O0bmcgdmnDqm4gVsSDbiBow7NhIEzDoG5nIEhvYQ!5e0!3m2!1svi!2s!4v1483457089115" width="100%" height="450" frameborder="0" style="border:0" allowfullscreen></iframe>-->
-                                        <!--</div>-->
-                                    </div>
-                                </div>
-                            </div>
+                            <div class="tour-photos" #photos></div>
+                            <!-- Tour book -->
                             <div class="tour-book">
                                 <form action="" class="f-tour-view-price clearfix">
                                     <div class="field">
@@ -61,17 +40,17 @@
                                                     <tr>
                                                         <td>Người lớn</td>
                                                         <td>
-                                                            <a (click)="number_adult = (number_adult ? number_adult - 1 : number_adult)"><i class="fa fa-minus"></i></a>&nbsp;
-                                                            <input type="text" class="input-quantity form-control" name="number_adult" ([ngModel])="number_adult" [value]="number_adult">&nbsp;
-                                                            <a (click)="number_adult = number_adult + 1" class="add-people"><i class="fa fa-plus"></i></a>
+                                                            <a (click)="onCountNumberAdult(1,'minus')"><i class="fa fa-minus"></i></a>&nbsp;
+                                                            <input type="text" class="input-quantity form-control" name="number_adult" ([ngModel])="number_adult" [value]="number_adult" (keyup)="onCountNumberAdult($event.target.value)" onkeypress="return event.charCode >= 48 && event.charCode <= 57" (focusout)="onClearNumber($event.target.value,'adult')">&nbsp;
+                                                            <a (click)="onCountNumberAdult(1,'plus')" class="add-people"><i class="fa fa-plus"></i></a>
                                                         </td>
                                                     </tr>
                                                     <tr>
                                                         <td>Trẻ em</td>
                                                         <td>
-                                                            <a (click)="number_children = (number_children ? number_children - 1 : number_children)"><i class="fa fa-minus"></i></a>&nbsp;
-                                                            <input type="text" class="input-quantity form-control" name="number_children" ([ngModel])="number_children" [value]="number_children">&nbsp;
-                                                            <a (click)="number_children = number_children + 1" class="add-people"><i class="fa fa-plus"></i></a>
+                                                            <a (click)="onCountNumberChildren(1,'minus')"><i class="fa fa-minus"></i></a>&nbsp;
+                                                            <input type="text" class="input-quantity form-control" name="number_children" ([ngModel])="number_children" [value]="number_children" (keyup)="onCountNumberChildren($event.target.value)" onkeypress="return event.charCode >= 48 && event.charCode <= 57" (focusout)="onClearNumber($event.target.value,'children')">&nbsp;
+                                                            <a (click)="onCountNumberChildren(1,'plus')" class="add-people"><i class="fa fa-plus"></i></a>
                                                         </td>
                                                     </tr>
                                                 </table>
@@ -136,6 +115,7 @@
                                     </div>
                                 </div>
                             </div>
+                            <!-- End tour book -->
                             <!-- <div class="tour-desc">
                                 <h2 class="content-title">ĐIỂM NỔI BẬT</h2>
                                 <p class="s-line"></p>
@@ -156,111 +136,48 @@
                                 <div class="content-inner" [innerHTML]="Ticket.content">
                                 </div>
                             </div>
-                            <div class="tour-info">
-                                <h2 class="content-title">THÔNG TIN QUAN TRỌNG</h2>
-                                <p class="s-line"></p>
+                            <!-- Tour info -->
+							<div class="tour-info">
+								<h2 class="content-title">THÔNG TIN QUAN TRỌNG</h2>
+								<p class="s-line"></p>
                                 <div class="content-inner">
                                     <tabset class="info-tab clearfix">
                                         <tab>
                                             <span *tabHeading>
-                                            <i class=""></i> VÉ BAO GỒM
-                                        </span>
+                                                <i class=""></i> VÉ BAO GỒM
+                                            </span>
                                             <div id="include" class="item">
                                                 {{ Ticket.include}}
                                             </div>
                                         </tab>
                                         <tab>
                                             <span *tabHeading>
-                                            <i class=""></i> VÉ KHÔNG BAO GỒM
-                                        </span>
+	                                            <i class=""></i> VÉ KHÔNG BAO GỒM
+	                                        </span>
                                             <div id="note" class="item">
                                                 {{ Ticket.not_include }}
                                             </div>
                                         </tab>
                                         <tab>
                                             <span *tabHeading>
-                                            <i class=""></i> LƯU Ý
-                                        </span>
+	                                            <i class=""></i> LƯU Ý
+	                                        </span>
                                             <div id="intro" class="item">
                                                 {{ Ticket.notice }}
                                             </div>
                                         </tab>
                                         <tab>
                                             <span *tabHeading>
-                                            <i class=""></i> HƯỚNG DẪN
-                                        </span>
+	                                            <i class=""></i> HƯỚNG DẪN
+	                                        </span>
                                             <div id="not-include" class="item">
                                                 {{ Ticket.support }}
                                             </div>
                                         </tab>
                                     </tabset>
                                 </div>
-                                <!-- <div class="content-inner">
-                                    <ul class="info-tab clearfix">
-                                        <li>
-                                            <a class="active" href="#include">VÉ BAO GỒM</a>
-                                        </li>
-                                        <li>
-                                            <a href="#not-include">VÉ KHÔNG BAO GỒM</a>
-                                        </li>
-                                        <li>
-                                            <a href="#note">LƯU Ý</a>
-                                        </li>
-                                        <li>
-                                            <a href="#intro">HƯỚNG DẪN</a>
-                                        </li>
-                                    </ul>
-                                    <div class="info-wrapper">
-                                        <div id="include" class="item">
-                                            - Vé tham quan nguyên khu Universal Studio trong 1 ngày.
-                                        </div>
-                                        <div id="not-include" class="item">
-                                            - Kể từ năm 2016, vé không còn voucher ăn 5$ và quà tặng 5$.
-                                            <br/> - Vé express (loại vé được hàng nhanh trong mỗi trò chơi).
-                                        </div>
-                                        <div id="note" class="item">
-                                            - Trẻ em từ 1-3 tuổi: miễn phí
-                                            <br/> - Trẻ em từ 4-12: tính vé trẻ em.
-                                            <br/> - Vé có thời hạn 1 tháng kể từ ngày đặt vé. Trong hạn này bạn đi ngày nào cũng được.
-                                        </div>
-                                        <div id="intro" class="item">
-                                            <ul>
-                                                <li>
-                                                    <h3 class="sub-title">Hướng dẫn đi lại</h3>
-                                                    <div>
-                                                        Đi đến bảo tàng tượng sáp Madame Tussauds
-                                                        <br/> - <strong>Đi bộ:</strong> Đi tàu điện ngầm đến ga Harbour Front. Từ sảnhVivoCity Shopping Mall bạn có thể vào Sentosa Boardwalk. Khoảng 30 phút đi bộ, bạn hãy theo những dấu hiệu hướng tới Madame Tussauds Singapore ở Imbiah Lookout.
-                                                        <br/> - <strong>Đi xe hơi:</strong> Vào Sentosa qua Sentosa Gateway và đậu xe tại bãi xe Imbiah Lookout. Bạn chỉ cần đi theo các dấu hiệu chỉ tới Imbiah Lookout. Madame Tussauds Singapore ở gần đó.
-                                                        <br/> - <strong>Bằng Sentosa Express:</strong> Đi đến tầng 3 của trung tâm mua sắm VivoCity, có Sentosa Express đến Đảo Sentosa. Xuống xe tại trạm Merlion, sau đó đi qua Merlion Plaza bằng thang cuốn. Sau 4 chuyến thang cuốn, bạn sẽ thấy thảm đỏ của Madame Tussauds Singapore.
-                                                        <br/> Bảo tàng lịch sử Image of Singapore nằm bên cạnh bảo tàng tượng sáp Madame Tussauds
-                                                    </div>
-                                                </li>
-                                                <li>
-                                                    <h3 class="sub-title">Thời gian tham quan</h3>
-                                                    <div>
-                                                        <strong>Bảo tàng tượng sáp:</strong>
-                                                        <br/> - Các ngày trong tuần: <strong>10am – 7:30pm</strong>
-                                                        <br/> - Thứ bảy, chủ nhật, và các ngày lễ: <strong>10am – 9pm</strong>
-                                                        <br/>
-                                                        <br/>
-                                                        <strong>Bảo tàng lịch sử Image of Singapore:</strong>
-                                                        <br/> - Các ngày trong tuần: 10am – 6pm
-                                                        <br/> - Thứ bảy, chủ nhật, và các ngày lễ: <strong>10am – 7:30pm</strong>
-                                                        <br/>
-                                                    </div>
-                                                </li>
-                                                <li>
-                                                    <h3 class="sub-title">Cách sử dụng voucher</h3>
-                                                    <div>
-                                                        - Voucher được gửi tới email của bạn trong vòng 48 tiếng. Đây là bằng chứng thanh toán của bạn.
-                                                        <br/> - In voucher và vào thẳng quầy soát vé để nhân viên scan mã vé trên voucher.
-                                                    </div>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </div> -->
                             </div>
+                            <!-- End tour info -->
                             <div class="tour-photos">
                                 <h2 class="content-title">MAPS</h2>
                                 <p class="s-line"></p>
