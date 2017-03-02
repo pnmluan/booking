@@ -195,13 +195,19 @@ export class DetailTicketComponent implements OnInit {
 	onCountNumberAdult(quantity: number, operation?: string){
 		if(quantity){
 			if(quantity == 1){
-				if(operation == 'plus'){
-					this.number_adult++;
-				}else{
-					this.number_adult = this.number_adult ? this.number_adult - 1 : 0;
+				switch(operation){
+					case 'plus':
+						this.number_adult++;
+						break;
+					case 'minus':
+						this.number_adult = this.number_adult ? this.number_adult - 1 : 0;
+						break;
+					default:
+						this.number_adult = quantity;
+						break;
 				}
 			}else{
-				this.number_adult = quantity;	
+				this.number_adult = quantity;
 			}
 		}
 	}
@@ -209,15 +215,21 @@ export class DetailTicketComponent implements OnInit {
 	onCountNumberChildren(quantity: number, operation?: string){
 		if(quantity){
 			if(quantity == 1){
-				if(operation == 'plus'){
-					this.number_children++;
-				}else{
-					this.number_children = this.number_children ? this.number_children - 1 : 0;
+				switch(operation){
+					case 'plus':
+						this.number_children++;
+						break;
+					case 'minus':
+						this.number_children = this.number_children ? this.number_children - 1 : 0;
+						break;
+					default:
+						this.number_children = quantity;
+						break;
 				}
 			}else{
 				this.number_children = quantity;	
 			}
-		}	
+		}
 	}
 
 	onClearNumber(quantity: number, field?: string){
