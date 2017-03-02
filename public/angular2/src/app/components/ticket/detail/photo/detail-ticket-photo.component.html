@@ -1,0 +1,18 @@
+<h2 class="content-title">VIEW THE PHOTOS</h2>
+<p class="s-line"></p>
+<div class="content-inner">
+	<div class="photos-wrapper">
+		<div id="photos" class="item">
+			<div id="sync1" class="owl-carousel">
+				<div class="item" *ngFor="let album of albums">
+					<img src="{{imgPath + album.img}}" alt="">
+				</div>
+			</div>
+			<div id="sync2" class="owl-carousel">
+				<div class="item" *ngFor="let album of albums">
+					<img src="{{imgPath + album.img}}" alt="">
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

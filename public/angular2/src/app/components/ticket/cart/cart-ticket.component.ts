@@ -5,6 +5,7 @@ import { EntranceTicketDataService } from './../../../shared';
 import { LocalStorageService } from 'angular-2-local-storage';
 import { ToasterModule, ToasterService } from 'angular2-toaster';
 
+declare let jQuery: any;
 declare let moment: any;
 
 @Component({
@@ -18,6 +19,7 @@ export class CartTicketComponent implements OnInit {
 	sumPrice: number = 0;
 	imgPath: string = this._EntranceTicketDataService.imgPath;
 	datepickerOptions: Array<any> = [];
+	numbers: Array<any> = [];
 
 	constructor(
 		private sessionStorage: LocalStorageService,
@@ -26,9 +28,24 @@ export class CartTicketComponent implements OnInit {
 		private _Configuration: Configuration,
 		private _ToasterService: ToasterService
 	) { }
+
 	ngOnInit() {
+		let i = 0;
+		do{
+			++i;
+			this.numbers.push(i);
+		}while(i<=30);
 		this.cartItems = this.sessionStorage.get('cartItems');
 		this.processTotal();
+	}
+
+	ngAfterViewInit(){
+		let self = this,
+			Configuration = this._Configuration;
+
+		jQuery('.daterange-single').datetimepicker({
+			format: Configuration.viFormatDate
+		});
 	}
 	/*=================================
 	 * Process Total
@@ -78,9 +95,15 @@ export class CartTicketComponent implements OnInit {
 	/*=================================
 	 * Plus People
 	 *=================================*/
-	onPlusPeople(index, key) {
-		this.cartItems[index][key]++;
-		this.processTotal();
+	onPlusPeople(quantity, index, key, action?: string) {
+		if(quantity){
+			if(quantity == 1){
+				this.cartItems[index][key] = action ? quantity : this.cartItems[index][key] + 1;	
+			}else{
+				this.cartItems[index][key] = quantity;
+			}
+			this.processTotal();
+		}
 	}
 
 
@@ -88,11 +111,17 @@ export class CartTicketComponent implements OnInit {
 	 * Minus People
 	 *=================================*/
 	onMinusPeople(index, key) {
-		console.log(this.cartItems[index][key])
+		console.log(this.cartItems[index][key]);
 		if (this.cartItems[index][key] > 1) {
 			this.cartItems[index][key]--;
 			this.processTotal();
 		}
+	}
+
+	onClearNumber(quantity: number,index: number, key?: string){
+		quantity = quantity ? +quantity : 0;
+		this.cartItems[index][key] = quantity;
+		this.processTotal();
 	}
 
 	onLinkToPaymentTicket(){

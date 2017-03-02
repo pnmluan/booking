@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ViewContainerRef, ComponentFactoryResolver } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { URLSearchParams } from '@angular/http';
 
@@ -9,6 +9,7 @@ import { Subscription } from 'rxjs/Rx';
 import { LocalStorageService } from 'angular-2-local-storage';
 import { ToasterModule, ToasterService } from 'angular2-toaster';
 import { AgmCoreModule } from 'angular2-google-maps/core';
+import { DetailTicketPhotoComponent } from './photo/detail-ticket-photo.component';
 
 declare let jQuery: any;
 declare let moment: any;
@@ -16,14 +17,17 @@ declare let moment: any;
 @Component({
   selector: 'app-detail-ticket',
   templateUrl: './detail-ticket.component.html',
-  providers: [EntranceTicketDataService, Configuration]
+  providers: [ EntranceTicketDataService ]
 })
 export class DetailTicketComponent implements OnInit {
 	private subscriptionEvents: Subscription;
 	private subscriptionParam: Subscription;
 	public comments = [];
+	@ViewChild('photos', {read: ViewContainerRef }) photos: ViewContainerRef;
+
 	filter_from_date: any;
 	curRouting?: string;
+	albums = [];
 	listItem = [];
 	_params = {};
 	Ticket = {};
@@ -41,8 +45,9 @@ export class DetailTicketComponent implements OnInit {
 		private _Router: Router,
 		private _ActivatedRoute: ActivatedRoute,
 		private sessionStorage: LocalStorageService,
-		private _ToasterService: ToasterService
-		) { 
+		private _ToasterService: ToasterService,
+		private _componentFactoryResolver: ComponentFactoryResolver
+	) { 
 		// subscribe to router event
 		this.subscriptionParam = _ActivatedRoute.params.subscribe(
 			(param: any) => {
@@ -60,7 +65,9 @@ export class DetailTicketComponent implements OnInit {
 		});
 	}
 
-  	ngOnInit() { }
+  	ngOnInit() {
+  		console.log(this._Configuration.number_order);
+  	}
 
   	ngAfterViewInit(){
   		//event view price
@@ -76,106 +83,36 @@ export class DetailTicketComponent implements OnInit {
 			}
 			return false;
 		});
+
+  		jQuery('.info-tab li a').click(function() {
+			jQuery('.info-tab li a').removeClass('active');
+			jQuery(this).addClass('active');
+
+			jQuery('.info-wrapper .item').hide();
+			jQuery(jQuery(this).attr('href')).show();
+			return false;
+		});
   	}
 
   	initData() {
+  		this.photos.clear();
   		this.isAddPeople = false;
-  		this._EntranceTicketDataService.getByID(this._params['ticket_id']).subscribe(res => {
 
+  		let childComponent = this._componentFactoryResolver.resolveComponentFactory(DetailTicketPhotoComponent);
+		let componentRef = this.photos.createComponent(childComponent);
+
+  		this._EntranceTicketDataService.getByID(this._params['ticket_id']).subscribe(res => {
 			if (res.data) {
 				this.Ticket = res.data;
+				(<DetailTicketPhotoComponent>componentRef.instance).albums = res.data.album;
+  				(<DetailTicketPhotoComponent>componentRef.instance).imgPath = this.imgPath;
 				this.lat = +this.Ticket['latitude'];
 				this.lng = +this.Ticket['longitude'];
 				this.loadCategoryTickets(res.data.category_ticket_id);
 			}
 		})
 
-		setTimeout(() => {
-			function photosGallery() {
-				var sync1 = jQuery("#sync1");
-				var sync2 = jQuery("#sync2");
-
-				sync1.owlCarousel({
-					singleItem: true,
-					slideSpeed: 1000,
-					navigation: true,
-					pagination: false,
-					autoPlay: 5000,
-					afterAction: syncPosition,
-					responsiveRefreshRate: 200,
-				});
-
-				sync2.owlCarousel({
-					items: 8,
-					itemsDesktop: [1199, 8],
-					itemsDesktopSmall: [979, 6],
-					itemsTablet: [768, 5],
-					itemsMobile: [479, 4],
-					pagination: false,
-					responsiveRefreshRate: 100,
-					afterInit: function(el) {
-						el.find(".owl-item").eq(0).addClass("synced");
-					}
-				});
-
-				function syncPosition(el) {
-					var current = this.currentItem;
-					jQuery("#sync2")
-						.find(".owl-item")
-						.removeClass("synced")
-						.eq(current)
-						.addClass("synced")
-					if (jQuery("#sync2").data("owlCarousel") !== undefined) {
-						center(current)
-					}
-
-				}
-
-				jQuery("#sync2").on("click", ".owl-item", function(e) {
-					e.preventDefault();
-					var number = jQuery(this).data("owlItem");
-					sync1.trigger("owl.goTo", number);
-				});
-
-				function center(number) {
-					var sync2visible = sync2.data("owlCarousel").owl.visibleItems;
-
-					var num = number;
-					var found = false;
-					for (var i in sync2visible) {
-						if (num === sync2visible[i]) {
-							var found = true;
-						}
-					}
-
-					if (found === false) {
-						if (num > sync2visible[sync2visible.length - 1]) {
-							sync2.trigger("owl.goTo", num - sync2visible.length + 2);
-						} else {
-							if (num - 1 === -1) {
-								num = 0;
-							}
-							sync2.trigger("owl.goTo", num);
-						}
-					} else if (num === sync2visible[sync2visible.length - 1]) {
-						sync2.trigger("owl.goTo", sync2visible[1]);
-					} else if (num === sync2visible[0]) {
-						sync2.trigger("owl.goTo", num - 1);
-					}
-				}
-			}
-			photosGallery();
-
-			jQuery('.info-tab li a').click(function() {
-				jQuery('.info-tab li a').removeClass('active');
-				jQuery(this).addClass('active');
-
-				jQuery('.info-wrapper .item').hide();
-				jQuery(jQuery(this).attr('href')).show();
-				return false;
-			});
-		}, 1000);
-
+		
   	}
 
   	loadCategoryTickets(category_ticket_id){
@@ -193,13 +130,18 @@ export class DetailTicketComponent implements OnInit {
 	 * Add To Cart
 	 *=================================*/
 	addToCart(item) {
+		if(this.number_adult == 0){
+			this._ToasterService.pop('error', 'Lỗi nhập liệu', 'Vui lòng nhập số người tham quan.');
+			return;
+		}
+
 		if(!this.filter_from_date){
 			this._ToasterService.pop('error', 'Lỗi nhập liệu', 'Vui lòng chọn ngày tham quan.');
 			return;
 		}
 
 		let booking_date = moment(this.filter_from_date.formatted, this._Configuration.viFormatDate).format(this._Configuration.dateFormat);
-		if(booking_date < moment().format(this._Configuration.dateFormat)){
+		if(booking_date < moment().add(24,'h').format(this._Configuration.dateFormat)){
 			this._ToasterService.pop('error', 'Lỗi nhập liệu', 'Vui lòng kiểm tra lại ngày tham quan.');
 			return;
 		}
@@ -247,9 +189,56 @@ export class DetailTicketComponent implements OnInit {
 			this.sessionStorage.set('cartItems', cartItems);
 			count++;
 		}
-		console.log(count);
 		this._Configuration.number_order = count;
-		console.log(this._Configuration.number_order);
+	}
+
+	onCountNumberAdult(quantity: number, operation?: string){
+		if(quantity){
+			if(quantity == 1){
+				switch(operation){
+					case 'plus':
+						this.number_adult++;
+						break;
+					case 'minus':
+						this.number_adult = this.number_adult ? this.number_adult - 1 : 0;
+						break;
+					default:
+						this.number_adult = quantity;
+						break;
+				}
+			}else{
+				this.number_adult = quantity;
+			}
+		}
+	}
+
+	onCountNumberChildren(quantity: number, operation?: string){
+		if(quantity){
+			if(quantity == 1){
+				switch(operation){
+					case 'plus':
+						this.number_children++;
+						break;
+					case 'minus':
+						this.number_children = this.number_children ? this.number_children - 1 : 0;
+						break;
+					default:
+						this.number_children = quantity;
+						break;
+				}
+			}else{
+				this.number_children = quantity;	
+			}
+		}
+	}
+
+	onClearNumber(quantity: number, field?: string){
+		quantity = quantity ? +quantity : 0;
+		if(field == 'adult'){
+			this.number_adult = quantity;
+		}else{
+			this.number_children = quantity;
+		}
 	}
 
   	onPlusPeople(value) {

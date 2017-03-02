@@ -30,6 +30,9 @@
                                     </tr>
                                 </thead>
                                 <tbody>
+                                    <tr *ngIf="cartItems.length == 0">
+                                        <td colspan="7">Your Cart is empty</td>
+                                    </tr>
                                     <tr *ngFor="let item of cartItems; let i = index">
                                         <td>
                                             <table>
@@ -44,8 +47,9 @@
                                             </table>
                                         </td>
                                         <td>
-                                            <div class="field">
-                                                <ng2-datepicker name="departure" [options]="datepickerOptions[i]" [(ngModel)]="item.departure" required></ng2-datepicker>
+                                            <div class="input-group">
+                                                <input type="text" class="form-control daterange-single">
+                                                <span class="input-group-addon"><i class="icon-calendar"></i></span>
                                             </div>
                                         </td>
                                         <td>
@@ -61,16 +65,16 @@
                                                         <td>Người lớn</td>
                                                         <td>
                                                             <a (click)="onMinusPeople(i,'number_adult')" class="minus-people pointer"><i class="fa fa-minus"></i></a>&nbsp;
-                                                            <input type="text" class="input-quantity form-control" [(ngModel)]="item.number_adult">&nbsp;
-                                                            <a (click)="onPlusPeople(i, 'number_adult')" class="add-people pointer"><i class="fa fa-plus"></i></a>
+                                                            <input type="text" class="input-quantity form-control" [(ngModel)]="item.number_adult" (keyup)="onPlusPeople($event.target.value, i, 'number_adult', 'typing')" onkeypress="return event.charCode >= 48 && event.charCode <= 57"  (blur)="onClearNumber($event.target.value, i, 'number_adult')">&nbsp;
+                                                            <a (click)="onPlusPeople(1, i, 'number_adult')" class="add-people pointer"><i class="fa fa-plus"></i></a>
                                                         </td>
                                                     </tr>
                                                     <tr>
                                                         <td>Trẻ em</td>
                                                         <td>
                                                             <a (click)="onMinusPeople(i,'number_children')" class="pointer minus-people"><i class="fa fa-minus"></i></a>&nbsp;
-                                                            <input type="text" class="input-quantity form-control" [(ngModel)]="item.number_children">&nbsp;
-                                                            <a (click)="onPlusPeople(i, 'number_children')" class="pointer add-people"><i class="fa fa-plus"></i></a>
+                                                            <input type="text" class="input-quantity form-control" [(ngModel)]="item.number_children" (keyup)="onPlusPeople($event.target.value, i, 'number_children', 'typing')" onkeypress="return event.charCode >= 48 && event.charCode <= 57" (blur)="onClearNumber($event.target.value,i,'number_children')">&nbsp;
+                                                            <a (click)="onPlusPeople(1, i, 'number_children')" class="pointer add-people"><i class="fa fa-plus"></i></a>
                                                         </td>
                                                     </tr>
                                                 </table>
@@ -94,7 +98,6 @@
                             <div>
                                 <a [routerLink]="['/list-tickets']" class="pointer" ><i class="fa fa-long-arrow-left" aria-hidden="true"></i> Tiếp tục mua hàng</a></div>
                             <div>
-                                
                                 <button type="btn" class="btn btn-checkout" (click)="onLinkToPaymentTicket()" [disabled]="!sumPrice">THANH TOÁN</button>
                             </div>
                         </div>
