@@ -161,14 +161,11 @@ export class AppComponent {
 	 * Toggle Sidebar
 	 *=================================*/
 	loadCartItemsStorage() {
-
 		this.cartItems = this._LocalStorageService.get('cartItems');
 		let sum = 0;
 		for (let key in this.cartItems) {
 			var item = this.cartItems[key];
-			console.log(item);
 			sum = sum + item.number_adult * item.adult_fare + item.number_children * item.children_fare;
-			console.log(sum);
 		}
 		this.sumPrice = sum;
 	}

@@ -67,7 +67,6 @@ export class ListTicketComponent implements OnInit {
 
 				}
 				this.categoryTicketOptions = categoryTicketOptions;
-				console.log(categoryTicketOptions)
 			}
 		});
   	}
