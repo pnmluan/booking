@@ -17,8 +17,12 @@ var MetronicApp = angular.module("MetronicApp", [
 
 /* Configure API */
 MetronicApp.config(['$httpProvider', '$base64', 'toastrConfig', function($httpProvider, $base64, toastrConfig) {
-    var auth = $base64.encode("datvesieure:balobooking");
-    $httpProvider.defaults.headers.common['Authorization'] = 'Basic ' + auth;
+    // var auth = $base64.encode("datvesieure:balobooking");
+    // $httpProvider.defaults.headers.common['Authorization'] = 'Basic ' + auth;
+    let token = localStorage.getItem('token');
+    if(token) {
+        $httpProvider.defaults.headers.common['Authorization'] = 'Bearer ' + token;
+    }
 
     angular.extend(toastrConfig, {
         autoDismiss: false,
@@ -68,7 +72,8 @@ MetronicApp.factory('settings', ['$rootScope', function($rootScope) {
         assetsPath: '../assets',
         globalPath: '../assets/global',
         layoutPath: '../assets/layouts/layout',
-        apiPath: '/booking/public/api/v1/',
+        apiPath: '/booking-upgrade/public/api/',
+        baseUrl: '/booking-upgrade/public/backend/admin/#/',
         imgPath: '../assets/apps/img/',
         btnUpdate: `<button class="btn btn-sm green btn-outline filter-submit margin-bottom clickToUpdate"><i class="fa fa-edit"></i> Edit</button>`,
         btnDelete: `<button class="btn btn-sm red btn-outline filter-cancel clickToDelete"><i class="fa fa-trash"></i> Delete</button>`,
@@ -94,11 +99,41 @@ MetronicApp.factory('settings', ['$rootScope', function($rootScope) {
 }]);
 
 /* Setup App Main Controller */
-MetronicApp.controller('AppController', ['$scope', '$rootScope', function($scope, $rootScope) {
+MetronicApp.controller('AppController', ['$scope', '$rootScope', '$http', '$window', function($scope, $rootScope, $http, $window) {
     $scope.$on('$viewContentLoaded', function() {
+        console.log($rootScope.settings.state)
+        if($rootScope.settings.state != 'login') {
+            var urlBase = $rootScope.settings.apiPath + 'auth';
+            $http.get(urlBase + '/user').then(function(res) {
+                if(res.status == 200) {
+                    // localStorage.removeItem('token');
+                    
+                    // $window.location.reload();
+                }
+
+            }, function(res) {
+                if(res.status == 401) {
+                    $window.location.href = $rootScope.settings.baseUrl + 'login.html';
+                }
+            });
+        }
         //App.initComponents(); // init core components
         //Layout.init(); //  Init entire layout(header, footer, sidebar, etc) on page load if the partials included in server side instead of loading with ng-include directive 
     });
+
+    /* Logout system */
+    $scope.onLogout = function() {
+        var urlBase = $rootScope.settings.apiPath + 'auth';
+        $http.delete(urlBase + '/logout').then(function(res) {
+
+            if(res.status == 200) {
+                localStorage.removeItem('token');
+                $window.location.href = $rootScope.settings.baseUrl + 'login.html';
+                // $window.location.reload();
+            }
+
+        });
+    }
 }]);
 
 /* Format Number Input */
@@ -199,9 +234,30 @@ MetronicApp.controller('FooterController', ['$scope', function($scope) {
 /* Setup Rounting For All Pages */
 MetronicApp.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $urlRouterProvider) {
     // Redirect any unmatched url
-    $urlRouterProvider.otherwise("/banner.html");  
+    $urlRouterProvider.otherwise("/login.html");  
 
     $stateProvider
+
+        // Login
+        .state('login', {
+            url: "/login.html",
+            templateUrl: "views/login/main.html",            
+            data: {pageTitle: 'Admin Category Template'},
+            controller: "AuthController",
+            resolve: {
+                deps: ['$ocLazyLoad', function($ocLazyLoad) {
+                    return $ocLazyLoad.load({
+                        name: 'MetronicApp',
+                        insertBefore: '#ng_load_plugins_before', // load the above css files before a LINK element with this ID. Dynamic CSS files must be loaded between core and theme css files
+                        files: [
+                            '../assets/global/plugins/dropzone/dropzone.min.js',
+                            'js/controllers/AuthController.js',
+                            'js/services/auth.service.js'
+                        ] 
+                    });
+                }]
+            }
+        })
 
         // Booking
         .state('booking', {

@@ -30,7 +30,7 @@ export class AirlineDataService {
 	public vietjet(data) {
 		let headers = new Headers();
 		this.createAuthorizationHeader(headers);
-		return this.http.post(this.actionUrl + 'vietjet', data, { headers: headers, withCredentials: true })
+		return this.http.post(this.actionUrl + 'vietjet', data, { headers: headers })
 			.map(res => res.json())
 			.catch(this.handleError);
 	}
@@ -38,7 +38,7 @@ export class AirlineDataService {
 	public jetstar(data) {
 		let headers = new Headers();
 		this.createAuthorizationHeader(headers);
-		return this.http.post(this.actionUrl + 'jetstar', data, { headers: headers, withCredentials: true })
+		return this.http.post(this.actionUrl + 'jetstar', data, { headers: headers })
 			.map(res => res.json())
 			.catch(this.handleError);
 	}

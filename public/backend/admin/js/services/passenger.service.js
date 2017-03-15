@@ -2,26 +2,27 @@ angular.module('MetronicApp')
     .factory('PassengerService', ['$http', '$rootScope', function($http, $rootScope) {
 
     var urlBase = $rootScope.settings.apiPath + 'Passenger';
-    var PassengerService = {};
+    var service = {};
 
-    PassengerService.getAll = function (params = null) {
+    service.getAll = function (params = null) {
         if(params) {
             return $http.get(urlBase + '/index?'+ params);
         }
         return $http.get(urlBase + '/index');
     };
 
-    PassengerService.create = function (cust) {
-        return $http.post(urlBase + '/create', cust);
+    service.save = function (cust, id = null) {
+        if(id) {
+            return $http.post(urlBase + '/save/' + cust.id, cust)
+        } else {
+            return $http.post(urlBase + '/save', cust)
+        }
+        
     };
 
-    PassengerService.update = function (cust) {
-        return $http.put(urlBase + '/update/' + cust.id, cust)
-    };
-
-    PassengerService.delete = function (id) {
+    service.delete = function (id) {
         return $http.delete(urlBase + '/delete/' + id);
     };
 
-    return PassengerService;
+    return service;
 }]);

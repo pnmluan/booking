@@ -2,23 +2,24 @@ angular.module('MetronicApp')
     .factory('TicketDetailService', ['$http', '$rootScope', 'Upload', function($http, $rootScope, Upload) {
 
     var urlBase = $rootScope.settings.apiPath + 'ticket_detail';
-    var TicketDetailService = {};
+    var service = {};
 
-    TicketDetailService.getAll = function (params = null) {
+    service.getAll = function (params = null) {
         return $http.get(urlBase + '/index?'+ params);
     };
 
-    TicketDetailService.create = function (cust) {
-        return $http.post(urlBase + '/create', cust);
+    service.save = function (cust, id = null) {
+        if(id) {
+            return $http.post(urlBase + '/save/' + cust.id, cust)
+        } else {
+            return $http.post(urlBase + '/save', cust)
+        }
+        
     };
 
-    TicketDetailService.update = function (cust) {
-        return $http.put(urlBase + '/update/' + cust.id, cust)
-    };
-
-    TicketDetailService.delete = function (id) {
+    service.delete = function (id) {
         return $http.delete(urlBase + '/delete/' + id);
     };
 
-    return TicketDetailService;
+    return service;
 }]);

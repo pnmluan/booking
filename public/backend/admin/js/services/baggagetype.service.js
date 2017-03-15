@@ -2,23 +2,24 @@ angular.module('MetronicApp')
     .factory('BaggageTypeService', ['$http', '$rootScope', function($http, $rootScope) {
 
     var urlBase = $rootScope.settings.apiPath + 'baggagetype';
-    var BaggageTypeService = {};
+    var serive = {};
 
-    BaggageTypeService.getAll = function () {
+    serive.getAll = function () {
         return $http.get(urlBase + '/index');
     };
 
-    BaggageTypeService.create = function (cust) {
-        return $http.post(urlBase + '/create', cust);
+    service.save = function (cust, id = null) {
+        if(id) {
+            return $http.post(urlBase + '/save/' + cust.id, cust)
+        } else {
+            return $http.post(urlBase + '/save', cust)
+        }
+        
     };
 
-    BaggageTypeService.update = function (cust) {
-        return $http.put(urlBase + '/update/' + cust.id, cust)
-    };
-
-    BaggageTypeService.delete = function (id) {
+    serive.delete = function (id) {
         return $http.delete(urlBase + '/delete/' + id);
     };
 
-    return BaggageTypeService;
+    return serive;
 }]);

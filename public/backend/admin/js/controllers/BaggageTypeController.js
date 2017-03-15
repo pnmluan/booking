@@ -35,9 +35,9 @@ angular.module('MetronicApp').controller('BaggageTypeController', function($root
                 $scope.save = function() {
                     $scope.mItem.provider = $scope.optionProvider.selected.id;
                     $scope.mItem.status = $scope.optionStatus.selected.id;
-                    BaggageTypeService.create($scope.mItem).then(function(res) {
+                    BaggageTypeService.save($scope.mItem).then(function(res) {
 
-                        if(res.data.status == 'success') {
+                        if(res.status == 200) {
                             data.dtInstance.reloadData();
                             $scope.mItem = {};
                             toastr.success('Added an item', 'Success');
@@ -111,9 +111,8 @@ angular.module('MetronicApp').controller('BaggageTypeController', function($root
                 $scope.save = function() {
                     $scope.mItem.status = $scope.optionStatus.selected.id;
                     $scope.mItem.provider = $scope.optionProvider.selected.id;
-                    BaggageTypeService.update($scope.mItem).then(function(res) {
-
-                        if(res.data.status == 'success') {
+                    BaggageTypeService.save($scope.mItem, $scope.mItem.id).then(function(res) {
+                        if(res.status == 200) {
                             data.dtInstance.reloadData();
                             ngDialog.close();
                             toastr.success('Updated an item', 'Success');
@@ -162,7 +161,7 @@ angular.module('MetronicApp').controller('BaggageTypeController', function($root
         }).then(function() {
 
             BaggageTypeService.delete(id).then(function(res) {
-                if(res.data.status == 'success') {
+                if(res.status == 200) {
                     toastr.success('Deleted an item', 'Success');
                     $scope.dtInstance.reloadData();
                 }
@@ -202,7 +201,7 @@ angular.module('MetronicApp').controller('BaggageTypeController', function($root
                     xhr.setRequestHeader('Authorization',"Basic " + $base64.encode('datvesieure' + ":" + 'balobooking'));
                 },
                 data: params,
-                url: $rootScope.settings.apiPath + table + '/index',
+                url: $rootScope.settings.apiPath + table + '/index?has_data_table=1',
                 type: 'GET',
         }).withDataProp('data')
             .withOption('processing',true)

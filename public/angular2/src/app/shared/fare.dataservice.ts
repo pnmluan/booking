@@ -22,7 +22,7 @@ export class FareDataService {
 	public getAll() {
 		let headers = new Headers();
 		this.createAuthorizationHeader(headers);
-		return this._Http.get(this.actionUrl + 'index', { headers: headers, withCredentials: true })
+		return this._Http.get(this.actionUrl + 'index', { headers: headers })
 			.map(res => res.json())
 			.catch(this.handleError);
 	}
@@ -31,7 +31,7 @@ export class FareDataService {
 		let headers = new Headers();
 		this.createAuthorizationHeader(headers);
 		return this._Http.get(this.actionUrl + 'show/' + id, {
-			headers: headers, withCredentials: true
+			headers: headers
 		})
 			.map(res => res.json())
 			.catch(this.handleError);

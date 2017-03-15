@@ -25,7 +25,7 @@ export class BookingDataService {
 	public getAll() {
 		let headers = new Headers();
 		this.createAuthorizationHeader(headers);
-		return this._Http.get(this.actionUrl + 'index', { headers: headers, withCredentials: true })
+		return this._Http.get(this.actionUrl + 'index', { headers: headers })
 			.map(res => res.json())
 			.catch(this.handleError);
 	}

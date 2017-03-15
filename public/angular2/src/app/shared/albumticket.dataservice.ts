@@ -24,7 +24,7 @@ export class AlbumTicketDataService {
 		this.createAuthorizationHeader(headers);
 		return this._Http.get(this.actionUrl + 'index', { 
 			search: params,
-			headers: headers, withCredentials: true })
+			headers: headers })
 			.map(res => res.json())
 			.catch(this.handleError);
 	}

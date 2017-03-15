@@ -2,35 +2,36 @@ angular.module('MetronicApp')
     .factory('AlbumTicketService', ['$http', '$rootScope', 'Upload', function($http, $rootScope, Upload) {
 
     var urlBase = $rootScope.settings.apiPath + 'album_ticket';
-    var AlbumTicketService = {};
+    var service = {};
 
-    AlbumTicketService.getAll = function (params = null) {
+    service.getAll = function (params = null) {
         return $http.get(urlBase + '/index?'+ params);
     };
 
-    AlbumTicketService.create = function (imgs,  cust) {
-        return Upload.upload({
-            url: urlBase + '/create',
-            data: {
-                data: cust,
-                imgs: imgs
-            },
-        });
+    service.save = function (imgs, cust, id = null) {
+        if(id) {
+            return Upload.upload({
+                url: urlBase + '/save/' + cust.id,
+                data: {
+                    data: cust,
+                    imgs: imgs
+                },
+            });
+        } else {
+            return Upload.upload({
+                url: urlBase + '/save',
+                data: {
+                    data: cust,
+                    imgs: imgs
+                },
+            });
+        }
+        
     };
 
-    AlbumTicketService.update = function (img, cust) {
-        return Upload.upload({
-            url: urlBase + '/update/' + cust.id,
-            data: {
-                data: cust,
-                img: img
-            },
-        });
-    };
-
-    AlbumTicketService.delete = function (id) {
+    service.delete = function (id) {
         return $http.delete(urlBase + '/delete/' + id);
     };
 
-    return AlbumTicketService;
+    return service;
 }]);

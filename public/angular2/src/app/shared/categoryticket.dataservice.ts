@@ -24,7 +24,7 @@ export class CategoryTicketDataService {
 		this.createAuthorizationHeader(headers);
 		return this._Http.get(this.actionUrl + 'index', { 
 			search: params,
-			headers: headers, withCredentials: true })
+			headers: headers })
 			.retryWhen(errors => errors.delay(1000))
 			.map(res => res.json())
 			.catch(this.handleError);
