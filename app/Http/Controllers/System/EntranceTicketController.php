@@ -85,6 +85,11 @@ class EntranceTicketController extends Controller{
              *==================================================*/
             $query->limit($limit)->offset($offset);
             $data = $query->get()->toArray();
+            // Add album_ticket 
+            foreach ($data as $key => $value) {
+                $album = \DB::table('album_ticket')->where('entrance_ticket_id', $value->id)->get();
+                $data[$key]->album = $album;
+            }
             $total_data = count($data);
             /*==================================================
              * Response Data
