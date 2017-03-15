@@ -25,6 +25,7 @@ export class ListTicketComponent implements OnInit {
 	curRouting?: string;
 	search = {};
 	imgPath: string = this._EntranceTicketDataService.imgPath;
+
 	constructor(
 		private _CategoryTicketDataService: CategoryTicketDataService, 
 		private _EntranceTicketDataService: EntranceTicketDataService,
@@ -39,10 +40,7 @@ export class ListTicketComponent implements OnInit {
 				this.queryParams = param;
 			}
 		)
-		setTimeout(() => {
-			this.search['category_ticket_id'] = this.queryParams['category_ticket_id'];
-		}, 200);
-		
+
 		this.subscriptionEvents = this._Router.events.subscribe((val) => {
 			let routing = this._Router.url;
 			if (this.curRouting != routing) {
@@ -72,7 +70,9 @@ export class ListTicketComponent implements OnInit {
   	}
 
   	initData() {
-		var params: URLSearchParams = new URLSearchParams();
+  		this.search['category_ticket_id'] = this.queryParams['category_ticket_id'];
+		console.log(this.search['category_ticket_id']);
+		let params: URLSearchParams = new URLSearchParams();
 		params.set('category_ticket_id', this.search['category_ticket_id']);
 			// params.set('round_trip', this.session_flight['round_trip']);
 		this._EntranceTicketDataService.getAll(params).subscribe(res => {
@@ -173,6 +173,7 @@ export class ListTicketComponent implements OnInit {
 	 * Search Ticket
 	 *=================================*/
 	onSearch() {
+		this._Router.navigate(['list-tickets'],{ queryParams : this.search });
 		this.initData();
 	}
 
