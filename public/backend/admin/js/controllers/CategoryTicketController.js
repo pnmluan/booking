@@ -35,9 +35,9 @@ angular.module('MetronicApp').controller('CategoryTicketController', function($r
                 $scope.save = function() {
                     $scope.mItem.provider = $scope.optionProvider.selected.id;
                     $scope.mItem.status = $scope.optionStatus.selected.id;
-                    CategoryTicketService.create($scope.mItem).then(function(res) {
+                    CategoryTicketService.save($scope.mItem).then(function(res) {
 
-                        if(res.data.status == 'success') {
+                        if(res.status == 200) {
                             data.dtInstance.reloadData();
                             $scope.mItem = {};
                             toastr.success('Added an item', 'Success');
@@ -111,9 +111,9 @@ angular.module('MetronicApp').controller('CategoryTicketController', function($r
                 $scope.save = function() {
                     $scope.mItem.status = $scope.optionStatus.selected.id;
                     $scope.mItem.provider = $scope.optionProvider.selected.id;
-                    CategoryTicketService.update($scope.mItem).then(function(res) {
+                    CategoryTicketService.save($scope.mItem, $scope.mItem.id).then(function(res) {
 
-                        if(res.data.status == 'success') {
+                        if(res.status == 200) {
                             data.dtInstance.reloadData();
                             ngDialog.close();
                             toastr.success('Updated an item', 'Success');
@@ -162,7 +162,7 @@ angular.module('MetronicApp').controller('CategoryTicketController', function($r
         }).then(function() {
 
             CategoryTicketService.delete(id).then(function(res) {
-                if(res.data.status == 'success') {
+                if(res.status == 200) {
                     toastr.success('Deleted an item', 'Success');
                     $scope.dtInstance.reloadData();
                 }
@@ -202,7 +202,7 @@ angular.module('MetronicApp').controller('CategoryTicketController', function($r
                     xhr.setRequestHeader('Authorization',"Basic " + $base64.encode('datvesieure' + ":" + 'balobooking'));
                 },
                 data: params,
-                url: $rootScope.settings.apiPath + table + '/index',
+                url: $rootScope.settings.apiPath + table + '/index?has_data_table=1',
                 type: 'GET',
         }).withDataProp('data')
             .withOption('processing',true)

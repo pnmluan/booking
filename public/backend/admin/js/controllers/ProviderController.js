@@ -34,9 +34,9 @@ angular.module('MetronicApp').controller('ProviderController', function($rootSco
                 // Create Provider
                 $scope.save = function() {
                     $scope.mItem.status = $scope.optionStatus.selected.id;
-                    ProviderService.create($scope.mItem).then(function(res) {
+                    ProviderService.save($scope.mItem).then(function(res) {
 
-                        if(res.data.status == 'success') {
+                        if(res.status == 200) {
                             data.dtInstance.reloadData();
                             $scope.mItem = {};
                             toastr.success('Added an item', 'Success');
@@ -92,9 +92,9 @@ angular.module('MetronicApp').controller('ProviderController', function($rootSco
                 // Create Provider
                 $scope.save = function() {
 
-                    ProviderService.update($scope.mItem).then(function(res) {
-
-                        if(res.data.status == 'success') {
+                    ProviderService.save($scope.mItem, $scope.mItem.id).then(function(res) {
+console.log(res)
+                        if(res.status == 200) {
                             data.dtInstance.reloadData();
                             ngDialog.close();
                             toastr.success('Updated an item', 'Success');
@@ -141,7 +141,7 @@ angular.module('MetronicApp').controller('ProviderController', function($rootSco
         }).then(function() {
 
             ProviderService.delete(id).then(function(res) {
-                if(res.data.status == 'success') {
+                if(res.status == 200) {
                     toastr.success('Deleted an item', 'Success');
                     // loadListItem();
                 }

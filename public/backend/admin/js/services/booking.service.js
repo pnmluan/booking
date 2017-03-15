@@ -4,21 +4,22 @@ angular.module('MetronicApp')
     var urlBase = $rootScope.settings.apiPath + 'booking';
     var BookingService = {};
 
-    BookingService.getAll = function () {
+    service.getAll = function () {
         return $http.get(urlBase + '/index');
     };
 
-    BookingService.create = function (cust) {
-        return $http.post(urlBase + '/create', cust);
+    service.save = function (cust, id = null) {
+        if(id) {
+            return $http.post(urlBase + '/save/' + cust.id, cust)
+        } else {
+            return $http.post(urlBase + '/save', cust)
+        }
+        
     };
 
-    BookingService.update = function (cust) {
-        return $http.put(urlBase + '/update/' + cust.id, cust)
-    };
-
-    BookingService.delete = function (id) {
+    service.delete = function (id) {
         return $http.delete(urlBase + '/delete/' + id);
     };
 
-    return BookingService;
+    return service;
 }]);

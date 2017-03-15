@@ -2,13 +2,13 @@ angular.module('MetronicApp')
     .factory('CommentService', ['$http', '$rootScope', 'Upload', function($http, $rootScope, Upload) {
 
     var urlBase = $rootScope.settings.apiPath + 'comment';
-    var CommentService = {};
+    var service = {};
 
-    CommentService.getAll = function () {
+    service.getAll = function () {
         return $http.get(urlBase + '/index');
     };
 
-    CommentService.create = function (img,  cust) {
+    service.create = function (img,  cust) {
         return Upload.upload({
             url: urlBase + '/create',
             data: {
@@ -18,7 +18,7 @@ angular.module('MetronicApp')
         });
     };
 
-    CommentService.update = function (img, cust) {
+    service.update = function (img, cust) {
         return Upload.upload({
             url: urlBase + '/update/' + cust.id,
             data: {
@@ -28,9 +28,9 @@ angular.module('MetronicApp')
         });
     };
 
-    CommentService.delete = function (id) {
+    service.delete = function (id) {
         return $http.delete(urlBase + '/delete/' + id);
     };
 
-    return CommentService;
+    return service;
 }]);

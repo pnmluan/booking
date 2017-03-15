@@ -46,14 +46,14 @@ angular.module('MetronicApp').controller('EntranceTicketController', function($r
                         $scope.mItem.category_ticket_id = $scope.optionCategoryTicket.selected.id;
                         $scope.mItem.status = $scope.optionStatus.selected.id;
 
-                        EntranceTicketService.create($scope.mItem).then(function(res) {
+                        EntranceTicketService.save($scope.mItem).then(function(res) {
 
-                            if (res.data.status == 'success') {
+                            if (res.status == 200) {
 
                                 var params = {
                                     entrance_ticket_id: res.data.data.id
                                 };
-                                AlbumTicketService.create($scope.imgs, params).then(function(res) {
+                                AlbumTicketService.save($scope.imgs, params).then(function(res) {
 
 
                                 });
@@ -200,9 +200,9 @@ angular.module('MetronicApp').controller('EntranceTicketController', function($r
                     }
                     
                     
-                    EntranceTicketService.update($scope.mItem).then(function(res) {
+                    EntranceTicketService.save($scope.mItem, $scope.mItem.id).then(function(res) {
 
-                        if (res.data.status == 'success') {
+                        if (res.status == 200) {
                             var imgs = [];
                             angular.forEach($scope.imgs, function(value, key) {
                                 if (typeof value === 'object') {
@@ -267,7 +267,7 @@ angular.module('MetronicApp').controller('EntranceTicketController', function($r
         }).then(function() {
 
             EntranceTicketService.delete(id).then(function(res) {
-                if (res.data.status == 'success') {
+                if (res.status == 200) {
                     toastr.success('Deleted an item', 'Success');
                     $scope.dtInstance.reloadData();
                 }
@@ -312,7 +312,7 @@ angular.module('MetronicApp').controller('EntranceTicketController', function($r
                     xhr.setRequestHeader('Authorization', "Basic " + $base64.encode('datvesieure' + ":" + 'balobooking'));
                 },
                 data: params,
-                url: $rootScope.settings.apiPath + table + '/index',
+                url: $rootScope.settings.apiPath + table + '/index?has_data_table=1',
                 type: 'GET',
             }).withDataProp('data')
             .withOption('processing', true)

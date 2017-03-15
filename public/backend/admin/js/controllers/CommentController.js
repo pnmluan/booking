@@ -38,7 +38,7 @@ angular.module('MetronicApp').controller('CommentController', function($rootScop
                     $scope.mItem.status = $scope.optionStatus.selected.id;
                     CommentService.create($scope.img, $scope.mItem).then(function(res) {
 
-                        if(res.data.status == 'success') {
+                        if(res.status == 200) {
                             data.dtInstance.reloadData();
                             $scope.mItem = {};
                             toastr.success('Added an item', 'Success');
@@ -113,7 +113,7 @@ angular.module('MetronicApp').controller('CommentController', function($rootScop
                     $scope.mItem.status = $scope.optionStatus.selected.id;
                     CommentService.update($scope.img, $scope.mItem).then(function(res) {
 
-                        if(res.data.status == 'success') {
+                        if(res.status == 200) {
                             data.dtInstance.reloadData();
                             ngDialog.close();
                             toastr.success('Updated an item', 'Success');
@@ -162,7 +162,7 @@ angular.module('MetronicApp').controller('CommentController', function($rootScop
         }).then(function() {
 
             CommentService.delete(id).then(function(res) {
-                if(res.data.status == 'success') {
+                if(res.status == 200) {
                     toastr.success('Deleted an item', 'Success');
                     $scope.dtInstance.reloadData();
                 }
@@ -195,7 +195,7 @@ angular.module('MetronicApp').controller('CommentController', function($rootScop
                     xhr.setRequestHeader('Authorization',"Basic " + $base64.encode('datvesieure' + ":" + 'balobooking'));
                 },
                 data: params,
-                url: $rootScope.settings.apiPath + table + '/index',
+                url: $rootScope.settings.apiPath + table + '/index?has_data_table=1',
                 type: 'GET',
         }).withDataProp('data')
             .withOption('processing',true)

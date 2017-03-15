@@ -2,13 +2,13 @@ angular.module('MetronicApp')
     .factory('NewsService', ['$http', '$rootScope', 'Upload', function($http, $rootScope, Upload) {
 
     var urlBase = $rootScope.settings.apiPath + 'news';
-    var NewsService = {};
+    var service = {};
 
-    NewsService.getAll = function () {
+    service.getAll = function () {
         return $http.get(urlBase + '/index');
     };
 
-    NewsService.create = function (img,  cust) {
+    service.create = function (img,  cust) {
         return Upload.upload({
             url: urlBase + '/create',
             data: {
@@ -18,7 +18,7 @@ angular.module('MetronicApp')
         });
     };
 
-    NewsService.update = function (img, cust) {
+    service.update = function (img, cust) {
         return Upload.upload({
             url: urlBase + '/update/' + cust.id,
             data: {
@@ -28,9 +28,9 @@ angular.module('MetronicApp')
         });
     };
 
-    NewsService.delete = function (id) {
+    service.delete = function (id) {
         return $http.delete(urlBase + '/delete/' + id);
     };
 
-    return NewsService;
+    return service;
 }]);

@@ -35,7 +35,7 @@ export class ProviderDataService {
 		let headers = new Headers();
 		this.createAuthorizationHeader(headers);
 		return this._Http.get(this.actionUrl + 'show/' + id, {
-			headers: headers, withCredentials: true
+			headers: headers
 		})
 			.map(res => res.json())
 			.catch(this.handleError);

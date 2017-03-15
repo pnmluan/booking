@@ -1,0 +1,50 @@
+<div class="modal-header">
+    <h4 class="modal-title">Update Article</h4>
+</div>
+<div class="modal-body">
+    <div class="portlet-body form">
+        <form role="form">
+            <div class="form-body">
+                <div class="form-group dropzone dropzone-file-area" ngf-drop ngf-select ng-model="imgs" ngf-multiple="true" ngf-drag-over-class="'dragover'" ngf-allow-dir="true" style="width: 100%; height: 100%" accept="image/*" ngf-pattern="'image/*'" ngf-max-size="2MB" multiple ngf-keep="'distinct'">
+                    <div>
+                        <h3 class="sbold" ng-if="!imgs && !imgs.$error">Drop files here <br/> or click to upload</h3>
+                        <div ng-repeat="img in imgs track by $index" class="dz-preview dz-processing dz-image-preview dz-success dz-complete">
+                          <div class="dz-image">
+                            <i class="fa fa-times" aria-hidden="true" ng-click="removeImg($event, img, $index)"></i>
+                            <img ngf-src="!img.$error && img">
+                          </div>
+                        </div>
+                        
+                    </div>
+                </div>
+                <div class="form-group form-md-line-input form-md-floating-label" ng-class="{'has-error': errorMsg.title.length}">
+                    <input type="text" class="form-control edited" ng-model="mItem.title">
+                    <label for="form_control_1">Title</label>
+                    <span ng-show="errorMsg.title.length" class="help-block">{{ errorMsg.title[0] }}</span>
+                </div>
+                <div class="form-group form-md-line-input form-md-floating-label">
+                    <select class="form-control edited" ng-model="optionCategory.selected" ng-options="option.name for option in optionCategory track by option.id"></select>
+                    <label for="form_control_1">Category</label>
+                </div>
+                
+                <div class="form-group form-md-line-input form-md-floating-label">
+                    <textarea class="form-control edited" ng-model="mItem.description"></textarea>
+                    <label for="form_control_1">Description</label>
+                </div>
+                <div class="form-group form-md-line-input form-md-floating-label">
+                    <textarea type="text" class="form-control edited" ng-model="mItem.content" name="editor1" id="editor1" rows="10" cols="80" ck-editor></textarea>
+                    <label for="form_control_1">Content</label>
+                </div>
+
+                <div class="form-group form-md-line-input form-md-floating-label">
+                    <select class="form-control edited" ng-model="optionStatus.selected" ng-options="option.name for option in optionStatus track by option.id"></select>
+                    <label for="form_control_1">Status</label>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+<div class="modal-footer">
+    <button type="button" class="btn default" data-dismiss="modal" ng-click="close()">Close</button>
+    <button type="button" class="btn blue" ng-click="save()">Save</button>
+</div>

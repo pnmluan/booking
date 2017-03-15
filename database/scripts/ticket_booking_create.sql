@@ -237,7 +237,6 @@ CREATE TABLE entrance_ticket (
 CREATE TABLE ticket_bill (
     id int NOT NULL AUTO_INCREMENT,
 	code varchar(10) NOT NULL,
-    departure datetime NOT NULL,
     total_fare float NOT NULL,
     contact_id int NOT NULL,
     comment varchar(500) NOT NULL,
@@ -254,6 +253,7 @@ CREATE TABLE ticket_detail (
     id int NOT NULL AUTO_INCREMENT,
     adult int NOT NULL,
     entrance_ticket_id int NOT NULL,
+	departure datetime NOT NULL,
     children int NOT NULL,
     ticket_bill_id int NOT NULL,
 	created_at datetime NULL,

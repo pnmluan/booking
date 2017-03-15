@@ -2,23 +2,24 @@ angular.module('MetronicApp')
     .factory('CategoryTicketService', ['$http', '$rootScope', function($http, $rootScope) {
 
     var urlBase = $rootScope.settings.apiPath + 'category_ticket';
-    var CategoryTicketService = {};
+    var service = {};
 
-    CategoryTicketService.getAll = function (params = null) {
+    service.getAll = function (params = null) {
         return $http.get(urlBase + '/index?'+ params);
     };
 
-    CategoryTicketService.create = function (cust) {
-        return $http.post(urlBase + '/create', cust);
+    service.save = function (cust, id = null) {
+        if(id) {
+            return $http.post(urlBase + '/save/' + cust.id, cust)
+        } else {
+            return $http.post(urlBase + '/save', cust)
+        }
+        
     };
 
-    CategoryTicketService.update = function (cust) {
-        return $http.put(urlBase + '/update/' + cust.id, cust)
-    };
-
-    CategoryTicketService.delete = function (id) {
+    service.delete = function (id) {
         return $http.delete(urlBase + '/delete/' + id);
     };
 
-    return CategoryTicketService;
+    return service;
 }]);

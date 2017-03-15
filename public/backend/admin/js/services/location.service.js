@@ -2,23 +2,24 @@ angular.module('MetronicApp')
     .factory('LocationService', ['$http', '$rootScope', function($http, $rootScope) {
 
     var urlBase = $rootScope.settings.apiPath + 'location';
-    var LocationService = {};
+    var service = {};
 
-    LocationService.getAll = function () {
+    service.getAll = function () {
         return $http.get(urlBase + '/index');
     };
 
-    LocationService.create = function (cust) {
-        return $http.post(urlBase + '/create', cust);
+    service.save = function (cust, id = null) {
+        if(id) {
+            return $http.post(urlBase + '/save/' + cust.id, cust)
+        } else {
+            return $http.post(urlBase + '/save', cust)
+        }
+        
     };
 
-    LocationService.update = function (cust) {
-        return $http.put(urlBase + '/update/' + cust.id, cust)
-    };
-
-    LocationService.delete = function (id) {
+    service.delete = function (id) {
         return $http.delete(urlBase + '/delete/' + id);
     };
 
-    return LocationService;
+    return service;
 }]);
