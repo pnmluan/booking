@@ -16,21 +16,107 @@ use Illuminate\Http\Exception\HttpResponseException;
 class CommentController extends Controller{
     private $path = 'backend/assets/apps/img/comment';
 
-    public function index(Request $request){
+    /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->table = 'comment';
+        $this->columns = \DB::getSchemaBuilder()->getColumnListing($this->table);
+    }
 
-        $data = Comment::listItems($request->all());
-        return response()->json($data);
+
+    /**
+     * Get info users for datatables
+     *
+     * @param \Illuminate\Http\Request $request
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function index(Request $request){
+        $params = $request->all();
+        if(isset($request['has_data_table']) && $request['has_data_table']) {
+            $data = Comment::listItems($params);
+            return $data;
+        } else {
+
+            $columns  = $this->columns;
+
+            $limit          = 5000;
+            $offset         = 0;
+
+            $alias = 'MT';
+            $alias_dot = $alias . '.';
+            $select         = $alias_dot . '*';
+            $query = \DB::table($this->table . ' AS ' . $alias)
+                        ->select($select);
+            /*==================================================
+             * Filter Data
+             *==================================================*/
+            foreach ($columns as $field) {
+                if(isset($params[$field]) || !empty($params[$field])){
+                    if(is_array($params[$field])){
+                        $query->where($alias_dot . $field, 'IN', $params[$field]);
+                    }else{
+                        switch ($field) {
+                            case 'status':
+                                $query->where($alias_dot . $field, '=', $params[$field]);
+                                break;
+                            default:
+                                $query->where($alias_dot . $field, 'LIKE', '%' . $params[$field] . '%');
+                                break;
+                        }
+                    }
+                }
+            }
+
+            /*==================================================
+             * Limit & Offset
+             *==================================================*/
+            $limit = (isset($params['limit']) || !empty($params['limit']))?$params['limit']:$limit;
+            $offset = (isset($params['offset']) || !empty($params['offset']))?$params['offset']:$offset;
+
+
+            /*==================================================
+             * Process Query
+             *==================================================*/
+            $query->limit($limit)->offset($offset);
+            $data = $query->get()->toArray();
+            $total_data = count($data);
+            /*==================================================
+             * Response Data
+             *==================================================*/
+            return new JsonResponse([
+                'message' => 'list_data',
+                'total' => $total_data,
+                'data' => $data
+            ]);
+        }
 
     }
 
+    /**
+     * Get authenticated user.
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function show($id) {
 
-        $comment  = Comment::find($id);
+        $model  = Comment::find($id);
 
-        if (!$comment) {
-            return $this->respondNotFound();
+        if (empty($model)) {
+            return new JsonResponse([
+                'message' => 'no_data',
+            ]);
         }
-        return $this->respondWithSuccess(['data'=>$comment]);
+
+        return new JsonResponse([
+            'message' => 'get_detail',
+            'data' => $model
+        ]);
+
     }
 
     protected function uploadImage($image) {
@@ -47,33 +133,75 @@ class CommentController extends Controller{
 
     }
 
-    public function create(Request $request){
-        $comment = new Comment();
+    /**
+     * Create/Update record into DB.
+     *
+     * @return JsonResponse
+     */
+    public function save(Request $request, $id = null){
         $data = $request['data'];
-
         $img = $this->uploadImage($request->file('img'));
-        if($img) {
-            $data['img'] = $img;
+
+        if(!empty($id)) {
+
+            $model = Comment::find($id);
+            if (!$model) {
+                return new JsonResponse([
+                    'message' => 'no_data',
+                ]);
+            }
+            if($img) {
+                $filename = $this->path . '/' . $model->img;
+                if(file_exists($filename)) {
+                    unlink($filename);
+                }
+                $data['img'] = $img;
+            }
+
+            
+        } else {
+            $model = new Comment();
+            
+            if($img) {
+                $data['img'] = $img;
+            }
         }
+        
 
-        $comment->fill($data);
+        $model->fill($data);
 
-        if (!$comment->isValid()) {
-            return $this->respondWithError(['error' => $comment->getValidationErrors()]);
+        if (!$model->isValid()) {
+            return new JsonResponse([
+                'message' => 'invalid',
+                'error' => $model->getValidationErrors()
+            ]);
         }
         try {
-            $comment->save();
+            $model->save();
         } catch (\Exception $ex) {
-            return $this->respondWithNotSaved();
+            return new JsonResponse([
+                'message' => 'exception',
+                'error' => $ex->getMessage()
+            ]);
         }
-        return $this->respondWithCreated(['data'=>$comment]);
+        return new JsonResponse([
+            'message' => 'created',
+            'data' => $model
+        ]);
     }
 
+    /**
+     * Remove record into DB.
+     *
+     * @return JsonResponse
+     */
     public function delete($id){
 
-        $comment  = Comment::find($id);
-        if (!$comment) {
-            return $this->respondNotFound();
+        $model  = Comment::find($id);
+        if (!$model) {
+            return new JsonResponse([
+                'message' => 'no_data',
+            ]);
         }
         try {
             $filename = $this->path . '/' . $comment->img;
@@ -81,44 +209,23 @@ class CommentController extends Controller{
                 unlink($filename);
             }
 
-            if (!$comment->delete()) {
-                return $this->respondWithError();
+            if (!$model->delete()) {
+                return new JsonResponse([
+                    'message' => 'exception',
+                    'error' => 'can not delete'
+                ]);
             }
         } catch (\Exception $ex) {
-            return $this->respondWithError(['error' => $ex->getMessage()]);
+            return new JsonResponse([
+                'message' => 'exception',
+                'error' => $ex->getMessage()
+            ]);
         }
-        return $this->respondWithSuccess(['record_id'=>$id]);
+        return new JsonResponse([
+            'message' => 'deleted',
+            'rercord_id' => $id
+        ]);
     }
 
-    public function update(Request $request, $id){
-
-        $comment = Comment::find($id);
-        if(!$comment) {
-            return $this->respondNotFound();
-        }
-        $data = $request['data'];
-        $img = $this->uploadImage($request->file('img'));
-        if($img) {
-            $filename = $this->path . '/' . $comment->img;
-            if(file_exists($filename)) {
-                unlink($filename);
-            }
-            
-            $data['img'] = $img;
-        }
-
-        $comment->fill($data);
-
-        if (!$comment->isValid()) {
-            return $this->respondWithError(['error' => $comment->getValidationErrors()]);
-        }
-        try {
-            $comment->save();
-        } catch (\Exception $ex) {
-            return $this->respondWithNotSaved();
-        }
-
-        return $this->respondWithSaved(['data'=>$comment]);
-    }
 }
 ?>

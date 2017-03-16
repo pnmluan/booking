@@ -19,7 +19,7 @@ angular.module('MetronicApp').controller('AuthController', function($rootScope, 
 
     $scope.onLogin = function() {
         AuthService.login($scope.mItem).then(function(res) {
-            console.log(res)
+            console.log(res.data.data.token)
             if(res.status == 200) {
                 $rootScope.settings.token = res.data.data.token;
                 localStorage.setItem('token', res.data.data.token);
