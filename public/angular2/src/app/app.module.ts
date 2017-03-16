@@ -95,7 +95,7 @@ import { ListTicketComponent, DetailTicketComponent, DetailTicketPhotoComponent,
     //   provide: LOCAL_STORAGE_SERVICE_CONFIG, useValue: localStorageServiceConfig
     // }
   ],
-  entryComponents: [ DetailTicketPhotoComponent ],
+  entryComponents: [ BannerComponent, DetailTicketPhotoComponent ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

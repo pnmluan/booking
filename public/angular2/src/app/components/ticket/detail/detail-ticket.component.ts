@@ -19,6 +19,7 @@ declare let moment: any;
   templateUrl: './detail-ticket.component.html',
   providers: [ EntranceTicketDataService ]
 })
+
 export class DetailTicketComponent implements OnInit {
 	private subscriptionEvents: Subscription;
 	private subscriptionParam: Subscription;

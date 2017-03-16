@@ -117,6 +117,8 @@ class EntranceTicketController extends Controller{
                 'message' => 'no_data',
             ]);
         }
+        // Add album_ticket
+        $model->album = \DB::table('album_ticket')->where('entrance_ticket_id', $model->id)->get();
 
         return new JsonResponse([
             'message' => 'get_detail',

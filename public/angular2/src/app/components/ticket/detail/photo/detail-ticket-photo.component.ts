@@ -3,7 +3,7 @@ import { Component, Input, OnInit, AfterViewInit } from '@angular/core';
 declare let jQuery: any;
 
 @Component({
-	selector: 'detail-ticket-photo',
+	selector: 'app-detail-ticket-photo',
 	templateUrl: './detail-ticket-photo.component.html',
 })
 
@@ -18,7 +18,6 @@ export class DetailTicketPhotoComponent implements OnInit {
 	}
 
 	loadScript(){
-		console.log('loaded');
 		setTimeout(() => {
 			function photosGallery() {
 				var sync1 = jQuery("#sync1");

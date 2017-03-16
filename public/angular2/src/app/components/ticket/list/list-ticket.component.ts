@@ -62,7 +62,6 @@ export class ListTicketComponent implements OnInit {
 					};
 
 					categoryTicketOptions.push(temp);
-
 				}
 				this.categoryTicketOptions = categoryTicketOptions;
 			}
@@ -70,18 +69,18 @@ export class ListTicketComponent implements OnInit {
   	}
 
   	initData() {
-  		this.search['category_ticket_id'] = this.queryParams['category_ticket_id'];
-		console.log(this.search['category_ticket_id']);
+  		//get entrance ticket
+  		this.search['category_ticket_id'] = this.queryParams['category_ticket_id'] || '';
 		let params: URLSearchParams = new URLSearchParams();
 		params.set('category_ticket_id', this.search['category_ticket_id']);
-			// params.set('round_trip', this.session_flight['round_trip']);
 		this._EntranceTicketDataService.getAll(params).subscribe(res => {
 			let listItem = [];
 			if (res.data) {
 				for (let key in res.data) {
+					let images = res.data[key].album[0];
+					res.data[key].img = images.img ? this.imgPath + images.img : '';
 					res.data[key].order = 1;
 					listItem.push(res.data[key]);
-
 				}
 				this.listItem = listItem;
 			}
@@ -122,8 +121,6 @@ export class ListTicketComponent implements OnInit {
 				} else {
 					gotoY = 117;
 				}
-
-
 
 				jQuery(window).resize(function() {
 					if (jQuery(window).width() < 1200) {
@@ -166,15 +163,16 @@ export class ListTicketComponent implements OnInit {
 				jQuery('.item-inner > a').height(a * 10 / 16);
 			}
 			
-		},500)
+		},800)
   	}
 
   	/*=================================
 	 * Search Ticket
 	 *=================================*/
 	onSearch() {
+		//reset list item
+		this.listItem = [];
 		this._Router.navigate(['list-tickets'],{ queryParams : this.search });
-		this.initData();
 	}
 
 	/*=================================

@@ -1,4 +1,4 @@
-import { Component, OnInit, AfterViewInit, ViewChild } from '@angular/core';
+import { Component, OnInit, AfterViewInit, ViewChild, ViewContainerRef, ComponentFactoryResolver } from '@angular/core';
 import { Router } from '@angular/router';
 import {
 	FormControl,
@@ -10,22 +10,22 @@ import { SelectModule } from 'angular2-select';
 import { UUID } from 'angular2-uuid';
 import { ModalComponent } from 'ng2-bs3-modal/ng2-bs3-modal';
 import { Subscription } from 'rxjs/Rx';
-
-
-
 import { Configuration } from '../../shared/app.configuration';
-import { LocationDataService, CategoryTicketDataService } from '../../shared';
+import { LocationDataService, CategoryTicketDataService, BannerDataService } from '../../shared';
+import { BannerComponent } from './banner/banner.component';
+
 declare let jQuery: any;
 declare let moment: any;
-
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
-  providers: [ LocationDataService, CategoryTicketDataService]
+  providers: [ LocationDataService, CategoryTicketDataService, BannerDataService ]
 })
 export class HomeComponent implements OnInit, AfterViewInit {
 	@ViewChild('warning') warning: ModalComponent;
+	@ViewChild('banner', {read: ViewContainerRef }) banner: ViewContainerRef;
+
 	private subscriptionEvents: Subscription;
 	Filter = {};
 	filterTicket = {};
@@ -40,11 +40,14 @@ export class HomeComponent implements OnInit, AfterViewInit {
 	filter_to_date: any;
 	datepickerOptions = { format: this._Configuration.viFormatDate, autoApply: true, locate: 'vi', style: 'big' };
 	constructor(
-		private _LocationDataService: LocationDataService, 
+		private _LocationDataService: LocationDataService,
+		private _BannerDataService: BannerDataService,
 		private _Configuration: Configuration,
 		private _CategoryTicketDataService: CategoryTicketDataService, 
 		private sessionStorage: LocalStorageService,
-		private _Router: Router) { 
+		private _Router: Router,
+		private _componentFactoryResolver: ComponentFactoryResolver
+	) { 
 
 		this.subscriptionEvents = this._Router.events.subscribe((val) => {
 			let routing = this._Router.url;
@@ -59,6 +62,11 @@ export class HomeComponent implements OnInit, AfterViewInit {
 
 	// initialize data
 	initData() {
+		//load banner
+		this.banner.clear();
+		let childComponent = this._componentFactoryResolver.resolveComponentFactory(BannerComponent);
+		this.banner.createComponent(childComponent);
+
 		this.Filter['round_trip'] = 'off';
 		// Location Options
 		this._LocationDataService.getAll().subscribe(res => {
@@ -126,30 +134,11 @@ export class HomeComponent implements OnInit, AfterViewInit {
 		}
 		this.infantOptions = infantOptions;
 
-		setTimeout(function() {
-			jQuery('.owl-carousel.customer-comment').owlCarousel({
-				navigation: false,
-				slideSpeed: 300,
-				paginationSpeed: 400,
-				singleItem: true,
-				autoPlay: 5000
-			});
-
-			jQuery('.owl-carousel-home-slider').owlCarousel({
-				navigation: true,
-				slideSpeed: 300,
-				paginationSpeed: 400,
-				singleItem: true,
-				autoPlay: 5000,
-				transitionStyle: "fade",
-				pagination: false
-			});
-
-			jQuery('.date').datetimepicker({
-				format: 'DD/MM/YYYY',
-				allowInputToggle: true
-			});
-		}, 500);
+		
+		jQuery('.date').datetimepicker({
+			format: 'DD/MM/YYYY',
+			allowInputToggle: true
+		});
 	}
 	
 
