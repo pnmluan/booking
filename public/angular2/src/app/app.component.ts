@@ -108,6 +108,10 @@ export class AppComponent {
 				format: _Configuration.viFormatDate,
 			});
 
+		}, 1000);
+
+		setTimeout(() => {
+
 			jQuery("html").niceScroll({
 				cursorcolor: "#ccc",
 				cursorborder: "0px solid #fff",
@@ -121,7 +125,7 @@ export class AppComponent {
 				autohidemode: false
 			});
 
-		}, 1000);                                                                                                                                                                                                                                                                                                                                                                                                                                                                    
+		}, 200);                                                                                                                                                                                                                                                                                                                                                                                                                                                                    
 		
 	}
 

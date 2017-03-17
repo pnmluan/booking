@@ -66,6 +66,13 @@ export class DetailTicketPhotoComponent implements OnInit {
 					sync1.trigger("owl.goTo", number);
 				});
 
+				jQuery('#sync2 .owl-item').matchHeight({
+					byRow: true,
+					property: 'height',
+					target: null,
+					remove: false
+				});
+
 				function center(number) {
 					var sync2visible = sync2.data("owlCarousel").owl.visibleItems;
 
@@ -98,9 +105,3 @@ export class DetailTicketPhotoComponent implements OnInit {
 	}
 }
 
-// jQuery('#sync2 .owl-item').matchHeight({
-//                                     byRow: true,
-//                                     property: 'height',
-//                                     target: null,
-//                                     remove: false
-//                                 });
