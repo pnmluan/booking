@@ -9,10 +9,10 @@
                             <h1 class="title">{{ Ticket.name }}</h1>
                             <p class="line"></p>
                             <div class="desc">{{ Ticket.description }}</div>
-                            <div class="price">
+                            <!-- <div class="price">
                                 <del><span class="amount">{{ Ticket.adult_fare | number }} VNĐ</span></del>
                                 <ins><span class="amount">{{ Ticket.children_fare | number }} VNĐ</span></ins>
-                            </div>
+                            </div> -->
                         </div>
                         <!-- End Tour info -->
 
@@ -193,7 +193,7 @@
                 </div>
                 <div class="tour-details-r">
                     <div class="tour-details-r-inner">
-                        <h3>Ưu đãi phút chót</h3>
+                        <h3>Vé tham quan khác</h3>
                         <div>
                             <ul>
                                 <li *ngFor="let item of listItem">
