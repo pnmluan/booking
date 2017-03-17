@@ -43,8 +43,13 @@ export class CartTicketComponent implements OnInit {
 		let self = this,
 			Configuration = this._Configuration;
 
-		jQuery('.daterange-single').datetimepicker({
+		/*jQuery('.daterange-single').datetimepicker({
 			format: Configuration.viFormatDate
+		});*/
+
+		jQuery('.daterange-single').datepicker({
+			firstDay: 1,
+			minDate: 0
 		});
 	}
 	/*=================================
