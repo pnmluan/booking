@@ -120,7 +120,8 @@ textarea:-moz-placeholder { color: #a9a9a9; }
 @font-face {font-family: 'diavlo'; src: url('../fonts/Diavlo_MEDIUM.otf');}
 @font-face {font-family: 'diavlo-book'; src: url('../fonts/Diavlo_BOOK.otf');}
 
-.form-control { border-radius: 3px; box-shadow: none; }
+.form-control { border-radius: 0px; box-shadow: none; padding: 5px 12px; height: 32px; }
+.btn { border-radius: 0px; padding: 5px 12px; }
 .input-group-addon { border-radius: 2px; }
 .form-group { margin-bottom: 0px; }
 
@@ -1102,7 +1103,7 @@ only screen and (max-width: 767px) {
 .tours-filter-inner { border: 1px solid #ddd; }
 .tours-filter-inner .results-founded { height: 45px; line-height: 45px; color: #fff; background: #649931; padding: 0px 15px; font-size: 18px; }
 .tours-filter-inner .g-field { padding: 25px 15px 20px 15px; }
-.btn-search-tour { font-size: 16px; width: 100%; height: 34px; background: #649931; color: #fff; text-transform: uppercase; border-radius: 0px;  }
+.btn-search-tour { font-size: 16px; width: 100%; height: 32px; background: #649931; color: #fff; text-transform: uppercase; border-radius: 0px;  }
 .btn-search-tour:hover { color: #fff; }
 
 .tours-main { width: calc(100% - 300px); float: left; }
@@ -1383,6 +1384,16 @@ only screen and (max-width: 767px) {
     box-shadow: 0px 0px 0px 1px #DE4131;
 }
 
+.widget.widget_shopping_cart .widget_shopping_cart_content p.buttons a.checkout:hover,
+.widget.widget_shopping_cart .widget_shopping_cart_content p.buttons a.checkout:focus ,
+.widget.widget_shopping_cart .widget_shopping_cart_content p.buttons a.checkout:active,
+.widget.widget_shopping_cart .widget_shopping_cart_content p.buttons a.button:hover,
+.widget.widget_shopping_cart .widget_shopping_cart_content p.buttons a.button:focus,
+.widget.widget_shopping_cart .widget_shopping_cart_content p.buttons a.button:active {
+    text-decoration: none;
+}
+
+
 .shopping-cart-details h1 { text-transform: uppercase; font-weight: bold; font-size: 20px; margin-bottom: 30px; border-left: 5px solid #649931; margin-top: 15px; color: #649931; padding-left: 5px; }
 .table-details table { border-collapse: collapse; }
 .table-details table th { background: #649931; color: #fff; text-align: center; }
@@ -1489,7 +1500,7 @@ only screen and (max-width: 767px) {
 #tab-tour .ui-widget-content .ui-state-default,
 #tab-tour .ui-widget-header .ui-state-default { border: 0px; }
 
-#tab-tour .btn-search-tour { margin-top: 22px;  border-radius: 4px; background: #E77741; }
+#tab-tour .btn-search-tour { margin-top: 22px; background: #E77741; }
 #tab-tour .btn-search-tour:hover { background: #E44803; }
 .cart_anchor { position: relative; }
 .cart_anchor i { font-size: 20px; color: #649931; }
@@ -1537,6 +1548,13 @@ ng-select > div > div.single > div.clear, ng-select > div > div.single > div.tog
 #modalShoppingCart .nicdark_margin020 { margin: 0px; }
 .widget ul li { color: #333; }
 .widget ul li a { color: #649931; }
+
+
+.tour-info .tabset-content { padding-top: 30px; }
+.tour-details-l-inner { border: 1px solid #ddd; padding: 15px; }
+
+#sync2 .item, #sync2 .item img { height: 100%; }
+#sync2 .owl-item { padding: 0px 5px; }
 
 
 
