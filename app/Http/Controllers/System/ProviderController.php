@@ -190,7 +190,7 @@ class ProviderController extends Controller
             ]);
         }
         return new JsonResponse([
-            'message' => 'created',
+            'message' => 'deleted',
             'record_id' => $id
         ]);
     }
