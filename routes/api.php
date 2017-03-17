@@ -511,9 +511,27 @@ $api->version('v1', function ($api) {
         'as' => 'api.ticket_detail.show',
         'uses' => 'App\Http\Controllers\System\TicketDetailController@show',
     ]);
+
+    /*
+    |--------------------------------------------------------------------------
+    | Crawler API
+    |--------------------------------------------------------------------------
+    */
+    $api->post('/airline/vietjet', [
+        'as' => 'api.airline.vietjet',
+        'uses' => 'App\Http\Controllers\TicketCrawlers\AirlineController@vietjet',
+    ]);
+
+    $api->post('/airline/jetstar', [
+        'as' => 'api.airline.jetstar',
+        'uses' => 'App\Http\Controllers\TicketCrawlers\AirlineController@jetstar',
+    ]);
+
+    $api->post('/airline/vna', [
+        'as' => 'api.airline.vna',
+        'uses' => 'App\Http\Controllers\TicketCrawlers\AirlineController@vna',
+    ]);
     
 });
-
-
 
     

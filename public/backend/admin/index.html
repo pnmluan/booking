@@ -102,7 +102,7 @@ License: You must have a valid license purchased only from themeforest(the above
         </div>
         <!-- END CONTAINER -->
         <!-- BEGIN FOOTER -->
-        <div data-ng-include="'tpl/footer.html'" data-ng-controller="FooterController" class="page-footer"> </div>
+        <div ng-if="settings.state != 'login'" data-ng-include="'tpl/footer.html'" data-ng-controller="FooterController" class="page-footer"> </div>
         <!-- END FOOTER -->
         <!-- BEGIN JAVASCRIPTS(Load javascripts at bottom, this will reduce page load time) -->
         <!-- BEGIN CORE JQUERY PLUGINS -->
