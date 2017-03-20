@@ -85,15 +85,6 @@ $api->version('v1', function ($api) {
         | Booking
         |--------------------------------------------------------------------------
         */
-        $api->post('/booking/save', [
-            'as' => 'api.booking.create',
-            'uses' => 'App\Http\Controllers\System\BookingController@save',
-        ]);
-
-        $api->post('/booking/save/{id}', [
-            'as' => 'api.booking.update',
-            'uses' => 'App\Http\Controllers\System\BookingController@save',
-        ]);
 
         $api->delete('/booking/delete/{id}', [
             'as' => 'api.booking.delete',
@@ -225,15 +216,6 @@ $api->version('v1', function ($api) {
         | Ticket Bill
         |--------------------------------------------------------------------------
         */
-        $api->post('/ticket_bill/save', [
-            'as' => 'api.ticket_bill.create',
-            'uses' => 'App\Http\Controllers\System\TicketBillController@save',
-        ]);
-
-        $api->post('/ticket_bill/save/{id}', [
-            'as' => 'api.ticket_bill.update',
-            'uses' => 'App\Http\Controllers\System\TicketBillController@save',
-        ]);
 
         $api->delete('/ticket_bill/delete/{id}', [
             'as' => 'api.ticket_bill.delete',
@@ -258,15 +240,6 @@ $api->version('v1', function ($api) {
         'uses' => 'App\Http\Controllers\System\UserController@show',
     ]);
 
-
-
-    /*
-    |--------------------------------------------------------------------------
-    | Mail
-    |--------------------------------------------------------------------------
-    */
-    $api->post('mail/sendInfoPayment','MailController@sendInfoPayment');
-    $api->post('mail/sendEntranceTicketPayment','MailController@sendEntranceTicketPayment');
 
     /*
     |--------------------------------------------------------------------------
@@ -510,6 +483,93 @@ $api->version('v1', function ($api) {
     $api->get('/ticket_detail/show/{id}', [
         'as' => 'api.ticket_detail.show',
         'uses' => 'App\Http\Controllers\System\TicketDetailController@show',
+    ]);
+
+
+    /*
+    |--------------------------------------------------------------------------
+    | Saving Booking
+    |--------------------------------------------------------------------------
+    */
+    $api->post('/booking/save', [
+        'as' => 'api.booking.create',
+        'uses' => 'App\Http\Controllers\System\BookingController@save',
+    ]);
+
+    $api->post('/booking/save/{id}', [
+        'as' => 'api.booking.update',
+        'uses' => 'App\Http\Controllers\System\BookingController@save',
+    ]);
+
+    $api->post('/contact/save', [
+        'as' => 'api.contact.create',
+        'uses' => 'App\Http\Controllers\System\ContactController@save',
+    ]);
+
+    $api->post('/contact/save/{id}', [
+        'as' => 'api.contact.update',
+        'uses' => 'App\Http\Controllers\System\ContactController@save',
+    ]);
+
+    $api->post('/passenger/save', [
+        'as' => 'api.passenger.create',
+        'uses' => 'App\Http\Controllers\System\PassengerController@save',
+    ]);
+
+    $api->post('/passenger/save/{id}', [
+        'as' => 'api.passenger.update',
+        'uses' => 'App\Http\Controllers\System\PassengerController@save',
+    ]);
+
+    $api->post('/booking_detail/save', [
+        'as' => 'api.booking_detail.create',
+        'uses' => 'App\Http\Controllers\System\BookingDetailController@save',
+    ]);
+
+    $api->post('/booking_detail/save/{id}', [
+        'as' => 'api.booking_detail.update',
+        'uses' => 'App\Http\Controllers\System\BookingDetailController@save',
+    ]);
+
+    $api->post('/fare/save', [
+        'as' => 'api.fare.create',
+        'uses' => 'App\Http\Controllers\System\FareController@save',
+    ]);
+
+    $api->post('/fare/save/{id}', [
+        'as' => 'api.fare.update',
+        'uses' => 'App\Http\Controllers\System\FareController@save',
+    ]);
+
+    /*
+    |--------------------------------------------------------------------------
+    | Mail
+    |--------------------------------------------------------------------------
+    */
+    $api->post('mail/sendInfoPayment', [
+        'as' => 'api.mail.airline',
+        'uses' => 'App\Http\Controllers\System\MailController@sendInfoPayment',
+    ]);
+    $api->post('mail/sendEntranceTicketPayment', [
+        'as' => 'api.mail.ticket',
+        'uses' => 'App\Http\Controllers\System\MailController@sendEntranceTicketPayment',
+    ]);
+    // $api->post('mail/sendInfoPayment','MailController@sendInfoPayment');
+    // $api->post('mail/sendEntranceTicketPayment','MailController@sendEntranceTicketPayment');
+
+    /*
+    |--------------------------------------------------------------------------
+    | Ticket
+    |--------------------------------------------------------------------------
+    */
+    $api->post('/ticket_bill/save', [
+        'as' => 'api.ticket_bill.create',
+        'uses' => 'App\Http\Controllers\System\TicketBillController@save',
+    ]);
+
+    $api->post('/ticket_bill/save/{id}', [
+        'as' => 'api.ticket_bill.update',
+        'uses' => 'App\Http\Controllers\System\TicketBillController@save',
     ]);
 
     /*

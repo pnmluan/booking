@@ -23,8 +23,7 @@ export class MailDataService {
 		let headers = new Headers();
 		this.createAuthorizationHeader(headers);
 		return this._Http.post(this.actionUrl + 'sendInfoPayment', params.toString(), {
-			headers: headers,
-			withCredentials: true
+			headers: headers
 		})
 			.map(res => res.json())
 			.catch(this.handleError);
@@ -34,8 +33,7 @@ export class MailDataService {
 		let headers = new Headers();
 		this.createAuthorizationHeader(headers);
 		return this._Http.post(this.actionUrl + 'sendEntranceTicketPayment', params.toString(), {
-			headers: headers,
-			withCredentials: true
+			headers: headers
 		})
 			.map(res => res.json())
 			.catch(this.handleError);

@@ -8,9 +8,15 @@
 
 namespace App\Http\Controllers\System;
 
-
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
+use App\Http\Controllers\Controller;
+use App\Models\News;
+use Illuminate\Http\Request;
+use Illuminate\Http\Response;
+use Illuminate\Http\JsonResponse;
+use Tymon\JWTAuth\Facades\JWTAuth;
+use Tymon\JWTAuth\Exceptions\JWTException;
+use Illuminate\Http\Exception\HttpResponseException;
 
 class MailController extends Controller
 {

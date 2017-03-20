@@ -38,7 +38,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
 	round_trip = 'off';
 	filter_from_date: any;
 	filter_to_date: any;
-	datepickerOptions = { format: this._Configuration.viFormatDate, autoApply: true, locate: 'vi', style: 'big' };
+	datepickerOptions = { format: this._Configuration.viFormatDate, autoApply: true, locate: 'vi', style: 'normal' };
 	constructor(
 		private _LocationDataService: LocationDataService,
 		private _BannerDataService: BannerDataService,

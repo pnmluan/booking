@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Facade;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Routing\ResponseFactory;
 use Illuminate\Cache\MemcachedConnector;
+use Illuminate\Mail\MailServiceProvider;
 use Tymon\JWTAuth\JWTAuth as TymonJWTAuth;
 use Tymon\JWTAuth\Middleware\RefreshToken;
 use Tymon\JWTAuth\Providers\JWT\JWTInterface;
@@ -125,6 +126,22 @@ class LumenJWTServiceProvider extends ServiceProvider
     }
 
     /**
+     * Load mailer.
+     *
+     * @return Closure
+     */
+    protected function loadMailer()
+    {
+        return function ($app) {
+            return $app->loadComponent(
+                'mail',
+                MailServiceProvider::class,
+                'mailer'
+            );
+        };
+    }
+
+    /**
      * Register cookie to application.
      */
     protected function registerCookieComponent()
@@ -221,6 +238,8 @@ class LumenJWTServiceProvider extends ServiceProvider
         $this->registerJwtAuth();
 
         $this->registerJWTFacades();
+
+        $this->loadMailer();
     }
 
     /**
@@ -353,4 +372,5 @@ class LumenJWTServiceProvider extends ServiceProvider
             $this->{"load{$name}Component"}()
         );
     }
+    
 }
