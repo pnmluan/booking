@@ -120,8 +120,9 @@ textarea:-moz-placeholder { color: #a9a9a9; }
 @font-face {font-family: 'diavlo'; src: url('../fonts/Diavlo_MEDIUM.otf');}
 @font-face {font-family: 'diavlo-book'; src: url('../fonts/Diavlo_BOOK.otf');}
 
-.form-control { border-radius: 3px; box-shadow: none; }
-.input-group-addon { border-radius: 2px; }
+.form-control { border-radius: 0px; box-shadow: none; padding: 5px 12px; height: 32px; }
+.btn { border-radius: 0px; padding: 5px 12px; }
+.input-group-addon { border-radius: 0px; }
 .form-group { margin-bottom: 0px; }
 
 .mr10 { margin-right: 10px; }
@@ -389,7 +390,7 @@ ul.footerlist li a:hover{color:#F69E1C; text-decoration:none;}
 
 /*.aside-search-plane { display: table-cell; width: 300px; min-width: 260px; font-size: 13px; }*/
 .aside-search-plane { font-size: 13px; }
-.filter-plane { background: #f9f9f9; border: 1px solid #ddd; border-radius: 3px; margin-bottom: 20px; }
+.filter-plane { background: #f9f9f9; border: 1px solid #ddd; margin-bottom: 20px; }
 .filter-plane h2 { font-family: 'diavlo'; font-size: 20px; padding-bottom: 10px; padding-left: 50px; padding-top: 7px; color: #649931; position: relative;
     background: #fff; /* For browsers that do not support gradients */
     background: -webkit-linear-gradient(#fff, #ccc); /* For Safari 5.1 to 6.0 */
@@ -401,7 +402,7 @@ ul.footerlist li a:hover{color:#F69E1C; text-decoration:none;}
 .filter-plane-inner { padding: 10px 8px; }
 .filter-plane-inner h3 { font-size: 18px; font-family: 'diavlo'; color: #649931; margin-top: 10px; }
 .filter-plane-inner h3 i { font-size: 14px; }
-.filter-plane-inner .box { border: 1px solid #ddd; border-radius: 4px; padding: 0px 7px; background: #fff; margin-top: 10px; }
+.filter-plane-inner .box { border: 1px solid #ddd; padding: 0px 7px; background: #fff; margin-top: 10px; }
 .filter-plane-inner .box table { width: 100%; margin-top: 10px; }
 .filter-plane-inner .box table td { vertical-align: middle; }
 .filter-plane-inner .box table td:last-child { text-align: right; color: #E44803; font-weight: bold; }
@@ -409,9 +410,9 @@ ul.footerlist li a:hover{color:#F69E1C; text-decoration:none;}
 .filter-plane-inner .box table tr a { color: #649931; }
 .filter-plane-inner .box table tr a:hover { color: #F69E1C; }
 
-.search-plane { border-radius: 4px; padding: 10px; background: url("../img/pattern_vang.svg") repeat 0px 0px; margin-bottom: 20px; }
+.search-plane { padding: 10px; background: url("../img/pattern_vang.svg") repeat 0px 0px; margin-bottom: 20px; }
 .search-plane h2 { font-family: 'diavlo'; font-size: 20px; padding-bottom: 15px; background: url(../img/plane-icon.png) no-repeat 0px 0px; padding-left: 50px; padding-top: 5px; color: #649931; }
-.search-plane-inner { background: #fff; border-radius: 5px; padding: 10px; }
+.search-plane-inner { background: #fff; padding: 10px; }
 .search-plane-inner .field { margin-bottom: 10px; }
 .search-plane-inner .field:first-child { font-family: 'diavlo'; }
 .search-plane-inner .field:last-child button { color: #fff; }
@@ -438,7 +439,7 @@ ul.footerlist li a:hover{color:#F69E1C; text-decoration:none;}
 .btn-go-home { background: #ddd; border: 1px solid #ddd; }
 .btn-go-home:hover { background: #ccc; border: 1px solid #ccc; }
 
-.btn-select-flight { color: #fff; background: #E77741; border: 0px; outline: 0px; font-family: 'diavlo'; text-transform: uppercase; padding: 3px 15px; border-radius: 3px; }
+.btn-select-flight { color: #fff; background: #E77741; border: 0px; outline: 0px; font-family: 'diavlo'; text-transform: uppercase; padding: 3px 15px; }
 .btn-select-flight:hover { background: #E44803; }
 .list-plane-table table td:last-child { text-align: center; }
 
@@ -528,7 +529,7 @@ ul.footerlist li a:hover{color:#F69E1C; text-decoration:none;}
 .customer-title-1 { font-weight: bold; margin-bottom: 5px; }
 .luggage-info p span { float: left; margin-right: 10px;}
 .luggage-info p select { border: 1px solid #ddd; float: left; display: inline-block; width: auto; height: 28px; padding: 0px 5px; }
-.customer-info .form-control { height: 28px; padding: 0px 5px; }
+.customer-info .form-control { height: 30px; padding: 0px 5px; }
 
 
 .luggage-info .field > div { float: left; width: calc(100% - 160px); }
@@ -644,11 +645,11 @@ only screen and (max-width: 767px) {
 .submit-customer p { width: calc(100% - 130px); float: left; }
 .submit-customer p a { font-weight: bold; color: #649931; }
 .submit-customer p a:hover { color: #FBBB00; }
-.submit-customer button { float: right; height: 40px; border-radius: 5px; padding: 0px 30px; border: 0px; outline: 0px; text-transform: uppercase;background: #E77741; color: #fff; font-family: 'diavlo'; }
+.submit-customer button { float: right; height: 40px; padding: 0px 30px; border: 0px; outline: 0px; text-transform: uppercase;background: #E77741; color: #fff; font-family: 'diavlo'; }
 .submit-customer button:hover { background: #E44803; }
 
 .aside-price-detail{ font-size: 13px; }
-.price-detail { padding: 15px 10px; background: #649931; color: #fff; border-radius: 3px; box-shadow: 0 1px 3px rgba(0,0,0,.5); }
+.price-detail { padding: 15px 10px; background: #649931; color: #fff; box-shadow: 0 1px 3px rgba(0,0,0,.5); }
 .price-detail h2 { font-size: 18px; font-family: 'diavlo'; border-bottom: 1px solid rgba(255, 255, 255, 0.2); padding-bottom: 10px; color: #fbba00; }
 .price-detail h3 { font-size: 13px; font-family: 'diavlo'; margin-bottom: 5px; color: #fbba00; margin-top: 10px; font-size: 14px; }
 .price-detail > div { border-bottom: 1px solid rgba(255, 255, 255, 0.2); padding-bottom: 10px; padding-top: 10px; }
@@ -665,7 +666,7 @@ only screen and (max-width: 767px) {
 .prev-page button { width: 100%; color: #fff; background: #E77741; }
 .prev-page button:hover { color: #fff; }
 
-.how-to { border-radius: 4px; padding: 10px; padding-top: 20px; background-color: #f9f9f9; margin-bottom: 20px; border: 1px solid #f2f2f2; box-shadow: 0 1px 1px rgba(0,0,0,.05); }
+.how-to { padding: 10px; padding-top: 20px; background-color: #f9f9f9; margin-bottom: 20px; border: 1px solid #f2f2f2; box-shadow: 0 1px 1px rgba(0,0,0,.05); }
 .how-to h3 { color: #649931; font-family: 'diavlo'; font-size: 20px; text-transform: uppercase;  margin-bottom: 10px; padding-bottom: 5px; }
 .how-to ul { background: #fff; padding: 15px; }
 .how-to ul li { margin-bottom: 5px; font-size: 14px; }
@@ -1102,7 +1103,7 @@ only screen and (max-width: 767px) {
 .tours-filter-inner { border: 1px solid #ddd; }
 .tours-filter-inner .results-founded { height: 45px; line-height: 45px; color: #fff; background: #649931; padding: 0px 15px; font-size: 18px; }
 .tours-filter-inner .g-field { padding: 25px 15px 20px 15px; }
-.btn-search-tour { font-size: 16px; width: 100%; height: 34px; background: #649931; color: #fff; text-transform: uppercase; border-radius: 0px;  }
+.btn-search-tour { font-size: 16px; width: 100%; height: 32px; background: #649931; color: #fff; text-transform: uppercase; border-radius: 0px;  }
 .btn-search-tour:hover { color: #fff; }
 
 .tours-main { width: calc(100% - 300px); float: left; }
@@ -1193,7 +1194,7 @@ only screen and (max-width: 767px) {
 .pagi ul li a { display: block; padding: 6px 10px; background: #999; color: #fff; margin: 0px 3px; border-radius: 2px; font-size: 15px; }
 .pagi ul li a.active, .pagi ul li a:hover { background: #DE4131; }
 
-.tours .tours-sort { border: 1px solid #f5f5f5; background: linear-gradient(#fff, #ccc);  padding: 10px 10px; margin-bottom: 20px; }
+.tours .tours-sort { border-top: 1px solid #ddd; border-bottom: 1px solid #ddd; background: #f2f2f2;  padding: 10px 10px; margin: 0px 10px 20px 10px; }
 .tours .tours-sort-l { float: left; }
 .tours .tours-sort-l ul li { float: left; padding-right: 10px; }
 .tours .tours-sort-l ul li select { height: 25px; border: 1px solid #ddd; padding: 0px 5px; width: 90px; }
@@ -1333,10 +1334,10 @@ only screen and (max-width: 767px) {
 .f-tour-view-price .field:last-child button.no { background: #DE4131; }
 .f-tour-view-price .field .field-inner {  }
 .field-select-people { position: relative; }
-.input-select-people { height: 34px; line-height: 32px; border: 1px solid #ccc; border-radius: 3px; cursor: pointer; }
+.input-select-people { height: 32px; line-height: 32px; border: 1px solid #ccc; cursor: pointer; }
 .input-select-people > div { float: left; }
 .input-select-people > div:first-child { width: calc(100% - 40px); float: left; padding-left: 12px; text-align: left; }
-.input-select-people > div:last-child { width: 40px; text-align: center; float: left; border-left: 1px solid #ddd; background: #eee; height: 32px; line-height: 32px; }
+.input-select-people > div:last-child { width: 40px; text-align: center; float: left; border-left: 1px solid #ddd; background: #eee; height: 30px; line-height: 30px; }
 .tbl-select-people { position:  absolute; top: 100%; left: 0px; width: 100%; padding: 10px;  background: #fff; border: 1px solid #ddd; z-index: 99; }
 .tbl-select-people table { width: 100%; }
 .tbl-select-people table td { vertical-align: middle; padding: 5px 0px;  }
@@ -1382,6 +1383,16 @@ only screen and (max-width: 767px) {
     background-color: #DE4131;
     box-shadow: 0px 0px 0px 1px #DE4131;
 }
+
+.widget.widget_shopping_cart .widget_shopping_cart_content p.buttons a.checkout:hover,
+.widget.widget_shopping_cart .widget_shopping_cart_content p.buttons a.checkout:focus ,
+.widget.widget_shopping_cart .widget_shopping_cart_content p.buttons a.checkout:active,
+.widget.widget_shopping_cart .widget_shopping_cart_content p.buttons a.button:hover,
+.widget.widget_shopping_cart .widget_shopping_cart_content p.buttons a.button:focus,
+.widget.widget_shopping_cart .widget_shopping_cart_content p.buttons a.button:active {
+    text-decoration: none;
+}
+
 
 .shopping-cart-details h1 { text-transform: uppercase; font-weight: bold; font-size: 20px; margin-bottom: 30px; border-left: 5px solid #649931; margin-top: 15px; color: #649931; padding-left: 5px; }
 .table-details table { border-collapse: collapse; }
@@ -1489,7 +1500,7 @@ only screen and (max-width: 767px) {
 #tab-tour .ui-widget-content .ui-state-default,
 #tab-tour .ui-widget-header .ui-state-default { border: 0px; }
 
-#tab-tour .btn-search-tour { margin-top: 22px;  border-radius: 4px; background: #E77741; }
+#tab-tour .btn-search-tour { margin-top: 22px; background: #E77741; }
 #tab-tour .btn-search-tour:hover { background: #E44803; }
 .cart_anchor { position: relative; }
 .cart_anchor i { font-size: 20px; color: #649931; }
@@ -1537,6 +1548,15 @@ ng-select > div > div.single > div.clear, ng-select > div > div.single > div.tog
 #modalShoppingCart .nicdark_margin020 { margin: 0px; }
 .widget ul li { color: #333; }
 .widget ul li a { color: #649931; }
+
+
+.tour-info .tabset-content { padding-top: 30px; }
+.tour-details-l-inner { border: 1px solid #ddd; padding: 15px; }
+
+#sync2 .item, #sync2 .item img { height: 100%; }
+#sync2 .owl-item { padding: 0px 5px; }
+ng-select > div { height: 30px; }
+.modal-content, .modal-header { border-radius: 0px; }
 
 
 

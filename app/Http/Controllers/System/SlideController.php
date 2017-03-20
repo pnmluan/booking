@@ -215,7 +215,7 @@ class SlideController extends Controller
             ]);
         }
         return new JsonResponse([
-            'message' => 'created',
+            'message' => 'deleted',
             'rercord_id' => $id
         ]);
     }

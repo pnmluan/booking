@@ -1,6 +1,7 @@
 <div style="float:left; width:100%;" id="post-32" class="post-32 page type-page status-publish hentry">
     <!--start slider-->
-    <section class="home-slider" #banner></section>
+    <div #banner></div>
+    
     <!-- end slider -->
     <section class="nicdark_section vc_row wpb_row vc_row-fluid">
         <div class="nicdark_container nicdark_vc nicdark_clearfix">
@@ -55,9 +56,11 @@
                                                         <div class="col-md-3">
                                                             <div class="field">
                                                                 <span class="field-label">Ngày đi</span>
-                                                                <div class="field-input">
-                                                                    <ng2-datepicker name="from_date" [options]="datepickerOptions" [(ngModel)]="filter_from_date" required></ng2-datepicker>
-                                                                </div>
+                                                                
+                                                                    <ng2-datepicker name="from_date" [options]="datepickerOptions" [(ngModel)]="filter_from_date" required>
+                                                                      <div class="field-input"></div>
+                                                                    </ng2-datepicker>
+                                                                
                                                             </div>
                                                         </div>
                                                         <div class="col-md-3">

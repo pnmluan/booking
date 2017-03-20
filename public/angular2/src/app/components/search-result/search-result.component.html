@@ -4,8 +4,8 @@
         <h4>Vui lòng đợi, hệ thống đang tìm kiếm chuyến bay và mức giá tốt nhất ...</h4>
         <div>
             <h3>
-                {{ search.from_name }}, Việt Nam ({{ search.from }}) 
-                <i class="fa fa-long-arrow-right" aria-hidden="true"></i> 
+                {{ search.from_name }}, Việt Nam ({{ search.from }})
+                <i class="fa fa-long-arrow-right" aria-hidden="true"></i>
                 {{ search.to_name }}, Việt Nam ({{ search.to }})
             </h3>
             <p>
@@ -359,10 +359,10 @@
                                                 <div class="field clearfix">
                                                     <label>Hành lý ký gửi</label>
                                                     <div>
-                                                        <div class="clearfix" *ngFor="let route of listRoutes">
+                                                        <div class="item clearfix" *ngFor="let route of listRoutes">
                                                             <span>{{ route.direction_vi }} :&nbsp;</span>
-                                                            <div class="item">
-                                                                <ng-select 
+                                                            <div>
+                                                                <ng-select
                                                                 name="from_baggage" [(ngModel)]="p[route.direction].baggage_type_id" [options]="route.baggageOptions" [noFilter]="11"
                                                                 (selected)="onChangeBaggageType($event, 'from')">
                                                                 </ng-select>
@@ -375,8 +375,8 @@
                                                                 (selected)="onChangeBaggageType($event, 'to')">
                                                                 </ng-select>
                                                             </div>
-                                                            
-                                                            
+
+
                                                         </div> -->
                                                     </div>
                                                 </div>

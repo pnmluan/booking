@@ -33,9 +33,8 @@ export class BookingDataService {
 	public create(params) {
 		let headers = new Headers();
 		this.createAuthorizationHeader(headers);
-		return this._Http.post(this.actionUrl + 'create', params.toString(), {
-			headers: headers,
-			withCredentials: true
+		return this._Http.post(this.actionUrl + 'save', params.toString(), {
+			headers: headers
 		})
 			.map(res => res.json())
 			.catch(this.handleError);

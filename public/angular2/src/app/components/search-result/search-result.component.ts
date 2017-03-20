@@ -737,7 +737,7 @@ console.log(this.passengers)
 			params.set('state', 'pending');
 
 			this._BookingDataService.create(params).subscribe(res => {
-				if (res.status == 'success') {
+				if (res.data) {
 					let booking = res.data;
 					let routes = [];
 					let total_sum = 0;
@@ -760,7 +760,7 @@ console.log(this.passengers)
 						params.set('provider', airline);
 
 						this._BookingDetailDataService.create(params).subscribe(res => {
-							if (res.status == 'success') {
+							if (res.data) {
 								let booking_detail = res.data;
 
 								// Insert Passengers

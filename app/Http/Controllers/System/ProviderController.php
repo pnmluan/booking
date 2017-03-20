@@ -87,6 +87,14 @@ class ProviderController extends Controller
             $query->limit($limit)->offset($offset);
             $data = $query->get()->toArray();
             $total_data = count($data);
+
+            if(isset($request['is_key_value'])) {
+                $convertedData = [];
+                foreach ($data as $key => $value) {
+                    $convertedData[$value->name] = $value;
+                }
+                $data = $convertedData;
+            }
             /*==================================================
              * Response Data
              *==================================================*/
@@ -190,7 +198,7 @@ class ProviderController extends Controller
             ]);
         }
         return new JsonResponse([
-            'message' => 'created',
+            'message' => 'deleted',
             'record_id' => $id
         ]);
     }

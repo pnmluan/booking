@@ -16,6 +16,9 @@ ng-select {
     font-family: 'diavlo-book';
 }
 
+.filter-tab ul li a:hover,
+.filter-tab ul li a:focus { text-decoration: none; background: #E6E1DA; }
+
 .filter-tab ul li.active a{
     background-image: url("../img/pattern_vang.svg");
     background-repeat: repeat;
@@ -64,9 +67,8 @@ ng-select > div > div.single > div.clear, ng-select > div > div.single > div.tog
 }
 
 .tour-book .datepicker-container .datepicker-input-container .datepicker-input {
-    height: 34px !important;
+    height: 32px !important;
     border: 1px solid #ccc !important;
-    border-radius: 4px;
 }
 
 .tour-book .datepicker-container .datepicker-input-container .datepicker-input-icon {
