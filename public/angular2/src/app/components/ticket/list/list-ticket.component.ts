@@ -27,13 +27,13 @@ export class ListTicketComponent implements OnInit {
 	imgPath: string = this._EntranceTicketDataService.imgPath;
 
 	constructor(
-		private _CategoryTicketDataService: CategoryTicketDataService, 
+		private _CategoryTicketDataService: CategoryTicketDataService,
 		private _EntranceTicketDataService: EntranceTicketDataService,
 		private _Configuration: Configuration,
 		private _Router: Router,
 		private _ActivatedRoute: ActivatedRoute,
 		private sessionStorage: LocalStorageService,
-	) { 
+	) {
 
 		this.querySubscription = _ActivatedRoute.queryParams.subscribe(
 			(param: any) => {
@@ -87,18 +87,18 @@ export class ListTicketComponent implements OnInit {
 		});
 
 		setTimeout(()=>{
-			jQuery('.tours-list .item .item-inner h3').matchHeight({
-				byRow: true,
-				property: 'height',
-				target: null,
-				remove: false
-			});
-			jQuery('.tours-list .item .item-inner p').matchHeight({
-				byRow: true,
-				property: 'height',
-				target: null,
-				remove: false
-			});
+				jQuery('.tours-list .item .item-inner h3').matchHeight({
+					byRow: true,
+					property: 'height',
+					target: null,
+					remove: false
+				});
+				jQuery('.tours-list .item .item-inner p').matchHeight({
+					byRow: true,
+					property: 'height',
+					target: null,
+					remove: false
+				});
 
 			this.resizeImage();
 
@@ -162,7 +162,33 @@ export class ListTicketComponent implements OnInit {
 				var a = jQuery('.item-inner').width();
 				jQuery('.item-inner > a').height(a * 10 / 16);
 			}
-			
+
+			jQuery('.tours-sort-r li a').click(function(){
+
+	      jQuery('.tours-sort-r li a').removeClass('active');
+	      jQuery(this).addClass('active');
+	      var temp = jQuery(this).attr('title');
+	      if( temp == 'list-view' ) {
+	        jQuery('.tours-list').addClass('list-view');
+	      } else {
+	        jQuery('.tours-list').removeClass('list-view');
+	      }
+
+	      jQuery('.tours-list .item .item-inner h3').matchHeight({
+					byRow: true,
+					property: 'height',
+					target: null,
+					remove: false
+				});
+				jQuery('.tours-list .item .item-inner p').matchHeight({
+					byRow: true,
+					property: 'height',
+					target: null,
+					remove: false
+				});
+
+	    });
+
 		},800)
   	}
 
@@ -200,7 +226,7 @@ export class ListTicketComponent implements OnInit {
 		if (this.sessionStorage.get('cartItems')) {
 			let cartItems = this.sessionStorage.get('cartItems');
 			let existed = false;
-			
+
 			for(let key in cartItems) {
 				if(cartItems[key].id == item.id) {
 					cartItems[key].number_adult = +cartItems[key].number_adult + item.order;
@@ -211,14 +237,14 @@ export class ListTicketComponent implements OnInit {
 
 			if(!existed){
 				cartItems[count] = obj;
-				count++; 	
+				count++;
 			}
 			this.sessionStorage.set('cartItems', cartItems);
 
 		} else {
 			let cartItems = [obj];
 			this.sessionStorage.set('cartItems', cartItems);
-			count++; 
+			count++;
 		}
 		item.order = 1;
 		this._Configuration.number_order = count;

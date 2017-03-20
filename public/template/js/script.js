@@ -185,6 +185,7 @@ jQuery(document).ready(function() {
     remove: false
   });
 
+
   //effect image our service
   jQuery(".intro-why .item").mouseover(function() {
     //Add hiệu ứng lúc hover vào icon
