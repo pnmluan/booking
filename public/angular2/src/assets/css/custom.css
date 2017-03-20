@@ -67,9 +67,8 @@ ng-select > div > div.single > div.clear, ng-select > div > div.single > div.tog
 }
 
 .tour-book .datepicker-container .datepicker-input-container .datepicker-input {
-    height: 34px !important;
+    height: 32px !important;
     border: 1px solid #ccc !important;
-    border-radius: 4px;
 }
 
 .tour-book .datepicker-container .datepicker-input-container .datepicker-input-icon {
