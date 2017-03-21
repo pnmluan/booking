@@ -66,9 +66,7 @@ export class DetailTicketComponent implements OnInit {
 		});
 	}
 
-  	ngOnInit() {
-  		console.log(this._Configuration.number_order);
-  	}
+  	ngOnInit() { }
 
   	ngAfterViewInit(){
   		//event view price
@@ -102,14 +100,16 @@ export class DetailTicketComponent implements OnInit {
   		let childComponent = this._componentFactoryResolver.resolveComponentFactory(DetailTicketPhotoComponent);
 		let componentRef = this.photos.createComponent(childComponent);
 
-  		this._EntranceTicketDataService.getByID(this._params['ticket_id']).subscribe(res => {
+		let params: URLSearchParams = new URLSearchParams();
+		params.set('clean_url', this._params['clean_url']);
+  		this._EntranceTicketDataService.getAll(params).subscribe(res => {
 			if (res.data) {
-				this.Ticket = res.data;
-				(<DetailTicketPhotoComponent>componentRef.instance).albums = res.data.album;
+				this.Ticket = res.data[0];
+				(<DetailTicketPhotoComponent>componentRef.instance).albums = res.data[0].album;
   				(<DetailTicketPhotoComponent>componentRef.instance).imgPath = this.imgPath;
 				this.lat = +this.Ticket['latitude'];
 				this.lng = +this.Ticket['longitude'];
-				this.loadCategoryTickets(res.data.category_ticket_id);
+				this.loadCategoryTickets(res.data[0].category_ticket_id);
 			}
 		})
 

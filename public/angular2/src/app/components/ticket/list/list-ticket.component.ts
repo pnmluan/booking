@@ -187,7 +187,7 @@ export class ListTicketComponent implements OnInit {
 				});
 	    	});
 
-		},1000)
+		},2000)
   	}
 
   	loadEntranceTicketList(category_ticket_id){
