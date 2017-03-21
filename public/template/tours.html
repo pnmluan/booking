@@ -163,12 +163,12 @@
                       </li>
                     </ul>
                   </div>
-                  <!--<div class="tours-sort-r">-->
-                  <!--<ul class="clearfix">-->
-                  <!--<li><a href="#" class="active"><i class="fa fa-bars" aria-hidden="true"></i></a></li>-->
-                  <!--<li><a href="#"><i class="fa fa-th" aria-hidden="true"></i></a></li>-->
-                  <!--</ul>-->
-                  <!--</div>-->
+                  <div class="tours-sort-r">
+                    <ul class="clearfix">
+                      <li><a href="#" title="list-view"><i class="fa fa-bars" aria-hidden="true"></i></a></li>
+                      <li><a href="#" class="active" title="grid-view"><i class="fa fa-th" aria-hidden="true"></i></a></li>
+                    </ul>
+                  </div>
                 </div>
                 <div class="tours-list clearfix">
                   <div class="item">
@@ -564,6 +564,8 @@
   <script src="js/script.js"></script>
   <script type="text/javascript">
   jQuery(document).ready(function() {
+
+
     function flyToElement(flyer, flyingTo) {
       var $func = jQuery(this);
       var flyerClone = jQuery(flyer).clone();
