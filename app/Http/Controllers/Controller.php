@@ -44,6 +44,7 @@ class Controller extends BaseController
 			'ử' => 'u',
 			'ứ' => 'u',
 			'ừ' => 'u',
+			'ữ' => 'u',
 			'ự' => 'u'
 		];
 		if( !empty($replace) ) {
