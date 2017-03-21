@@ -8,14 +8,34 @@ class Controller extends BaseController
 {
 	public function toAscii($str, $replace=array(), $delimiter='-') {
 		setlocale(LC_ALL, 'en_US.UTF8');
+		$replace = [
+			'đ' => 'd',
+			'ổ' => 'o',
+			'ồ' => 'o',
+			'ố' => 'o',
+			'ở' => 'o',
+			'ờ' => 'o',
+			'ớ' => 'o',
+			'ế' => 'e',
+			'ể' => 'e',
+			'ề' => 'e',
+			'ẩ' => 'a',
+			'ấ' => 'a',
+			'ầ' => 'a',
+			'ắ' => 'a',
+			'ẩ' => 'a',
+			'ầ' => 'a',
+			'ử' => 'u',
+			'ứ' => 'u',
+			'ừ' => 'u'
+		];
 		if( !empty($replace) ) {
+
 			foreach($replace as $key=>$value) {
 	    	    $str = str_replace($key, $value, $str);
 	    	}
-		} else {
-		    $str = str_replace('đ', 'd', $str);
 		}
-		var_dump($str);die;
+
 		$clean = iconv('UTF-8', 'ASCII//TRANSLIT', $str);
 		$clean = preg_replace("/[^a-zA-Z0-9\/_|+ -]/", '', $clean);
 		$clean = strtolower(trim($clean, '-'));

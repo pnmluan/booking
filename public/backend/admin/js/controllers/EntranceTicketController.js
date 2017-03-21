@@ -209,6 +209,7 @@ angular.module('MetronicApp').controller('EntranceTicketController', function($r
                                     imgs.push(value);
                                 }
                             });
+                            console.log(res);
                             var params = {
                                 entrance_ticket_id: res.data.data.id,
                                 removed_imgs: arr_removed_img
