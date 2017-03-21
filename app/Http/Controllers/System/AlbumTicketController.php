@@ -17,21 +17,108 @@ class AlbumTicketController extends Controller{
 
     private $path = 'backend/assets/apps/img/album_ticket';
 
-    public function index(Request $request){
+    /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->table = 'album_ticket';
+        $this->columns = \DB::getSchemaBuilder()->getColumnListing($this->table);
+    }
 
-        $data = AlbumTicket::listItems($request->all());
-        return response()->json($data);
+
+    /**
+     * Get info table for datatables
+     *
+     * @param \Illuminate\Http\Request $request
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function index(Request $request){
+        $params = $request->all();
+        if(isset($request['has_data_table']) && $request['has_data_table']) {
+            $data = AlbumTicket::listItems($params);
+            return $data;
+        } else {
+
+            $columns  = $this->columns;
+
+            $limit          = 5000;
+            $offset         = 0;
+
+            $alias = 'MT';
+            $alias_dot = $alias . '.';
+            $select         = $alias_dot . '*';
+            $query = \DB::table($this->table . ' AS ' . $alias)
+                        ->select($select);
+            /*==================================================
+             * Filter Data
+             *==================================================*/
+            foreach ($columns as $field) {
+                if(isset($params[$field]) || !empty($params[$field])){
+                    if(is_array($params[$field])){
+                        $query->where($alias_dot . $field, 'IN', $params[$field]);
+                    }else{
+                        switch ($field) {
+                            case 'status':
+                            case 'entrance_ticket_id':
+                                $query->where($alias_dot . $field, '=', $params[$field]);
+                                break;
+                            default:
+                                $query->where($alias_dot . $field, 'LIKE', '%' . $params[$field] . '%');
+                                break;
+                        }
+                    }
+                }
+            }
+
+            /*==================================================
+             * Limit & Offset
+             *==================================================*/
+            $limit = (isset($params['limit']) || !empty($params['limit']))?$params['limit']:$limit;
+            $offset = (isset($params['offset']) || !empty($params['offset']))?$params['offset']:$offset;
+
+
+            /*==================================================
+             * Process Query
+             *==================================================*/
+            $query->limit($limit)->offset($offset);
+            $data = $query->get()->toArray();
+            $total_data = count($data);
+            /*==================================================
+             * Response Data
+             *==================================================*/
+            return new JsonResponse([
+                'message' => 'list_data',
+                'total' => $total_data,
+                'data' => $data
+            ]);
+        }
 
     }
 
+    /**
+     * Get authenticated user.
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function show($id) {
 
-        $albumTicket  = AlbumTicket::find($id);
+        $model  = AlbumTicket::find($id);
 
-        if (!$albumTicket) {
-            return $this->respondNotFound();
+        if (empty($model)) {
+            return new JsonResponse([
+                'message' => 'no_data',
+            ]);
         }
-        return $this->respondWithSuccess(['data'=>$albumTicket]);
+
+        return new JsonResponse([
+            'message' => 'get_detail',
+            'data' => $model
+        ]);
+
     }
 
     protected function uploadImage($images) {
@@ -54,27 +141,32 @@ class AlbumTicketController extends Controller{
 
     }
 
-    public function create(Request $request){
-        
-        $data = $request['data'];
-        $albumTickets = [];
-        $imgs = $this->uploadImage($request->file('imgs'));
+    /**
+     * Create/Update record into DB.
+     *
+     * @return JsonResponse
+     */
+    public function save(Request $request, $id = null){
 
+        $data = $request['data'];
+        
+        $pictures = [];
+        $imgs = $this->uploadImage($request->file('imgs'));
         if($imgs) {
 
             foreach ($imgs as $key => $img) {
-                $albumTicket = new AlbumTicket();
+                $model = new AlbumTicket();
                 $data['img'] = $img;
-                $albumTicket->fill($data);
+                $model->fill($data);
 
-                if (!$albumTicket->isValid()) {
-                    return $this->respondWithError(['error' => $albumTicket->getValidationErrors()]);
-                }
                 try {
-                    $albumTicket->save();
-                    $albumTickets[] = $albumTicket;
+                    $model->save();
+                    $pictures[] = $model;
                 } catch (\Exception $ex) {
-                    return $this->respondWithNotSaved();
+                    return new JsonResponse([
+                        'message' => 'exception',
+                        'error' => $ex->getMessage()
+                    ]);
                 }
             }
             
@@ -91,52 +183,44 @@ class AlbumTicketController extends Controller{
 
             
         }
-
-        return $this->respondWithCreated(['data'=>$albumTickets]);
     }
 
+    /**
+     * Remove record into DB.
+     *
+     * @return JsonResponse
+     */
     public function delete($id){
 
-
-        $albumTicket  = AlbumTicket::find($id);
-        if (!$albumTicket) {
-            return $this->respondNotFound();
+        $model  = AlbumTicket::find($id);
+        if (!$model) {
+            return new JsonResponse([
+                'message' => 'no_data',
+            ]);
         }
         try {
-            if (!$albumTicket->delete()) {
-
-                return $this->respondWithError();
+            $filename = $this->path . '/' . $model->img;
+            if(file_exists($filename)) {
+                unlink($filename);
+            }
+            if (!$model->delete()) {
+                return new JsonResponse([
+                    'message' => 'exception',
+                    'error' => 'can not delete'
+                ]);
             }
         } catch (\Exception $ex) {
-            return $this->respondWithError(['error' => $ex->getMessage()]);
+            return new JsonResponse([
+                'message' => 'exception',
+                'error' => $ex->getMessage()
+            ]);
         }
-        return $this->respondWithSuccess(['record_id'=>$id]);
+        return new JsonResponse([
+            'message' => 'created',
+            'rercord_id' => $id
+        ]);
     }
 
-    public function update(Request $request, $id){
 
-        $albumTicket = AlbumTicket::find($id);
-        if(!$albumTicket) {
-            return $this->respondNotFound();
-        }
-        $data = $request['data'];
-        $img = $this->uploadImage($request->file('img'));
-        if($img) {
-            $data['img'] = $img;
-        }
-
-        $albumTicket->fill($data);
-
-        if (!$albumTicket->isValid()) {
-            return $this->respondWithError(['error' => $albumTicket->getValidationErrors()]);
-        }
-        try {
-            $albumTicket->save();
-        } catch (\Exception $ex) {
-            return $this->respondWithNotSaved();
-        }
-
-        return $this->respondWithSaved(['data'=>$albumTicket]);
-    }
 }
 ?>

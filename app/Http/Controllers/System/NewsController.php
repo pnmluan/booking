@@ -37,7 +37,7 @@ class NewsController extends Controller{
     public function index(Request $request){
         $params = $request->all();
         if(isset($request['has_data_table']) && $request['has_data_table']) {
-            $data = Passenger::listItems($params);
+            $data = News::listItems($params);
             return $data;
         } else {
 
@@ -96,14 +96,26 @@ class NewsController extends Controller{
 
     }
 
+    /**
+     * Get authenticated user.
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function show($id) {
 
-        $news  = News::find($id);
+        $model  = News::find($id);
 
-        if (!$news) {
-            return $this->respondNotFound();
+        if (empty($model)) {
+            return new JsonResponse([
+                'message' => 'no_data',
+            ]);
         }
-        return $this->respondWithSuccess(['data'=>$news]);
+
+        return new JsonResponse([
+            'message' => 'get_detail',
+            'data' => $model
+        ]);
+
     }
 
     protected function uploadImage($image) {
@@ -120,80 +132,98 @@ class NewsController extends Controller{
 
     }
 
-    public function create(Request $request){
-        $news = new News();
+    /**
+     * Create/Update record into DB.
+     *
+     * @return JsonResponse
+     */
+    public function save(Request $request, $id = null){
         $data = $request['data'];
-
         $img = $this->uploadImage($request->file('img'));
-        if($img) {
-            $data['img'] = $img;
+
+        if(!empty($id)) {
+
+            $model = News::find($id);
+            if (!$model) {
+                return new JsonResponse([
+                    'message' => 'no_data',
+                ]);
+            }
+            if($img) {
+                $filename = $this->path . '/' . $model->img;
+                if(file_exists($filename)) {
+                    unlink($filename);
+                }
+                $data['img'] = $img;
+            }
+
+            
+        } else {
+            $model = new News();
+            
+            if($img) {
+                $data['img'] = $img;
+            }
         }
+        
 
-        $news->fill($data);
+        $model->fill($data);
 
-        if (!$news->isValid()) {
-            return $this->respondWithError(['error' => $news->getValidationErrors()]);
+        if (!$model->isValid()) {
+            return new JsonResponse([
+                'message' => 'invalid',
+                'error' => $model->getValidationErrors()
+            ]);
         }
-
         try {
-            $news->save();
+            $model->save();
         } catch (\Exception $ex) {
-            return $ex;
-            return $this->respondWithNotSaved();
+            return new JsonResponse([
+                'message' => 'exception',
+                'error' => $ex->getMessage()
+            ]);
         }
-        return $this->respondWithCreated(['data'=>$news]);
+        return new JsonResponse([
+            'message' => 'created',
+            'data' => $model
+        ]);
     }
 
+    /**
+     * Remove record into DB.
+     *
+     * @return JsonResponse
+     */
     public function delete($id){
 
-        $news  = News::find($id);
-        if (!$news) {
-            return $this->respondNotFound();
+        $model  = News::find($id);
+        if (!$model) {
+            return new JsonResponse([
+                'message' => 'no_data',
+            ]);
         }
         try {
-            $filename = $this->path . '/' . $news->img;
+            $filename = $this->path . '/' . $model->img;
             if(file_exists($filename)) {
                 unlink($filename);
             }
 
-            if (!$news->delete()) {
-                return $this->respondWithError();
+            if (!$model->delete()) {
+                return new JsonResponse([
+                    'message' => 'exception',
+                    'error' => 'can not delete'
+                ]);
             }
         } catch (\Exception $ex) {
-            return $this->respondWithError(['error' => $ex->getMessage()]);
+            return new JsonResponse([
+                'message' => 'exception',
+                'error' => $ex->getMessage()
+            ]);
         }
-        return $this->respondWithSuccess(['record_id'=>$id]);
-    }
-
-    public function update(Request $request, $id){
-
-        $news = News::find($id);
-        if(!$news) {
-            return $this->respondNotFound();
-        }
-        $data = $request['data'];
-        $img = $this->uploadImage($request->file('img'));
-        if($img) {
-            $filename = $this->path . '/' . $news->img;
-            if(file_exists($filename)) {
-                unlink($filename);
-            }
-            
-            $data['img'] = $img;
-        }
-
-        $news->fill($data);
-
-        if (!$news->isValid()) {
-            return $this->respondWithError(['error' => $news->getValidationErrors()]);
-        }
-        try {
-            $news->save();
-        } catch (\Exception $ex) {
-            return $this->respondWithNotSaved();
-        }
-
-        return $this->respondWithSaved(['data'=>$news]);
+        return new JsonResponse([
+            'message' => 'deleted',
+            'rercord_id' => $id
+        ]);
     }
  
 }

@@ -4344,7 +4344,11 @@
                 "testing",
                 "xunit"
             ],
+<<<<<<< HEAD
+            "time": "2017-03-02 15:22:43"
+=======
             "time": "2017-03-19 16:52:12"
+>>>>>>> 6c90819de7386d7473558843bf2e9e130b213d04
         },
         {
             "name": "phpunit/phpunit-mock-objects",

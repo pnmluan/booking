@@ -10,7 +10,7 @@ angular.module('MetronicApp')
 
     BannerService.create = function (img,  cust) {
         return Upload.upload({
-            url: urlBase + '/create',
+            url: urlBase + '/save',
             data: {
                 data: cust,
                 img: img
@@ -20,7 +20,7 @@ angular.module('MetronicApp')
 
     BannerService.update = function (img, cust) {
         return Upload.upload({
-            url: urlBase + '/update/' + cust.id,
+            url: urlBase + '/save/' + cust.id,
             data: {
                 data: cust,
                 img: img

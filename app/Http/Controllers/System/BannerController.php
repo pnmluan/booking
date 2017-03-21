@@ -95,14 +95,26 @@ class BannerController extends Controller{
 
     }
 
+    /**
+     * Get authenticated user.
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function show($id) {
 
-        $banner  = Banner::find($id);
+        $model  = Banner::find($id);
 
-        if (!$banner) {
-            return $this->respondNotFound();
+        if (empty($model)) {
+            return new JsonResponse([
+                'message' => 'no_data',
+            ]);
         }
-        return $this->respondWithSuccess(['data'=>$banner]);
+
+        return new JsonResponse([
+            'message' => 'get_detail',
+            'data' => $model
+        ]);
+
     }
 
     protected function uploadImage($image) {
@@ -119,81 +131,100 @@ class BannerController extends Controller{
 
     }
 
-    public function create(Request $request){
-        $banner = new Banner();
+    /**
+     * Create/Update record into DB.
+     *
+     * @return JsonResponse
+     */
+    public function save(Request $request, $id = null){
         $data = $request['data'];
-
         $img = $this->uploadImage($request->file('img'));
-        if($img) {
-            $data['img'] = $img;
+
+        if(!empty($id)) {
+
+            $model = Banner::find($id);
+            if (!$model) {
+                return new JsonResponse([
+                    'message' => 'no_data',
+                ]);
+            }
+            if($img) {
+                $filename = $this->path . '/' . $model->img;
+                if(file_exists($filename)) {
+                    unlink($filename);
+                }
+                $data['img'] = $img;
+            }
+
+            
+        } else {
+            $model = new Banner();
+            
+            if($img) {
+                $data['img'] = $img;
+            }
         }
+        
 
-        $banner->fill($data);
+        $model->fill($data);
 
-        if (!$banner->isValid()) {
-            return $this->respondWithError(['error' => $banner->getValidationErrors()]);
+        if (!$model->isValid()) {
+            return new JsonResponse([
+                'message' => 'invalid',
+                'error' => $model->getValidationErrors()
+            ]);
         }
-
         try {
-            $banner->save();
+            $model->save();
         } catch (\Exception $ex) {
-            return $ex;
-            return $this->respondWithNotSaved();
+            return new JsonResponse([
+                'message' => 'exception',
+                'error' => $ex->getMessage()
+            ]);
         }
-        return $this->respondWithCreated(['data'=>$banner]);
+        return new JsonResponse([
+            'message' => 'created',
+            'data' => $model
+        ]);
     }
 
+    /**
+     * Remove record into DB.
+     *
+     * @return JsonResponse
+     */
     public function delete($id){
 
-        $banner  = Banner::find($id);
-        if (!$banner) {
-            return $this->respondNotFound();
+        $model  = Banner::find($id);
+        if (!$model) {
+            return new JsonResponse([
+                'message' => 'no_data',
+            ]);
         }
         try {
-            $filename = $this->path . '/' . $banner->img;
+            $filename = $this->path . '/' . $model->img;
             if(file_exists($filename)) {
                 unlink($filename);
             }
-            
-            if (!$banner->delete()) {
-                return $this->respondWithError();
+
+            if (!$model->delete()) {
+                return new JsonResponse([
+                    'message' => 'exception',
+                    'error' => 'can not delete'
+                ]);
             }
         } catch (\Exception $ex) {
-            return $this->respondWithError(['error' => $ex->getMessage()]);
+            return new JsonResponse([
+                'message' => 'exception',
+                'error' => $ex->getMessage()
+            ]);
         }
-        return $this->respondWithSuccess(['record_id'=>$id]);
+        return new JsonResponse([
+            'message' => 'deleted',
+            'rercord_id' => $id
+        ]);
     }
 
-    public function update(Request $request, $id){
-
-        $banner = Banner::find($id);
-        if(!$banner) {
-            return $this->respondNotFound();
-        }
-        $data = $request['data'];
-        $img = $this->uploadImage($request->file('img'));
-        if($img) {
-            $filename = $this->path . '/' . $banner->img;
-            if(file_exists($filename)) {
-                unlink($filename);
-            }
-            
-            $data['img'] = $img;
-        }
-
-        $banner->fill($data);
-
-        if (!$banner->isValid()) {
-            return $this->respondWithError(['error' => $banner->getValidationErrors()]);
-        }
-        try {
-            $banner->save();
-        } catch (\Exception $ex) {
-            return $this->respondWithNotSaved();
-        }
-
-        return $this->respondWithSaved(['data'=>$banner]);
-    }
  
 }
 ?>

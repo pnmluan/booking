@@ -204,7 +204,7 @@ class CommentController extends Controller{
             ]);
         }
         try {
-            $filename = $this->path . '/' . $comment->img;
+            $filename = $this->path . '/' . $model->img;
             if(file_exists($filename)) {
                 unlink($filename);
             }

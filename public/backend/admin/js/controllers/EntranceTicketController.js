@@ -214,7 +214,7 @@ angular.module('MetronicApp').controller('EntranceTicketController', function($r
                                 entrance_ticket_id: res.data.data.id,
                                 removed_imgs: arr_removed_img
                             };
-                            AlbumTicketService.create(imgs, params).then(function(res) {
+                            AlbumTicketService.save(imgs, params).then(function(res) {
 
 
                             });

@@ -10,7 +10,12 @@ const APP_ROUTES: Routes = [
 	{ path: '', redirectTo: 'home', pathMatch: 'full' },
 	{ path: 'home', component: HomeComponent },
 	{ path: 'search-result/:session_token', component: SearchResultComponent },
-	{ path: 'list-tickets', component: ListTicketComponent },
+	{ path: 'list-tickets',
+		children: [
+			{ path: ':clean_url', component: ListTicketComponent },
+			{ path: '', component: ListTicketComponent }
+		]
+	},
 	{ path: 'detail-ticket/:ticket_id', component: DetailTicketComponent },
 	{ path: 'cart-ticket', component: CartTicketComponent },
 	{ path: 'payment-ticket', component: PaymentTicketComponent },

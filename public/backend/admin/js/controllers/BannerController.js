@@ -21,10 +21,11 @@ angular.module('MetronicApp').controller('BannerController', function($rootScope
     $scope.clickToAddNew = function() {
 
         ngDialog.openConfirm({
-            template: 'views/banner/model_add_banner.html',
+            template: 'views/banner/model_form_banner.html',
             className: 'ngdialog-theme-default',
             scope: $scope,
             controller: ['$scope', 'data', function($scope, data){
+                $scope.action = 'create';
                 $scope.mItem = {};
                 $scope.errorMsg = [];
 
@@ -89,10 +90,11 @@ angular.module('MetronicApp').controller('BannerController', function($rootScope
     // Click to Update
     $scope.clickToUpdate = function(item) {
         ngDialog.openConfirm({
-            template: 'views/banner/model_update_banner.html',
+            template: 'views/banner/model_form_banner.html',
             className: 'ngdialog-theme-default',
             scope: $scope,
             controller: ['$scope', '$filter', 'data', function($scope, $filter, data){
+                $scope.action = 'update';
                 $scope.mItem = item;
                 $scope.errorMsg = [];
 

@@ -62,6 +62,26 @@ $api->version('v1', function ($api) {
 
         /*
         |--------------------------------------------------------------------------
+        | Album Ticket
+        |--------------------------------------------------------------------------
+        */
+        $api->post('/album_ticket/save', [
+            'as' => 'api.album_ticket.create',
+            'uses' => 'App\Http\Controllers\System\AlbumTicketController@save',
+        ]);
+
+        $api->post('/album_ticket/save/{id}', [
+            'as' => 'api.album_ticket.update',
+            'uses' => 'App\Http\Controllers\System\AlbumTicketController@save',
+        ]);
+
+        $api->delete('/album_ticket/delete/{id}', [
+            'as' => 'api.album_ticket.delete',
+            'uses' => 'App\Http\Controllers\System\AlbumTicketController@delete',
+        ]);
+
+        /*
+        |--------------------------------------------------------------------------
         | Baggage Type
         |--------------------------------------------------------------------------
         */

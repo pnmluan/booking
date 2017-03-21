@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 class Banner extends BaseModel
 {
      protected $table = 'banner';
-     protected $fillable = ['title', 'img', 'url', 'description', 'status', 'created_at', 'updated_at'];
+     protected $fillable = ['title', 'img', 'url', 'from', 'to', 'between', 'price', 'description', 'status', 'created_at', 'updated_at'];
 
      public function getModelValidations()
 	{
@@ -18,7 +18,7 @@ class Banner extends BaseModel
 
      public static function listItems(array $param = null){
 
-		$aColumns = ['title', 'img', 'url', 'description', 'status'];
+		$aColumns = ['title', 'img', 'url', 'from', 'to', 'between', 'price', 'description', 'status'];
 		
 		$query = \DB::table('banner')
 					->select(\DB::raw('SQL_CALC_FOUND_ROWS id'),\DB::raw('id AS DT_RowId'),'banner.*');
