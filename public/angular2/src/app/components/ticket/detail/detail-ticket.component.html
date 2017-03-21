@@ -197,7 +197,7 @@
                         <div>
                             <ul>
                                 <li *ngFor="let item of listItem">
-                                    <a class="clearfix" [routerLink]=" ['/detail-ticket', item.id] ">
+                                    <a class="clearfix" [routerLink]=" ['/detail-ticket', item.clean_url] ">
                                         <img src="{{ imgPath + item.album[0].img }}">
                                         <div>
                                             <p>{{ item.name }}</p>

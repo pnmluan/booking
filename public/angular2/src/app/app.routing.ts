@@ -16,7 +16,7 @@ const APP_ROUTES: Routes = [
 			{ path: '', component: ListTicketComponent }
 		]
 	},
-	{ path: 'detail-ticket/:ticket_id', component: DetailTicketComponent },
+	{ path: 'detail-ticket/:clean_url', component: DetailTicketComponent },
 	{ path: 'cart-ticket', component: CartTicketComponent },
 	{ path: 'payment-ticket', component: PaymentTicketComponent },
 	{ path: 'about', component: AboutComponent },
