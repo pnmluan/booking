@@ -1,36 +1,53 @@
 <IfModule mod_rewrite.c>
-    <IfModule mod_negotiation.c>
-        Options -MultiViews
-    </IfModule>
-
+    #<IfModule mod_negotiation.c>
+        #Options -MultiViews
+    #</IfModule>
+    Options +FollowSymLinks -Indexes
     RewriteEngine On
 
-    #RewriteCond %{REQUEST_METHOD} OPTIONS
-    #RewriteRule ^(.*)$ $1 [R=200,L]
+    RewriteCond %{REQUEST_METHOD} OPTIONS
+    RewriteRule ^(.*)$ $1 [R=200,L]
+    RewriteCond %{HTTP:Authorization} ^(.*)
+    RewriteRule .* - [e=HTTP_AUTHORIZATION:%1]
 
     #SetEnvIf Origin "^http(s)?://(.+\.)?(vision-vietnam\.com)$" origin_is=$0
     #Header always set Access-Control-Allow-Origin %{origin_is}e env=origin_is
 
     Header always set Access-Control-Allow-Origin "http://localhost:4200"
 
-    #SetEnvIf Origin "^http(s)?://(www\.)?(localhost:4200|localhost)$" ORIGIN=$0
-    #Header always set Access-Control-Allow-Origin %{ORIGIN}e
-    Header always set Access-Control-Max-Age "172800"
+    SetEnvIf Origin "^http(s)?://(www\.)?(localhost:4200|localhost)$" ORIGIN=$0
+    Header always set Access-Control-Max-Age "86400"
     Header always set Access-Control-Allow-Headers "Origin, X-Requested-With, Content-Type, Accept, Authorization, X-REQUESTED-WITH, If-Modified-Since, x-application-token"
-    Header always set Access-Control-Allow-Credentials true
-    Header always set Access-Control-Allow-Methods "POST, GET, OPTIONS, PUT, PATCH, DELETE"
 
     # Apache seems to discard the Authorization header if it is not a
     # base64 encoded user/pass combo
-    RewriteCond %{HTTP:Authorization} ^(.*)
-    RewriteRule .* - [e=HTTP_AUTHORIZATION:%1]
+    
 
     # Redirect Trailing Slashes If Not A Folder...
-    RewriteCond %{REQUEST_FILENAME} !-d
-    RewriteRule ^(.*)/$ /$1 [L,R=301]
+    #RewriteCond %{REQUEST_FILENAME} !-d
+    #RewriteRule ^(.*)/$ /$1 [L,R=301]
 
     # Handle Front Controller...
-    RewriteCond %{REQUEST_FILENAME} !-d
-    RewriteCond %{REQUEST_FILENAME} !-f
-    RewriteRule ^ index.php [L]
+    #RewriteCond %{REQUEST_FILENAME} !-d
+    #RewriteCond %{REQUEST_FILENAME} !-f
+    #RewriteRule ^ index.php [L]
+
+    # deal with php5-cgi first
+    <IfModule mod_fcgid.c>
+        RewriteRule ^ index.php [L]
+    </IfModule>
+
+    <IfModule !mod_fcgid.c>
+
+        # for normal Apache installations
+        <IfModule mod_php5.c>
+            RewriteRule ^ index.php [L]
+        </IfModule>
+
+        # for Apache FGCI installations
+        <IfModule !mod_php5.c>
+            RewriteRule ^ index.php [L]
+        </IfModule>
+
+    </IfModule>
 </IfModule>
