@@ -84,20 +84,6 @@ export class ListTicketComponent implements OnInit {
   		}
 
 		setTimeout(()=>{
-			jQuery('.tours-list .item .item-inner h3').matchHeight({
-					byRow: true,
-					property: 'height',
-					target: null,
-					remove: false
-			});
-
-			jQuery('.tours-list .item .item-inner p').matchHeight({
-					byRow: true,
-					property: 'height',
-					target: null,
-					remove: false
-			});
-
 			this.resizeImage();
 
 			function flyToElement(flyer, flyingTo) {
@@ -187,7 +173,30 @@ export class ListTicketComponent implements OnInit {
 				});
 	    	});*/
 
-		},2000)
+	    	
+
+		},1000)
+
+		this.loadPluginMatchHeight();
+  	}
+
+  	loadPluginMatchHeight(){
+  		let timeout = (this.view == 'list') ? 20 : 2000;
+  		setTimeout(() => {
+  			jQuery('.tours-list .item .item-inner h3').matchHeight({
+				byRow: true,
+				property: 'height',
+				target: null,
+				remove: false
+			});
+
+			jQuery('.tours-list .item .item-inner p').matchHeight({
+					byRow: true,
+					property: 'height',
+					target: null,
+					remove: false
+			});	
+  		}, timeout);
   	}
 
   	loadEntranceTicketList(category_ticket_id){

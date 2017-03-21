@@ -53,18 +53,20 @@
                         <div class="tours-sort-r">
                             <ul class="clearfix">
                                 <li>
-                                    <a [ngClass]="{ 'active': view == 'list' }" (click)="view = 'list'" title="List View">
+                                    <a [ngClass]="{ 'active': view == 'list' }" (click)="view = 'list'; loadPluginMatchHeight();" title="List View">
                                         <i class="fa fa-bars" aria-hidden="true"></i>
                                     </a>
                                 </li>
                                 <li>
-                                    <a [ngClass]="{ 'active': view == 'grid' }" (click)="view = 'grid'" title="Grid View">
+                                    <a [ngClass]="{ 'active': view == 'grid' }" (click)="view = 'grid'; loadPluginMatchHeight();" title="Grid View">
                                         <i class="fa fa-th" aria-hidden="true"></i>
                                     </a>
                                 </li>
+                                
                             </ul>
                         </div>
                     </div>
+
                     <div class="tours-list clearfix" [ngClass]="{ 'list-view': view == 'list' }">
                         <div class="item" *ngFor="let item of listItem">
                             <div class="item-inner">
