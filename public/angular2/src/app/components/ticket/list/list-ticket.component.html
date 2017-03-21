@@ -53,21 +53,21 @@
                         <div class="tours-sort-r">
                             <ul class="clearfix">
                                 <li>
-                                    <a [ngClass]="{ 'active': view == 'list' }" (click)="view = 'list'; loadPluginMatchHeight();" title="List View">
+                                    <a [ngClass]="{ 'active': view == 'list' }" (click)="onChangeView('list')" title="List View">
                                         <i class="fa fa-bars" aria-hidden="true"></i>
                                     </a>
                                 </li>
                                 <li>
-                                    <a [ngClass]="{ 'active': view == 'grid' }" (click)="view = 'grid'; loadPluginMatchHeight();" title="Grid View">
+                                    <a [ngClass]="{ 'active': view == 'grid' }" (click)="onChangeView('grid')" title="Grid View">
                                         <i class="fa fa-th" aria-hidden="true"></i>
                                     </a>
                                 </li>
-                                
                             </ul>
                         </div>
                     </div>
-
+                    <div class="preloader"><img src="assets/img/loading-x-1.gif"></div>
                     <div class="tours-list clearfix" [ngClass]="{ 'list-view': view == 'list' }">
+
                         <div class="item" *ngFor="let item of listItem">
                             <div class="item-inner">
                                 <a [routerLink]="['/detail-ticket', item.clean_url]"><img *ngIf="item.img" [src]="item.img" alt=""></a>

@@ -147,43 +147,15 @@ export class ListTicketComponent implements OnInit {
 				jQuery('.item-inner > a').height(a * 10 / 16);
 			}
 
-			/*jQuery('.tours-sort-r li a').click(function(){
-
-	      		jQuery('.tours-sort-r li a').removeClass('active');
-	      		jQuery(this).addClass('active');
-	      		var temp = jQuery(this).attr('title');
-	      		if( temp == 'list-view' ) {
-	      			jQuery('.tours-list').addClass('list-view');
-	      		} else {
-	      			jQuery('.tours-list').removeClass('list-view');
-	      		}
-
-	      		jQuery('.tours-list .item .item-inner h3').matchHeight({
-					byRow: true,
-					property: 'height',
-					target: null,
-					remove: false
-				});
-
-				jQuery('.tours-list .item .item-inner p').matchHeight({
-					byRow: true,
-					property: 'height',
-					target: null,
-					remove: false
-				});
-	    	});*/
-
-	    	
-
 		},1000)
 
-		this.loadPluginMatchHeight();
+		jQuery('.preloader').delay(1000).fadeOut("slow");
   	}
 
-  	loadPluginMatchHeight(){
-  		let timeout = (this.view == 'list') ? 20 : 2000;
-  		setTimeout(() => {
-  			jQuery('.tours-list .item .item-inner h3').matchHeight({
+  	onChangeView(view) {
+		this.view = view;
+		setTimeout(() => {
+			jQuery('.tours-list .item .item-inner h3').matchHeight({
 				byRow: true,
 				property: 'height',
 				target: null,
@@ -191,12 +163,13 @@ export class ListTicketComponent implements OnInit {
 			});
 
 			jQuery('.tours-list .item .item-inner p').matchHeight({
-					byRow: true,
-					property: 'height',
-					target: null,
-					remove: false
-			});	
-  		}, timeout);
+				byRow: true,
+				property: 'height',
+				target: null,
+				remove: false
+			});
+		}, 100);
+
   	}
 
   	loadEntranceTicketList(category_ticket_id){
@@ -225,6 +198,8 @@ export class ListTicketComponent implements OnInit {
 		//reset list item
 		this.listItem = [];
 		this._Router.navigate(['list-tickets', this.search]);
+		//display loading
+		jQuery('.preloader').fadeIn();
 	}
 
 	/*=================================

@@ -109,17 +109,18 @@ export class DetailTicketComponent implements OnInit {
   				(<DetailTicketPhotoComponent>componentRef.instance).imgPath = this.imgPath;
 				this.lat = +this.Ticket['latitude'];
 				this.lng = +this.Ticket['longitude'];
-				this.loadCategoryTickets(res.data[0].category_ticket_id);
+				this.loadCategoryTickets(res.data[0].category_ticket_id, res.data[0].id);
 			}
 		})
 
-		
+		jQuery('.preloader').delay(1000).fadeOut("slow");
   	}
 
-  	loadCategoryTickets(category_ticket_id){
+  	loadCategoryTickets(category_ticket_id, except_id){
   		var params: URLSearchParams = new URLSearchParams();
 		params.set('category_ticket_id', category_ticket_id);
-		params.set('except_id',this._params['ticket_id']);
+		params.set('except_id', except_id);
+		params.set('limit', '5');
 		this._EntranceTicketDataService.getAll(params).subscribe(res => {
 			if (res.data) {
 				this.listItem = res.data;
