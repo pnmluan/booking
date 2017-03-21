@@ -110,7 +110,7 @@ a:hover { color: #69f; }
 /* Custom text-selection colors (remove any text shadows: http://twitter.com/miketaylr/status/12228805301) */
 ::-moz-selection { background: #fcd700; color: #fff; text-shadow: none; }
 ::selection { background: #fcd700; color: #fff; text-shadow: none; }
-/*	j.mp/webkit-tap-highlight-color */
+/*  j.mp/webkit-tap-highlight-color */
 a:link { -webkit-tap-highlight-color: #fcd700; outline: none; text-decoration: none; }
 ins { background-color: #fcd700; color: #000; text-decoration: none; }
 mark { background-color: #fcd700; color: #000; font-style: italic; font-weight: bold; }
@@ -1125,6 +1125,17 @@ only screen and (max-width: 767px) {
     -o-transform: translate(-50%,-50%);
 }
 .tours-list .item .item-inner > div { padding: 15px; }
+
+.tours-list.list-view .item { float: none; width: 100%; padding: 0px 10px; margin-bottom: 20px;  }
+.tours-list.list-view .item .item-inner { padding-left: 15px; }
+.tours-list.list-view .item .item-inner > a { float: left; width: 200px; }
+.tours-list.list-view .item .item-inner > div { overflow: hidden; }
+
+@media screen and (max-width: 767px) {
+    .tours-list.list-view .item .item-inner { padding-left: 0px; }
+    .tours-list.list-view .item .item-inner > a { float: none; width: auto; }
+}
+
 .tours-list .item .item-inner h3 { border-bottom: 1px solid #ddd; margin-bottom: 10px; text-transform: capitalize; font-size: 13px; font-weight: bold; padding-bottom: 15px; line-height: 20px; }
 .tours-list .item .item-inner h3 a{ color: #333; }
 .tours-list .item .item-inner p { color: #999; }
