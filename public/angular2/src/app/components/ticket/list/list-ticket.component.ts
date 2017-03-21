@@ -161,7 +161,7 @@ export class ListTicketComponent implements OnInit {
 				jQuery('.item-inner > a').height(a * 10 / 16);
 			}
 
-			jQuery('.tours-sort-r li a').click(function(){
+			/*jQuery('.tours-sort-r li a').click(function(){
 
 	      		jQuery('.tours-sort-r li a').removeClass('active');
 	      		jQuery(this).addClass('active');
@@ -185,14 +185,16 @@ export class ListTicketComponent implements OnInit {
 					target: null,
 					remove: false
 				});
-	    	});
+	    	});*/
 
 		},2000)
   	}
 
   	loadEntranceTicketList(category_ticket_id){
 		let params: URLSearchParams = new URLSearchParams();
-		params.set('category_ticket_id', category_ticket_id);
+		if(category_ticket_id){
+			params.set('category_ticket_id', category_ticket_id);	
+		}
   		this._EntranceTicketDataService.getAll(params).subscribe(res => {
 			let listItem = [];
 			if (res.data) {

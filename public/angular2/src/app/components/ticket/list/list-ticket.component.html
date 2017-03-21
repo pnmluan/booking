@@ -65,7 +65,7 @@
                             </ul>
                         </div>
                     </div>
-                    <div class="tours-list clearfix">
+                    <div class="tours-list clearfix" [ngClass]="{ 'list-view': view == 'list' }">
                         <div class="item" *ngFor="let item of listItem">
                             <div class="item-inner">
                                 <a [routerLink]="['/detail-ticket', item.clean_url]"><img *ngIf="item.img" [src]="item.img" alt=""></a>
