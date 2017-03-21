@@ -4,8 +4,7 @@ import { URLSearchParams } from '@angular/http';
 
 import { Configuration } from '../../../shared/app.configuration';
 
-import { CategoryTicketDataService } from '../../../shared/categoryticket.dataservice';
-import { EntranceTicketDataService } from '../../../shared/entranceticket.dataservice';
+import { CategoryTicketDataService, EntranceTicketDataService } from '../../../shared/';
 import { LocalStorageService } from 'angular-2-local-storage';
 import { Subscription } from 'rxjs/Rx';
 declare let jQuery: any;
@@ -13,7 +12,7 @@ declare let jQuery: any;
 @Component({
   selector: 'app-list-ticket',
   templateUrl: './list-ticket.component.html',
-  providers: [CategoryTicketDataService, EntranceTicketDataService]
+  providers: [ CategoryTicketDataService, EntranceTicketDataService]
 })
 export class ListTicketComponent implements OnInit {
 	private subscriptionEvents: Subscription;
@@ -72,34 +71,32 @@ export class ListTicketComponent implements OnInit {
   	initData() {
   		//get entrance ticket
   		this.search = this.params['clean_url'] || '';
-		let params: URLSearchParams = new URLSearchParams();
-		params.set('category_ticket_id', this.search);
-		this._EntranceTicketDataService.getAll(params).subscribe(res => {
-			let listItem = [];
-			if (res.data) {
-				for (let key in res.data) {
-					let images = res.data[key].album[0];
-					res.data[key].img = images.img ? this.imgPath + images.img : '';
-					res.data[key].order = 1;
-					listItem.push(res.data[key]);
+  		if(this.search){
+  			let params: URLSearchParams = new URLSearchParams();
+			params.set('clean_url', this.search);
+			this._CategoryTicketDataService.getAll(params).subscribe(res => {
+				if(res.data){
+					this.loadEntranceTicketList(res.data[0].id);
 				}
-				this.listItem = listItem;
-			}
-		});
+			});
+  		}else{
+  			this.loadEntranceTicketList(this.search);
+  		}
 
 		setTimeout(()=>{
-				jQuery('.tours-list .item .item-inner h3').matchHeight({
+			jQuery('.tours-list .item .item-inner h3').matchHeight({
 					byRow: true,
 					property: 'height',
 					target: null,
 					remove: false
-				});
-				jQuery('.tours-list .item .item-inner p').matchHeight({
+			});
+
+			jQuery('.tours-list .item .item-inner p').matchHeight({
 					byRow: true,
 					property: 'height',
 					target: null,
 					remove: false
-				});
+			});
 
 			this.resizeImage();
 
@@ -166,31 +163,48 @@ export class ListTicketComponent implements OnInit {
 
 			jQuery('.tours-sort-r li a').click(function(){
 
-	      jQuery('.tours-sort-r li a').removeClass('active');
-	      jQuery(this).addClass('active');
-	      var temp = jQuery(this).attr('title');
-	      if( temp == 'list-view' ) {
-	        jQuery('.tours-list').addClass('list-view');
-	      } else {
-	        jQuery('.tours-list').removeClass('list-view');
-	      }
+	      		jQuery('.tours-sort-r li a').removeClass('active');
+	      		jQuery(this).addClass('active');
+	      		var temp = jQuery(this).attr('title');
+	      		if( temp == 'list-view' ) {
+	      			jQuery('.tours-list').addClass('list-view');
+	      		} else {
+	      			jQuery('.tours-list').removeClass('list-view');
+	      		}
 
-	      jQuery('.tours-list .item .item-inner h3').matchHeight({
+	      		jQuery('.tours-list .item .item-inner h3').matchHeight({
 					byRow: true,
 					property: 'height',
 					target: null,
 					remove: false
 				});
+
 				jQuery('.tours-list .item .item-inner p').matchHeight({
 					byRow: true,
 					property: 'height',
 					target: null,
 					remove: false
 				});
+	    	});
 
-	    });
+		},1000)
+  	}
 
-		},800)
+  	loadEntranceTicketList(category_ticket_id){
+		let params: URLSearchParams = new URLSearchParams();
+		params.set('category_ticket_id', category_ticket_id);
+  		this._EntranceTicketDataService.getAll(params).subscribe(res => {
+			let listItem = [];
+			if (res.data) {
+				for (let key in res.data) {
+					let images = res.data[key].album[0];
+					res.data[key].img = images.img ? this.imgPath + images.img : '';
+					res.data[key].order = 1;
+					listItem.push(res.data[key]);
+				}
+				this.listItem = listItem;
+			}
+		});
   	}
 
   	/*=================================
