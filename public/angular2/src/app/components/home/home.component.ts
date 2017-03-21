@@ -28,7 +28,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
 
 	private subscriptionEvents: Subscription;
 	Filter = {};
-	filterTicket = {};
+	filterTicket: string;
 	curRouting?: string;
 	warningMsg = '';
 	adultOptions = [];
@@ -89,13 +89,12 @@ export class HomeComponent implements OnInit, AfterViewInit {
 
 		// CategoryTicket Options
 		this._CategoryTicketDataService.getAll().subscribe(res => {
-
 			if (res.data) {
 				var categoryTicketOptions = [];
 				for (var key in res.data) {
 
 					var temp = {
-						value: res.data[key].id,
+						value: res.data[key].clean_url,
 						label: res.data[key].name
 					};
 					categoryTicketOptions.push(temp);
@@ -103,7 +102,6 @@ export class HomeComponent implements OnInit, AfterViewInit {
 				}
 				this.categoryTicketOptions = categoryTicketOptions;
 			}
-
 		});
 
 		// List Options Adult
@@ -207,7 +205,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
 		// }
 
 		// this._Router.navigateByUrl('/list-tickets/' + queryParams);
-		this._Router.navigate(['list-tickets'], { queryParams : this.filterTicket })
+		this._Router.navigate(['list-tickets', this.filterTicket]);
 	}
 
 	/*=================================

@@ -20,11 +20,11 @@ export class ListTicketComponent implements OnInit {
 	private querySubscription: Subscription;
 	public categoryTicketOptions = [];
 
-	queryParams = {};
+	params = {};
 	listItem = [];
 	curRouting?: string;
 	view: string = 'grid';
-	search = {};
+	search: string;
 	imgPath: string = this._EntranceTicketDataService.imgPath;
 
 	constructor(
@@ -36,9 +36,9 @@ export class ListTicketComponent implements OnInit {
 		private sessionStorage: LocalStorageService,
 	) {
 
-		this.querySubscription = _ActivatedRoute.queryParams.subscribe(
-			(param: any) => {
-				this.queryParams = param;
+		this.querySubscription = _ActivatedRoute.params.subscribe(
+			(params: any) => {
+				this.params = params;
 			}
 		)
 
@@ -53,12 +53,12 @@ export class ListTicketComponent implements OnInit {
 
   	ngOnInit() {
 		this._CategoryTicketDataService.getAll().subscribe(res => {
-			let categoryTicketOptions = [];
 			if (res.data) {
+				let categoryTicketOptions = [];
 				for (let key in res.data) {
 
 					var temp = {
-						value: String(res.data[key].id),
+						value: res.data[key].clean_url,
 						label: res.data[key].name
 					};
 
@@ -71,9 +71,9 @@ export class ListTicketComponent implements OnInit {
 
   	initData() {
   		//get entrance ticket
-  		this.search['category_ticket_id'] = this.queryParams['category_ticket_id'] || '';
+  		this.search = this.params['clean_url'] || '';
 		let params: URLSearchParams = new URLSearchParams();
-		params.set('category_ticket_id', this.search['category_ticket_id']);
+		params.set('category_ticket_id', this.search);
 		this._EntranceTicketDataService.getAll(params).subscribe(res => {
 			let listItem = [];
 			if (res.data) {
@@ -199,7 +199,7 @@ export class ListTicketComponent implements OnInit {
 	onSearch() {
 		//reset list item
 		this.listItem = [];
-		this._Router.navigate(['list-tickets'],{ queryParams : this.search });
+		this._Router.navigate(['list-tickets', this.search]);
 	}
 
 	/*=================================
