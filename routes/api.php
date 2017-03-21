@@ -439,6 +439,23 @@ $api->version('v1', function ($api) {
         'uses' => 'App\Http\Controllers\System\CategoryTicketController@show',
     ]);
 
+
+    /*
+    |--------------------------------------------------------------------------
+    | Album Ticket
+    |--------------------------------------------------------------------------
+    */
+    $api->get('/album_ticket/index', [
+        'as' => 'api.album_ticket.index',
+        'uses' => 'App\Http\Controllers\System\AlbumTicketController@index',
+    ]);
+
+    $api->get('/album_ticket/show/{id}', [
+        'as' => 'api.album_ticket.show',
+        'uses' => 'App\Http\Controllers\System\AlbumTicketController@show',
+    ]);
+
+
     /*
     |--------------------------------------------------------------------------
     | Entrance Ticket
