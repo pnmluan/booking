@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class EntranceTicket extends BaseModel
 {
     protected $table = 'entrance_ticket'; 
-    protected $fillable = ['name', 'category_ticket_id', 'adult_fare', 'children_fare', 'description', 'content', 'include', 'not_include', 'notice', 'support', 'longitude', 'latitude', 'created_at'];
+    protected $fillable = ['name', 'category_ticket_id', 'adult_fare', 'children_fare', 'description', 'content', 'include', 'not_include', 'notice', 'support', 'longitude', 'latitude', 'clean_url', 'created_at'];
 
     public function getModelValidations()
     {
