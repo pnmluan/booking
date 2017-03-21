@@ -23,6 +23,7 @@ export class ListTicketComponent implements OnInit {
 	queryParams = {};
 	listItem = [];
 	curRouting?: string;
+	view: string = 'grid';
 	search = {};
 	imgPath: string = this._EntranceTicketDataService.imgPath;
 
