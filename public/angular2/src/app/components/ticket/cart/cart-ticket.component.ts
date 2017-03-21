@@ -132,12 +132,15 @@ export class CartTicketComponent implements OnInit {
 	onLinkToPaymentTicket(){
 		let today = moment().format(this._Configuration.dateFormat);
 		for(let key in this.cartItems){
-			let departure = this.cartItems[key].departure.formatted;
-			let booking_date = moment(departure, this._Configuration.viFormatDate).format(this._Configuration.dateFormat);
-			if(booking_date < today){
-				this._ToasterService.pop('error', 'Lỗi nhập liệu', 'Vui lòng kiểm tra lại ngày tham quan tour ' + this.cartItems[key].name + '.');
-				return;
+			if (this.cartItems[key].departure) {
+				let departure = this.cartItems[key].departure.formatted;
+				let booking_date = moment(departure, this._Configuration.viFormatDate).format(this._Configuration.dateFormat);
+				if (booking_date < today) {
+					this._ToasterService.pop('error', 'Lỗi nhập liệu', 'Vui lòng kiểm tra lại ngày tham quan tour ' + this.cartItems[key].name + '.');
+					return;
+				}
 			}
+			
 		}
 		this._Router.navigate(['payment-ticket']);
 	}
