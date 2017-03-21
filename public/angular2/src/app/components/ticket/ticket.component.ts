@@ -497,7 +497,7 @@ export class SearchResultComponent implements OnInit, AfterViewInit {
 		params.set('infant', this.session_flight['infant']);
 
 		this._BookingDataService.create(params).subscribe(res => {
-			if(res.status == 'success') {
+			if(res.data) {
 				let booking = res.data;
 
 				// Insert Booking Detail
@@ -516,7 +516,7 @@ export class SearchResultComponent implements OnInit, AfterViewInit {
 					params.set('ticket_type', this.listRoutes[key].selectedFlight.type);
 
 					this._BookingDetailDataService.create(params).subscribe(res => {
-						if (res.status == 'success') {
+						if (res.data) {
 							let booking_detail = res.data;
 							// Insert Passengers
 							for (let k in this.passengers) {

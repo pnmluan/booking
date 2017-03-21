@@ -589,6 +589,16 @@ $api->version('v1', function ($api) {
         'uses' => 'App\Http\Controllers\System\TicketBillController@save',
     ]);
 
+    $api->post('/ticket_detail/save', [
+        'as' => 'api.ticket_detail.create',
+        'uses' => 'App\Http\Controllers\System\TicketDetailController@save',
+    ]);
+
+    $api->post('/ticket_detail/save/{id}', [
+        'as' => 'api.ticket_detail.update',
+        'uses' => 'App\Http\Controllers\System\TicketDetailController@save',
+    ]);
+
     /*
     |--------------------------------------------------------------------------
     | Crawler API

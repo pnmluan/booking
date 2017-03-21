@@ -183,8 +183,9 @@ export class PaymentTicketComponent implements OnInit {
 			params.set('state', 'pending');
 
 			this._TicketBillDataService.create(params).subscribe(res => {
-				if (res.status == 'success') {
+				if (res.data) {
 					let ticketBill = res.data;
+					console.log(cartItems)
 
 					// Insert Ticket Detail
 					for (let key in cartItems) {
@@ -197,7 +198,7 @@ export class PaymentTicketComponent implements OnInit {
 						params.set('departure', selectedTicket.departure);
 
 						this._TicketDetailDataService.create(params).subscribe(res => {
-							if (res.status == 'success') {
+							if (res.data) {
 
 							}
 						});
