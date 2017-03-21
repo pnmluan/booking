@@ -32,6 +32,10 @@
     #RewriteCond %{REQUEST_FILENAME} !-f
     #RewriteRule ^ index.php [L]
 
+    # Send request via index.php (again, not if its a real file or folder)
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+
     # deal with php5-cgi first
     <IfModule mod_fcgid.c>
         RewriteRule ^ index.php [L]
