@@ -1242,7 +1242,7 @@ only screen and (max-width: 767px) {
 
 .tour-details-inner {  width: 100%; }
 
-.tour-details-l { width: calc(100% - 320px); padding-right: 20px; float: left }
+.tour-details-l { width: calc(100% - 320px); padding-right: 20px; float: left; position: relative; }
 .tour-details-l-inner {}
 .tour-info { margin-bottom: 30px; }
 .tour-info .title { font-size: 20px; font-weight: bold; color: #649931; font-family: arial; line-height: 25px; margin-bottom: 5px; }
@@ -1569,8 +1569,8 @@ ng-select > div > div.single > div.clear, ng-select > div > div.single > div.tog
 ng-select > div { height: 30px; }
 .modal-content, .modal-header { border-radius: 0px; }
 
-.preloader{ float: left; left: 0; width: 100%; height: 100%; position: absolute; background-color: #fff; z-index: 10001; text-align: center; }
-.preloader img { width: 100px; height: 100px; position: absolute; }
+.preloader{ float: left; left: 0; width: 100%; height: 100%; position: absolute; background-color: #fff; z-index: 10000; text-align: center; }
+.preloader img { width: 320px; height: 320px; position: relative; }
 
 
 

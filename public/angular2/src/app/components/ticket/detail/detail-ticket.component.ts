@@ -94,6 +94,8 @@ export class DetailTicketComponent implements OnInit {
   	}
 
   	initData() {
+  		//display loading
+  		jQuery('.preloader').fadeIn();
   		this.photos.clear();
   		this.isAddPeople = false;
 

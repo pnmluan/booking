@@ -11,19 +11,19 @@
                         </div>
                     </div>
                 </div>
-                <div class="row" style="">
+                <div class="row">
                     <div class="col-md-4 col-xs-12 box-left-contact">
-                        <form class="form-contact">
+                        <form #f="ngForm" (ngSubmit)="onSubmit(f)" autocomplete="off" class="form-contact">
                             <div class="field">
                                 <label>Họ Tên <span style="color: red">*</span></label>
                                 <div>
-                                    <input placeholder="" id="name">
+                                    <input type="text" name="name" [(ngModel)]="contact.name" #name required>
                                 </div>
                             </div>
                             <div class="field">
                                 <label>Email <span style="color: red">*</span></label>
                                 <div>
-                                    <input placeholder="" id="email">
+                                    <input type="text" name="email" [(ngModel)]="contact.email" #email required>
                                 </div>
                             </div>
                             <div class="field">
