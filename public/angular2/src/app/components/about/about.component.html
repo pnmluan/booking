@@ -29,23 +29,23 @@
                             <div class="field">
                                 <label>Điện Thoại <span style="color: red">*</span></label>
                                 <div>
-                                    <input placeholder="" id="phone">
+                                    <input type="text" name="phone" [(ngModel)]="contact.phone" #phone required>
                                 </div>
                             </div>
                             <div class="field">
                                 <label>Tiêu Đề</label>
                                 <div>
-                                    <input placeholder="" id="title">
+                                    <input type="text" name="title" [(ngModel)]="contact.title">
                                 </div>
                             </div>
                             <div class="field">
                                 <label>Nội Dung <span style="color: red">*</span></label>
                                 <div>
-                                    <textarea placeholder="" id="comment"></textarea>
+                                    <textarea name="comment" [(ngModel)]="contact.comment" required></textarea>
                                 </div>
                             </div>
                             <div class="field">
-                                <button class="btn-contact" type="button">Gửi</button>
+                                <button class="btn-contact" type="submit" [disabled]="!f.valid">Gửi</button>
                             </div>
                         </form>
                     </div>

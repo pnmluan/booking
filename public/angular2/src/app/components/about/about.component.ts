@@ -14,4 +14,9 @@ export class AboutComponent implements OnInit {
 
 	ngOnInit() { }
 
+	onSubmit(form: NgForm){
+		if(form.valid){
+			console.log(this.contact);
+		}
+	}
 }
