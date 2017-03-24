@@ -74,6 +74,13 @@ class EntranceTicketController extends Controller{
             }
 
             /*==================================================
+             * Except ID
+             *==================================================*/
+            if(isset($param['except_id'])) {
+                $query->where($alias_dot.'id','!=', $param['except_id']);
+            }
+
+            /*==================================================
              * Limit & Offset
              *==================================================*/
             $limit = (isset($params['limit']) || !empty($params['limit']))?$params['limit']:$limit;
