@@ -1,19 +1,20 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, HostListener } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { URLSearchParams } from '@angular/http';
 
 import { Configuration } from '../../../shared/app.configuration';
-
 import { CategoryTicketDataService, EntranceTicketDataService } from '../../../shared/';
 import { LocalStorageService } from 'angular-2-local-storage';
 import { Subscription } from 'rxjs/Rx';
 declare let jQuery: any;
 
 @Component({
-  selector: 'app-list-ticket',
-  templateUrl: './list-ticket.component.html',
-  providers: [ CategoryTicketDataService, EntranceTicketDataService]
+	selector: 'app-list-ticket',
+	templateUrl: './list-ticket.component.html',
+	providers: [ CategoryTicketDataService, EntranceTicketDataService],
+	host: { '(document:keydown)' : 'onEnterForm($event)' }
 })
+
 export class ListTicketComponent implements OnInit {
 	private subscriptionEvents: Subscription;
 	private querySubscription: Subscription;
@@ -25,6 +26,7 @@ export class ListTicketComponent implements OnInit {
 	view: string = 'grid';
 	search: string;
 	imgPath: string = this._EntranceTicketDataService.imgPath;
+
 
 	constructor(
 		private _CategoryTicketDataService: CategoryTicketDataService,
@@ -189,6 +191,12 @@ export class ListTicketComponent implements OnInit {
 				this.listItem = listItem;
 			}
 		});
+  	}
+
+  	onEnterForm($event){
+  		if($event.keyCode == 13){
+			this.onSearch();
+		}
   	}
 
   	/*=================================
