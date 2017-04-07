@@ -1,4 +1,5 @@
 import { Component, OnInit, HostListener } from '@angular/core';
+import { Title } from '@angular/platform-browser';
 import { Router, ActivatedRoute } from '@angular/router';
 import { URLSearchParams } from '@angular/http';
 
@@ -21,12 +22,15 @@ export class ListTicketComponent implements OnInit {
 	public categoryTicketOptions = [];
 
 	params = {};
+	sort = {};
 	listItem = [];
+	order: boolean = false;
+	column: string;
+	direction: string;
 	curRouting?: string;
-	view: string = 'grid';
+	view: string;
 	search: string;
 	imgPath: string = this._EntranceTicketDataService.imgPath;
-
 
 	constructor(
 		private _CategoryTicketDataService: CategoryTicketDataService,
@@ -35,6 +39,7 @@ export class ListTicketComponent implements OnInit {
 		private _Router: Router,
 		private _ActivatedRoute: ActivatedRoute,
 		private sessionStorage: LocalStorageService,
+		private _title: Title
 	) {
 
 		this.querySubscription = _ActivatedRoute.params.subscribe(
@@ -53,6 +58,11 @@ export class ListTicketComponent implements OnInit {
 	}
 
   	ngOnInit() {
+  		this._title.setTitle('Tours | Datvesieure');
+  		//set default sort
+		this.sort['column'] = 'name';
+		this.sort['direction'] = 'asc';
+
 		this._CategoryTicketDataService.getAll().subscribe(res => {
 			if (res.data) {
 				let categoryTicketOptions = [];
@@ -70,7 +80,11 @@ export class ListTicketComponent implements OnInit {
 		});
   	}
 
-  	initData() {
+  	ngAfterViewInit(){
+  		this.onChangeView('grid');
+  	}
+
+  	initData() {	
   		//get entrance ticket
   		this.search = this.params['clean_url'] || '';
   		if(this.search){
@@ -156,6 +170,12 @@ export class ListTicketComponent implements OnInit {
 
   	onChangeView(view) {
 		this.view = view;
+		let timeout: number = 100;
+		//set timeout and reset boolean order
+		if(this.order){
+			timeout = 1000;
+			this.order = !this.order;
+		}
 		setTimeout(() => {
 			jQuery('.tours-list .item .item-inner h3').matchHeight({
 				byRow: true,
@@ -170,8 +190,7 @@ export class ListTicketComponent implements OnInit {
 				target: null,
 				remove: false
 			});
-		}, 100);
-
+		}, timeout);
   	}
 
   	loadEntranceTicketList(category_ticket_id){
@@ -179,6 +198,12 @@ export class ListTicketComponent implements OnInit {
 		if(category_ticket_id){
 			params.set('category_ticket_id', category_ticket_id);	
 		}
+
+		if(this.order){
+			params.set('order_by', this.column);
+			params.set('order', this.direction);
+		}
+
   		this._EntranceTicketDataService.getAll(params).subscribe(res => {
 			let listItem = [];
 			if (res.data) {
@@ -193,17 +218,35 @@ export class ListTicketComponent implements OnInit {
 		});
   	}
 
-  	onEnterForm($event){
-  		if($event.keyCode == 13){
-			this.onSearch();
+	/*=================================
+	 * Sort Ticket
+	 *=================================*/
+	onSort(field, value){
+		this.order = true;
+		if(field == 'column'){
+			this.column = value;
+			this.direction = this.sort['direction'];
 		}
-  	}
+		if(field == 'direction'){
+			this.column = this.sort['column'];
+			this.direction = value;
+		}
+		this.initData();
+		this.onChangeView(this.view);
+	}
 
   	/*=================================
 	 * Search Ticket
 	 *=================================*/
+	onEnterForm($event){
+		if($event.keyCode == 13){
+			this.onSearch();
+		}
+	}
+
 	onSearch() {
-		//reset list item
+		//reset properties
+		this.order = false;
 		this.listItem = [];
 		this._Router.navigate(['list-tickets', this.search]);
 		//display loading

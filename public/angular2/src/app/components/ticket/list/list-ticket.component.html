@@ -34,18 +34,18 @@
                         <div class="tours-sort-l">
                             <ul class="clearfix">
                                 <li>
-                                    <label for="">SORT BY</label>
-                                    <select name="">
-                                        <option value="">Name</option>
-                                        <option value="">Price</option>
+                                    <label>SORT BY</label>
+                                    <select name="column" [(ngModel)]="sort.column" (change)="onSort('column', $event.target.value)">
+                                        <option value="name">Name</option>
+                                        <option value="price">Price</option>
                                     </select>
                                 </li>
                                 <li>|</li>
                                 <li>
-                                    <label for="">ORDER</label>
-                                    <select name="">
-                                        <option value="">A/Z - 1/3</option>
-                                        <option value="">Z/A - 1/3</option>
+                                    <label>ORDER</label>
+                                    <select name="direction" [(ngModel)]="sort.direction" (change)="onSort('direction', $event.target.value)">
+                                        <option value="asc">A/Z - 1/3</option>
+                                        <option value="desc">Z/A - 1/3</option>
                                     </select>
                                 </li>
                             </ul>
@@ -67,27 +67,31 @@
                     </div>
                     <div class="preloader"><img src="assets/img/loading-x-1.gif"></div>
                     <div class="tours-list clearfix" [ngClass]="{ 'list-view': view == 'list' }">
-
-                        <div class="item" *ngFor="let item of listItem">
-                            <div class="item-inner">
-                                <a [routerLink]="['/detail-ticket', item.clean_url]"><img *ngIf="item.img" [src]="item.img" alt=""></a>
-                                <div>
-                                    <h3>
-                                      <a [routerLink]="['/detail-ticket', item.clean_url]">{{ item.name }}</a>
-                                    </h3>
-                                    <p>
-                                        {{ item.description }}
-                                    </p>
-                                    <div class="item-book clearfix">
-                                        <div class="price">{{ item.adult_fare | number }} <span>VNĐ</span></div>
-                                        <div class="s-cart">
-                                            <input type="number" [(ngModel)]="item.order" min="1">
-                                            <a title="ADD TO CART" class="add-to-cart pointer" (click)="addToCart(item)"><i class="fa fa-shopping-cart"></i></a>
+                        <ng-template [ngIf]="!listItem.length">
+                            <div>Khong tim thay du lieu</div>
+                        </ng-template>
+                        <ng-template [ngIf]="listItem.length">
+                            <div class="item" *ngFor="let item of listItem">
+                                <div class="item-inner">
+                                    <a [routerLink]="['/detail-ticket', item.clean_url]"><img *ngIf="item.img" [src]="item.img" alt=""></a>
+                                    <div>
+                                        <h3>
+                                          <a [routerLink]="['/detail-ticket', item.clean_url]">{{ item.name }}</a>
+                                        </h3>
+                                        <p>
+                                            {{ item.description }}
+                                        </p>
+                                        <div class="item-book clearfix">
+                                            <div class="price">{{ item.adult_fare | number }} <span>VNĐ</span></div>
+                                            <div class="s-cart">
+                                                <input type="number" [(ngModel)]="item.order" min="1">
+                                                <a title="ADD TO CART" class="add-to-cart pointer" (click)="addToCart(item)"><i class="fa fa-shopping-cart"></i></a>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                        </div>
+                            </div>    
+                        </ng-template>
                     </div>
                     <!-- <div class="pagi">
                         <ul class="clearfix">

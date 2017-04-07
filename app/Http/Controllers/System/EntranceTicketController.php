@@ -62,6 +62,7 @@ class EntranceTicketController extends Controller{
                         $query->where($alias_dot . $field, 'IN', $params[$field]);
                     }else{
                         switch ($field) {
+                            case 'category_ticket_id':
                             case 'status':
                                 $query->where($alias_dot . $field, '=', $params[$field]);
                                 break;
@@ -76,16 +77,23 @@ class EntranceTicketController extends Controller{
             /*==================================================
              * Except ID
              *==================================================*/
-            if(isset($param['except_id'])) {
-                $query->where($alias_dot.'id','!=', $param['except_id']);
+            if(isset($params['except_id'])) {
+                $except_id = explode(',', $params['except_id']);
+                $query->whereNotIn($alias_dot.'id', $except_id);
             }
-
+            
+            /*==================================================
+             * Order
+             *==================================================*/            
+            if(isset($params['order_by'], $params['order'])){
+                ($params['order_by'] == 'price') && $params['order_by'] = 'adult_fare';
+                $query->orderBy($params['order_by'], $params['order']);
+            }
             /*==================================================
              * Limit & Offset
              *==================================================*/
-            $limit = (isset($params['limit']) || !empty($params['limit']))?$params['limit']:$limit;
-            $offset = (isset($params['offset']) || !empty($params['offset']))?$params['offset']:$offset;
-
+            $limit = (isset($params['limit']) || !empty($params['limit'])) ? $params['limit'] : $limit;
+            $offset = (isset($params['offset']) || !empty($params['offset'])) ? $params['offset'] : $offset;
 
             /*==================================================
              * Process Query

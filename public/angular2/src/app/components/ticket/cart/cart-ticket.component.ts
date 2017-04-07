@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Title } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 import { Configuration } from '../../../shared/app.configuration';
 import { EntranceTicketDataService } from './../../../shared';
@@ -19,22 +20,18 @@ export class CartTicketComponent implements OnInit {
 	sumPrice: number = 0;
 	imgPath: string = this._EntranceTicketDataService.imgPath;
 	datepickerOptions: Array<any> = [];
-	numbers: Array<any> = [];
 
 	constructor(
 		private sessionStorage: LocalStorageService,
 		private _EntranceTicketDataService: EntranceTicketDataService,
 		private _Router: Router,
 		private _Configuration: Configuration,
-		private _ToasterService: ToasterService
+		private _ToasterService: ToasterService,
+		private _title: Title
 	) { }
 
 	ngOnInit() {
-		let i = 0;
-		do{
-			++i;
-			this.numbers.push(i);
-		}while(i<=30);
+		this._title.setTitle('Your Cart | Datvesieure');
 		this.cartItems = this.sessionStorage.get('cartItems');
 		this.processTotal();
 	}

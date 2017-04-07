@@ -1,4 +1,5 @@
 import { Component, OnInit, AfterViewInit, ViewChild, ViewContainerRef, ComponentFactoryResolver } from '@angular/core';
+import { Title } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 import {
 	FormControl,
@@ -46,9 +47,9 @@ export class HomeComponent implements OnInit, AfterViewInit {
 		private _CategoryTicketDataService: CategoryTicketDataService, 
 		private sessionStorage: LocalStorageService,
 		private _Router: Router,
-		private _componentFactoryResolver: ComponentFactoryResolver
-	) { 
-
+		private _componentFactoryResolver: ComponentFactoryResolver,
+		private _title: Title
+	) {
 		this.subscriptionEvents = this._Router.events.subscribe((val) => {
 			let routing = this._Router.url;
 			if (this.curRouting != routing) {
@@ -56,8 +57,6 @@ export class HomeComponent implements OnInit, AfterViewInit {
 				this.initData();
 			}
 		});
-		
-		
 	}
 
 	// initialize data
@@ -140,7 +139,9 @@ export class HomeComponent implements OnInit, AfterViewInit {
 	}
 	
 
-	ngOnInit() {}
+	ngOnInit() {
+		this._title.setTitle('Homepage - Đặt vé siêu rẻ');
+	}
 
 	ngAfterViewInit() {}
 	

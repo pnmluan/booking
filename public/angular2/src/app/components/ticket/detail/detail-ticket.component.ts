@@ -1,4 +1,5 @@
 import { Component, OnInit, ViewChild, ViewContainerRef, ComponentFactoryResolver } from '@angular/core';
+import { Title } from '@angular/platform-browser';
 import { Router, ActivatedRoute } from '@angular/router';
 import { URLSearchParams } from '@angular/http';
 
@@ -47,8 +48,9 @@ export class DetailTicketComponent implements OnInit {
 		private _ActivatedRoute: ActivatedRoute,
 		private sessionStorage: LocalStorageService,
 		private _ToasterService: ToasterService,
-		private _componentFactoryResolver: ComponentFactoryResolver
-	) { 
+		private _componentFactoryResolver: ComponentFactoryResolver,
+		private _title: Title
+	) {
 		// subscribe to router event
 		this.subscriptionParam = _ActivatedRoute.params.subscribe(
 			(param: any) => {
@@ -107,6 +109,7 @@ export class DetailTicketComponent implements OnInit {
   		this._EntranceTicketDataService.getAll(params).subscribe(res => {
 			if (res.data) {
 				this.Ticket = res.data[0];
+				this._title.setTitle(this.Ticket['name'] + ' | Datvesieure');
 				(<DetailTicketPhotoComponent>componentRef.instance).albums = res.data[0].album;
   				(<DetailTicketPhotoComponent>componentRef.instance).imgPath = this.imgPath;
 				this.lat = +this.Ticket['latitude'];

@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { Title } from '@angular/platform-browser';
 import { NgForm } from '@angular/forms';
 import { URLSearchParams } from '@angular/http';
+import { ToasterService } from 'angular2-toaster/angular2-toaster';
 
 @Component({
 	selector: 'app-about',
@@ -10,13 +12,20 @@ import { URLSearchParams } from '@angular/http';
 export class AboutComponent implements OnInit {
 	contact = {};
 
-	constructor() { }
+	constructor(
+		private _ToasterService: ToasterService,
+		private _title: Title
+	) { }
 
-	ngOnInit() { }
+	ngOnInit() {
+		this._title.setTitle('Liên hệ | Datvesieure');
+	}
 
 	onSubmit(form: NgForm){
 		if(form.valid){
-			console.log(this.contact);
+			
+		}else{
+			this._ToasterService.pop('warning', '登録しました。');
 		}
 	}
 }

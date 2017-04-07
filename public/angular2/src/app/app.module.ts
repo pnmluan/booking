@@ -1,5 +1,5 @@
-import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { BrowserModule, Title } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
@@ -12,7 +12,7 @@ import { SelectModule } from 'angular2-select';
 // import { LocalStorageService, LOCAL_STORAGE_SERVICE_CONFIG } from 'angular-2-local-storage';
 import { LocalStorageModule } from 'angular-2-local-storage';
 import { MomentModule } from 'angular2-moment';
-import { HTTP_INTERCEPTOR_PROVIDER } from 'ng2-http-interceptor';
+import { HttpInterceptorModule, HttpInterceptorService } from 'ng-http-interceptor';
 import { LoadingAnimateModule, LoadingAnimateService } from 'ng2-loading-animate';
 import { Ng2Bs3ModalModule } from 'ng2-bs3-modal/ng2-bs3-modal';
 import { DatePickerModule } from 'ng2-datepicker';
@@ -64,6 +64,7 @@ import { ListTicketComponent, DetailTicketComponent, DetailTicketPhotoComponent,
     PaymentTicketComponent
   ],
   imports: [
+    HttpInterceptorModule,
     BrowserModule,
     FormsModule,
     HttpModule,
@@ -88,8 +89,9 @@ import { ListTicketComponent, DetailTicketComponent, DetailTicketPhotoComponent,
   providers: [
     Configuration,
     HttpClient,
-    ...HTTP_INTERCEPTOR_PROVIDER,
+    HttpInterceptorService,
     LoadingAnimateService,
+    Title
     // LocalStorageService,
     // {
     //   provide: LOCAL_STORAGE_SERVICE_CONFIG, useValue: localStorageServiceConfig

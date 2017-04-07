@@ -13,6 +13,7 @@ export class Configuration {
 	public longFormatDate = "dddd - DD/MM/YYYY";
 	public viFormatDate = "DD/MM/YYYY";
 	public dateFormat = 'YYYY-MM-DD';
+	public formatDate = 'YYYY-MM-DD';
 	public longDateTime = 'YYYY-MM-DD HH:mm:ss';
 	public longFormatDateTime = "HH:mm-dddd-DD/MM/YYYY";
 	public session_expired = 30/60; //Session 15 mins
