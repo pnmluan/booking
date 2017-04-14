@@ -1,6 +1,6 @@
 import { Component, ViewChild } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { HttpInterceptorService } from 'ng2-http-interceptor';
+import { HttpInterceptorService } from 'ng-http-interceptor';
 import { ToasterConfig } from 'angular2-toaster/angular2-toaster';
 import { LoadingAnimateService } from 'ng2-loading-animate';
 import { ModalComponent } from 'ng2-bs3-modal/ng2-bs3-modal';
