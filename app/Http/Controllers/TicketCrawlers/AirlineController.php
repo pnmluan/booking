@@ -289,63 +289,41 @@ class AirlineController extends ApiController
         require_once(base_path('app/Libraries/Curl.php'));
 
         // PREPARE PARAM
-        $round_trip = $request->input('round_trip');
-
-        if ($round_trip == 'on')
-            $round_trip = 'RoundTrip';
-        else if ($round_trip == 'off')
-            $round_trip = 'OneWay';
-
         $from = $request->input('from');
         $to = $request->input('to');
-        $from_date = strtotime($request->input('from_date'));
-        $to_date = strtotime($request->input('to_date'));
+        $from_date = $request->input('from_date');
+        $to_date = $request->input('to_date');
         $adult = $request->input('adult');
         $children = $request->input('children') ?: 0;
         $infant = $request->input('infant') ?: 0;
+
+        $round_trip = $request->input('round_trip');
+
+        if ($round_trip == 'on') {
+
+            $url = 'https://booking.jetstar.com/vn/vi/booking/search-flights?origin1=' . $from . '&destination1=' . $to . '&departuredate1=' . $from_date . '&origin2=' . $to . '&destination2=' . $from . '&departuredate2=' . $to_date . '&adults=' . $adult . '&children=' . $children . '&infants=' . $infant . '&currency=VND';
+
+            $prefix_search = "//div[contains(@class, 'js-outbound')]";
+
+        } else if ($round_trip == 'off') {
+
+            $url = 'https://booking.jetstar.com/vn/vi/booking/search-flights?origin1=' . $from . '&destination1=' . $to . '&departuredate1=' . $from_date . '&adults=' . $adult . '&children=' . $children . '&infants=' . $infant . '&currency=VND';
+
+            $prefix_search = "";
+        }
 
         // GET SESSION ID
         $again = 0;
         begin:
         $again++;
-        $url = 'http://booknow.jetstar.com/Search.aspx?culture=vi-VN';
 
         $curl = new \Curl();
 
         $curl->get($url);
 
-        $curl->setHeader('Host', 'booknow.jetstar.com');
-        $curl->setHeader('Referer', 'http://booknow.jetstar.com/Search.aspx?culture=vi-VN');
-
         $curl->setCookie('ASP.NET_SessionId', $curl->getCookie('ASP.NET_SessionId'));
 
-        // SEARCH FLIGHT
-        $curl->post('http://booknow.jetstar.com/Search.aspx?culture=vi-VN', array(
-            '__EVENTTARGET' => '',
-            '__EVENTARGUMENT' => '',
-            '__VIEWSTATE' => '/wEPDwUBMGQYAQUeX19Db250cm9sc1JlcXVpcmVQb3N0QmFja0tleV9fFgEFJ01lbWJlckxvZ2luU2VhcmNoVmlldyRtZW1iZXJfUmVtZW1iZXJtZSDCMtVG/1lYc7dy4fVekQjBMvD5',
-            'pageToken' => '',
-            'ControlGroupSearchView$AvailabilitySearchInputSearchView$RadioButtonMarketStructure' => $round_trip,
-            'ControlGroupSearchView$AvailabilitySearchInputSearchView$TextBoxMarketOrigin1' => $from,
-            'ControlGroupSearchView$AvailabilitySearchInputSearchView$TextBoxMarketDestination1' => $to,
-            'ControlGroupSearchView$AvailabilitySearchInputSearchView$TextboxDepartureDate1' => date('d/m/Y', $from_date),
-            'ControlGroupSearchView$AvailabilitySearchInputSearchView$TextboxDestinationDate1' => date('d/m/Y', $to_date),
-            'ControlGroupSearchView$AvailabilitySearchInputSearchView$DropDownListCurrency' => 'VND',
-            'ControlGroupSearchView$AvailabilitySearchInputSearchView$TextBoxMarketOrigin2' => $to,
-            'ControlGroupSearchView$AvailabilitySearchInputSearchView$TextBoxMarketDestination2' => $from,
-            'ControlGroupSearchView$AvailabilitySearchInputSearchView$TextboxDepartureDate2' => date('d/m/Y', $to_date),
-            'ControlGroupSearchView$AvailabilitySearchInputSearchView$TextboxDestinationDate2' => '',
-            'ControlGroupSearchView$AvailabilitySearchInputSearchView$DropDownListPassengerType_ADT' => $adult,
-            'ControlGroupSearchView$AvailabilitySearchInputSearchView$DropDownListPassengerType_CHD' => $children,
-            'ControlGroupSearchView$AvailabilitySearchInputSearchView$DropDownListPassengerType_INFANT' => $infant,
-            'ControlGroupSearchView$AvailabilitySearchInputSearchView$RadioButtonSearchBy' => 'SearchStandard',
-            'ControlGroupSearchView$AvailabilitySearchInputSearchView$numberTrips' => '2',
-            'ControlGroupSearchView$AvailabilitySearchInputSearchView$ButtonSubmit' => '',
-            'locale' => 'vi-VN',
-        ));
-
-
-        $curl->get('http://booknow.jetstar.com/Select.aspx');
+        $curl->get('https://booking.jetstar.com/vn/vi/booking/select-flights');
 
         $doc = new \DOMDocument();
         $doc->loadHTML($curl->response);
@@ -355,141 +333,41 @@ class AirlineController extends ApiController
 
         // DEPARTURE FLIGHT
         $k = 0;
-        $fields = $xpath->query("(//table[@class='domestic'])[1]/tbody/tr/td");
-        $prices = $xpath->query("//*[@name='ControlGroupSelectView\$AvailabilityInputSelectView\$market1']");
-        $prices1 = $xpath->query("//*[@name='ControlGroupSelectView\$AvailabilityInputSelectView\$CheckBoxMkt1P']");
-        $prices2 = $xpath->query("//*[@name='ControlGroupSelectView\$AvailabilityInputSelectView\$CheckBoxMkt1Y']");
+        $fields = $xpath->query($prefix_search . "//input[@class='js-flight-selection']");
 
-        for ($i = 0; $i < ($fields->length - 2) / 4; $i++) {
-            if ($xpath->query("(//table[@class='domestic'])[1]/tbody/tr[" . ($i + 1) . "]/td[4]/div[1]")->length > 0) {
+        for ($i = 0; $i < ($fields->length); $i++) {
 
-                $str = $fields[$i * 4]->nodeValue;
-                $start_time = substr($str, 0, strpos($str, ':') + 3);
+            $data = [];
+            $data['start_date'] = date('d/m/Y', strtotime($from_date));
+            $data['start_time'] = substr($fields[$i]->getAttribute('data-departure-time'), 11);
+            $data['end_time'] = substr($fields[$i]->getAttribute('data-arrival-time'), 11);
+            $data['flight_code'] = $fields[$i]->getAttribute('data-flightnumber');
+            $data['price'] = intval($fields[$i]->getAttribute('data-per-pax-amount'));
+            $data['fee'] = json_decode($fields[$i]->getAttribute('data-price-breakdown'), true)['PriceBreakdown'][0]['Fees'];
+            $data['fee_service'] = 0;
+            $data['type'] = 'Vé tiết kiệm';
 
-                $str = $fields[$i * 4 + 1]->nodeValue;
-                $end_time = substr($str, 0, strpos($str, ':') + 3);
-
-                $str = $fields[$i * 4 + 2]->nodeValue;
-                $str = substr($str, strpos($str, 'Lượt đi') + 14, 8);
-                $str = implode('', explode('  ', $str));
-                $flight_code = trim($str);
-
-                $price = $prices[$k]->getAttribute('data-price');
-                $price1 = $prices1[$k]->getAttribute('data-price');
-                $price2 = $prices2[$k]->getAttribute('data-price');
-                $fee = $prices[$k]->getAttribute('data-discfees-adt');
-                $k++;
-
-                // Vé tiết kiệm
-                $data = [];
-                $data['start_date'] = date('d/m/Y', $from_date);
-                $data['start_time'] = $start_time;
-                $data['end_time'] = $end_time;
-                $data['flight_code'] = $flight_code;
-                $data['price'] = $price;
-                $data['fee'] = $fee;
-                $data['fee_service'] = 0;
-                $data['type'] = 'Vé tiết kiệm';
-
-                $result['dep_flights'][] = $data;
-
-                // Vé linh hoạt
-                // $data = [];
-                // $data['start_date'] = date('d/m/Y', $from_date);
-                // $data['start_time'] = $start_time;
-                // $data['end_time'] = $end_time;
-                // $data['flight_code'] = $flight_code;
-                // $data['price'] = $price;
-                // $data['fee'] = $fee;
-                // $data['fee_service'] = $price1;
-                // $data['type'] = 'Vé linh hoạt';
-
-                // $result['dep_flights'][] = $data;
-
-                // Vé tối ưu
-                // $data = [];
-                // $data['start_date'] = date('d/m/Y', $from_date);
-                // $data['start_time'] = $start_time;
-                // $data['end_time'] = $end_time;
-                // $data['flight_code'] = $flight_code;
-                // $data['price'] = $price;
-                // $data['fee'] = $fee;
-                // $data['fee_service'] = $price2;
-                // $data['type'] = 'Vé tối ưu';
-
-                // $result['dep_flights'][] = $data;
-            }
+            $result['dep_flights'][] = $data;
         }
 
         // RETURN FLIGHT
-        if (!empty($round_trip) && $round_trip == 'RoundTrip') {
+        if (!empty($round_trip) && $round_trip == 'on') {
 
-            $fields = $xpath->query("(//table[@class='domestic'])[2]/tbody/tr/td");
-            $prices = $xpath->query("//*[@name='ControlGroupSelectView\$AvailabilityInputSelectView\$market2']");
-            $prices1 = $xpath->query("//*[@name='ControlGroupSelectView\$AvailabilityInputSelectView\$CheckBoxMkt2P']");
-            $prices2 = $xpath->query("//*[@name='ControlGroupSelectView\$AvailabilityInputSelectView\$CheckBoxMkt2Y']");
+            $fields = $xpath->query("//div[contains(@class, 'js-inbound')]//input[@class='js-flight-selection']");
 
-            $k = 0;
+            for ($i = 0; $i < ($fields->length); $i++) {
 
-            for ($i = 0; $i < ($fields->length - 2) / 4; $i++) {
-                if ($xpath->query("(//table[@class='domestic'])[2]/tbody/tr[" . ($i + 1) . "]/td[4]/div[1]")->length > 0) {
+                $data = [];
+                $data['start_date'] = date('d/m/Y', strtotime($to_date));
+                $data['start_time'] = substr($fields[$i]->getAttribute('data-departure-time'), 11);
+                $data['end_time'] = substr($fields[$i]->getAttribute('data-arrival-time'), 11);
+                $data['flight_code'] = $fields[$i]->getAttribute('data-flightnumber');
+                $data['price'] = intval($fields[$i]->getAttribute('data-per-pax-amount'));
+                $data['fee'] = json_decode($fields[$i]->getAttribute('data-price-breakdown'), true)['PriceBreakdown'][0]['Fees'];
+                $data['fee_service'] = 0;
+                $data['type'] = 'Vé tiết kiệm';
 
-                    $str = $fields[$i * 4]->nodeValue;
-                    $start_time = substr($str, 0, strpos($str, ':') + 3);
-
-                    $str = $fields[$i * 4 + 1]->nodeValue;
-                    $end_time = substr($str, 0, strpos($str, ':') + 3);
-
-                    $str = $fields[$i * 4 + 2]->nodeValue;
-                    $str = substr($str, strpos($str, 'Lượt về') + 14, 8);
-                    $str = implode('', explode('  ', $str));
-                    $flight_code = trim($str);
-
-                    $price = $prices[$k]->getAttribute('data-price');
-                    $price1 = $prices1[$k]->getAttribute('data-price');
-                    $price2 = $prices2[$k]->getAttribute('data-price');
-                    $fee = $prices[$k]->getAttribute('data-discfees-adt');
-                    $k++;
-
-                    // Vé tiết kiệm
-                    $data = [];
-                    $data['start_date'] = date('d/m/Y', $to_date);
-                    $data['start_time'] = $start_time;
-                    $data['end_time'] = $end_time;
-                    $data['flight_code'] = $flight_code;
-                    $data['price'] = $price;
-                    $data['fee'] = $fee;
-                    $data['fee_service'] = 0;
-                    $data['type'] = 'Vé tiết kiệm';
-
-                    $result['ret_flights'][] = $data;
-
-                    // Vé linh hoạt
-                    // $data = [];
-                    // $data['start_date'] = date('d/m/Y', $to_date);
-                    // $data['start_time'] = $start_time;
-                    // $data['end_time'] = $end_time;
-                    // $data['flight_code'] = $flight_code;
-                    // $data['price'] = $price;
-                    // $data['fee'] = $fee;
-                    // $data['fee_service'] = $price1;
-                    // $data['type'] = 'Vé linh hoạt';
-
-                    // $result['ret_flights'][] = $data;
-
-                    // Vé tối ưu
-                    // $data = [];
-                    // $data['start_date'] = date('d/m/Y', $to_date);
-                    // $data['start_time'] = $start_time;
-                    // $data['end_time'] = $end_time;
-                    // $data['flight_code'] = $flight_code;
-                    // $data['price'] = $price;
-                    // $data['fee'] = $fee;
-                    // $data['fee_service'] = $price2;
-                    // $data['type'] = 'Vé tối ưu';
-
-                    // $result['ret_flights'][] = $data;
-                }
+                $result['ret_flights'][] = $data;
             }
         }
 
