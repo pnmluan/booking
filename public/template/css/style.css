@@ -1106,16 +1106,12 @@ only screen and (max-width: 767px) {
 .btn-search-tour { font-size: 16px; width: 100%; height: 32px; background: #649931; color: #fff; text-transform: uppercase; border-radius: 0px;  }
 .btn-search-tour:hover { color: #fff; }
 
-.tours-main { width: calc(100% - 300px); float: left; }
+.tours-main { width: calc(100% - 300px); float: left; position: relative; }
 
 .tours-list .item { float: left; width: 33.33%; padding: 0px 10px; margin-bottom: 20px; }
-.tours-list.list-view .item { float: none; width: 100%; padding: 0px 10px; margin-bottom: 20px; }
-
 .tours-list .item img { width: 100%; height: auto; display: block; }
 .tours-list .item .item-inner { box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); }
-
 .tours-list .item .item-inner > a { display: block; width: 100%; position: relative; }
-.tours-list.list-view .item .item-inner > a { float: left; width: 200px; }
 .tours-list .item .item-inner > a img {
     max-width: 100%;
     max-height: 100%;
@@ -1129,7 +1125,17 @@ only screen and (max-width: 767px) {
     -o-transform: translate(-50%,-50%);
 }
 .tours-list .item .item-inner > div { padding: 15px; }
+
+.tours-list.list-view .item { float: none; width: 100%; padding: 0px 10px; margin-bottom: 20px;  }
+.tours-list.list-view .item .item-inner { padding-left: 15px; }
+.tours-list.list-view .item .item-inner > a { float: left; width: 200px; }
 .tours-list.list-view .item .item-inner > div { overflow: hidden; }
+
+@media screen and (max-width: 767px) {
+    .tours-list.list-view .item .item-inner { padding-left: 0px; }
+    .tours-list.list-view .item .item-inner > a { float: none; width: auto; }
+}
+
 .tours-list .item .item-inner h3 { border-bottom: 1px solid #ddd; margin-bottom: 10px; text-transform: capitalize; font-size: 13px; font-weight: bold; padding-bottom: 15px; line-height: 20px; }
 .tours-list .item .item-inner h3 a{ color: #333; }
 .tours-list .item .item-inner p { color: #999; }
@@ -1236,7 +1242,7 @@ only screen and (max-width: 767px) {
 
 .tour-details-inner {  width: 100%; }
 
-.tour-details-l { width: calc(100% - 320px); padding-right: 20px; float: left }
+.tour-details-l { width: calc(100% - 320px); padding-right: 20px; float: left; }
 .tour-details-l-inner {}
 .tour-info { margin-bottom: 30px; }
 .tour-info .title { font-size: 20px; font-weight: bold; color: #649931; font-family: arial; line-height: 25px; margin-bottom: 5px; }
@@ -1556,12 +1562,63 @@ ng-select > div > div.single > div.clear, ng-select > div > div.single > div.tog
 
 
 .tour-info .tabset-content { padding-top: 30px; }
-.tour-details-l-inner { border: 1px solid #ddd; padding: 15px; }
+.tour-details-l-inner { border: 1px solid #ddd; padding: 15px; position: relative;}
 
 #sync2 .item, #sync2 .item img { height: 100%; }
 #sync2 .owl-item { padding: 0px 5px; }
 ng-select > div { height: 30px; }
 .modal-content, .modal-header { border-radius: 0px; }
+
+.preloader{ float: left; left: 0; width: 100%; height: 100%; position: absolute; background-color: #fff; z-index: 10000; text-align: center; }
+.preloader img { width: 320px; height: 320px; position: relative; }
+
+/***** BackToTop button css *****/
+#scroll {
+    position:fixed;
+    right:10px;
+    bottom:10px;
+    cursor:pointer;
+    width:50px;
+    height:50px;
+    background-color:#3498db;
+    text-indent:-9999px;
+    display:none;
+    -webkit-border-radius:60px;
+    -moz-border-radius:60px;
+    border-radius:60px
+}
+#scroll span {
+    position:absolute;
+    top:50%;
+    left:50%;
+    margin-left:-8px;
+    margin-top:-12px;
+    height:0;
+    width:0;
+    border:8px solid transparent;
+    border-bottom-color:#ffffff
+}
+#scroll:hover {
+    background-color:#e74c3c;
+    opacity:1;filter:"alpha(opacity=100)";
+    -ms-filter:"alpha(opacity=100)";
+}
+
+.about-title, .tutorial-title {
+	color: #649931;
+	font-size: 18px;
+	font-weight: bold;
+	margin-bottom: 10px;
+	border-left: 5px solid #649931;
+	padding-left: 10px;
+	margin-top: 50px;
+	margin-bottom: 20px;
+}
+
+.about p, .tutorial p { text-align: justify; }
+.tutorial p { margin-bottom: 20px; }
+.tutorial ul { margin-bottom:15px; margin-left: 30px; }
+.tutorial ul li { margin-bottom: 5px; }
 
 
 
