@@ -1617,9 +1617,24 @@ ng-select > div { height: 30px; }
 
 .about p, .tutorial p { text-align: justify; }
 .tutorial p { margin-bottom: 20px; }
-.tutorial ul { margin-bottom:15px; margin-left: 30px; }
-.tutorial ul li { margin-bottom: 5px; }
+.tutorial article ul { margin-bottom:15px; margin-left: 30px; }
+.tutorial article ul li { margin-bottom: 5px; }
 
+.about .container, .tutorial .container { margin-top: 20px; }
+.about aside, .tutorial aside { width: 330px; float: right; padding: 30px 20px;background: #f9f9f9;border: 1px solid #ddd;border-radius: 0px; }
+.about aside h2, .tutorial aside h2 { text-transform: uppercase; border-bottom: 1px solid #ddd; padding-bottom: 20px; margin-bottom: 20px; color: #649931; font-size: 22px; }
+.about aside ul li, .tutorial aside ul li { margin-bottom: 10px; }
+.about aside ul li a, .tutorial aside ul li a { color: #333; }
+.about aside ul li a:hover, .tutorial aside ul li a:hover { color: #649931; text-decoration: underline; }
+.about article, .tutorial article { width: calc(100% - 350px); float: left; padding: 15px; border: 1px solid #ddd; }
+.about article h2:first-child, .tutorial article h2:first-child { margin-top: 0px; }
+
+@media screen and (max-width: 768px) {
+    .about article, .aside aside,
+    .tutorial article, .tutorial aside { float: none; width: 100%; }
+    .about aside, .tutorial aside { display: none; }
+    .about article, .tutorial article {  border: 0px; padding: 30px 0px; }
+}
 
 
 
