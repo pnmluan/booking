@@ -23,6 +23,7 @@ export class ListTicketComponent implements OnInit {
 
 	params = {};
 	sort = {};
+	searchObj = {};
 	listItem = [];
 	order: boolean = false;
 	column: string;
@@ -72,6 +73,9 @@ export class ListTicketComponent implements OnInit {
 						value: res.data[key].clean_url,
 						label: res.data[key].name
 					};
+					if(this.search == res.data[key].clean_url){
+						this.searchObj = temp;
+					}
 
 					categoryTicketOptions.push(temp);
 				}
@@ -81,6 +85,8 @@ export class ListTicketComponent implements OnInit {
   	}
 
   	ngAfterViewInit(){
+  		//fake order
+  		this.order = true;
   		this.onChangeView('grid');
   	}
 
@@ -235,6 +241,14 @@ export class ListTicketComponent implements OnInit {
 		this.onChangeView(this.view);
 	}
 
+	/*=================================
+	 * Select Ticket
+	 *=================================*/
+	onSelected(obj: any){
+		this.search = obj.value;
+		this.searchObj = obj;
+	}
+
   	/*=================================
 	 * Search Ticket
 	 *=================================*/
@@ -267,6 +281,7 @@ export class ListTicketComponent implements OnInit {
 		let obj = {
 			id: item.id,
 			name: item.name,
+			clean_url: item.clean_url,
 			departure: null,
 			img: img,
 			adult_fare: item.adult_fare,
