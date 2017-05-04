@@ -90,7 +90,7 @@ export class ListTicketComponent implements OnInit {
   		this.onChangeView('grid');
   	}
 
-  	initData() {	
+  	initData() {
   		//get entrance ticket
   		this.search = this.params['clean_url'] || '';
   		if(this.search){
@@ -172,6 +172,11 @@ export class ListTicketComponent implements OnInit {
 		},1000)
 
 		jQuery('.preloader').delay(1000).fadeOut("slow");
+
+		//call onChangeView when page is reload
+		if(this.order){
+			this.onChangeView(this.view);
+		}
   	}
 
   	onChangeView(view) {
@@ -259,12 +264,14 @@ export class ListTicketComponent implements OnInit {
 	}
 
 	onSearch() {
-		//reset properties
-		this.order = false;
-		this.listItem = [];
-		this._Router.navigate(['list-tickets', this.search]);
-		//display loading
-		jQuery('.preloader').fadeIn();
+		if(this.search != this.params['clean_url']){
+			this.order = true;
+			//reset properties
+			this.listItem = [];
+			this._Router.navigate(['list-tickets', this.search]);
+			//display loading
+			jQuery('.preloader').fadeIn();
+		}
 	}
 
 	/*=================================
