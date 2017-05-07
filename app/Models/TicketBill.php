@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 class TicketBill extends BaseModel
 {
     protected $table = 'ticket_bill';
-    protected $fillable = ['code', 'total_fare', 'state', 'comment', 'status'];
+    protected $fillable = ['departure', 'total_fare', 'contact_id', 'comment'];
 
     public function getModelValidations()
     {
@@ -17,7 +17,7 @@ class TicketBill extends BaseModel
 
     public static function listItems(array $param = null){
 
-        $aColumns = ['code', 'total_fare', 'state', 'comment', 'status'];
+        $aColumns = ['departure', 'total_fare', 'contact_id', 'comment'];
 
         $query = \DB::table('ticket_bill')
             ->select(\DB::raw('SQL_CALC_FOUND_ROWS ticket_bill.id'),\DB::raw('ticket_bill.id AS DT_RowId'),'ticket_bill.*', 'contact.fullname', 'contact.phone', 'contact.email', 'contact.requirement')
@@ -64,8 +64,6 @@ class TicketBill extends BaseModel
         }
 
         //======================= Ordering =================
-        $query->orderBy('ticket_bill.state', 'desc');
-        $query->orderBy('ticket_bill.created_at', 'asc');
         // $sOrder = '';
         // if (isset($param['order']) && count($param['order'])){
         // 	for ($i=0 ; $i<count($param['order']); $i++){

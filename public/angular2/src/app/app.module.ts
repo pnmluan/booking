@@ -39,6 +39,8 @@ import { AppComponent } from './app.component';
 import { HomeComponent, BannerComponent, CommentComponent, NewsComponent } from './components/home';
 import { AboutComponent } from './components/about';
 import { IntrodutionComponent } from './components/introdution';
+import { TutorialComponent } from './components/tutorial';
+import { PolicyComponent } from './components/policy';
 import { PageNotFoundComponent } from './components/page-not-found';
 import { HeaderComponent } from './components/header';
 import { SearchResultComponent } from './components/search-result';
@@ -51,6 +53,8 @@ import { ListTicketComponent, DetailTicketComponent, DetailTicketPhotoComponent,
     HomeComponent,
     AboutComponent,
     IntrodutionComponent,
+    TutorialComponent,
+    PolicyComponent,
     PageNotFoundComponent,
     HeaderComponent,
     SearchResultComponent,

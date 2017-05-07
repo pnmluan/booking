@@ -2,6 +2,8 @@ import { Routes, RouterModule } from '@angular/router';
 import { HomeComponent } from './components/home';
 import { AboutComponent } from './components/about';
 import { IntrodutionComponent } from './components/introdution';
+import { PolicyComponent } from './components/policy';
+import { TutorialComponent } from './components/tutorial';
 import { SearchResultComponent } from './components/search-result';
 import { ListTicketComponent, DetailTicketComponent, CartTicketComponent, PaymentTicketComponent } from './components/ticket';
 import { PageNotFoundComponent } from './components/page-not-found';
@@ -21,12 +23,8 @@ const APP_ROUTES: Routes = [
 	{ path: 'payment-ticket', component: PaymentTicketComponent },
 	{ path: 'about', component: AboutComponent },
 	{ path: 'introdution', component: IntrodutionComponent },
-	// {
-	//   path: 'detail', loadChildren: () => System.import('./+detail').then((comp: any) => {
-	//     return comp.default;
-	//   })
-	//   ,
-	// },
+	{ path: 'tutorial', component: TutorialComponent },
+	{ path: 'policy', component: PolicyComponent },
 	{ path: '**', component: PageNotFoundComponent },
 ];
 

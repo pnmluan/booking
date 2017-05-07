@@ -25,9 +25,10 @@ export class BannerComponent implements OnInit {
 					options.push(res.data[key]);
 				}
 				this.bannerOptions = options;
+				this.loadScript();
 			}
 		});
-		this.loadScript();
+		
 	}
 
 	loadScript(){

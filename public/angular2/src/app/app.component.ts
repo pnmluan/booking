@@ -54,7 +54,6 @@ export class AppComponent {
 		let current_domain = window.location.origin;
 		current_href = current_href.replace(current_domain, '');
 		this._Router.events.subscribe((val) => {
-			console.log('this._Router.events.subscribe')
 			if (current_href.match(/^\/search-result.*/i)) {
 				let now = new Date().getTime();
 				this._LocalStorageService.set('user_session_start', now);
@@ -91,7 +90,6 @@ export class AppComponent {
 		let routing = this._Router.url;
 		if (this.curRouting != routing) {
 			this.curRouting = routing;
-			console.log('ngAfterContentChecked')
 			let now = new Date().getTime();
 			this._LocalStorageService.set('user_session_start', now);
 			this.onSetGlobalScript();
