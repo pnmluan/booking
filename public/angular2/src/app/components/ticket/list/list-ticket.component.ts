@@ -23,6 +23,7 @@ export class ListTicketComponent implements OnInit {
 
 	params = {};
 	sort = {};
+	searchObj = {};
 	listItem = [];
 	order: boolean = false;
 	column: string;
@@ -72,6 +73,9 @@ export class ListTicketComponent implements OnInit {
 						value: res.data[key].clean_url,
 						label: res.data[key].name
 					};
+					if(this.search == res.data[key].clean_url){
+						this.searchObj = temp;
+					}
 
 					categoryTicketOptions.push(temp);
 				}
@@ -80,11 +84,16 @@ export class ListTicketComponent implements OnInit {
 		});
   	}
 
-  	ngAfterViewInit(){
-  		this.onChangeView('grid');
-  	}
+	ngAfterViewInit(){
+		setTimeout(() => {
+			//fake order
+			this.order = true;
+			this.onChangeView('grid');	
+		}, 1000);
+		
+	}
 
-  	initData() {	
+  	initData() {
   		//get entrance ticket
   		this.search = this.params['clean_url'] || '';
   		if(this.search){
@@ -166,6 +175,11 @@ export class ListTicketComponent implements OnInit {
 		},1000)
 
 		jQuery('.preloader').delay(1000).fadeOut("slow");
+
+		//call onChangeView when page is reload
+		if(this.order){
+			this.onChangeView(this.view);
+		}
   	}
 
   	onChangeView(view) {
@@ -235,6 +249,14 @@ export class ListTicketComponent implements OnInit {
 		this.onChangeView(this.view);
 	}
 
+	/*=================================
+	 * Select Ticket
+	 *=================================*/
+	onSelected(obj: any){
+		this.search = obj.value;
+		this.searchObj = obj;
+	}
+
   	/*=================================
 	 * Search Ticket
 	 *=================================*/
@@ -245,12 +267,14 @@ export class ListTicketComponent implements OnInit {
 	}
 
 	onSearch() {
-		//reset properties
-		this.order = false;
-		this.listItem = [];
-		this._Router.navigate(['list-tickets', this.search]);
-		//display loading
-		jQuery('.preloader').fadeIn();
+		if(this.search != this.params['clean_url']){
+			this.order = true;
+			//reset properties
+			this.listItem = [];
+			this._Router.navigate(['list-tickets', this.search]);
+			//display loading
+			jQuery('.preloader').fadeIn();
+		}
 	}
 
 	/*=================================
@@ -267,6 +291,7 @@ export class ListTicketComponent implements OnInit {
 		let obj = {
 			id: item.id,
 			name: item.name,
+			clean_url: item.clean_url,
 			departure: null,
 			img: img,
 			adult_fare: item.adult_fare,

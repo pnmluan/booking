@@ -40,7 +40,7 @@
                                                     <tr>
                                                         <td><img src="{{imgPath + item.img}}" width="90" height="90"></td>
                                                         <td style="padding-left: 10px; text-align: left">
-                                                            <a [routerLink]="['/detail-ticket', item.id]">{{ item.name }}</a>
+                                                            <a [routerLink]="['/detail-ticket', item.clean_url]">{{ item.name }}</a>
                                                         </td>
                                                     </tr>
                                                 </tbody>
@@ -48,7 +48,7 @@
                                         </td>
                                         <td>
                                             <div class="input-group">
-                                                <input type="text" class="form-control daterange-single">
+                                                <input type="text" class="form-control daterange-single" [ngModel]="item.departure" #daparture (blur)="item.daparture = daparture.value">
                                                 <span class="input-group-addon"><i class="icon-calendar"></i></span>
                                             </div>
                                         </td>

@@ -1569,7 +1569,7 @@ ng-select > div > div.single > div.clear, ng-select > div > div.single > div.tog
 ng-select > div { height: 30px; }
 .modal-content, .modal-header { border-radius: 0px; }
 
-.preloader{ float: left; left: 0; width: 100%; height: 100%; position: absolute; background-color: #fff; z-index: 10000; text-align: center; }
+.preloader{ float: left; left: 0; width: 100%; height: 100%; position: absolute; background-color: #fff; z-index: 1040; text-align: center; }
 .preloader img { width: 320px; height: 320px; position: relative; }
 
 /***** BackToTop button css *****/
