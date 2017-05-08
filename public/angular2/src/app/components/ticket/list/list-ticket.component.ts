@@ -84,11 +84,14 @@ export class ListTicketComponent implements OnInit {
 		});
   	}
 
-  	ngAfterViewInit(){
-  		//fake order
-  		this.order = true;
-  		this.onChangeView('grid');
-  	}
+	ngAfterViewInit(){
+		setTimeout(() => {
+			//fake order
+			this.order = true;
+			this.onChangeView('grid');	
+		}, 1000);
+		
+	}
 
   	initData() {
   		//get entrance ticket
