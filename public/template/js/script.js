@@ -109,6 +109,16 @@ var general = {
 
 
 jQuery(document).ready(function() {
+
+  jQuery("a[href^=#]").click(function(e) {
+    e.preventDefault();
+    var dest = jQuery(this).attr('href');
+    console.log(dest);
+    jQuery('html,body').animate({ scrollTop: jQuery(dest).offset().top - 120 }, 'fast');
+  });
+
+  jQuery('.in-this-article').stick_in_parent();
+
   jQuery(".select-from, .select-to").select2({
     width: '100%'
   });
@@ -211,4 +221,6 @@ jQuery(document).ready(function() {
 
   jQuery("#min-price").text(jQuery("#slider-price").slider("values", 0) + " đ");
   jQuery("#max-price").text(jQuery("#slider-price").slider("values", 1) + " đ");
+
+
 });
