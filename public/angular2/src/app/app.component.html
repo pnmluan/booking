@@ -184,7 +184,7 @@
                                                 </a>
                                             </td>
                                             <td>
-                                                <a [routerLink]=" ['/detail-ticket', item.id] ">{{ item.name }}</a>
+                                                <a [routerLink]=" ['/detail-ticket', item.clean_url] ">{{ item.name }}</a>
                                                 <p *ngIf="item.departure">Ngày đặt: {{ item.departure }}</p>
                                                 <p *ngIf="!item.departure">Ngày đặt: <i>N/A</i></p>
                                                 <p>

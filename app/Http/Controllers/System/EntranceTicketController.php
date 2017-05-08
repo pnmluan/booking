@@ -79,7 +79,8 @@ class EntranceTicketController extends Controller{
              *==================================================*/
             if(isset($params['except_id'])) {
                 $except_id = explode(',', $params['except_id']);
-                $query->whereNotIn($alias_dot.'id', $except_id);
+                $query->whereNotIn($alias_dot.'id', $except_id)
+                        ->inRandomOrder();
             }
             
             /*==================================================

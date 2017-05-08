@@ -10,7 +10,13 @@
                         </div>
                         <div class="g-field">
                             <div class="field mb15">
-                                <ng-select placeholder="Điểm đi" name="category_ticket_id" [(ngModel)]="search" [options]="categoryTicketOptions" [allowClear]="true">
+                                <ng-select 
+                                    [options]="categoryTicketOptions"
+                                    name="category_ticket_id"
+                                    
+                                    (selected)="onSelected($event)"
+                                    [allowClear]="true"
+                                    placeholder="Điểm đi">
                                 </ng-select>
                             </div>
                             <div class="field mb30">
@@ -76,7 +82,7 @@
                                     <a [routerLink]="['/detail-ticket', item.clean_url]"><img *ngIf="item.img" [src]="item.img" alt=""></a>
                                     <div>
                                         <h3>
-                                          <a [routerLink]="['/detail-ticket', item.clean_url]">{{ item.name }}</a>
+                                            <a [routerLink]="['/detail-ticket', item.clean_url]">{{ item.name }}</a>
                                         </h3>
                                         <p>
                                             {{ item.description }}
