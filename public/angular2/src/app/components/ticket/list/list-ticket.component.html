@@ -79,7 +79,7 @@
                         <ng-template [ngIf]="listItem.length">
                             <div class="item" *ngFor="let item of listItem">
                                 <div class="item-inner">
-                                    <a [routerLink]="['/detail-ticket', item.clean_url]"><img *ngIf="item.img" [src]="item.img" alt=""></a>
+                                    <a [routerLink]="['/detail-ticket', item.clean_url]"><img *ngIf="item.img" [src]="item.img" alt="{{ item.name }}"></a>
                                     <div>
                                         <h3>
                                             <a [routerLink]="['/detail-ticket', item.clean_url]">{{ item.name }}</a>
