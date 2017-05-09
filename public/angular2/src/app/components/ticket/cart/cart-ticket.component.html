@@ -48,7 +48,7 @@
                                         </td>
                                         <td>
                                             <div class="input-group">
-                                                <input type="text" class="form-control daterange-single" [ngModel]="item.departure" #daparture (blur)="item.daparture = daparture.value">
+                                                <input type="text" class="form-control daterange-single" [ngModel]="item.departure" (ngModelChange)="item.departure = $event" [attr.id]="'departure_' + i" (blur)="onSetDate(item, 'departure_' + i)">
                                                 <span class="input-group-addon"><i class="icon-calendar"></i></span>
                                             </div>
                                         </td>
