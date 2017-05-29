@@ -103,7 +103,7 @@
                     <br/>
                     <ul class="footerlist">
                         <li><a href="#">Giới thiệu về balotravel.vn</a></li>
-                        <li><a href="#">Giới thiệu về datvesieure.com</a></li>
+                        <li><a [routerLink]="['/introdution']">Giới thiệu về datvesieure.com</a></li>
                     </ul>
                 </div>
                 <!-- End of column 2-->
@@ -112,9 +112,8 @@
                     <br/>
                     <br/>
                     <ul class="footerlist">
-                        <li><a href="#">Các điều khoản và điều kiện</a></li>
-                        <li><a href="#">Lịch sử hoạt động</a></li>
-                        <li><a href="#">Chính sách bảo mật</a></li>
+                        <li><a [routerLink]="['/tutorial']">Hướng dẫn sử dụng</a></li>
+                        <li><a [routerLink]="['/policy']">Các điều khoản và điều kiện</a></li>
                     </ul>
                 </div>
                 <!-- End of column 3-->
@@ -138,8 +137,8 @@
             <a [routerLink]="['/home']">Trang chủ</a> |
             <a href="#">Đặt vé</a> |
             <a [routerLink]="['/introdution']">Giới thiệu</a> |
-            <a href="#">Hướng dẫn</a> |
-            <a href="#">Liên hệ</a>
+            <a [routerLink]="['/tutorial']">Hướng dẫn</a> |
+            <a [routerLink]="['/about']">Liên hệ</a>
         </div>
     </div>
 </footer>
