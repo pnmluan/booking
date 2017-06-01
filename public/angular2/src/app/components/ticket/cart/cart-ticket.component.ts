@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ElementRef } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 import { Configuration } from '../../../shared/app.configuration';
@@ -23,6 +23,7 @@ export class CartTicketComponent implements OnInit {
 
 	constructor(
 		private sessionStorage: LocalStorageService,
+		private _elementRef: ElementRef,
 		private _EntranceTicketDataService: EntranceTicketDataService,
 		private _Router: Router,
 		private _Configuration: Configuration,
@@ -45,6 +46,7 @@ export class CartTicketComponent implements OnInit {
 		});*/
 
 		jQuery('.daterange-single').datepicker({
+			dateFormat: 'dd/mm/yy',
 			firstDay: 1,
 			minDate: 0
 		});
@@ -58,20 +60,6 @@ export class CartTicketComponent implements OnInit {
 
 		for (let key in this.cartItems) {
 			var item = this.cartItems[key];
- 			
- 			if(this.cartItems[key].departure){
- 				let departure = moment(this.cartItems[key].departure, this._Configuration.viFormatDate).format(this._Configuration.dateFormat);
- 				booking_date = new Date(departure);
- 			}else{
- 				booking_date = new Date();
- 			}
-
-			this.datepickerOptions[key] = { 
-				format: this._Configuration.viFormatDate,
-				autoApply: true,
-				locate: 'vi', style: 'big',
-				initialDate: booking_date
-			};
 
 			var total = (item.number_adult * item.adult_fare) + (item.number_children * item.children_fare);
 			sum = sum + total;
@@ -126,19 +114,31 @@ export class CartTicketComponent implements OnInit {
 		this.processTotal();
 	}
 
+	onSetDate(item, element){
+		setTimeout(() => {
+			item.departure = this._elementRef.nativeElement.querySelector('#' + element).value;
+		}, 400);
+	}
+
 	onLinkToPaymentTicket(){
 		let today = moment().format(this._Configuration.dateFormat);
 		for(let key in this.cartItems){
+			
 			if (this.cartItems[key].departure) {
-				let departure = this.cartItems[key].departure.formatted;
+				let departure = this.cartItems[key].departure;
 				let booking_date = moment(departure, this._Configuration.viFormatDate).format(this._Configuration.dateFormat);
 				if (booking_date < today) {
 					this._ToasterService.pop('error', 'Lỗi nhập liệu', 'Vui lòng kiểm tra lại ngày tham quan tour ' + this.cartItems[key].name + '.');
 					return;
 				}
+			}else{
+				this._ToasterService.pop('error', 'Lỗi nhập liệu', 'Vui lòng kiểm tra lại ngày tham quan tour ' + this.cartItems[key].name + '.');
+				return;
 			}
-			
 		}
+		//update cart
+		this.sessionStorage.set('cartItems', this.cartItems);
+		//redirect to payment-ticket
 		this._Router.navigate(['payment-ticket']);
 	}
 
