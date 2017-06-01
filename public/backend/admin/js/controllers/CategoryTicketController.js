@@ -28,12 +28,16 @@ angular.module('MetronicApp').controller('CategoryTicketController', function($r
                 $scope.mItem = {};
                 $scope.errorMsg = [];
 
+                $scope.optionCategoryTicket = data.optionCategoryTicket;
+                $scope.optionCategoryTicket.selected = data.optionCategoryTicket[0];
+
                 $scope.optionStatus = data.optionStatus;
                 $scope.optionStatus.selected = data.optionStatus[0];
 
                 // Create category_ticket
                 $scope.save = function() {
-                    $scope.mItem.provider = $scope.optionProvider.selected.id;
+                    $scope.mItem.parent = $scope.optionCategoryTicket.selected.id;
+                    $scope.mItem.level = $scope.mItem.parent ? 2 : 1;
                     $scope.mItem.status = $scope.optionStatus.selected.id;
                     CategoryTicketService.save($scope.mItem).then(function(res) {
 
@@ -59,7 +63,8 @@ angular.module('MetronicApp').controller('CategoryTicketController', function($r
                 data: function () {
                     var data = {
                         optionStatus: $scope.optionStatus,
-                        dtInstance: $scope.dtInstance
+                        dtInstance: $scope.dtInstance,
+                        optionCategoryTicket: $scope.optionCategoryTicket
                     }
                     return data;
                 }
@@ -104,13 +109,22 @@ angular.module('MetronicApp').controller('CategoryTicketController', function($r
                     }
                 });
 
+                $scope.optionCategoryTicket = data.optionCategoryTicket;
+                angular.forEach($scope.optionCategoryTicket, function(value, key) {
+                    if (value.id == item.parent) {
+                        $scope.optionCategoryTicket.selected = value;
+                        return;
+                    }
+                });
+
                 //Load Image
                 $scope.img = $scope.settings.imgPath + 'category_ticket/' + item.img; 
 
                 // Create CategoryTicket
                 $scope.save = function() {
+                    $scope.mItem.parent = $scope.optionCategoryTicket.selected.id;
+                    $scope.mItem.level = $scope.mItem.parent ? 2 : 1;
                     $scope.mItem.status = $scope.optionStatus.selected.id;
-                    $scope.mItem.provider = $scope.optionProvider.selected.id;
                     CategoryTicketService.save($scope.mItem, $scope.mItem.id).then(function(res) {
 
                         if(res.status == 200) {
@@ -135,7 +149,8 @@ angular.module('MetronicApp').controller('CategoryTicketController', function($r
                 data: function () {
                     var data = {
                         optionStatus: $scope.optionStatus,
-                        dtInstance: $scope.dtInstance
+                        dtInstance: $scope.dtInstance,
+                        optionCategoryTicket: $scope.optionCategoryTicket
                     }
                     return data;
                 }
@@ -177,17 +192,23 @@ angular.module('MetronicApp').controller('CategoryTicketController', function($r
     $rootScope.settings.layout.pageSidebarClosed = false;
 
     function initialize() {
+        console.log('abc')
+        $scope.optionCategoryTicket = [];
+        var params = {
+            'parent': 0
+        };
+        CategoryTicketService.getAll($.param(params)).then(function(res) {
+            if (res.data.data) {
+                $scope.optionCategoryTicket = res.data.data;
+                $scope.optionCategoryTicket.unshift({id:0, parent: 0, name: 'None'})
+            }
+
+        });
+
         $scope.optionStatus = [
             {id: 'active', name: 'Active'},
             {id: 'inactive', name: 'Inactive'},
         ];
-
-        $scope.optionProvider = [
-            {id: 'vietjet', name: 'VietJet'},
-            {id: 'jetstar', name: 'JetStar'},
-            {id: 'vna', name: 'VietNam Airline'},
-        ];
-        $scope.optionProvider.selected = $scope.optionProvider[0];
         
         $scope.listItem = [];
         $scope.dtInstance = {};
@@ -223,6 +244,7 @@ angular.module('MetronicApp').controller('CategoryTicketController', function($r
         $scope.dtColumns = [
             DTColumnBuilder.newColumn('id').notVisible(),
             DTColumnBuilder.newColumn('name').withTitle('Name'),
+            DTColumnBuilder.newColumn('category_parent').withTitle('Parent'),
             DTColumnBuilder.newColumn('status').withTitle('Status'),
             DTColumnBuilder.newColumn(null).withTitle('Action').withOption('createdCell',function(td,cellData,rowData,row,col){
                 
@@ -233,7 +255,7 @@ angular.module('MetronicApp').controller('CategoryTicketController', function($r
         ];
     }
 
-    function loadListItem() {
+    function getCategoryTicket() {
         CategoryTicketService.getCategoryTickets().then(function(res) {
 
             if(res.statusText == 'OK') {

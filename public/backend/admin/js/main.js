@@ -13,6 +13,7 @@ var MetronicApp = angular.module("MetronicApp", [
     "toastr",       // Toastr
     "datatables",   // Datatable
     'ngFileUpload', // ng-file-upload
+    "angucomplete-alt"
 ]); 
 
 /* Configure API */
