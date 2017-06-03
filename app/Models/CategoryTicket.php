@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 class CategoryTicket extends BaseModel
 {
     protected $table = 'category_ticket';
-    protected $fillable = [ 'name', 'clean_url', 'status'];
+    protected $fillable = [ 'name', 'clean_url', 'parent', 'level', 'status'];
 
     public function getModelValidations()
     {
@@ -17,11 +17,12 @@ class CategoryTicket extends BaseModel
 
     public static function listItems(array $param = null){
 
-        $aColumns = ['name', 'clean_url', 'status'];
+        $aColumns = ['name', 'clean_url', 'parent', 'level', 'status'];
         $aNotLike = ['status'];
 
-        $query = \DB::table('category_ticket')
-            ->select(\DB::raw('SQL_CALC_FOUND_ROWS id'),\DB::raw('id AS DT_RowId'),'category_ticket.*');
+        $query = \DB::table('category_ticket AS SM')
+            ->select(\DB::raw('SQL_CALC_FOUND_ROWS SM.id'),\DB::raw('SM.id AS DT_RowId'),'SM.*', \DB::raw('CT.name AS category_parent'))
+            ->leftJoin('category_ticket AS CT', 'CT.id', '=', 'SM.parent');;
 
         // Filter search condition
         foreach ($aColumns as $key => $value) {
@@ -88,7 +89,6 @@ class CategoryTicket extends BaseModel
 
         \DB::setFetchMode(\PDO::FETCH_ASSOC);
         $total = \DB::select('SELECT FOUND_ROWS() as rows');
-
 
         $draw = 0;
         if(isset($param['draw'])) {

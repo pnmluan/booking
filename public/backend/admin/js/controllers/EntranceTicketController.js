@@ -28,7 +28,7 @@ angular.module('MetronicApp').controller('EntranceTicketController', function($r
                 controller: ['$scope', 'data', function($scope, data) {
                     $scope.mItem = {};
                     $scope.errorMsg = [];
-
+                    $scope.selectedCategory = {};
                     $scope.optionCategoryTicket = data.optionCategoryTicket;
                     $scope.optionCategoryTicket.selected = data.optionCategoryTicket[0];
 
@@ -43,7 +43,10 @@ angular.module('MetronicApp').controller('EntranceTicketController', function($r
 
                     // Create EntranceTicket
                     $scope.save = function() {
-                        $scope.mItem.category_ticket_id = $scope.optionCategoryTicket.selected.id;
+                        if($scope.selectedCategory['originalObject']) {
+                            $scope.mItem.category_ticket_id = $scope.selectedCategory['originalObject'].id;
+                        }
+                        
                         $scope.mItem.status = $scope.optionStatus.selected.id;
 
                         EntranceTicketService.save($scope.mItem).then(function(res) {
@@ -137,9 +140,12 @@ angular.module('MetronicApp').controller('EntranceTicketController', function($r
                 $scope.errorMsg = [];
 
                 $scope.optionCategoryTicket = data.optionCategoryTicket;
+                $scope.selectedCategory = new Object();
+                $scope.selectedCategoryInit = {};
+
                 angular.forEach($scope.optionCategoryTicket, function(value, key) {
                     if (value.id == item.category_ticket_id) {
-                        $scope.optionCategoryTicket.selected = value;
+                        $scope.selectedCategoryInit = value;
                         return;
                     }
                 });
@@ -188,11 +194,14 @@ angular.module('MetronicApp').controller('EntranceTicketController', function($r
                     console.log($scope.imgs);
                 }
 
-
                 // Create entrance_ticket
                 $scope.save = function() {
+console.log($scope.selectedCategory);
+console.log($scope.selectedCategoryInit);
+                    if($scope.selectedCategory.hasOwnProperty('originalObject')) {
+                        $scope.mItem.category_ticket_id = $scope.selectedCategory['originalObject'].id;
+                    }
 
-                    $scope.mItem.category_ticket_id = $scope.optionCategoryTicket.selected.id;
                     if($scope.optionStatus.selected) {
                         $scope.mItem.status = $scope.optionStatus.selected.id;
                     } else {
@@ -289,11 +298,14 @@ angular.module('MetronicApp').controller('EntranceTicketController', function($r
         ];
 
         let query = {
-            status: 'active'
+            status: 'active',
+            level: 2
         };
+        console.log(query)
         $scope.optionCategoryTicket = [];
         CategoryTicketService.getAll($.param(query)).then(function(res) {
             if (res.data.data) {
+                console.log(res.data)
                 $scope.optionCategoryTicket = res.data.data;
 
             }
