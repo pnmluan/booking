@@ -8,31 +8,31 @@
     <!-- DOC: Set data-auto-speed="200" to adjust the sub menu slide up/down speed -->
     <ul class="page-sidebar-menu" data-keep-expanded="false" data-auto-scroll="true" data-slide-speed="200" ng-class="{'page-sidebar-menu-closed': settings.layout.pageSidebarClosed}">
         
-        <li class="start nav-item">
+        <li class="start nav-item" ng-if="cur_user_info.role == 1">
             <a href="#/provider.html">
                 <i class="icon-pointer"></i>
                 <span class="title">Provider</span>
             </a>
         </li>
-        <li class="start nav-item">
+        <li class="start nav-item" ng-if="cur_user_info.role == 1">
             <a href="#/banner.html">
                 <i class="icon-home"></i>
                 <span class="title">Banner</span>
             </a>
         </li>
-        <li class="start nav-item">
+        <li class="start nav-item" ng-if="cur_user_info.role == 1">
             <a href="#/news.html">
                 <i class="fa fa-newspaper-o"></i>
                 <span class="title">News</span>
             </a>
         </li>
-        <li class="start nav-item">
+        <li class="start nav-item" ng-if="cur_user_info.role == 1">
             <a href="#/comment.html">
                 <i class="icon-bubbles"></i>
                 <span class="title">Comment</span>
             </a>
         </li>
-        <li class="start nav-item">
+        <li class="start nav-item" ng-if="cur_user_info.role == 1">
             <a href="#/location.html">
                 <i class="icon-pointer"></i>
                 <span class="title">Location</span>
@@ -51,7 +51,7 @@
                 <li class="start nav-item">
                     <a href="#/entrance-ticket.html"><i class="fa fa-ticket"></i> Entrance Ticket</a>
                 </li>
-                <li class="start nav-item">
+                <li class="start nav-item" ng-if="cur_user_info.role == 1">
                     <a href="#/ticket-bill.html"><i class="fa fa-ticket"></i> Ticket Bill</a>
                 </li>
             </ul>
