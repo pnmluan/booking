@@ -17,6 +17,7 @@ import { LoadingAnimateModule, LoadingAnimateService } from 'ng2-loading-animate
 import { Ng2Bs3ModalModule } from 'ng2-bs3-modal/ng2-bs3-modal';
 import { DatePickerModule } from 'ng2-datepicker';
 import { AgmCoreModule } from 'angular2-google-maps/core';
+import { NgxPaginationModule } from 'ngx-pagination';
 // import { SidebarModule } from 'ng-sidebar';
  
 // Create config options (see ILocalStorageServiceConfigOptions) for deets:
@@ -88,6 +89,7 @@ import { ListTicketComponent, DetailTicketComponent, DetailTicketPhotoComponent,
         prefix: 'my-app',
         storageType: 'localStorage'
     }),
+    NgxPaginationModule
     // SidebarModule
   ],
   providers: [

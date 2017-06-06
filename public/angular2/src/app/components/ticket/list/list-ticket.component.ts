@@ -2,11 +2,11 @@ import { Component, OnInit, HostListener } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { Router, ActivatedRoute } from '@angular/router';
 import { URLSearchParams } from '@angular/http';
-
+import { Subscription } from 'rxjs/Rx';
 import { Configuration } from '../../../shared/app.configuration';
 import { CategoryTicketDataService, EntranceTicketDataService } from '../../../shared/';
 import { LocalStorageService } from 'angular-2-local-storage';
-import { Subscription } from 'rxjs/Rx';
+
 declare let jQuery: any;
 
 @Component({
@@ -21,10 +21,14 @@ export class ListTicketComponent implements OnInit {
 	private querySubscription: Subscription;
 	public categoryTicketOptions = [];
 
+	page: number = 1;
+	pageSize: number = 12;
+	totalRecords: number;
+	currentCategoryId: number;
 	params = {};
 	sort = {};
 	searchObj = {};
-	listItem = [];
+	listItem: Array<any> = [];
 	order: boolean = false;
 	column: string;
 	direction: string;
@@ -49,7 +53,7 @@ export class ListTicketComponent implements OnInit {
 			}
 		)
 
-		this.subscriptionEvents = this._Router.events.subscribe((val) => {
+		this.subscriptionEvents = _Router.events.subscribe((val) => {
 			let routing = this._Router.url;
 			if (this.curRouting != routing) {
 				this.curRouting = routing;
@@ -64,7 +68,9 @@ export class ListTicketComponent implements OnInit {
 		this.sort['column'] = 'name';
 		this.sort['direction'] = 'asc';
 
-		this._CategoryTicketDataService.getAll().subscribe(res => {
+		let params: URLSearchParams = new URLSearchParams();
+		params.set('load_menu', '1');
+		this._CategoryTicketDataService.getAll(params).subscribe(res => {
 			if (res.data) {
 				let categoryTicketOptions = [];
 				for (let key in res.data) {
@@ -101,6 +107,7 @@ export class ListTicketComponent implements OnInit {
 			params.set('clean_url', this.search);
 			this._CategoryTicketDataService.getAll(params).subscribe(res => {
 				if(res.data){
+					this.currentCategoryId = res.data[0].id;
 					this.loadEntranceTicketList(res.data[0].id);
 				}
 			});
@@ -187,7 +194,7 @@ export class ListTicketComponent implements OnInit {
 		let timeout: number = 100;
 		//set timeout and reset boolean order
 		if(this.order){
-			timeout = 1000;
+			timeout = 2000;
 			this.order = !this.order;
 		}
 		setTimeout(() => {
@@ -213,6 +220,10 @@ export class ListTicketComponent implements OnInit {
 			params.set('category_ticket_id', category_ticket_id);	
 		}
 
+		let offset:number = (this.page - 1) * this.pageSize;
+		params.set('limit', String(this.pageSize));
+		params.set('offset', String(offset));
+
 		if(this.order){
 			params.set('order_by', this.column);
 			params.set('order', this.direction);
@@ -221,8 +232,9 @@ export class ListTicketComponent implements OnInit {
   		this._EntranceTicketDataService.getAll(params).subscribe(res => {
 			let listItem = [];
 			if (res.data) {
+				this.totalRecords = +res.total;
 				for (let key in res.data) {
-					let images = res.data[key].album[0];
+					let images = res.data[key].album[0] || {};
 					res.data[key].img = images.img ? this.imgPath + images.img : '';
 					res.data[key].order = 1;
 					listItem.push(res.data[key]);
@@ -255,6 +267,15 @@ export class ListTicketComponent implements OnInit {
 	onSelected(obj: any){
 		this.search = obj.value;
 		this.searchObj = obj;
+	}
+
+	onPageChange(page){
+		this.page = page;
+		this.order = true;
+		jQuery("html, body").animate({ scrollTop: 0 }, 600);
+		//display loading
+		jQuery('.preloader').fadeIn();
+		this.initData();
 	}
 
   	/*=================================

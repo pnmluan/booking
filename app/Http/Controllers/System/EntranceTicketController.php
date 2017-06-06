@@ -50,9 +50,9 @@ class EntranceTicketController extends Controller{
 
             $alias = 'MT';
             $alias_dot = $alias . '.';
-            $select         = $alias_dot . '*';
+            $select = $alias_dot . '*';
             $query = \DB::table($this->table . ' AS ' . $alias)
-                        ->select($select);
+                        ->select(\DB::raw('SQL_CALC_FOUND_ROWS `MT`.`id`') ,$select);
             /*==================================================
              * Filter Data
              *==================================================*/
@@ -101,12 +101,17 @@ class EntranceTicketController extends Controller{
              *==================================================*/
             $query->limit($limit)->offset($offset);
             $data = $query->get()->toArray();
+            //found rows
+            \DB::setFetchMode(\PDO::FETCH_ASSOC);
+            $query = \DB::select(\DB::raw('SELECT FOUND_ROWS() as rows'));
+            $total_data = $query[0]['rows'];
+
             // Add album_ticket 
             foreach ($data as $key => $value) {
                 $album = \DB::table('album_ticket')->where('entrance_ticket_id', $value->id)->get();
                 $data[$key]->album = $album;
             }
-            $total_data = count($data);
+            
             /*==================================================
              * Response Data
              *==================================================*/
