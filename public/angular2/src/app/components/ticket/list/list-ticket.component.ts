@@ -88,9 +88,9 @@ export class ListTicketComponent implements OnInit {
 		setTimeout(() => {
 			//fake order
 			this.order = true;
-			this.onChangeView('grid');	
+			this.onChangeView('grid');
 		}, 1000);
-		
+
 	}
 
   	initData() {
@@ -191,33 +191,33 @@ export class ListTicketComponent implements OnInit {
 			this.order = !this.order;
 		}
 		setTimeout(() => {
-			jQuery('.tours-list .item .item-inner h3').matchHeight({
+			jQuery('.tours-list .item').matchHeight({
 				byRow: true,
 				property: 'height',
 				target: null,
 				remove: false
 			});
 
-			jQuery('.tours-list .item .item-inner p').matchHeight({
-				byRow: true,
-				property: 'height',
-				target: null,
-				remove: false
-			});
+			// jQuery('.tours-list .item .item-inner p').matchHeight({
+			// 	byRow: true,
+			// 	property: 'height',
+			// 	target: null,
+			// 	remove: false
+			// });
 		}, timeout);
   	}
 
   	loadEntranceTicketList(category_ticket_id){
 		let params: URLSearchParams = new URLSearchParams();
 		if(category_ticket_id){
-			params.set('category_ticket_id', category_ticket_id);	
+			params.set('category_ticket_id', category_ticket_id);
 		}
 
 		if(this.order){
 			params.set('order_by', this.column);
 			params.set('order', this.direction);
 		}
-
+		console.log(params);
   		this._EntranceTicketDataService.getAll(params).subscribe(res => {
 			let listItem = [];
 			if (res.data) {
