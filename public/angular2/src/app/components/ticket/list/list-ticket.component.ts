@@ -191,19 +191,26 @@ export class ListTicketComponent implements OnInit {
 			this.order = !this.order;
 		}
 		setTimeout(() => {
+			// jQuery('.item-inner h3').matchHeight({
+			// 	byRow: true,
+			// 	property: 'height',
+			// 	target: null,
+			// 	remove: false
+			// });
+
+			// jQuery('.item-inner p').matchHeight({
+			// 	byRow: true,
+			// 	property: 'height',
+			// 	target: null,
+			// 	remove: false
+			// });
+
 			jQuery('.tours-list .item').matchHeight({
 				byRow: true,
 				property: 'height',
 				target: null,
 				remove: false
 			});
-
-			// jQuery('.tours-list .item .item-inner p').matchHeight({
-			// 	byRow: true,
-			// 	property: 'height',
-			// 	target: null,
-			// 	remove: false
-			// });
 		}, timeout);
   	}
 
