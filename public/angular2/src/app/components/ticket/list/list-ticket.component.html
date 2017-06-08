@@ -10,10 +10,10 @@
                         </div>
                         <div class="g-field">
                             <div class="field mb15">
-                                <ng-select 
+                                <ng-select
                                     [options]="categoryTicketOptions"
                                     name="category_ticket_id"
-                                    
+
                                     (selected)="onSelected($event)"
                                     [allowClear]="true"
                                     placeholder="Điểm đi">
@@ -103,7 +103,6 @@
                                     </div>
                                 </div>
                             </div>
-                            <pagination-controls (pageChange)="onPageChange($event)"></pagination-controls>
                         </ng-template>
                     </div>
                     <!-- <div class="pagi">

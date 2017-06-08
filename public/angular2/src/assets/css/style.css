@@ -1110,7 +1110,7 @@ only screen and (max-width: 767px) {
 
 .tours-list .item { float: left; width: 33.33%; padding: 0px 10px; margin-bottom: 20px; }
 .tours-list .item img { width: 100%; height: auto; display: block; }
-.tours-list .item .item-inner { box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); }
+.tours-list .item .item-inner { box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); height: inherit; }
 .tours-list .item .item-inner > a { display: block; width: 100%; position: relative; }
 .tours-list .item .item-inner > a img {
     max-width: 100%;

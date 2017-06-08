@@ -20,11 +20,9 @@ class EntranceTicket extends BaseModel
         $aColumns = ['entrance_ticket.name', 'category_ticket_id', 'category_ticket.name', 'entrance_ticket.adult_fare', 'entrance_ticket.children_fare', 'entrance_ticket.description', 'entrance_ticket.created_at'];
 
         $query = \DB::table('entrance_ticket')
-            ->select(\DB::raw('SQL_CALC_FOUND_ROWS entrance_ticket.id'),\DB::raw('entrance_ticket.id AS DT_RowId'),'entrance_ticket.*', \DB::raw('category_ticket.name AS category_ticket_name')
-            	// , 'album_ticket.name', 'album_ticket.url', 'album_ticket.email', 'album_ticket.requirement'
-            	)
+            ->select(\DB::raw('SQL_CALC_FOUND_ROWS entrance_ticket.id'),\DB::raw('entrance_ticket.id AS DT_RowId'),
+                'entrance_ticket.*', \DB::raw('category_ticket.name AS category_ticket_name'))
             ->leftJoin('category_ticket', 'entrance_ticket.category_ticket_id', '=', 'category_ticket.id');
-            // ->leftJoin('album_ticket', 'entrance_ticket.id', '=', 'album_ticket.entrance_ticket_id');
 
         // Filter search condition
         foreach ($aColumns as $key => $value) {
@@ -94,7 +92,6 @@ class EntranceTicket extends BaseModel
             $album = \DB::table('album_ticket')->where('entrance_ticket_id', $value->id)->get();
             $data[$key]->album = $album;
         }
-
 
         $draw = 0;
         if(isset($param['draw'])) {
