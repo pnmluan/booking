@@ -6,14 +6,14 @@
                     <div class="tours-filter-inner">
                         <!-- <form (ngSubmit)="onSearch()" #fSearch="ngForm"> -->
                         <div class="results-founded">
-                            Bộ lọc
+                            Bộ lọc {{parent_category}}
                         </div>
                         <div class="g-field">
                             <div class="field mb15">
                                 <ng-select
                                     [options]="categoryTicketOptions"
                                     name="category_ticket_id"
-
+                                    [(ngModel)]="parent_category"
                                     (selected)="onSelected($event)"
                                     [allowClear]="true"
                                     placeholder="Điểm đi">
@@ -40,18 +40,18 @@
                         <div class="tours-sort-l">
                             <ul class="clearfix">
                                 <li>
-                                    <label>SORT BY</label>
+                                    <label>Sắp Xếp</label>
                                     <select name="column" [(ngModel)]="sort.column" (change)="onSort('column', $event.target.value)">
-                                        <option value="name">Name</option>
-                                        <option value="price">Price</option>
+                                        <option value="name">Tên</option>
+                                        <option value="price">Giá</option>
                                     </select>
                                 </li>
                                 <li>|</li>
                                 <li>
-                                    <label>ORDER</label>
+                                    <label>Thư tự</label>
                                     <select name="direction" [(ngModel)]="sort.direction" (change)="onSort('direction', $event.target.value)">
-                                        <option value="asc">A/Z - 1/3</option>
-                                        <option value="desc">Z/A - 1/3</option>
+                                        <option value="asc">Giảm dần</option>
+                                        <option value="desc">Tăng dần</option>
                                     </select>
                                 </li>
                             </ul>
@@ -74,7 +74,7 @@
                     <div class="preloader"><img src="assets/img/loading-x-1.gif"></div>
                     <div class="tours-list clearfix" [ngClass]="{ 'list-view': view == 'list' }">
                         <ng-template [ngIf]="!listItem.length">
-                            <div>Khong tim thay du lieu</div>
+                            <div style="text-align: center;">Không tìm thấy dữ liệu</div>
                         </ng-template>
                         <ng-template [ngIf]="listItem.length">
                             <div class="item"
@@ -103,6 +103,7 @@
                                     </div>
                                 </div>
                             </div>
+                            <pagination-controls (pageChange)="onPageChange($event)"></pagination-controls>
                         </ng-template>
                     </div>
                     <!-- <div class="pagi">

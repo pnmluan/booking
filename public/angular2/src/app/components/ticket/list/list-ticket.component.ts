@@ -25,6 +25,7 @@ export class ListTicketComponent implements OnInit {
 	pageSize: number = 12;
 	totalRecords: number;
 	currentCategoryId: number;
+	parent_category: string;
 	params = {};
 	sort = {};
 	searchObj = {};
@@ -63,6 +64,7 @@ export class ListTicketComponent implements OnInit {
 	}
 
   	ngOnInit() {
+  		
   		this._title.setTitle('Tours | Datvesieure');
   		//set default sort
 		this.sort['column'] = 'name';
@@ -86,6 +88,11 @@ export class ListTicketComponent implements OnInit {
 					categoryTicketOptions.push(temp);
 				}
 				this.categoryTicketOptions = categoryTicketOptions;
+
+				setTimeout(() => {
+					this.parent_category = this.params['clean_url'];
+				}, 1000);
+				
 			}
 		});
   	}
@@ -194,7 +201,7 @@ export class ListTicketComponent implements OnInit {
 		let timeout: number = 100;
 		//set timeout and reset boolean order
 		if(this.order){
-			timeout = 2000;
+			timeout = 1000;
 			this.order = !this.order;
 		}
 		setTimeout(() => {
