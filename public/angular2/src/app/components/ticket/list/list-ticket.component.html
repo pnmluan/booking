@@ -10,14 +10,17 @@
                         </div>
                         <div class="g-field">
                             <div class="field mb15">
-                                <ng-select 
-                                    [options]="categoryTicketOptions"
+                                <ng-select
                                     name="category_ticket_id"
-                                    
+                                    [ngModel]="clean_url"
+                                    [options]="categoryTicketOptions"
                                     (selected)="onSelected($event)"
                                     [allowClear]="true"
                                     placeholder="Điểm đi">
                                 </ng-select>
+                            </div>
+                            <div class="field mb15">
+
                             </div>
                             <div class="field mb30">
                                 <div class="slider-price clearfix">

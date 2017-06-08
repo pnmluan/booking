@@ -19,7 +19,6 @@ declare let jQuery: any;
 export class ListTicketComponent implements OnInit {
 	private subscriptionEvents: Subscription;
 	private querySubscription: Subscription;
-	public categoryTicketOptions = [];
 
 	page: number = 1;
 	pageSize: number = 12;
@@ -28,13 +27,15 @@ export class ListTicketComponent implements OnInit {
 	params = {};
 	sort = {};
 	searchObj = {};
+	categoryTicketOptions: Array<any> = [];
+	subCategoryTicketOptions: Array<any> = [];
 	listItem: Array<any> = [];
 	order: boolean = false;
 	column: string;
+	clean_url: string;
 	direction: string;
 	curRouting?: string;
 	view: string;
-	search: string;
 	imgPath: string = this._EntranceTicketDataService.imgPath;
 
 	constructor(
@@ -57,19 +58,24 @@ export class ListTicketComponent implements OnInit {
 			let routing = this._Router.url;
 			if (this.curRouting != routing) {
 				this.curRouting = routing;
-				this.initData();
+				setTimeout(() => {
+					this.clean_url = this.params['clean_url'] || '';
+					this.initData();
+				}, 800);
 			}
 		});
 	}
 
   	ngOnInit() {
+  		//set page title
   		this._title.setTitle('Tours | Datvesieure');
   		//set default sort
 		this.sort['column'] = 'name';
 		this.sort['direction'] = 'asc';
 
 		let params: URLSearchParams = new URLSearchParams();
-		params.set('load_menu', '1');
+		params.set('level', '1');
+		params.set('status', 'active');
 		this._CategoryTicketDataService.getAll(params).subscribe(res => {
 			if (res.data) {
 				let categoryTicketOptions = [];
@@ -79,8 +85,9 @@ export class ListTicketComponent implements OnInit {
 						value: res.data[key].clean_url,
 						label: res.data[key].name
 					};
-					if(this.search == res.data[key].clean_url){
+					if(this.clean_url == res.data[key].clean_url){
 						this.searchObj = temp;
+						
 					}
 
 					categoryTicketOptions.push(temp);
@@ -101,10 +108,9 @@ export class ListTicketComponent implements OnInit {
 
   	initData() {
   		//get entrance ticket
-  		this.search = this.params['clean_url'] || '';
-  		if(this.search){
+  		if(this.clean_url){
   			let params: URLSearchParams = new URLSearchParams();
-			params.set('clean_url', this.search);
+			params.set('clean_url', this.clean_url);
 			this._CategoryTicketDataService.getAll(params).subscribe(res => {
 				if(res.data){
 					this.currentCategoryId = res.data[0].id;
@@ -112,7 +118,7 @@ export class ListTicketComponent implements OnInit {
 				}
 			});
   		}else{
-  			this.loadEntranceTicketList(this.search);
+  			this.loadEntranceTicketList(this.clean_url);
   		}
 
 		setTimeout(()=>{
@@ -265,7 +271,7 @@ export class ListTicketComponent implements OnInit {
 	 * Select Ticket
 	 *=================================*/
 	onSelected(obj: any){
-		this.search = obj.value;
+		this.clean_url = obj.value;
 		this.searchObj = obj;
 	}
 
@@ -288,13 +294,40 @@ export class ListTicketComponent implements OnInit {
 	}
 
 	onSearch() {
-		if(this.search != this.params['clean_url']){
+		if(this.clean_url != this.params['clean_url']){
 			this.order = true;
+			//reset page
+			this.page = 1;
+			this.totalRecords = 0;
 			//reset properties
 			this.listItem = [];
-			this._Router.navigate(['list-tickets', this.search]);
+			this._Router.navigate(['list-tickets', this.clean_url]);
 			//display loading
 			jQuery('.preloader').fadeIn();
+
+			let params: URLSearchParams = new URLSearchParams();
+			params.set('parent', String(this.currentCategoryId));
+			params.set('level', '2');
+			params.set('status', 'active');
+			this._CategoryTicketDataService.getAll(params).subscribe(res => {
+				if (res.data) {
+					let categoryTicketOptions = [];
+					for (let key in res.data) {
+
+						var temp = {
+							value: res.data[key].clean_url,
+							label: res.data[key].name
+						};
+						if(this.clean_url == res.data[key].clean_url){
+							this.searchObj = temp;
+							
+						}
+
+						categoryTicketOptions.push(temp);
+					}
+					this.subCategoryTicketOptions = categoryTicketOptions;
+				}
+			})
 		}
 	}
 
