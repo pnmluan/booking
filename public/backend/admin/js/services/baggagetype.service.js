@@ -2,9 +2,9 @@ angular.module('MetronicApp')
     .factory('BaggageTypeService', ['$http', '$rootScope', function($http, $rootScope) {
 
     var urlBase = $rootScope.settings.apiPath + 'baggagetype';
-    var serive = {};
+    var service = {};
 
-    serive.getAll = function () {
+    service.getAll = function () {
         return $http.get(urlBase + '/index');
     };
 
@@ -17,9 +17,9 @@ angular.module('MetronicApp')
         
     };
 
-    serive.delete = function (id) {
+    service.delete = function (id) {
         return $http.delete(urlBase + '/delete/' + id);
     };
 
-    return serive;
+    return service;
 }]);
