@@ -89,6 +89,7 @@ class CategoryTicketController extends Controller
             $query->limit($limit)->offset($offset);
             $data = $query->get()->toArray();
             $total_data = count($data);
+
             /*==================================================
              * Response Data
              *==================================================*/
