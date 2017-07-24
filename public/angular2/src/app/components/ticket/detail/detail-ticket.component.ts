@@ -42,7 +42,7 @@ export class DetailTicketComponent implements OnInit {
 	datepickerOptions = { format: this._Configuration.viFormatDate, autoApply: true, locate: 'vi', style: 'big' };
 
 	constructor(
-		private _EntranceTicketDataService: EntranceTicketDataService, 
+		private _EntranceTicketDataService: EntranceTicketDataService,
 		private _Configuration: Configuration,
 		private _Router: Router,
 		private _ActivatedRoute: ActivatedRoute,
@@ -71,6 +71,8 @@ export class DetailTicketComponent implements OnInit {
   	ngOnInit() { }
 
   	ngAfterViewInit(){
+  		//back to top when access this component
+		jQuery("html, body").animate({ scrollTop: 0 }, 200);
   		//event view price
   		jQuery('.btn-view-price').click(function() {
 			if (!jQuery('.tour-price-details').is(':visible')) {
@@ -136,7 +138,7 @@ export class DetailTicketComponent implements OnInit {
   	/*=================================
 	 * Add To Cart
 	 *=================================*/
-	addToCart(item) {
+	addToCart(item, redirect?: string) {
 		if(this.number_adult == 0){
 			this._ToasterService.pop('error', 'Lỗi nhập liệu', 'Vui lòng nhập số người tham quan.');
 			return;
@@ -174,7 +176,7 @@ export class DetailTicketComponent implements OnInit {
 		if (this.sessionStorage.get('cartItems')) {
 			let cartItems = this.sessionStorage.get('cartItems');
 			let existed = false;
-			
+
 			for(let key in cartItems) {
 				if(cartItems[key].id == item.id) {
 					if(cartItems[key].departure == this.filter_from_date.formatted){
@@ -197,6 +199,10 @@ export class DetailTicketComponent implements OnInit {
 			count++;
 		}
 		this._Configuration.number_order = count;
+
+		if(redirect){
+			this._Router.navigate(['cart-ticket']);
+		}
 	}
 
 	onCountNumberAdult(quantity: number, operation?: string){
@@ -234,7 +240,7 @@ export class DetailTicketComponent implements OnInit {
 						break;
 				}
 			}else{
-				this.number_children = quantity;	
+				this.number_children = quantity;
 			}
 		}
 	}
