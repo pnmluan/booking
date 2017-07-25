@@ -14,13 +14,20 @@
                                     name="category_ticket_id"
                                     [ngModel]="clean_url"
                                     [options]="categoryTicketOptions"
-                                    (selected)="onSelected($event)"
+                                    (selected)="onSelected($event, 1)"
                                     [allowClear]="true"
                                     placeholder="Điểm đi">
                                 </ng-select>
                             </div>
                             <div class="field mb15">
-
+                                <ng-select
+                                    name="category_ticket_id"
+                                    [ngModel]="clean_url"
+                                    [options]="subCategoryTicketOptions"
+                                    (selected)="onSelected($event, 2)"
+                                    [allowClear]="true"
+                                    placeholder="Điểm đi">
+                                </ng-select>
                             </div>
                             <div class="field mb30">
                                 <div class="slider-price clearfix">

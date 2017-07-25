@@ -23,16 +23,17 @@ export class ListTicketComponent implements OnInit {
 	page: number = 1;
 	pageSize: number = 12;
 	totalRecords: number;
+	category_level: number;
 	currentCategoryId: number;
 	params = {};
 	sort = {};
-	searchObj = {};
 	categoryTicketOptions: Array<any> = [];
 	subCategoryTicketOptions: Array<any> = [];
 	listItem: Array<any> = [];
 	order: boolean = false;
 	column: string;
 	clean_url: string;
+	sub_clean_url: string;
 	direction: string;
 	curRouting?: string;
 	view: string;
@@ -59,9 +60,18 @@ export class ListTicketComponent implements OnInit {
 			if (this.curRouting != routing) {
 				this.curRouting = routing;
 				setTimeout(() => {
-					this.clean_url = this.params['clean_url'] || '';
+					switch (this.category_level) {
+						case 2:
+							this.sub_clean_url = this.params['clean_url'] || '';
+							break;
+						case 1:
+						default:
+							this.clean_url = this.params['clean_url'] || '';
+							break;
+					}
+
 					this.initData();
-				}, 800);
+				}, 1000);
 			}
 		});
 	}
@@ -73,37 +83,19 @@ export class ListTicketComponent implements OnInit {
 		this.sort['column'] = 'name';
 		this.sort['direction'] = 'asc';
 
-		let params: URLSearchParams = new URLSearchParams();
-		params.set('level', '1');
-		params.set('status', 'active');
-		this._CategoryTicketDataService.getAll(params).subscribe(res => {
-			if (res.data) {
-				let categoryTicketOptions = [];
-				for (let key in res.data) {
-
-					var temp = {
-						value: res.data[key].clean_url,
-						label: res.data[key].name
-					};
-					if(this.clean_url == res.data[key].clean_url){
-						this.searchObj = temp;
-						
-					}
-
-					categoryTicketOptions.push(temp);
-				}
-				this.categoryTicketOptions = categoryTicketOptions;
-			}
-		});
+		this.onBuildSelectOption();
   	}
 
 	ngAfterViewInit(){
+		//back to top when access this component
+		jQuery("html, body").animate({ scrollTop: 0 }, 200);
+		//load list entrance tickets
 		setTimeout(() => {
 			//fake order
 			this.order = true;
-			this.onChangeView('grid');	
+			this.onChangeView('grid');
 		}, 1000);
-		
+
 	}
 
   	initData() {
@@ -115,6 +107,7 @@ export class ListTicketComponent implements OnInit {
 				if(res.data){
 					this.currentCategoryId = res.data[0].id;
 					this.loadEntranceTicketList(res.data[0].id);
+					this.onBuildSubSelectOption();
 				}
 			});
   		}else{
@@ -185,14 +178,14 @@ export class ListTicketComponent implements OnInit {
 				jQuery('.item-inner > a').height(a * 10 / 16);
 			}
 
+			//call onChangeView when page is reload
+			if(this.order){
+				this.onChangeView(this.view);
+			}
 		},1000)
 
 		jQuery('.preloader').delay(1000).fadeOut("slow");
 
-		//call onChangeView when page is reload
-		if(this.order){
-			this.onChangeView(this.view);
-		}
   	}
 
   	onChangeView(view) {
@@ -200,7 +193,7 @@ export class ListTicketComponent implements OnInit {
 		let timeout: number = 100;
 		//set timeout and reset boolean order
 		if(this.order){
-			timeout = 2000;
+			timeout = 1000;
 			this.order = !this.order;
 		}
 		setTimeout(() => {
@@ -223,7 +216,7 @@ export class ListTicketComponent implements OnInit {
   	loadEntranceTicketList(category_ticket_id){
 		let params: URLSearchParams = new URLSearchParams();
 		if(category_ticket_id){
-			params.set('category_ticket_id', category_ticket_id);	
+			params.set('category_ticket_id', category_ticket_id);
 		}
 
 		let offset:number = (this.page - 1) * this.pageSize;
@@ -270,9 +263,23 @@ export class ListTicketComponent implements OnInit {
 	/*=================================
 	 * Select Ticket
 	 *=================================*/
-	onSelected(obj: any){
-		this.clean_url = obj.value;
-		this.searchObj = obj;
+	onSelected(obj: any, level: number){
+		this.category_level = level;
+		if(level == 1){
+			this.clean_url = obj.value;
+			let params: URLSearchParams = new URLSearchParams();
+			params.set('clean_url', this.clean_url);
+			this._CategoryTicketDataService.getAll(params).subscribe(res => {
+				if(res.data){
+					this.currentCategoryId = res.data[0].id;
+					this.onBuildSubSelectOption();
+				}
+			})
+		}
+
+		if(level == 2){
+			this.sub_clean_url = obj.value;
+		}
 	}
 
 	onPageChange(page){
@@ -294,41 +301,74 @@ export class ListTicketComponent implements OnInit {
 	}
 
 	onSearch() {
-		if(this.clean_url != this.params['clean_url']){
-			this.order = true;
-			//reset page
-			this.page = 1;
-			this.totalRecords = 0;
-			//reset properties
-			this.listItem = [];
-			this._Router.navigate(['list-tickets', this.clean_url]);
-			//display loading
-			jQuery('.preloader').fadeIn();
-
-			let params: URLSearchParams = new URLSearchParams();
-			params.set('parent', String(this.currentCategoryId));
-			params.set('level', '2');
-			params.set('status', 'active');
-			this._CategoryTicketDataService.getAll(params).subscribe(res => {
-				if (res.data) {
-					let categoryTicketOptions = [];
-					for (let key in res.data) {
-
-						var temp = {
-							value: res.data[key].clean_url,
-							label: res.data[key].name
-						};
-						if(this.clean_url == res.data[key].clean_url){
-							this.searchObj = temp;
-							
-						}
-
-						categoryTicketOptions.push(temp);
-					}
-					this.subCategoryTicketOptions = categoryTicketOptions;
-				}
-			})
+		let valid: boolean;
+		let clean_url: string;
+		if(this.category_level == 2){
+			valid = this.sub_clean_url != this.params['clean_url'];
+			clean_url = this.sub_clean_url;
+		}else{
+			valid = this.clean_url != this.params['clean_url'];
+			clean_url = this.clean_url;
 		}
+
+		this.order = true;
+		//reset page
+		this.page = 1;
+		this.totalRecords = 0;
+		//reset properties
+		this.listItem = [];
+
+		//display loading
+		jQuery('.preloader').fadeIn();
+
+		if(valid){
+			//if user change category, reload page
+			this._Router.navigate(['list-tickets', clean_url]);
+		}else{
+			//if user don't change category, reload first page
+			this.initData();
+		}
+
+	}
+
+	onBuildSelectOption(){
+		let params: URLSearchParams = new URLSearchParams();
+		params.set('level', '1');
+		params.set('status', 'active');
+		this._CategoryTicketDataService.getAll(params).subscribe(res => {
+			if (res.data) {
+				let categoryTicketOptions = [];
+				for (let key in res.data) {
+					categoryTicketOptions.push({
+						value: res.data[key].clean_url,
+						label: res.data[key].name
+					});
+				}
+				this.categoryTicketOptions = categoryTicketOptions;
+			}
+		});
+	}
+
+	onBuildSubSelectOption(){
+		let params: URLSearchParams = new URLSearchParams();
+		params.set('parent', String(this.currentCategoryId));
+		params.set('level', '2');
+		params.set('status', 'active');
+		this._CategoryTicketDataService.getAll(params).subscribe(res => {
+			if (res.data) {
+				let categoryTicketOptions = [];
+				for (let key in res.data) {
+
+					var temp = {
+						value: res.data[key].clean_url,
+						label: res.data[key].name
+					};
+
+					categoryTicketOptions.push(temp);
+				}
+				this.subCategoryTicketOptions = categoryTicketOptions;
+			}
+		})
 	}
 
 	/*=================================
