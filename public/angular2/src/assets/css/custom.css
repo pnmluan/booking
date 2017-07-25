@@ -78,7 +78,7 @@ ng-select > div > div.single > div.clear, ng-select > div > div.single > div.tog
 .datepicker-container .datepicker-input-container .datepicker-input-icon {
     display: inline-block;
     position: absolute;
-    top: 1px;
+    top: 7px;
     right: 5px;
 }
 
