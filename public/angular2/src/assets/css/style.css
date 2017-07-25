@@ -1638,10 +1638,40 @@ ng-select > div { height: 30px; }
     .about article, .tutorial article {  border: 0px; padding: 30px 0px; }
 }
 
+.datepicker-container[_ngcontent-c2]   .datepicker-calendar[_ngcontent-c2]   .datepicker-calendar-top[_ngcontent-c2] {
+    background: #649931 !important;
+}
+
+.datepicker-container[_ngcontent-c2] .datepicker-calendar[_ngcontent-c2] .datepicker-calendar-container[_ngcontent-c2] {
+    background: #fff !important;
+}
+
+.datepicker-container[_ngcontent-c2]   svg[_ngcontent-c2]   g[_ngcontent-c2]   g[_ngcontent-c2] {
+    fill: #649931 !important;
+}
 
 
+.datepicker-container[_ngcontent-c2]   .datepicker-calendar[_ngcontent-c2]   .datepicker-calendar-container[_ngcontent-c2]   .datepicker-calendar-month-section[_ngcontent-c2] { color: #649931 !important; }
+
+.datepicker-container[_ngcontent-c2] .datepicker-calendar[_ngcontent-c2] .datepicker-calendar-container[_ngcontent-c2] .datepicker-calendar-days-container[_ngcontent-c2] .day.selected[_ngcontent-c2], .datepicker-container[_ngcontent-c2] .datepicker-calendar[_ngcontent-c2] .datepicker-calendar-container[_ngcontent-c2] .datepicker-calendar-days-container[_ngcontent-c2] .day[_ngcontent-c2]:hover:not(.disabled) {
+    background: #649931 !important;
+    border: 1px solid #649931 !important;
+    color: #fff !important;
+    border-radius: 50% !important;
+}
 
 
+.datepicker-container[_ngcontent-c2] .datepicker-calendar[_ngcontent-c2] .datepicker-calendar-container[_ngcontent-c2] .datepicker-calendar-days-container[_ngcontent-c2] .day.today[_ngcontent-c2] {
+    color: #fff !important;
+    background: #649931 !important;
+}
+
+.datepicker-container[_ngcontent-c2] .datepicker-calendar[_ngcontent-c2] .datepicker-calendar-container[_ngcontent-c2] .datepicker-calendar-years-container[_ngcontent-c2] .year.selected[_ngcontent-c2], .datepicker-container[_ngcontent-c2] .datepicker-calendar[_ngcontent-c2] .datepicker-calendar-container[_ngcontent-c2] .datepicker-calendar-years-container[_ngcontent-c2] .year[_ngcontent-c2]:hover {
+    background: #649931 !important;
+    border: 1px solid #649931 !important;
+    color: #fff !important;
+    border-radius: 4px;
+}
 
 
 
