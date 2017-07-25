@@ -1110,7 +1110,7 @@ only screen and (max-width: 767px) {
 
 .tours-list .item { float: left; width: 33.33%; padding: 0px 10px; margin-bottom: 20px; }
 .tours-list .item img { width: 100%; height: auto; display: block; }
-.tours-list .item .item-inner { box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); }
+.tours-list .item .item-inner { box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); height: inherit; position: relative; padding-bottom: 40px; }
 .tours-list .item .item-inner > a { display: block; width: 100%; position: relative; }
 .tours-list .item .item-inner > a img {
     max-width: 100%;
@@ -1127,7 +1127,7 @@ only screen and (max-width: 767px) {
 .tours-list .item .item-inner > div { padding: 15px; }
 
 .tours-list.list-view .item { float: none; width: 100%; padding: 0px 10px; margin-bottom: 20px;  }
-.tours-list.list-view .item .item-inner { padding-left: 15px; }
+.tours-list.list-view .item .item-inner { padding-left: 15px; padding-bottom: 0px; }
 .tours-list.list-view .item .item-inner > a { float: left; width: 200px; }
 .tours-list.list-view .item .item-inner > div { overflow: hidden; }
 
@@ -1139,6 +1139,7 @@ only screen and (max-width: 767px) {
 .tours-list .item .item-inner h3 { border-bottom: 1px solid #ddd; margin-bottom: 10px; text-transform: capitalize; font-size: 13px; font-weight: bold; padding-bottom: 15px; line-height: 20px; }
 .tours-list .item .item-inner h3 a{ color: #333; }
 .tours-list .item .item-inner p { color: #999; }
+.tours-list:not(.list-view) .item .item-inner .item-book { position: absolute; bottom: 15px; left: 15px; width: calc(100% - 30px); }
 .tours-list .item .item-inner .item-book { margin-top: 10px; }
 .tours-list .item .item-inner .item-book .price { float: left; color: #DE4131; font-weight: bold; line-height: 30px; font-size: 16px; }
 .tours-list .item .item-inner .item-book .price span { font-size: 14px; color: #666; font-weight: bold; }
@@ -1576,16 +1577,17 @@ ng-select > div { height: 30px; }
 #scroll {
     position:fixed;
     right:10px;
-    bottom:10px;
+    bottom:15px;
     cursor:pointer;
-    width:50px;
-    height:50px;
-    background-color:#3498db;
+    width:45px;
+    height:45px;
+    background-color:#649931;
     text-indent:-9999px;
     display:none;
-    -webkit-border-radius:60px;
-    -moz-border-radius:60px;
-    border-radius:60px
+    -webkit-border-radius:50%;
+    -moz-border-radius:50%;
+    border-radius:50%;
+    box-shadow: 0px 1px 12px #ddd;
 }
 #scroll span {
     position:absolute;

@@ -19,14 +19,17 @@ declare let jQuery: any;
 export class ListTicketComponent implements OnInit {
 	private subscriptionEvents: Subscription;
 	private querySubscription: Subscription;
+	// public categoryTicketOptions = [];
 
 	page: number = 1;
 	pageSize: number = 12;
 	totalRecords: number;
 	category_level: number;
 	currentCategoryId: number;
+	parent_category: string;
 	params = {};
 	sort = {};
+
 	categoryTicketOptions: Array<any> = [];
 	subCategoryTicketOptions: Array<any> = [];
 	listItem: Array<any> = [];
@@ -34,9 +37,11 @@ export class ListTicketComponent implements OnInit {
 	column: string;
 	clean_url: string;
 	sub_clean_url: string;
+
 	direction: string;
 	curRouting?: string;
 	view: string;
+	search: string;
 	imgPath: string = this._EntranceTicketDataService.imgPath;
 
 	constructor(
@@ -59,31 +64,60 @@ export class ListTicketComponent implements OnInit {
 			let routing = this._Router.url;
 			if (this.curRouting != routing) {
 				this.curRouting = routing;
-				setTimeout(() => {
-					switch (this.category_level) {
-						case 2:
-							this.sub_clean_url = this.params['clean_url'] || '';
-							break;
-						case 1:
-						default:
-							this.clean_url = this.params['clean_url'] || '';
-							break;
-					}
 
-					this.initData();
-				}, 1000);
+				// setTimeout(() => {
+				// 	switch (this.category_level) {
+				// 		case 2:
+				// 			this.sub_clean_url = this.params['clean_url'] || '';
+				// 			break;
+				// 		case 1:
+				// 		default:
+				// 			this.clean_url = this.params['clean_url'] || '';
+				// 			break;
+				// 	}
+
+				// 	this.initData();
+				// }, 1000);
+
+				this.initData();
+
 			}
 		});
 	}
 
   	ngOnInit() {
-  		//set page title
+
   		this._title.setTitle('Tours | Datvesieure');
   		//set default sort
 		this.sort['column'] = 'name';
 		this.sort['direction'] = 'asc';
 
+
 		this.onBuildSelectOption();
+
+		let params: URLSearchParams = new URLSearchParams();
+		params.set('load_menu', '1');
+		this._CategoryTicketDataService.getAll(params).subscribe(res => {
+			if (res.data) {
+				let categoryTicketOptions = [];
+				for (let key in res.data) {
+
+					var temp = {
+						value: res.data[key].clean_url,
+						label: res.data[key].name
+					};
+
+					categoryTicketOptions.push(temp);
+				}
+				this.categoryTicketOptions = categoryTicketOptions;
+
+				setTimeout(() => {
+					this.parent_category = this.params['clean_url'];
+				}, 1000);
+
+			}
+		});
+
   	}
 
 	ngAfterViewInit(){
@@ -100,9 +134,10 @@ export class ListTicketComponent implements OnInit {
 
   	initData() {
   		//get entrance ticket
-  		if(this.clean_url){
+  		this.search = this.params['clean_url'] || '';
+  		if(this.search){
   			let params: URLSearchParams = new URLSearchParams();
-			params.set('clean_url', this.clean_url);
+			params.set('clean_url', this.search);
 			this._CategoryTicketDataService.getAll(params).subscribe(res => {
 				if(res.data){
 					this.currentCategoryId = res.data[0].id;
@@ -111,7 +146,7 @@ export class ListTicketComponent implements OnInit {
 				}
 			});
   		}else{
-  			this.loadEntranceTicketList(this.clean_url);
+  			this.loadEntranceTicketList(this.search);
   		}
 
 		setTimeout(()=>{
@@ -182,9 +217,10 @@ export class ListTicketComponent implements OnInit {
 			if(this.order){
 				this.onChangeView(this.view);
 			}
+
 		},1000)
 
-		jQuery('.preloader').delay(1000).fadeOut("slow");
+		jQuery('.preloader').delay(1200).fadeOut("slow");
 
   	}
 
@@ -193,18 +229,25 @@ export class ListTicketComponent implements OnInit {
 		let timeout: number = 100;
 		//set timeout and reset boolean order
 		if(this.order){
-			timeout = 1000;
+			timeout = 2000;
 			this.order = !this.order;
 		}
 		setTimeout(() => {
-			jQuery('.tours-list .item .item-inner h3').matchHeight({
-				byRow: true,
-				property: 'height',
-				target: null,
-				remove: false
-			});
+			// jQuery('.item-inner h3').matchHeight({
+			// 	byRow: true,
+			// 	property: 'height',
+			// 	target: null,
+			// 	remove: false
+			// });
 
-			jQuery('.tours-list .item .item-inner p').matchHeight({
+			// jQuery('.item-inner p').matchHeight({
+			// 	byRow: true,
+			// 	property: 'height',
+			// 	target: null,
+			// 	remove: false
+			// });
+
+			jQuery('.tours-list .item').matchHeight({
 				byRow: true,
 				property: 'height',
 				target: null,
@@ -308,7 +351,8 @@ export class ListTicketComponent implements OnInit {
 			clean_url = this.sub_clean_url;
 		}else{
 			valid = this.clean_url != this.params['clean_url'];
-			clean_url = this.clean_url;
+			// clean_url = this.clean_url;
+			clean_url = this.parent_category;
 		}
 
 		this.order = true;

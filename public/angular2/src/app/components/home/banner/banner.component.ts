@@ -50,7 +50,7 @@ export class BannerComponent implements OnInit {
 				transitionStyle: "fade",
 				pagination: false
 			});
-		}, 1000)
+		}, 200)
 		
 	}
 

@@ -25,7 +25,6 @@ export class TutorialComponent implements OnInit {
 			jQuery("a[href^=#]").click(function(e) {
 				e.preventDefault();
 				var dest = jQuery(this).attr('href');
-				console.log(dest);
 				jQuery('html,body').animate({ scrollTop: jQuery(dest).offset().top - 120 }, 'fast');
 			});
 

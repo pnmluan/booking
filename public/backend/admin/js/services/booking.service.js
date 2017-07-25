@@ -2,7 +2,7 @@ angular.module('MetronicApp')
     .factory('BookingService', ['$http', '$rootScope', function($http, $rootScope) {
 
     var urlBase = $rootScope.settings.apiPath + 'booking';
-    var BookingService = {};
+    var service = {};
 
     service.getAll = function () {
         return $http.get(urlBase + '/index');
