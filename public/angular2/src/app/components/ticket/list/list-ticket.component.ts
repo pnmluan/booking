@@ -64,7 +64,7 @@ export class ListTicketComponent implements OnInit {
 	}
 
   	ngOnInit() {
-  		
+
   		this._title.setTitle('Tours | Datvesieure');
   		//set default sort
 		this.sort['column'] = 'name';
@@ -92,7 +92,7 @@ export class ListTicketComponent implements OnInit {
 				setTimeout(() => {
 					this.parent_category = this.params['clean_url'];
 				}, 1000);
-				
+
 			}
 		});
   	}
@@ -123,7 +123,10 @@ export class ListTicketComponent implements OnInit {
   		}
 
 		setTimeout(()=>{
-			this.resizeImage();
+			if(this.view == 'grid'){
+				this.resizeImage();
+			}
+
 
 			function flyToElement(flyer, flyingTo) {
 				var $func = jQuery(this);
@@ -180,12 +183,6 @@ export class ListTicketComponent implements OnInit {
 				var itemImg = jQuery(this).closest('.item').find('img').eq(0);
 				flyToElement(jQuery(itemImg), jQuery('.cart_anchor'));
 			});
-
-			function resizeImage() {
-				var a = jQuery('.item-inner').width();
-				jQuery('.item-inner > a').height(a * 10 / 16);
-			}
-
 		},1000)
 
 		jQuery('.preloader').delay(1000).fadeOut("slow");
@@ -205,20 +202,6 @@ export class ListTicketComponent implements OnInit {
 			this.order = !this.order;
 		}
 		setTimeout(() => {
-			// jQuery('.item-inner h3').matchHeight({
-			// 	byRow: true,
-			// 	property: 'height',
-			// 	target: null,
-			// 	remove: false
-			// });
-
-			// jQuery('.item-inner p').matchHeight({
-			// 	byRow: true,
-			// 	property: 'height',
-			// 	target: null,
-			// 	remove: false
-			// });
-
 			jQuery('.tours-list .item').matchHeight({
 				byRow: true,
 				property: 'height',
