@@ -1680,7 +1680,10 @@ ng-select > div { height: 30px; }
     border-radius: 4px;
 }
 
-
+ul.ngx-pagination li a, ul.ngx-pagination div span {
+    cursor: pointer !important;
+    text-decoration: none;
+}
 
 
 
