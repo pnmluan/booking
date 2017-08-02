@@ -195,6 +195,7 @@ export class ListTicketComponent implements OnInit {
 
   	onChangeView(view) {
 		this.view = view;
+
 		let timeout: number = 100;
 		//set timeout and reset boolean order
 		if(this.order){
@@ -202,12 +203,16 @@ export class ListTicketComponent implements OnInit {
 			this.order = !this.order;
 		}
 		setTimeout(() => {
+			if(view == 'grid') {
+				this.resizeImage();
+			}
 			jQuery('.tours-list .item').matchHeight({
 				byRow: true,
 				property: 'height',
 				target: null,
 				remove: false
 			});
+
 		}, timeout);
   	}
 
