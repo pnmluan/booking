@@ -99,6 +99,8 @@ export class PaymentTicketComponent implements OnInit {
 				this.amount += ((+this.listItems[key].number_adult * +this.listItems[key].adult_fare)
 								+ (+this.listItems[key].number_children * +this.listItems[key].children_fare));
 			}
+		} else {
+			this._Router.navigate(['list-tickets']);
 		}
 	}
 
@@ -199,11 +201,7 @@ export class PaymentTicketComponent implements OnInit {
 						params.set('adult_fare', selectedTicket.adult_fare);
 						params.set('children_fare', selectedTicket.children_fare);
 
-						this._TicketDetailDataService.create(params).subscribe(res => {
-							if (res.data) {
-
-							}
-						});
+						this._TicketDetailDataService.create(params).subscribe(res => {});
 					}
 
 					this.sendEntranceTicketPayment(cartItems, long_expired_payment_date);

@@ -32,7 +32,7 @@ export class CartTicketComponent implements OnInit {
 	) { }
 
 	ngOnInit() {
-		this._title.setTitle('Your Cart | Datvesieure');
+		this._title.setTitle('Thanh Toán | Datvesieure');
 		this.cartItems = this.sessionStorage.get('cartItems');
 		this.processTotal();
 	}
@@ -65,7 +65,7 @@ export class CartTicketComponent implements OnInit {
 			sum = sum + total;
 
 			this.cartItems[key].total = total;
-			count++; 
+			count++;
 		}
 		//update cart
 		this.sessionStorage.set('cartItems', this.cartItems);
@@ -79,7 +79,7 @@ export class CartTicketComponent implements OnInit {
 	onRemoveTicket(index, item) {
 		this.cartItems.splice(index, 1);
 		this.processTotal();
-		
+
 	}
 
 	/*=================================
@@ -88,7 +88,7 @@ export class CartTicketComponent implements OnInit {
 	onPlusPeople(quantity, index, key, action?: string) {
 		if(quantity){
 			if(quantity == 1){
-				this.cartItems[index][key] = action ? quantity : this.cartItems[index][key] + 1;	
+				this.cartItems[index][key] = action ? quantity : this.cartItems[index][key] + 1;
 			}else{
 				this.cartItems[index][key] = quantity;
 			}
@@ -123,7 +123,7 @@ export class CartTicketComponent implements OnInit {
 	onLinkToPaymentTicket(){
 		let today = moment().format(this._Configuration.dateFormat);
 		for(let key in this.cartItems){
-			
+
 			if (this.cartItems[key].departure) {
 				let departure = this.cartItems[key].departure;
 				let booking_date = moment(departure, this._Configuration.viFormatDate).format(this._Configuration.dateFormat);
