@@ -206,12 +206,15 @@ export class ListTicketComponent implements OnInit {
 			if(view == 'grid') {
 				this.resizeImage();
 			}
-			jQuery('.tours-list .item').matchHeight({
-				byRow: true,
-				property: 'height',
-				target: null,
-				remove: false
-			});
+			setTimeout(() => {
+				jQuery('.tours-list .item').matchHeight({
+					byRow: true,
+					property: 'height',
+					target: null,
+					remove: false
+				});
+			}, 100);
+
 
 		}, timeout);
   	}

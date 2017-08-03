@@ -44,7 +44,7 @@ angular.module('MetronicApp').controller('TicketBillController', function($rootS
                             $scope.errorMsg = [];
                         } else {
                             $scope.errorMsg = res.data.error;
-                            
+
                         }
 
                     });
@@ -76,7 +76,7 @@ angular.module('MetronicApp').controller('TicketBillController', function($rootS
             controller: ['$scope', '$filter', 'data', ($scope, $filter, data) => {
                 $scope.customerTypeOptions = data.customerTypeOptions;
                 $scope.mItem = item;
-                
+
                 // Get Booking Detail with Passengers
                 var params = {
                     ticket_bill_id: item.id
@@ -87,16 +87,11 @@ angular.module('MetronicApp').controller('TicketBillController', function($rootS
                         var total_payment = 0;
                         angular.forEach(details, (detail, key) => {
                             var total = 0;
-                            angular.forEach(detail.passengers, (p, k) => {
-                                p.fare_tax = p.admin_fee + p.airport_fee + p.charge + p.fare + p.payment_fee + p.security_fee + p.other_tax;
-                                total += p.fare_tax;
-                            });
-                            detail.total = total;
-                            total_payment += total;
+                            detail.total = detail.adult*detail.adult_fare + detail.children*detail.children_fare;
+                            total_payment += detail.total;
                         });
                         $scope.mItem.total_payment = total_payment;
                         $scope.mItem.details = details;
-                        console.log(details);
                     }
                 });
 
@@ -120,7 +115,7 @@ angular.module('MetronicApp').controller('TicketBillController', function($rootS
                             toastr.success('Updated an item', 'Success');
                         } else {
                             $scope.errorMsg = res.data.error;
-                            
+
                         }
 
                     });
@@ -144,7 +139,7 @@ angular.module('MetronicApp').controller('TicketBillController', function($rootS
             }
         });
 
-        
+
     }
 
     // Get item By ID
@@ -162,7 +157,7 @@ angular.module('MetronicApp').controller('TicketBillController', function($rootS
                 });
             }
         });
-        
+
         return deferred.promise;
     }
 
@@ -185,7 +180,7 @@ angular.module('MetronicApp').controller('TicketBillController', function($rootS
                 });
 
                 //Load Image
-                $scope.img = $scope.settings.imgPath + 'ticket_bill/' + item.img; 
+                $scope.img = $scope.settings.imgPath + 'ticket_bill/' + item.img;
 
                 // Create TicketBill
                 $scope.save = function() {
@@ -199,7 +194,7 @@ angular.module('MetronicApp').controller('TicketBillController', function($rootS
                             toastr.success('Updated an item', 'Success');
                         } else {
                             $scope.errorMsg = res.data.error;
-                            
+
                         }
 
                     });
@@ -222,7 +217,7 @@ angular.module('MetronicApp').controller('TicketBillController', function($rootS
             }
         });
 
-        
+
     }
 
     // Click to Delete
@@ -268,7 +263,7 @@ angular.module('MetronicApp').controller('TicketBillController', function($rootS
             {id: 'vna', name: 'VietNam Airline'},
         ];
         $scope.optionProvider.selected = $scope.optionProvider[0];
-        
+
         $scope.listItem = [];
         $scope.dtInstance = {};
 
@@ -332,7 +327,7 @@ angular.module('MetronicApp').controller('TicketBillController', function($rootS
                 return $scope.listItem;
             }
             return;
-            
+
         });
     }
 });

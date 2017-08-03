@@ -54,7 +54,9 @@ class TicketDetailController extends Controller
             $alias_dot = $alias . '.';
             $select         = $alias_dot . '*';
             $query = \DB::table($this->table . ' AS ' . $alias)
-                        ->select($select);
+                        ->select($select, \DB::raw('entrance_ticket.name AS ticket_name'), 'ticket_bill.code')
+                        ->leftJoin('entrance_ticket', $alias_dot . 'entrance_ticket_id', '=', 'entrance_ticket.id')
+                        ->leftJoin('ticket_bill', $alias_dot . 'ticket_bill_id', '=', 'ticket_bill.id');
             /*==================================================
              * Filter Data
              *==================================================*/
@@ -139,7 +141,7 @@ class TicketDetailController extends Controller
         } else {
             $model = new TicketDetail();
         }
-        
+
         $data = $request->all();
         $model->fill($data);
 

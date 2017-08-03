@@ -52,7 +52,7 @@ export class PaymentTicketComponent implements OnInit {
 		private _ActivatedRoute: ActivatedRoute,
 		private _ToasterService: ToasterService,
 		private sessionStorage: LocalStorageService
-	) { 
+	) {
 		// subscribe to router event
 		this.subscriptionParam = _ActivatedRoute.params.subscribe(
 			(param: any) => {
@@ -68,9 +68,9 @@ export class PaymentTicketComponent implements OnInit {
 				if (this._Configuration.number_order) {
 					this.curRouting = routing;
 					this.initData();
-				} 
+				}
 
-				
+
 			}
 		});
 
@@ -81,7 +81,7 @@ export class PaymentTicketComponent implements OnInit {
 			{ value: '2', label: 'Chị' },
 			{ value: '3', label: 'Ông' },
 			{ value: '4', label: 'Bà' },
-			
+
 		];
 
 		this.titleAdultOptions = {
@@ -96,7 +96,7 @@ export class PaymentTicketComponent implements OnInit {
 		this.listItems = this.sessionStorage.get('cartItems');
 		if(this.listItems){
 			for(let key in this.listItems){
-				this.amount += ((+this.listItems[key].number_adult * +this.listItems[key].adult_fare) 
+				this.amount += ((+this.listItems[key].number_adult * +this.listItems[key].adult_fare)
 								+ (+this.listItems[key].number_children * +this.listItems[key].children_fare));
 			}
 		}
@@ -193,9 +193,11 @@ export class PaymentTicketComponent implements OnInit {
 						var params: URLSearchParams = new URLSearchParams();
 						params.set('ticket_bill_id', ticketBill.id);
 						params.set('entrance_ticket_id', selectedTicket.id);
-						params.set('adult', selectedTicket.adult);
-						params.set('children', selectedTicket.children);
-						params.set('departure', selectedTicket.departure);
+						params.set('adult', selectedTicket.number_adult);
+						params.set('children', selectedTicket.number_children);
+						params.set('departure', moment(selectedTicket.departure).format('YYYY-MM-DD'));
+						params.set('adult_fare', selectedTicket.adult_fare);
+						params.set('children_fare', selectedTicket.children_fare);
 
 						this._TicketDetailDataService.create(params).subscribe(res => {
 							if (res.data) {
@@ -203,7 +205,7 @@ export class PaymentTicketComponent implements OnInit {
 							}
 						});
 					}
-					
+
 					this.sendEntranceTicketPayment(cartItems, long_expired_payment_date);
 					this.selectedStep = 2;
 					this._Configuration.number_order = 0;
@@ -232,7 +234,7 @@ export class PaymentTicketComponent implements OnInit {
 			if(res.data) {
 				this.generalData['contact_id'] = res.data.id;
 			}
-			
+
 		});
 	}
 
@@ -256,7 +258,7 @@ export class PaymentTicketComponent implements OnInit {
 				}
 			});
 		}
-		
+
 	}
 
 	/*=================================
