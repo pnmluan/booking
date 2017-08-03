@@ -680,7 +680,7 @@ JQUERY UI
 	-o-transition:all 500ms;
 	transition:all 500ms;
 }
-.nicdark_zoom:hover	
+.nicdark_zoom:hover
 {
 	-webkit-transform:scale(1.2, 1.2);
 	-o-transform:scale(1.2, 1.2);
@@ -755,9 +755,9 @@ z-index: 2;
 
 /*zoom image works with nicdark_fadeinout */
 .nicdark_fadeinout .nicdark_zoom_image { -webkit-transition:all 3000ms; -o-transition:all 500ms; transition:all 3000ms; }
-.nicdark_fadeinout:hover .nicdark_zoom_image{ 
-    -webkit-transform:rotate(3deg) scale(1.2, 1.2); 
-    -o-transform:rotate(3deg) scale(1.2, 1.2); 
+.nicdark_fadeinout:hover .nicdark_zoom_image{
+    -webkit-transform:rotate(3deg) scale(1.2, 1.2);
+    -o-transform:rotate(3deg) scale(1.2, 1.2);
     transform:rotate(3deg) scale(1.2, 1.2); }
 
 
@@ -782,7 +782,7 @@ z-index: 2;
 /***************************************************JQUERY UI***********************************************************************/
 
 /* 44 - START NICDARKCALENDAR*/
-.ui-datepicker{ float: left; width: 300px; position: relative; z-index: 888 !important; margin-top: 0px !important;}
+.ui-datepicker{ float: left; width: 300px; position: relative; z-index: 9999 !important; margin-top: 0px !important;}
 .ui-datepicker tbody{ border-left: 1px solid #f1f1f1; border-bottom: 1px solid #f1f1f1;}
 .grid .ui-datepicker{ float: left; width: 100%; }
 
@@ -801,18 +801,19 @@ z-index: 2;
 .ui-datepicker-next:before{ content: '\e8c7' !important; font-family: 'fontello'; color: #fff; cursor: pointer; }
 /*days*/
 .ui-datepicker-calendar{ float: left; width: 100%; border-collapse: collapse; text-align: center; border-radius: 0px; box-shadow: 0px 0px 0px 0px #f1f1f1; background-color: #f9f9f9; }
-.ui-datepicker-calendar thead{ color: #fff; font-size: 13px; line-height: 13px; font-weight: normal; text-transform: uppercase; }
+.ui-datepicker-calendar thead{ color: #649931; font-size: 13px; line-height: 13px; font-weight: normal; text-transform: uppercase; }
 .ui-datepicker-calendar tbody{  }
 .ui-datepicker-calendar th{ font-weight: normal; padding: 15px 10px; }
 .ui-datepicker-calendar td{ font-weight: normal; box-shadow:inset -1px 1px 0px 0px #f1f1f1}
-.ui-datepicker-calendar td a{ font-size: 13px; padding: 10px 10px; line-height: 15px; color: #a4a4a4; display: block;}
+.ui-datepicker-calendar td a{ font-size: 13px; padding: 10px 10px; line-height: 15px; color: #333; display: block;}
 /*today*/
+.ui-datepicker-today { background: #649931 !important; }
 .ui-datepicker-today a { color: #fff !important; }
 .ui-datepicker-other-month {  }
 /*hover*/
-.ui-datepicker-calendar .ui-state-hover{ color: #fff !important; }
+.ui-datepicker-calendar .ui-state-hover{ color: #fff !important; background: #649931 !important;  }
 /*unselectable*/
-.ui-datepicker-unselectable span{ font-size: 13px; padding: 10px 10px; line-height: 15px; color: #d3d3d3; display: block; }
+.ui-datepicker-unselectable span{ font-size: 13px; padding: 10px 10px; line-height: 15px; color: #999; display: block; cursor: not-allowed; }
 /*END NICDARKCALENDAR*/
 
 
@@ -843,5 +844,3 @@ z-index: 2;
 .ui-slider .ui-slider-handle { position: absolute; z-index: 2;width: 20px; height: 20px;cursor: pointer; -ms-touch-action: none; touch-action: none; border-radius: 100%;outline: 0;bottom: -8px;}
 .ui-slider .ui-slider-range {position: absolute;z-index: 1;font-size: .7em;display: block;border: 0;background-position: 0 0;height: 5px; }
 .nicdark_slider_range a:last-child { margin-left: -20px !important; }
-
-

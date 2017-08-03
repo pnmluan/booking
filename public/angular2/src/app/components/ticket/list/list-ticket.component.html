@@ -83,32 +83,36 @@
                         </div>
                     </div>
                     <div class="preloader"><img src="assets/img/loading-x-1.gif"></div>
-                    <div class="tours-list clearfix" [ngClass]="{ 'list-view': view == 'list' }">
+
                         <ng-template [ngIf]="!listItem.length">
-                            <div style="text-align: center;">Không tìm thấy dữ liệu</div>
+                            <div class="tours-list clearfix" [ngClass]="{ 'list-view': view == 'list' }">
+                                <div style="text-align: center;">Không tìm thấy dữ liệu</div>
+                            </div>
                         </ng-template>
                         <ng-template [ngIf]="listItem.length">
-                            <div class="item"
-                                *ngFor="let item of listItem | paginate: {
-                                    itemsPerPage: pageSize,
-                                    currentPage: page,
-                                    totalItems: totalRecords
-                                }"
-                            >
-                                <div class="item-inner">
-                                    <a [routerLink]="['/detail-ticket', item.clean_url]"><img *ngIf="item.img" [src]="item.img" alt="{{ item.name }}"></a>
-                                    <div>
-                                        <h3>
-                                            <a [routerLink]="['/detail-ticket', item.clean_url]">{{ item.name }}</a>
-                                        </h3>
-                                        <p>
-                                            {{ item.description }}
-                                        </p>
-                                        <div class="item-book clearfix">
-                                            <div class="price">{{ item.adult_fare | number }} <span>VNĐ</span></div>
-                                            <div class="s-cart">
-                                                <input type="number" [(ngModel)]="item.order" min="1">
-                                                <a title="ADD TO CART" class="add-to-cart pointer" (click)="addToCart(item)"><i class="fa fa-shopping-cart"></i></a>
+                            <div class="tours-list clearfix" [ngClass]="{ 'list-view': view == 'list' }">
+                                <div class="item"
+                                    *ngFor="let item of listItem | paginate: {
+                                        itemsPerPage: pageSize,
+                                        currentPage: page,
+                                        totalItems: totalRecords
+                                    }"
+                                >
+                                    <div class="item-inner">
+                                        <a [routerLink]="['/detail-ticket', item.clean_url]"><img *ngIf="item.img" [src]="item.img" alt="{{ item.name }}"></a>
+                                        <div>
+                                            <h3>
+                                                <a [routerLink]="['/detail-ticket', item.clean_url]">{{ item.name }}</a>
+                                            </h3>
+                                            <p>
+                                                {{ item.description }}
+                                            </p>
+                                            <div class="item-book clearfix">
+                                                <div class="price">{{ item.adult_fare | number }} <span>VNĐ</span></div>
+                                                <div class="s-cart">
+                                                    <input type="number" [(ngModel)]="item.order" min="1">
+                                                    <a title="ADD TO CART" class="add-to-cart pointer" (click)="addToCart(item)"><i class="fa fa-shopping-cart"></i></a>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -116,7 +120,7 @@
                             </div>
                             <pagination-controls class="pagi" (pageChange)="onPageChange($event)"></pagination-controls>
                         </ng-template>
-                    </div>
+
                     <!-- <div class="pagi">
                         <ul class="clearfix">
                             <li><a href="#"><i class="fa fa-angle-double-left" aria-hidden="true"></i></a></li>
