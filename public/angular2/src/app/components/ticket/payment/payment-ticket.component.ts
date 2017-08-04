@@ -179,7 +179,6 @@ export class PaymentTicketComponent implements OnInit {
 			var params: URLSearchParams = new URLSearchParams();
 			params.set('code', code);
 			params.set('total_fare', String(total_fare));
-			params.set('expired_payment_date', expired_payment_date);
 			params.set('state', 'pending');
 
 			this._TicketBillDataService.create(params).subscribe(res => {
