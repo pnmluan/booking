@@ -259,7 +259,7 @@ export class ListTicketComponent implements OnInit {
 		let offset:number = (this.page - 1) * this.pageSize;
 		params.set('limit', String(this.pageSize));
 		params.set('offset', String(offset));
-console.log(this.order);
+
 		if(this.order){
 			params.set('order_by', this.column);
 			params.set('order', this.direction);
