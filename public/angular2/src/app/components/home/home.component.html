@@ -13,6 +13,37 @@
 					<div class="wpb_tabs wpb_content_element nicdark_tab_dark" data-interval="0">
 						<div class="wpb_wrapper wpb_tour_tabs_wrapper ui-tabs vc_clearfix">
 							<tabset class="filter-tab">
+                                <tab>
+                                    <span *tabHeading>
+                                        <a class="title white"><i class="fa fa-bus"></i> VÉ THAM QUAN</a>
+                                    </span>
+                                    <div id="tab-tour" class="wpb_tab ui-tabs-panel wpb_ui-tabs-hide vc_clearfix">
+                                        <form class="tour-form" #t="ngForm" (ngSubmit)="onSearchTicket()">
+                                            <div class="tour-form-inner">
+                                                <div class="tour-input clearfix">
+                                                    <div class="col-md-8">
+                                                        <div class="field">
+                                                            <span class="field-label">Điểm đến</span>
+                                                            <div class="field-input">
+                                                                <ng-select placeholder="Điểm đến"
+                                                                name="category_ticket_id"
+                                                                [(ngModel)]="filterTicket"
+                                                                [options]="categoryTicketOptions"
+                                                                [allowClear]="true">
+                                                                </ng-select>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-4">
+                                                        <div class="field">
+                                                            <button type="submit" class="btn btn-search-tour"><i class="icon-search-2"></i> Tìm kiếm</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </tab>
 								<tab>
 									<span *tabHeading>
 										<a class="title white"><i class="icon-plane"></i> VÉ MÁY BAY</a>
@@ -120,37 +151,7 @@
                                         </form>
                                     </div>
                                 </tab>
-                                <tab>
-                                    <span *tabHeading>
-                                        <a class="title white"><i class="fa fa-bus"></i> VÉ THAM QUAN</a>
-                                    </span>
-                                    <div id="tab-tour" class="wpb_tab ui-tabs-panel wpb_ui-tabs-hide vc_clearfix">
-                                        <form class="tour-form" #t="ngForm" (ngSubmit)="onSearchTicket()">
-                                            <div class="tour-form-inner">
-                                                <div class="tour-input clearfix">
-                                                    <div class="col-md-8">
-                                                        <div class="field">
-                                                            <span class="field-label">Điểm đến</span>
-                                                            <div class="field-input">
-                                                                <ng-select placeholder="Điểm đến"
-                                                                name="category_ticket_id"
-                                                                [(ngModel)]="filterTicket"
-                                                                [options]="categoryTicketOptions"
-                                                                [allowClear]="true">
-                                                                </ng-select>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-md-4">
-                                                        <div class="field">
-                                                            <button type="submit" class="btn btn-search-tour"><i class="icon-search-2"></i> Tìm kiếm</button>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </form>
-                                    </div>
-                                </tab>
+
                             </tabset>
                         </div>
                     </div>

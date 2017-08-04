@@ -150,7 +150,9 @@ export class ListTicketComponent implements OnInit {
   		}
 
 		setTimeout(()=>{
-			this.resizeImage();
+			if(this.view == 'grid'){
+				this.resizeImage();
+			}
 
 			function flyToElement(flyer, flyingTo) {
 				var $func = jQuery(this);
@@ -233,26 +235,18 @@ export class ListTicketComponent implements OnInit {
 			this.order = !this.order;
 		}
 		setTimeout(() => {
-			// jQuery('.item-inner h3').matchHeight({
-			// 	byRow: true,
-			// 	property: 'height',
-			// 	target: null,
-			// 	remove: false
-			// });
+			if(view == 'grid') {
+				this.resizeImage();
+			}
+			setTimeout(() => {
+				jQuery('.tours-list .item').matchHeight({
+					byRow: true,
+					property: 'height',
+					target: null,
+					remove: false
+				});
+			}, 100);
 
-			// jQuery('.item-inner p').matchHeight({
-			// 	byRow: true,
-			// 	property: 'height',
-			// 	target: null,
-			// 	remove: false
-			// });
-
-			jQuery('.tours-list .item').matchHeight({
-				byRow: true,
-				property: 'height',
-				target: null,
-				remove: false
-			});
 		}, timeout);
   	}
 
@@ -265,7 +259,7 @@ export class ListTicketComponent implements OnInit {
 		let offset:number = (this.page - 1) * this.pageSize;
 		params.set('limit', String(this.pageSize));
 		params.set('offset', String(offset));
-
+console.log(this.order);
 		if(this.order){
 			params.set('order_by', this.column);
 			params.set('order', this.direction);
@@ -300,7 +294,6 @@ export class ListTicketComponent implements OnInit {
 			this.direction = value;
 		}
 		this.initData();
-		this.onChangeView(this.view);
 	}
 
 	/*=================================

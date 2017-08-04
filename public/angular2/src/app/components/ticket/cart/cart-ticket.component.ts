@@ -29,21 +29,23 @@ export class CartTicketComponent implements OnInit {
 		private _Configuration: Configuration,
 		private _ToasterService: ToasterService,
 		private _title: Title
-	) { }
+	) {
+		this.cartItems = sessionStorage.get('cartItems');
+		if(this.cartItems.length == 0){
+			_ToasterService.pop('error', 'Your Cart is empty', 'Vui lòng chọn tour tham quan');
+			_Router.navigate(['list-tickets']);
+		}
+
+	}
 
 	ngOnInit() {
-		this._title.setTitle('Your Cart | Datvesieure');
-		this.cartItems = this.sessionStorage.get('cartItems');
+		this._title.setTitle('Thanh Toán | Datvesieure');
 		this.processTotal();
 	}
 
 	ngAfterViewInit(){
 		let self = this,
 			Configuration = this._Configuration;
-
-		/*jQuery('.daterange-single').datetimepicker({
-			format: Configuration.viFormatDate
-		});*/
 
 		jQuery('.daterange-single').datepicker({
 			dateFormat: 'dd/mm/yy',
@@ -65,7 +67,7 @@ export class CartTicketComponent implements OnInit {
 			sum = sum + total;
 
 			this.cartItems[key].total = total;
-			count++; 
+			count++;
 		}
 		//update cart
 		this.sessionStorage.set('cartItems', this.cartItems);
@@ -79,7 +81,7 @@ export class CartTicketComponent implements OnInit {
 	onRemoveTicket(index, item) {
 		this.cartItems.splice(index, 1);
 		this.processTotal();
-		
+
 	}
 
 	/*=================================
@@ -88,7 +90,7 @@ export class CartTicketComponent implements OnInit {
 	onPlusPeople(quantity, index, key, action?: string) {
 		if(quantity){
 			if(quantity == 1){
-				this.cartItems[index][key] = action ? quantity : this.cartItems[index][key] + 1;	
+				this.cartItems[index][key] = action ? quantity : this.cartItems[index][key] + 1;
 			}else{
 				this.cartItems[index][key] = quantity;
 			}
@@ -123,7 +125,7 @@ export class CartTicketComponent implements OnInit {
 	onLinkToPaymentTicket(){
 		let today = moment().format(this._Configuration.dateFormat);
 		for(let key in this.cartItems){
-			
+
 			if (this.cartItems[key].departure) {
 				let departure = this.cartItems[key].departure;
 				let booking_date = moment(departure, this._Configuration.viFormatDate).format(this._Configuration.dateFormat);
@@ -133,6 +135,11 @@ export class CartTicketComponent implements OnInit {
 				}
 			}else{
 				this._ToasterService.pop('error', 'Lỗi nhập liệu', 'Vui lòng kiểm tra lại ngày tham quan tour ' + this.cartItems[key].name + '.');
+				return;
+			}
+
+			if(this.cartItems[key].number_adult <= 0){
+				this._ToasterService.pop('error', 'Lỗi nhập liệu', 'Vui lòng kiểm tra lại số lượng người tham quan tour ' + this.cartItems[key].name + '.');
 				return;
 			}
 		}
