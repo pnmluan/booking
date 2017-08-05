@@ -12,6 +12,7 @@
                             <div class="field mb15">
                                 <ng-select
                                     [options]="categoryTicketOptions"
+                                    (selected)="onSelected($event, 1)"
                                     name="category_ticket_id"
                                     [(ngModel)]="parent_category"
                                     (selected)="onSelected($event)"
@@ -19,6 +20,16 @@
                                     placeholder="Điểm đi">
                                 </ng-select>
                             </div>
+                            <!--<div class="field mb15">
+                                <ng-select
+                                    name="category_ticket_id"
+                                    [ngModel]="clean_url"
+                                    [options]="subCategoryTicketOptions"
+                                    (selected)="onSelected($event, 2)"
+                                    [allowClear]="true"
+                                    placeholder="Điểm đi">
+                                </ng-select>
+                            </div>-->
                             <div class="field mb30">
                                 <div class="slider-price clearfix">
                                     <div class="clearfix">
@@ -50,8 +61,8 @@
                                 <li>
                                     <label>Thư tự</label>
                                     <select name="direction" [(ngModel)]="sort.direction" (change)="onSort('direction', $event.target.value)">
-                                        <option value="asc">Giảm dần</option>
-                                        <option value="desc">Tăng dần</option>
+                                        <option value="desc">Giảm dần</option>
+                                        <option value="asc">Tăng dần</option>
                                     </select>
                                 </li>
                             </ul>
@@ -107,7 +118,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <pagination-controls (pageChange)="onPageChange($event)"></pagination-controls>
+                            <pagination-controls class="pagi" (pageChange)="onPageChange($event)"></pagination-controls>
                         </ng-template>
 
                     <!-- <div class="pagi">
