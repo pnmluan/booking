@@ -51,7 +51,7 @@ export class SearchResultComponent implements OnInit, AfterViewInit {
 	round_trip = false;
 	selectedFlights = {};
 	roundTripOptions = {};
-	selectedStep = 0;
+	selectedStep = 2;
 	sort: any;
 	lowestFilter = {};
 	steps = [];
@@ -81,6 +81,8 @@ export class SearchResultComponent implements OnInit, AfterViewInit {
 	fromBaggageTypeFare = 0;
 	toBaggageTypeFare = 0;
 	datepickerOptions = { format: this._Configuration.viFormatDate, autoApply: true, locate: 'vi', style: 'big' };
+	bank_accounts = [];
+	bank_account_name = this._Configuration.bank_account_name;
 
 	constructor(
 		private _AirlineDataService: AirlineDataService,
@@ -168,6 +170,13 @@ export class SearchResultComponent implements OnInit, AfterViewInit {
 			jetstar: 'Jetstar Pacific',
 			vna: 'Vietnam Airlines'
 		};
+
+		let bank_accounts = this._Configuration.bank_accounts;
+		var banks = [];
+		for(let key in bank_accounts) {
+			banks.push(bank_accounts[key]);
+		}
+		this.bank_accounts = banks;
 
 		// Get Provider's Fee
 		var params: URLSearchParams = new URLSearchParams();

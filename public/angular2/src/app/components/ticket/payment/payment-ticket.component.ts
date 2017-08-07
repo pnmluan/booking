@@ -40,6 +40,8 @@ export class PaymentTicketComponent implements OnInit {
 	imgPath: string = this._EntranceTicketDataService.imgPath;
 	lat: number;
 	lng: number;
+	bank_accounts = [];
+	bank_account_name = this._Configuration.bank_account_name;
 
 	constructor(
 		private _EntranceTicketDataService: EntranceTicketDataService,
@@ -90,6 +92,13 @@ export class PaymentTicketComponent implements OnInit {
 			'3': 'Ông',
 			'4': 'Bà'
 		};
+
+		let bank_accounts = this._Configuration.bank_accounts;
+		var banks = [];
+		for(let key in bank_accounts) {
+			banks.push(bank_accounts[key]);
+		}
+		this.bank_accounts = banks;
 	}
 
   	ngOnInit() {
@@ -273,6 +282,8 @@ export class PaymentTicketComponent implements OnInit {
 		params.set('code', this.generalData['generateCode']);
 		params.set('title', this.titleAdultOptions[this.contact['title']]);
 		params.set('total_fare', String(this.generalData['total_fare']));
+		params.set('bank_accounts', JSON.stringify(this.bank_accounts));
+		params.set('bank_account_name', this.bank_account_name);
 
 		this._MailDataService.sendEntranceTicketPayment(params).subscribe(res => {
 

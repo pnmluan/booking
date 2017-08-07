@@ -22,20 +22,23 @@ export class Configuration {
 	public arr_number_infants = ['1', '2'];
 	public number_order: number = 0;
 
-
+	public bank_account_name = 'Cao Thị Ngọc Thủy';
 	public bank_accounts = {
 		vietcombank: {
+			name: 'TMCP Ngoại thương Việt Nam - Vietcombank',
 			icon: 'assets/img/bank/bank-logo-VCB.jpg',
 			number_account: '0451000328295',
 			branch: 'Vietcombank chi nhánh Thành Công, Hà Nội'
 		},
 		bidv: {
-			icon: '',
+			name: 'TMCP Đầu Tư & Phát Triển Việt Nam - BIDV',
+			icon: 'assets/img/bank/bank-logo-BIDV.jpg',
 			number_account: '31310000341958',
 			branch: 'BIDV chi nhánh Bắc Sài Gòn, TPHCM'
 		},
 		techcombank: {
-			icon: '',
+			name: 'TMCP Kỹ thương Việt Nam - Techcombank',
+			icon: 'assets/img/bank/bank-logo-TCB.jpg',
 			number_account: '19031034880011',
 			branch: 'Techcombank chi nhánh Hà Nội'
 		}

@@ -202,7 +202,7 @@
                                             <p>Quý khách có thể thanh toán cho chúng tôi bằng cách chuyển khoản trực tiếp tại ngân hàng, chuyển qua thẻ ATM, hoặc qua Internet banking.</p>
                                             <div class="warning">
                                                 <b><u>Chi tiết thanh toán:</u></b>
-                                                <p><strong>Tên tài khoản: </strong><span class="tetp">Công ty TNHH MTV Thương mại và Du lịch Ba Lô</span></p>
+                                                <p><strong>Tên tài khoản: </strong><span class="tetp" [innerHTML]="bank_account_name"></span></p>
                                                 <p><strong>Nội dung chuyển khoản:</strong> <span class="tetp">"MDH 1128103, Le Van A, Noi dung thanh toan"</span></p>
                                                 <p>
                                                     <u>Ví dụ:</u>
@@ -223,54 +223,14 @@
                                                             <th>Số tài khoản</th>
                                                             <th>Chi nhánh</th>
                                                         </tr>
-                                                        <tr>
-                                                            <td><img src="assets/img/bank/bank-logo-VCB.jpg" alt=""></td>
-                                                            <td>TMCP Ngoại thương Việt Nam - Vietcombank </td>
-                                                            <td>0071000764340</td>
-                                                            <td>PGD số 10 CN Hồ Chí Minh</td>
+
+                                                        <tr *ngFor="let bank of bank_accounts">
+                                                            <td><img [src]="bank.icon" alt=""></td>
+                                                            <td [innerHTML]="bank.name"> </td>
+                                                            <td [innerHTML]="bank.number_account"></td>
+                                                            <td [innerHTML]="bank.branch"></td>
                                                         </tr>
-                                                        <tr>
-                                                            <td><img src="assets/img/bank/bank-logo-TCB.jpg" alt=""></td>
-                                                            <td>TMCP Kỹ Thương Việt Nam</td>
-                                                            <td>012170730001</td>
-                                                            <td>Phòng giao dịch Võ Văn Tần</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td><img src="assets/img/bank/bank-logo-ACB.jpg" alt=""></td>
-                                                            <td>TMCP Á Châu - ACB</td>
-                                                            <td>624704060033559</td>
-                                                            <td>PGD Võ Thị Sáu CN Hồ Chí Minh</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td><img src="assets/img/bank/bank-logo-EAB.jpg" alt=""></td>
-                                                            <td>TMCP Đông Á </td>
-                                                            <td>102010001851074 </td>
-                                                            <td>Chi Nhánh 3</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td><img src="assets/img/bank/bank-logo-AGR.jpg" alt=""></td>
-                                                            <td>Nông Nghiệp Và Phát Triển Nông Thôn Việt Nam - Agribank</td>
-                                                            <td>1602201359662</td>
-                                                            <td>Chi nhánh 3</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td><img src="assets/img/bank/bank-logo-VTB.jpg" alt=""></td>
-                                                            <td>TMCP Công Thương Việt Nam - Vietinbank</td>
-                                                            <td>060077605811</td>
-                                                            <td>Phòng giao dịch Võ Văn Tần</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td><img src="assets/img/bank/bank-logo-MBB.jpg" alt=""></td>
-                                                            <td>Quân Đội</td>
-                                                            <td>19128300324018</td>
-                                                            <td>Chi nhánh Tdắng Lợi</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td><img src="assets/img/bank/bank-logo-MSB.jpg" alt=""></td>
-                                                            <td>TMCP Hàng Hải Việt Nam</td>
-                                                            <td>16810000136466</td>
-                                                            <td>chi nhánh Bến Thành - PGD Bắc Hải</td>
-                                                        </tr>
+
                                                     </tbody>
                                                 </table>
                                             </div>
