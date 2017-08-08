@@ -27,6 +27,7 @@ export class ListTicketComponent implements OnInit {
 	category_level: number;
 	currentCategoryId: number;
 	parent_category: string;
+	children_category: string;
 	params = {};
 	sort = {};
 
@@ -35,8 +36,6 @@ export class ListTicketComponent implements OnInit {
 	listItem: Array<any> = [];
 	order: boolean = false;
 	column: string;
-	clean_url: string;
-	sub_clean_url: string;
 
 	direction: string;
 	curRouting?: string;
@@ -64,59 +63,22 @@ export class ListTicketComponent implements OnInit {
 			let routing = this._Router.url;
 			if (this.curRouting != routing) {
 				this.curRouting = routing;
-
-				// setTimeout(() => {
-				// 	switch (this.category_level) {
-				// 		case 2:
-				// 			this.sub_clean_url = this.params['clean_url'] || '';
-				// 			break;
-				// 		case 1:
-				// 		default:
-				// 			this.clean_url = this.params['clean_url'] || '';
-				// 			break;
-				// 	}
-
-				// 	this.initData();
-				// }, 1000);
-
 				this.initData();
-
 			}
 		});
 	}
 
   	ngOnInit() {
-
   		this._title.setTitle('Tours | Datvesieure');
   		//set default sort
 		this.sort['column'] = 'name';
 		this.sort['direction'] = 'asc';
 
-
 		this.onBuildSelectOption();
 
-		let params: URLSearchParams = new URLSearchParams();
-		params.set('load_menu', '1');
-		this._CategoryTicketDataService.getAll(params).subscribe(res => {
-			if (res.data) {
-				let categoryTicketOptions = [];
-				for (let key in res.data) {
-
-					var temp = {
-						value: res.data[key].clean_url,
-						label: res.data[key].name
-					};
-
-					categoryTicketOptions.push(temp);
-				}
-				this.categoryTicketOptions = categoryTicketOptions;
-
-				setTimeout(() => {
-					this.parent_category = this.params['clean_url'];
-				}, 1000);
-
-			}
-		});
+		setTimeout(() => {
+			this.parent_category = this.params['clean_url'];
+		}, 1000);
 
   	}
 
@@ -142,7 +104,23 @@ export class ListTicketComponent implements OnInit {
 				if(res.data){
 					this.currentCategoryId = res.data[0].id;
 					this.loadEntranceTicketList(res.data[0].id);
-					this.onBuildSubSelectOption();
+					this.category_level = res.data[0].level;
+
+					setTimeout(() => {
+						if(this.category_level == 2){
+							this.parent_category = res.data[0].parent_clean_url;
+							this.onBuildSubSelectOption(res.data[0].parent);
+							setTimeout(() => {
+								this.children_category = res.data[0].clean_url;
+							}, 500);
+						}
+
+						if(this.category_level == 1){
+							this.parent_category = res.data[0].clean_url;
+	  						this.onBuildSubSelectOption(res.data[0].id);
+	  					}
+					}, 1000);
+
 				}
 			});
   		}else{
@@ -302,19 +280,25 @@ export class ListTicketComponent implements OnInit {
 	onSelected(obj: any, level: number){
 		this.category_level = level;
 		if(level == 1){
-			this.clean_url = obj.value;
+			let clean_url = obj.value;
 			let params: URLSearchParams = new URLSearchParams();
-			params.set('clean_url', this.clean_url);
+			params.set('clean_url', clean_url);
 			this._CategoryTicketDataService.getAll(params).subscribe(res => {
 				if(res.data){
 					this.currentCategoryId = res.data[0].id;
-					this.onBuildSubSelectOption();
+					this.onBuildSubSelectOption(res.data[0].id);
 				}
 			})
 		}
 
 		if(level == 2){
-			this.sub_clean_url = obj.value;
+			this.children_category = obj.value;
+		}
+	}
+
+	onDeselected(obj: any, level: number){
+		if(level == 2){
+			this.category_level = 1;
 		}
 	}
 
@@ -340,10 +324,10 @@ export class ListTicketComponent implements OnInit {
 		let valid: boolean;
 		let clean_url: string;
 		if(this.category_level == 2){
-			valid = this.sub_clean_url != this.params['clean_url'];
-			clean_url = this.sub_clean_url;
+			valid = this.children_category != this.params['clean_url'];
+			clean_url = this.children_category;
 		}else{
-			valid = this.clean_url != this.params['clean_url'];
+			valid = this.parent_category != this.params['clean_url'];
 			// clean_url = this.clean_url;
 			clean_url = this.parent_category;
 		}
@@ -360,6 +344,9 @@ export class ListTicketComponent implements OnInit {
 
 		if(valid){
 			//if user change category, reload page
+			if(clean_url == undefined){
+				clean_url = '';
+			}
 			this._Router.navigate(['list-tickets', clean_url]);
 		}else{
 			//if user don't change category, reload first page
@@ -386,9 +373,9 @@ export class ListTicketComponent implements OnInit {
 		});
 	}
 
-	onBuildSubSelectOption(){
+	onBuildSubSelectOption(parent_id){
 		let params: URLSearchParams = new URLSearchParams();
-		params.set('parent', String(this.currentCategoryId));
+		params.set('parent', parent_id);
 		params.set('level', '2');
 		params.set('status', 'active');
 		this._CategoryTicketDataService.getAll(params).subscribe(res => {

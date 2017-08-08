@@ -61,7 +61,7 @@ export class CartTicketComponent implements OnInit {
 		let booking_date = null;
 
 		for (let key in this.cartItems) {
-			var item = this.cartItems[key];
+			var item = this.cartItems[key];console.log(item);
 
 			var total = (item.number_adult * item.adult_fare) + (item.number_children * item.children_fare);
 			sum = sum + total;

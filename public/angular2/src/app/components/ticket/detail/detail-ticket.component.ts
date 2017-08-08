@@ -4,7 +4,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { URLSearchParams } from '@angular/http';
 
 import { Configuration } from '../../../shared/app.configuration';
-import { EntranceTicketDataService } from '../../../shared/entranceticket.dataservice';
+import { CategoryTicketDataService, EntranceTicketDataService } from '../../../shared/';
 
 import { Subscription } from 'rxjs/Rx';
 import { LocalStorageService } from 'angular-2-local-storage';
@@ -18,7 +18,7 @@ declare let moment: any;
 @Component({
   selector: 'app-detail-ticket',
   templateUrl: './detail-ticket.component.html',
-  providers: [ EntranceTicketDataService ]
+  providers: [ CategoryTicketDataService, EntranceTicketDataService ]
 })
 
 export class DetailTicketComponent implements OnInit {
@@ -42,6 +42,7 @@ export class DetailTicketComponent implements OnInit {
 	datepickerOptions = { format: this._Configuration.viFormatDate, autoApply: true, locate: 'vi', style: 'big' };
 
 	constructor(
+		private _CategoryTicketDataService: CategoryTicketDataService,
 		private _EntranceTicketDataService: EntranceTicketDataService,
 		private _Configuration: Configuration,
 		private _Router: Router,
@@ -165,6 +166,7 @@ export class DetailTicketComponent implements OnInit {
 		let obj = {
 			id: item.id,
 			name: item.name,
+			clean_url: item.clean_url,
 			departure: this.filter_from_date.formatted,
 			img: img,
 			adult_fare: item.adult_fare,
@@ -265,7 +267,8 @@ export class DetailTicketComponent implements OnInit {
   	}
 
   	onLinkToListTicket(){
-		this._Router.navigate(['list-tickets']);
+  		let clean_url = this.Ticket['category_ticket_clean_url'];
+		this._Router.navigate(['list-tickets', clean_url]);
 	}
 
 	ngOnDestroy() {

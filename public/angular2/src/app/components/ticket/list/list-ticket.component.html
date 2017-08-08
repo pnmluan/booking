@@ -11,25 +11,25 @@
                         <div class="g-field">
                             <div class="field mb15">
                                 <ng-select
+                                    name="category_ticket_id"
                                     [options]="categoryTicketOptions"
                                     (selected)="onSelected($event, 1)"
-                                    name="category_ticket_id"
                                     [(ngModel)]="parent_category"
-                                    (selected)="onSelected($event)"
                                     [allowClear]="true"
                                     placeholder="Điểm đi">
                                 </ng-select>
                             </div>
-                            <!--<div class="field mb15">
+                            <div class="field mb15" *ngIf="subCategoryTicketOptions.length">
                                 <ng-select
                                     name="category_ticket_id"
-                                    [ngModel]="clean_url"
+                                    [ngModel]="children_category"
                                     [options]="subCategoryTicketOptions"
                                     (selected)="onSelected($event, 2)"
                                     [allowClear]="true"
-                                    placeholder="Điểm đi">
+                                    (deselected)="onDeselected($event, 2)"
+                                    placeholder="Địa điểm">
                                 </ng-select>
-                            </div>-->
+                            </div>
                             <div class="field mb30">
                                 <div class="slider-price clearfix">
                                     <div class="clearfix">
