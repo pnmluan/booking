@@ -52,7 +52,8 @@ class EntranceTicketController extends Controller{
             $alias_dot = $alias . '.';
             $select = $alias_dot . '*';
             $query = \DB::table($this->table . ' AS ' . $alias)
-                        ->select(\DB::raw('SQL_CALC_FOUND_ROWS `MT`.`id`') ,$select);
+                        ->select(\DB::raw('SQL_CALC_FOUND_ROWS `MT`.`id`'), $select, 'CT.name AS category_ticket_name', 'CT.clean_url AS category_ticket_clean_url')
+                        ->leftJoin(\DB::raw('category_ticket CT'),'CT.id','=',$alias_dot.'category_ticket_id');
             /*==================================================
              * Filter Data
              *==================================================*/
@@ -82,10 +83,10 @@ class EntranceTicketController extends Controller{
                 $query->whereNotIn($alias_dot.'id', $except_id)
                         ->inRandomOrder();
             }
-            
+
             /*==================================================
              * Order
-             *==================================================*/            
+             *==================================================*/
             if(isset($params['order_by'], $params['order'])){
                 ($params['order_by'] == 'price') && $params['order_by'] = 'adult_fare';
                 $query->orderBy($params['order_by'], $params['order']);
@@ -106,12 +107,12 @@ class EntranceTicketController extends Controller{
             $query = \DB::select(\DB::raw('SELECT FOUND_ROWS() as rows'));
             $total_data = $query[0]['rows'];
 
-            // Add album_ticket 
+            // Add album_ticket
             foreach ($data as $key => $value) {
                 $album = \DB::table('album_ticket')->where('entrance_ticket_id', $value->id)->get();
                 $data[$key]->album = $album;
             }
-            
+
             /*==================================================
              * Response Data
              *==================================================*/
@@ -165,7 +166,7 @@ class EntranceTicketController extends Controller{
         } else {
             $model = new EntranceTicket();
         }
-        
+
         $data = $request->all();
         $data['clean_url'] = $this->toAscii($data['name']);
         $model->fill($data);
@@ -211,7 +212,7 @@ class EntranceTicketController extends Controller{
                 ]);
             } else {
                 $removedModels  = AlbumTicket::where(['entrance_ticket_id' => $id])->get();
-                
+
                 foreach ($removedModels as $key => $value) {
 
                     $value->delete();
