@@ -19,7 +19,7 @@ use Illuminate\Http\Exception\HttpResponseException;
 
 class CategoryTicketController extends Controller
 {
-    
+
     /**
      * Create a new controller instance.
      *
@@ -55,7 +55,8 @@ class CategoryTicketController extends Controller
             $alias_dot = $alias . '.';
             $select         = $alias_dot . '*';
             $query = \DB::table($this->table . ' AS ' . $alias)
-                        ->select($select);
+                        ->select($select, 'CT.clean_url AS parent_clean_url')
+                        ->leftJoin('category_ticket AS CT', 'CT.id', '=', $alias_dot.'parent');
             /*==================================================
              * Filter Data
              *==================================================*/
@@ -141,7 +142,7 @@ class CategoryTicketController extends Controller
         } else {
             $model = new CategoryTicket();
         }
-        
+
         $data = $request->all();
         $data['clean_url'] = $this->toAscii($data['name']);
         $model->fill($data);

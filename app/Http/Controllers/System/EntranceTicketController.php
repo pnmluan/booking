@@ -53,7 +53,7 @@ class EntranceTicketController extends Controller{
             $select = $alias_dot . '*';
             $query = \DB::table($this->table . ' AS ' . $alias)
                         ->select(\DB::raw('SQL_CALC_FOUND_ROWS `MT`.`id`'), $select, 'CT.name AS category_ticket_name', 'CT.clean_url AS category_ticket_clean_url')
-                        ->leftJoin(\DB::raw('category_ticket CT'),'CT.id','=',$alias_dot.'category_ticket_id');
+                        ->leftJoin('category_ticket AS CT','CT.id','=',$alias_dot.'category_ticket_id');
             /*==================================================
              * Filter Data
              *==================================================*/
